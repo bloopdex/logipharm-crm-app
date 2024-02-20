@@ -2,7 +2,6 @@ import 'package:crm/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/const.dart';
 import '../image/custom_local_image.widget.dart';
 
 class NoInternetScreen extends StatelessWidget {

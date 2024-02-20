@@ -27,7 +27,7 @@ class LoginButton extends StatelessWidget {
         style: Theme.of(context)
             .textTheme
             .headlineMedium!
-            .copyWith(color: textInvert),
+            .copyWith(color: kTextLight),
       ),
     );
   }

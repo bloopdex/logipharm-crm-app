@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../core/const.dart';
 
 class CustomLocalImage extends StatelessWidget {
   const CustomLocalImage(
-      {Key? key,
+      {super.key,
       required this.image,
       this.fit = BoxFit.cover,
       this.width,
-      this.height})
-      : super(key: key);
+      this.height});
 
   final String image;
   final BoxFit fit;
@@ -25,7 +23,7 @@ class CustomLocalImage extends StatelessWidget {
       width: width,
       height: height,
       errorBuilder: (context, url, error) =>
-          const Center(child: Icon(LucideIcons.xCircle, color: kDanger)),
+          const Center(child: Icon(Icons.warning_rounded, color: kDanger)),
     );
   }
 }

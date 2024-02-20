@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../core/core.dart';
 import '../../../logic/localizations/localizations_bloc.dart';
@@ -29,9 +28,9 @@ class CustomAppBars {
                   builder: (context, state) {
                     return Icon(
                       state.locale.languageCode != 'ar'
-                          ? LucideIcons.chevronLeft
-                          : LucideIcons.chevronRight,
-                      color: iconSecondary,
+                          ? Icons.chevron_left_rounded
+                          : Icons.chevron_right_rounded,
+                      color: kBgGrayVisibility6,
                     );
                   },
                 ),

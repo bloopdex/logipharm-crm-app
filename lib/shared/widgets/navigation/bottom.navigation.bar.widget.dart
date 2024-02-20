@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../core/core.dart';
 import '../../../features/navigation/cubit/navigation_cubit.dart';
@@ -36,23 +35,28 @@ class CustomBottomNavigationBar extends StatelessWidget {
       },
       items: [
         BottomNavigationBarItem(
-          icon: const Icon(LucideIcons.home),
+          icon: const Icon(Icons.home_outlined),
+          activeIcon: const Icon(Icons.home_filled),
           label: 'layout:home'.translate(context),
         ),
         BottomNavigationBarItem(
-          icon: const Icon(LucideIcons.pill),
-          label: 'layout:medicaments'.translate(context),
+          icon: const Icon(Icons.offline_bolt_outlined),
+          activeIcon: const Icon(Icons.offline_bolt),
+          label: 'layout:plans'.translate(context),
         ),
         BottomNavigationBarItem(
-          icon: const Icon(LucideIcons.fileStack),
-          label: 'layout:orders'.translate(context),
+          icon: const Icon(Icons.fact_check_outlined),
+          activeIcon: const Icon(Icons.fact_check),
+          label: 'layout:visits'.translate(context),
         ),
         BottomNavigationBarItem(
-          icon: const Icon(LucideIcons.shoppingBag),
-          label: 'layout:card'.translate(context),
+          icon: const Icon(Icons.view_timeline_outlined),
+          activeIcon: const Icon(Icons.view_timeline),
+          label: 'layout:todo'.translate(context),
         ),
         BottomNavigationBarItem(
-          icon: const Icon(LucideIcons.menu),
+          icon: const Icon(Icons.dashboard_outlined),
+          activeIcon: const Icon(Icons.dashboard),
           label: 'layout:menu'.translate(context),
         ),
       ],

@@ -37,7 +37,7 @@ class TimeIntervalPicker extends StatelessWidget {
                     child: Text(
                       'general:cancel'.translate(context),
                       style: context.textTheme.titleMedium!
-                          .copyWith(color: textSecondary),
+                          .copyWith(color: kText4),
                     ),
                   ),
                   Expanded(
@@ -55,7 +55,7 @@ class TimeIntervalPicker extends StatelessWidget {
                     child: Text(
                       'general:search'.translate(context),
                       style: context.textTheme.titleMedium!
-                          .copyWith(color: surfaceBrand),
+                          .copyWith(color: kText4),
                     ),
                   )
                 ],
@@ -63,8 +63,7 @@ class TimeIntervalPicker extends StatelessWidget {
               SizedBox(height: kSpacingX3),
               Text(
                 'general:select-date-range'.translate(context),
-                style: context.textTheme.bodyMedium!
-                    .copyWith(color: textSecondary),
+                style: context.textTheme.bodyMedium!.copyWith(color: kText1),
               ),
               SizedBox(height: kSpacingX3),
               Row(
@@ -76,9 +75,9 @@ class TimeIntervalPicker extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(kSpacingX1),
                         decoration: BoxDecoration(
-                          color: surfacePrimary,
+                          color: kBgGrayVisibility1,
                           borderRadius: BorderRadius.circular(kSpacingX1),
-                          border: Border.all(color: borderTernary),
+                          border: Border.all(color: kBorder1),
                         ),
                         child: Center(
                           child: Text(
@@ -87,7 +86,7 @@ class TimeIntervalPicker extends StatelessWidget {
                             style: context.textTheme.headlineMedium!.copyWith(
                                 color: state.selectedDate == SelectedDate.start
                                     ? kPrimary
-                                    : textSecondary),
+                                    : kBorder1),
                           ),
                         ),
                       ),
@@ -96,8 +95,8 @@ class TimeIntervalPicker extends StatelessWidget {
                   SizedBox(width: kSpacingX2),
                   Text(
                     "general:to".translate(context),
-                    style: context.textTheme.bodyMedium!
-                        .copyWith(color: textSecondary),
+                    style:
+                        context.textTheme.bodyMedium!.copyWith(color: kText4),
                   ),
                   SizedBox(width: kSpacingX2),
                   Expanded(
@@ -106,9 +105,9 @@ class TimeIntervalPicker extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(kSpacingX1),
                         decoration: BoxDecoration(
-                          color: surfacePrimary,
+                          color: kBgGrayVisibility1,
                           borderRadius: BorderRadius.circular(kSpacingX1),
-                          border: Border.all(color: borderTernary),
+                          border: Border.all(color: kBorder3),
                         ),
                         child: Center(
                           child: Text(
@@ -117,7 +116,7 @@ class TimeIntervalPicker extends StatelessWidget {
                             style: context.textTheme.headlineMedium!.copyWith(
                                 color: state.selectedDate == SelectedDate.end
                                     ? kPrimary
-                                    : textSecondary),
+                                    : kText4),
                           ),
                         ),
                       ),

@@ -7,55 +7,55 @@ class AppTheme {
   static TextTheme lightTextTheme() => TextTheme(
         headlineLarge: TextStyle(
           fontSize: 24.sp,
-          color: textPrimary,
+          color: kText1,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
         ),
         headlineMedium: TextStyle(
           fontSize: 16.sp,
-          color: textPrimary,
+          color: kText1,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
         ),
         headlineSmall: TextStyle(
           fontSize: 14.sp,
-          color: textPrimary,
+          color: kText1,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
         ),
         titleMedium: TextStyle(
           fontSize: 16.sp,
-          color: textPrimary,
+          color: kText1,
           fontWeight: FontWeight.w500,
           overflow: TextOverflow.ellipsis,
         ),
         titleSmall: TextStyle(
           fontSize: 14.sp,
-          color: textPrimary,
+          color: kText1,
           fontWeight: FontWeight.w500,
           overflow: TextOverflow.ellipsis,
         ),
         bodySmall: TextStyle(
           fontSize: 14.sp,
-          color: textPrimary,
+          color: kText1,
           fontWeight: FontWeight.w500,
           overflow: TextOverflow.ellipsis,
         ),
         labelLarge: TextStyle(
           fontSize: 24.sp,
-          color: textPrimary,
+          color: kText1,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
         ),
         labelMedium: TextStyle(
           fontSize: 20.sp,
-          color: textPrimary,
+          color: kText1,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
         ),
         labelSmall: TextStyle(
           fontSize: 16.sp,
-          color: textPrimary,
+          color: kText1,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
         ),
@@ -77,13 +77,13 @@ class AppTheme {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.r),
             borderSide: BorderSide(
-              color: borderSecondary,
+              color: kBorder1,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.r),
             borderSide: BorderSide(
-              color: borderSecondary,
+              color: kBorder1,
               width: 1,
             ),
           ),
@@ -103,9 +103,8 @@ class AppTheme {
           ),
           contentPadding: EdgeInsets.symmetric(
               horizontal: kSpacingX5, vertical: kSpacingX4),
-          hintStyle: lightTextTheme().bodySmall!.copyWith(color: textSecondary),
-          labelStyle:
-              lightTextTheme().bodySmall!.copyWith(color: textSecondary),
+          hintStyle: lightTextTheme().bodySmall!.copyWith(color: kText4),
+          labelStyle: lightTextTheme().bodySmall!.copyWith(color: kText4),
           errorStyle: lightTextTheme().bodySmall!.copyWith(color: kDanger),
         ),
         buttonTheme: ButtonThemeData(

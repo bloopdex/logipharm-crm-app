@@ -73,20 +73,26 @@ const kGray = MaterialColor(0xFF949FA6, gray);
 const kSuccess = MaterialColor(0xFF2BBA28, success);
 const kWarning = MaterialColor(0xFFDB9900, warning);
 
-Color textPrimary = kGray.shade900;
-Color textSecondary = kGray.shade700;
-Color textInvert = kGray.shade100;
+Color kTextLight = Colors.white;
+Color kText5 = kGray.shade400;
+Color kText4 = kGray.shade500;
+Color kText3 = kGray.shade600;
+Color kText2 = kGray.shade800;
+Color kText1 = kGray.shade900;
+Color kTextPrimary = kPrimary.shade500;
 
-Color borderPrimary = kGray.shade900;
-Color borderSecondary = kGray.shade400;
-Color borderTernary = kGray.shade200;
+Color kBorder1 = kGray.shade400;
+Color kBorder3 = kGray.shade200;
+Color kBorderBlue = kPrimary.shade200;
 
-Color surfacePrimary = kGray.shade50;
-Color surfaceSecondary = Colors.white;
-Color surfaceBrand = kPrimary.shade500;
-Color surfaceFaded = kGray.shade300;
-
-Color iconSecondary = kGray.shade600;
+Color kBgGrayVisibility1 = kGray.shade50;
+Color kBgGrayVisibility2 = kGray.shade100;
+Color kBgGrayVisibility3 = kGray.shade200;
+Color kBgGrayVisibility4 = kGray.shade300;
+Color kBgGrayVisibility5 = kGray.shade400;
+Color kBgGrayVisibility6 = kGray.shade500;
+Color kBgBlack = kGray.shade900;
+Color kBgButtonSecondary = kBgGrayVisibility2;
 
 double kSpacingHalf = 2.sp;
 double kSpacingX1 = 4.sp;

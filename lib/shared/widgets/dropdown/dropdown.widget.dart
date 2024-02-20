@@ -1,7 +1,6 @@
 import 'package:crm/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 class CustomDropDown extends StatelessWidget {
   const CustomDropDown(
@@ -26,7 +25,7 @@ class CustomDropDown extends StatelessWidget {
                 child: Text(
                   e.value,
                   style: context.textTheme.bodyMedium!.copyWith(
-                    color: textSecondary,
+                    color: kText4,
                   ),
                 ),
               ))
@@ -36,10 +35,11 @@ class CustomDropDown extends StatelessWidget {
       elevation: 0,
       dropdownColor: kPrimary.shade100,
       icon: Icon(
-        LucideIcons.chevronDown,
+        // Chevron down rounded
+        Icons.keyboard_arrow_down_rounded,
         size: kSpacingX1,
       ),
-      iconDisabledColor: textSecondary,
+      iconDisabledColor: kText4,
       iconEnabledColor: kPrimary,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
@@ -48,7 +48,7 @@ class CustomDropDown extends StatelessWidget {
         ),
         hintText: hintText,
         hintStyle: context.textTheme.bodyMedium!.copyWith(
-          color: textSecondary,
+          color: kText4,
         ),
       ),
     );

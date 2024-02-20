@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../core/core.dart';
 import '../loading/custom_loading.widget.dart';
@@ -25,7 +24,7 @@ class CustomNetworkImage extends StatelessWidget {
       imageBuilder: imageBuilder,
       httpHeaders: headers,
       errorWidget: (context, url, error) =>
-          const Center(child: Icon(LucideIcons.xCircle, color: kDanger)),
+          const Center(child: Icon(Icons.warning_rounded, color: kDanger)),
       progressIndicatorBuilder: (context, url, progress) =>
           const Center(child: CustomLoader()),
     );

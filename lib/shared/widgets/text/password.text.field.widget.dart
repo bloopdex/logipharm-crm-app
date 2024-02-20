@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconly/iconly.dart';
 
 import '../../../logic/toggle.cubit.logic.dart';
 
@@ -37,7 +36,9 @@ class PasswordTextField extends StatelessWidget {
               hintText: hintText,
               prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
               suffixIcon: IconButton(
-                icon: Icon(state ? IconlyLight.show : IconlyLight.hide),
+                icon: Icon(state
+                    ? Icons.remove_red_eye_rounded
+                    : Icons.remove_red_eye_outlined),
                 onPressed: () {
                   context.read<ToggleCubit>().toggle();
                 },

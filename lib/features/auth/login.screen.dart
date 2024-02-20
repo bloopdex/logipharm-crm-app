@@ -1,15 +1,14 @@
+import 'package:flutter/cupertino.dart';
+
 import '../../core/extension.dart';
 import 'widget/login.button.widget.dart';
 import '../navigation/cubit/navigation_cubit.dart';
-// TODO: Keep it for vecopahrm
-// import '../politics/politics.screen.dart';
 import '../../shared/widgets/image/custom_local_image.widget.dart';
 import '../../shared/widgets/text/custom.text.form.field.widget.dart';
 import '../../shared/widgets/text/password.text.field.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../core/const.dart';
 import '../../logic/auth/auth_bloc.dart';
@@ -115,14 +114,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               const Icon(
-                                LucideIcons.xCircle,
+                                Icons.highlight_remove_rounded,
                                 color: kDanger,
                               ),
                               SizedBox(width: kSpacingX5),
-                              Text(
-                                message.translate(context),
-                                style: context.textTheme.bodyMedium!
-                                    .copyWith(color: kDanger),
+                              Expanded(
+                                child: Text(
+                                  message.translate(context),
+                                  maxLines: 2,
+                                  softWrap: true,
+                                  style: context.textTheme.bodyMedium!
+                                      .copyWith(color: kDanger),
+                                ),
                               )
                             ],
                           ),

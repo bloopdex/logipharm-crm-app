@@ -37,11 +37,11 @@ class CustomTextField extends StatelessWidget {
         hintText: hintText,
         prefixIcon: Icon(
           prefixIcon,
-          color: textSecondary,
+          color: kText1,
         ),
         suffixIcon: Icon(
           suffixIcon,
-          color: textSecondary,
+          color: kText1,
         ),
       ),
     );

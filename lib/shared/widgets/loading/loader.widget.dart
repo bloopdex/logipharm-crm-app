@@ -62,17 +62,17 @@ class Loader extends StatefulWidget {
   final Color ringColor;
 
   const Loader({
-    Key? key,
+    super.key,
     required this.size,
     required this.color,
     this.ringColor = const Color(0x1A000000),
-  }) : super(key: key);
+  });
 
   @override
-  _LoaderState createState() => _LoaderState();
+  LoaderState createState() => LoaderState();
 }
 
-class _LoaderState extends State<Loader> with SingleTickerProviderStateMixin {
+class LoaderState extends State<Loader> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
   @override

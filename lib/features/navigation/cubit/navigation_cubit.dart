@@ -8,9 +8,9 @@ part 'navigation_cubit.freezed.dart';
 
 enum AppScreen {
   home(0),
-  medicaments(1),
-  orders(2),
-  card(3),
+  plans(1),
+  visits(2),
+  todo(3),
   menu(4);
 
   const AppScreen(this.value);
@@ -22,11 +22,11 @@ extension AppScreensExtension on AppScreen {
     switch (this) {
       case AppScreen.home:
         return const SizedBox();
-      case AppScreen.medicaments:
+      case AppScreen.plans:
         return const SizedBox();
-      case AppScreen.orders:
+      case AppScreen.visits:
         return const SizedBox();
-      case AppScreen.card:
+      case AppScreen.todo:
         return const SizedBox();
       case AppScreen.menu:
         return const SizedBox();
@@ -53,13 +53,13 @@ class NavigationCubit extends Cubit<NavigationState> {
         home();
         break;
       case 1:
-        medicaments();
+        plans();
         break;
       case 2:
-        orders();
+        visits();
         break;
       case 3:
-        card();
+        todo();
         break;
       case 4:
         menu();
@@ -74,25 +74,25 @@ class NavigationCubit extends Cubit<NavigationState> {
     emit(const NavigationState.home());
   }
 
-  void medicaments() {
-    current = AppScreen.medicaments;
-    currentScreen = AppScreen.medicaments.screen;
-    title = 'medicaments';
-    emit(const NavigationState.medicaments());
+  void plans() {
+    current = AppScreen.plans;
+    currentScreen = AppScreen.plans.screen;
+    title = 'plans';
+    emit(const NavigationState.plans());
   }
 
-  void orders() {
-    current = AppScreen.orders;
-    currentScreen = AppScreen.orders.screen;
-    title = 'orders';
-    emit(const NavigationState.orders());
+  void visits() {
+    current = AppScreen.visits;
+    currentScreen = AppScreen.visits.screen;
+    title = 'visits';
+    emit(const NavigationState.visits());
   }
 
-  void card() {
-    current = AppScreen.card;
-    currentScreen = AppScreen.card.screen;
-    title = 'card';
-    emit(const NavigationState.card());
+  void todo() {
+    current = AppScreen.todo;
+    currentScreen = AppScreen.todo.screen;
+    title = 'todo';
+    emit(const NavigationState.todo());
   }
 
   void menu() {

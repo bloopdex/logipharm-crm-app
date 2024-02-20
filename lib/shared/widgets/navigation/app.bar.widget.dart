@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../core/core.dart';
 import '../../../logic/localizations/localizations_bloc.dart';
@@ -29,8 +28,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 icon: BlocBuilder<LocalizationsBloc, LocalizationsState>(
                   builder: (context, state) {
                     return state.locale.languageCode != 'ar'
-                        ? const Icon(LucideIcons.chevronLeft)
-                        : const Icon(LucideIcons.chevronRight);
+                        ? const Icon(Icons.chevron_left_rounded)
+                        : const Icon(Icons.chevron_right_rounded);
                   },
                 ),
               ),
@@ -62,7 +61,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                   child: Icon(
-                    LucideIcons.calendar,
+                    Icons.calendar_month_rounded,
                     color: Colors.white,
                     size: 24.sp,
                   )),

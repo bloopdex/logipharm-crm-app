@@ -11,7 +11,6 @@ import 'core/localizations.dart';
 import 'core/routes.dart';
 import 'core/theme.dart';
 import 'features/auth/bloc/login/login_bloc.dart';
-import 'features/navigation/core/controllers.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
 import 'logic/auth/auth_bloc.dart';
@@ -44,10 +43,6 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
     DioHelper.init();
     authBloc = AuthBloc();
     authBloc.add(const AuthEvent.appstarted());
-    TabControllers.init(
-      medicamentController: TabController(length: 2, vsync: this),
-      orderController: TabController(length: 5, vsync: this),
-    );
     super.initState();
   }
 

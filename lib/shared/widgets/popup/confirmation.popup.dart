@@ -35,7 +35,7 @@ class ConfirmationPopUp extends StatelessWidget {
         margin: EdgeInsets.only(top: kSpacingX1),
         padding: EdgeInsets.all(kSpacingX2),
         decoration: BoxDecoration(
-          color: surfaceSecondary,
+          color: kBgGrayVisibility1,
           borderRadius: BorderRadius.circular(kSpacingX2),
         ),
         child: Column(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../core/core.dart';
 import '../../../logic/search/search_cubit.dart';
@@ -38,7 +37,7 @@ class CustomMenuBottomAppBar extends StatelessWidget
                     Expanded(
                       child: CustomTextField(
                         hintText: "general:search".translate(context),
-                        prefixIcon: LucideIcons.search,
+                        prefixIcon: Icons.search,
                         onChange: (query) => search.setSearchQuery(query ?? ""),
                       ),
                     ),
@@ -65,7 +64,7 @@ class CustomMenuBottomAppBar extends StatelessWidget
                             ),
                           ),
                           child: Icon(
-                            LucideIcons.calendar,
+                            Icons.calendar_month_rounded,
                             color: Colors.white,
                             size: 24.sp,
                           ))
