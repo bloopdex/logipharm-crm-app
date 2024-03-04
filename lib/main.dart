@@ -1,16 +1,17 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:crm/features/auth/login.screen.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'core/const.dart';
 import 'core/localizations.dart';
 import 'core/routes.dart';
 import 'core/theme.dart';
 import 'features/auth/bloc/login/login_bloc.dart';
+import 'features/auth/login.screen.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
 import 'logic/auth/auth_bloc.dart';
@@ -22,6 +23,7 @@ import 'shared/widgets/error/error.screen.dart';
 import 'shared/widgets/error/noconnection.screen.dart';
 import 'shared/widgets/loading/loading.screen.dart';
 
+final InternetConnectionChecker connectionChecker = InternetConnectionChecker();
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -102,10 +104,12 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
                         GlobalCupertinoLocalizations.delegate,
                       ],
                       routes: AppRoutes.routes,
-                      home: StreamBuilder<ConnectivityResult>(
-                          stream: Connectivity().onConnectivityChanged,
+                      home: StreamBuilder<InternetConnectionStatus>(
+                          stream: connectionChecker.onStatusChange,
+                          initialData: InternetConnectionStatus.connected,
                           builder: (context, snapshot) {
-                            if (snapshot.data == ConnectivityResult.none) {
+                            if (snapshot.data ==
+                                InternetConnectionStatus.disconnected) {
                               return const NoInternetScreen();
                             }
                             return BlocBuilder<AuthBloc, AuthState>(
