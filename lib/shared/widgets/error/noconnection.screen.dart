@@ -19,12 +19,12 @@ class NoInternetScreen extends StatelessWidget {
             CustomLocalImage(image: 'errors/000.png', width: 300.sp),
             SizedBox(height: kSpacingX2),
             Text(
-              "errors:no-internet-connection".translate(context),
+              "errors:no-internet-connection",
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!
-                  .copyWith(color: kPrimary),
+                  .copyWith(color: kCeruleanBlue),
             ),
           ],
         ),

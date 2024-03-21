@@ -51,7 +51,7 @@ class ConfirmationPopUp extends StatelessWidget {
             ),
             SizedBox(height: kSpacingX2),
             Text(
-              title.translate(context),
+              title,
               maxLines: 3,
               textAlign: TextAlign.center,
               style: context.textTheme.headlineMedium,
@@ -59,7 +59,7 @@ class ConfirmationPopUp extends StatelessWidget {
             SizedBox(height: kSpacingX1),
             if (description != null)
               Text(
-                title.translate(context),
+                title,
                 maxLines: 3,
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyMedium,
@@ -75,10 +75,11 @@ class ConfirmationPopUp extends StatelessWidget {
             GestureDetector(
               onTap: () => context.pop(pop: false),
               child: Text(
-                cancelText.translate(context),
+                cancelText,
                 maxLines: 3,
                 textAlign: TextAlign.center,
-                style: context.textTheme.labelSmall!.copyWith(color: kPrimary),
+                style: context.textTheme.labelSmall!
+                    .copyWith(color: kCeruleanBlue),
               ),
             ),
           ],

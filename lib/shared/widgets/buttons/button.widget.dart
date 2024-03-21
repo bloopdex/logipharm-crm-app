@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.text,
     this.onPressed,
-    this.backgroundColor = kPrimary,
+    this.backgroundColor = kCeruleanBlue,
     this.textColor = Colors.white,
     required this.height,
     this.icon,
@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
         ),
         elevation: MaterialStateProperty.all(0),
         backgroundColor: disabled
-            ? MaterialStateProperty.all(kGray)
+            ? MaterialStateProperty.all(kCodGray)
             : MaterialStateProperty.all(backgroundColor),
         minimumSize:
             MaterialStateProperty.all(Size(double.infinity, height.sp)),
@@ -61,7 +61,7 @@ class CustomButton extends StatelessWidget {
                 SizedBox(width: kSpacingX1)
               ],
             ),
-          Text(text.translate(context),
+          Text(text,
               maxLines: 2,
               textAlign: TextAlign.center,
               style:

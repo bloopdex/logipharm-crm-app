@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 const String images = 'assets/images/';
 const String icons = 'assets/icons/';
 
-const Map<int, Color> danger = {
+const Map<int, Color> cardinal = {
   100: Color(0xFFFDE4D6),
   200: Color(0xFFFCC3AF),
   300: Color(0xFFF69985),
@@ -16,7 +16,7 @@ const Map<int, Color> danger = {
   900: Color(0xFF6C0A2C),
 };
 
-const Map<int, Color> gray = {
+const Map<int, Color> codGray = {
   50: Color(0xFFF4F5F7),
   100: Color(0xFFEEF0F1),
   200: Color(0xFFC9D1D8),
@@ -30,7 +30,7 @@ const Map<int, Color> gray = {
   950: Color(0xFF090A0C),
 };
 
-const Map<int, Color> primary = {
+const Map<int, Color> ceruleanBlue = {
   100: Color(0xFFDBE6FE),
   200: Color(0xFFBFD5FE),
   300: Color(0xFF92BAFE),
@@ -43,7 +43,7 @@ const Map<int, Color> primary = {
   950: Color(0xFF171F54),
 };
 
-const Map<int, Color> success = {
+const Map<int, Color> highland = {
   100: Color(0xFFE2FBD4),
   200: Color(0xFFBFF8AA),
   300: Color(0xFF91EA7B),
@@ -67,31 +67,37 @@ const Map<int, Color> warning = {
   900: Color(0xFF7A4100),
 };
 
-const kPrimary = MaterialColor(0xFF3A6FF7, primary);
-const kDanger = MaterialColor(0xFFE23636, danger);
-const kGray = MaterialColor(0xFF949FA6, gray);
-const kSuccess = MaterialColor(0xFF2BBA28, success);
-const kWarning = MaterialColor(0xFFDB9900, warning);
+const kCeruleanBlue = MaterialColor(0xFF3A6FF7, ceruleanBlue);
+const kCardinal = MaterialColor(0xFFE23636, cardinal);
+const kCodGray = MaterialColor(0xFF949FA6, codGray);
+const kHighland = MaterialColor(0xFF2BBA28, highland);
+const kBrightSun = MaterialColor(0xFFDB9900, warning);
+
+Color kWhite = Colors.white;
+Color kOverlay = Colors.black.withOpacity(.5);
+
+Color kPrimaryColor = kCeruleanBlue.shade600;
+Color kSuccessColor = kHighland.shade500;
 
 Color kTextLight = Colors.white;
-Color kText5 = kGray.shade400;
-Color kText4 = kGray.shade500;
-Color kText3 = kGray.shade600;
-Color kText2 = kGray.shade800;
-Color kText1 = kGray.shade900;
-Color kTextPrimary = kPrimary.shade500;
+Color kText5 = kCodGray.shade400;
+Color kText4 = kCodGray.shade500;
+Color kText3 = kCodGray.shade600;
+Color kText2 = kCodGray.shade800;
+Color kText1 = kCodGray.shade900;
+Color kTextPrimary = kCeruleanBlue.shade500;
 
-Color kBorder1 = kGray.shade400;
-Color kBorder3 = kGray.shade200;
-Color kBorderBlue = kPrimary.shade200;
+Color kBorder1 = kCodGray.shade400;
+Color kBorder3 = kCodGray.shade200;
+Color kBorderBlue = kCeruleanBlue.shade200;
 
-Color kBgGrayVisibility1 = kGray.shade50;
-Color kBgGrayVisibility2 = kGray.shade100;
-Color kBgGrayVisibility3 = kGray.shade200;
-Color kBgGrayVisibility4 = kGray.shade300;
-Color kBgGrayVisibility5 = kGray.shade400;
-Color kBgGrayVisibility6 = kGray.shade500;
-Color kBgBlack = kGray.shade900;
+Color kBgGrayVisibility1 = kCodGray.shade50;
+Color kBgGrayVisibility2 = kCodGray.shade100;
+Color kBgGrayVisibility3 = kCodGray.shade200;
+Color kBgGrayVisibility4 = kCodGray.shade300;
+Color kBgGrayVisibility5 = kCodGray.shade400;
+Color kBgGrayVisibility6 = kCodGray.shade500;
+Color kBgBlack = kCodGray.shade900;
 Color kBgButtonSecondary = kBgGrayVisibility2;
 
 double kSpacingHalf = 2.sp;
@@ -110,7 +116,18 @@ double kSpacingX12 = 72.sp;
 double kSpacingX13 = 96.sp;
 double kSpacingX14 = 500.sp;
 
-double kCornerButtonRadius = 200.r;
+double kPaddingSm1 = kSpacingHalf;
+double kPaddingSm2 = kSpacingX1;
+double kPaddingSm3 = kSpacingX3;
+double kPaddingMd1 = kSpacingX4;
+double kPaddingMd2 = kSpacingX5;
+double kPaddingMd3 = kSpacingX6;
+double kPaddingLg1 = kSpacingX7;
+double kPaddingLg2 = kSpacingX9;
+double kPaddingLg3 = kSpacingX10;
+double kPaddingLg4 = kSpacingX11;
+
+double kRadiusRounded = 500.sp;
 
 BoxShadow kDropShadowPrimary = BoxShadow(
   color: Colors.black.withOpacity(.15),

@@ -1,6 +1,8 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 // Keep it for companies that has self-signed certificate
 // import 'package:dio/io.dart';
 // import 'dart:io';
@@ -8,18 +10,15 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/const.dart';
-import '../../../features/auth/services/auth.repository.dart';
 
 class DioHelper {
   static late Dio dio;
   static CancelToken cancelToken = CancelToken();
 
   static Future<void> init() async {
-    String? link = await AuthRepository.link;
-
     dio = Dio(
       BaseOptions(
-        baseUrl: link ?? '$HTTP$baseUrl:$port$version',
+        baseUrl: '$HTTP$baseUrl:$port$version',
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
         receiveDataWhenStatusError: true,
@@ -28,14 +27,14 @@ class DioHelper {
         responseType: ResponseType.json,
       ),
     );
-    // (dio.httpClientAdapter as IOHttpClientAdapter).validateCertificate =
-    //     (certificate, host, port) => true;
-    // (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
-    //   HttpClient client = HttpClient();
-    //   client.badCertificateCallback =
-    //       (X509Certificate cert, String host, int port) => true;
-    //   return client;
-    // };
+    (dio.httpClientAdapter as IOHttpClientAdapter).validateCertificate =
+        (certificate, host, port) => true;
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      HttpClient client = HttpClient();
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         // Print the request method and URL

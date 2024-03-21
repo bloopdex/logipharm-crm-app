@@ -1,0 +1,147 @@
+{
+    "@@locale": "en",
+    "confirm": "Confirm",
+    "@confirm": {
+        "description": "Confirm"
+    },
+    "save": "Save",
+    "@save": {
+        "description": "Save"
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+        "description": "Cancel"
+    },
+    "selectDateRange": "Select Date Range",
+    "@selectDateRange": {
+        "description": "Select Date Range"
+    },
+    "startDate": "Start Date",
+    "@startDate": {
+        "description": "Start Date"
+    },
+    "endDate": "End Date",
+    "@endDate": {
+        "description": "End Date"
+    },
+    "navHome": "Home",
+    "@navHome": {
+        "description": "Home"
+    },
+    "navPlans": "Plans",
+    "@navPlans": {
+        "description": "Plans"
+    },
+    "navVisits": "Visits",
+    "@navVisits": {
+        "description": "Visits"
+    },
+    "navTodos": "Todos",
+    "@navTodos": {
+        "description": "Todos"
+    },
+    "navMenu": "Menu",
+    "@navMenu": {
+        "description": "Menu"
+    },
+    "authLoginTitle": "Login",
+    "@authLoginTitle": {
+        "description": "Login Title"
+    },
+    "authLoginDescription": "And have access to all the features of the application",
+    "@authLoginDescription": {
+        "description": "Login Description"
+    },
+    "authLoginUsername": "Username",
+    "@authLoginUsername": {
+        "description": "Username"
+    },
+    "authLoginUsernamePlaceholder": "Enter your username",
+    "@authLoginUsernamePlaceholder": {
+        "description": "Username Placeholder"
+    },
+    "authLoginUsernameRequired": "Username is required",
+    "@authLoginUsernameRequired": {
+        "description": "Username Required"
+    },
+    "authLoginPassword": "Password",
+    "@authLoginPassword": {
+        "description": "Password"
+    },
+    "authLoginPasswordPlaceholder": "Enter your password",
+    "@authLoginPasswordPlaceholder": {
+        "description": "Password Placeholder"
+    },
+    "authLoginPasswordRequired": "Password is required",
+    "@authLoginPasswordRequired": {
+        "description": "Password Required"
+    },
+    "authLoginSubmit": "Login",
+    "@authLoginSubmit": {
+        "description": "Login Submit"
+    },
+    "tourClient": "{count} Client",
+    "@tourClient": {
+        "description": "Client",
+        "placeholders": {
+            "count": {
+                "description": "Client Count",
+                "type": "int"
+            }
+        }
+    },
+    "tourProgress": "{percentage}%",
+    "@tourProgress": {
+        "description": "Progress",
+        "placeholders": {
+            "percentage": {
+                "description": "Percentage",
+                "type": "int"
+            }
+        }
+    },
+    "tourCurrentTour": "Current Tour",
+    "@tourCurrentTour": {
+        "description": "Current Tour"
+    },
+    "tourSearchPerWilaya": "Search per wilaya",
+    "@tourSearchPerWilaya": {
+        "description": "Search per wilaya"
+    },
+    "tourAllPlans": "All Plans",
+    "@tourAllPlans": {
+        "description": "All Plans"
+    },
+    "tourPendingPlans": "Pending Plans",
+    "@tourPendingPlans": {
+        "description": "Pending Plans"
+    },
+    "tourInProgressPlans": "In Progress Plans",
+    "@tourInProgressPlans": {
+        "description": "In Progress Plans"
+    },
+    "tourCompletedPlans": "Completed Plans",
+    "@tourCompletedPlans": {
+        "description": "Completed Plans"
+    },
+    "tourPendingStatus": "Pending",
+    "@tourPendingStatus": {
+        "description": "Pending Status"
+    },
+    "tourInProgressStatus": "In Progress",
+    "@tourInProgressStatus": {
+        "description": "In Progress Status"
+    },
+    "tourCompletedStatus": "Completed",
+    "@tourCompletedStatus": {
+        "description": "Completed Status"
+    },
+    "tourEmptyPlans": "No plans found",
+    "@tourEmptyPlans": {
+        "description": "Empty Plans"
+    },
+    "tourEmptyPlansDescription": "You don''t have any plans yet",
+    "@tourEmptyPlansDescription": {
+        "description": "Empty Plans Description"
+    }
+}

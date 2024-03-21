@@ -32,11 +32,11 @@ class ErrorScreen extends StatelessWidget {
                   CustomLocalImage(image: 'errors/404.png', width: 300.sp),
                   SizedBox(height: kSpacingX2),
                   Text(
-                    message.translate(context),
+                    message,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge!
-                        .copyWith(color: kPrimary),
+                        .copyWith(color: kCeruleanBlue),
                   ),
                 ],
               ),
