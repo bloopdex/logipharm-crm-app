@@ -1,7 +1,6 @@
 name: crm
 description: "A new Flutter project."
-
-publish_to: 'none'
+publish_to: 'none' # Prevents accidental publishing to pub.dev
 
 version: 1.0.0+1
 
@@ -11,82 +10,89 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  # Localizations for Flutter
   flutter_localizations:
     sdk: flutter
+  # Cupertino style icons
   cupertino_icons: ^1.0.6
-  bloc: ^8.1.3
-  cached_network_image: ^3.3.1
-  dio: ^5.4.1
+  # State management library
   flutter_bloc: ^8.1.4
-  flutter_native_splash: ^2.3.10
-  flutter_screenutil: ^5.9.0
-  flutter_secure_storage: ^9.0.0
-  flutter_svg: ^2.0.9
+  # Business logic library
+  bloc: ^8.1.3
+  # HTTP client for Dart
+  dio: ^5.4.1
+  # Equality comparisons for Dart
+  equatable: ^2.0.5
+  # Internationalization and localization library
   intl: ^0.18.1
-  font_awesome_flutter: ^10.7.0
+  # Flutter library to load and cache network images
+  cached_network_image: ^3.3.1
+  # Functional programming library for Dart
+  dartz: ^0.10.1
+  # Flutter screen adaptation library
+  flutter_screenutil: ^5.9.0
+  # SVG rendering library for Flutter
+  flutter_svg: ^2.0.10+1
+  # Flutter plugin for reading and writing simple key-value pairs
+  shared_preferences: ^2.2.2
+  # Flutter plugin for checking internet connectivity
+  internet_connection_checker: ^1.0.0+1
+  # Flutter plugin for native splash screen
+  flutter_native_splash: ^2.2.16
+  # Flutter plugin for loading animation
+  loading_animation_widget: ^1.2.1
+  go_router: ^13.2.0
   freezed_annotation: ^2.4.1
-  json_annotation: ^4.8.1
   awesome_snackbar_content: ^0.1.3
-  loading_animation_widget: ^1.2.0+4
-  connectivity_plus: ^5.0.2
-  image_picker: ^1.0.7
-  http: ^1.2.1
+  intl_utils: ^2.8.7
+  # Flutter plugin for logging
+  logger: ^2.1.0
+  # Flutter plugin for map luncher
+  map_launcher: ^3.2.0
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.0
+  shimmer: ^3.0.0
+  geolocator: ^11.0.0
+  geocoding: ^3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Linter for Dart
   flutter_lints: ^3.0.0
+  # Code generator for Flutter
   build_runner: ^2.4.8
-  flutter_launcher_icons: ^0.13.1
-  freezed: ^2.4.7
+  analyzer: ^6.4.1
   json_serializable: ^6.7.1
-
+  freezed: ^2.4.7
+  json_annotation: ^4.8.1
 
 flutter_native_splash:
-  color: "#2B54ED"
-  image: assets/logo.png
+  color: "#FFFFFF"
+  image: assets/images/logo.png
 
   web: false
 
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/logo.png"
+  image_path: "assets/images/logo.png"
 
-
-# The following section is specific to Flutter packages.
 flutter:
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
+  generate: true
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
+  # Assets
   assets:
     - assets/
     - assets/fonts/
     - assets/images/
-    - assets/images/onboarding/
     - assets/images/errors/
-    - assets/images/home/
     - assets/images/empty-states/
     - assets/icons/
-    - lang/
-  #   - images/a_dot_ham.jpeg
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
+  # Fonts
   fonts:
     - family: Montserrat
       fonts:
@@ -108,11 +114,8 @@ flutter:
           weight: 800
         - asset: assets/fonts/Montserrat-Black.ttf
           weight: 900
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true
+  class_name: S
+  arb_dir: lib/l10n
+  output_dir: lib/l10n

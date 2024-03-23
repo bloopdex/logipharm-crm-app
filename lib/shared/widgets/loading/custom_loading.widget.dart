@@ -64,16 +64,16 @@ class CustomCircularLoader extends CustomPainter {
       startAngle: 0,
       endAngle: pi + (2 * pi),
       colors: [
-        kPrimary,
-        kPrimary.withOpacity(0.9),
-        kPrimary.withOpacity(0.8),
-        kPrimary.withOpacity(0.7),
-        kPrimary.withOpacity(0.6),
-        kPrimary.withOpacity(0.5),
-        kPrimary.withOpacity(0.3),
-        kPrimary.withOpacity(0.2),
-        kPrimary.withOpacity(0.2),
-        kPrimary.withOpacity(0.1),
+        kCeruleanBlue,
+        kCeruleanBlue.withOpacity(0.9),
+        kCeruleanBlue.withOpacity(0.8),
+        kCeruleanBlue.withOpacity(0.7),
+        kCeruleanBlue.withOpacity(0.6),
+        kCeruleanBlue.withOpacity(0.5),
+        kCeruleanBlue.withOpacity(0.3),
+        kCeruleanBlue.withOpacity(0.2),
+        kCeruleanBlue.withOpacity(0.2),
+        kCeruleanBlue.withOpacity(0.1),
         const Color(0xffEAEFF5),
       ],
       stops: const [
@@ -97,14 +97,14 @@ class CustomCircularLoader extends CustomPainter {
         endAngle: 2 * pi,
         colors: [
           const Color(0xffEAEFF5),
-          kPrimary.withOpacity(0.1),
-          kPrimary.withOpacity(0.2),
-          kPrimary.withOpacity(0.4),
-          kPrimary.withOpacity(0.5),
-          kPrimary.withOpacity(0.6),
-          kPrimary.withOpacity(0.7),
-          kPrimary.withOpacity(0.8),
-          kPrimary.withOpacity(0.9),
+          kCeruleanBlue.withOpacity(0.1),
+          kCeruleanBlue.withOpacity(0.2),
+          kCeruleanBlue.withOpacity(0.4),
+          kCeruleanBlue.withOpacity(0.5),
+          kCeruleanBlue.withOpacity(0.6),
+          kCeruleanBlue.withOpacity(0.7),
+          kCeruleanBlue.withOpacity(0.8),
+          kCeruleanBlue.withOpacity(0.9),
         ],
         stops: const [
           0.0,
@@ -128,7 +128,7 @@ class CustomCircularLoader extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..shader = gradient.createShader(rect)
       ..strokeCap = StrokeCap.round
-      ..color = kPrimary
+      ..color = kCeruleanBlue
       ..strokeJoin = StrokeJoin.round;
     canvas.drawArc(
       rect,

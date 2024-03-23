@@ -23,7 +23,7 @@ class CustomLocalImage extends StatelessWidget {
       width: width,
       height: height,
       errorBuilder: (context, url, error) =>
-          const Center(child: Icon(Icons.warning_rounded, color: kDanger)),
+          const Center(child: Icon(Icons.warning_rounded, color: kCardinal)),
     );
   }
 }

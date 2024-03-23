@@ -20,7 +20,7 @@ class LoadingScreen extends StatelessWidget {
           CustomLocalImage(image: 'logo.png', width: 145.sp),
           SizedBox(height: kSpacingX3),
           LoadingAnimationWidget.staggeredDotsWave(
-            color: kPrimary,
+            color: kCeruleanBlue,
             size: 30.sp,
           ),
         ],

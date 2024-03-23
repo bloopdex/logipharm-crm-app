@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../l10n/l10n.dart';
+import '../../home/home.page.dart';
+import '../../tour-plan/tour.plan.page.dart';
 
 part 'navigation_state.dart';
 part 'navigation_cubit.freezed.dart';
@@ -21,9 +24,9 @@ extension AppScreensExtension on AppScreen {
   Widget get screen {
     switch (this) {
       case AppScreen.home:
-        return const SizedBox();
+        return const HomePage();
       case AppScreen.plans:
-        return const SizedBox();
+        return const PlanTourPage();
       case AppScreen.visits:
         return const SizedBox();
       case AppScreen.todo:
@@ -45,7 +48,7 @@ class NavigationCubit extends Cubit<NavigationState> {
 
   Widget currentScreen = AppScreen.home.screen;
 
-  String title = 'home';
+  String title = S.current.navHome;
 
   void change(int index) {
     switch (index) {
@@ -70,35 +73,35 @@ class NavigationCubit extends Cubit<NavigationState> {
   void home() {
     current = AppScreen.home;
     currentScreen = AppScreen.home.screen;
-    title = 'home';
+    title = S.current.navHome;
     emit(const NavigationState.home());
   }
 
   void plans() {
     current = AppScreen.plans;
     currentScreen = AppScreen.plans.screen;
-    title = 'plans';
+    title = S.current.navPlans;
     emit(const NavigationState.plans());
   }
 
   void visits() {
     current = AppScreen.visits;
     currentScreen = AppScreen.visits.screen;
-    title = 'visits';
+    title = S.current.navVisits;
     emit(const NavigationState.visits());
   }
 
   void todo() {
     current = AppScreen.todo;
     currentScreen = AppScreen.todo.screen;
-    title = 'todo';
+    title = S.current.navTodos;
     emit(const NavigationState.todo());
   }
 
   void menu() {
     current = AppScreen.menu;
     currentScreen = AppScreen.menu.screen;
-    title = 'menu';
+    title = S.current.navMenu;
     emit(const NavigationState.menu());
   }
 }

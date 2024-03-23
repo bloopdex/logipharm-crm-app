@@ -1,19 +1,26 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:crm/features/auth/login.screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-import 'core/const.dart';
-import 'core/localizations.dart';
 import 'core/routes.dart';
 import 'core/theme.dart';
 import 'features/auth/bloc/login/login_bloc.dart';
+import 'features/auth/login.screen.dart';
+import 'features/create-plan/bloc/clients/clients_cubit.dart';
+import 'features/create-plan/bloc/cubit/tour_creation_cubit.dart';
+import 'features/create-plan/bloc/delegate_cubit.dart';
+import 'features/create-plan/bloc/wilaya_cubit.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
+import 'features/tour-plan/core/controller.dart';
+import 'l10n/l10n.dart';
 import 'logic/auth/auth_bloc.dart';
+import 'logic/counter_cubit.dart';
 import 'logic/localizations/localizations_bloc.dart';
 import 'logic/search/search_cubit.dart';
 import 'logic/time.range/time_range_cubit.dart';
@@ -22,9 +29,12 @@ import 'shared/widgets/error/error.screen.dart';
 import 'shared/widgets/error/noconnection.screen.dart';
 import 'shared/widgets/loading/loading.screen.dart';
 
+final InternetConnectionChecker connectionChecker = InternetConnectionChecker();
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await ScreenUtil.ensureScreenSize();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(const MyApp());
 }
@@ -43,6 +53,8 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
     DioHelper.init();
     authBloc = AuthBloc();
     authBloc.add(const AuthEvent.appstarted());
+    TabController tourController = TabController(length: 4, vsync: this);
+    TourTabController.setController(tourController);
     super.initState();
   }
 
@@ -54,6 +66,14 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
+    ScreenUtil.init(
+      context,
+      designSize: const Size(393, 852),
+      minTextAdapt: true,
+      splitScreenMode: true,
+    );
+
     return MultiBlocProvider(
         providers: [
           BlocProvider<LocalizationsBloc>(
@@ -65,76 +85,81 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
             create: (context) => LoginBloc(authBloc),
           ),
           BlocProvider<NavigationCubit>(create: (context) => NavigationCubit()),
-          BlocProvider<SearchCubit>(create: (context) => SearchCubit()),
           BlocProvider<TimeRangeCubit>(create: (context) => TimeRangeCubit()),
+          BlocProvider<SearchCubit>(create: (context) => SearchCubit()),
+          BlocProvider<CounterCubit>(
+              create: (context) => CounterCubit()..reset()),
+          BlocProvider<DelegateCubit>(
+            lazy: false,
+            create: (context) => DelegateCubit()..load(),
+          ),
+          BlocProvider<WilayaCubit>(
+            lazy: false,
+            create: (context) => WilayaCubit()..load(),
+          ),
+          BlocProvider<ClientsCubit>(
+            lazy: false,
+            create: (context) => ClientsCubit()..load(),
+          ),
+          BlocProvider<TourCreationCubit>(
+              create: (context) => TourCreationCubit()),
         ],
-        child: ScreenUtilInit(
-            designSize: const Size(390, 844),
-            minTextAdapt: true,
-            splitScreenMode: true,
-            builder: (context, child) {
-              FlutterNativeSplash.remove();
-              return BlocBuilder<LocalizationsBloc, LocalizationsState>(
-                builder: (context, state) {
-                  return MaterialApp(
-                      title: 'Logipharm-CRM',
-                      debugShowCheckedModeBanner: false,
-                      theme: AppTheme.lightTheme(),
-                      scrollBehavior: MyScrollBehavior(),
-                      locale: state.locale,
-                      supportedLocales:
-                          supportedLanguages.map((e) => Locale(e)).toList(),
-                      localeResolutionCallback: (locale, supportedLocales) {
-                        for (var supportedLocale in supportedLocales) {
-                          if (supportedLocale.languageCode ==
-                              locale!.languageCode) {
-                            return supportedLocale;
-                          }
-                        }
-                        return supportedLocales.first;
+        child: BlocBuilder<LocalizationsBloc, LocalizationsState>(
+            builder: (context, state) {
+          return MaterialApp(
+              title: 'Logipharm-CRM',
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.lightTheme(),
+              scrollBehavior: MyScrollBehavior(),
+              locale: state.locale,
+              supportedLocales: S.delegate.supportedLocales,
+              localeResolutionCallback: (locale, supportedLocales) {
+                for (var supportedLocale in supportedLocales) {
+                  if (supportedLocale.languageCode == locale!.languageCode) {
+                    return supportedLocale;
+                  }
+                }
+                return supportedLocales.first;
+              },
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              routes: AppRoutes.routes,
+              home: StreamBuilder<InternetConnectionStatus>(
+                  stream: connectionChecker.onStatusChange,
+                  initialData: InternetConnectionStatus.connected,
+                  builder: (context, snapshot) {
+                    if (snapshot.data ==
+                        InternetConnectionStatus.disconnected) {
+                      return const NoInternetScreen();
+                    }
+                    return BlocBuilder<AuthBloc, AuthState>(
+                      builder: (context, state) {
+                        return state.when(
+                            initial: () => const SizedBox.shrink(),
+                            loading: () {
+                              FlutterNativeSplash.remove();
+                              return const LoadingScreen();
+                            },
+                            authenticated: (user, tempError) =>
+                                const NavigationScreen(),
+                            unauthenticated: () => const LoginScreen(),
+                            failure: (message) {
+                              return ErrorScreen(
+                                message: message,
+                                onRetry: () {
+                                  authBloc.add(const AuthEvent.appstarted());
+                                },
+                              );
+                            });
+                        // return LoginScreen();
                       },
-                      localizationsDelegates: [
-                        AppLocalizations(
-                          state.locale,
-                        ),
-                        GlobalMaterialLocalizations.delegate,
-                        GlobalWidgetsLocalizations.delegate,
-                        GlobalCupertinoLocalizations.delegate,
-                      ],
-                      routes: AppRoutes.routes,
-                      home: StreamBuilder<ConnectivityResult>(
-                          stream: Connectivity().onConnectivityChanged,
-                          builder: (context, snapshot) {
-                            if (snapshot.data == ConnectivityResult.none) {
-                              return const NoInternetScreen();
-                            }
-                            return BlocBuilder<AuthBloc, AuthState>(
-                              builder: (context, state) {
-                                return state.when(
-                                    initial: () => const SizedBox.shrink(),
-                                    loading: () {
-                                      FlutterNativeSplash.remove();
-                                      return const LoadingScreen();
-                                    },
-                                    authenticated: (user, tempError) =>
-                                        const NavigationScreen(),
-                                    unauthenticated: () => const LoginScreen(),
-                                    failure: (message) {
-                                      return ErrorScreen(
-                                        message: message,
-                                        onRetry: () {
-                                          authBloc.add(
-                                              const AuthEvent.appstarted());
-                                        },
-                                      );
-                                    });
-                                // return LoginScreen();
-                              },
-                            );
-                          }));
-                },
-              );
-            }));
+                    );
+                  }));
+        }));
   }
 }
 

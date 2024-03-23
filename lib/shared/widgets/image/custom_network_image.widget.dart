@@ -24,7 +24,7 @@ class CustomNetworkImage extends StatelessWidget {
       imageBuilder: imageBuilder,
       httpHeaders: headers,
       errorWidget: (context, url, error) =>
-          const Center(child: Icon(Icons.warning_rounded, color: kDanger)),
+          const Center(child: Icon(Icons.warning_rounded, color: kCardinal)),
       progressIndicatorBuilder: (context, url, progress) =>
           const Center(child: CustomLoader()),
     );

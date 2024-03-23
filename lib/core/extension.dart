@@ -1,7 +1,8 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-import 'localizations.dart';
+import '../l10n/l10n.dart';
 
 extension ColorExtension on Color {
   Color get lighter => Color.fromARGB(
@@ -18,14 +19,14 @@ extension ColorExtension on Color {
       );
 }
 
-extension TranslateExtension on String {
-  String translate(BuildContext context) {
-    return AppTranslations.of(context)!.text(this) ?? this;
-  }
+extension TranslationExtension on BuildContext {
+  S get i10n => S.of(this);
 }
 
-extension GetTextTheme on BuildContext {
+extension GetTheme on BuildContext {
   TextTheme get textTheme => Theme.of(this).textTheme;
+  ButtonStyle get elevatedButtonTheme =>
+      Theme.of(this).elevatedButtonTheme.style!;
 }
 
 extension Navigation on BuildContext {
@@ -79,6 +80,7 @@ extension ScreenSize on BuildContext {
   double get paddingLeft => MediaQuery.of(this).padding.left;
   double get paddingRight => MediaQuery.of(this).padding.right;
   double get appBarSize => MediaQuery.of(this).padding.top + kToolbarHeight;
+  double get bottomNavigationBarSize => kBottomNavigationBarHeight;
 }
 
 extension SnackBarExtension on BuildContext {
@@ -90,7 +92,7 @@ extension SnackBarExtension on BuildContext {
       backgroundColor: Colors.transparent,
       content: AwesomeSnackbarContent(
         title: 'Success', // Update the title to indicate success
-        message: message.translate(this),
+        message: message,
         contentType: ContentType.success,
       ),
     );
@@ -107,7 +109,7 @@ extension SnackBarExtension on BuildContext {
       backgroundColor: Colors.transparent,
       content: AwesomeSnackbarContent(
         title: 'Error', // Update the title to indicate error
-        message: message.translate(this),
+        message: message,
         contentType: ContentType.failure,
       ),
     );
@@ -124,7 +126,7 @@ extension SnackBarExtension on BuildContext {
       backgroundColor: Colors.transparent,
       content: AwesomeSnackbarContent(
         title: 'Warning', // Update the title to indicate warning
-        message: message.translate(this),
+        message: message,
         contentType: ContentType.warning,
       ),
     );
@@ -140,8 +142,8 @@ extension SnackBarExtension on BuildContext {
       behavior: SnackBarBehavior.floating,
       backgroundColor: Colors.transparent,
       content: AwesomeSnackbarContent(
-        title: title.translate(this),
-        message: message.translate(this),
+        title: title,
+        message: message,
         contentType: ContentType.help,
       ),
     );
@@ -149,4 +151,54 @@ extension SnackBarExtension on BuildContext {
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
   }
+}
+
+extension DateFormaterExtension on DateTime {
+  String YYYYMMdd({String separator = "-"}) {
+    return DateFormat("yyyy${separator}MM${separator}dd").format(this);
+  }
+
+  String ddMMYYYY({String separator = "-"}) {
+    return DateFormat("dd${separator}MM${separator}yyyy").format(this);
+  }
+
+  String ddMMYYYYHHMMSS({String separator = "-"}) {
+    return DateFormat("dd${separator}MM${separator}yyyy HH:mm:ss").format(this);
+  }
+
+  String HHMMSS({String separator = ":"}) {
+    return DateFormat("HH${separator}mm${separator}ss").format(this);
+  }
+
+  String HHMM({String separator = ":"}) {
+    return DateFormat("HH${separator}mm").format(this);
+  }
+
+  String MMMMyyyy() {
+    return DateFormat("MMMM yyyy").format(this);
+  }
+
+  String MMMMdyyyy() {
+    return DateFormat("MMMM d, yyyy").format(this);
+  }
+
+  String MMMdyyyy() {
+    return DateFormat("MMM d, yyyy").format(this);
+  }
+
+  String MMMd() {
+    return DateFormat("MMM d").format(this);
+  }
+}
+
+extension StringExtensions on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
+
+  String capitalizeFirstofEach() {
+    return split(" ").map((e) => e.capitalize()).toList().join(" ");
+  }
+
+  String get initials => split(" ").map((e) => e[0]).join();
 }

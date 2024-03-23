@@ -4,9 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/const.dart';
 
 class SVG extends StatelessWidget {
-  const SVG(
+  const SVG(this.asset,
       {super.key,
-      required this.asset,
       this.icon = false,
       this.fit = BoxFit.cover,
       this.width,

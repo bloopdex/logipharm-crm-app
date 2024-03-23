@@ -14,22 +14,33 @@ class ErrorScreen extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async => onRetry(),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomLocalImage(image: 'errors/404.png', width: 300.sp),
-              SizedBox(height: kSpacingX2),
-              Text(
-                message.translate(context),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge!
-                    .copyWith(color: kPrimary),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: context.height,
+            minWidth: context.width,
+            maxHeight: context.height,
+            maxWidth: context.width,
+          ),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CustomLocalImage(image: 'errors/404.png', width: 300.sp),
+                  SizedBox(height: kSpacingX2),
+                  Text(
+                    message,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: kCeruleanBlue),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

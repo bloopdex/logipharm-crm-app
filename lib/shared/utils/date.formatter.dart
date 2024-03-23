@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:intl/intl.dart';
 
 class DateHelper {
@@ -7,6 +9,10 @@ class DateHelper {
 
   static String ddMMYYYYHHMMSS(DateTime date) {
     return DateFormat('dd/MM/yyyy HH:mm:ss').format(date);
+  }
+
+  static String YYYYMMdd(DateTime date) {
+    return DateFormat('yyyy-MM-dd').format(date);
   }
 
   static DateTime parse(String date) {

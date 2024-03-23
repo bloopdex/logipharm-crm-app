@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/core.dart';
 import '../../../logic/localizations/localizations_bloc.dart';
-import '../popup/time.interval.picker.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key, required this.title});
@@ -35,37 +34,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             Center(
               child: Text(
-                title.translate(context),
+                title,
                 style: context.textTheme.headlineMedium,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                        isDismissible: false,
-                        context: context,
-                        builder: (context) => const TimeIntervalPicker());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(44.sp, 44.sp),
-                    backgroundColor: kPrimary.shade500,
-                    padding: EdgeInsets.all(kSpacingX1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(kSpacingX1),
-                      side: BorderSide(
-                        color: kPrimary.shade600,
-                        width: 1.sp,
-                      ),
-                    ),
-                  ),
-                  child: Icon(
-                    Icons.calendar_month_rounded,
-                    color: Colors.white,
-                    size: 24.sp,
-                  )),
-            )
           ],
         ),
       ),

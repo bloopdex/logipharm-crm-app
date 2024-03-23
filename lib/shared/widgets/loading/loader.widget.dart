@@ -1,6 +1,9 @@
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart' '';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../core/core.dart';
 
 class Arc extends CustomPainter {
   final Color _color;
@@ -58,13 +61,13 @@ class Arc extends CustomPainter {
 
 class Loader extends StatefulWidget {
   final double size;
-  final Color color;
+  final Color? color;
   final Color ringColor;
 
   const Loader({
     super.key,
-    required this.size,
-    required this.color,
+    this.size = 32,
+    this.color,
     this.ringColor = const Color(0x1A000000),
   });
 
@@ -86,8 +89,8 @@ class LoaderState extends State<Loader> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final double size = widget.size;
-    final Color color = widget.color;
+    final double size = widget.size.sp;
+    final Color color = widget.color ?? kPrimaryColor;
     final Color ringColor = widget.ringColor;
     final double strokeWidth = size / 5;
     return SizedBox(

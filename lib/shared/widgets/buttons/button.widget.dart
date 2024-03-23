@@ -9,43 +9,30 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.text,
     this.onPressed,
-    this.backgroundColor = kPrimary,
+    this.backgroundColor = kCeruleanBlue,
     this.textColor = Colors.white,
-    required this.height,
+    this.height,
     this.icon,
     this.disabled = false,
   });
   final String text;
   final IconData? icon;
   final Color textColor;
-  final double height;
+  final double? height;
   final void Function()? onPressed;
-  final Color? backgroundColor;
+  final Color backgroundColor;
   final bool disabled;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(
-          EdgeInsets.symmetric(
-            horizontal: kSpacingX2,
-            vertical: kSpacingX1,
-          ),
-        ),
-        elevation: MaterialStateProperty.all(0),
-        backgroundColor: disabled
-            ? MaterialStateProperty.all(kGray)
-            : MaterialStateProperty.all(backgroundColor),
-        minimumSize:
-            MaterialStateProperty.all(Size(double.infinity, height.sp)),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(kSpacingX1),
-          ),
+      onPressed: disabled ? () {} : onPressed,
+      style: context.elevatedButtonTheme.copyWith(
+        backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+        minimumSize: MaterialStateProperty.all<Size>(
+          Size(double.infinity, height ?? 50.sp),
         ),
       ),
-      onPressed: disabled ? () {} : onPressed,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -61,7 +48,7 @@ class CustomButton extends StatelessWidget {
                 SizedBox(width: kSpacingX1)
               ],
             ),
-          Text(text.translate(context),
+          Text(text,
               maxLines: 2,
               textAlign: TextAlign.center,
               style:

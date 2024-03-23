@@ -33,14 +33,14 @@ class CustomDropDown extends StatelessWidget {
       onChanged: (newValue) => data![mapKey!] = newValue!,
       isExpanded: isExpanded,
       elevation: 0,
-      dropdownColor: kPrimary.shade100,
+      dropdownColor: kCeruleanBlue.shade100,
       icon: Icon(
         // Chevron down rounded
         Icons.keyboard_arrow_down_rounded,
         size: kSpacingX1,
       ),
       iconDisabledColor: kText4,
-      iconEnabledColor: kPrimary,
+      iconEnabledColor: kCeruleanBlue,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
           horizontal: 12.sp,
