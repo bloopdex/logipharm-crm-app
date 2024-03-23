@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,13 +7,13 @@ import '../../logic/counter_cubit.dart';
 import '../../logic/selection_cubit.dart';
 import '../../shared/widgets/buttons/button.widget.dart';
 import 'add-clients.page.dart';
-import 'bloc/cubit/tour_creation_cubit.dart';
 import 'bloc/delegate_cubit.dart';
+import 'bloc/tour-creation/tour_creation_cubit.dart';
 import 'delegate-selection.page.dart';
 import 'validate-creation.page.dart';
-import 'widgets/creation-loading.page.dart';
-import 'widgets/creation-successful.page.dart';
-import 'widgets/stepper.dart';
+import 'widget/creation-loading.page.dart';
+import 'widget/creation-successful.page.dart';
+import 'widget/stepper.dart';
 
 class CreatePlanPage extends StatefulWidget {
   static const String routeName = '/create-plan';

@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../l10n/l10n.dart';
-import '../../../tour-plan/models/tour.dart';
+import '../../models/tour.dart';
 import '../../services/creation.repository.dart';
 
 part 'tour_creation_state.dart';

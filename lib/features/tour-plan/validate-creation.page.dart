@@ -1,5 +1,3 @@
-import 'package:crm/features/create-plan/bloc/cubit/tour_creation_cubit.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +8,7 @@ import '../../models/person/person.dart';
 import '../../shared/services/helpers/location.helper.dart';
 import 'bloc/clients/clients_cubit.dart';
 import 'bloc/delegate_cubit.dart';
+import 'bloc/tour-creation/tour_creation_cubit.dart';
 
 class ValidateCreationPage extends StatelessWidget {
   final Map<String, dynamic> data;

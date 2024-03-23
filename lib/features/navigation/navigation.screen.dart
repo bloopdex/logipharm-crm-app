@@ -1,12 +1,17 @@
-import 'package:crm/core/core.dart';
-import 'package:crm/features/create-plan/bloc/delegate_cubit.dart';
-import 'package:crm/features/create-plan/create-plan.page.dart';
-import 'package:crm/logic/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:crm/core/core.dart';
+import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
+import 'package:crm/features/tour-plan/bloc/delegate_cubit.dart';
+import 'package:crm/features/tour-plan/bloc/wilaya_cubit.dart';
+import 'package:crm/features/tour-plan/create-plan.page.dart';
+import 'package:crm/logic/auth/auth_bloc.dart';
 
 import '../../shared/widgets/navigation/bottom.navigation.bar.widget.dart';
 import '../tour-plan/bloc/tour_plan_bloc.dart';
+
 import 'cubit/navigation_cubit.dart';
 import 'widgets/notification.button.dart';
 
@@ -20,19 +25,6 @@ class NavigationScreen extends StatefulWidget {
 
 class _NavigationScreenState extends State<NavigationScreen> {
   get surfacePrimary => null;
-
-  @override
-  void initState() {
-    if (context.read<DelegateCubit>().state.isEmpty) {
-      context.read<DelegateCubit>().load();
-    }
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,5 +71,27 @@ class _NavigationScreenState extends State<NavigationScreen> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    if (context.read<DelegateCubit>().state.isEmpty) {
+      context.read<DelegateCubit>().load();
+    }
+    if (context.read<WilayaCubit>().state.isEmpty) {
+      context.read<WilayaCubit>().load();
+    }
+    if (context.read<ClientsCubit>().state.maybeWhen(
+          orElse: () => true,
+          loaded: (clients) => clients.isEmpty,
+        )) {
+      context.read<ClientsCubit>().load();
+    }
+    super.initState();
   }
 }

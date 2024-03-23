@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 
+import '../../create-plan/services/wilaya.repository.dart';
 import '../models/wilaya/wilaya.dart';
-import '../services/wilaya.repository.dart';
 
 class WilayaCubit extends Cubit<List<Wilaya>> {
   WilayaCubit() : super([]);
