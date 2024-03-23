@@ -5,83 +5,85 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'const.dart';
 
 class AppTheme {
-  static TextTheme lightTextTheme() => const TextTheme(
+  static TextTheme lightTextTheme() => TextTheme(
         // Figma: titleH1
         displayLarge: TextStyle(
-          fontSize: 32,
-          height: 0.94,
-          fontWeight: FontWeight.w600,
-        ),
+            fontSize: 32,
+            height: 0.94,
+            fontWeight: FontWeight.w600,
+            color: kText1),
         // Figma: titleH2
         displayMedium: TextStyle(
-          fontSize: 30,
-          height: 1.2,
-          fontWeight: FontWeight.w500,
-        ),
+            fontSize: 30,
+            height: 1.2,
+            fontWeight: FontWeight.w500,
+            color: kText1),
         // Custom style not directly in TextTheme: titleH4
         displaySmall: TextStyle(
-          fontSize: 22,
-          height: 1.18,
-          fontWeight: FontWeight.w600,
-        ),
+            fontSize: 22,
+            height: 1.18,
+            fontWeight: FontWeight.w600,
+            color: kText1),
         // Custom style not directly in TextTheme: titleH6
         headlineMedium: TextStyle(
-          fontSize: 18,
-          height: 1.33,
-          fontWeight: FontWeight.w600,
-        ),
+            fontSize: 18,
+            height: 1.33,
+            fontWeight: FontWeight.w600,
+            color: kText1),
         // Custom style not directly in TextTheme: titleH8
         headlineSmall: TextStyle(
-          fontSize: 16,
-          height: 1.63,
-          fontWeight: FontWeight.w600,
-        ),
+            fontSize: 16,
+            height: 1.63,
+            fontWeight: FontWeight.w600,
+            color: kText1),
         // Figma: paragraphMid
         bodyLarge: TextStyle(
-          fontSize: 18,
-          height: 1.39,
-          fontWeight: FontWeight.w400,
-        ),
+            fontSize: 18,
+            height: 1.39,
+            fontWeight: FontWeight.w400,
+            color: kText1),
         // Custom style not directly in TextTheme: paragraphSm1
         bodyMedium: TextStyle(
-          fontSize: 16,
-          height: 1.25,
-          fontWeight: FontWeight.w400,
-        ),
+            fontSize: 16,
+            height: 1.25,
+            fontWeight: FontWeight.w400,
+            color: kText1),
         // Figma: paragraphSm2
         titleMedium: TextStyle(
-          fontSize: 14,
-          height: 1.21,
-          fontWeight: FontWeight.w400,
-        ),
+            fontSize: 14,
+            height: 1.21,
+            fontWeight: FontWeight.w400,
+            color: kText1),
         // Custom style for buttons not directly in TextTheme: buttonDefault
         labelLarge: TextStyle(
-          fontSize: 18,
-          height: 1.11,
-          fontWeight: FontWeight.w600,
-        ),
+            fontSize: 18,
+            height: 1.11,
+            fontWeight: FontWeight.w600,
+            color: kText1),
         // Custom style not directly in TextTheme: buttonSmall
         bodySmall: TextStyle(
-          fontSize: 16,
-          height: 1.63,
-          fontWeight: FontWeight.w600,
-        ),
+            fontSize: 16,
+            height: 1.63,
+            fontWeight: FontWeight.w600,
+            color: kText1),
         // Custom style not directly in TextTheme: notationSm
         labelSmall: TextStyle(
-          fontSize: 14,
-          height: 1,
-          fontWeight: FontWeight.w500,
-        ),
+            fontSize: 14,
+            height: 1,
+            fontWeight: FontWeight.w500,
+            color: kText1),
       );
 
   static ThemeData lightTheme() => ThemeData(
         brightness: Brightness.light,
         primaryColor: kCeruleanBlue,
+        canvasColor: kWhite,
         scaffoldBackgroundColor: Colors.white,
         textTheme: lightTextTheme(),
         fontFamily: 'Montserrat',
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
           elevation: 0,
         ),
         dialogBackgroundColor: Colors.white,
@@ -94,6 +96,16 @@ class AppTheme {
             ),
           ),
         ),
+        listTileTheme: ListTileThemeData(
+          visualDensity: VisualDensity.standard,
+          titleTextStyle: lightTextTheme().bodyLarge,
+          subtitleTextStyle: lightTextTheme().bodyMedium,
+          horizontalTitleGap: kSpacingX5,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: kPaddingMd2,
+            vertical: kPaddingMd1,
+          ),
+        ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: kPrimaryColor,
           foregroundColor: kWhite,
@@ -101,6 +113,89 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(kRadiusRounded),
           ),
+        ),
+        checkboxTheme: CheckboxThemeData(
+          fillColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.selected)) {
+              return kCeruleanBlue;
+            }
+            return kWhite;
+          }),
+          checkColor: MaterialStateProperty.all(kWhite),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: kBorder1,
+            ),
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+        dropdownMenuTheme: DropdownMenuThemeData(
+          textStyle: lightTextTheme().bodyMedium,
+          inputDecorationTheme: InputDecorationTheme(
+            fillColor: Colors.white,
+            filled: true,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(kSpacingX3),
+              borderSide: BorderSide(
+                color: kBorder1,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(kSpacingX3),
+              borderSide: BorderSide(
+                color: kBorder1,
+                width: 1,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(kSpacingX3),
+              borderSide: const BorderSide(
+                color: kCeruleanBlue,
+                width: 2,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(kSpacingX3),
+              borderSide: const BorderSide(
+                color: kCardinal,
+                width: 2,
+              ),
+            ),
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: kSpacingX5, vertical: kSpacingX4),
+            hintStyle: lightTextTheme().bodySmall!.copyWith(color: kText4),
+            labelStyle: lightTextTheme().bodySmall!.copyWith(color: kText4),
+            errorStyle: lightTextTheme().bodySmall!.copyWith(color: kCardinal),
+          ),
+          menuStyle: MenuStyle(
+            backgroundColor: MaterialStateProperty.all(kWhite),
+            surfaceTintColor: MaterialStateProperty.all(Colors.transparent),
+            padding: MaterialStateProperty.all(EdgeInsets.symmetric(
+              horizontal: kSpacingX10,
+            )),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(kSpacingX3),
+              ),
+            ),
+          ),
+        ),
+        popupMenuTheme: PopupMenuThemeData(
+          color: kWhite,
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(kSpacingX3),
+          ),
+        ),
+        radioTheme: RadioThemeData(
+          fillColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.selected)) {
+              return kCeruleanBlue;
+            }
+            return kCodGray.shade400;
+          }),
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
         datePickerTheme: DatePickerThemeData(
           backgroundColor: Colors.white,
@@ -132,12 +227,29 @@ class AppTheme {
           }),
           dayOverlayColor:
               MaterialStateProperty.all(kCeruleanBlue.withOpacity(0.3)),
-          todayForegroundColor: MaterialStatePropertyAll(kPrimaryColor),
-          todayBackgroundColor: MaterialStatePropertyAll(kPrimaryColor),
+          todayForegroundColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return kWhite;
+            }
+            return kPrimaryColor;
+          }),
+          todayBackgroundColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return kPrimaryColor;
+            }
+            return kWhite;
+          }),
           todayBorder: BorderSide(color: kPrimaryColor),
           yearStyle: TextStyle(color: kCodGray.shade900, fontSize: 16.sp),
-          yearForegroundColor:
-              MaterialStateProperty.all(kCeruleanBlue.shade600),
+          yearForegroundColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return kWhite;
+            }
+            return kCodGray.shade900;
+          }),
           yearBackgroundColor: MaterialStateProperty.all(kWhite),
           yearOverlayColor: MaterialStateProperty.all(kCeruleanBlue.shade100),
           rangePickerBackgroundColor: Colors.white,
@@ -165,27 +277,27 @@ class AppTheme {
           fillColor: Colors.white,
           filled: true,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(kRadiusRounded),
+            borderRadius: BorderRadius.circular(kSpacingX3),
             borderSide: BorderSide(
               color: kBorder1,
             ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(kRadiusRounded),
+            borderRadius: BorderRadius.circular(kSpacingX3),
             borderSide: BorderSide(
               color: kBorder1,
               width: 1,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(kRadiusRounded),
+            borderRadius: BorderRadius.circular(kSpacingX3),
             borderSide: const BorderSide(
               color: kCeruleanBlue,
               width: 2,
             ),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(kRadiusRounded),
+            borderRadius: BorderRadius.circular(kSpacingX3),
             borderSide: const BorderSide(
               color: kCardinal,
               width: 2,

@@ -27,10 +27,11 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
         startDate: DateHelper.YYYYMMdd(DateTime(DateTime.now().year, 1, 1)),
         endDate:
             DateHelper.YYYYMMdd(DateTime.now().add(const Duration(days: 1))),
+        query: "",
       );
 
       List<Tour> tours = response.data['body']['content']
-          .map<Tour>((laboratory) => Tour.fromJson(laboratory))
+          .map<Tour>((tour) => Tour.fromJson(tour))
           .toList();
 
       emit(TourPlanState.loaded(
@@ -52,10 +53,11 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
         startDate: DateHelper.YYYYMMdd(
             event.start ?? DateTime(DateTime.now().year, 1, 1)),
         endDate: DateHelper.YYYYMMdd(event.end ?? DateTime.now()),
+        query: event.query,
       );
 
       List<Tour> tours = response.data['body']['content']
-          .map<Tour>((laboratory) => Tour.fromJson(laboratory))
+          .map<Tour>((tour) => Tour.fromJson(tour))
           .toList();
 
       emit(TourPlanState.loaded(
@@ -79,10 +81,11 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
             startDate: DateHelper.YYYYMMdd(
                 event.start ?? DateTime(DateTime.now().year, 1, 1)),
             endDate: DateHelper.YYYYMMdd(event.end ?? DateTime.now()),
+            query: event.query,
           );
 
           List<Tour> tours = response.data['body']['content']
-              .map<Tour>((laboratory) => Tour.fromJson(laboratory))
+              .map<Tour>((tour) => Tour.fromJson(tour))
               .toList();
 
           emit(TourPlanState.loaded(

@@ -19,24 +19,24 @@ mixin _$TourPlanEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? query, DateTime? start, DateTime? end)
+    required TResult Function(String query, DateTime? start, DateTime? end)
         search,
-    required TResult Function(String? query, DateTime? start, DateTime? end)
+    required TResult Function(String query, DateTime? start, DateTime? end)
         load,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? query, DateTime? start, DateTime? end)? search,
-    TResult? Function(String? query, DateTime? start, DateTime? end)? load,
+    TResult? Function(String query, DateTime? start, DateTime? end)? search,
+    TResult? Function(String query, DateTime? start, DateTime? end)? load,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? query, DateTime? start, DateTime? end)? search,
-    TResult Function(String? query, DateTime? start, DateTime? end)? load,
+    TResult Function(String query, DateTime? start, DateTime? end)? search,
+    TResult Function(String query, DateTime? start, DateTime? end)? load,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,9 +121,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? query, DateTime? start, DateTime? end)
+    required TResult Function(String query, DateTime? start, DateTime? end)
         search,
-    required TResult Function(String? query, DateTime? start, DateTime? end)
+    required TResult Function(String query, DateTime? start, DateTime? end)
         load,
   }) {
     return started();
@@ -133,8 +133,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? query, DateTime? start, DateTime? end)? search,
-    TResult? Function(String? query, DateTime? start, DateTime? end)? load,
+    TResult? Function(String query, DateTime? start, DateTime? end)? search,
+    TResult? Function(String query, DateTime? start, DateTime? end)? load,
   }) {
     return started?.call();
   }
@@ -143,8 +143,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? query, DateTime? start, DateTime? end)? search,
-    TResult Function(String? query, DateTime? start, DateTime? end)? load,
+    TResult Function(String query, DateTime? start, DateTime? end)? search,
+    TResult Function(String query, DateTime? start, DateTime? end)? load,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -198,7 +198,7 @@ abstract class _$$SearchImplCopyWith<$Res> {
           _$SearchImpl value, $Res Function(_$SearchImpl) then) =
       __$$SearchImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? query, DateTime? start, DateTime? end});
+  $Res call({String query, DateTime? start, DateTime? end});
 }
 
 /// @nodoc
@@ -212,15 +212,15 @@ class __$$SearchImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? query = freezed,
+    Object? query = null,
     Object? start = freezed,
     Object? end = freezed,
   }) {
     return _then(_$SearchImpl(
-      query: freezed == query
+      query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       start: freezed == start
           ? _value.start
           : start // ignore: cast_nullable_to_non_nullable
@@ -236,10 +236,10 @@ class __$$SearchImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SearchImpl implements _Search {
-  const _$SearchImpl({this.query, this.start, this.end});
+  const _$SearchImpl({required this.query, this.start, this.end});
 
   @override
-  final String? query;
+  final String query;
   @override
   final DateTime? start;
   @override
@@ -273,9 +273,9 @@ class _$SearchImpl implements _Search {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? query, DateTime? start, DateTime? end)
+    required TResult Function(String query, DateTime? start, DateTime? end)
         search,
-    required TResult Function(String? query, DateTime? start, DateTime? end)
+    required TResult Function(String query, DateTime? start, DateTime? end)
         load,
   }) {
     return search(query, start, end);
@@ -285,8 +285,8 @@ class _$SearchImpl implements _Search {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? query, DateTime? start, DateTime? end)? search,
-    TResult? Function(String? query, DateTime? start, DateTime? end)? load,
+    TResult? Function(String query, DateTime? start, DateTime? end)? search,
+    TResult? Function(String query, DateTime? start, DateTime? end)? load,
   }) {
     return search?.call(query, start, end);
   }
@@ -295,8 +295,8 @@ class _$SearchImpl implements _Search {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? query, DateTime? start, DateTime? end)? search,
-    TResult Function(String? query, DateTime? start, DateTime? end)? load,
+    TResult Function(String query, DateTime? start, DateTime? end)? search,
+    TResult Function(String query, DateTime? start, DateTime? end)? load,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -342,11 +342,11 @@ class _$SearchImpl implements _Search {
 
 abstract class _Search implements TourPlanEvent {
   const factory _Search(
-      {final String? query,
+      {required final String query,
       final DateTime? start,
       final DateTime? end}) = _$SearchImpl;
 
-  String? get query;
+  String get query;
   DateTime? get start;
   DateTime? get end;
   @JsonKey(ignore: true)
@@ -360,7 +360,7 @@ abstract class _$$LoadImplCopyWith<$Res> {
           _$LoadImpl value, $Res Function(_$LoadImpl) then) =
       __$$LoadImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? query, DateTime? start, DateTime? end});
+  $Res call({String query, DateTime? start, DateTime? end});
 }
 
 /// @nodoc
@@ -373,15 +373,15 @@ class __$$LoadImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? query = freezed,
+    Object? query = null,
     Object? start = freezed,
     Object? end = freezed,
   }) {
     return _then(_$LoadImpl(
-      query: freezed == query
+      query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       start: freezed == start
           ? _value.start
           : start // ignore: cast_nullable_to_non_nullable
@@ -397,10 +397,10 @@ class __$$LoadImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadImpl implements _Load {
-  const _$LoadImpl({this.query, this.start, this.end});
+  const _$LoadImpl({required this.query, this.start, this.end});
 
   @override
-  final String? query;
+  final String query;
   @override
   final DateTime? start;
   @override
@@ -434,9 +434,9 @@ class _$LoadImpl implements _Load {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? query, DateTime? start, DateTime? end)
+    required TResult Function(String query, DateTime? start, DateTime? end)
         search,
-    required TResult Function(String? query, DateTime? start, DateTime? end)
+    required TResult Function(String query, DateTime? start, DateTime? end)
         load,
   }) {
     return load(query, start, end);
@@ -446,8 +446,8 @@ class _$LoadImpl implements _Load {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? query, DateTime? start, DateTime? end)? search,
-    TResult? Function(String? query, DateTime? start, DateTime? end)? load,
+    TResult? Function(String query, DateTime? start, DateTime? end)? search,
+    TResult? Function(String query, DateTime? start, DateTime? end)? load,
   }) {
     return load?.call(query, start, end);
   }
@@ -456,8 +456,8 @@ class _$LoadImpl implements _Load {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? query, DateTime? start, DateTime? end)? search,
-    TResult Function(String? query, DateTime? start, DateTime? end)? load,
+    TResult Function(String query, DateTime? start, DateTime? end)? search,
+    TResult Function(String query, DateTime? start, DateTime? end)? load,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -503,11 +503,11 @@ class _$LoadImpl implements _Load {
 
 abstract class _Load implements TourPlanEvent {
   const factory _Load(
-      {final String? query,
+      {required final String query,
       final DateTime? start,
       final DateTime? end}) = _$LoadImpl;
 
-  String? get query;
+  String get query;
   DateTime? get start;
   DateTime? get end;
   @JsonKey(ignore: true)

@@ -1,8 +1,20 @@
 {
     "@@locale": "en",
+    "error": "Error",
+    "@error": {
+        "description": "Error"
+    },
     "confirm": "Confirm",
     "@confirm": {
         "description": "Confirm"
+    },
+    "finish": "Finish",
+    "@finish": {
+        "description": "Finish"
+    },
+    "viewDetails": "View Details",
+    "@viewDetails": {
+        "description": "View Details"
     },
     "save": "Save",
     "@save": {
@@ -11,6 +23,18 @@
     "cancel": "Cancel",
     "@cancel": {
         "description": "Cancel"
+    },
+    "later": "Later",
+    "@later": {
+        "description": "Later"
+    },
+    "next": "Next",
+    "@next": {
+        "description": "Next"
+    },
+    "validate": "Validate",
+    "@validate": {
+        "description": "Validate"
     },
     "selectDateRange": "Select Date Range",
     "@selectDateRange": {
@@ -23,6 +47,14 @@
     "endDate": "End Date",
     "@endDate": {
         "description": "End Date"
+    },
+    "selectDate": "Select Date",
+    "@selectDate": {
+        "description": "Select Date"
+    },
+    "today": "Today",
+    "@today": {
+        "description": "Today"
     },
     "navHome": "Home",
     "@navHome": {
@@ -143,5 +175,143 @@
     "tourEmptyPlansDescription": "You don''t have any plans yet",
     "@tourEmptyPlansDescription": {
         "description": "Empty Plans Description"
+    },
+    "tourCreateNewPlan": "Create New Plan",
+    "@tourCreateNewPlan": {
+        "description": "Create New Plan"
+    },
+    "tourCreationTourDetailsTitle": "Tour Details",
+    "@tourCreationTourDetailsTitle": {
+        "description": "Tour Details Title"
+    },
+    "tourCreationTourDetailsDescription": "Choose the delegate responsible for this tour plan and enter the date scheduled for the tour.",
+    "@tourCreationTourDetailsDescription": {
+        "description": "Tour Details Description"
+    },
+    "tourCreationTourDetailsDelegateLabel": "Delegate",
+    "@tourCreationTourDetailsDelegateLabel": {
+        "description": "Delegate"
+    },
+    "tourCreationTourDetailsDateLabel": "Date",
+    "@tourCreationTourDetailsDateLabel": {
+        "description": "Date"
+    },
+    "tourCreationClientVisitsTitle": "Client To Visits",
+    "@tourCreationClientVisitsTitle": {
+        "description": "Client To Visits Title"
+    },
+    "tourCreationClientVisitsDescription": "Select the clients you want to visit during this tour.",
+    "@tourCreationClientVisitsDescription": {
+        "description": "Client To Visits Description"
+    },
+    "tourCreationRegionLabel": "Region",
+    "@tourCreationRegionLabel": {
+        "description": "Region"
+    },
+    "tourCreationRegionPlaceholder": "Select a region",
+    "@tourCreationRegionPlaceholder": {
+        "description": "Region Placeholder"
+    },
+    "tourCreationClientsLabel": "Clients",
+    "@tourCreationClientsLabel": {
+        "description": "Clients"
+    },
+    "tourCreationClientEmptyTitle": "No clients found",
+    "@tourCreationClientEmptyTitle": {
+        "description": "Empty Clients"
+    },
+    "tourCreationClientEmptyDescription": "No clients found in this region",
+    "@tourCreationClientEmptyDescription": {
+        "description": "Empty Clients Description"
+    },
+    "tourCreationNoAddress": "No address",
+    "@tourCreationNoAddress": {
+        "description": "No address"
+    },
+    "tourValidationPlanBy": "Tour Plan, By:",
+    "@tourValidationPlanBy": {
+        "description": "Tour Plan, By:"
+    },
+    "tourValidationRegion": "Region",
+    "@tourValidationRegion": {
+        "description": "Region"
+    },
+    "tourCreationInProgressTitle": "The Creation Of The Tour Plan Is In Progress",
+    "@tourCreationInProgressTitle": {
+        "description": "The Creation Of The Tour Plan Is In Progress"
+    },
+    "tourCreationInProgressDescription": "We are finalizing the details of your tour plan. Thank you for your patience.",
+    "@tourCreationInProgressDescription": {
+        "description": "We are finalizing the details of your tour plan. Thank you for your patience."
+    },
+    "tourCreationErrorTitle": "An error occurred",
+    "@tourCreationErrorTitle": {
+        "description": "An error occurred"
+    },
+    "tourCreationErrorDescription": "An error occurred while creating the tour plan. Please try again later.",
+    "@tourCreationErrorDescription": {
+        "description": "An error occurred while creating the tour plan. Please try again later."
+    },
+    "tourCreationSuccessTitle": "Successfully created tour plan",
+    "@tourCreationSuccessTitle": {
+        "description": "Successfully created tour plan"
+    },
+    "tourCreationSuccessDescription": "Your tour plan has been successfully created. You can now view and manage your planned tours.",
+    "@tourCreationSuccessDescription": {
+        "description": "Your tour plan has been successfully created. You can now view and manage your planned tours."
+    },
+    "tourCreationStartTour": "Do You Want To Start The Tour Now?",
+    "@tourCreationStartTour": {
+        "description": "Do You Want To Start The Tour Now?"
+    },
+    "tourCreationStartTourDescription": "You can start the tour now or later from the list of planned tours.",
+    "@tourCreationStartTourDescription": {
+        "description": "You can start the tour now or later from the list of planned tours."
+    },
+    "tourValidationClientLabelNumber": "Clients ({count})",
+    "@tourValidationClientLabelNumber": {
+        "description": "Clients",
+        "placeholders": {
+            "count": {
+                "description": "Client Count",
+                "type": "int"
+            }
+        }
+    },
+    "homeCreateNewPlan": "Create New Plan",
+    "@homeCreateNewPlan": {
+        "description": "Create New Plan"
+    },
+    "homeCreateNewVisit": "Create New Visit",
+    "@homeCreateNewVisit": {
+        "description": "Create New Visit"
+    },
+    "homeCreateNewEvent": "Create New Event",
+    "@homeCreateNewEvent": {
+        "description": "Create New Event"
+    },
+    "homeHireNewClient": "Hire New Client",
+    "@homeHireNewClient": {
+        "description": "Hire New Client"
+    },
+    "homeMyClients": "My Clients",
+    "@homeMyClients": {
+        "description": "My Clients"
+    },
+    "homeMyTasksToday": "My Tasks Today",
+    "@homeMyTasksToday": {
+        "description": "My Tasks Today"
+    },
+    "homePendingPlan": "Pending Plan",
+    "@homePendingPlan": {
+        "description": "Pending Plan"
+    },
+    "homePendingHire": "Pending Hire",
+    "@homePendingHire": {
+        "description": "Pending Hire"
+    },
+    "homeHello": "Hello",
+    "@homeHello": {
+        "description": "Hello"
     }
 }

@@ -1,5 +1,6 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../l10n/l10n.dart';
 
@@ -150,4 +151,54 @@ extension SnackBarExtension on BuildContext {
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
   }
+}
+
+extension DateFormaterExtension on DateTime {
+  String YYYYMMdd({String separator = "-"}) {
+    return DateFormat("yyyy${separator}MM${separator}dd").format(this);
+  }
+
+  String ddMMYYYY({String separator = "-"}) {
+    return DateFormat("dd${separator}MM${separator}yyyy").format(this);
+  }
+
+  String ddMMYYYYHHMMSS({String separator = "-"}) {
+    return DateFormat("dd${separator}MM${separator}yyyy HH:mm:ss").format(this);
+  }
+
+  String HHMMSS({String separator = ":"}) {
+    return DateFormat("HH${separator}mm${separator}ss").format(this);
+  }
+
+  String HHMM({String separator = ":"}) {
+    return DateFormat("HH${separator}mm").format(this);
+  }
+
+  String MMMMyyyy() {
+    return DateFormat("MMMM yyyy").format(this);
+  }
+
+  String MMMMdyyyy() {
+    return DateFormat("MMMM d, yyyy").format(this);
+  }
+
+  String MMMdyyyy() {
+    return DateFormat("MMM d, yyyy").format(this);
+  }
+
+  String MMMd() {
+    return DateFormat("MMM d").format(this);
+  }
+}
+
+extension StringExtensions on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
+
+  String capitalizeFirstofEach() {
+    return split(" ").map((e) => e.capitalize()).toList().join(" ");
+  }
+
+  String get initials => split(" ").map((e) => e[0]).join();
 }

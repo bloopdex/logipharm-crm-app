@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(percentage) => "${percentage}%";
 
+  static String m2(count) => "Clients (${count})";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "authLoginDescription": MessageLookupByLibrary.simpleMessage(
@@ -43,21 +45,85 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "finish": MessageLookupByLibrary.simpleMessage("Finish"),
+        "homeCreateNewEvent":
+            MessageLookupByLibrary.simpleMessage("Create New Event"),
+        "homeCreateNewPlan":
+            MessageLookupByLibrary.simpleMessage("Create New Plan"),
+        "homeCreateNewVisit":
+            MessageLookupByLibrary.simpleMessage("Create New Visit"),
+        "homeHello": MessageLookupByLibrary.simpleMessage("Hello"),
+        "homeHireNewClient":
+            MessageLookupByLibrary.simpleMessage("Hire New Client"),
+        "homeMyClients": MessageLookupByLibrary.simpleMessage("My Clients"),
+        "homeMyTasksToday":
+            MessageLookupByLibrary.simpleMessage("My Tasks Today"),
+        "homePendingHire": MessageLookupByLibrary.simpleMessage("Pending Hire"),
+        "homePendingPlan": MessageLookupByLibrary.simpleMessage("Pending Plan"),
+        "later": MessageLookupByLibrary.simpleMessage("Later"),
         "navHome": MessageLookupByLibrary.simpleMessage("Home"),
         "navMenu": MessageLookupByLibrary.simpleMessage("Menu"),
         "navPlans": MessageLookupByLibrary.simpleMessage("Plans"),
         "navTodos": MessageLookupByLibrary.simpleMessage("Todos"),
         "navVisits": MessageLookupByLibrary.simpleMessage("Visits"),
+        "next": MessageLookupByLibrary.simpleMessage("Next"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
         "selectDateRange":
             MessageLookupByLibrary.simpleMessage("Select Date Range"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "today": MessageLookupByLibrary.simpleMessage("Today"),
         "tourAllPlans": MessageLookupByLibrary.simpleMessage("All Plans"),
         "tourClient": m0,
         "tourCompletedPlans":
             MessageLookupByLibrary.simpleMessage("Completed Plans"),
         "tourCompletedStatus":
             MessageLookupByLibrary.simpleMessage("Completed"),
+        "tourCreateNewPlan":
+            MessageLookupByLibrary.simpleMessage("Create New Plan"),
+        "tourCreationClientEmptyDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "No clients found in this region"),
+        "tourCreationClientEmptyTitle":
+            MessageLookupByLibrary.simpleMessage("No clients found"),
+        "tourCreationClientVisitsDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "Select the clients you want to visit during this tour."),
+        "tourCreationClientVisitsTitle":
+            MessageLookupByLibrary.simpleMessage("Client To Visits"),
+        "tourCreationClientsLabel":
+            MessageLookupByLibrary.simpleMessage("Clients"),
+        "tourCreationErrorDescription": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while creating the tour plan. Please try again later."),
+        "tourCreationErrorTitle":
+            MessageLookupByLibrary.simpleMessage("An error occurred"),
+        "tourCreationInProgressDescription": MessageLookupByLibrary.simpleMessage(
+            "We are finalizing the details of your tour plan. Thank you for your patience."),
+        "tourCreationInProgressTitle": MessageLookupByLibrary.simpleMessage(
+            "The Creation Of The Tour Plan Is In Progress"),
+        "tourCreationNoAddress":
+            MessageLookupByLibrary.simpleMessage("No address"),
+        "tourCreationRegionLabel":
+            MessageLookupByLibrary.simpleMessage("Region"),
+        "tourCreationRegionPlaceholder":
+            MessageLookupByLibrary.simpleMessage("Select a region"),
+        "tourCreationStartTour": MessageLookupByLibrary.simpleMessage(
+            "Do You Want To Start The Tour Now?"),
+        "tourCreationStartTourDescription": MessageLookupByLibrary.simpleMessage(
+            "You can start the tour now or later from the list of planned tours."),
+        "tourCreationSuccessDescription": MessageLookupByLibrary.simpleMessage(
+            "Your tour plan has been successfully created. You can now view and manage your planned tours."),
+        "tourCreationSuccessTitle": MessageLookupByLibrary.simpleMessage(
+            "Successfully created tour plan"),
+        "tourCreationTourDetailsDateLabel":
+            MessageLookupByLibrary.simpleMessage("Date"),
+        "tourCreationTourDetailsDelegateLabel":
+            MessageLookupByLibrary.simpleMessage("Delegate"),
+        "tourCreationTourDetailsDescription": MessageLookupByLibrary.simpleMessage(
+            "Choose the delegate responsible for this tour plan and enter the date scheduled for the tour."),
+        "tourCreationTourDetailsTitle":
+            MessageLookupByLibrary.simpleMessage("Tour Details"),
         "tourCurrentTour": MessageLookupByLibrary.simpleMessage("Current Tour"),
         "tourEmptyPlans":
             MessageLookupByLibrary.simpleMessage("No plans found"),
@@ -72,6 +138,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "tourPendingStatus": MessageLookupByLibrary.simpleMessage("Pending"),
         "tourProgress": m1,
         "tourSearchPerWilaya":
-            MessageLookupByLibrary.simpleMessage("Search per wilaya")
+            MessageLookupByLibrary.simpleMessage("Search per wilaya"),
+        "tourValidationClientLabelNumber": m2,
+        "tourValidationPlanBy":
+            MessageLookupByLibrary.simpleMessage("Tour Plan, By:"),
+        "tourValidationRegion": MessageLookupByLibrary.simpleMessage("Region"),
+        "validate": MessageLookupByLibrary.simpleMessage("Validate"),
+        "viewDetails": MessageLookupByLibrary.simpleMessage("View Details")
       };
 }

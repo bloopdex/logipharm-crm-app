@@ -67,7 +67,7 @@ const Map<int, Color> warning = {
   900: Color(0xFF7A4100),
 };
 
-const kCeruleanBlue = MaterialColor(0xFF3A6FF7, ceruleanBlue);
+const kCeruleanBlue = MaterialColor(0xFF2B54ED, ceruleanBlue);
 const kCardinal = MaterialColor(0xFFE23636, cardinal);
 const kCodGray = MaterialColor(0xFF949FA6, codGray);
 const kHighland = MaterialColor(0xFF2BBA28, highland);

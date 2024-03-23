@@ -1,6 +1,5 @@
-import 'package:crm/features/tour-plan/core/controller.dart';
-import 'package:crm/logic/search/search_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,11 +11,18 @@ import 'core/routes.dart';
 import 'core/theme.dart';
 import 'features/auth/bloc/login/login_bloc.dart';
 import 'features/auth/login.screen.dart';
+import 'features/create-plan/bloc/clients/clients_cubit.dart';
+import 'features/create-plan/bloc/cubit/tour_creation_cubit.dart';
+import 'features/create-plan/bloc/delegate_cubit.dart';
+import 'features/create-plan/bloc/wilaya_cubit.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
+import 'features/tour-plan/core/controller.dart';
 import 'l10n/l10n.dart';
 import 'logic/auth/auth_bloc.dart';
+import 'logic/counter_cubit.dart';
 import 'logic/localizations/localizations_bloc.dart';
+import 'logic/search/search_cubit.dart';
 import 'logic/time.range/time_range_cubit.dart';
 import 'shared/services/helpers/dio.helper.dart';
 import 'shared/widgets/error/error.screen.dart';
@@ -28,6 +34,7 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await ScreenUtil.ensureScreenSize();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(const MyApp());
 }
@@ -80,6 +87,22 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<NavigationCubit>(create: (context) => NavigationCubit()),
           BlocProvider<TimeRangeCubit>(create: (context) => TimeRangeCubit()),
           BlocProvider<SearchCubit>(create: (context) => SearchCubit()),
+          BlocProvider<CounterCubit>(
+              create: (context) => CounterCubit()..reset()),
+          BlocProvider<DelegateCubit>(
+            lazy: false,
+            create: (context) => DelegateCubit()..load(),
+          ),
+          BlocProvider<WilayaCubit>(
+            lazy: false,
+            create: (context) => WilayaCubit()..load(),
+          ),
+          BlocProvider<ClientsCubit>(
+            lazy: false,
+            create: (context) => ClientsCubit()..load(),
+          ),
+          BlocProvider<TourCreationCubit>(
+              create: (context) => TourCreationCubit()),
         ],
         child: BlocBuilder<LocalizationsBloc, LocalizationsState>(
             builder: (context, state) {

@@ -50,12 +50,42 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Error`
+  String get error {
+    return Intl.message(
+      'Error',
+      name: 'error',
+      desc: 'Error',
+      args: [],
+    );
+  }
+
   /// `Confirm`
   String get confirm {
     return Intl.message(
       'Confirm',
       name: 'confirm',
       desc: 'Confirm',
+      args: [],
+    );
+  }
+
+  /// `Finish`
+  String get finish {
+    return Intl.message(
+      'Finish',
+      name: 'finish',
+      desc: 'Finish',
+      args: [],
+    );
+  }
+
+  /// `View Details`
+  String get viewDetails {
+    return Intl.message(
+      'View Details',
+      name: 'viewDetails',
+      desc: 'View Details',
       args: [],
     );
   }
@@ -76,6 +106,36 @@ class S {
       'Cancel',
       name: 'cancel',
       desc: 'Cancel',
+      args: [],
+    );
+  }
+
+  /// `Later`
+  String get later {
+    return Intl.message(
+      'Later',
+      name: 'later',
+      desc: 'Later',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
+      desc: 'Next',
+      args: [],
+    );
+  }
+
+  /// `Validate`
+  String get validate {
+    return Intl.message(
+      'Validate',
+      name: 'validate',
+      desc: 'Validate',
       args: [],
     );
   }
@@ -106,6 +166,26 @@ class S {
       'End Date',
       name: 'endDate',
       desc: 'End Date',
+      args: [],
+    );
+  }
+
+  /// `Select Date`
+  String get selectDate {
+    return Intl.message(
+      'Select Date',
+      name: 'selectDate',
+      desc: 'Select Date',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get today {
+    return Intl.message(
+      'Today',
+      name: 'today',
+      desc: 'Today',
       args: [],
     );
   }
@@ -376,6 +456,340 @@ class S {
       'You don\'\'t have any plans yet',
       name: 'tourEmptyPlansDescription',
       desc: 'Empty Plans Description',
+      args: [],
+    );
+  }
+
+  /// `Create New Plan`
+  String get tourCreateNewPlan {
+    return Intl.message(
+      'Create New Plan',
+      name: 'tourCreateNewPlan',
+      desc: 'Create New Plan',
+      args: [],
+    );
+  }
+
+  /// `Tour Details`
+  String get tourCreationTourDetailsTitle {
+    return Intl.message(
+      'Tour Details',
+      name: 'tourCreationTourDetailsTitle',
+      desc: 'Tour Details Title',
+      args: [],
+    );
+  }
+
+  /// `Choose the delegate responsible for this tour plan and enter the date scheduled for the tour.`
+  String get tourCreationTourDetailsDescription {
+    return Intl.message(
+      'Choose the delegate responsible for this tour plan and enter the date scheduled for the tour.',
+      name: 'tourCreationTourDetailsDescription',
+      desc: 'Tour Details Description',
+      args: [],
+    );
+  }
+
+  /// `Delegate`
+  String get tourCreationTourDetailsDelegateLabel {
+    return Intl.message(
+      'Delegate',
+      name: 'tourCreationTourDetailsDelegateLabel',
+      desc: 'Delegate',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get tourCreationTourDetailsDateLabel {
+    return Intl.message(
+      'Date',
+      name: 'tourCreationTourDetailsDateLabel',
+      desc: 'Date',
+      args: [],
+    );
+  }
+
+  /// `Client To Visits`
+  String get tourCreationClientVisitsTitle {
+    return Intl.message(
+      'Client To Visits',
+      name: 'tourCreationClientVisitsTitle',
+      desc: 'Client To Visits Title',
+      args: [],
+    );
+  }
+
+  /// `Select the clients you want to visit during this tour.`
+  String get tourCreationClientVisitsDescription {
+    return Intl.message(
+      'Select the clients you want to visit during this tour.',
+      name: 'tourCreationClientVisitsDescription',
+      desc: 'Client To Visits Description',
+      args: [],
+    );
+  }
+
+  /// `Region`
+  String get tourCreationRegionLabel {
+    return Intl.message(
+      'Region',
+      name: 'tourCreationRegionLabel',
+      desc: 'Region',
+      args: [],
+    );
+  }
+
+  /// `Select a region`
+  String get tourCreationRegionPlaceholder {
+    return Intl.message(
+      'Select a region',
+      name: 'tourCreationRegionPlaceholder',
+      desc: 'Region Placeholder',
+      args: [],
+    );
+  }
+
+  /// `Clients`
+  String get tourCreationClientsLabel {
+    return Intl.message(
+      'Clients',
+      name: 'tourCreationClientsLabel',
+      desc: 'Clients',
+      args: [],
+    );
+  }
+
+  /// `No clients found`
+  String get tourCreationClientEmptyTitle {
+    return Intl.message(
+      'No clients found',
+      name: 'tourCreationClientEmptyTitle',
+      desc: 'Empty Clients',
+      args: [],
+    );
+  }
+
+  /// `No clients found in this region`
+  String get tourCreationClientEmptyDescription {
+    return Intl.message(
+      'No clients found in this region',
+      name: 'tourCreationClientEmptyDescription',
+      desc: 'Empty Clients Description',
+      args: [],
+    );
+  }
+
+  /// `No address`
+  String get tourCreationNoAddress {
+    return Intl.message(
+      'No address',
+      name: 'tourCreationNoAddress',
+      desc: 'No address',
+      args: [],
+    );
+  }
+
+  /// `Tour Plan, By:`
+  String get tourValidationPlanBy {
+    return Intl.message(
+      'Tour Plan, By:',
+      name: 'tourValidationPlanBy',
+      desc: 'Tour Plan, By:',
+      args: [],
+    );
+  }
+
+  /// `Region`
+  String get tourValidationRegion {
+    return Intl.message(
+      'Region',
+      name: 'tourValidationRegion',
+      desc: 'Region',
+      args: [],
+    );
+  }
+
+  /// `The Creation Of The Tour Plan Is In Progress`
+  String get tourCreationInProgressTitle {
+    return Intl.message(
+      'The Creation Of The Tour Plan Is In Progress',
+      name: 'tourCreationInProgressTitle',
+      desc: 'The Creation Of The Tour Plan Is In Progress',
+      args: [],
+    );
+  }
+
+  /// `We are finalizing the details of your tour plan. Thank you for your patience.`
+  String get tourCreationInProgressDescription {
+    return Intl.message(
+      'We are finalizing the details of your tour plan. Thank you for your patience.',
+      name: 'tourCreationInProgressDescription',
+      desc:
+          'We are finalizing the details of your tour plan. Thank you for your patience.',
+      args: [],
+    );
+  }
+
+  /// `An error occurred`
+  String get tourCreationErrorTitle {
+    return Intl.message(
+      'An error occurred',
+      name: 'tourCreationErrorTitle',
+      desc: 'An error occurred',
+      args: [],
+    );
+  }
+
+  /// `An error occurred while creating the tour plan. Please try again later.`
+  String get tourCreationErrorDescription {
+    return Intl.message(
+      'An error occurred while creating the tour plan. Please try again later.',
+      name: 'tourCreationErrorDescription',
+      desc:
+          'An error occurred while creating the tour plan. Please try again later.',
+      args: [],
+    );
+  }
+
+  /// `Successfully created tour plan`
+  String get tourCreationSuccessTitle {
+    return Intl.message(
+      'Successfully created tour plan',
+      name: 'tourCreationSuccessTitle',
+      desc: 'Successfully created tour plan',
+      args: [],
+    );
+  }
+
+  /// `Your tour plan has been successfully created. You can now view and manage your planned tours.`
+  String get tourCreationSuccessDescription {
+    return Intl.message(
+      'Your tour plan has been successfully created. You can now view and manage your planned tours.',
+      name: 'tourCreationSuccessDescription',
+      desc:
+          'Your tour plan has been successfully created. You can now view and manage your planned tours.',
+      args: [],
+    );
+  }
+
+  /// `Do You Want To Start The Tour Now?`
+  String get tourCreationStartTour {
+    return Intl.message(
+      'Do You Want To Start The Tour Now?',
+      name: 'tourCreationStartTour',
+      desc: 'Do You Want To Start The Tour Now?',
+      args: [],
+    );
+  }
+
+  /// `You can start the tour now or later from the list of planned tours.`
+  String get tourCreationStartTourDescription {
+    return Intl.message(
+      'You can start the tour now or later from the list of planned tours.',
+      name: 'tourCreationStartTourDescription',
+      desc:
+          'You can start the tour now or later from the list of planned tours.',
+      args: [],
+    );
+  }
+
+  /// `Clients ({count})`
+  String tourValidationClientLabelNumber(int count) {
+    return Intl.message(
+      'Clients ($count)',
+      name: 'tourValidationClientLabelNumber',
+      desc: 'Clients',
+      args: [count],
+    );
+  }
+
+  /// `Create New Plan`
+  String get homeCreateNewPlan {
+    return Intl.message(
+      'Create New Plan',
+      name: 'homeCreateNewPlan',
+      desc: 'Create New Plan',
+      args: [],
+    );
+  }
+
+  /// `Create New Visit`
+  String get homeCreateNewVisit {
+    return Intl.message(
+      'Create New Visit',
+      name: 'homeCreateNewVisit',
+      desc: 'Create New Visit',
+      args: [],
+    );
+  }
+
+  /// `Create New Event`
+  String get homeCreateNewEvent {
+    return Intl.message(
+      'Create New Event',
+      name: 'homeCreateNewEvent',
+      desc: 'Create New Event',
+      args: [],
+    );
+  }
+
+  /// `Hire New Client`
+  String get homeHireNewClient {
+    return Intl.message(
+      'Hire New Client',
+      name: 'homeHireNewClient',
+      desc: 'Hire New Client',
+      args: [],
+    );
+  }
+
+  /// `My Clients`
+  String get homeMyClients {
+    return Intl.message(
+      'My Clients',
+      name: 'homeMyClients',
+      desc: 'My Clients',
+      args: [],
+    );
+  }
+
+  /// `My Tasks Today`
+  String get homeMyTasksToday {
+    return Intl.message(
+      'My Tasks Today',
+      name: 'homeMyTasksToday',
+      desc: 'My Tasks Today',
+      args: [],
+    );
+  }
+
+  /// `Pending Plan`
+  String get homePendingPlan {
+    return Intl.message(
+      'Pending Plan',
+      name: 'homePendingPlan',
+      desc: 'Pending Plan',
+      args: [],
+    );
+  }
+
+  /// `Pending Hire`
+  String get homePendingHire {
+    return Intl.message(
+      'Pending Hire',
+      name: 'homePendingHire',
+      desc: 'Pending Hire',
+      args: [],
+    );
+  }
+
+  /// `Hello`
+  String get homeHello {
+    return Intl.message(
+      'Hello',
+      name: 'homeHello',
+      desc: 'Hello',
       args: [],
     );
   }

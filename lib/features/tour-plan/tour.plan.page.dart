@@ -1,4 +1,5 @@
 import 'package:crm/core/const.dart';
+import 'package:crm/shared/utils/date.formatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +9,7 @@ import '../../core/core.dart';
 import '../../logic/search/search_cubit.dart';
 import '../../logic/time.range/time_range_cubit.dart';
 import '../../shared/widgets/image/svg.dart';
-import '../../shared/widgets/inputs/date.picker.input.dart';
+import '../../shared/widgets/inputs/daterange.picker.input.dart';
 import '../../shared/widgets/inputs/search.text.field.widget.dart';
 import '../../shared/widgets/loading/loader.widget.dart';
 import 'bloc/tour_plan_bloc.dart';
@@ -18,14 +19,14 @@ import 'widget/current.plan.widget.dart';
 import 'widget/status.tabbar.widget.dart';
 import 'widget/tour.plan.card.dart';
 
-class PlanTourScreen extends StatefulWidget {
-  const PlanTourScreen({super.key});
+class PlanTourPage extends StatefulWidget {
+  const PlanTourPage({super.key});
 
   @override
-  State<PlanTourScreen> createState() => _PlanTourScreenState();
+  State<PlanTourPage> createState() => _PlanTourPageState();
 }
 
-class _PlanTourScreenState extends State<PlanTourScreen> {
+class _PlanTourPageState extends State<PlanTourPage> {
   final ScrollController controller = ScrollController();
 
   @override
@@ -41,7 +42,7 @@ class _PlanTourScreenState extends State<PlanTourScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: kSpacingX5),
+      padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
       constraints: BoxConstraints(
         maxWidth: context.width,
         minWidth: context.width,
@@ -104,22 +105,64 @@ class _PlanTourScreenState extends State<PlanTourScreen> {
                       ),
                       SizedBox(height: kSpacingX4),
                       CurrentWidgetCard(tour: current),
-                      SizedBox(height: kSpacingX4),
+                      SizedBox(height: kSpacingX6),
                     ],
                   ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: kSpacingX6),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: SearchTextField(
-                          hintText: context.i10n.tourSearchPerWilaya,
-                        ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: SearchTextField(
+                        hintText: context.i10n.tourSearchPerWilaya,
                       ),
-                      SizedBox(width: kSpacingX1),
-                      const CustomDateRangePicker()
-                    ],
-                  ),
+                    ),
+                    SizedBox(width: kSpacingX2),
+                    const CustomDateRangePicker()
+                  ],
+                ),
+                BlocBuilder<TimeRangeCubit, TimeRangeState>(
+                  builder: (context, state) {
+                    if (state.validatedStartDate != null &&
+                        state.validatedEndDate != null) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: kSpacingX4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              DateHelper.ddMMYYYY(state.validatedStartDate!),
+                              style: context.textTheme.bodyMedium!.copyWith(
+                                color: kBgGrayVisibility5,
+                              ),
+                            ),
+                            SizedBox(width: kSpacingX4),
+                            Icon(Icons.arrow_forward,
+                                size: 20.sp, color: kBgGrayVisibility4),
+                            SizedBox(width: kSpacingX4),
+                            Text(
+                              DateHelper.ddMMYYYY(state.validatedEndDate!),
+                              style: context.textTheme.bodyMedium!.copyWith(
+                                color: kBgGrayVisibility5,
+                              ),
+                            ),
+                            SizedBox(width: kSpacingX4),
+                            InkWell(
+                              onTap: () {
+                                context.read<TimeRangeCubit>().reset();
+                              },
+                              child: Icon(
+                                Icons.cancel,
+                                size: kSpacingX7,
+                                color: kPrimaryColor,
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
                 ),
                 const TourStatusTabBar(),
                 SizedBox(height: kSpacingX4),
@@ -150,19 +193,28 @@ class _PlanTourScreenState extends State<PlanTourScreen> {
                           ],
                         ));
                       }
-                      return ListView.separated(
-                        controller: controller,
-                        itemCount: tours.length,
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: kSpacingX3),
-                        itemBuilder: (context, index) {
-                          if (index == tours.length && !hasReachedMax) {
-                            return const Center(
-                              child: Loader(),
-                            );
-                          }
-                          return TourPlanCard(tour: tours[index]);
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          context.read<SearchCubit>().reset();
+                          context.read<TimeRangeCubit>().reset();
+                          context.read<TourPlanBloc>().add(
+                                const TourPlanEvent.started(),
+                              );
                         },
+                        child: ListView.separated(
+                          controller: controller,
+                          itemCount: tours.length,
+                          separatorBuilder: (context, index) =>
+                              SizedBox(height: kSpacingX3),
+                          itemBuilder: (context, index) {
+                            if (index == tours.length && !hasReachedMax) {
+                              return const Center(
+                                child: Loader(),
+                              );
+                            }
+                            return TourPlanCard(tour: tours[index]);
+                          },
+                        ),
                       );
                     },
                     orElse: () => const Center(
@@ -181,7 +233,11 @@ class _PlanTourScreenState extends State<PlanTourScreen> {
   void load() {
     if (controller.offset >= controller.position.maxScrollExtent &&
         !controller.position.outOfRange) {
-      context.read<TourPlanBloc>().add(const TourPlanEvent.load());
+      context.read<TourPlanBloc>().add(TourPlanEvent.load(
+            query: context.read<SearchCubit>().state,
+            start: context.read<TimeRangeCubit>().state.validatedStartDate,
+            end: context.read<TimeRangeCubit>().state.validatedEndDate,
+          ));
     }
   }
 }

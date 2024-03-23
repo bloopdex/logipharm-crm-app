@@ -1,4 +1,7 @@
 import 'package:crm/core/core.dart';
+import 'package:crm/features/create-plan/bloc/delegate_cubit.dart';
+import 'package:crm/features/create-plan/create-plan.page.dart';
+import 'package:crm/logic/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,6 +23,9 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   @override
   void initState() {
+    if (context.read<DelegateCubit>().state.isEmpty) {
+      context.read<DelegateCubit>().load();
+    }
     super.initState();
   }
 
@@ -45,10 +51,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
             child: Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
-                title: Text(layout.title,
-                    style: context.textTheme.headlineSmall!.copyWith(
-                      color: kText1,
-                    )),
+                centerTitle: layout.current.value != 0,
+                title: Text(
+                  layout.current.value == 0
+                      ? "${context.i10n.homeHello} ${context.read<AuthBloc>().user.fullName}"
+                      : layout.title,
+                  style: context.textTheme.displaySmall,
+                ),
                 backgroundColor: Colors.white,
                 elevation: 0,
                 actions: const [
@@ -58,7 +67,9 @@ class _NavigationScreenState extends State<NavigationScreen> {
               body: layout.currentScreen,
               floatingActionButton: layout.current.value == 1
                   ? FloatingActionButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, CreatePlanPage.routeName);
+                      },
                       child: Icon(Icons.add_outlined, color: kWhite),
                     )
                   : null,

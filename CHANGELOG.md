@@ -2,6 +2,78 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2024-03-23
+
+### Commit Message
+
+- **Description**: feat: Added create new tour feature
+
+### Added
+
+#### Create new tour
+
+- **Description**: Added create new tour feature to the app with the ability to select the delegate and the clients
+- **Author**: @bloopdex
+
+#### Added query parameters to the tour list
+
+- **Description**: Added query parameters to the tour list to support the new filters
+- **Author**: @bloopdex
+
+#### Selection Cubit
+
+- **Description**: Added selection cubit to the app to support the selection of the clients.
+- **Author**: @bloopdex
+
+#### Counter Cubit
+
+- **Description**: Added counter cubit to the app to support the counter.
+- **Author**: @bloopdex
+
+#### Location Helper
+
+- **Description**: Added location helper to the app to get the address from the longitude and latitude
+- **Author**: @bloopdex
+
+#### Date Range Picker Shared Widget
+
+- **Description**: Added date range picker shared widget to the app
+- **Author**: @bloopdex
+
+#### Date Range Picker Cubit
+
+- **Description**: Added date range picker cubit to the app to support the date range picker
+- **Author**: @bloopdex
+
+#### Date Picker Shared Widget
+
+- **Description**: Added date picker shared widget to the app
+- **Author**: @bloopdex
+
+#### Model Bottom Sheet Shared Widget
+
+- **Description**: Added model bottom sheet shared widget to the app with those parameters : title, subtitle, icon, the confirm button and the cancel button
+- **Author**: @bloopdex
+
+#### Date Formater Extension On DateTime
+
+- **Description**: Added date formater extension on date time to support the new date formater
+- **Author**: @bloopdex
+
+### Fixed
+
+#### Tour Model
+
+- **Description**: Fixed the tour model by making pharmacies optional
+- **Author**: @bloopdex
+
+### Refactor
+
+#### Updated the theme of the app
+
+- **Description**: Updated the theme of the app by adding the theme of the date range picker, the floating action button theme and checkbox theme and updating the default color of the text, surfaceTintColor of the appbar.
+- **Author**: @bloopdex
+
 ## [0.3.0] - 2024-02-18
 
 ### Commit Message

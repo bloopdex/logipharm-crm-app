@@ -9,6 +9,8 @@ class TourApi {
     required int size,
     required String start,
     required String end,
+    required int status,
+    required String query,
   }) async {
     final String token = (await AuthRepository.token) ?? "";
 
@@ -20,6 +22,8 @@ class TourApi {
         "dateFin": end,
         'page': page,
         'pageSize': size,
+        'status': status,
+        'region': query,
       },
     );
   }
