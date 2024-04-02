@@ -6,7 +6,7 @@ import 'package:latlong2/latlong.dart';
 
 import '../../core/core.dart';
 import '../../shared/widgets/buttons/circlebutton.text.widget.dart';
-import '../tour-plan/bloc/tour_plan_bloc.dart';
+import '../tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import '../tour-plan/core/enums.dart';
 import '../tour-plan/models/tour.dart';
 import '../tour-plan/widget/current.plan.widget.dart';
@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
                 loaded: (tours, hasReachedMax, currentPage) {
                   return tours
                       .where((element) =>
-                          element.statusFlag == StatuFlags.closed.value)
+                          element.statusFlag == StatuFlags.opened.value)
                       .firstOrNull;
                 },
                 orElse: () => null,

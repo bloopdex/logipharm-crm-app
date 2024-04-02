@@ -2,10 +2,10 @@ import 'package:crm/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/person/person.dart';
-import '../../shared/widgets/inputs/date.picker.input.dart';
-import '../../shared/widgets/inputs/dropdown.input.dart';
-import 'bloc/delegate_cubit.dart';
+import '../../../models/person/person.dart';
+import '../../../shared/widgets/inputs/date.picker.input.dart';
+import '../../../shared/widgets/inputs/dropdown.input.dart';
+import '../bloc/delegate_cubit.dart';
 
 class DelegateSelectionForm extends StatelessWidget {
   final Map<String, dynamic> data;

@@ -197,6 +197,20 @@ class AppTheme {
           }),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
+        tabBarTheme: TabBarTheme(
+          indicatorColor: kTextPrimary,
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicator: BoxDecoration(
+            color: kCeruleanBlue.shade100,
+            borderRadius: BorderRadius.circular(kSpacingX12),
+          ),
+          labelColor: kPrimaryColor,
+          labelStyle: lightTextTheme().headlineSmall,
+          labelPadding: EdgeInsets.symmetric(horizontal: kPaddingSm3),
+          unselectedLabelColor: kText1,
+          dividerColor: Colors.transparent,
+          tabAlignment: TabAlignment.start,
+        ),
         datePickerTheme: DatePickerThemeData(
           backgroundColor: Colors.white,
           elevation: 2.0,

@@ -1,3 +1,4 @@
+import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -5,19 +6,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+// import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'core/routes.dart';
 import 'core/theme.dart';
 import 'features/auth/bloc/login/login_bloc.dart';
 import 'features/auth/login.screen.dart';
+import 'features/navigation/cubit/navigation_cubit.dart';
+import 'features/navigation/navigation.screen.dart';
 import 'features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'features/tour-plan/bloc/delegate_cubit.dart';
 import 'features/tour-plan/bloc/tour-creation/tour_creation_cubit.dart';
 import 'features/tour-plan/bloc/wilaya_cubit.dart';
-import 'features/navigation/cubit/navigation_cubit.dart';
-import 'features/navigation/navigation.screen.dart';
 import 'features/tour-plan/core/controller.dart';
+import 'features/visits/bloc/tour-creation/visit_creation_cubit.dart';
 import 'l10n/l10n.dart';
 import 'logic/auth/auth_bloc.dart';
 import 'logic/counter_cubit.dart';
@@ -26,10 +28,9 @@ import 'logic/search/search_cubit.dart';
 import 'logic/time.range/time_range_cubit.dart';
 import 'shared/services/helpers/dio.helper.dart';
 import 'shared/widgets/error/error.screen.dart';
-import 'shared/widgets/error/noconnection.screen.dart';
+// import 'shared/widgets/error/noconnection.screen.dart';
 import 'shared/widgets/loading/loading.screen.dart';
 
-final InternetConnectionChecker connectionChecker = InternetConnectionChecker();
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -103,6 +104,11 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ),
           BlocProvider<TourCreationCubit>(
               create: (context) => TourCreationCubit()),
+          BlocProvider<TourPlanBloc>(
+            create: (context) => TourPlanBloc(),
+          ),
+          BlocProvider<VisitCreationCubit>(
+              create: (context) => VisitCreationCubit()),
         ],
         child: BlocBuilder<LocalizationsBloc, LocalizationsState>(
             builder: (context, state) {
@@ -128,37 +134,31 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
                 GlobalCupertinoLocalizations.delegate,
               ],
               routes: AppRoutes.routes,
-              home: StreamBuilder<InternetConnectionStatus>(
-                  stream: connectionChecker.onStatusChange,
-                  initialData: InternetConnectionStatus.connected,
-                  builder: (context, snapshot) {
-                    if (snapshot.data ==
-                        InternetConnectionStatus.disconnected) {
-                      return const NoInternetScreen();
-                    }
-                    return BlocBuilder<AuthBloc, AuthState>(
-                      builder: (context, state) {
-                        return state.when(
-                            initial: () => const SizedBox.shrink(),
-                            loading: () {
-                              FlutterNativeSplash.remove();
-                              return const LoadingScreen();
+              home: GestureDetector(
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    return state.when(
+                        initial: () => const SizedBox.shrink(),
+                        loading: () {
+                          FlutterNativeSplash.remove();
+                          return const LoadingScreen();
+                        },
+                        authenticated: (user, tempError) =>
+                            const NavigationScreen(),
+                        unauthenticated: () => const LoginScreen(),
+                        failure: (message) {
+                          return ErrorScreen(
+                            message: message,
+                            onRetry: () {
+                              authBloc.add(const AuthEvent.appstarted());
                             },
-                            authenticated: (user, tempError) =>
-                                const NavigationScreen(),
-                            unauthenticated: () => const LoginScreen(),
-                            failure: (message) {
-                              return ErrorScreen(
-                                message: message,
-                                onRetry: () {
-                                  authBloc.add(const AuthEvent.appstarted());
-                                },
-                              );
-                            });
-                        // return LoginScreen();
-                      },
-                    );
-                  }));
+                          );
+                        });
+                    // return LoginScreen();
+                  },
+                ),
+              ));
         }));
   }
 }

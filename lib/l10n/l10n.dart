@@ -70,6 +70,16 @@ class S {
     );
   }
 
+  /// `Start`
+  String get start {
+    return Intl.message(
+      'Start',
+      name: 'start',
+      desc: 'Start',
+      args: [],
+    );
+  }
+
   /// `Finish`
   String get finish {
     return Intl.message(
@@ -136,6 +146,46 @@ class S {
       'Validate',
       name: 'validate',
       desc: 'Validate',
+      args: [],
+    );
+  }
+
+  /// `Created At`
+  String get createdAt {
+    return Intl.message(
+      'Created At',
+      name: 'createdAt',
+      desc: 'Created At',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: 'Pending',
+      args: [],
+    );
+  }
+
+  /// `In Progress`
+  String get inProgress {
+    return Intl.message(
+      'In Progress',
+      name: 'inProgress',
+      desc: 'In Progress',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get completed {
+    return Intl.message(
+      'Completed',
+      name: 'completed',
+      desc: 'Completed',
       args: [],
     );
   }
@@ -590,6 +640,16 @@ class S {
     );
   }
 
+  /// `Overview and Validation`
+  String get tourValidationTitle {
+    return Intl.message(
+      'Overview and Validation',
+      name: 'tourValidationTitle',
+      desc: 'Overview and Validation',
+      args: [],
+    );
+  }
+
   /// `Tour Plan, By:`
   String get tourValidationPlanBy {
     return Intl.message(
@@ -694,6 +754,126 @@ class S {
     );
   }
 
+  /// `Tour Details`
+  String get tourDetailsTitle {
+    return Intl.message(
+      'Tour Details',
+      name: 'tourDetailsTitle',
+      desc: 'Tour Details',
+      args: [],
+    );
+  }
+
+  /// `Tour Plan By`
+  String get tourDetailsTourBy {
+    return Intl.message(
+      'Tour Plan By',
+      name: 'tourDetailsTourBy',
+      desc: 'Tour Plan By',
+      args: [],
+    );
+  }
+
+  /// `Region`
+  String get tourDetailsRegion {
+    return Intl.message(
+      'Region',
+      name: 'tourDetailsRegion',
+      desc: 'Region',
+      args: [],
+    );
+  }
+
+  /// `Clients`
+  String get tourDetailsClients {
+    return Intl.message(
+      'Clients',
+      name: 'tourDetailsClients',
+      desc: 'Clients',
+      args: [],
+    );
+  }
+
+  /// `All Clients`
+  String get tourDetailsAllClients {
+    return Intl.message(
+      'All Clients',
+      name: 'tourDetailsAllClients',
+      desc: 'All Clients',
+      args: [],
+    );
+  }
+
+  /// `Visited`
+  String get tourDetailsVisited {
+    return Intl.message(
+      'Visited',
+      name: 'tourDetailsVisited',
+      desc: 'Visited',
+      args: [],
+    );
+  }
+
+  /// `Non Visited`
+  String get tourDetailsNonVisited {
+    return Intl.message(
+      'Non Visited',
+      name: 'tourDetailsNonVisited',
+      desc: 'Non Visited',
+      args: [],
+    );
+  }
+
+  /// `Non Visited Clients`
+  String get tourDetailsNonVisitedClients {
+    return Intl.message(
+      'Non Visited Clients',
+      name: 'tourDetailsNonVisitedClients',
+      desc: 'Non Visited Clients',
+      args: [],
+    );
+  }
+
+  /// `Visited Clients`
+  String get tourDetailsVisitedClients {
+    return Intl.message(
+      'Visited Clients',
+      name: 'tourDetailsVisitedClients',
+      desc: 'Visited Clients',
+      args: [],
+    );
+  }
+
+  /// `Visit Client`
+  String get tourDetailsVisitClient {
+    return Intl.message(
+      'Visit Client',
+      name: 'tourDetailsVisitClient',
+      desc: 'Visit Client',
+      args: [],
+    );
+  }
+
+  /// `You have an open tour`
+  String get tourErrorExistOpenTour {
+    return Intl.message(
+      'You have an open tour',
+      name: 'tourErrorExistOpenTour',
+      desc: 'You have an open tour',
+      args: [],
+    );
+  }
+
+  /// `You must be authenticated to access this resource`
+  String get tourErrorResourceRequireAuthentication {
+    return Intl.message(
+      'You must be authenticated to access this resource',
+      name: 'tourErrorResourceRequireAuthentication',
+      desc: 'You must be authenticated to access this resource',
+      args: [],
+    );
+  }
+
   /// `Clients ({count})`
   String tourValidationClientLabelNumber(int count) {
     return Intl.message(
@@ -790,6 +970,208 @@ class S {
       'Hello',
       name: 'homeHello',
       desc: 'Hello',
+      args: [],
+    );
+  }
+
+  /// `The Creation Of The Visit Is In Progress`
+  String get visitCreationInProgressTitle {
+    return Intl.message(
+      'The Creation Of The Visit Is In Progress',
+      name: 'visitCreationInProgressTitle',
+      desc: 'The Creation Of The Visit Is In Progress',
+      args: [],
+    );
+  }
+
+  /// `We are finalizing the details of your visit. Thank you for your patience.`
+  String get visitCreationInProgressDescription {
+    return Intl.message(
+      'We are finalizing the details of your visit. Thank you for your patience.',
+      name: 'visitCreationInProgressDescription',
+      desc:
+          'We are finalizing the details of your visit. Thank you for your patience.',
+      args: [],
+    );
+  }
+
+  /// `Successfully created visit`
+  String get visitCreationSuccessTitle {
+    return Intl.message(
+      'Successfully created visit',
+      name: 'visitCreationSuccessTitle',
+      desc: 'Successfully created visit',
+      args: [],
+    );
+  }
+
+  /// `Your visit has been successfully created. You can now view and manage your visits.`
+  String get visitCreationSuccessDescription {
+    return Intl.message(
+      'Your visit has been successfully created. You can now view and manage your visits.',
+      name: 'visitCreationSuccessDescription',
+      desc:
+          'Your visit has been successfully created. You can now view and manage your visits.',
+      args: [],
+    );
+  }
+
+  /// `New Visit`
+  String get visitCreationTitle {
+    return Intl.message(
+      'New Visit',
+      name: 'visitCreationTitle',
+      desc: 'New Visit',
+      args: [],
+    );
+  }
+
+  /// `Create a new visit for a client`
+  String get visitCreationDescription {
+    return Intl.message(
+      'Create a new visit for a client',
+      name: 'visitCreationDescription',
+      desc: 'Create a new visit for a client',
+      args: [],
+    );
+  }
+
+  /// `Client`
+  String get visitCreationClientLabel {
+    return Intl.message(
+      'Client',
+      name: 'visitCreationClientLabel',
+      desc: 'Client',
+      args: [],
+    );
+  }
+
+  /// `Select a client`
+  String get visitCreationClientPlaceholder {
+    return Intl.message(
+      'Select a client',
+      name: 'visitCreationClientPlaceholder',
+      desc: 'Select a client',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get visitCreationDateLabel {
+    return Intl.message(
+      'Date',
+      name: 'visitCreationDateLabel',
+      desc: 'Date',
+      args: [],
+    );
+  }
+
+  /// `Reason`
+  String get visitCreationReasonLabel {
+    return Intl.message(
+      'Reason',
+      name: 'visitCreationReasonLabel',
+      desc: 'Reason',
+      args: [],
+    );
+  }
+
+  /// `Enter the reason for the visit`
+  String get visitCreationReasonPlaceholder {
+    return Intl.message(
+      'Enter the reason for the visit',
+      name: 'visitCreationReasonPlaceholder',
+      desc: 'Enter the reason for the visit',
+      args: [],
+    );
+  }
+
+  /// `Rapport`
+  String get visitCreationRapportLabel {
+    return Intl.message(
+      'Rapport',
+      name: 'visitCreationRapportLabel',
+      desc: 'Rapport',
+      args: [],
+    );
+  }
+
+  /// `Reason is required`
+  String get visitCreationReasonError {
+    return Intl.message(
+      'Reason is required',
+      name: 'visitCreationReasonError',
+      desc: 'Reason is required',
+      args: [],
+    );
+  }
+
+  /// `Enter the rapport of the visit`
+  String get visitCreationRapportPlaceholder {
+    return Intl.message(
+      'Enter the rapport of the visit',
+      name: 'visitCreationRapportPlaceholder',
+      desc: 'Enter the rapport of the visit',
+      args: [],
+    );
+  }
+
+  /// `Overview and Validation`
+  String get visitValidationTitle {
+    return Intl.message(
+      'Overview and Validation',
+      name: 'visitValidationTitle',
+      desc: 'Overview and Validation',
+      args: [],
+    );
+  }
+
+  /// `Client`
+  String get visitValidationClient {
+    return Intl.message(
+      'Client',
+      name: 'visitValidationClient',
+      desc: 'Client',
+      args: [],
+    );
+  }
+
+  /// `Visited At`
+  String get visitValidationVisitedAt {
+    return Intl.message(
+      'Visited At',
+      name: 'visitValidationVisitedAt',
+      desc: 'Visited At',
+      args: [],
+    );
+  }
+
+  /// `Reason`
+  String get visitValidationReason {
+    return Intl.message(
+      'Reason',
+      name: 'visitValidationReason',
+      desc: 'Reason',
+      args: [],
+    );
+  }
+
+  /// `Rapport`
+  String get visitValidationRapport {
+    return Intl.message(
+      'Rapport',
+      name: 'visitValidationRapport',
+      desc: 'Rapport',
+      args: [],
+    );
+  }
+
+  /// `The tour isn''t open`
+  String get visitTourIsntOpen {
+    return Intl.message(
+      'The tour isn\'\'t open',
+      name: 'visitTourIsntOpen',
+      desc: 'The tour isn\'t open',
       args: [],
     );
   }

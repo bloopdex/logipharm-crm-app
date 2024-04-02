@@ -43,7 +43,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "authLoginUsernameRequired":
             MessageLookupByLibrary.simpleMessage("Username is required"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "completed": MessageLookupByLibrary.simpleMessage("Completed"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "createdAt": MessageLookupByLibrary.simpleMessage("Created At"),
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
@@ -61,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("My Tasks Today"),
         "homePendingHire": MessageLookupByLibrary.simpleMessage("Pending Hire"),
         "homePendingPlan": MessageLookupByLibrary.simpleMessage("Pending Plan"),
+        "inProgress": MessageLookupByLibrary.simpleMessage("In Progress"),
         "later": MessageLookupByLibrary.simpleMessage("Later"),
         "navHome": MessageLookupByLibrary.simpleMessage("Home"),
         "navMenu": MessageLookupByLibrary.simpleMessage("Menu"),
@@ -68,10 +71,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "navTodos": MessageLookupByLibrary.simpleMessage("Todos"),
         "navVisits": MessageLookupByLibrary.simpleMessage("Visits"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "pending": MessageLookupByLibrary.simpleMessage("Pending"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
         "selectDateRange":
             MessageLookupByLibrary.simpleMessage("Select Date Range"),
+        "start": MessageLookupByLibrary.simpleMessage("Start"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "tourAllPlans": MessageLookupByLibrary.simpleMessage("All Plans"),
@@ -125,10 +130,32 @@ class MessageLookup extends MessageLookupByLibrary {
         "tourCreationTourDetailsTitle":
             MessageLookupByLibrary.simpleMessage("Tour Details"),
         "tourCurrentTour": MessageLookupByLibrary.simpleMessage("Current Tour"),
+        "tourDetailsAllClients":
+            MessageLookupByLibrary.simpleMessage("All Clients"),
+        "tourDetailsClients": MessageLookupByLibrary.simpleMessage("Clients"),
+        "tourDetailsNonVisited":
+            MessageLookupByLibrary.simpleMessage("Non Visited"),
+        "tourDetailsNonVisitedClients":
+            MessageLookupByLibrary.simpleMessage("Non Visited Clients"),
+        "tourDetailsRegion": MessageLookupByLibrary.simpleMessage("Region"),
+        "tourDetailsTitle":
+            MessageLookupByLibrary.simpleMessage("Tour Details"),
+        "tourDetailsTourBy":
+            MessageLookupByLibrary.simpleMessage("Tour Plan By"),
+        "tourDetailsVisitClient":
+            MessageLookupByLibrary.simpleMessage("Visit Client"),
+        "tourDetailsVisited": MessageLookupByLibrary.simpleMessage("Visited"),
+        "tourDetailsVisitedClients":
+            MessageLookupByLibrary.simpleMessage("Visited Clients"),
         "tourEmptyPlans":
             MessageLookupByLibrary.simpleMessage("No plans found"),
         "tourEmptyPlansDescription": MessageLookupByLibrary.simpleMessage(
             "You don\'\'t have any plans yet"),
+        "tourErrorExistOpenTour":
+            MessageLookupByLibrary.simpleMessage("You have an open tour"),
+        "tourErrorResourceRequireAuthentication":
+            MessageLookupByLibrary.simpleMessage(
+                "You must be authenticated to access this resource"),
         "tourInProgressPlans":
             MessageLookupByLibrary.simpleMessage("In Progress Plans"),
         "tourInProgressStatus":
@@ -143,7 +170,45 @@ class MessageLookup extends MessageLookupByLibrary {
         "tourValidationPlanBy":
             MessageLookupByLibrary.simpleMessage("Tour Plan, By:"),
         "tourValidationRegion": MessageLookupByLibrary.simpleMessage("Region"),
+        "tourValidationTitle":
+            MessageLookupByLibrary.simpleMessage("Overview and Validation"),
         "validate": MessageLookupByLibrary.simpleMessage("Validate"),
-        "viewDetails": MessageLookupByLibrary.simpleMessage("View Details")
+        "viewDetails": MessageLookupByLibrary.simpleMessage("View Details"),
+        "visitCreationClientLabel":
+            MessageLookupByLibrary.simpleMessage("Client"),
+        "visitCreationClientPlaceholder":
+            MessageLookupByLibrary.simpleMessage("Select a client"),
+        "visitCreationDateLabel": MessageLookupByLibrary.simpleMessage("Date"),
+        "visitCreationDescription": MessageLookupByLibrary.simpleMessage(
+            "Create a new visit for a client"),
+        "visitCreationInProgressDescription": MessageLookupByLibrary.simpleMessage(
+            "We are finalizing the details of your visit. Thank you for your patience."),
+        "visitCreationInProgressTitle": MessageLookupByLibrary.simpleMessage(
+            "The Creation Of The Visit Is In Progress"),
+        "visitCreationRapportLabel":
+            MessageLookupByLibrary.simpleMessage("Rapport"),
+        "visitCreationRapportPlaceholder": MessageLookupByLibrary.simpleMessage(
+            "Enter the rapport of the visit"),
+        "visitCreationReasonError":
+            MessageLookupByLibrary.simpleMessage("Reason is required"),
+        "visitCreationReasonLabel":
+            MessageLookupByLibrary.simpleMessage("Reason"),
+        "visitCreationReasonPlaceholder": MessageLookupByLibrary.simpleMessage(
+            "Enter the reason for the visit"),
+        "visitCreationSuccessDescription": MessageLookupByLibrary.simpleMessage(
+            "Your visit has been successfully created. You can now view and manage your visits."),
+        "visitCreationSuccessTitle":
+            MessageLookupByLibrary.simpleMessage("Successfully created visit"),
+        "visitCreationTitle": MessageLookupByLibrary.simpleMessage("New Visit"),
+        "visitTourIsntOpen":
+            MessageLookupByLibrary.simpleMessage("The tour isn\'\'t open"),
+        "visitValidationClient": MessageLookupByLibrary.simpleMessage("Client"),
+        "visitValidationRapport":
+            MessageLookupByLibrary.simpleMessage("Rapport"),
+        "visitValidationReason": MessageLookupByLibrary.simpleMessage("Reason"),
+        "visitValidationTitle":
+            MessageLookupByLibrary.simpleMessage("Overview and Validation"),
+        "visitValidationVisitedAt":
+            MessageLookupByLibrary.simpleMessage("Visited At")
       };
 }

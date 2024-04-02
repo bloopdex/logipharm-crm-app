@@ -25,8 +25,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   Map<String, String> loginData = {
-    'username': '',
-    'password': '',
+    'username': 'YA.SI-MOUSSA',
+    'password': '123',
   };
   final formKey = GlobalKey<FormState>();
 
@@ -81,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       CustomTextFormField(
                         data: loginData,
                         mapKey: 'username',
+                        initialValue: loginData['username'],
                         hintText: context.i10n.authLoginUsernamePlaceholder,
                         autoFillHints: const [AutofillHints.username],
                         validator: (value) {
@@ -98,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: kSpacingX1),
                       PasswordTextField(
                         data: loginData,
+                        initialValue: loginData['password'],
                         mapKey: 'password',
                         hintText: context.i10n.authLoginPasswordPlaceholder,
                         validator: (value) {

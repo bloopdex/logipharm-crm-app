@@ -23,6 +23,7 @@ mixin _$TourPlanEvent {
         search,
     required TResult Function(String query, DateTime? start, DateTime? end)
         load,
+    required TResult Function(String tourId) startTour,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$TourPlanEvent {
     TResult? Function()? started,
     TResult? Function(String query, DateTime? start, DateTime? end)? search,
     TResult? Function(String query, DateTime? start, DateTime? end)? load,
+    TResult? Function(String tourId)? startTour,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,6 +39,7 @@ mixin _$TourPlanEvent {
     TResult Function()? started,
     TResult Function(String query, DateTime? start, DateTime? end)? search,
     TResult Function(String query, DateTime? start, DateTime? end)? load,
+    TResult Function(String tourId)? startTour,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,6 +48,7 @@ mixin _$TourPlanEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_Search value) search,
     required TResult Function(_Load value) load,
+    required TResult Function(_StartTour value) startTour,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,6 +56,7 @@ mixin _$TourPlanEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_Search value)? search,
     TResult? Function(_Load value)? load,
+    TResult? Function(_StartTour value)? startTour,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +64,7 @@ mixin _$TourPlanEvent {
     TResult Function(_Started value)? started,
     TResult Function(_Search value)? search,
     TResult Function(_Load value)? load,
+    TResult Function(_StartTour value)? startTour,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,6 +131,7 @@ class _$StartedImpl implements _Started {
         search,
     required TResult Function(String query, DateTime? start, DateTime? end)
         load,
+    required TResult Function(String tourId) startTour,
   }) {
     return started();
   }
@@ -135,6 +142,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(String query, DateTime? start, DateTime? end)? search,
     TResult? Function(String query, DateTime? start, DateTime? end)? load,
+    TResult? Function(String tourId)? startTour,
   }) {
     return started?.call();
   }
@@ -145,6 +153,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(String query, DateTime? start, DateTime? end)? search,
     TResult Function(String query, DateTime? start, DateTime? end)? load,
+    TResult Function(String tourId)? startTour,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -159,6 +168,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_Search value) search,
     required TResult Function(_Load value) load,
+    required TResult Function(_StartTour value) startTour,
   }) {
     return started(this);
   }
@@ -169,6 +179,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_Search value)? search,
     TResult? Function(_Load value)? load,
+    TResult? Function(_StartTour value)? startTour,
   }) {
     return started?.call(this);
   }
@@ -179,6 +190,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_Search value)? search,
     TResult Function(_Load value)? load,
+    TResult Function(_StartTour value)? startTour,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -277,6 +289,7 @@ class _$SearchImpl implements _Search {
         search,
     required TResult Function(String query, DateTime? start, DateTime? end)
         load,
+    required TResult Function(String tourId) startTour,
   }) {
     return search(query, start, end);
   }
@@ -287,6 +300,7 @@ class _$SearchImpl implements _Search {
     TResult? Function()? started,
     TResult? Function(String query, DateTime? start, DateTime? end)? search,
     TResult? Function(String query, DateTime? start, DateTime? end)? load,
+    TResult? Function(String tourId)? startTour,
   }) {
     return search?.call(query, start, end);
   }
@@ -297,6 +311,7 @@ class _$SearchImpl implements _Search {
     TResult Function()? started,
     TResult Function(String query, DateTime? start, DateTime? end)? search,
     TResult Function(String query, DateTime? start, DateTime? end)? load,
+    TResult Function(String tourId)? startTour,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -311,6 +326,7 @@ class _$SearchImpl implements _Search {
     required TResult Function(_Started value) started,
     required TResult Function(_Search value) search,
     required TResult Function(_Load value) load,
+    required TResult Function(_StartTour value) startTour,
   }) {
     return search(this);
   }
@@ -321,6 +337,7 @@ class _$SearchImpl implements _Search {
     TResult? Function(_Started value)? started,
     TResult? Function(_Search value)? search,
     TResult? Function(_Load value)? load,
+    TResult? Function(_StartTour value)? startTour,
   }) {
     return search?.call(this);
   }
@@ -331,6 +348,7 @@ class _$SearchImpl implements _Search {
     TResult Function(_Started value)? started,
     TResult Function(_Search value)? search,
     TResult Function(_Load value)? load,
+    TResult Function(_StartTour value)? startTour,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -438,6 +456,7 @@ class _$LoadImpl implements _Load {
         search,
     required TResult Function(String query, DateTime? start, DateTime? end)
         load,
+    required TResult Function(String tourId) startTour,
   }) {
     return load(query, start, end);
   }
@@ -448,6 +467,7 @@ class _$LoadImpl implements _Load {
     TResult? Function()? started,
     TResult? Function(String query, DateTime? start, DateTime? end)? search,
     TResult? Function(String query, DateTime? start, DateTime? end)? load,
+    TResult? Function(String tourId)? startTour,
   }) {
     return load?.call(query, start, end);
   }
@@ -458,6 +478,7 @@ class _$LoadImpl implements _Load {
     TResult Function()? started,
     TResult Function(String query, DateTime? start, DateTime? end)? search,
     TResult Function(String query, DateTime? start, DateTime? end)? load,
+    TResult Function(String tourId)? startTour,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -472,6 +493,7 @@ class _$LoadImpl implements _Load {
     required TResult Function(_Started value) started,
     required TResult Function(_Search value) search,
     required TResult Function(_Load value) load,
+    required TResult Function(_StartTour value) startTour,
   }) {
     return load(this);
   }
@@ -482,6 +504,7 @@ class _$LoadImpl implements _Load {
     TResult? Function(_Started value)? started,
     TResult? Function(_Search value)? search,
     TResult? Function(_Load value)? load,
+    TResult? Function(_StartTour value)? startTour,
   }) {
     return load?.call(this);
   }
@@ -492,6 +515,7 @@ class _$LoadImpl implements _Load {
     TResult Function(_Started value)? started,
     TResult Function(_Search value)? search,
     TResult Function(_Load value)? load,
+    TResult Function(_StartTour value)? startTour,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -512,6 +536,153 @@ abstract class _Load implements TourPlanEvent {
   DateTime? get end;
   @JsonKey(ignore: true)
   _$$LoadImplCopyWith<_$LoadImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$StartTourImplCopyWith<$Res> {
+  factory _$$StartTourImplCopyWith(
+          _$StartTourImpl value, $Res Function(_$StartTourImpl) then) =
+      __$$StartTourImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String tourId});
+}
+
+/// @nodoc
+class __$$StartTourImplCopyWithImpl<$Res>
+    extends _$TourPlanEventCopyWithImpl<$Res, _$StartTourImpl>
+    implements _$$StartTourImplCopyWith<$Res> {
+  __$$StartTourImplCopyWithImpl(
+      _$StartTourImpl _value, $Res Function(_$StartTourImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tourId = null,
+  }) {
+    return _then(_$StartTourImpl(
+      tourId: null == tourId
+          ? _value.tourId
+          : tourId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$StartTourImpl implements _StartTour {
+  const _$StartTourImpl({required this.tourId});
+
+  @override
+  final String tourId;
+
+  @override
+  String toString() {
+    return 'TourPlanEvent.startTour(tourId: $tourId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StartTourImpl &&
+            (identical(other.tourId, tourId) || other.tourId == tourId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, tourId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$StartTourImplCopyWith<_$StartTourImpl> get copyWith =>
+      __$$StartTourImplCopyWithImpl<_$StartTourImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String query, DateTime? start, DateTime? end)
+        search,
+    required TResult Function(String query, DateTime? start, DateTime? end)
+        load,
+    required TResult Function(String tourId) startTour,
+  }) {
+    return startTour(tourId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String query, DateTime? start, DateTime? end)? search,
+    TResult? Function(String query, DateTime? start, DateTime? end)? load,
+    TResult? Function(String tourId)? startTour,
+  }) {
+    return startTour?.call(tourId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String query, DateTime? start, DateTime? end)? search,
+    TResult Function(String query, DateTime? start, DateTime? end)? load,
+    TResult Function(String tourId)? startTour,
+    required TResult orElse(),
+  }) {
+    if (startTour != null) {
+      return startTour(tourId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Search value) search,
+    required TResult Function(_Load value) load,
+    required TResult Function(_StartTour value) startTour,
+  }) {
+    return startTour(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Search value)? search,
+    TResult? Function(_Load value)? load,
+    TResult? Function(_StartTour value)? startTour,
+  }) {
+    return startTour?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Search value)? search,
+    TResult Function(_Load value)? load,
+    TResult Function(_StartTour value)? startTour,
+    required TResult orElse(),
+  }) {
+    if (startTour != null) {
+      return startTour(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StartTour implements TourPlanEvent {
+  const factory _StartTour({required final String tourId}) = _$StartTourImpl;
+
+  String get tourId;
+  @JsonKey(ignore: true)
+  _$$StartTourImplCopyWith<_$StartTourImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

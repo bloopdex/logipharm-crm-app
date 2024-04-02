@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-import '../../core/core.dart';
-import '../../models/person/person.dart';
-import '../../shared/services/helpers/location.helper.dart';
-import 'bloc/clients/clients_cubit.dart';
-import 'bloc/delegate_cubit.dart';
-import 'bloc/tour-creation/tour_creation_cubit.dart';
+import '../../../core/core.dart';
+import '../../../models/person/person.dart';
+import '../../../shared/services/helpers/location.helper.dart';
+import '../bloc/clients/clients_cubit.dart';
+import '../bloc/delegate_cubit.dart';
+import '../bloc/tour-creation/tour_creation_cubit.dart';
 
 class ValidateCreationPage extends StatelessWidget {
   final Map<String, dynamic> data;
@@ -16,19 +16,20 @@ class ValidateCreationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Data $data");
+    // get the delegate from the cubit by delegate id
     final delegate = context
         .read<DelegateCubit>()
         .state
-        .where((element) => element.id.toString() == data['delegueId'])
-        .first;
+        .firstWhere((element) => element.id.toString() == data['delegueId']);
 
+    // get the clients from the cubit by pharmacy id
     final clients = context.read<ClientsCubit>().state.maybeWhen(
-          orElse: () => [],
-          loaded: (clients) => clients
-              .where((element) =>
-                  data['pharmacieIds'].contains(element.id.toString()))
-              .toList(),
-        );
+        orElse: () => [],
+        loaded: (clients) => clients
+            .where((element) =>
+                data['pharmacieIds']?.contains(element.id.toString()))
+            .toList());
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
@@ -77,7 +78,7 @@ class ValidateCreationPage extends StatelessWidget {
             },
           ),
           Text(
-            context.i10n.tourCreationClientVisitsTitle,
+            context.i10n.tourValidationTitle,
             style: context.textTheme.displayMedium,
           ),
           SizedBox(height: kSpacingX7),
@@ -86,7 +87,7 @@ class ValidateCreationPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: kPaddingMd2),
             decoration: BoxDecoration(
               color: kWhite,
-              borderRadius: BorderRadius.circular(kSpacingX4),
+              borderRadius: BorderRadius.circular(kSpacingX3),
               border: Border.all(color: kBorder3),
             ),
             child: Column(
@@ -100,7 +101,7 @@ class ValidateCreationPage extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.all(kPaddingSm3),
                           decoration: BoxDecoration(
-                            color: kBrightSun.shade500,
+                            color: kCodGray.shade100,
                             borderRadius: BorderRadius.circular(kPaddingSm3),
                           ),
                           child: Center(
@@ -110,7 +111,7 @@ class ValidateCreationPage extends StatelessWidget {
                               ),
                               textAlign: TextAlign.center,
                               style: context.textTheme.displaySmall!.copyWith(
-                                color: kWhite,
+                                color: kBrightSun.shade600,
                               ),
                             ),
                           ),
@@ -131,7 +132,7 @@ class ValidateCreationPage extends StatelessWidget {
                               ),
                               SizedBox(height: kSpacingX1),
                               Text(
-                                data['dateDebut'],
+                                DateTime.parse(data['dateDebut']).ddMMYYYY(),
                                 style: context.textTheme.bodyMedium,
                               ),
                             ],
@@ -141,9 +142,8 @@ class ValidateCreationPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: kSpacingX5),
-                const Divider(),
                 SizedBox(height: kSpacingX3),
+                const Divider(),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
                   child: Text(

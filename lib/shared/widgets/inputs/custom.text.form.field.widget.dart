@@ -13,7 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.maxLines = 1,
-    this.autoFillHints = const [],
+    this.autoFillHints = const [], this.onChanged,
   });
 
   final String? initialValue;
@@ -27,6 +27,7 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? prefixIcon;
   final int maxLines;
   final List<String> autoFillHints;
+  final String? Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,7 @@ class CustomTextFormField extends StatelessWidget {
       initialValue: initialValue,
       autocorrect: false,
       validator: validator,
+      onChanged: onChanged,
       onSaved: (newValue) => data![mapKey!] = newValue!.toString(),
       keyboardType: keyboardType,
       textCapitalization: textCapitalization,

@@ -1,5 +1,6 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../l10n/l10n.dart';
@@ -21,6 +22,10 @@ extension ColorExtension on Color {
 
 extension TranslationExtension on BuildContext {
   S get i10n => S.of(this);
+}
+
+extension TranslationBlocExtension on Bloc {
+  S get i10n => S.current;
 }
 
 extension GetTheme on BuildContext {

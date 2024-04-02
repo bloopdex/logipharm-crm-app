@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 
 import '../../../models/person/person.dart';
-import '../../create-plan/services/delegate.repository.dart';
+import '../services/delegate.repository.dart';
 
 class DelegateCubit extends Cubit<List<Person>> {
   DelegateCubit() : super([]);

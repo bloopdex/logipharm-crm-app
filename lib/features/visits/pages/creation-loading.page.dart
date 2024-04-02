@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class CreationLoadingPage extends StatelessWidget {
-  const CreationLoadingPage({super.key});
+class VisitCreationLoadingPage extends StatelessWidget {
+  const VisitCreationLoadingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +21,13 @@ class CreationLoadingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                context.i10n.tourCreationInProgressTitle,
+                context.i10n.visitCreationInProgressTitle,
                 textAlign: TextAlign.center,
                 style: context.textTheme.displayLarge,
               ),
               SizedBox(height: kSpacingX5),
               Text(
-                context.i10n.tourCreationInProgressDescription,
+                context.i10n.visitCreationInProgressDescription,
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyLarge,
               ),

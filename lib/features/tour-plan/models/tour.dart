@@ -21,7 +21,9 @@ class Tour with _$Tour {
     @JsonKey(name: 'dateFinEffective') String? effectiveEndDate,
     @JsonKey(name: 'delegue') required Person delegate,
     @JsonKey(name: 'superviseur') required Person supervisor,
-    @JsonKey(name: 'tourneeDetails') required List<TourDetail> tourDetails,
+    int? totalClients,
+    int? visitedClients,
+    @JsonKey(name: 'tourneeDetails') List<TourDetail>? pharmacies,
   }) = _Tour;
 
   factory Tour.fromJson(Map<String, dynamic> json) => _$TourFromJson(json);

@@ -22,4 +22,14 @@ class TourRepository {
 
     return response;
   }
+
+  static Future<Response> startTour({
+    required String tourId,
+  }) async {
+    Response response = await TourApi.startTour(
+      tourId: tourId,
+    );
+
+    return response;
+  }
 }

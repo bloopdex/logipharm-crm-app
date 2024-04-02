@@ -13,4 +13,8 @@ class TourPlanEvent with _$TourPlanEvent {
     DateTime? start,
     DateTime? end,
   }) = _Load;
+
+  const factory TourPlanEvent.startTour({
+    required String tourId,
+  }) = _StartTour;
 }

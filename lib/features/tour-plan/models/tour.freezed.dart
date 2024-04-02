@@ -42,8 +42,10 @@ mixin _$Tour {
   Person get delegate => throw _privateConstructorUsedError;
   @JsonKey(name: 'superviseur')
   Person get supervisor => throw _privateConstructorUsedError;
+  int? get totalClients => throw _privateConstructorUsedError;
+  int? get visitedClients => throw _privateConstructorUsedError;
   @JsonKey(name: 'tourneeDetails')
-  List<TourDetail> get tourDetails => throw _privateConstructorUsedError;
+  List<TourDetail>? get pharmacies => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,7 +69,9 @@ abstract class $TourCopyWith<$Res> {
       @JsonKey(name: 'dateFinEffective') String? effectiveEndDate,
       @JsonKey(name: 'delegue') Person delegate,
       @JsonKey(name: 'superviseur') Person supervisor,
-      @JsonKey(name: 'tourneeDetails') List<TourDetail> tourDetails});
+      int? totalClients,
+      int? visitedClients,
+      @JsonKey(name: 'tourneeDetails') List<TourDetail>? pharmacies});
 
   $PersonCopyWith<$Res> get delegate;
   $PersonCopyWith<$Res> get supervisor;
@@ -97,7 +101,9 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
     Object? effectiveEndDate = freezed,
     Object? delegate = null,
     Object? supervisor = null,
-    Object? tourDetails = null,
+    Object? totalClients = freezed,
+    Object? visitedClients = freezed,
+    Object? pharmacies = freezed,
   }) {
     return _then(_value.copyWith(
       tourneeId: null == tourneeId
@@ -144,10 +150,18 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
           ? _value.supervisor
           : supervisor // ignore: cast_nullable_to_non_nullable
               as Person,
-      tourDetails: null == tourDetails
-          ? _value.tourDetails
-          : tourDetails // ignore: cast_nullable_to_non_nullable
-              as List<TourDetail>,
+      totalClients: freezed == totalClients
+          ? _value.totalClients
+          : totalClients // ignore: cast_nullable_to_non_nullable
+              as int?,
+      visitedClients: freezed == visitedClients
+          ? _value.visitedClients
+          : visitedClients // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pharmacies: freezed == pharmacies
+          ? _value.pharmacies
+          : pharmacies // ignore: cast_nullable_to_non_nullable
+              as List<TourDetail>?,
     ) as $Val);
   }
 
@@ -187,7 +201,9 @@ abstract class _$$TourImplCopyWith<$Res> implements $TourCopyWith<$Res> {
       @JsonKey(name: 'dateFinEffective') String? effectiveEndDate,
       @JsonKey(name: 'delegue') Person delegate,
       @JsonKey(name: 'superviseur') Person supervisor,
-      @JsonKey(name: 'tourneeDetails') List<TourDetail> tourDetails});
+      int? totalClients,
+      int? visitedClients,
+      @JsonKey(name: 'tourneeDetails') List<TourDetail>? pharmacies});
 
   @override
   $PersonCopyWith<$Res> get delegate;
@@ -216,7 +232,9 @@ class __$$TourImplCopyWithImpl<$Res>
     Object? effectiveEndDate = freezed,
     Object? delegate = null,
     Object? supervisor = null,
-    Object? tourDetails = null,
+    Object? totalClients = freezed,
+    Object? visitedClients = freezed,
+    Object? pharmacies = freezed,
   }) {
     return _then(_$TourImpl(
       tourneeId: null == tourneeId
@@ -263,10 +281,18 @@ class __$$TourImplCopyWithImpl<$Res>
           ? _value.supervisor
           : supervisor // ignore: cast_nullable_to_non_nullable
               as Person,
-      tourDetails: null == tourDetails
-          ? _value._tourDetails
-          : tourDetails // ignore: cast_nullable_to_non_nullable
-              as List<TourDetail>,
+      totalClients: freezed == totalClients
+          ? _value.totalClients
+          : totalClients // ignore: cast_nullable_to_non_nullable
+              as int?,
+      visitedClients: freezed == visitedClients
+          ? _value.visitedClients
+          : visitedClients // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pharmacies: freezed == pharmacies
+          ? _value._pharmacies
+          : pharmacies // ignore: cast_nullable_to_non_nullable
+              as List<TourDetail>?,
     ));
   }
 }
@@ -286,9 +312,10 @@ class _$TourImpl implements _Tour {
       @JsonKey(name: 'dateFinEffective') this.effectiveEndDate,
       @JsonKey(name: 'delegue') required this.delegate,
       @JsonKey(name: 'superviseur') required this.supervisor,
-      @JsonKey(name: 'tourneeDetails')
-      required final List<TourDetail> tourDetails})
-      : _tourDetails = tourDetails;
+      this.totalClients,
+      this.visitedClients,
+      @JsonKey(name: 'tourneeDetails') final List<TourDetail>? pharmacies})
+      : _pharmacies = pharmacies;
 
   factory _$TourImpl.fromJson(Map<String, dynamic> json) =>
       _$$TourImplFromJson(json);
@@ -326,18 +353,24 @@ class _$TourImpl implements _Tour {
   @override
   @JsonKey(name: 'superviseur')
   final Person supervisor;
-  final List<TourDetail> _tourDetails;
+  @override
+  final int? totalClients;
+  @override
+  final int? visitedClients;
+  final List<TourDetail>? _pharmacies;
   @override
   @JsonKey(name: 'tourneeDetails')
-  List<TourDetail> get tourDetails {
-    if (_tourDetails is EqualUnmodifiableListView) return _tourDetails;
+  List<TourDetail>? get pharmacies {
+    final value = _pharmacies;
+    if (value == null) return null;
+    if (_pharmacies is EqualUnmodifiableListView) return _pharmacies;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tourDetails);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'Tour(tourneeId: $tourneeId, companyId: $companyId, regionId: $regionId, regionName: $regionName, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, effectiveStartDate: $effectiveStartDate, effectiveEndDate: $effectiveEndDate, delegate: $delegate, supervisor: $supervisor, tourDetails: $tourDetails)';
+    return 'Tour(tourneeId: $tourneeId, companyId: $companyId, regionId: $regionId, regionName: $regionName, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, effectiveStartDate: $effectiveStartDate, effectiveEndDate: $effectiveEndDate, delegate: $delegate, supervisor: $supervisor, totalClients: $totalClients, visitedClients: $visitedClients, pharmacies: $pharmacies)';
   }
 
   @override
@@ -366,8 +399,12 @@ class _$TourImpl implements _Tour {
                 other.delegate == delegate) &&
             (identical(other.supervisor, supervisor) ||
                 other.supervisor == supervisor) &&
+            (identical(other.totalClients, totalClients) ||
+                other.totalClients == totalClients) &&
+            (identical(other.visitedClients, visitedClients) ||
+                other.visitedClients == visitedClients) &&
             const DeepCollectionEquality()
-                .equals(other._tourDetails, _tourDetails));
+                .equals(other._pharmacies, _pharmacies));
   }
 
   @JsonKey(ignore: true)
@@ -385,7 +422,9 @@ class _$TourImpl implements _Tour {
       effectiveEndDate,
       delegate,
       supervisor,
-      const DeepCollectionEquality().hash(_tourDetails));
+      totalClients,
+      visitedClients,
+      const DeepCollectionEquality().hash(_pharmacies));
 
   @JsonKey(ignore: true)
   @override
@@ -414,8 +453,10 @@ abstract class _Tour implements Tour {
       @JsonKey(name: 'dateFinEffective') final String? effectiveEndDate,
       @JsonKey(name: 'delegue') required final Person delegate,
       @JsonKey(name: 'superviseur') required final Person supervisor,
+      final int? totalClients,
+      final int? visitedClients,
       @JsonKey(name: 'tourneeDetails')
-      required final List<TourDetail> tourDetails}) = _$TourImpl;
+      final List<TourDetail>? pharmacies}) = _$TourImpl;
 
   factory _Tour.fromJson(Map<String, dynamic> json) = _$TourImpl.fromJson;
 
@@ -453,8 +494,12 @@ abstract class _Tour implements Tour {
   @JsonKey(name: 'superviseur')
   Person get supervisor;
   @override
+  int? get totalClients;
+  @override
+  int? get visitedClients;
+  @override
   @JsonKey(name: 'tourneeDetails')
-  List<TourDetail> get tourDetails;
+  List<TourDetail>? get pharmacies;
   @override
   @JsonKey(ignore: true)
   _$$TourImplCopyWith<_$TourImpl> get copyWith =>

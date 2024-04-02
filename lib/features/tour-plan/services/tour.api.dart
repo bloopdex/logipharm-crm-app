@@ -27,4 +27,19 @@ class TourApi {
       },
     );
   }
+
+  static Future<Response> startTour({
+    required String tourId,
+  }) async {
+    final String token = (await AuthRepository.token) ?? "";
+
+    return await DioHelper.postData(
+      url: '/tournee/',
+      data: {
+        'tourneeId': tourId,
+        'status': 1,
+      },
+      token: token,
+    );
+  }
 }

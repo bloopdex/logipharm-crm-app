@@ -8,6 +8,10 @@
     "@confirm": {
         "description": "Confirm"
     },
+    "start": "Start",
+    "@start": {
+        "description": "Start"
+    },
     "finish": "Finish",
     "@finish": {
         "description": "Finish"
@@ -35,6 +39,22 @@
     "validate": "Validate",
     "@validate": {
         "description": "Validate"
+    },
+    "createdAt": "Created At",
+    "@createdAt": {
+        "description": "Created At"
+    },
+    "pending": "Pending",
+    "@pending": {
+        "description": "Pending"
+    },
+    "inProgress": "In Progress",
+    "@inProgress": {
+        "description": "In Progress"
+    },
+    "completed": "Completed",
+    "@completed": {
+        "description": "Completed"
     },
     "selectDateRange": "Select Date Range",
     "@selectDateRange": {
@@ -228,6 +248,10 @@
     "@tourCreationNoAddress": {
         "description": "No address"
     },
+    "tourValidationTitle": "Overview and Validation",
+    "@tourValidationTitle": {
+        "description": "Overview and Validation"
+    },
     "tourValidationPlanBy": "Tour Plan, By:",
     "@tourValidationPlanBy": {
         "description": "Tour Plan, By:"
@@ -267,6 +291,54 @@
     "tourCreationStartTourDescription": "You can start the tour now or later from the list of planned tours.",
     "@tourCreationStartTourDescription": {
         "description": "You can start the tour now or later from the list of planned tours."
+    },
+    "tourDetailsTitle": "Tour Details",
+    "@tourDetailsTitle": {
+        "description": "Tour Details"
+    },
+    "tourDetailsTourBy": "Tour Plan By",
+    "@tourDetailsTourBy": {
+        "description": "Tour Plan By"
+    },
+    "tourDetailsRegion": "Region",
+    "@tourDetailsRegion": {
+        "description": "Region"
+    },
+    "tourDetailsClients": "Clients",
+    "@tourDetailsClients": {
+        "description": "Clients"
+    },
+    "tourDetailsAllClients": "All Clients",
+    "@tourDetailsAllClients": {
+        "description": "All Clients"
+    },
+    "tourDetailsVisited": "Visited",
+    "@tourDetailsVisited": {
+        "description": "Visited"
+    },
+    "tourDetailsNonVisited": "Non Visited",
+    "@tourDetailsNonVisited": {
+        "description": "Non Visited"
+    },
+    "tourDetailsNonVisitedClients": "Non Visited Clients",
+    "@tourDetailsNonVisitedClients": {
+        "description": "Non Visited Clients"
+    },
+    "tourDetailsVisitedClients": "Visited Clients",
+    "@tourDetailsVisitedClients": {
+        "description": "Visited Clients"
+    },
+    "tourDetailsVisitClient": "Visit Client",
+    "@tourDetailsVisitClient": {
+        "description": "Visit Client"
+    },
+    "tourErrorExistOpenTour": "You have an open tour",
+    "@tourErrorExistOpenTour": {
+        "description": "You have an open tour"
+    },
+    "tourErrorResourceRequireAuthentication": "You must be authenticated to access this resource",
+    "@tourErrorResourceRequireAuthentication": {
+        "description": "You must be authenticated to access this resource"
     },
     "tourValidationClientLabelNumber": "Clients ({count})",
     "@tourValidationClientLabelNumber": {
@@ -313,5 +385,85 @@
     "homeHello": "Hello",
     "@homeHello": {
         "description": "Hello"
+    },
+    "visitCreationInProgressTitle": "The Creation Of The Visit Is In Progress",
+    "@visitCreationInProgressTitle": {
+        "description": "The Creation Of The Visit Is In Progress"
+    },
+    "visitCreationInProgressDescription": "We are finalizing the details of your visit. Thank you for your patience.",
+    "@visitCreationInProgressDescription": {
+        "description": "We are finalizing the details of your visit. Thank you for your patience."
+    },
+    "visitCreationSuccessTitle": "Successfully created visit",
+    "@visitCreationSuccessTitle": {
+        "description": "Successfully created visit"
+    },
+    "visitCreationSuccessDescription": "Your visit has been successfully created. You can now view and manage your visits.",
+    "@visitCreationSuccessDescription": {
+        "description": "Your visit has been successfully created. You can now view and manage your visits."
+    },
+    "visitCreationTitle": "New Visit",
+    "@visitCreationTitle": {
+        "description": "New Visit"
+    },
+    "visitCreationDescription": "Create a new visit for a client",
+    "@visitCreationDescription": {
+        "description": "Create a new visit for a client"
+    },
+    "visitCreationClientLabel": "Client",
+    "@visitCreationClientLabel": {
+        "description": "Client"
+    },
+    "visitCreationClientPlaceholder": "Select a client",
+    "@visitCreationClientPlaceholder": {
+        "description": "Select a client"
+    },
+    "visitCreationDateLabel": "Date",
+    "@visitCreationDateLabel": {
+        "description": "Date"
+    },
+    "visitCreationReasonLabel": "Reason",
+    "@visitCreationReasonLabel": {
+        "description": "Reason"
+    },
+    "visitCreationReasonPlaceholder": "Enter the reason for the visit",
+    "@visitCreationReasonPlaceholder": {
+        "description": "Enter the reason for the visit"
+    },
+    "visitCreationRapportLabel": "Rapport",
+    "@visitCreationRapportLabel": {
+        "description": "Rapport"
+    },
+    "visitCreationReasonError": "Reason is required",
+    "@visitCreationReasonError": {
+        "description": "Reason is required"
+    },
+    "visitCreationRapportPlaceholder": "Enter the rapport of the visit",
+    "@visitCreationRapportPlaceholder": {
+        "description": "Enter the rapport of the visit"
+    },
+    "visitValidationTitle": "Overview and Validation",
+    "@visitValidationTitle": {
+        "description": "Overview and Validation"
+    },
+    "visitValidationClient": "Client",
+    "@visitValidationClient": {
+        "description": "Client"
+    },
+    "visitValidationVisitedAt": "Visited At",
+    "@visitValidationVisitedAt": {
+        "description": "Visited At"
+    },
+    "visitValidationReason": "Reason",
+    "@visitValidationReason": {
+        "description": "Reason"
+    },
+    "visitValidationRapport": "Rapport",
+    "@visitValidationRapport": {
+        "description": "Rapport"
+    },
+    "visitTourIsntOpen": "The tour isn''t open",
+    "@visitTourIsntOpen": {
+        "description": "The tour isn't open"
     }
 }

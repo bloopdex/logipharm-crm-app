@@ -6,14 +6,14 @@ import '../../core/core.dart';
 import '../../logic/counter_cubit.dart';
 import '../../logic/selection_cubit.dart';
 import '../../shared/widgets/buttons/button.widget.dart';
-import 'add-clients.page.dart';
+import '../../shared/widgets/navigation/stepper.widget.dart';
+import 'pages/add-clients.page.dart';
 import 'bloc/delegate_cubit.dart';
 import 'bloc/tour-creation/tour_creation_cubit.dart';
-import 'delegate-selection.page.dart';
-import 'validate-creation.page.dart';
-import 'widget/creation-loading.page.dart';
-import 'widget/creation-successful.page.dart';
-import 'widget/stepper.dart';
+import 'pages/creation-loading.page.dart';
+import 'pages/creation-successful.page.dart';
+import 'pages/delegate-selection.page.dart';
+import 'pages/validate-creation.page.dart';
 
 class CreatePlanPage extends StatefulWidget {
   static const String routeName = '/create-plan';
@@ -47,7 +47,7 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
         builder: (context, state) {
           return state.maybeWhen(
               loading: () {
-                return const CreationLoadingPage();
+                return const TourCreationLoadingPage();
               },
               loaded: (tour) => const CreationSuccessfulPage(),
               orElse: () => Scaffold(
@@ -130,6 +130,12 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
                                             .isEmpty) {
                                           return;
                                         }
+                                        data['pharmacieIds'] = context
+                                            .read<SelectionCubit>()
+                                            .state
+                                            .selected
+                                            .map((e) => e)
+                                            .toList();
                                         context
                                             .read<CounterCubit>()
                                             .increment();

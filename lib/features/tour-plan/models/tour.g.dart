@@ -18,8 +18,10 @@ _$TourImpl _$$TourImplFromJson(Map<String, dynamic> json) => _$TourImpl(
       effectiveEndDate: json['dateFinEffective'] as String?,
       delegate: Person.fromJson(json['delegue'] as Map<String, dynamic>),
       supervisor: Person.fromJson(json['superviseur'] as Map<String, dynamic>),
-      tourDetails: (json['tourneeDetails'] as List<dynamic>)
-          .map((e) => TourDetail.fromJson(e as Map<String, dynamic>))
+      totalClients: json['totalClients'] as int?,
+      visitedClients: json['visitedClients'] as int?,
+      pharmacies: (json['tourneeDetails'] as List<dynamic>?)
+          ?.map((e) => TourDetail.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -36,7 +38,9 @@ Map<String, dynamic> _$$TourImplToJson(_$TourImpl instance) =>
       'dateFinEffective': instance.effectiveEndDate,
       'delegue': instance.delegate,
       'superviseur': instance.supervisor,
-      'tourneeDetails': instance.tourDetails,
+      'totalClients': instance.totalClients,
+      'visitedClients': instance.visitedClients,
+      'tourneeDetails': instance.pharmacies,
     };
 
 _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
