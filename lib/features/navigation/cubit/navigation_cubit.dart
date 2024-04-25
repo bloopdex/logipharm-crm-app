@@ -1,13 +1,16 @@
+import 'package:crm/features/menu/menu.page.dart';
+import 'package:crm/features/visits/visit.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../l10n/l10n.dart';
 import '../../home/home.page.dart';
+import '../../todo/todo.page.dart';
 import '../../tour-plan/tour.plan.page.dart';
 
-part 'navigation_state.dart';
 part 'navigation_cubit.freezed.dart';
+part 'navigation_state.dart';
 
 enum AppScreen {
   home(0),
@@ -28,11 +31,11 @@ extension AppScreensExtension on AppScreen {
       case AppScreen.plans:
         return const PlanTourPage();
       case AppScreen.visits:
-        return const SizedBox();
+        return const VisitPage();
       case AppScreen.todo:
-        return const SizedBox();
+        return const TodoPage();
       case AppScreen.menu:
-        return const SizedBox();
+        return const MenuPage();
       default:
         return const SizedBox.shrink();
     }

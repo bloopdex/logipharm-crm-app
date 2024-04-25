@@ -70,12 +70,42 @@ class S {
     );
   }
 
+  /// `Start`
+  String get start {
+    return Intl.message(
+      'Start',
+      name: 'start',
+      desc: 'Start',
+      args: [],
+    );
+  }
+
   /// `Finish`
   String get finish {
     return Intl.message(
       'Finish',
       name: 'finish',
       desc: 'Finish',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: 'Add',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: 'Update',
       args: [],
     );
   }
@@ -140,6 +170,66 @@ class S {
     );
   }
 
+  /// `Created At`
+  String get createdAt {
+    return Intl.message(
+      'Created At',
+      name: 'createdAt',
+      desc: 'Created At',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: 'Pending',
+      args: [],
+    );
+  }
+
+  /// `In Progress`
+  String get inProgress {
+    return Intl.message(
+      'In Progress',
+      name: 'inProgress',
+      desc: 'In Progress',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get completed {
+    return Intl.message(
+      'Completed',
+      name: 'completed',
+      desc: 'Completed',
+      args: [],
+    );
+  }
+
+  /// `Active`
+  String get active {
+    return Intl.message(
+      'Active',
+      name: 'active',
+      desc: 'Active',
+      args: [],
+    );
+  }
+
+  /// `Refused`
+  String get refused {
+    return Intl.message(
+      'Refused',
+      name: 'refused',
+      desc: 'Refused',
+      args: [],
+    );
+  }
+
   /// `Select Date Range`
   String get selectDateRange {
     return Intl.message(
@@ -186,6 +276,16 @@ class S {
       'Today',
       name: 'today',
       desc: 'Today',
+      args: [],
+    );
+  }
+
+  /// `Color`
+  String get color {
+    return Intl.message(
+      'Color',
+      name: 'color',
+      desc: 'Color',
       args: [],
     );
   }
@@ -590,6 +690,16 @@ class S {
     );
   }
 
+  /// `Overview and Validation`
+  String get tourValidationTitle {
+    return Intl.message(
+      'Overview and Validation',
+      name: 'tourValidationTitle',
+      desc: 'Overview and Validation',
+      args: [],
+    );
+  }
+
   /// `Tour Plan, By:`
   String get tourValidationPlanBy {
     return Intl.message(
@@ -694,6 +804,136 @@ class S {
     );
   }
 
+  /// `Tour Details`
+  String get tourDetailsTitle {
+    return Intl.message(
+      'Tour Details',
+      name: 'tourDetailsTitle',
+      desc: 'Tour Details',
+      args: [],
+    );
+  }
+
+  /// `Tour Plan By`
+  String get tourDetailsTourBy {
+    return Intl.message(
+      'Tour Plan By',
+      name: 'tourDetailsTourBy',
+      desc: 'Tour Plan By',
+      args: [],
+    );
+  }
+
+  /// `Region`
+  String get tourDetailsRegion {
+    return Intl.message(
+      'Region',
+      name: 'tourDetailsRegion',
+      desc: 'Region',
+      args: [],
+    );
+  }
+
+  /// `Clients`
+  String get tourDetailsClients {
+    return Intl.message(
+      'Clients',
+      name: 'tourDetailsClients',
+      desc: 'Clients',
+      args: [],
+    );
+  }
+
+  /// `All Clients`
+  String get tourDetailsAllClients {
+    return Intl.message(
+      'All Clients',
+      name: 'tourDetailsAllClients',
+      desc: 'All Clients',
+      args: [],
+    );
+  }
+
+  /// `Visited`
+  String get tourDetailsVisited {
+    return Intl.message(
+      'Visited',
+      name: 'tourDetailsVisited',
+      desc: 'Visited',
+      args: [],
+    );
+  }
+
+  /// `Non Visited`
+  String get tourDetailsNonVisited {
+    return Intl.message(
+      'Non Visited',
+      name: 'tourDetailsNonVisited',
+      desc: 'Non Visited',
+      args: [],
+    );
+  }
+
+  /// `Non Visited Clients`
+  String get tourDetailsNonVisitedClients {
+    return Intl.message(
+      'Non Visited Clients',
+      name: 'tourDetailsNonVisitedClients',
+      desc: 'Non Visited Clients',
+      args: [],
+    );
+  }
+
+  /// `Visited Clients`
+  String get tourDetailsVisitedClients {
+    return Intl.message(
+      'Visited Clients',
+      name: 'tourDetailsVisitedClients',
+      desc: 'Visited Clients',
+      args: [],
+    );
+  }
+
+  /// `Visit Client`
+  String get tourDetailsVisitClient {
+    return Intl.message(
+      'Visit Client',
+      name: 'tourDetailsVisitClient',
+      desc: 'Visit Client',
+      args: [],
+    );
+  }
+
+  /// `You have an open tour`
+  String get tourErrorExistOpenTour {
+    return Intl.message(
+      'You have an open tour',
+      name: 'tourErrorExistOpenTour',
+      desc: 'You have an open tour',
+      args: [],
+    );
+  }
+
+  /// `The tour is already closed`
+  String get tourErrorExistClosedTour {
+    return Intl.message(
+      'The tour is already closed',
+      name: 'tourErrorExistClosedTour',
+      desc: 'The tour is already closed',
+      args: [],
+    );
+  }
+
+  /// `You must be authenticated to access this resource`
+  String get tourErrorResourceRequireAuthentication {
+    return Intl.message(
+      'You must be authenticated to access this resource',
+      name: 'tourErrorResourceRequireAuthentication',
+      desc: 'You must be authenticated to access this resource',
+      args: [],
+    );
+  }
+
   /// `Clients ({count})`
   String tourValidationClientLabelNumber(int count) {
     return Intl.message(
@@ -793,6 +1033,988 @@ class S {
       args: [],
     );
   }
+
+  /// `The Creation Of The Visit Is In Progress`
+  String get visitCreationInProgressTitle {
+    return Intl.message(
+      'The Creation Of The Visit Is In Progress',
+      name: 'visitCreationInProgressTitle',
+      desc: 'The Creation Of The Visit Is In Progress',
+      args: [],
+    );
+  }
+
+  /// `We are finalizing the details of your visit. Thank you for your patience.`
+  String get visitCreationInProgressDescription {
+    return Intl.message(
+      'We are finalizing the details of your visit. Thank you for your patience.',
+      name: 'visitCreationInProgressDescription',
+      desc:
+          'We are finalizing the details of your visit. Thank you for your patience.',
+      args: [],
+    );
+  }
+
+  /// `Successfully created visit`
+  String get visitCreationSuccessTitle {
+    return Intl.message(
+      'Successfully created visit',
+      name: 'visitCreationSuccessTitle',
+      desc: 'Successfully created visit',
+      args: [],
+    );
+  }
+
+  /// `Your visit has been successfully created. You can now view and manage your visits.`
+  String get visitCreationSuccessDescription {
+    return Intl.message(
+      'Your visit has been successfully created. You can now view and manage your visits.',
+      name: 'visitCreationSuccessDescription',
+      desc:
+          'Your visit has been successfully created. You can now view and manage your visits.',
+      args: [],
+    );
+  }
+
+  /// `New Visit`
+  String get visitCreationTitle {
+    return Intl.message(
+      'New Visit',
+      name: 'visitCreationTitle',
+      desc: 'New Visit',
+      args: [],
+    );
+  }
+
+  /// `Create a new visit for a client`
+  String get visitCreationDescription {
+    return Intl.message(
+      'Create a new visit for a client',
+      name: 'visitCreationDescription',
+      desc: 'Create a new visit for a client',
+      args: [],
+    );
+  }
+
+  /// `Client`
+  String get visitCreationClientLabel {
+    return Intl.message(
+      'Client',
+      name: 'visitCreationClientLabel',
+      desc: 'Client',
+      args: [],
+    );
+  }
+
+  /// `Select a client`
+  String get visitCreationClientPlaceholder {
+    return Intl.message(
+      'Select a client',
+      name: 'visitCreationClientPlaceholder',
+      desc: 'Select a client',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get visitCreationDateLabel {
+    return Intl.message(
+      'Date',
+      name: 'visitCreationDateLabel',
+      desc: 'Date',
+      args: [],
+    );
+  }
+
+  /// `Reason`
+  String get visitCreationReasonLabel {
+    return Intl.message(
+      'Reason',
+      name: 'visitCreationReasonLabel',
+      desc: 'Reason',
+      args: [],
+    );
+  }
+
+  /// `Enter the reason for the visit`
+  String get visitCreationReasonPlaceholder {
+    return Intl.message(
+      'Enter the reason for the visit',
+      name: 'visitCreationReasonPlaceholder',
+      desc: 'Enter the reason for the visit',
+      args: [],
+    );
+  }
+
+  /// `Rapport`
+  String get visitCreationRapportLabel {
+    return Intl.message(
+      'Rapport',
+      name: 'visitCreationRapportLabel',
+      desc: 'Rapport',
+      args: [],
+    );
+  }
+
+  /// `Reason is required`
+  String get visitCreationReasonError {
+    return Intl.message(
+      'Reason is required',
+      name: 'visitCreationReasonError',
+      desc: 'Reason is required',
+      args: [],
+    );
+  }
+
+  /// `Enter the rapport of the visit`
+  String get visitCreationRapportPlaceholder {
+    return Intl.message(
+      'Enter the rapport of the visit',
+      name: 'visitCreationRapportPlaceholder',
+      desc: 'Enter the rapport of the visit',
+      args: [],
+    );
+  }
+
+  /// `Overview and Validation`
+  String get visitValidationTitle {
+    return Intl.message(
+      'Overview and Validation',
+      name: 'visitValidationTitle',
+      desc: 'Overview and Validation',
+      args: [],
+    );
+  }
+
+  /// `Client`
+  String get visitValidationClient {
+    return Intl.message(
+      'Client',
+      name: 'visitValidationClient',
+      desc: 'Client',
+      args: [],
+    );
+  }
+
+  /// `Visited At`
+  String get visitValidationVisitedAt {
+    return Intl.message(
+      'Visited At',
+      name: 'visitValidationVisitedAt',
+      desc: 'Visited At',
+      args: [],
+    );
+  }
+
+  /// `Reason`
+  String get visitValidationReason {
+    return Intl.message(
+      'Reason',
+      name: 'visitValidationReason',
+      desc: 'Reason',
+      args: [],
+    );
+  }
+
+  /// `Rapport`
+  String get visitValidationRapport {
+    return Intl.message(
+      'Rapport',
+      name: 'visitValidationRapport',
+      desc: 'Rapport',
+      args: [],
+    );
+  }
+
+  /// `The tour isn''t open`
+  String get visitTourIsntOpen {
+    return Intl.message(
+      'The tour isn\'\'t open',
+      name: 'visitTourIsntOpen',
+      desc: 'The tour isn\'t open',
+      args: [],
+    );
+  }
+
+  /// `The visit is already entred`
+  String get visitAlreadyEntered {
+    return Intl.message(
+      'The visit is already entred',
+      name: 'visitAlreadyEntered',
+      desc: 'The visit is already entred',
+      args: [],
+    );
+  }
+
+  /// `Visit Details`
+  String get visitDetailsTitle {
+    return Intl.message(
+      'Visit Details',
+      name: 'visitDetailsTitle',
+      desc: 'Visit Details',
+      args: [],
+    );
+  }
+
+  /// `Create New Visit`
+  String get createNewVisit {
+    return Intl.message(
+      'Create New Visit',
+      name: 'createNewVisit',
+      desc: 'Create New Visit',
+      args: [],
+    );
+  }
+
+  /// `Update Visit`
+  String get updateVisit {
+    return Intl.message(
+      'Update Visit',
+      name: 'updateVisit',
+      desc: 'Update Visit',
+      args: [],
+    );
+  }
+
+  /// `No visits found`
+  String get visitsEmpty {
+    return Intl.message(
+      'No visits found',
+      name: 'visitsEmpty',
+      desc: 'No visits found',
+      args: [],
+    );
+  }
+
+  /// `You don''t have any visits yet`
+  String get visitsEmptyDescription {
+    return Intl.message(
+      'You don\'\'t have any visits yet',
+      name: 'visitsEmptyDescription',
+      desc: 'You don\'t have any visits yet',
+      args: [],
+    );
+  }
+
+  /// `Task`
+  String get todoTask {
+    return Intl.message(
+      'Task',
+      name: 'todoTask',
+      desc: 'Task',
+      args: [],
+    );
+  }
+
+  /// `Event`
+  String get todoEvent {
+    return Intl.message(
+      'Event',
+      name: 'todoEvent',
+      desc: 'Event',
+      args: [],
+    );
+  }
+
+  /// `Create New Task`
+  String get todoCreateNewTask {
+    return Intl.message(
+      'Create New Task',
+      name: 'todoCreateNewTask',
+      desc: 'Create New Task',
+      args: [],
+    );
+  }
+
+  /// `Create New Event`
+  String get todoCreateNewEvent {
+    return Intl.message(
+      'Create New Event',
+      name: 'todoCreateNewEvent',
+      desc: 'Create New Event',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get todoTitle {
+    return Intl.message(
+      'Title',
+      name: 'todoTitle',
+      desc: 'Title',
+      args: [],
+    );
+  }
+
+  /// `Enter the title`
+  String get todoTitlePlaceholder {
+    return Intl.message(
+      'Enter the title',
+      name: 'todoTitlePlaceholder',
+      desc: 'Enter the title',
+      args: [],
+    );
+  }
+
+  /// `Title is required`
+  String get todoTitleError {
+    return Intl.message(
+      'Title is required',
+      name: 'todoTitleError',
+      desc: 'Title is required',
+      args: [],
+    );
+  }
+
+  /// `Details`
+  String get todoDetails {
+    return Intl.message(
+      'Details',
+      name: 'todoDetails',
+      desc: 'Details',
+      args: [],
+    );
+  }
+
+  /// `Enter the details`
+  String get todoDetailsPlaceholder {
+    return Intl.message(
+      'Enter the details',
+      name: 'todoDetailsPlaceholder',
+      desc: 'Enter the details',
+      args: [],
+    );
+  }
+
+  /// `Details is required`
+  String get todoDetailsError {
+    return Intl.message(
+      'Details is required',
+      name: 'todoDetailsError',
+      desc: 'Details is required',
+      args: [],
+    );
+  }
+
+  /// `Supervisor`
+  String get supervisorRole {
+    return Intl.message(
+      'Supervisor',
+      name: 'supervisorRole',
+      desc: 'Supervisor',
+      args: [],
+    );
+  }
+
+  /// `Delegate`
+  String get delegateRole {
+    return Intl.message(
+      'Delegate',
+      name: 'delegateRole',
+      desc: 'Delegate',
+      args: [],
+    );
+  }
+
+  /// `Manage Profile`
+  String get manageProfile {
+    return Intl.message(
+      'Manage Profile',
+      name: 'manageProfile',
+      desc: 'Manage Profile',
+      args: [],
+    );
+  }
+
+  /// `Consultation`
+  String get consultation {
+    return Intl.message(
+      'Consultation',
+      name: 'consultation',
+      desc: 'Consultation',
+      args: [],
+    );
+  }
+
+  /// `Dashboard`
+  String get dashboard {
+    return Intl.message(
+      'Dashboard',
+      name: 'dashboard',
+      desc: 'Dashboard',
+      args: [],
+    );
+  }
+
+  /// `Client List`
+  String get clientList {
+    return Intl.message(
+      'Client List',
+      name: 'clientList',
+      desc: 'Client List',
+      args: [],
+    );
+  }
+
+  /// `Hiring`
+  String get hiring {
+    return Intl.message(
+      'Hiring',
+      name: 'hiring',
+      desc: 'Hiring',
+      args: [],
+    );
+  }
+
+  /// `File CNRC`
+  String get fileCNRC {
+    return Intl.message(
+      'File CNRC',
+      name: 'fileCNRC',
+      desc: 'File CNRC',
+      args: [],
+    );
+  }
+
+  /// `System`
+  String get system {
+    return Intl.message(
+      'System',
+      name: 'system',
+      desc: 'System',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: 'Notifications',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: 'Logout',
+      args: [],
+    );
+  }
+
+  /// `Hirement`
+  String get hirement {
+    return Intl.message(
+      'Hirement',
+      name: 'hirement',
+      desc: 'Hirement',
+      args: [],
+    );
+  }
+
+  /// `No hirement found`
+  String get noHirement {
+    return Intl.message(
+      'No hirement found',
+      name: 'noHirement',
+      desc: 'No hirement found',
+      args: [],
+    );
+  }
+
+  /// `You don''t have any hirement yet`
+  String get youDontHaveAnyHirement {
+    return Intl.message(
+      'You don\'\'t have any hirement yet',
+      name: 'youDontHaveAnyHirement',
+      desc: 'You don\'t have any hirement yet',
+      args: [],
+    );
+  }
+
+  /// `Create New Hirement`
+  String get createNewHirement {
+    return Intl.message(
+      'Create New Hirement',
+      name: 'createNewHirement',
+      desc: 'Create New Hirement',
+      args: [],
+    );
+  }
+
+  /// `No phone`
+  String get noPhone {
+    return Intl.message(
+      'No phone',
+      name: 'noPhone',
+      desc: 'No phone',
+      args: [],
+    );
+  }
+
+  /// `No Note`
+  String get noNote {
+    return Intl.message(
+      'No Note',
+      name: 'noNote',
+      desc: 'No Note',
+      args: [],
+    );
+  }
+
+  /// `Client Name`
+  String get clientName {
+    return Intl.message(
+      'Client Name',
+      name: 'clientName',
+      desc: 'Client Name',
+      args: [],
+    );
+  }
+
+  /// `Last Name`
+  String get lastName {
+    return Intl.message(
+      'Last Name',
+      name: 'lastName',
+      desc: 'Last Name',
+      args: [],
+    );
+  }
+
+  /// `No last name`
+  String get noLastName {
+    return Intl.message(
+      'No last name',
+      name: 'noLastName',
+      desc: 'No last name',
+      args: [],
+    );
+  }
+
+  /// `Enter the last name`
+  String get lastNamePlaceholder {
+    return Intl.message(
+      'Enter the last name',
+      name: 'lastNamePlaceholder',
+      desc: 'Enter the last name',
+      args: [],
+    );
+  }
+
+  /// `Last name is required`
+  String get lastNameRequired {
+    return Intl.message(
+      'Last name is required',
+      name: 'lastNameRequired',
+      desc: 'Last name is required',
+      args: [],
+    );
+  }
+
+  /// `First Name`
+  String get firstName {
+    return Intl.message(
+      'First Name',
+      name: 'firstName',
+      desc: 'First Name',
+      args: [],
+    );
+  }
+
+  /// `No first name`
+  String get noFirstName {
+    return Intl.message(
+      'No first name',
+      name: 'noFirstName',
+      desc: 'No first name',
+      args: [],
+    );
+  }
+
+  /// `Enter the first name`
+  String get firstNamePlaceholder {
+    return Intl.message(
+      'Enter the first name',
+      name: 'firstNamePlaceholder',
+      desc: 'Enter the first name',
+      args: [],
+    );
+  }
+
+  /// `First name is required`
+  String get firstNameRequired {
+    return Intl.message(
+      'First name is required',
+      name: 'firstNameRequired',
+      desc: 'First name is required',
+      args: [],
+    );
+  }
+
+  /// `Region`
+  String get region {
+    return Intl.message(
+      'Region',
+      name: 'region',
+      desc: 'Region',
+      args: [],
+    );
+  }
+
+  /// `Select a region`
+  String get regionPlaceholder {
+    return Intl.message(
+      'Select a region',
+      name: 'regionPlaceholder',
+      desc: 'Select a region',
+      args: [],
+    );
+  }
+
+  /// `Region is required`
+  String get regionRequired {
+    return Intl.message(
+      'Region is required',
+      name: 'regionRequired',
+      desc: 'Region is required',
+      args: [],
+    );
+  }
+
+  /// `No region`
+  String get noRegion {
+    return Intl.message(
+      'No region',
+      name: 'noRegion',
+      desc: 'No region',
+      args: [],
+    );
+  }
+
+  /// `Address`
+  String get address {
+    return Intl.message(
+      'Address',
+      name: 'address',
+      desc: 'Address',
+      args: [],
+    );
+  }
+
+  /// `No address`
+  String get noAddress {
+    return Intl.message(
+      'No address',
+      name: 'noAddress',
+      desc: 'No address',
+      args: [],
+    );
+  }
+
+  /// `Enter the address`
+  String get addressPlaceholder {
+    return Intl.message(
+      'Enter the address',
+      name: 'addressPlaceholder',
+      desc: 'Enter the address',
+      args: [],
+    );
+  }
+
+  /// `Address is required`
+  String get addressRequired {
+    return Intl.message(
+      'Address is required',
+      name: 'addressRequired',
+      desc: 'Address is required',
+      args: [],
+    );
+  }
+
+  /// `Phone`
+  String get phone {
+    return Intl.message(
+      'Phone',
+      name: 'phone',
+      desc: 'Phone',
+      args: [],
+    );
+  }
+
+  /// `Enter the phone`
+  String get phonePlaceholder {
+    return Intl.message(
+      'Enter the phone',
+      name: 'phonePlaceholder',
+      desc: 'Enter the phone',
+      args: [],
+    );
+  }
+
+  /// `Phone is required`
+  String get phoneRequired {
+    return Intl.message(
+      'Phone is required',
+      name: 'phoneRequired',
+      desc: 'Phone is required',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: 'Email',
+      args: [],
+    );
+  }
+
+  /// `No email`
+  String get noEmail {
+    return Intl.message(
+      'No email',
+      name: 'noEmail',
+      desc: 'No email',
+      args: [],
+    );
+  }
+
+  /// `Enter the email`
+  String get emailPlaceholder {
+    return Intl.message(
+      'Enter the email',
+      name: 'emailPlaceholder',
+      desc: 'Enter the email',
+      args: [],
+    );
+  }
+
+  /// `Email is required`
+  String get emailRequired {
+    return Intl.message(
+      'Email is required',
+      name: 'emailRequired',
+      desc: 'Email is required',
+      args: [],
+    );
+  }
+
+  /// `Enter a valid email`
+  String get emailInvalid {
+    return Intl.message(
+      'Enter a valid email',
+      name: 'emailInvalid',
+      desc: 'Enter a valid email',
+      args: [],
+    );
+  }
+
+  /// `Note`
+  String get note {
+    return Intl.message(
+      'Note',
+      name: 'note',
+      desc: 'Note',
+      args: [],
+    );
+  }
+
+  /// `Enter the note`
+  String get notePlaceholder {
+    return Intl.message(
+      'Enter the note',
+      name: 'notePlaceholder',
+      desc: 'Enter the note',
+      args: [],
+    );
+  }
+
+  /// `Hire`
+  String get hire {
+    return Intl.message(
+      'Hire',
+      name: 'hire',
+      desc: 'Hire',
+      args: [],
+    );
+  }
+
+  /// `Hire Details`
+  String get hireDetails {
+    return Intl.message(
+      'Hire Details',
+      name: 'hireDetails',
+      desc: 'Hire Details',
+      args: [],
+    );
+  }
+
+  /// `Waiting for decision`
+  String get waitingForDecision {
+    return Intl.message(
+      'Waiting for decision',
+      name: 'waitingForDecision',
+      desc: 'Waiting for decision',
+      args: [],
+    );
+  }
+
+  /// `Hired`
+  String get hired {
+    return Intl.message(
+      'Hired',
+      name: 'hired',
+      desc: 'Hired',
+      args: [],
+    );
+  }
+
+  /// `Rejected`
+  String get rejected {
+    return Intl.message(
+      'Rejected',
+      name: 'rejected',
+      desc: 'Rejected',
+      args: [],
+    );
+  }
+
+  /// `Client Details`
+  String get clientDetails {
+    return Intl.message(
+      'Client Details',
+      name: 'clientDetails',
+      desc: 'Client Details',
+      args: [],
+    );
+  }
+
+  /// `Client Address`
+  String get clientAddress {
+    return Intl.message(
+      'Client Address',
+      name: 'clientAddress',
+      desc: 'Client Address',
+      args: [],
+    );
+  }
+
+  /// `Close Tour Plan`
+  String get closeTourPlan {
+    return Intl.message(
+      'Close Tour Plan',
+      name: 'closeTourPlan',
+      desc: 'Close Tour Plan',
+      args: [],
+    );
+  }
+
+  /// `Ferme le plan de tournée actuel.`
+  String get closeTourPlanDesc {
+    return Intl.message(
+      'Ferme le plan de tournée actuel.',
+      name: 'closeTourPlanDesc',
+      desc: 'Ferme le plan de tournée actuel.',
+      args: [],
+    );
+  }
+
+  /// `Clients`
+  String get clients {
+    return Intl.message(
+      'Clients',
+      name: 'clients',
+      desc: 'Clients',
+      args: [],
+    );
+  }
+
+  /// `Observations`
+  String get observations {
+    return Intl.message(
+      'Observations',
+      name: 'observations',
+      desc: 'Observations',
+      args: [],
+    );
+  }
+
+  /// `No observations`
+  String get noObservations {
+    return Intl.message(
+      'No observations',
+      name: 'noObservations',
+      desc: 'No observations',
+      args: [],
+    );
+  }
+
+  /// `No observations found for this client`
+  String get noObservationsDesc {
+    return Intl.message(
+      'No observations found for this client',
+      name: 'noObservationsDesc',
+      desc: 'No observations found for this client',
+      args: [],
+    );
+  }
+
+  /// `Add Observation`
+  String get addObservation {
+    return Intl.message(
+      'Add Observation',
+      name: 'addObservation',
+      desc: 'Add Observation',
+      args: [],
+    );
+  }
+
+  /// `Claims`
+  String get claims {
+    return Intl.message(
+      'Claims',
+      name: 'claims',
+      desc: 'Claims',
+      args: [],
+    );
+  }
+
+  /// `No claims`
+  String get noClaims {
+    return Intl.message(
+      'No claims',
+      name: 'noClaims',
+      desc: 'No claims',
+      args: [],
+    );
+  }
+
+  /// `No claims found for this client`
+  String get noClaimsDesc {
+    return Intl.message(
+      'No claims found for this client',
+      name: 'noClaimsDesc',
+      desc: 'No claims found for this client',
+      args: [],
+    );
+  }
+
+  /// `Add Claim`
+  String get addClaim {
+    return Intl.message(
+      'Add Claim',
+      name: 'addClaim',
+      desc: 'Add Claim',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -801,6 +2023,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'fr'),
     ];
   }
 

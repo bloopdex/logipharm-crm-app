@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+## [0.4.1] - 2024-03-23
+
+### Commit Message
+
+- **Description**: refactor: Updated create new tour folder
+
+### Refactor
+
+#### Updated create new tour folder
+
+- **Description**: Updated create new tour folder by putting it in tour plan folder cause they belong to the same feature
+- **Author**: @bloopdex
+
 ## [0.4.0] - 2024-03-23
 
 ### Commit Message

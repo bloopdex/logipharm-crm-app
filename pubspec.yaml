@@ -8,65 +8,74 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
-  flutter:
-    sdk: flutter
-  # Localizations for Flutter
-  flutter_localizations:
-    sdk: flutter
-  # Cupertino style icons
-  cupertino_icons: ^1.0.6
-  # State management library
-  flutter_bloc: ^8.1.4
+  awesome_snackbar_content: ^0.1.3
   # Business logic library
   bloc: ^8.1.3
+  # Flutter library to load and cache network images
+  cached_network_image: ^3.3.1
+  # Cupertino style icons
+  cupertino_icons: ^1.0.6
+  # Functional programming library for Dart
+  dartz: ^0.10.1
   # HTTP client for Dart
   dio: ^5.4.1
   # Equality comparisons for Dart
   equatable: ^2.0.5
-  # Internationalization and localization library
-  intl: ^0.18.1
-  # Flutter library to load and cache network images
-  cached_network_image: ^3.3.1
-  # Functional programming library for Dart
-  dartz: ^0.10.1
+  flutter:
+    sdk: flutter
+  # State management library
+  flutter_bloc: ^8.1.4
+  # Localizations for Flutter
+  flutter_expandable_fab: ^2.0.0
+  flutter_gen: ^5.4.0
+  flutter_localizations:
+    sdk: flutter
+  flutter_map: ^6.1.0
+  # Flutter plugin for native splash screen
+  flutter_native_splash: ^2.2.16
   # Flutter screen adaptation library
+  flutter_quill: ^9.3.5
   flutter_screenutil: ^5.9.0
   # SVG rendering library for Flutter
   flutter_svg: ^2.0.10+1
-  # Flutter plugin for reading and writing simple key-value pairs
-  shared_preferences: ^2.2.2
+  freezed_annotation: ^2.4.1
+  geocoding: ^3.0.0
+  geolocator: ^11.0.0
+  go_router: ^13.2.0
   # Flutter plugin for checking internet connectivity
+  hydrated_bloc: ^9.1.5
   internet_connection_checker: ^1.0.0+1
-  # Flutter plugin for native splash screen
-  flutter_native_splash: ^2.2.16
+  # Internationalization and localization library
+  intl: ^0.18.1
+  intl_utils: ^2.8.7
+  latlong2: ^0.9.0
   # Flutter plugin for loading animation
   loading_animation_widget: ^1.2.1
-  go_router: ^13.2.0
-  freezed_annotation: ^2.4.1
-  awesome_snackbar_content: ^0.1.3
-  intl_utils: ^2.8.7
   # Flutter plugin for logging
   logger: ^2.1.0
-  # Flutter plugin for map luncher
-  map_launcher: ^3.2.0
-  flutter_map: ^6.1.0
-  latlong2: ^0.9.0
+  # Flutter plugin for reading and writing simple key-value pairs
+  path_provider: ^2.1.2
+  shared_preferences: ^2.2.3
   shimmer: ^3.0.0
-  geolocator: ^11.0.0
-  geocoding: ^3.0.0
+  syncfusion_flutter_calendar: ^25.1.38
+  # Flutter plugin for map luncher
+  map_launcher: ^3.3.0
+  # Url launcher for Flutter
+  url_launcher: ^6.2.6
+  
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  analyzer: ^6.4.1
+  # Code generator for Flutter
+  build_runner: ^2.4.8
 
   # Linter for Dart
   flutter_lints: ^3.0.0
-  # Code generator for Flutter
-  build_runner: ^2.4.8
-  analyzer: ^6.4.1
-  json_serializable: ^6.7.1
+  flutter_test:
+    sdk: flutter
   freezed: ^2.4.7
   json_annotation: ^4.8.1
+  json_serializable: ^6.7.1
 
 flutter_native_splash:
   color: "#FFFFFF"

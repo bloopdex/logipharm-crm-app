@@ -25,7 +25,7 @@ mixin _$Person {
   @JsonKey(name: 'cmpId')
   int get companyId => throw _privateConstructorUsedError;
   @JsonKey(name: 'typeTier')
-  String get tierType => throw _privateConstructorUsedError;
+  String get typeTier => throw _privateConstructorUsedError;
   @JsonKey(name: 'nom')
   String get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: 'prenom')
@@ -42,6 +42,26 @@ mixin _$Person {
   double? get latitude => throw _privateConstructorUsedError;
   @JsonKey(name: 'longitude')
   double? get longitude => throw _privateConstructorUsedError;
+  @JsonKey(name: 'codePostal')
+  String? get postalCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'boitePostale')
+  String? get postBox => throw _privateConstructorUsedError;
+  @JsonKey(name: 'email')
+  String? get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'siteWeb')
+  String? get website => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nisCode')
+  String? get nisCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nssCode')
+  String? get nssCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tel1Fixe')
+  String? get tel1Fixe => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tel2Fixe')
+  String? get tel2Fixe => throw _privateConstructorUsedError;
+  @JsonKey(name: 'telMobile')
+  String? get telMobile => throw _privateConstructorUsedError;
+  @JsonKey(name: 'fax')
+  String? get fax => throw _privateConstructorUsedError;
   @JsonKey(name: 'fullName')
   String get fullName => throw _privateConstructorUsedError;
 
@@ -58,7 +78,7 @@ abstract class $PersonCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'cmpId') int companyId,
-      @JsonKey(name: 'typeTier') String tierType,
+      @JsonKey(name: 'typeTier') String typeTier,
       @JsonKey(name: 'nom') String lastName,
       @JsonKey(name: 'prenom') String? firstName,
       @JsonKey(name: 'loginCode') String loginCode,
@@ -67,6 +87,16 @@ abstract class $PersonCopyWith<$Res> {
       @JsonKey(name: 'adresse') String? address,
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'longitude') double? longitude,
+      @JsonKey(name: 'codePostal') String? postalCode,
+      @JsonKey(name: 'boitePostale') String? postBox,
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'siteWeb') String? website,
+      @JsonKey(name: 'nisCode') String? nisCode,
+      @JsonKey(name: 'nssCode') String? nssCode,
+      @JsonKey(name: 'tel1Fixe') String? tel1Fixe,
+      @JsonKey(name: 'tel2Fixe') String? tel2Fixe,
+      @JsonKey(name: 'telMobile') String? telMobile,
+      @JsonKey(name: 'fax') String? fax,
       @JsonKey(name: 'fullName') String fullName});
 }
 
@@ -85,7 +115,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
   $Res call({
     Object? id = null,
     Object? companyId = null,
-    Object? tierType = null,
+    Object? typeTier = null,
     Object? lastName = null,
     Object? firstName = freezed,
     Object? loginCode = null,
@@ -94,6 +124,16 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? address = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? postalCode = freezed,
+    Object? postBox = freezed,
+    Object? email = freezed,
+    Object? website = freezed,
+    Object? nisCode = freezed,
+    Object? nssCode = freezed,
+    Object? tel1Fixe = freezed,
+    Object? tel2Fixe = freezed,
+    Object? telMobile = freezed,
+    Object? fax = freezed,
     Object? fullName = null,
   }) {
     return _then(_value.copyWith(
@@ -105,9 +145,9 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as int,
-      tierType: null == tierType
-          ? _value.tierType
-          : tierType // ignore: cast_nullable_to_non_nullable
+      typeTier: null == typeTier
+          ? _value.typeTier
+          : typeTier // ignore: cast_nullable_to_non_nullable
               as String,
       lastName: null == lastName
           ? _value.lastName
@@ -141,6 +181,46 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
+      postalCode: freezed == postalCode
+          ? _value.postalCode
+          : postalCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      postBox: freezed == postBox
+          ? _value.postBox
+          : postBox // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      website: freezed == website
+          ? _value.website
+          : website // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nisCode: freezed == nisCode
+          ? _value.nisCode
+          : nisCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nssCode: freezed == nssCode
+          ? _value.nssCode
+          : nssCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tel1Fixe: freezed == tel1Fixe
+          ? _value.tel1Fixe
+          : tel1Fixe // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tel2Fixe: freezed == tel2Fixe
+          ? _value.tel2Fixe
+          : tel2Fixe // ignore: cast_nullable_to_non_nullable
+              as String?,
+      telMobile: freezed == telMobile
+          ? _value.telMobile
+          : telMobile // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fax: freezed == fax
+          ? _value.fax
+          : fax // ignore: cast_nullable_to_non_nullable
+              as String?,
       fullName: null == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
@@ -159,7 +239,7 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'cmpId') int companyId,
-      @JsonKey(name: 'typeTier') String tierType,
+      @JsonKey(name: 'typeTier') String typeTier,
       @JsonKey(name: 'nom') String lastName,
       @JsonKey(name: 'prenom') String? firstName,
       @JsonKey(name: 'loginCode') String loginCode,
@@ -168,6 +248,16 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       @JsonKey(name: 'adresse') String? address,
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'longitude') double? longitude,
+      @JsonKey(name: 'codePostal') String? postalCode,
+      @JsonKey(name: 'boitePostale') String? postBox,
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'siteWeb') String? website,
+      @JsonKey(name: 'nisCode') String? nisCode,
+      @JsonKey(name: 'nssCode') String? nssCode,
+      @JsonKey(name: 'tel1Fixe') String? tel1Fixe,
+      @JsonKey(name: 'tel2Fixe') String? tel2Fixe,
+      @JsonKey(name: 'telMobile') String? telMobile,
+      @JsonKey(name: 'fax') String? fax,
       @JsonKey(name: 'fullName') String fullName});
 }
 
@@ -184,7 +274,7 @@ class __$$PersonImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? companyId = null,
-    Object? tierType = null,
+    Object? typeTier = null,
     Object? lastName = null,
     Object? firstName = freezed,
     Object? loginCode = null,
@@ -193,6 +283,16 @@ class __$$PersonImplCopyWithImpl<$Res>
     Object? address = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? postalCode = freezed,
+    Object? postBox = freezed,
+    Object? email = freezed,
+    Object? website = freezed,
+    Object? nisCode = freezed,
+    Object? nssCode = freezed,
+    Object? tel1Fixe = freezed,
+    Object? tel2Fixe = freezed,
+    Object? telMobile = freezed,
+    Object? fax = freezed,
     Object? fullName = null,
   }) {
     return _then(_$PersonImpl(
@@ -204,9 +304,9 @@ class __$$PersonImplCopyWithImpl<$Res>
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as int,
-      tierType: null == tierType
-          ? _value.tierType
-          : tierType // ignore: cast_nullable_to_non_nullable
+      typeTier: null == typeTier
+          ? _value.typeTier
+          : typeTier // ignore: cast_nullable_to_non_nullable
               as String,
       lastName: null == lastName
           ? _value.lastName
@@ -240,6 +340,46 @@ class __$$PersonImplCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
+      postalCode: freezed == postalCode
+          ? _value.postalCode
+          : postalCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      postBox: freezed == postBox
+          ? _value.postBox
+          : postBox // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      website: freezed == website
+          ? _value.website
+          : website // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nisCode: freezed == nisCode
+          ? _value.nisCode
+          : nisCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nssCode: freezed == nssCode
+          ? _value.nssCode
+          : nssCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tel1Fixe: freezed == tel1Fixe
+          ? _value.tel1Fixe
+          : tel1Fixe // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tel2Fixe: freezed == tel2Fixe
+          ? _value.tel2Fixe
+          : tel2Fixe // ignore: cast_nullable_to_non_nullable
+              as String?,
+      telMobile: freezed == telMobile
+          ? _value.telMobile
+          : telMobile // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fax: freezed == fax
+          ? _value.fax
+          : fax // ignore: cast_nullable_to_non_nullable
+              as String?,
       fullName: null == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
@@ -254,7 +394,7 @@ class _$PersonImpl implements _Person {
   const _$PersonImpl(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'cmpId') required this.companyId,
-      @JsonKey(name: 'typeTier') required this.tierType,
+      @JsonKey(name: 'typeTier') required this.typeTier,
       @JsonKey(name: 'nom') required this.lastName,
       @JsonKey(name: 'prenom') this.firstName,
       @JsonKey(name: 'loginCode') required this.loginCode,
@@ -263,6 +403,16 @@ class _$PersonImpl implements _Person {
       @JsonKey(name: 'adresse') this.address,
       @JsonKey(name: 'latitude') this.latitude,
       @JsonKey(name: 'longitude') this.longitude,
+      @JsonKey(name: 'codePostal') this.postalCode,
+      @JsonKey(name: 'boitePostale') this.postBox,
+      @JsonKey(name: 'email') this.email,
+      @JsonKey(name: 'siteWeb') this.website,
+      @JsonKey(name: 'nisCode') this.nisCode,
+      @JsonKey(name: 'nssCode') this.nssCode,
+      @JsonKey(name: 'tel1Fixe') this.tel1Fixe,
+      @JsonKey(name: 'tel2Fixe') this.tel2Fixe,
+      @JsonKey(name: 'telMobile') this.telMobile,
+      @JsonKey(name: 'fax') this.fax,
       @JsonKey(name: 'fullName') required this.fullName});
 
   factory _$PersonImpl.fromJson(Map<String, dynamic> json) =>
@@ -276,7 +426,7 @@ class _$PersonImpl implements _Person {
   final int companyId;
   @override
   @JsonKey(name: 'typeTier')
-  final String tierType;
+  final String typeTier;
   @override
   @JsonKey(name: 'nom')
   final String lastName;
@@ -302,12 +452,42 @@ class _$PersonImpl implements _Person {
   @JsonKey(name: 'longitude')
   final double? longitude;
   @override
+  @JsonKey(name: 'codePostal')
+  final String? postalCode;
+  @override
+  @JsonKey(name: 'boitePostale')
+  final String? postBox;
+  @override
+  @JsonKey(name: 'email')
+  final String? email;
+  @override
+  @JsonKey(name: 'siteWeb')
+  final String? website;
+  @override
+  @JsonKey(name: 'nisCode')
+  final String? nisCode;
+  @override
+  @JsonKey(name: 'nssCode')
+  final String? nssCode;
+  @override
+  @JsonKey(name: 'tel1Fixe')
+  final String? tel1Fixe;
+  @override
+  @JsonKey(name: 'tel2Fixe')
+  final String? tel2Fixe;
+  @override
+  @JsonKey(name: 'telMobile')
+  final String? telMobile;
+  @override
+  @JsonKey(name: 'fax')
+  final String? fax;
+  @override
   @JsonKey(name: 'fullName')
   final String fullName;
 
   @override
   String toString() {
-    return 'Person(id: $id, companyId: $companyId, tierType: $tierType, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, fullName: $fullName)';
+    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName)';
   }
 
   @override
@@ -318,8 +498,8 @@ class _$PersonImpl implements _Person {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.companyId, companyId) ||
                 other.companyId == companyId) &&
-            (identical(other.tierType, tierType) ||
-                other.tierType == tierType) &&
+            (identical(other.typeTier, typeTier) ||
+                other.typeTier == typeTier) &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
             (identical(other.firstName, firstName) ||
@@ -335,26 +515,51 @@ class _$PersonImpl implements _Person {
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
+            (identical(other.postalCode, postalCode) ||
+                other.postalCode == postalCode) &&
+            (identical(other.postBox, postBox) || other.postBox == postBox) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.website, website) || other.website == website) &&
+            (identical(other.nisCode, nisCode) || other.nisCode == nisCode) &&
+            (identical(other.nssCode, nssCode) || other.nssCode == nssCode) &&
+            (identical(other.tel1Fixe, tel1Fixe) ||
+                other.tel1Fixe == tel1Fixe) &&
+            (identical(other.tel2Fixe, tel2Fixe) ||
+                other.tel2Fixe == tel2Fixe) &&
+            (identical(other.telMobile, telMobile) ||
+                other.telMobile == telMobile) &&
+            (identical(other.fax, fax) || other.fax == fax) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      companyId,
-      tierType,
-      lastName,
-      firstName,
-      loginCode,
-      actionFlag,
-      regionId,
-      address,
-      latitude,
-      longitude,
-      fullName);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        companyId,
+        typeTier,
+        lastName,
+        firstName,
+        loginCode,
+        actionFlag,
+        regionId,
+        address,
+        latitude,
+        longitude,
+        postalCode,
+        postBox,
+        email,
+        website,
+        nisCode,
+        nssCode,
+        tel1Fixe,
+        tel2Fixe,
+        telMobile,
+        fax,
+        fullName
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -374,7 +579,7 @@ abstract class _Person implements Person {
   const factory _Person(
           {@JsonKey(name: 'id') required final int id,
           @JsonKey(name: 'cmpId') required final int companyId,
-          @JsonKey(name: 'typeTier') required final String tierType,
+          @JsonKey(name: 'typeTier') required final String typeTier,
           @JsonKey(name: 'nom') required final String lastName,
           @JsonKey(name: 'prenom') final String? firstName,
           @JsonKey(name: 'loginCode') required final String loginCode,
@@ -383,6 +588,16 @@ abstract class _Person implements Person {
           @JsonKey(name: 'adresse') final String? address,
           @JsonKey(name: 'latitude') final double? latitude,
           @JsonKey(name: 'longitude') final double? longitude,
+          @JsonKey(name: 'codePostal') final String? postalCode,
+          @JsonKey(name: 'boitePostale') final String? postBox,
+          @JsonKey(name: 'email') final String? email,
+          @JsonKey(name: 'siteWeb') final String? website,
+          @JsonKey(name: 'nisCode') final String? nisCode,
+          @JsonKey(name: 'nssCode') final String? nssCode,
+          @JsonKey(name: 'tel1Fixe') final String? tel1Fixe,
+          @JsonKey(name: 'tel2Fixe') final String? tel2Fixe,
+          @JsonKey(name: 'telMobile') final String? telMobile,
+          @JsonKey(name: 'fax') final String? fax,
           @JsonKey(name: 'fullName') required final String fullName}) =
       _$PersonImpl;
 
@@ -396,7 +611,7 @@ abstract class _Person implements Person {
   int get companyId;
   @override
   @JsonKey(name: 'typeTier')
-  String get tierType;
+  String get typeTier;
   @override
   @JsonKey(name: 'nom')
   String get lastName;
@@ -421,6 +636,36 @@ abstract class _Person implements Person {
   @override
   @JsonKey(name: 'longitude')
   double? get longitude;
+  @override
+  @JsonKey(name: 'codePostal')
+  String? get postalCode;
+  @override
+  @JsonKey(name: 'boitePostale')
+  String? get postBox;
+  @override
+  @JsonKey(name: 'email')
+  String? get email;
+  @override
+  @JsonKey(name: 'siteWeb')
+  String? get website;
+  @override
+  @JsonKey(name: 'nisCode')
+  String? get nisCode;
+  @override
+  @JsonKey(name: 'nssCode')
+  String? get nssCode;
+  @override
+  @JsonKey(name: 'tel1Fixe')
+  String? get tel1Fixe;
+  @override
+  @JsonKey(name: 'tel2Fixe')
+  String? get tel2Fixe;
+  @override
+  @JsonKey(name: 'telMobile')
+  String? get telMobile;
+  @override
+  @JsonKey(name: 'fax')
+  String? get fax;
   @override
   @JsonKey(name: 'fullName')
   String get fullName;

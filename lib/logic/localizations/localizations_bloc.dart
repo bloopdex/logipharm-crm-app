@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'localizations_state.dart';
-part 'localizations_event.dart';
 part 'localizations_bloc.freezed.dart';
+part 'localizations_event.dart';
+part 'localizations_state.dart';
 
 class LocalizationsBloc extends Bloc<LocalizationsEvent, LocalizationsState> {
   LocalizationsBloc()

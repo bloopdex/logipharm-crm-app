@@ -11,80 +11,108 @@ class AppTheme {
             fontSize: 32,
             height: 0.94,
             fontWeight: FontWeight.w600,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
         // Figma: titleH2
         displayMedium: TextStyle(
             fontSize: 30,
             height: 1.2,
             fontWeight: FontWeight.w500,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
         // Custom style not directly in TextTheme: titleH4
         displaySmall: TextStyle(
             fontSize: 22,
             height: 1.18,
             fontWeight: FontWeight.w600,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
         // Custom style not directly in TextTheme: titleH6
         headlineMedium: TextStyle(
             fontSize: 18,
             height: 1.33,
             fontWeight: FontWeight.w600,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
         // Custom style not directly in TextTheme: titleH8
         headlineSmall: TextStyle(
             fontSize: 16,
             height: 1.63,
             fontWeight: FontWeight.w600,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
         // Figma: paragraphMid
         bodyLarge: TextStyle(
             fontSize: 18,
             height: 1.39,
             fontWeight: FontWeight.w400,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
         // Custom style not directly in TextTheme: paragraphSm1
         bodyMedium: TextStyle(
             fontSize: 16,
             height: 1.25,
             fontWeight: FontWeight.w400,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
         // Figma: paragraphSm2
         titleMedium: TextStyle(
             fontSize: 14,
             height: 1.21,
             fontWeight: FontWeight.w400,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
         // Custom style for buttons not directly in TextTheme: buttonDefault
         labelLarge: TextStyle(
             fontSize: 18,
             height: 1.11,
             fontWeight: FontWeight.w600,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
         // Custom style not directly in TextTheme: buttonSmall
         bodySmall: TextStyle(
             fontSize: 16,
             height: 1.63,
             fontWeight: FontWeight.w600,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
         // Custom style not directly in TextTheme: notationSm
         labelSmall: TextStyle(
             fontSize: 14,
             height: 1,
             fontWeight: FontWeight.w500,
+            overflow: TextOverflow.ellipsis,
             color: kText1),
       );
 
   static ThemeData lightTheme() => ThemeData(
+        useMaterial3: true,
+        visualDensity: VisualDensity.standard,
+        colorScheme: ColorScheme(
+          primary: kCeruleanBlue,
+          secondary: kCeruleanBlue.shade500,
+          surface: kWhite,
+          background: kWhite,
+          error: kCardinal,
+          onPrimary: kWhite,
+          onSecondary: kWhite,
+          onSurface: kText1,
+          onBackground: kText1,
+          onError: kWhite,
+          brightness: Brightness.light,
+        ),
+        splashColor: kCeruleanBlue.shade100,
         brightness: Brightness.light,
         primaryColor: kCeruleanBlue,
         canvasColor: kWhite,
         scaffoldBackgroundColor: Colors.white,
         textTheme: lightTextTheme(),
         fontFamily: 'Montserrat',
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.transparent,
           elevation: 0,
+          titleTextStyle: lightTextTheme().bodyMedium,
         ),
         dialogBackgroundColor: Colors.white,
         dialogTheme: DialogTheme(
@@ -129,6 +157,37 @@ class AppTheme {
             borderRadius: BorderRadius.circular(4),
           ),
         ),
+        toggleButtonsTheme: ToggleButtonsThemeData(
+          color: kText1,
+          selectedColor: kWhite,
+          fillColor: kCeruleanBlue,
+          borderRadius: BorderRadius.circular(kSpacingX3),
+          borderWidth: 0,
+          borderColor: kBorder1,
+          selectedBorderColor: kCeruleanBlue,
+          constraints: BoxConstraints(
+            minHeight: kSpacingX10,
+            minWidth: kSpacingX10,
+          ),
+        ),
+        switchTheme: SwitchThemeData(
+          thumbColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.selected)) {
+              return kWhite;
+            }
+            return kWhite;
+          }),
+          trackColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.selected)) {
+              return kCeruleanBlue;
+            }
+            return kCodGray.shade400;
+          }),
+          overlayColor:
+              MaterialStateProperty.all(kCeruleanBlue.withOpacity(0.3)),
+          splashRadius: 24,
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        ),
         dropdownMenuTheme: DropdownMenuThemeData(
           textStyle: lightTextTheme().bodyMedium,
           inputDecorationTheme: InputDecorationTheme(
@@ -165,7 +224,7 @@ class AppTheme {
                 horizontal: kSpacingX5, vertical: kSpacingX4),
             hintStyle: lightTextTheme().bodySmall!.copyWith(color: kText4),
             labelStyle: lightTextTheme().bodySmall!.copyWith(color: kText4),
-            errorStyle: lightTextTheme().bodySmall!.copyWith(color: kCardinal),
+            errorStyle: lightTextTheme().labelSmall!.copyWith(color: kCardinal),
           ),
           menuStyle: MenuStyle(
             backgroundColor: MaterialStateProperty.all(kWhite),
@@ -196,6 +255,20 @@ class AppTheme {
             return kCodGray.shade400;
           }),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        ),
+        tabBarTheme: TabBarTheme(
+          indicatorColor: kTextPrimary,
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicator: BoxDecoration(
+            color: kCeruleanBlue.shade100,
+            borderRadius: BorderRadius.circular(kSpacingX12),
+          ),
+          labelColor: kPrimaryColor,
+          labelStyle: lightTextTheme().headlineSmall,
+          labelPadding: EdgeInsets.symmetric(horizontal: kPaddingSm3),
+          unselectedLabelColor: kText1,
+          dividerColor: Colors.transparent,
+          tabAlignment: TabAlignment.start,
         ),
         datePickerTheme: DatePickerThemeData(
           backgroundColor: Colors.white,
@@ -272,6 +345,28 @@ class AppTheme {
               TextButton.styleFrom(foregroundColor: kCodGray.shade900),
           confirmButtonStyle:
               TextButton.styleFrom(foregroundColor: kCeruleanBlue.shade600),
+        ),
+        dataTableTheme: DataTableThemeData(
+          dataTextStyle: lightTextTheme().bodyMedium,
+          headingTextStyle: lightTextTheme().bodyMedium,
+          headingRowHeight: 56,
+          horizontalMargin: 0,
+          columnSpacing: 0,
+          dividerThickness: 1,
+          headingRowColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.selected)) {
+              return kCeruleanBlue.shade100;
+            }
+            return kWhite;
+          }),
+          decoration: BoxDecoration(
+            color: kWhite,
+            border: Border.all(
+              color: kBorder1,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(kSpacingX3),
+          ),
         ),
         inputDecorationTheme: InputDecorationTheme(
           fillColor: Colors.white,

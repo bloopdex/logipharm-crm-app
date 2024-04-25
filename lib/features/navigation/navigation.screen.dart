@@ -1,14 +1,21 @@
 import 'package:crm/core/core.dart';
-import 'package:crm/features/create-plan/bloc/delegate_cubit.dart';
-import 'package:crm/features/create-plan/create-plan.page.dart';
+import 'package:crm/features/todo/create-event.page.dart';
+import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
+import 'package:crm/features/tour-plan/bloc/delegate_cubit.dart';
+import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
+import 'package:crm/features/tour-plan/bloc/wilaya_cubit.dart';
+import 'package:crm/features/tour-plan/create-plan.page.dart';
 import 'package:crm/logic/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../shared/widgets/inputs/daterange.picker.input.dart';
 import '../../shared/widgets/navigation/bottom.navigation.bar.widget.dart';
-import '../tour-plan/bloc/tour_plan_bloc.dart';
+import '../todo/create-todo.page.dart';
+import '../visits/bloc/visits/visit_bloc.dart';
 import 'cubit/navigation_cubit.dart';
-import 'widgets/notification.button.dart';
 
 class NavigationScreen extends StatefulWidget {
   static String routeName = '/layout';
@@ -19,14 +26,157 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
-  get surfacePrimary => null;
-
   @override
-  void initState() {
-    if (context.read<DelegateCubit>().state.isEmpty) {
-      context.read<DelegateCubit>().load();
-    }
-    super.initState();
+  Widget build(BuildContext context) {
+    return BlocBuilder<NavigationCubit, NavigationState>(
+      builder: (context, state) {
+        NavigationCubit layout = NavigationCubit.get(context);
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              centerTitle: layout.current.value != 0,
+              title: Text(
+                layout.current.value == 0
+                    ? "${context.i10n.homeHello} ${context.read<AuthBloc>().user.fullName}"
+                    : layout.title,
+                style: context.textTheme.displaySmall,
+              ),
+              backgroundColor: Colors.white,
+              elevation: 0,
+              actions: [
+                if (layout.current.value == 2) const CustomDateRangePicker()
+              ],
+            ),
+            body: layout.currentScreen,
+            floatingActionButtonLocation:
+                layout.current.value == 3 ? ExpandableFab.location : null,
+            floatingActionButton: layout.current.value == 1
+                ? FloatingActionButton(
+                    heroTag: 'createPlan',
+                    onPressed: () {
+                      Navigator.pushNamed(context, CreatePlanPage.routeName);
+                    },
+                    child: Icon(Icons.add_outlined, color: kWhite),
+                  )
+                : layout.current.value == 3
+                    ? ExpandableFab(
+                        key: const Key('todoFab'),
+                        distance: 50.sp,
+                        type: ExpandableFabType.up,
+                        duration: Duration.zero,
+                        childrenOffset: Offset(0, kSpacingX3),
+                        openButtonBuilder: FloatingActionButtonBuilder(
+                          size: kSpacingX7,
+                          builder: (context, onPressed, progress) {
+                            return FloatingActionButton(
+                              heroTag: 'openTask',
+                              onPressed: onPressed,
+                              child: const Icon(Icons.add_rounded),
+                            );
+                          },
+                        ),
+                        closeButtonBuilder: FloatingActionButtonBuilder(
+                          size: kSpacingX7,
+                          builder: (context, onPressed, progress) {
+                            return FloatingActionButton(
+                              heroTag: 'closeTask',
+                              onPressed: onPressed,
+                              child: const Icon(Icons.close_rounded),
+                            );
+                          },
+                        ),
+                        children: [
+                          InkWell(
+                            key: const Key('createEvent'),
+                            onTap: () {
+                              context.push(const CreateEventPage());
+                            },
+                            child: Container(
+                              width: 170.sp,
+                              height: 50.sp,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: kPaddingMd3,
+                                vertical: kPaddingMd2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: kCeruleanBlue.shade500,
+                                // Bottom border
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: kWhite,
+                                    width: 1,
+                                  ),
+                                ),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(kPaddingLg1),
+                                  bottomRight: Radius.circular(kPaddingLg1),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(context.i10n.todoEvent,
+                                      style: context.textTheme.labelLarge!
+                                          .copyWith(color: kWhite)),
+                                  SizedBox(width: kSpacingX3),
+                                  Icon(
+                                    Icons.event_rounded,
+                                    color: kWhite,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            key: const Key('createTask'),
+                            onTap: () {
+                              context.push(const CreateTaskPage());
+                            },
+                            child: Container(
+                              width: 170.sp,
+                              height: 50.sp,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: kPaddingMd3,
+                                vertical: kPaddingMd2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: kCeruleanBlue.shade500,
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: kWhite,
+                                    width: 1,
+                                  ),
+                                ),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(kPaddingLg1),
+                                  topRight: Radius.circular(kPaddingLg1),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(context.i10n.todoTask,
+                                      style: context.textTheme.labelLarge!
+                                          .copyWith(color: kWhite)),
+                                  SizedBox(width: kSpacingX3),
+                                  Icon(
+                                    Icons.check_circle_outline_rounded,
+                                    color: kWhite,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : null,
+            bottomNavigationBar: CustomBottomNavigationBar(layout: layout),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -35,49 +185,27 @@ class _NavigationScreenState extends State<NavigationScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<TourPlanBloc>(
-            lazy: false,
-            create: (context) =>
-                TourPlanBloc()..add(const TourPlanEvent.started())),
-      ],
-      child: BlocBuilder<NavigationCubit, NavigationState>(
-        builder: (context, state) {
-          NavigationCubit layout = NavigationCubit.get(context);
-          return GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: Scaffold(
-              backgroundColor: Colors.white,
-              appBar: AppBar(
-                centerTitle: layout.current.value != 0,
-                title: Text(
-                  layout.current.value == 0
-                      ? "${context.i10n.homeHello} ${context.read<AuthBloc>().user.fullName}"
-                      : layout.title,
-                  style: context.textTheme.displaySmall,
-                ),
-                backgroundColor: Colors.white,
-                elevation: 0,
-                actions: const [
-                  NotificationButton(),
-                ],
-              ),
-              body: layout.currentScreen,
-              floatingActionButton: layout.current.value == 1
-                  ? FloatingActionButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, CreatePlanPage.routeName);
-                      },
-                      child: Icon(Icons.add_outlined, color: kWhite),
-                    )
-                  : null,
-              bottomNavigationBar: CustomBottomNavigationBar(layout: layout),
-            ),
-          );
-        },
-      ),
-    );
+  void initState() {
+    if (context.read<DelegateCubit>().state.isEmpty) {
+      context.read<DelegateCubit>().load();
+    }
+    if (context.read<WilayaCubit>().state.isEmpty) {
+      context.read<WilayaCubit>().load();
+    }
+    if (context.read<ClientsCubit>().state.maybeWhen(
+          orElse: () => true,
+          loaded: (clients) => clients.isEmpty,
+        )) {
+      context.read<ClientsCubit>().load();
+    }
+    if (context.read<TourPlanBloc>().state.maybeWhen(
+        orElse: () => true, loaded: (tours, _, __) => tours.isEmpty)) {
+      context.read<TourPlanBloc>().add(const TourPlanEvent.started());
+    }
+    if (context.read<VisitBloc>().state.maybeWhen(
+        orElse: () => true, loaded: (visits, _, __) => visits.isEmpty)) {
+      context.read<VisitBloc>().add(const VisitEvent.started());
+    }
+    super.initState();
   }
 }

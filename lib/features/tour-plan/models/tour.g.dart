@@ -7,36 +7,44 @@ part of 'tour.dart';
 // **************************************************************************
 
 _$TourImpl _$$TourImplFromJson(Map<String, dynamic> json) => _$TourImpl(
-      tourneeId: json['tourneeId'] as String,
+      tourId: json['tourneeId'] as String,
       companyId: json['companyId'] as int,
-      regionId: json['regionId'] as String?,
-      regionName: json['regionName'] as String,
+      regionId: json['regionId'] as String,
+      regionName: json['regionName'] as String?,
       startDate: json['dateDebut'] as String,
       endDate: json['dateFin'] as String,
       statusFlag: json['statusFlag'] as int,
+      statusName: json['statusName'] as String?,
       effectiveStartDate: json['dateDebutEffective'] as String?,
       effectiveEndDate: json['dateFinEffective'] as String?,
       delegate: Person.fromJson(json['delegue'] as Map<String, dynamic>),
-      supervisor: Person.fromJson(json['superviseur'] as Map<String, dynamic>),
-      tourDetails: (json['tourneeDetails'] as List<dynamic>)
-          .map((e) => TourDetail.fromJson(e as Map<String, dynamic>))
+      supervisor: json['superviseur'] == null
+          ? null
+          : Person.fromJson(json['superviseur'] as Map<String, dynamic>),
+      totalClients: json['totalClients'] as int?,
+      visitedClients: json['visitedClients'] as int?,
+      pharmacies: (json['tourneeDetails'] as List<dynamic>?)
+          ?.map((e) => TourDetail.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$$TourImplToJson(_$TourImpl instance) =>
     <String, dynamic>{
-      'tourneeId': instance.tourneeId,
+      'tourneeId': instance.tourId,
       'companyId': instance.companyId,
       'regionId': instance.regionId,
       'regionName': instance.regionName,
       'dateDebut': instance.startDate,
       'dateFin': instance.endDate,
       'statusFlag': instance.statusFlag,
+      'statusName': instance.statusName,
       'dateDebutEffective': instance.effectiveStartDate,
       'dateFinEffective': instance.effectiveEndDate,
       'delegue': instance.delegate,
       'superviseur': instance.supervisor,
-      'tourneeDetails': instance.tourDetails,
+      'totalClients': instance.totalClients,
+      'visitedClients': instance.visitedClients,
+      'tourneeDetails': instance.pharmacies,
     };
 
 _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
@@ -48,8 +56,12 @@ _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
       startDate: json['dateDebut'] as String?,
       endDate: json['dateFin'] as String?,
       statusFlag: json['statusFlag'] as int?,
+      statusName: json['statusName'] as String?,
       reason: json['motif'] as String?,
       report: json['repport'] as String?,
+      reportText: json['repportText'] as String?,
+      latitude: (json['latitude'] as num?)?.toDouble(),
+      longitude: (json['longitude'] as num?)?.toDouble(),
       pharmacy: json['pharmacie'] == null
           ? null
           : Person.fromJson(json['pharmacie'] as Map<String, dynamic>),
@@ -64,7 +76,11 @@ Map<String, dynamic> _$$TourDetailImplToJson(_$TourDetailImpl instance) =>
       'dateDebut': instance.startDate,
       'dateFin': instance.endDate,
       'statusFlag': instance.statusFlag,
+      'statusName': instance.statusName,
       'motif': instance.reason,
       'repport': instance.report,
+      'repportText': instance.reportText,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
       'pharmacie': instance.pharmacy,
     };

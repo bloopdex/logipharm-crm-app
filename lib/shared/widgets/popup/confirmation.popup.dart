@@ -28,38 +28,42 @@ class ConfirmationPopUp extends StatelessWidget {
     return AlertDialog(
       contentPadding: const EdgeInsets.all(0),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(kSpacingX2)),
+          borderRadius: BorderRadius.circular(kSpacingX4)),
       backgroundColor: color,
       clipBehavior: Clip.hardEdge,
       content: Container(
         margin: EdgeInsets.only(top: kSpacingX1),
-        padding: EdgeInsets.all(kSpacingX2),
+        padding: EdgeInsets.all(kSpacingX6),
+        constraints: BoxConstraints(
+          minWidth: context.width,
+          maxWidth: context.width,
+        ),
         decoration: BoxDecoration(
           color: kBgGrayVisibility1,
-          borderRadius: BorderRadius.circular(kSpacingX2),
+          borderRadius: BorderRadius.circular(kSpacingX4),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: kSpacingX7,
-              width: kSpacingX7,
+              height: kSpacingX10,
+              width: kSpacingX10,
               padding: EdgeInsets.all(kSpacingX2),
               decoration:
                   BoxDecoration(color: iconBackground, shape: BoxShape.circle),
               child: Icon(icon, color: color),
             ),
-            SizedBox(height: kSpacingX2),
+            SizedBox(height: kSpacingX4),
             Text(
               title,
               maxLines: 3,
               textAlign: TextAlign.center,
-              style: context.textTheme.headlineMedium,
+              style: context.textTheme.labelLarge!.copyWith(color: color),
             ),
-            SizedBox(height: kSpacingX1),
+            SizedBox(height: kSpacingX2),
             if (description != null)
               Text(
-                title,
+                description!,
                 maxLines: 3,
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyMedium,
@@ -71,15 +75,16 @@ class ConfirmationPopUp extends StatelessWidget {
               height: 44.sp,
               onPressed: () => context.pop(pop: true),
             ),
-            SizedBox(height: kSpacingX1),
+            SizedBox(height: kSpacingX4),
             GestureDetector(
               onTap: () => context.pop(pop: false),
               child: Text(
                 cancelText,
                 maxLines: 3,
                 textAlign: TextAlign.center,
-                style: context.textTheme.labelSmall!
-                    .copyWith(color: kCeruleanBlue),
+                style: context.textTheme.bodyLarge!.copyWith(
+                  color: kCeruleanBlue,
+                ),
               ),
             ),
           ],

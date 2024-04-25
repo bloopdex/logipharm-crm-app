@@ -1,6 +1,3 @@
-import 'package:crm/core/const.dart';
-import 'package:crm/shared/utils/date.formatter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,36 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/core.dart';
 import '../../logic/search/search_cubit.dart';
 import '../../logic/time.range/time_range_cubit.dart';
-import '../../shared/widgets/image/svg.dart';
+import '../../shared/utils/date.formatter.dart';
 import '../../shared/widgets/inputs/daterange.picker.input.dart';
 import '../../shared/widgets/inputs/search.text.field.widget.dart';
-import '../../shared/widgets/loading/loader.widget.dart';
-import 'bloc/tour_plan_bloc.dart';
+import 'bloc/tour-plan/tour_plan_bloc.dart';
 import 'core/enums.dart';
 import 'models/tour.dart';
 import 'widget/current.plan.widget.dart';
-import 'widget/status.tabbar.widget.dart';
-import 'widget/tour.plan.card.dart';
+import 'widget/tour-tab.widget.dart';
 
-class PlanTourPage extends StatefulWidget {
+class PlanTourPage extends StatelessWidget {
   const PlanTourPage({super.key});
-
-  @override
-  State<PlanTourPage> createState() => _PlanTourPageState();
-}
-
-class _PlanTourPageState extends State<PlanTourPage> {
-  final ScrollController controller = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +66,7 @@ class _PlanTourPageState extends State<PlanTourPage> {
               loaded: (tours, hasReachedMax, currentPage) {
                 return tours
                     .where((element) =>
-                        element.statusFlag == StatuFlags.closed.value)
+                        element.statusFlag == StatuFlags.opened.value)
                     .firstOrNull;
               },
               orElse: () => null,
@@ -164,80 +142,12 @@ class _PlanTourPageState extends State<PlanTourPage> {
                     }
                   },
                 ),
-                const TourStatusTabBar(),
-                SizedBox(height: kSpacingX4),
-                Expanded(
-                  child: state.maybeWhen(
-                    loaded: (tours, hasReachedMax, currentPage) {
-                      if (tours.isEmpty) {
-                        return Center(
-                            child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SVG(
-                              'empty-states/info.svg',
-                              height: 175.sp,
-                            ),
-                            SizedBox(height: kSpacingX3),
-                            Text(
-                              context.i10n.tourEmptyPlans,
-                              style: context.textTheme.headlineMedium,
-                            ),
-                            SizedBox(height: kSpacingX2),
-                            Text(
-                              context.i10n.tourEmptyPlansDescription,
-                              style: context.textTheme.bodyMedium,
-                            ),
-                          ],
-                        ));
-                      }
-                      return RefreshIndicator(
-                        onRefresh: () async {
-                          context.read<SearchCubit>().reset();
-                          context.read<TimeRangeCubit>().reset();
-                          context.read<TourPlanBloc>().add(
-                                const TourPlanEvent.started(),
-                              );
-                        },
-                        child: ListView.separated(
-                          controller: controller,
-                          itemCount: tours.length,
-                          separatorBuilder: (context, index) =>
-                              SizedBox(height: kSpacingX3),
-                          itemBuilder: (context, index) {
-                            if (index == tours.length && !hasReachedMax) {
-                              return const Center(
-                                child: Loader(),
-                              );
-                            }
-                            return TourPlanCard(tour: tours[index]);
-                          },
-                        ),
-                      );
-                    },
-                    orElse: () => const Center(
-                      child: Loader(),
-                    ),
-                  ),
-                ),
+                Expanded(child: TourTabListWidget(state: state)),
               ],
             );
           },
         ),
       ),
     );
-  }
-
-  void load() {
-    if (controller.offset >= controller.position.maxScrollExtent &&
-        !controller.position.outOfRange) {
-      context.read<TourPlanBloc>().add(TourPlanEvent.load(
-            query: context.read<SearchCubit>().state,
-            start: context.read<TimeRangeCubit>().state.validatedStartDate,
-            end: context.read<TimeRangeCubit>().state.validatedEndDate,
-          ));
-    }
   }
 }

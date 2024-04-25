@@ -1,5 +1,5 @@
 import 'package:crm/features/auth/login.screen.dart';
-import 'package:crm/features/create-plan/create-plan.page.dart';
+import 'package:crm/features/tour-plan/create-plan.page.dart';
 import 'package:crm/features/navigation/navigation.screen.dart';
 import 'package:flutter/material.dart';
 
