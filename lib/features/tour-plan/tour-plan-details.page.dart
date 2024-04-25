@@ -1,13 +1,12 @@
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/core/enums.dart';
+import 'package:crm/shared/widgets/container/profile-container.widget.dart';
+import 'package:crm/shared/widgets/popup/confirmation.popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/core.dart';
-
-import '../../shared/services/helpers/location.helper.dart';
 import '../../shared/widgets/buttons/button.widget.dart';
 import '../visits/create-visit.page.dart';
 import 'models/tour.dart';
@@ -15,6 +14,7 @@ import 'widget/tour.status.widget.dart';
 
 class TourPlanDetailPage extends StatelessWidget {
   final Tour tour;
+
   const TourPlanDetailPage({super.key, required this.tour});
 
   @override
@@ -29,7 +29,7 @@ class TourPlanDetailPage extends StatelessWidget {
             color: kWhite,
           ),
           onPressed: () {
-            Navigator.of(context).pop();
+            context.pop();
           },
         ),
         title: Text(context.i10n.tourDetailsTitle,
@@ -39,6 +39,7 @@ class TourPlanDetailPage extends StatelessWidget {
         listener: (context, state) {
           state.maybeWhen(
             orElse: () {},
+            loading: () {},
             failure: (message) {
               context.errorSnackBar(message);
             },
@@ -100,9 +101,42 @@ class TourPlanDetailPage extends StatelessWidget {
                       child: CustomButton(
                         text: context.i10n.start,
                         onPressed: () {
-                          BlocProvider.of<TourPlanBloc>(context).add(
-                            TourPlanEvent.startTour(tourId: tour.tourneeId),
-                          );
+                          context.read<TourPlanBloc>().add(
+                                TourPlanEvent.startTour(tourId: tour.tourId),
+                              );
+                          context.pop();
+                        },
+                      ),
+                    ),
+                  if (tour.statusFlag == 1)
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: kPaddingMd1,
+                        horizontal: kPaddingMd2,
+                      ),
+                      child: CustomButton(
+                        text: context.i10n.finish,
+                        onPressed: () async {
+                          bool finish = await showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return ConfirmationPopUp(
+                                  icon: Icons.check_rounded,
+                                  title: context.i10n.closeTourPlan,
+                                  description: context.i10n.closeTourPlanDesc,
+                                  confirmText: context.i10n.confirm,
+                                  cancelText: context.i10n.cancel,
+                                  color: kPrimaryColor,
+                                  iconBackground: kCeruleanBlue.shade100,
+                                );
+                              });
+                          if (finish) {
+                            context.read<TourPlanBloc>().add(
+                                  TourPlanEvent.closeTour(tourId: tour.tourId),
+                                );
+                            context.pop();
+                          }
                         },
                       ),
                     ),
@@ -140,7 +174,7 @@ class TourPlanDetailPage extends StatelessWidget {
                           style: context.textTheme.headlineSmall,
                         ),
                         Text(
-                          tour.regionName,
+                          tour.regionName ?? context.i10n.noRegion,
                           style: context.textTheme.bodyMedium,
                         ),
                       ],
@@ -177,6 +211,7 @@ class TourClientsStatusCard extends StatelessWidget {
   final int flag;
   final int visitedClients;
   final int totalClients;
+
   const TourClientsStatusCard({
     super.key,
     required this.flag,
@@ -200,14 +235,20 @@ class TourClientsStatusCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (flag == 0)
-                  Icon(
-                    Icons.access_time_filled_rounded,
-                    color: kBgGrayVisibility4,
+                  Container(
+                    margin: EdgeInsets.only(right: kSpacingX1),
+                    child: Icon(
+                      Icons.access_time_filled_rounded,
+                      color: kBgGrayVisibility4,
+                    ),
                   ),
                 if (flag == 2)
-                  Icon(
-                    Icons.done_all_rounded,
-                    color: kSuccessColor,
+                  Container(
+                    margin: EdgeInsets.only(right: kSpacingX1),
+                    child: Icon(
+                      Icons.done_all_rounded,
+                      color: kSuccessColor,
+                    ),
                   ),
                 Text(
                   "$totalClients",
@@ -231,9 +272,12 @@ class TourClientsStatusCard extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
-                        Icons.done_all_rounded,
-                        color: kSuccessColor,
+                      Container(
+                        margin: EdgeInsets.only(right: kSpacingX1),
+                        child: Icon(
+                          Icons.done_all_rounded,
+                          color: kSuccessColor,
+                        ),
                       ),
                       Text(
                         "$visitedClients",
@@ -255,9 +299,12 @@ class TourClientsStatusCard extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
-                        Icons.access_time_filled_rounded,
-                        color: kBgGrayVisibility4,
+                      Container(
+                        margin: EdgeInsets.only(right: kSpacingX1),
+                        child: Icon(
+                          Icons.access_time_filled_rounded,
+                          color: kBgGrayVisibility4,
+                        ),
                       ),
                       Text(
                         "${(totalClients - visitedClients).abs()}",
@@ -277,6 +324,7 @@ class TourClientsStatusCard extends StatelessWidget {
 class TourClientsTab extends StatefulWidget {
   final int flag;
   final Tour tour;
+
   const TourClientsTab({super.key, required this.tour, required this.flag});
 
   @override
@@ -339,6 +387,7 @@ class _TourClientsTabState extends State<TourClientsTab>
 class TourClientsList extends StatelessWidget {
   final int flag;
   final Tour tour;
+
   const TourClientsList({super.key, required this.tour, required this.flag});
 
   @override
@@ -356,69 +405,47 @@ class TourClientsList extends StatelessWidget {
       itemCount: pharmacies.length,
       itemBuilder: (context, index) {
         final pharmacy = pharmacies[index];
-        return GestureDetector(
-          onTap: () {
-            // if (flag == StatuFlags.pending.value) {
-            // TODO: Navigate to client details
-            context.push(CreateVisitPage(
-              tour: tour,
-            ));
-            // }
-          },
-          child: ListTile(
-            leading: Container(
-              width: 48.sp,
-              height: 48.sp,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: kBgGrayVisibility1,
-                border: Border.all(
-                  color: kBorder3,
-                ),
-              ),
-              alignment: Alignment.center,
-              child: Text(pharmacy.pharmacy?.fullName[0] ?? "",
-                  style: context.textTheme.headlineSmall!.copyWith(
-                    color: kPrimaryColor,
-                  )),
-            ),
-            title: Text(pharmacy.pharmacy!.fullName),
-            subtitle: pharmacy.pharmacy?.latitude != null &&
-                    pharmacy.pharmacy?.longitude != null
-                ? FutureBuilder(
-                    future: LocationHelper.addressFromLongitudeLatitude(
-                      latitude: pharmacy.pharmacy?.latitude ?? 0,
-                      longitude: pharmacy.pharmacy?.latitude ?? 0,
-                    ),
-                    builder: (context, snapshot) {
-                      return Text(snapshot.data ?? "");
-                    })
-                : Text(context.i10n.tourCreationNoAddress),
-            trailing: pharmacy.statusFlag != StatuFlags.pending.value
-                ? Icon(
-                    Icons.done_all_rounded,
-                    color: kSuccessColor,
-                  )
-                : Row(
+        return ListTile(
+          leading: ProfileCard(
+            text: pharmacy.pharmacy?.fullName ?? "",
+          ),
+          title: Text(pharmacy.pharmacy!.fullName),
+          subtitle:
+              pharmacy.reportText != null ? Text(pharmacy.reportText!) : null,
+          trailing: pharmacy.statusFlag != StatuFlags.pending.value
+              ? Icon(
+                  Icons.done_all_rounded,
+                  color: kSuccessColor,
+                )
+              : InkWell(
+                  onTap: () {
+                    if (tour.statusFlag == StatuFlags.opened.value) {
+                      context.push(CreateVisitPage(
+                        tour: tour,
+                        pharmacieId: pharmacy.pharmacy!.id.toString(),
+                      ));
+                    }
+                  },
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
                         Icons.add_rounded,
-                        color: flag == StatuFlags.opened.value
+                        color: tour.statusFlag == StatuFlags.opened.value
                             ? kPrimaryColor
                             : kText5,
                       ),
                       Text(
                         context.i10n.tourDetailsVisitClient,
                         style: context.textTheme.headlineSmall!.copyWith(
-                          color: flag == StatuFlags.opened.value
+                          color: tour.statusFlag == StatuFlags.opened.value
                               ? kPrimaryColor
                               : kText5,
                         ),
                       )
                     ],
                   ),
-          ),
+                ),
         );
       },
     );

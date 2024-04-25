@@ -48,7 +48,6 @@ class AddClientsForm extends StatelessWidget {
                   return CustomDropDownInput(
                       data: data,
                       mapKey: 'regionId',
-                      hint: context.i10n.tourCreationRegionPlaceholder,
                       onChanged: (value) =>
                           context.read<ClientsCubit>().filter(value ?? ""),
                       items: state

@@ -11,6 +11,8 @@ class CustomDatePicker extends StatefulWidget {
   final DateTime? lastDate;
   final IconData? icon;
   final String dateFormat;
+
+  final DateTime? initialDate;
   const CustomDatePicker({
     super.key,
     required this.data,
@@ -19,6 +21,7 @@ class CustomDatePicker extends StatefulWidget {
     this.lastDate,
     this.icon,
     this.dateFormat = 'yyyy-MM-dd',
+    this.initialDate,
   });
 
   @override
@@ -32,6 +35,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   initState() {
     super.initState();
     controller = TextEditingController();
+    controller.text = DateFormat(widget.dateFormat)
+        .format(widget.initialDate ?? DateTime.now());
   }
 
   @override
@@ -58,7 +63,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       onTap: () async {
         final DateTime? picked = await showDatePicker(
           context: context,
-          initialDate: DateTime.now(),
+          initialDate: widget.firstDate ?? DateTime.now(),
           firstDate: widget.firstDate ?? DateTime(DateTime.now().year, 1, 1),
           lastDate: widget.lastDate ?? DateTime(DateTime.now().year, 12, 31),
           helpText: context.i10n.selectDate,

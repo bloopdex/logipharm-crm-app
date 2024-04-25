@@ -21,19 +21,21 @@ Tour _$TourFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Tour {
   @JsonKey(name: 'tourneeId')
-  String get tourneeId => throw _privateConstructorUsedError;
+  String get tourId => throw _privateConstructorUsedError;
   @JsonKey(name: 'companyId')
   int get companyId => throw _privateConstructorUsedError;
   @JsonKey(name: 'regionId')
-  String? get regionId => throw _privateConstructorUsedError;
+  String get regionId => throw _privateConstructorUsedError;
   @JsonKey(name: 'regionName')
-  String get regionName => throw _privateConstructorUsedError;
+  String? get regionName => throw _privateConstructorUsedError;
   @JsonKey(name: 'dateDebut')
   String get startDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'dateFin')
   String get endDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'statusFlag')
   int get statusFlag => throw _privateConstructorUsedError;
+  @JsonKey(name: 'statusName')
+  String? get statusName => throw _privateConstructorUsedError;
   @JsonKey(name: 'dateDebutEffective')
   String? get effectiveStartDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'dateFinEffective')
@@ -41,8 +43,10 @@ mixin _$Tour {
   @JsonKey(name: 'delegue')
   Person get delegate => throw _privateConstructorUsedError;
   @JsonKey(name: 'superviseur')
-  Person get supervisor => throw _privateConstructorUsedError;
+  Person? get supervisor => throw _privateConstructorUsedError;
+  @JsonKey(name: 'totalClients')
   int? get totalClients => throw _privateConstructorUsedError;
+  @JsonKey(name: 'visitedClients')
   int? get visitedClients => throw _privateConstructorUsedError;
   @JsonKey(name: 'tourneeDetails')
   List<TourDetail>? get pharmacies => throw _privateConstructorUsedError;
@@ -58,23 +62,24 @@ abstract class $TourCopyWith<$Res> {
       _$TourCopyWithImpl<$Res, Tour>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'tourneeId') String tourneeId,
+      {@JsonKey(name: 'tourneeId') String tourId,
       @JsonKey(name: 'companyId') int companyId,
-      @JsonKey(name: 'regionId') String? regionId,
-      @JsonKey(name: 'regionName') String regionName,
+      @JsonKey(name: 'regionId') String regionId,
+      @JsonKey(name: 'regionName') String? regionName,
       @JsonKey(name: 'dateDebut') String startDate,
       @JsonKey(name: 'dateFin') String endDate,
       @JsonKey(name: 'statusFlag') int statusFlag,
+      @JsonKey(name: 'statusName') String? statusName,
       @JsonKey(name: 'dateDebutEffective') String? effectiveStartDate,
       @JsonKey(name: 'dateFinEffective') String? effectiveEndDate,
       @JsonKey(name: 'delegue') Person delegate,
-      @JsonKey(name: 'superviseur') Person supervisor,
-      int? totalClients,
-      int? visitedClients,
+      @JsonKey(name: 'superviseur') Person? supervisor,
+      @JsonKey(name: 'totalClients') int? totalClients,
+      @JsonKey(name: 'visitedClients') int? visitedClients,
       @JsonKey(name: 'tourneeDetails') List<TourDetail>? pharmacies});
 
   $PersonCopyWith<$Res> get delegate;
-  $PersonCopyWith<$Res> get supervisor;
+  $PersonCopyWith<$Res>? get supervisor;
 }
 
 /// @nodoc
@@ -90,38 +95,39 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tourneeId = null,
+    Object? tourId = null,
     Object? companyId = null,
-    Object? regionId = freezed,
-    Object? regionName = null,
+    Object? regionId = null,
+    Object? regionName = freezed,
     Object? startDate = null,
     Object? endDate = null,
     Object? statusFlag = null,
+    Object? statusName = freezed,
     Object? effectiveStartDate = freezed,
     Object? effectiveEndDate = freezed,
     Object? delegate = null,
-    Object? supervisor = null,
+    Object? supervisor = freezed,
     Object? totalClients = freezed,
     Object? visitedClients = freezed,
     Object? pharmacies = freezed,
   }) {
     return _then(_value.copyWith(
-      tourneeId: null == tourneeId
-          ? _value.tourneeId
-          : tourneeId // ignore: cast_nullable_to_non_nullable
+      tourId: null == tourId
+          ? _value.tourId
+          : tourId // ignore: cast_nullable_to_non_nullable
               as String,
       companyId: null == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as int,
-      regionId: freezed == regionId
+      regionId: null == regionId
           ? _value.regionId
           : regionId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      regionName: null == regionName
+              as String,
+      regionName: freezed == regionName
           ? _value.regionName
           : regionName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -134,6 +140,10 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
           ? _value.statusFlag
           : statusFlag // ignore: cast_nullable_to_non_nullable
               as int,
+      statusName: freezed == statusName
+          ? _value.statusName
+          : statusName // ignore: cast_nullable_to_non_nullable
+              as String?,
       effectiveStartDate: freezed == effectiveStartDate
           ? _value.effectiveStartDate
           : effectiveStartDate // ignore: cast_nullable_to_non_nullable
@@ -146,10 +156,10 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
           ? _value.delegate
           : delegate // ignore: cast_nullable_to_non_nullable
               as Person,
-      supervisor: null == supervisor
+      supervisor: freezed == supervisor
           ? _value.supervisor
           : supervisor // ignore: cast_nullable_to_non_nullable
-              as Person,
+              as Person?,
       totalClients: freezed == totalClients
           ? _value.totalClients
           : totalClients // ignore: cast_nullable_to_non_nullable
@@ -175,8 +185,12 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
 
   @override
   @pragma('vm:prefer-inline')
-  $PersonCopyWith<$Res> get supervisor {
-    return $PersonCopyWith<$Res>(_value.supervisor, (value) {
+  $PersonCopyWith<$Res>? get supervisor {
+    if (_value.supervisor == null) {
+      return null;
+    }
+
+    return $PersonCopyWith<$Res>(_value.supervisor!, (value) {
       return _then(_value.copyWith(supervisor: value) as $Val);
     });
   }
@@ -190,25 +204,26 @@ abstract class _$$TourImplCopyWith<$Res> implements $TourCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'tourneeId') String tourneeId,
+      {@JsonKey(name: 'tourneeId') String tourId,
       @JsonKey(name: 'companyId') int companyId,
-      @JsonKey(name: 'regionId') String? regionId,
-      @JsonKey(name: 'regionName') String regionName,
+      @JsonKey(name: 'regionId') String regionId,
+      @JsonKey(name: 'regionName') String? regionName,
       @JsonKey(name: 'dateDebut') String startDate,
       @JsonKey(name: 'dateFin') String endDate,
       @JsonKey(name: 'statusFlag') int statusFlag,
+      @JsonKey(name: 'statusName') String? statusName,
       @JsonKey(name: 'dateDebutEffective') String? effectiveStartDate,
       @JsonKey(name: 'dateFinEffective') String? effectiveEndDate,
       @JsonKey(name: 'delegue') Person delegate,
-      @JsonKey(name: 'superviseur') Person supervisor,
-      int? totalClients,
-      int? visitedClients,
+      @JsonKey(name: 'superviseur') Person? supervisor,
+      @JsonKey(name: 'totalClients') int? totalClients,
+      @JsonKey(name: 'visitedClients') int? visitedClients,
       @JsonKey(name: 'tourneeDetails') List<TourDetail>? pharmacies});
 
   @override
   $PersonCopyWith<$Res> get delegate;
   @override
-  $PersonCopyWith<$Res> get supervisor;
+  $PersonCopyWith<$Res>? get supervisor;
 }
 
 /// @nodoc
@@ -221,38 +236,39 @@ class __$$TourImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tourneeId = null,
+    Object? tourId = null,
     Object? companyId = null,
-    Object? regionId = freezed,
-    Object? regionName = null,
+    Object? regionId = null,
+    Object? regionName = freezed,
     Object? startDate = null,
     Object? endDate = null,
     Object? statusFlag = null,
+    Object? statusName = freezed,
     Object? effectiveStartDate = freezed,
     Object? effectiveEndDate = freezed,
     Object? delegate = null,
-    Object? supervisor = null,
+    Object? supervisor = freezed,
     Object? totalClients = freezed,
     Object? visitedClients = freezed,
     Object? pharmacies = freezed,
   }) {
     return _then(_$TourImpl(
-      tourneeId: null == tourneeId
-          ? _value.tourneeId
-          : tourneeId // ignore: cast_nullable_to_non_nullable
+      tourId: null == tourId
+          ? _value.tourId
+          : tourId // ignore: cast_nullable_to_non_nullable
               as String,
       companyId: null == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as int,
-      regionId: freezed == regionId
+      regionId: null == regionId
           ? _value.regionId
           : regionId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      regionName: null == regionName
+              as String,
+      regionName: freezed == regionName
           ? _value.regionName
           : regionName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -265,6 +281,10 @@ class __$$TourImplCopyWithImpl<$Res>
           ? _value.statusFlag
           : statusFlag // ignore: cast_nullable_to_non_nullable
               as int,
+      statusName: freezed == statusName
+          ? _value.statusName
+          : statusName // ignore: cast_nullable_to_non_nullable
+              as String?,
       effectiveStartDate: freezed == effectiveStartDate
           ? _value.effectiveStartDate
           : effectiveStartDate // ignore: cast_nullable_to_non_nullable
@@ -277,10 +297,10 @@ class __$$TourImplCopyWithImpl<$Res>
           ? _value.delegate
           : delegate // ignore: cast_nullable_to_non_nullable
               as Person,
-      supervisor: null == supervisor
+      supervisor: freezed == supervisor
           ? _value.supervisor
           : supervisor // ignore: cast_nullable_to_non_nullable
-              as Person,
+              as Person?,
       totalClients: freezed == totalClients
           ? _value.totalClients
           : totalClients // ignore: cast_nullable_to_non_nullable
@@ -301,19 +321,20 @@ class __$$TourImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TourImpl implements _Tour {
   const _$TourImpl(
-      {@JsonKey(name: 'tourneeId') required this.tourneeId,
+      {@JsonKey(name: 'tourneeId') required this.tourId,
       @JsonKey(name: 'companyId') required this.companyId,
-      @JsonKey(name: 'regionId') this.regionId,
-      @JsonKey(name: 'regionName') required this.regionName,
+      @JsonKey(name: 'regionId') required this.regionId,
+      @JsonKey(name: 'regionName') this.regionName,
       @JsonKey(name: 'dateDebut') required this.startDate,
       @JsonKey(name: 'dateFin') required this.endDate,
       @JsonKey(name: 'statusFlag') required this.statusFlag,
+      @JsonKey(name: 'statusName') this.statusName,
       @JsonKey(name: 'dateDebutEffective') this.effectiveStartDate,
       @JsonKey(name: 'dateFinEffective') this.effectiveEndDate,
       @JsonKey(name: 'delegue') required this.delegate,
-      @JsonKey(name: 'superviseur') required this.supervisor,
-      this.totalClients,
-      this.visitedClients,
+      @JsonKey(name: 'superviseur') this.supervisor,
+      @JsonKey(name: 'totalClients') this.totalClients,
+      @JsonKey(name: 'visitedClients') this.visitedClients,
       @JsonKey(name: 'tourneeDetails') final List<TourDetail>? pharmacies})
       : _pharmacies = pharmacies;
 
@@ -322,16 +343,16 @@ class _$TourImpl implements _Tour {
 
   @override
   @JsonKey(name: 'tourneeId')
-  final String tourneeId;
+  final String tourId;
   @override
   @JsonKey(name: 'companyId')
   final int companyId;
   @override
   @JsonKey(name: 'regionId')
-  final String? regionId;
+  final String regionId;
   @override
   @JsonKey(name: 'regionName')
-  final String regionName;
+  final String? regionName;
   @override
   @JsonKey(name: 'dateDebut')
   final String startDate;
@@ -341,6 +362,9 @@ class _$TourImpl implements _Tour {
   @override
   @JsonKey(name: 'statusFlag')
   final int statusFlag;
+  @override
+  @JsonKey(name: 'statusName')
+  final String? statusName;
   @override
   @JsonKey(name: 'dateDebutEffective')
   final String? effectiveStartDate;
@@ -352,10 +376,12 @@ class _$TourImpl implements _Tour {
   final Person delegate;
   @override
   @JsonKey(name: 'superviseur')
-  final Person supervisor;
+  final Person? supervisor;
   @override
+  @JsonKey(name: 'totalClients')
   final int? totalClients;
   @override
+  @JsonKey(name: 'visitedClients')
   final int? visitedClients;
   final List<TourDetail>? _pharmacies;
   @override
@@ -370,7 +396,7 @@ class _$TourImpl implements _Tour {
 
   @override
   String toString() {
-    return 'Tour(tourneeId: $tourneeId, companyId: $companyId, regionId: $regionId, regionName: $regionName, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, effectiveStartDate: $effectiveStartDate, effectiveEndDate: $effectiveEndDate, delegate: $delegate, supervisor: $supervisor, totalClients: $totalClients, visitedClients: $visitedClients, pharmacies: $pharmacies)';
+    return 'Tour(tourId: $tourId, companyId: $companyId, regionId: $regionId, regionName: $regionName, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, statusName: $statusName, effectiveStartDate: $effectiveStartDate, effectiveEndDate: $effectiveEndDate, delegate: $delegate, supervisor: $supervisor, totalClients: $totalClients, visitedClients: $visitedClients, pharmacies: $pharmacies)';
   }
 
   @override
@@ -378,8 +404,7 @@ class _$TourImpl implements _Tour {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TourImpl &&
-            (identical(other.tourneeId, tourneeId) ||
-                other.tourneeId == tourneeId) &&
+            (identical(other.tourId, tourId) || other.tourId == tourId) &&
             (identical(other.companyId, companyId) ||
                 other.companyId == companyId) &&
             (identical(other.regionId, regionId) ||
@@ -391,6 +416,8 @@ class _$TourImpl implements _Tour {
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.statusFlag, statusFlag) ||
                 other.statusFlag == statusFlag) &&
+            (identical(other.statusName, statusName) ||
+                other.statusName == statusName) &&
             (identical(other.effectiveStartDate, effectiveStartDate) ||
                 other.effectiveStartDate == effectiveStartDate) &&
             (identical(other.effectiveEndDate, effectiveEndDate) ||
@@ -411,13 +438,14 @@ class _$TourImpl implements _Tour {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      tourneeId,
+      tourId,
       companyId,
       regionId,
       regionName,
       startDate,
       endDate,
       statusFlag,
+      statusName,
       effectiveStartDate,
       effectiveEndDate,
       delegate,
@@ -442,19 +470,20 @@ class _$TourImpl implements _Tour {
 
 abstract class _Tour implements Tour {
   const factory _Tour(
-      {@JsonKey(name: 'tourneeId') required final String tourneeId,
+      {@JsonKey(name: 'tourneeId') required final String tourId,
       @JsonKey(name: 'companyId') required final int companyId,
-      @JsonKey(name: 'regionId') final String? regionId,
-      @JsonKey(name: 'regionName') required final String regionName,
+      @JsonKey(name: 'regionId') required final String regionId,
+      @JsonKey(name: 'regionName') final String? regionName,
       @JsonKey(name: 'dateDebut') required final String startDate,
       @JsonKey(name: 'dateFin') required final String endDate,
       @JsonKey(name: 'statusFlag') required final int statusFlag,
+      @JsonKey(name: 'statusName') final String? statusName,
       @JsonKey(name: 'dateDebutEffective') final String? effectiveStartDate,
       @JsonKey(name: 'dateFinEffective') final String? effectiveEndDate,
       @JsonKey(name: 'delegue') required final Person delegate,
-      @JsonKey(name: 'superviseur') required final Person supervisor,
-      final int? totalClients,
-      final int? visitedClients,
+      @JsonKey(name: 'superviseur') final Person? supervisor,
+      @JsonKey(name: 'totalClients') final int? totalClients,
+      @JsonKey(name: 'visitedClients') final int? visitedClients,
       @JsonKey(name: 'tourneeDetails')
       final List<TourDetail>? pharmacies}) = _$TourImpl;
 
@@ -462,16 +491,16 @@ abstract class _Tour implements Tour {
 
   @override
   @JsonKey(name: 'tourneeId')
-  String get tourneeId;
+  String get tourId;
   @override
   @JsonKey(name: 'companyId')
   int get companyId;
   @override
   @JsonKey(name: 'regionId')
-  String? get regionId;
+  String get regionId;
   @override
   @JsonKey(name: 'regionName')
-  String get regionName;
+  String? get regionName;
   @override
   @JsonKey(name: 'dateDebut')
   String get startDate;
@@ -481,6 +510,9 @@ abstract class _Tour implements Tour {
   @override
   @JsonKey(name: 'statusFlag')
   int get statusFlag;
+  @override
+  @JsonKey(name: 'statusName')
+  String? get statusName;
   @override
   @JsonKey(name: 'dateDebutEffective')
   String? get effectiveStartDate;
@@ -492,10 +524,12 @@ abstract class _Tour implements Tour {
   Person get delegate;
   @override
   @JsonKey(name: 'superviseur')
-  Person get supervisor;
+  Person? get supervisor;
   @override
+  @JsonKey(name: 'totalClients')
   int? get totalClients;
   @override
+  @JsonKey(name: 'visitedClients')
   int? get visitedClients;
   @override
   @JsonKey(name: 'tourneeDetails')
@@ -526,10 +560,18 @@ mixin _$TourDetail {
   String? get endDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'statusFlag')
   int? get statusFlag => throw _privateConstructorUsedError;
+  @JsonKey(name: 'statusName')
+  String? get statusName => throw _privateConstructorUsedError;
   @JsonKey(name: 'motif')
   String? get reason => throw _privateConstructorUsedError;
   @JsonKey(name: 'repport')
   String? get report => throw _privateConstructorUsedError;
+  @JsonKey(name: 'repportText')
+  String? get reportText => throw _privateConstructorUsedError;
+  @JsonKey(name: 'latitude')
+  double? get latitude => throw _privateConstructorUsedError;
+  @JsonKey(name: 'longitude')
+  double? get longitude => throw _privateConstructorUsedError;
   @JsonKey(name: 'pharmacie')
   Person? get pharmacy => throw _privateConstructorUsedError;
 
@@ -553,8 +595,12 @@ abstract class $TourDetailCopyWith<$Res> {
       @JsonKey(name: 'dateDebut') String? startDate,
       @JsonKey(name: 'dateFin') String? endDate,
       @JsonKey(name: 'statusFlag') int? statusFlag,
+      @JsonKey(name: 'statusName') String? statusName,
       @JsonKey(name: 'motif') String? reason,
       @JsonKey(name: 'repport') String? report,
+      @JsonKey(name: 'repportText') String? reportText,
+      @JsonKey(name: 'latitude') double? latitude,
+      @JsonKey(name: 'longitude') double? longitude,
       @JsonKey(name: 'pharmacie') Person? pharmacy});
 
   $PersonCopyWith<$Res>? get pharmacy;
@@ -580,8 +626,12 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? statusFlag = freezed,
+    Object? statusName = freezed,
     Object? reason = freezed,
     Object? report = freezed,
+    Object? reportText = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
     Object? pharmacy = freezed,
   }) {
     return _then(_value.copyWith(
@@ -613,6 +663,10 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
           ? _value.statusFlag
           : statusFlag // ignore: cast_nullable_to_non_nullable
               as int?,
+      statusName: freezed == statusName
+          ? _value.statusName
+          : statusName // ignore: cast_nullable_to_non_nullable
+              as String?,
       reason: freezed == reason
           ? _value.reason
           : reason // ignore: cast_nullable_to_non_nullable
@@ -621,6 +675,18 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
           ? _value.report
           : report // ignore: cast_nullable_to_non_nullable
               as String?,
+      reportText: freezed == reportText
+          ? _value.reportText
+          : reportText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double?,
       pharmacy: freezed == pharmacy
           ? _value.pharmacy
           : pharmacy // ignore: cast_nullable_to_non_nullable
@@ -657,8 +723,12 @@ abstract class _$$TourDetailImplCopyWith<$Res>
       @JsonKey(name: 'dateDebut') String? startDate,
       @JsonKey(name: 'dateFin') String? endDate,
       @JsonKey(name: 'statusFlag') int? statusFlag,
+      @JsonKey(name: 'statusName') String? statusName,
       @JsonKey(name: 'motif') String? reason,
       @JsonKey(name: 'repport') String? report,
+      @JsonKey(name: 'repportText') String? reportText,
+      @JsonKey(name: 'latitude') double? latitude,
+      @JsonKey(name: 'longitude') double? longitude,
       @JsonKey(name: 'pharmacie') Person? pharmacy});
 
   @override
@@ -683,8 +753,12 @@ class __$$TourDetailImplCopyWithImpl<$Res>
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? statusFlag = freezed,
+    Object? statusName = freezed,
     Object? reason = freezed,
     Object? report = freezed,
+    Object? reportText = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
     Object? pharmacy = freezed,
   }) {
     return _then(_$TourDetailImpl(
@@ -716,6 +790,10 @@ class __$$TourDetailImplCopyWithImpl<$Res>
           ? _value.statusFlag
           : statusFlag // ignore: cast_nullable_to_non_nullable
               as int?,
+      statusName: freezed == statusName
+          ? _value.statusName
+          : statusName // ignore: cast_nullable_to_non_nullable
+              as String?,
       reason: freezed == reason
           ? _value.reason
           : reason // ignore: cast_nullable_to_non_nullable
@@ -724,6 +802,18 @@ class __$$TourDetailImplCopyWithImpl<$Res>
           ? _value.report
           : report // ignore: cast_nullable_to_non_nullable
               as String?,
+      reportText: freezed == reportText
+          ? _value.reportText
+          : reportText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double?,
       pharmacy: freezed == pharmacy
           ? _value.pharmacy
           : pharmacy // ignore: cast_nullable_to_non_nullable
@@ -743,8 +833,12 @@ class _$TourDetailImpl implements _TourDetail {
       @JsonKey(name: 'dateDebut') this.startDate,
       @JsonKey(name: 'dateFin') this.endDate,
       @JsonKey(name: 'statusFlag') this.statusFlag,
+      @JsonKey(name: 'statusName') this.statusName,
       @JsonKey(name: 'motif') this.reason,
       @JsonKey(name: 'repport') this.report,
+      @JsonKey(name: 'repportText') this.reportText,
+      @JsonKey(name: 'latitude') this.latitude,
+      @JsonKey(name: 'longitude') this.longitude,
       @JsonKey(name: 'pharmacie') this.pharmacy});
 
   factory _$TourDetailImpl.fromJson(Map<String, dynamic> json) =>
@@ -772,18 +866,30 @@ class _$TourDetailImpl implements _TourDetail {
   @JsonKey(name: 'statusFlag')
   final int? statusFlag;
   @override
+  @JsonKey(name: 'statusName')
+  final String? statusName;
+  @override
   @JsonKey(name: 'motif')
   final String? reason;
   @override
   @JsonKey(name: 'repport')
   final String? report;
   @override
+  @JsonKey(name: 'repportText')
+  final String? reportText;
+  @override
+  @JsonKey(name: 'latitude')
+  final double? latitude;
+  @override
+  @JsonKey(name: 'longitude')
+  final double? longitude;
+  @override
   @JsonKey(name: 'pharmacie')
   final Person? pharmacy;
 
   @override
   String toString() {
-    return 'TourDetail(id: $id, masterTourId: $masterTourId, companyId: $companyId, regionId: $regionId, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, reason: $reason, report: $report, pharmacy: $pharmacy)';
+    return 'TourDetail(id: $id, masterTourId: $masterTourId, companyId: $companyId, regionId: $regionId, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, statusName: $statusName, reason: $reason, report: $report, reportText: $reportText, latitude: $latitude, longitude: $longitude, pharmacy: $pharmacy)';
   }
 
   @override
@@ -803,16 +909,38 @@ class _$TourDetailImpl implements _TourDetail {
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.statusFlag, statusFlag) ||
                 other.statusFlag == statusFlag) &&
+            (identical(other.statusName, statusName) ||
+                other.statusName == statusName) &&
             (identical(other.reason, reason) || other.reason == reason) &&
             (identical(other.report, report) || other.report == report) &&
+            (identical(other.reportText, reportText) ||
+                other.reportText == reportText) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
             (identical(other.pharmacy, pharmacy) ||
                 other.pharmacy == pharmacy));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, masterTourId, companyId,
-      regionId, startDate, endDate, statusFlag, reason, report, pharmacy);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      masterTourId,
+      companyId,
+      regionId,
+      startDate,
+      endDate,
+      statusFlag,
+      statusName,
+      reason,
+      report,
+      reportText,
+      latitude,
+      longitude,
+      pharmacy);
 
   @JsonKey(ignore: true)
   @override
@@ -837,8 +965,12 @@ abstract class _TourDetail implements TourDetail {
       @JsonKey(name: 'dateDebut') final String? startDate,
       @JsonKey(name: 'dateFin') final String? endDate,
       @JsonKey(name: 'statusFlag') final int? statusFlag,
+      @JsonKey(name: 'statusName') final String? statusName,
       @JsonKey(name: 'motif') final String? reason,
       @JsonKey(name: 'repport') final String? report,
+      @JsonKey(name: 'repportText') final String? reportText,
+      @JsonKey(name: 'latitude') final double? latitude,
+      @JsonKey(name: 'longitude') final double? longitude,
       @JsonKey(name: 'pharmacie') final Person? pharmacy}) = _$TourDetailImpl;
 
   factory _TourDetail.fromJson(Map<String, dynamic> json) =
@@ -866,11 +998,23 @@ abstract class _TourDetail implements TourDetail {
   @JsonKey(name: 'statusFlag')
   int? get statusFlag;
   @override
+  @JsonKey(name: 'statusName')
+  String? get statusName;
+  @override
   @JsonKey(name: 'motif')
   String? get reason;
   @override
   @JsonKey(name: 'repport')
   String? get report;
+  @override
+  @JsonKey(name: 'repportText')
+  String? get reportText;
+  @override
+  @JsonKey(name: 'latitude')
+  double? get latitude;
+  @override
+  @JsonKey(name: 'longitude')
+  double? get longitude;
   @override
   @JsonKey(name: 'pharmacie')
   Person? get pharmacy;

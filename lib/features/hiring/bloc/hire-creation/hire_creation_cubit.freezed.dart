@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'visit_creation_cubit.dart';
+part of 'hire_creation_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$VisitCreationState {
+mixin _$HireCreationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Tour tour) loaded,
+    required TResult Function(Hire hire) loaded,
     required TResult Function(String message) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$VisitCreationState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Tour tour)? loaded,
+    TResult? Function(Hire hire)? loaded,
     TResult? Function(String message)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$VisitCreationState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tour tour)? loaded,
+    TResult Function(Hire hire)? loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) =>
@@ -69,16 +69,16 @@ mixin _$VisitCreationState {
 }
 
 /// @nodoc
-abstract class $VisitCreationStateCopyWith<$Res> {
-  factory $VisitCreationStateCopyWith(
-          VisitCreationState value, $Res Function(VisitCreationState) then) =
-      _$VisitCreationStateCopyWithImpl<$Res, VisitCreationState>;
+abstract class $HireCreationStateCopyWith<$Res> {
+  factory $HireCreationStateCopyWith(
+          HireCreationState value, $Res Function(HireCreationState) then) =
+      _$HireCreationStateCopyWithImpl<$Res, HireCreationState>;
 }
 
 /// @nodoc
-class _$VisitCreationStateCopyWithImpl<$Res, $Val extends VisitCreationState>
-    implements $VisitCreationStateCopyWith<$Res> {
-  _$VisitCreationStateCopyWithImpl(this._value, this._then);
+class _$HireCreationStateCopyWithImpl<$Res, $Val extends HireCreationState>
+    implements $HireCreationStateCopyWith<$Res> {
+  _$HireCreationStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -95,7 +95,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$VisitCreationStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$HireCreationStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -109,7 +109,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'VisitCreationState.initial()';
+    return 'HireCreationState.initial()';
   }
 
   @override
@@ -126,7 +126,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Tour tour) loaded,
+    required TResult Function(Hire hire) loaded,
     required TResult Function(String message) failure,
   }) {
     return initial();
@@ -137,7 +137,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Tour tour)? loaded,
+    TResult? Function(Hire hire)? loaded,
     TResult? Function(String message)? failure,
   }) {
     return initial?.call();
@@ -148,7 +148,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tour tour)? loaded,
+    TResult Function(Hire hire)? loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -196,7 +196,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements VisitCreationState {
+abstract class _Initial implements HireCreationState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -209,7 +209,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$VisitCreationStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$HireCreationStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -223,7 +223,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'VisitCreationState.loading()';
+    return 'HireCreationState.loading()';
   }
 
   @override
@@ -240,7 +240,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Tour tour) loaded,
+    required TResult Function(Hire hire) loaded,
     required TResult Function(String message) failure,
   }) {
     return loading();
@@ -251,7 +251,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Tour tour)? loaded,
+    TResult? Function(Hire hire)? loaded,
     TResult? Function(String message)? failure,
   }) {
     return loading?.call();
@@ -262,7 +262,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tour tour)? loaded,
+    TResult Function(Hire hire)? loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -310,7 +310,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements VisitCreationState {
+abstract class _Loading implements HireCreationState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -320,14 +320,14 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Tour tour});
+  $Res call({Hire hire});
 
-  $TourCopyWith<$Res> get tour;
+  $HireCopyWith<$Res> get hire;
 }
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$VisitCreationStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$HireCreationStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
@@ -336,21 +336,21 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tour = null,
+    Object? hire = null,
   }) {
     return _then(_$LoadedImpl(
-      tour: null == tour
-          ? _value.tour
-          : tour // ignore: cast_nullable_to_non_nullable
-              as Tour,
+      hire: null == hire
+          ? _value.hire
+          : hire // ignore: cast_nullable_to_non_nullable
+              as Hire,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $TourCopyWith<$Res> get tour {
-    return $TourCopyWith<$Res>(_value.tour, (value) {
-      return _then(_value.copyWith(tour: value));
+  $HireCopyWith<$Res> get hire {
+    return $HireCopyWith<$Res>(_value.hire, (value) {
+      return _then(_value.copyWith(hire: value));
     });
   }
 }
@@ -358,14 +358,14 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl({required this.tour});
+  const _$LoadedImpl({required this.hire});
 
   @override
-  final Tour tour;
+  final Hire hire;
 
   @override
   String toString() {
-    return 'VisitCreationState.loaded(tour: $tour)';
+    return 'HireCreationState.loaded(hire: $hire)';
   }
 
   @override
@@ -373,11 +373,11 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            (identical(other.tour, tour) || other.tour == tour));
+            (identical(other.hire, hire) || other.hire == hire));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tour);
+  int get hashCode => Object.hash(runtimeType, hire);
 
   @JsonKey(ignore: true)
   @override
@@ -390,10 +390,10 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Tour tour) loaded,
+    required TResult Function(Hire hire) loaded,
     required TResult Function(String message) failure,
   }) {
-    return loaded(tour);
+    return loaded(hire);
   }
 
   @override
@@ -401,10 +401,10 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Tour tour)? loaded,
+    TResult? Function(Hire hire)? loaded,
     TResult? Function(String message)? failure,
   }) {
-    return loaded?.call(tour);
+    return loaded?.call(hire);
   }
 
   @override
@@ -412,12 +412,12 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tour tour)? loaded,
+    TResult Function(Hire hire)? loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(tour);
+      return loaded(hire);
     }
     return orElse();
   }
@@ -460,10 +460,10 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements VisitCreationState {
-  const factory _Loaded({required final Tour tour}) = _$LoadedImpl;
+abstract class _Loaded implements HireCreationState {
+  const factory _Loaded({required final Hire hire}) = _$LoadedImpl;
 
-  Tour get tour;
+  Hire get hire;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -480,7 +480,7 @@ abstract class _$$FailureImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$FailureImplCopyWithImpl<$Res>
-    extends _$VisitCreationStateCopyWithImpl<$Res, _$FailureImpl>
+    extends _$HireCreationStateCopyWithImpl<$Res, _$FailureImpl>
     implements _$$FailureImplCopyWith<$Res> {
   __$$FailureImplCopyWithImpl(
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
@@ -510,7 +510,7 @@ class _$FailureImpl implements _Failure {
 
   @override
   String toString() {
-    return 'VisitCreationState.failure(message: $message)';
+    return 'HireCreationState.failure(message: $message)';
   }
 
   @override
@@ -535,7 +535,7 @@ class _$FailureImpl implements _Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Tour tour) loaded,
+    required TResult Function(Hire hire) loaded,
     required TResult Function(String message) failure,
   }) {
     return failure(message);
@@ -546,7 +546,7 @@ class _$FailureImpl implements _Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Tour tour)? loaded,
+    TResult? Function(Hire hire)? loaded,
     TResult? Function(String message)? failure,
   }) {
     return failure?.call(message);
@@ -557,7 +557,7 @@ class _$FailureImpl implements _Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tour tour)? loaded,
+    TResult Function(Hire hire)? loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -605,7 +605,7 @@ class _$FailureImpl implements _Failure {
   }
 }
 
-abstract class _Failure implements VisitCreationState {
+abstract class _Failure implements HireCreationState {
   const factory _Failure({required final String message}) = _$FailureImpl;
 
   String get message;

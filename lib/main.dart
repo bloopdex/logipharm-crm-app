@@ -1,17 +1,23 @@
+import 'package:crm/features/todo/cubit/todo_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
+import 'package:crm/features/visits/bloc/visits/visit_bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+
 // import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'core/routes.dart';
 import 'core/theme.dart';
 import 'features/auth/bloc/login/login_bloc.dart';
 import 'features/auth/login.screen.dart';
+import 'features/clients/blocs/observation_cubit.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
 import 'features/tour-plan/bloc/clients/clients_cubit.dart';
@@ -19,7 +25,7 @@ import 'features/tour-plan/bloc/delegate_cubit.dart';
 import 'features/tour-plan/bloc/tour-creation/tour_creation_cubit.dart';
 import 'features/tour-plan/bloc/wilaya_cubit.dart';
 import 'features/tour-plan/core/controller.dart';
-import 'features/visits/bloc/tour-creation/visit_creation_cubit.dart';
+import 'features/visits/bloc/visit-creation/visit_creation_cubit.dart';
 import 'l10n/l10n.dart';
 import 'logic/auth/auth_bloc.dart';
 import 'logic/counter_cubit.dart';
@@ -36,6 +42,11 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await ScreenUtil.ensureScreenSize();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb
+        ? HydratedStorage.webStorageDirectory
+        : await getApplicationDocumentsDirectory(),
+  );
 
   runApp(const MyApp());
 }
@@ -109,6 +120,11 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ),
           BlocProvider<VisitCreationCubit>(
               create: (context) => VisitCreationCubit()),
+          BlocProvider<TodoCubit>(create: (context) => TodoCubit()),
+          BlocProvider<VisitBloc>(create: (context) => VisitBloc()),
+          BlocProvider<ObservationCubit>(
+            create: (context) => ObservationCubit(),
+          ),
         ],
         child: BlocBuilder<LocalizationsBloc, LocalizationsState>(
             builder: (context, state) {

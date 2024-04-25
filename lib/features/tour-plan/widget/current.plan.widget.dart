@@ -32,6 +32,7 @@ class CurrentWidgetCard extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             IntrinsicHeight(
               child: Row(
@@ -61,7 +62,7 @@ class CurrentWidgetCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          tour.regionName,
+                          tour.regionName ?? context.i10n.noRegion,
                           style: context.textTheme.displaySmall!.copyWith(
                             color: kTextLight,
                           ),
@@ -77,10 +78,12 @@ class CurrentWidgetCard extends StatelessWidget {
                         Row(
                           children: [
                             Icon(Icons.person, color: kWhite),
-                            Text(
-                              tour.delegate.fullName,
-                              style: context.textTheme.bodyMedium!.copyWith(
-                                color: kTextLight,
+                            Expanded(
+                              child: Text(
+                                tour.delegate.fullName,
+                                style: context.textTheme.bodyMedium!.copyWith(
+                                  color: kTextLight,
+                                ),
                               ),
                             ),
                           ],
@@ -94,9 +97,10 @@ class CurrentWidgetCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                  context.i10n.tourProgress(
-                      (tour.visitedClients! / tour.totalClients! * 100)
-                          .toInt()),
+                  context.i10n.tourProgress((tour.visitedClients! /
+                          (tour.totalClients! != 0 ? tour.totalClients! : 1) *
+                          100)
+                      .toInt()),
                   style: context.textTheme.bodyMedium!.copyWith(
                     color: kTextLight,
                   )),
@@ -107,12 +111,11 @@ class CurrentWidgetCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(kRadiusRounded),
               minHeight: 5.sp,
               semanticsValue:
-                  "${(tour.visitedClients! / tour.totalClients! * 100).toInt()}%",
-              semanticsLabel: context.i10n.tourProgress(
-                  (tour.visitedClients! / tour.totalClients! * 100)
-                      .toInt()
-                      .toInt()),
-              value: (tour.visitedClients! / tour.totalClients! * 100),
+                  "${(tour.visitedClients! / (tour.totalClients! != 0 ? tour.totalClients! : 1) * 100).toInt()}%",
+              semanticsLabel: context.i10n.tourProgress(tour.visitedClients! ~/
+                  (tour.totalClients! != 0 ? tour.totalClients! : 1)),
+              value: tour.visitedClients! /
+                  (tour.totalClients! != 0 ? tour.totalClients! : 1),
             ),
           ],
         ),

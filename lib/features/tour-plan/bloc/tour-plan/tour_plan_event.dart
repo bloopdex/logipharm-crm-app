@@ -17,4 +17,8 @@ class TourPlanEvent with _$TourPlanEvent {
   const factory TourPlanEvent.startTour({
     required String tourId,
   }) = _StartTour;
+
+  const factory TourPlanEvent.closeTour({
+    required String tourId,
+  }) = _CloseTour;
 }

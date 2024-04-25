@@ -13,7 +13,10 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.maxLines = 1,
-    this.autoFillHints = const [], this.onChanged,
+    this.minLines = 1,
+    this.autoFillHints = const [],
+    this.onChanged,
+    this.controller,
   });
 
   final String? initialValue;
@@ -21,17 +24,20 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final TextCapitalization textCapitalization;
   final Map<String, dynamic>? data;
-  final String? Function(String?)? validator;
   final String? mapKey;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
   final IconData? suffixIcon;
   final IconData? prefixIcon;
   final int maxLines;
+  final int minLines;
   final List<String> autoFillHints;
   final String? Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       initialValue: initialValue,
       autocorrect: false,
       validator: validator,
@@ -40,6 +46,7 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       textCapitalization: textCapitalization,
       maxLines: maxLines,
+      minLines: minLines,
       autofillHints: autoFillHints,
       decoration: InputDecoration(
         hintText: hintText,

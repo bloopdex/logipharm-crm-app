@@ -1,0 +1,806 @@
+{
+  "@@locale": "fr",
+  "error": "Erreur",
+  "@error": {
+    "description": "Erreur"
+  },
+  "confirm": "Confirmer",
+  "@confirm": {
+    "description": "Confirmer"
+  },
+  "start": "Démarrer",
+  "@start": {
+    "description": "Démarrer"
+  },
+  "finish": "Terminer",
+  "@finish": {
+    "description": "Terminer"
+  },
+  "add": "Ajouter",
+  "@add": {
+    "description": "Ajouter"
+  },
+  "update": "Mettre à jour",
+  "@update": {
+    "description": "Mettre à jour"
+  },
+  "viewDetails": "Voir les détails",
+  "@viewDetails": {
+    "description": "Voir les détails"
+  },
+  "save": "Enregistrer",
+  "@save": {
+    "description": "Enregistrer"
+  },
+  "cancel": "Annuler",
+  "@cancel": {
+    "description": "Annuler"
+  },
+  "later": "Plus tard",
+  "@later": {
+    "description": "Plus tard"
+  },
+  "next": "Suivant",
+  "@next": {
+    "description": "Suivant"
+  },
+  "validate": "Valider",
+  "@validate": {
+    "description": "Valider"
+  },
+  "createdAt": "Créé le",
+  "@createdAt": {
+    "description": "Créé le"
+  },
+  "pending": "En attente",
+  "@pending": {
+    "description": "En attente"
+  },
+  "inProgress": "En cours",
+  "@inProgress": {
+    "description": "En cours"
+  },
+  "completed": "Terminé",
+  "@completed": {
+    "description": "Terminé"
+  },
+  "active": "Actif",
+  "@active": {
+    "description": "Actif"
+  },
+  "refused": "Refusé",
+  "@refused": {
+    "description": "Refusé"
+  },
+  "selectDateRange": "Sélectionner une plage de dates",
+  "@selectDateRange": {
+    "description": "Sélectionner une plage de dates"
+  },
+  "startDate": "Date de début",
+  "@startDate": {
+    "description": "Date de début"
+  },
+  "endDate": "Date de fin",
+  "@endDate": {
+    "description": "Date de fin"
+  },
+  "selectDate": "Sélectionner une date",
+  "@selectDate": {
+    "description": "Sélectionner une date"
+  },
+  "today": "Aujourd'hui",
+  "@today": {
+    "description": "Aujourd'hui"
+  },
+  "color": "Couleur",
+  "@color": {
+    "description": "Couleur"
+  },
+  "navHome": "Accueil",
+  "@navHome": {
+    "description": "Accueil"
+  },
+  "navPlans": "Plans",
+  "@navPlans": {
+    "description": "Plans"
+  },
+  "navVisits": "Visites",
+  "@navVisits": {
+    "description": "Visites"
+  },
+  "navTodos": "Tâches",
+  "@navTodos": {
+    "description": "Tâches"
+  },
+  "navMenu": "Menu",
+  "@navMenu": {
+    "description": "Menu"
+  },
+  "authLoginTitle": "Connexion",
+  "@authLoginTitle": {
+    "description": "Titre de connexion"
+  },
+  "authLoginDescription": "Et accédez à toutes les fonctionnalités de l'application",
+  "@authLoginDescription": {
+    "description": "Description de connexion"
+  },
+  "authLoginUsername": "Nom d'utilisateur",
+  "@authLoginUsername": {
+    "description": "Nom d'utilisateur"
+  },
+  "authLoginUsernamePlaceholder": "Entrez votre nom d'utilisateur",
+  "@authLoginUsernamePlaceholder": {
+    "description": "Espace pour le nom d'utilisateur"
+  },
+  "authLoginUsernameRequired": "Le nom d'utilisateur est requis",
+  "@authLoginUsernameRequired": {
+    "description": "Nom d'utilisateur requis"
+  },
+  "authLoginPassword": "Mot de passe",
+  "@authLoginPassword": {
+    "description": "Mot de passe"
+  },
+  "authLoginPasswordPlaceholder": "Entrez votre mot de passe",
+  "@authLoginPasswordPlaceholder": {
+    "description": "Espace pour le mot de passe"
+  },
+  "authLoginPasswordRequired": "Le mot de passe est requis",
+  "@authLoginPasswordRequired": {
+    "description": "Mot de passe requis"
+  },
+  "authLoginSubmit": "Connexion",
+  "@authLoginSubmit": {
+    "description": "Soumettre la connexion"
+  },
+  "tourClient": "{count} Client",
+  "@tourClient": {
+    "description": "Client",
+    "placeholders": {
+      "count": {
+        "description": "Nombre de clients",
+        "type": "int"
+      }
+    }
+  },
+  "tourProgress": "{percentage}%",
+  "@tourProgress": {
+    "description": "Progression",
+    "placeholders": {
+      "percentage": {
+        "description": "Pourcentage",
+        "type": "int"
+      }
+    }
+  },
+  "tourCurrentTour": "Tournée actuelle",
+  "@tourCurrentTour": {
+    "description": "Tournée actuelle"
+  },
+  "tourSearchPerWilaya": "Recherche par wilaya",
+  "@tourSearchPerWilaya": {
+    "description": "Recherche par wilaya"
+  },
+  "tourAllPlans": "Tous les plans",
+  "@tourAllPlans": {
+    "description": "Tous les plans"
+  },
+  "tourPendingPlans": "Plans en attente",
+  "@tourPendingPlans": {
+    "description": "Plans en attente"
+  },
+  "tourInProgressPlans": "Plans en cours",
+  "@tourInProgressPlans": {
+    "description": "Plans en cours"
+  },
+  "tourCompletedPlans": "Plans terminés",
+  "@tourCompletedPlans": {
+    "description": "Plans terminés"
+  },
+  "tourPendingStatus": "En attente",
+  "@tourPendingStatus": {
+    "description": "Statut en attente"
+  },
+  "tourInProgressStatus": "En cours",
+  "@tourInProgressStatus": {
+    "description": "Statut en cours"
+  },
+  "tourCompletedStatus": "Terminé",
+  "@tourCompletedStatus": {
+    "description": "Statut terminé"
+  },
+  "tourEmptyPlans": "Aucun plan trouvé",
+  "@tourEmptyPlans": {
+    "description": "Aucun plan"
+  },
+  "tourEmptyPlansDescription": "Vous n'avez aucun plan pour le moment",
+  "@tourEmptyPlansDescription": {
+    "description": "Description des plans vides"
+  },
+  "tourCreateNewPlan": "Créer un nouveau plan",
+  "@tourCreateNewPlan": {
+    "description": "Créer un nouveau plan"
+  },
+  "tourCreationTourDetailsTitle": "Détails de la tournée",
+  "@tourCreationTourDetailsTitle": {
+    "description": "Titre des détails de la tournée"
+  },
+  "tourCreationTourDetailsDescription": "Choisissez le délégué responsable de ce plan de tournée et entrez la date prévue pour la tournée.",
+  "@tourCreationTourDetailsDescription": {
+    "description": "Description des détails de la tournée"
+  },
+  "tourCreationTourDetailsDelegateLabel": "Délégué",
+  "@tourCreationTourDetailsDelegateLabel": {
+    "description": "Délégué"
+  },
+  "tourCreationTourDetailsDateLabel": "Date",
+  "@tourCreationTourDetailsDateLabel": {
+    "description": "Date"
+  },
+  "tourCreationClientVisitsTitle": "Clients à visiter",
+  "@tourCreationClientVisitsTitle": {
+    "description": "Titre des visites client"
+  },
+  "tourCreationClientVisitsDescription": "Sélectionnez les clients que vous souhaitez visiter pendant cette tournée.",
+  "@tourCreationClientVisitsDescription": {
+    "description": "Description des visites client"
+  },
+  "tourCreationRegionLabel": "Région",
+  "@tourCreationRegionLabel": {
+    "description": "Région"
+  },
+  "tourCreationRegionPlaceholder": "Sélectionnez une région",
+  "@tourCreationRegionPlaceholder": {
+    "description": "Espace pour la région"
+  },
+  "tourCreationClientsLabel": "Clients",
+  "@tourCreationClientsLabel": {
+    "description": "Clients"
+  },
+  "tourCreationClientEmptyTitle": "Aucun client trouvé",
+  "@tourCreationClientEmptyTitle": {
+    "description": "Titre clients vides"
+  },
+  "tourCreationClientEmptyDescription": "Aucun client trouvé dans cette région",
+  "@tourCreationClientEmptyDescription": {
+    "description": "Description des clients vides"
+  },
+  "tourCreationNoAddress": "Pas d'adresse",
+  "@tourCreationNoAddress": {
+    "description": "Pas d'adresse"
+  },
+  "tourValidationTitle": "Aperçu et Validation",
+  "@tourValidationTitle": {
+    "description": "Aperçu et Validation"
+  },
+  "tourValidationPlanBy": "Plan de tournée, par:",
+  "@tourValidationPlanBy": {
+    "description": "Plan de tournée, par:"
+  },
+  "tourValidationRegion": "Région",
+  "@tourValidationRegion": {
+    "description": "Région"
+  },
+  "tourCreationInProgressTitle": "La création du plan de tournée est en cours",
+  "@tourCreationInProgressTitle": {
+    "description": "La création du plan de tournée est en cours"
+  },
+  "tourCreationInProgressDescription": "Nous finalisons les détails de votre plan de tournée. Merci de votre patience.",
+  "@tourCreationInProgressDescription": {
+    "description": "Nous finalisons les détails de votre plan de tournée. Merci de votre patience."
+  },
+  "tourCreationErrorTitle": "Une erreur s'est produite",
+  "@tourCreationErrorTitle": {
+    "description": "Une erreur s'est produite"
+  },
+  "tourCreationErrorDescription": "Une erreur s'est produite lors de la création du plan de tournée. Veuillez réessayer plus tard.",
+  "@tourCreationErrorDescription": {
+    "description": "Une erreur s'est produite lors de la création du plan de tournée. Veuillez réessayer plus tard."
+  },
+  "tourCreationSuccessTitle": "Plan de tournée créé avec succès",
+  "@tourCreationSuccessTitle": {
+    "description": "Plan de tournée créé avec succès"
+  },
+  "tourCreationSuccessDescription": "Votre plan de tournée a été créé avec succès. Vous pouvez maintenant consulter et gérer vos tournées planifiées.",
+  "@tourCreationSuccessDescription": {
+    "description": "Votre plan de tournée a été créé avec succès. Vous pouvez maintenant consulter et gérer vos tournées planifiées."
+  },
+  "tourCreationStartTour": "Voulez-vous commencer la tournée maintenant?",
+  "@tourCreationStartTour": {
+    "description": "Voulez-vous commencer la tournée maintenant?"
+  },
+  "tourCreationStartTourDescription": "Vous pouvez commencer la tournée maintenant ou plus tard depuis la liste des tournées planifiées.",
+  "@tourCreationStartTourDescription": {
+    "description": "Vous pouvez commencer la tournée maintenant ou plus tard depuis la liste des tournées planifiées."
+  },
+  "tourDetailsTitle": "Détails de la tournée",
+  "@tourDetailsTitle": {
+    "description": "Détails de la tournée"
+  },
+  "tourDetailsTourBy": "Plan de tournée par",
+  "@tourDetailsTourBy": {
+    "description": "Plan de tournée par"
+  },
+  "tourDetailsRegion": "Région",
+  "@tourDetailsRegion": {
+    "description": "Région"
+  },
+  "tourDetailsClients": "Clients",
+  "@tourDetailsClients": {
+    "description": "Clients"
+  },
+  "tourDetailsAllClients": "Tous les clients",
+  "@tourDetailsAllClients": {
+    "description": "Tous les clients"
+  },
+  "tourDetailsVisited": "Visités",
+  "@tourDetailsVisited": {
+    "description": "Visités"
+  },
+  "tourDetailsNonVisited": "Non visités",
+  "@tourDetailsNonVisited": {
+    "description": "Non visités"
+  },
+  "tourDetailsNonVisitedClients": "Clients non visités",
+  "@tourDetailsNonVisitedClients": {
+    "description": "Clients non visités"
+  },
+  "tourDetailsVisitedClients": "Clients visités",
+  "@tourDetailsVisitedClients": {
+    "description": "Clients visités"
+  },
+  "tourDetailsVisitClient": "Visiter un client",
+  "@tourDetailsVisitClient": {
+    "description": "Visiter un client"
+  },
+  "tourErrorExistOpenTour": "Vous avez une tournée ouverte",
+  "@tourErrorExistOpenTour": {
+    "description": "Vous avez une tournée ouverte"
+  },
+  "tourErrorExistClosedTour": "La tournée est déjà clôturée",
+  "@tourErrorExistClosedTour": {
+    "description": "La tournée est déjà clôturée"
+  },
+  "tourErrorResourceRequireAuthentication": "Vous devez être authentifié pour accéder à cette ressource",
+  "@tourErrorResourceRequireAuthentication": {
+    "description": "Vous devez être authentifié pour accéder à cette ressource"
+  },
+  "tourValidationClientLabelNumber": "Clients ({count})",
+  "@tourValidationClientLabelNumber": {
+    "description": "Clients",
+    "placeholders": {
+      "count": {
+        "description": "Nombre de clients",
+        "type": "int"
+      }
+    }
+  },
+  "homeCreateNewPlan": "Créer un nouveau plan",
+  "@homeCreateNewPlan": {
+    "description": "Créer un nouveau plan"
+  },
+  "homeCreateNewVisit": "Créer une nouvelle visite",
+  "@homeCreateNewVisit": {
+    "description": "Créer une nouvelle visite"
+  },
+  "homeCreateNewEvent": "Créer un nouvel événement",
+  "@homeCreateNewEvent": {
+    "description": "Créer un nouvel événement"
+  },
+  "homeHireNewClient": "Recruter un nouveau client",
+  "@homeHireNewClient": {
+    "description": "Recruter un nouveau client"
+  },
+  "homeMyClients": "Mes clients",
+  "@homeMyClients": {
+    "description": "Mes clients"
+  },
+  "homeMyTasksToday": "Mes tâches aujourd'hui",
+  "@homeMyTasksToday": {
+    "description": "Mes tâches aujourd'hui"
+  },
+  "homePendingPlan": "Plan en attente",
+  "@homePendingPlan": {
+    "description": "Plan en attente"
+  },
+  "homePendingHire": "Recrutement en attente",
+  "@homePendingHire": {
+    "description": "Recrutement en attente"
+  },
+  "homeHello": "Bonjour",
+  "@homeHello": {
+    "description": "Bonjour"
+  },
+  "visitCreationInProgressTitle": "La création de la visite est en cours",
+  "@visitCreationInProgressTitle": {
+    "description": "La création de la visite est en cours"
+  },
+  "visitCreationInProgressDescription": "Nous finalisons les détails de votre visite. Merci de votre patience.",
+  "@visitCreationInProgressDescription": {
+    "description": "Nous finalisons les détails de votre visite. Merci de votre patience."
+  },
+  "visitCreationSuccessTitle": "Visite créée avec succès",
+  "@visitCreationSuccessTitle": {
+    "description": "Visite créée avec succès"
+  },
+  "visitCreationSuccessDescription": "Votre visite a été créée avec succès. Vous pouvez maintenant consulter et gérer vos visites.",
+  "@visitCreationSuccessDescription": {
+    "description": "Votre visite a été créée avec succès. Vous pouvez maintenant consulter et gérer vos visites."
+  },
+  "visitCreationTitle": "Nouvelle Visite",
+  "@visitCreationTitle": {
+    "description": "Nouvelle Visite"
+  },
+  "visitCreationDescription": "Créer une nouvelle visite pour un client",
+  "@visitCreationDescription": {
+    "description": "Créer une nouvelle visite pour un client"
+  },
+  "visitCreationClientLabel": "Client",
+  "@visitCreationClientLabel": {
+    "description": "Client"
+  },
+  "visitCreationClientPlaceholder": "Sélectionnez un client",
+  "@visitCreationClientPlaceholder": {
+    "description": "Espace pour sélectionner un client"
+  },
+  "visitCreationDateLabel": "Date",
+  "@visitCreationDateLabel": {
+    "description": "Date"
+  },
+  "visitCreationReasonLabel": "Raison",
+  "@visitCreationReasonLabel": {
+    "description": "Raison"
+  },
+  "visitCreationReasonPlaceholder": "Entrez la raison de la visite",
+  "@visitCreationReasonPlaceholder": {
+    "description": "Espace pour la raison de la visite"
+  },
+  "visitCreationRapportLabel": "Rapport",
+  "@visitCreationRapportLabel": {
+    "description": "Rapport"
+  },
+  "visitCreationReasonError": "La raison est requise",
+  "@visitCreationReasonError": {
+    "description": "La raison est requise"
+  },
+  "visitCreationRapportPlaceholder": "Entrez le rapport de la visite",
+  "@visitCreationRapportPlaceholder": {
+    "description": "Espace pour le rapport de la visite"
+  },
+  "visitValidationTitle": "Aperçu et Validation",
+  "@visitValidationTitle": {
+    "description": "Aperçu et Validation"
+  },
+  "visitValidationClient": "Client",
+  "@visitValidationClient": {
+    "description": "Client"
+  },
+  "visitValidationVisitedAt": "Visitée le",
+  "@visitValidationVisitedAt": {
+    "description": "Visitée le"
+  },
+  "visitValidationReason": "Raison",
+  "@visitValidationReason": {
+    "description": "Raison"
+  },
+  "visitValidationRapport": "Rapport",
+  "@visitValidationRapport": {
+    "description": "Rapport"
+  },
+  "visitTourIsntOpen": "La tournée n'est pas ouverte",
+  "@visitTourIsntOpen": {
+    "description": "La tournée n'est pas ouverte"
+  },
+  "visitAlreadyEntered": "La visite est déjà saisie",
+  "@visitAlreadyEntered": {
+    "description": "La visite est déjà saisie"
+  },
+  "visitDetailsTitle": "Détails de la visite",
+  "@visitDetailsTitle": {
+    "description": "Détails de la visite"
+  },
+  "createNewVisit": "Créer une nouvelle visite",
+  "@createNewVisit": {
+    "description": "Créer une nouvelle visite"
+  },
+  "updateVisit": "Mettre à jour la visite",
+  "@updateVisit": {
+    "description": "Mettre à jour la visite"
+  },
+  "visitsEmpty": "Aucune visite trouvée",
+  "@visitsEmpty": {
+    "description": "Aucune visite trouvée"
+  },
+  "visitsEmptyDescription": "Vous n'avez aucune visite pour le moment",
+  "@visitsEmptyDescription": {
+    "description": "Vous n'avez aucune visite pour le moment"
+  },
+  "todoTask": "Tâche",
+  "@todoTask": {
+    "description": "Tâche"
+  },
+  "todoEvent": "Événement",
+  "@todoEvent": {
+    "description": "Événement"
+  },
+  "todoCreateNewTask": "Créer une nouvelle tâche",
+  "@todoCreateNewTask": {
+    "description": "Créer une nouvelle tâche"
+  },
+  "todoCreateNewEvent": "Créer un nouvel événement",
+  "@todoCreateNewEvent": {
+    "description": "Créer un nouvel événement"
+  },
+  "todoTitle": "Titre",
+  "@todoTitle": {
+    "description": "Titre"
+  },
+  "todoTitlePlaceholder": "Entrez le titre",
+  "@todoTitlePlaceholder": {
+    "description": "Espace pour le titre"
+  },
+  "todoTitleError": "Le titre est requis",
+  "@todoTitleError": {
+    "description": "Le titre est requis"
+  },
+  "todoDetails": "Détails",
+  "@todoDetails": {
+    "description": "Détails"
+  },
+  "todoDetailsPlaceholder": "Entrez les détails",
+  "@todoDetailsPlaceholder": {
+    "description": "Espace pour les détails"
+  },
+  "todoDetailsError": "Les détails sont requis",
+  "@todoDetailsError": {
+    "description": "Les détails sont requis"
+  },
+  "supervisorRole": "Superviseur",
+  "@supervisorRole": {
+    "description": "Superviseur"
+  },
+  "delegateRole": "Délégué",
+  "@delegateRole": {
+    "description": "Délégué"
+  },
+  "manageProfile": "Gérer le profil",
+  "@manageProfile": {
+    "description": "Gérer le profil"
+  },
+  "consultation": "Consultation",
+  "@consultation": {
+    "description": "Consultation"
+  },
+  "dashboard": "Tableau de bord",
+  "@dashboard": {
+    "description": "Tableau de bord"
+  },
+  "clientList": "Liste des clients",
+  "@clientList": {
+    "description": "Liste des clients"
+  },
+  "hiring": "Recrutement",
+  "@hiring": {
+    "description": "Recrutement"
+  },
+  "fileCNRC": "Dossier CNRC",
+  "@fileCNRC": {
+    "description": "Dossier CNRC"
+  },
+  "system": "Système",
+  "@system": {
+    "description": "Système"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications"
+  },
+  "logout": "Déconnexion",
+  "@logout": {
+    "description": "Déconnexion"
+  },
+  "hirement": "Recrutement",
+  "@hirement": {
+    "description": "Recrutement"
+  },
+  "noHirement": "Aucun recrutement trouvé",
+  "@noHirement": {
+    "description": "Aucun recrutement trouvé"
+  },
+  "youDontHaveAnyHirement": "Vous n'avez aucun recrutement pour le moment",
+  "@youDontHaveAnyHirement": {
+    "description": "Vous n'avez aucun recrutement pour le moment"
+  },
+  "createNewHirement": "Créer un nouveau recrutement",
+  "@createNewHirement": {
+    "description": "Créer un nouveau recrutement"
+  },
+  "noPhone": "Pas de téléphone",
+  "@noPhone": {
+    "description": "Pas de téléphone"
+  },
+  "noNote": "Pas de note",
+  "@noNote": {
+    "description": "Pas de note"
+  },
+  "clientName": "Nom du client",
+  "@clientName": {
+    "description": "Nom du client"
+  },
+  "lastName": "Nom de famille",
+  "@lastName": {
+    "description": "Nom de famille"
+  },
+  "noLastName": "Pas de nom de famille",
+  "@noLastName": {
+    "description": "Pas de nom de famille"
+  },
+  "lastNamePlaceholder": "Entrez le nom de famille",
+  "@lastNamePlaceholder": {
+    "description": "Espace pour le nom de famille"
+  },
+  "lastNameRequired": "Le nom de famille est requis",
+  "@lastNameRequired": {
+    "description": "Le nom de famille est requis"
+  },
+  "firstName": "Prénom",
+  "@firstName": {
+    "description": "Prénom"
+  },
+  "noFirstName": "Pas de prénom",
+  "@noFirstName": {
+    "description": "Pas de prénom"
+  },
+  "firstNamePlaceholder": "Entrez le prénom",
+  "@firstNamePlaceholder": {
+    "description": "Espace pour le prénom"
+  },
+  "firstNameRequired": "Le prénom est requis",
+  "@firstNameRequired": {
+    "description": "Le prénom est requis"
+  },
+  "region": "Région",
+  "@region": {
+    "description": "Région"
+  },
+  "regionPlaceholder": "Sélectionnez une région",
+  "@regionPlaceholder": {
+    "description": "Espace pour sélectionner une région"
+  },
+  "regionRequired": "La région est requise",
+  "@regionRequired": {
+    "description": "La région est requise"
+  },
+  "noRegion": "Pas de région",
+  "@noRegion": {
+    "description": "Pas de région"
+  },
+  "address": "Adresse",
+  "@address": {
+    "description": "Adresse"
+  },
+  "noAddress": "Pas d'adresse",
+  "@noAddress": {
+    "description": "Pas d'adresse"
+  },
+  "addressPlaceholder": "Entrez l'adresse",
+  "@addressPlaceholder": {
+    "description": "Espace pour l'adresse"
+  },
+  "addressRequired": "L'adresse est requise",
+  "@addressRequired": {
+    "description": "L'adresse est requise"
+  },
+  "phone": "Téléphone",
+  "@phone": {
+    "description": "Téléphone"
+  },
+  "phonePlaceholder": "Entrez le téléphone",
+  "@phonePlaceholder": {
+    "description": "Espace pour le téléphone"
+  },
+  "phoneRequired": "Le téléphone est requis",
+  "@phoneRequired": {
+    "description": "Le téléphone est requis"
+  },
+  "email": "E-mail",
+  "@email": {
+    "description": "E-mail"
+  },
+  "noEmail": "Pas d'e-mail",
+  "@noEmail": {
+    "description": "Pas d'e-mail"
+  },
+  "emailPlaceholder": "Entrez l'e-mail",
+  "@emailPlaceholder": {
+    "description": "Espace pour l'e-mail"
+  },
+  "emailRequired": "L'e-mail est requis",
+  "@emailRequired": {
+    "description": "L'e-mail est requis"
+  },
+  "emailInvalid": "Entrez un e-mail valide",
+  "@emailInvalid": {
+    "description": "Entrez un e-mail valide"
+  },
+  "note": "Note",
+  "@note": {
+    "description": "Note"
+  },
+  "notePlaceholder": "Entrez la note",
+  "@notePlaceholder": {
+    "description": "Espace pour la note"
+  },
+  "hire": "Recruter",
+  "@hire": {
+    "description": "Recruter"
+  },
+  "hireDetails": "Détails du recrutement",
+  "@hireDetails": {
+    "description": "Détails du recrutement"
+  },
+  "waitingForDecision": "En attente de décision",
+  "@waitingForDecision": {
+    "description": "En attente de décision"
+  },
+  "hired": "Recruté",
+  "@hired": {
+    "description": "Recruté"
+  },
+
+  "rejected": "Rejeté",
+  "@rejected": {
+    "description": "Rejeté"
+  },
+  "clientDetails": "Détails du client",
+  "@clientDetails": {
+    "description": "Détails du client"
+  },
+  "clientAddress": "Adresse du client",
+  "@clientAddress": {
+    "description": "Adresse du client"
+  },
+  "closeTourPlan": "Fermer le plan de tournée",
+  "@closeTourPlan": {
+    "description": "Fermer le plan de tournée"
+  },
+  "closeTourPlanDesc": "Ferme le plan de tournée actuel.",
+  "@closeTourPlanDesc": {
+    "description": "Ferme le plan de tournée actuel."
+  },
+  "clients": "Clients",
+  "@clients": {
+    "description": "Clients"
+  },
+  "observations": "Observations",
+  "@observations": {
+    "description": "Observations"
+  },
+  "noObservations": "Pas d'observations",
+  "@noObservations": {
+    "description": "Pas d'observations"
+  },
+  "noObservationsDesc": "Aucune observation trouvée pour ce client",
+  "@noObservationsDesc": {
+    "description": "Aucune observation trouvée pour ce client"
+  },
+  "addObservation": "Ajouter une observation",
+  "@addObservation": {
+    "description": "Ajouter une observation"
+  },
+  "claims": "Réclamations",
+  "@claims": {
+    "description": "Réclamations"
+  },
+  "noClaims": "Pas de réclamations",
+  "@noClaims": {
+    "description": "Pas de réclamations"
+  },
+  "noClaimsDesc": "Aucune réclamation trouvée pour ce client",
+  "@noClaimsDesc": {
+    "description": "Aucune réclamation trouvée pour ce client"
+  },
+  "addClaim": "Ajouter une réclamation",
+  "@addClaim": {
+    "description": "Ajouter une réclamation"
+  }
+}

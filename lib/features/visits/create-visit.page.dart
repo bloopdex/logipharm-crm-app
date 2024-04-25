@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:crm/features/tour-plan/models/tour.dart';
 import 'package:crm/features/visits/pages/creation-successful.page.dart';
+import 'package:crm/shared/services/helpers/location.helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart';
@@ -9,7 +12,7 @@ import '../../core/core.dart';
 import '../../logic/counter_cubit.dart';
 import '../../shared/widgets/buttons/button.widget.dart';
 import '../../shared/widgets/navigation/stepper.widget.dart';
-import 'bloc/tour-creation/visit_creation_cubit.dart';
+import 'bloc/visit-creation/visit_creation_cubit.dart';
 import 'pages/client-selection.page.dart';
 import 'pages/creation-loading.page.dart';
 import 'pages/validate-creation.page.dart';
@@ -17,14 +20,15 @@ import 'pages/validate-creation.page.dart';
 class CreateVisitPage extends StatefulWidget {
   static const String routeName = '/create-plan';
   final Tour tour;
-  const CreateVisitPage({super.key, required this.tour});
+  final String? pharmacieId;
+  const CreateVisitPage({super.key, required this.tour, this.pharmacieId});
 
   @override
   State<CreateVisitPage> createState() => _CreateVisitPageState();
 }
 
 class _CreateVisitPageState extends State<CreateVisitPage> {
-  final QuillController _quillController = QuillController.basic();
+  QuillController _quillController = QuillController.basic();
 
   Map<String, dynamic> data = {};
 
@@ -34,8 +38,8 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
     context.read<CounterCubit>().reset();
     context.read<VisitCreationCubit>().reset();
     data['dateDebut'] = DateTime.now().YYYYMMdd();
-    data['pharmacieId'] = widget.tour.pharmacies?.first.pharmacy!.id.toString();
-    data['tourneeId'] = widget.tour.tourneeId;
+    data['pharmacieId'] = widget.pharmacieId?.toString() ?? null;
+    data['tourneeId'] = widget.tour.tourId;
   }
 
   @override
@@ -55,7 +59,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          context.i10n.tourCreateNewPlan,
+                          context.i10n.createNewVisit,
                           style: context.textTheme.headlineSmall,
                         ),
                         SizedBox(height: kSpacingX1),
@@ -72,7 +76,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                     ),
                     bottom: PreferredSize(
                       preferredSize: context.read<CounterCubit>().state < 1
-                          ? Size.fromHeight(150.sp)
+                          ? Size.fromHeight(160.sp)
                           : const Size.fromHeight(0),
                       child: context.read<CounterCubit>().state < 1
                           ? QuillToolbar.simple(
@@ -89,6 +93,8 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                               showListCheck: false,
                               showJustifyAlignment: false,
                               showHeaderStyle: false,
+                              showSearchButton: false,
+                              showFontFamily: false,
                             ))
                           : const SizedBox.shrink(),
                     ),
@@ -103,7 +109,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                           ? context.height -
                               context.appBarSize -
                               context.paddingBottom -
-                              150.sp
+                              160.sp
                           : context.height -
                               context.appBarSize -
                               context.paddingBottom,
@@ -111,7 +117,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                           ? context.height -
                               context.appBarSize -
                               context.paddingBottom -
-                              150.sp
+                              160.sp
                           : context.height -
                               context.appBarSize -
                               context.paddingBottom,
@@ -148,7 +154,10 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                   child: state == 0
                                       ? ClientSelectionForm(
                                           quillController: _quillController,
-                                          clients: widget.tour.pharmacies ?? [],
+                                          clients: widget.tour.pharmacies!
+                                              .where((element) =>
+                                                  element.statusFlag == 0)
+                                              .toList(),
                                           data: data,
                                         )
                                       : VisitValidateCreationPage(
@@ -162,7 +171,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                     text: state < 1
                                         ? context.i10n.next
                                         : context.i10n.validate,
-                                    onPressed: () {
+                                    onPressed: () async {
                                       switch (state) {
                                         case 0:
                                           if (data['dateDebut'] == null ||
@@ -181,9 +190,21 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                           setState(() {});
                                           break;
                                         case 1:
-                                          data['rapport'] = _quillController
+                                          data['rapportText'] = _quillController
                                               .document
                                               .toPlainText();
+                                          data['rapport'] = json.encode(
+                                              _quillController.document
+                                                  .toDelta()
+                                                  .toJson());
+                                          final position = await LocationHelper
+                                              .getCurrentPosition();
+                                          if (position != null) {
+                                            data['latitude'] =
+                                                position.latitude;
+                                            data['longitude'] =
+                                                position.longitude;
+                                          }
                                           context
                                               .read<VisitCreationCubit>()
                                               .validate(data: data);

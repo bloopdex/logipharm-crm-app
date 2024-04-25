@@ -65,7 +65,7 @@ class TourPlanCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          tour.regionName,
+                          tour.regionName ?? context.i10n.noRegion,
                           style: context.textTheme.headlineMedium,
                         ),
                         SizedBox(height: kSpacingX1),
@@ -83,10 +83,12 @@ class TourPlanCard extends StatelessWidget {
                               color: kText4,
                               size: 20.sp,
                             ),
-                            Text(
-                              tour.delegate.fullName,
-                              style: context.textTheme.bodyMedium!.copyWith(
-                                color: kText4,
+                            Expanded(
+                              child: Text(
+                                tour.delegate.fullName,
+                                style: context.textTheme.bodyMedium!.copyWith(
+                                  color: kText4,
+                                ),
                               ),
                             ),
                           ],

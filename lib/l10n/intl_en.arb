@@ -16,6 +16,14 @@
     "@finish": {
         "description": "Finish"
     },
+    "add": "Add",
+    "@add": {
+        "description": "Add"
+    },
+    "update": "Update",
+    "@update": {
+        "description": "Update"
+    },
     "viewDetails": "View Details",
     "@viewDetails": {
         "description": "View Details"
@@ -56,6 +64,14 @@
     "@completed": {
         "description": "Completed"
     },
+    "active": "Active",
+    "@active": {
+        "description": "Active"
+    },
+    "refused": "Refused",
+    "@refused": {
+        "description": "Refused"
+    },
     "selectDateRange": "Select Date Range",
     "@selectDateRange": {
         "description": "Select Date Range"
@@ -75,6 +91,10 @@
     "today": "Today",
     "@today": {
         "description": "Today"
+    },
+    "color": "Color",
+    "@color": {
+        "description": "Color"
     },
     "navHome": "Home",
     "@navHome": {
@@ -336,6 +356,10 @@
     "@tourErrorExistOpenTour": {
         "description": "You have an open tour"
     },
+    "tourErrorExistClosedTour": "The tour is already closed",
+    "@tourErrorExistClosedTour": {
+        "description": "The tour is already closed"
+    },
     "tourErrorResourceRequireAuthentication": "You must be authenticated to access this resource",
     "@tourErrorResourceRequireAuthentication": {
         "description": "You must be authenticated to access this resource"
@@ -465,5 +489,317 @@
     "visitTourIsntOpen": "The tour isn''t open",
     "@visitTourIsntOpen": {
         "description": "The tour isn't open"
+    },
+    "visitAlreadyEntered": "The visit is already entred",
+    "@visitAlreadyEntered": {
+        "description": "The visit is already entred"
+    },
+    "visitDetailsTitle": "Visit Details",
+    "@visitDetailsTitle": {
+        "description": "Visit Details"
+    },
+    "createNewVisit": "Create New Visit",
+    "@createNewVisit": {
+        "description": "Create New Visit"
+    },
+    "updateVisit": "Update Visit",
+    "@updateVisit": {
+        "description": "Update Visit"
+    },
+    "visitsEmpty": "No visits found",
+    "@visitsEmpty": {
+        "description": "No visits found"
+    },
+    "visitsEmptyDescription": "You don''t have any visits yet",
+    "@visitsEmptyDescription": {
+        "description": "You don't have any visits yet"
+    },
+    "todoTask": "Task",
+    "@todoTask": {
+        "description": "Task"
+    },
+    "todoEvent": "Event",
+    "@todoEvent": {
+        "description": "Event"
+    },
+    "todoCreateNewTask": "Create New Task",
+    "@todoCreateNewTask": {
+        "description": "Create New Task"
+    },
+    "todoCreateNewEvent": "Create New Event",
+    "@todoCreateNewEvent": {
+        "description": "Create New Event"
+    },
+    "todoTitle": "Title",
+    "@todoTitle": {
+        "description": "Title"
+    },
+    "todoTitlePlaceholder": "Enter the title",
+    "@todoTitlePlaceholder": {
+        "description": "Enter the title"
+    },
+    "todoTitleError": "Title is required",
+    "@todoTitleError": {
+        "description": "Title is required"
+    },
+    "todoDetails": "Details",
+    "@todoDetails": {
+        "description": "Details"
+    },
+    "todoDetailsPlaceholder": "Enter the details",
+    "@todoDetailsPlaceholder": {
+        "description": "Enter the details"
+    },
+    "todoDetailsError": "Details is required",
+    "@todoDetailsError": {
+        "description": "Details is required"
+    },
+    "supervisorRole": "Supervisor",
+    "@supervisorRole": {
+        "description": "Supervisor"
+    },
+    "delegateRole": "Delegate",
+    "@delegateRole": {
+        "description": "Delegate"
+    },
+    "manageProfile": "Manage Profile",
+    "@manageProfile": {
+        "description": "Manage Profile"
+    },
+    "consultation": "Consultation",
+    "@consultation": {
+        "description": "Consultation"
+    },
+    "dashboard": "Dashboard",
+    "@dashboard": {
+        "description": "Dashboard"
+    },
+    "clientList": "Client List",
+    "@clientList": {
+        "description": "Client List"
+    },
+    "hiring": "Hiring",
+    "@hiring": {
+        "description": "Hiring"
+    },
+    "fileCNRC": "File CNRC",
+    "@fileCNRC": {
+        "description": "File CNRC"
+    },
+    "system": "System",
+    "@system": {
+        "description": "System"
+    },
+    "notifications": "Notifications",
+    "@notifications": {
+        "description": "Notifications"
+    },
+    "logout": "Logout",
+    "@logout": {
+        "description": "Logout"
+    },
+    "hirement": "Hirement",
+    "@hirement": {
+        "description": "Hirement"
+    },
+    "noHirement": "No hirement found",
+    "@noHirement": {
+        "description": "No hirement found"
+    },
+    "youDontHaveAnyHirement": "You don''t have any hirement yet",
+    "@youDontHaveAnyHirement": {
+        "description": "You don't have any hirement yet"
+    },
+    "createNewHirement": "Create New Hirement",
+    "@createNewHirement": {
+        "description": "Create New Hirement"
+    },
+    "noPhone": "No phone",
+    "@noPhone": {
+        "description": "No phone"
+    },
+    "noNote": "No Note",
+    "@noNote": {
+        "description": "No Note"
+    },
+    "clientName": "Client Name",
+    "@clientName": {
+        "description": "Client Name"
+    },
+    "lastName": "Last Name",
+    "@lastName": {
+        "description": "Last Name"
+    },
+    "noLastName": "No last name",
+    "@noLastName": {
+        "description": "No last name"
+    },
+    "lastNamePlaceholder": "Enter the last name",
+    "@lastNamePlaceholder": {
+        "description": "Enter the last name"
+    },
+    "lastNameRequired": "Last name is required",
+    "@lastNameRequired": {
+        "description": "Last name is required"
+    },
+    "firstName": "First Name",
+    "@firstName": {
+        "description": "First Name"
+    },
+    "noFirstName": "No first name",
+    "@noFirstName": {
+        "description": "No first name"
+    },
+    "firstNamePlaceholder": "Enter the first name",
+    "@firstNamePlaceholder": {
+        "description": "Enter the first name"
+    },
+    "firstNameRequired": "First name is required",
+    "@firstNameRequired": {
+        "description": "First name is required"
+    },
+    "region": "Region",
+    "@region": {
+        "description": "Region"
+    },
+    "regionPlaceholder": "Select a region",
+    "@regionPlaceholder": {
+        "description": "Select a region"
+    },
+    "regionRequired": "Region is required",
+    "@regionRequired": {
+        "description": "Region is required"
+    },
+    "noRegion": "No region",
+    "@noRegion": {
+        "description": "No region"
+    },
+    "address": "Address",
+    "@address": {
+        "description": "Address"
+    },
+    "noAddress": "No address",
+    "@noAddress": {
+        "description": "No address"
+    },
+    "addressPlaceholder": "Enter the address",
+    "@addressPlaceholder": {
+        "description": "Enter the address"
+    },
+    "addressRequired": "Address is required",
+    "@addressRequired": {
+        "description": "Address is required"
+    },
+    "phone": "Phone",
+    "@phone": {
+        "description": "Phone"
+    },
+    "phonePlaceholder": "Enter the phone",
+    "@phonePlaceholder": {
+        "description": "Enter the phone"
+    },
+    "phoneRequired": "Phone is required",
+    "@phoneRequired": {
+        "description": "Phone is required"
+    },
+    "email": "Email",
+    "@email": {
+        "description": "Email"
+    },
+    "noEmail": "No email",
+    "@noEmail": {
+        "description": "No email"
+    },
+    "emailPlaceholder": "Enter the email",
+    "@emailPlaceholder": {
+        "description": "Enter the email"
+    },
+    "emailRequired": "Email is required",
+    "@emailRequired": {
+        "description": "Email is required"
+    },
+    "emailInvalid": "Enter a valid email",
+    "@emailInvalid": {
+        "description": "Enter a valid email"
+    },
+    "note": "Note",
+    "@note": {
+        "description": "Note"
+    },
+    "notePlaceholder": "Enter the note",
+    "@notePlaceholder": {
+        "description": "Enter the note"
+    },
+    "hire": "Hire",
+    "@hire": {
+        "description": "Hire"
+    },
+    "hireDetails": "Hire Details",
+    "@hireDetails": {
+        "description": "Hire Details"
+    },
+    "waitingForDecision": "Waiting for decision",
+    "@waitingForDecision": {
+        "description": "Waiting for decision"
+    },
+    "hired": "Hired",
+    "@hired": {
+        "description": "Hired"
+    },
+    "rejected": "Rejected",
+    "@rejected": {
+        "description": "Rejected"
+    },
+    "clientDetails": "Client Details",
+    "@clientDetails": {
+        "description": "Client Details"
+    },
+    "clientAddress": "Client Address",
+    "@clientAddress": {
+        "description": "Client Address"
+    },
+    "closeTourPlan": "Close Tour Plan",
+    "@closeTourPlan": {
+        "description": "Close Tour Plan"
+    },
+    "closeTourPlanDesc": "Ferme le plan de tournée actuel.",
+    "@closeTourPlanDesc": {
+        "description": "Ferme le plan de tournée actuel."
+    },
+    "clients": "Clients",
+    "@clients": {
+        "description": "Clients"
+    },
+    "observations": "Observations",
+    "@observations": {
+        "description": "Observations"
+    },
+    "noObservations": "No observations",
+    "@noObservations": {
+        "description": "No observations"
+    },
+    "noObservationsDesc": "No observations found for this client",
+    "@noObservationsDesc": {
+        "description": "No observations found for this client"
+    },
+    "addObservation": "Add Observation",
+    "@addObservation": {
+        "description": "Add Observation"
+    },
+    "claims": "Claims",
+    "@claims": {
+        "description": "Claims"
+    },
+    "noClaims": "No claims",
+    "@noClaims": {
+        "description": "No claims"
+    },
+    "noClaimsDesc": "No claims found for this client",
+    "@noClaimsDesc": {
+        "description": "No claims found for this client"
+    },
+    "addClaim": "Add Claim",
+    "@addClaim": {
+        "description": "Add Claim"
     }
 }

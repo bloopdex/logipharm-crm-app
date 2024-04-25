@@ -8,7 +8,7 @@ class CreationRepository {
     final String token = (await AuthRepository.token) ?? "";
 
     return await DioHelper.postData(
-      url: '/tournee/',
+      url: '/tournee',
       token: token,
       data: data,
     );

@@ -5,8 +5,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../models/person/person.dart';
 import '../../services/client.repository.dart';
 
-part 'clients_state.dart';
 part 'clients_cubit.freezed.dart';
+part 'clients_state.dart';
 
 class ClientsCubit extends Cubit<ClientsState> {
   ClientsCubit() : super(const ClientsState.initial());

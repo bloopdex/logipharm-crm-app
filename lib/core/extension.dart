@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -194,6 +196,10 @@ extension DateFormaterExtension on DateTime {
   String MMMd() {
     return DateFormat("MMM d").format(this);
   }
+
+  String get MMM => DateFormat("MMM").format(this);
+  String get MMMyyyy => DateFormat("MMM yyyy").format(this);
+  String get EEEdMMMMyyyy => DateFormat("EEE, d MMMM yyyy").format(this);
 }
 
 extension StringExtensions on String {
@@ -205,5 +211,17 @@ extension StringExtensions on String {
     return split(" ").map((e) => e.capitalize()).toList().join(" ");
   }
 
-  String get initials => split(" ").map((e) => e[0]).join();
+  String get initials =>
+      split(" ").map((String e) => e.isNotEmpty ? e[0] : '').join();
+
+  bool get isEmail => RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(this);
+  bool get isPhoneNumber => RegExp(r'^\+?0[0-9]{9}$').hasMatch(this);
+  bool get isNumeric => double.tryParse(this) != null;
+  bool get isAlphabetic => RegExp(r'^[a-zA-Z]+$').hasMatch(this);
+}
+
+T getRandomElement<T>(List<T> list) {
+  final random = Random();
+  var i = random.nextInt(list.length);
+  return list[i];
 }

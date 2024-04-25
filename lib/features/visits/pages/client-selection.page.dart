@@ -55,13 +55,18 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
           ),
           SizedBox(height: kSpacingX1),
           CustomDropDownInput(
-              data: widget.data,
-              mapKey: 'pharmacieId',
-              items: widget.clients
-                  .map((e) => CustomDropDownItem(
-                      label: e.pharmacy?.fullName ?? "",
-                      value: e.pharmacy!.id.toString()))
-                  .toList()),
+            data: widget.data,
+            mapKey: 'pharmacieId',
+            items: widget.clients
+                .where((e) => e.pharmacy != null)
+                .map(
+                  (e) => CustomDropDownItem(
+                    label: e.pharmacy?.fullName ?? "",
+                    value: e.pharmacy!.id.toString(),
+                  ),
+                )
+                .toList(),
+          ),
           SizedBox(height: kSpacingX5),
           Text(
             context.i10n.visitCreationDateLabel,
@@ -81,6 +86,7 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
           CustomTextFormField(
             data: widget.data,
             mapKey: 'motif',
+            initialValue: widget.data['motif'],
             onChanged: (value) => widget.data['motif'] = value,
             validator: (value) {
               if (value != null && value.isEmpty) {

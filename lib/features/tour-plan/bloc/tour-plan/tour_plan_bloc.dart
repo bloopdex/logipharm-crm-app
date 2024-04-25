@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:crm/core/core.dart';
+import 'package:crm/l10n/l10n.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,9 +12,9 @@ import '../../../../shared/utils/date.formatter.dart';
 import '../../models/tour.dart';
 import '../../services/tour.repository.dart';
 
+part 'tour_plan_bloc.freezed.dart';
 part 'tour_plan_event.dart';
 part 'tour_plan_state.dart';
-part 'tour_plan_bloc.freezed.dart';
 
 class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
   TourPlanBloc() : super(const _Initial()) {
@@ -21,6 +22,7 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
     on<_Search>(_search);
     on<_Load>(_load);
     on<_StartTour>(_startTour);
+    on<_CloseTour>(_closeTour);
   }
 
   Future<void> _started(_Started event, Emitter<TourPlanState> emit) async {
@@ -35,21 +37,25 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
         query: "",
       );
 
-      List<Tour> tours = response.data['body']['content']
-          .map<Tour>((tour) => Tour.fromJson(tour))
-          .toList();
+      var rawTours = response.data['body']['content'];
+      List<Tour> tours = rawTours.map<Tour>((tour) {
+        var parsedTour = Tour.fromJson(tour);
+        // Ensure totalClients and visitedClients are calculated correctly
+        int totalClients =
+            int.tryParse((tour['tourneeDetails']?.length ?? 0).toString()) ?? 0;
+        int visitedClients = tour['tourneeDetails']?.where((detail) {
+              return (int.tryParse(detail['statusFlag'].toString()) ?? 0) == 1;
+            })?.length ??
+            0;
 
-      List<Tour> finalTours = tours.map((element) {
-        return element.copyWith(
-          totalClients: element.pharmacies?.length,
-          visitedClients: element.pharmacies
-              ?.where((detail) => detail.statusFlag == 2)
-              .length,
+        return parsedTour.copyWith(
+          totalClients: totalClients,
+          visitedClients: visitedClients,
         );
       }).toList();
 
       emit(TourPlanState.loaded(
-          tours: finalTours,
+          tours: tours,
           hasReachedMax: response.data['body']['last'],
           currentPage: 0));
     } catch (e) {
@@ -70,25 +76,25 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
         query: event.query,
       );
 
-      List<Tour> tours = response.data['body']['content']
-          .map<Tour>((tour) => Tour.fromJson(tour).copyWith(
-                totalClients: tour.tourDetails.length,
-                visitedClients: tour.tourDetails
-                    .where((detail) => detail.statusFlag == 2)
-                    .length,
-              ))
-          .toList();
-      List<Tour> finalTours = tours.map((element) {
-        return element.copyWith(
-          totalClients: element.pharmacies?.length,
-          visitedClients: element.pharmacies
-              ?.where((detail) => detail.statusFlag == 2)
-              .length,
+      var rawTours = response.data['body']['content'];
+      List<Tour> tours = rawTours.map<Tour>((tour) {
+        var parsedTour = Tour.fromJson(tour);
+        // Ensure totalClients and visitedClients are calculated correctly
+        int totalClients =
+            int.tryParse((tour['tourneeDetails']?.length ?? 0).toString()) ?? 0;
+        int visitedClients = tour['tourneeDetails']?.where((detail) {
+              return (int.tryParse(detail['statusFlag'].toString()) ?? 0) == 1;
+            })?.length ??
+            0;
+
+        return parsedTour.copyWith(
+          totalClients: totalClients,
+          visitedClients: visitedClients,
         );
       }).toList();
 
       emit(TourPlanState.loaded(
-          tours: finalTours,
+          tours: tours,
           hasReachedMax: response.data['body']['last'],
           currentPage: 0));
     } catch (e) {
@@ -111,21 +117,27 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
             query: event.query,
           );
 
-          List<Tour> tours = response.data['body']['content']
-              .map<Tour>((tour) => Tour.fromJson(tour))
-              .toList();
+          var rawTours = response.data['body']['content'];
+          List<Tour> tours = rawTours.map<Tour>((tour) {
+            var parsedTour = Tour.fromJson(tour);
+            // Ensure totalClients and visitedClients are calculated correctly
+            int totalClients = int.tryParse(
+                    (tour['tourneeDetails']?.length ?? 0).toString()) ??
+                0;
+            int visitedClients = tour['tourneeDetails']?.where((detail) {
+                  return (int.tryParse(detail['statusFlag'].toString()) ?? 0) ==
+                      1;
+                })?.length ??
+                0;
 
-          List<Tour> finalTours = tours.map((element) {
-            return element.copyWith(
-              totalClients: element.pharmacies?.length,
-              visitedClients: element.pharmacies
-                  ?.where((detail) => detail.statusFlag == 2)
-                  .length,
+            return parsedTour.copyWith(
+              totalClients: totalClients,
+              visitedClients: visitedClients,
             );
           }).toList();
 
           emit(TourPlanState.loaded(
-              tours: currentState.tours + finalTours,
+              tours: currentState.tours + tours,
               hasReachedMax: response.data['body']['last'],
               currentPage: currentState.currentPage + 1));
         } catch (e) {
@@ -137,7 +149,8 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
     }
   }
 
-  FutureOr<void> _startTour(event, Emitter<TourPlanState> emit) async {
+  FutureOr<void> _startTour(
+      _StartTour event, Emitter<TourPlanState> emit) async {
     emit(const TourPlanState.loading());
     try {
       Response response = await TourRepository.startTour(tourId: event.tourId);
@@ -145,8 +158,44 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
         log(response.data.toString());
         switch (response.data['codeError']) {
           case 'error.exist.others.tourney.open':
+            emit(TourPlanState.failure(
+                message: S.current.tourErrorExistOpenTour));
+            break;
+          case 'error.tourney.is.closed':
+            emit(TourPlanState.failure(
+                message: S.current.tourErrorExistClosedTour));
+            break;
+          case 'error.ressourceRequiredAuthentication':
+            emit(TourPlanState.failure(
+                message: i10n.tourErrorResourceRequireAuthentication));
+            break;
+          default:
             emit(const TourPlanState.failure(
-                message: "errors:exist-others-tourney-open"));
+                message: "errors:something-went-wrong"));
+        }
+      }
+      add(const TourPlanEvent.started());
+    } catch (e) {
+      ILogger.error(e.toString());
+      emit(const TourPlanState.failure(message: "errors:something-went-wrong"));
+    }
+  }
+
+  FutureOr<void> _closeTour(
+      _CloseTour event, Emitter<TourPlanState> emit) async {
+    emit(const TourPlanState.loading());
+    try {
+      Response response = await TourRepository.closeTour(tourId: event.tourId);
+      if (response.statusCode != 200) {
+        log(response.data.toString());
+        switch (response.data['codeError']) {
+          case 'error.exist.others.tourney.open':
+            emit(TourPlanState.failure(
+                message: S.current.tourErrorExistOpenTour));
+            break;
+          case 'error.tourney.is.closed':
+            emit(TourPlanState.failure(
+                message: S.current.tourErrorExistClosedTour));
             break;
           case 'error.ressourceRequiredAuthentication':
             emit(TourPlanState.failure(

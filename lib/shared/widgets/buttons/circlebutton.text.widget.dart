@@ -5,14 +5,18 @@ import '../../../core/core.dart';
 
 class CircleButtonText extends StatelessWidget {
   final IconData icon;
-  final String text;
+  final String? text;
+
+  final Color? color;
   final void Function()? onPressed;
+
   const CircleButtonText(
-      {super.key, required this.icon, required this.text, this.onPressed});
+      {super.key, required this.icon, this.text, this.onPressed, this.color});
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton(
           style: context.elevatedButtonTheme.copyWith(
@@ -20,6 +24,9 @@ class CircleButtonText extends StatelessWidget {
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(kRadiusRounded),
               ),
+            ),
+            backgroundColor: MaterialStateProperty.all<Color>(
+              color ?? kPrimaryColor,
             ),
           ),
           onPressed: onPressed,
@@ -29,12 +36,19 @@ class CircleButtonText extends StatelessWidget {
             color: kWhite,
           ),
         ),
-        SizedBox(height: kSpacingX2),
-        Text(
-          text,
-          textAlign: TextAlign.center,
-          style: context.textTheme.titleMedium,
-        ),
+        if (text != null)
+          Column(
+            children: [
+              SizedBox(height: kSpacingX2),
+              Text(
+                text!,
+                textAlign: TextAlign.center,
+                softWrap: true,
+                maxLines: 3,
+                style: context.textTheme.titleMedium,
+              ),
+            ],
+          ),
       ],
     );
   }

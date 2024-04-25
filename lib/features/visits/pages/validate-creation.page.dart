@@ -5,7 +5,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import '../../../core/core.dart';
 import '../../../shared/services/helpers/location.helper.dart';
 import '../../tour-plan/models/tour.dart';
-import '../bloc/tour-creation/visit_creation_cubit.dart';
+import '../bloc/visit-creation/visit_creation_cubit.dart';
 
 class VisitValidateCreationPage extends StatelessWidget {
   final Tour tour;
@@ -15,6 +15,7 @@ class VisitValidateCreationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('tour: $tour');
     final TourDetail? client = tour.pharmacies?.firstWhere(
       (element) => element.pharmacy!.id.toString() == data['pharmacieId'],
     );

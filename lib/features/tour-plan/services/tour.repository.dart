@@ -32,4 +32,14 @@ class TourRepository {
 
     return response;
   }
+
+  static Future<Response> closeTour({
+    required String tourId,
+  }) async {
+    Response response = await TourApi.close(
+      tourId: tourId,
+    );
+
+    return response;
+  }
 }

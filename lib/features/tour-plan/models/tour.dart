@@ -10,19 +10,20 @@ part 'tour.g.dart';
 @freezed
 class Tour with _$Tour {
   const factory Tour({
-    @JsonKey(name: 'tourneeId') required String tourneeId,
+    @JsonKey(name: 'tourneeId') required String tourId,
     @JsonKey(name: 'companyId') required int companyId,
-    @JsonKey(name: 'regionId') String? regionId,
-    @JsonKey(name: 'regionName') required String regionName,
+    @JsonKey(name: 'regionId') required String regionId,
+    @JsonKey(name: 'regionName') String? regionName,
     @JsonKey(name: 'dateDebut') required String startDate,
     @JsonKey(name: 'dateFin') required String endDate,
     @JsonKey(name: 'statusFlag') required int statusFlag,
+    @JsonKey(name: 'statusName') String? statusName,
     @JsonKey(name: 'dateDebutEffective') String? effectiveStartDate,
     @JsonKey(name: 'dateFinEffective') String? effectiveEndDate,
     @JsonKey(name: 'delegue') required Person delegate,
-    @JsonKey(name: 'superviseur') required Person supervisor,
-    int? totalClients,
-    int? visitedClients,
+    @JsonKey(name: 'superviseur') Person? supervisor,
+    @JsonKey(name: 'totalClients') int? totalClients,
+    @JsonKey(name: 'visitedClients') int? visitedClients,
     @JsonKey(name: 'tourneeDetails') List<TourDetail>? pharmacies,
   }) = _Tour;
 
@@ -39,8 +40,12 @@ class TourDetail with _$TourDetail {
     @JsonKey(name: 'dateDebut') String? startDate,
     @JsonKey(name: 'dateFin') String? endDate,
     @JsonKey(name: 'statusFlag') int? statusFlag,
+    @JsonKey(name: 'statusName') String? statusName,
     @JsonKey(name: 'motif') String? reason,
     @JsonKey(name: 'repport') String? report,
+    @JsonKey(name: 'repportText') String? reportText,
+    @JsonKey(name: 'latitude') double? latitude,
+    @JsonKey(name: 'longitude') double? longitude,
     @JsonKey(name: 'pharmacie') Person? pharmacy,
   }) = _TourDetail;
 

@@ -15,7 +15,7 @@ class TourApi {
     final String token = (await AuthRepository.token) ?? "";
 
     return await DioHelper.getData(
-      url: '/tournee/',
+      url: '/tournee',
       token: token,
       query: {
         "dateDebut": start,
@@ -33,11 +33,26 @@ class TourApi {
   }) async {
     final String token = (await AuthRepository.token) ?? "";
 
-    return await DioHelper.postData(
-      url: '/tournee/',
+    return await DioHelper.putData(
+      url: '/tournee',
       data: {
         'tourneeId': tourId,
         'status': 1,
+      },
+      token: token,
+    );
+  }
+
+  static Future<Response> close({
+    required String tourId,
+  }) async {
+    final String token = (await AuthRepository.token) ?? "";
+
+    return await DioHelper.putData(
+      url: '/tournee',
+      data: {
+        'tourneeId': tourId,
+        'status': 2,
       },
       token: token,
     );
