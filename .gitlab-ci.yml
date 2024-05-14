@@ -17,7 +17,7 @@ cache:
 
 build_android:
   stage: build
-  image: cirrusci/flutter:stable
+  image: ghcr.io/cirruslabs/flutter
   script:
     - flutter pub get
     - flutter build apk --release
@@ -30,7 +30,7 @@ build_android:
 
 build_ios:
   stage: build
-  image: cirrusci/flutter:latest
+  image: ghcr.io/cirruslabs/flutter
   script:
     - flutter pub get
     - flutter build ios --release --no-codesign
