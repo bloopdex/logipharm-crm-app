@@ -152,6 +152,10 @@
   "@authLoginSubmit": {
     "description": "Soumettre la connexion"
   },
+  "authLoginError": "Nom d'utilisateur ou mot de passe incorrect",
+  "@authLoginError": {
+    "description": "Nom d'utilisateur ou mot de passe incorrect"
+  },
   "tourClient": "{count} Client",
   "@tourClient": {
     "description": "Client",
@@ -746,7 +750,6 @@
   "@hired": {
     "description": "Recruté"
   },
-
   "rejected": "Rejeté",
   "@rejected": {
     "description": "Rejeté"
@@ -802,5 +805,29 @@
   "addClaim": "Ajouter une réclamation",
   "@addClaim": {
     "description": "Ajouter une réclamation"
+  },
+  "allRegions": "Toutes les régions",
+  "@allRegions": {
+    "description": "Toutes les régions"
+  },
+  "cantCreatePlanWhileOpened": "Vous ne pouvez pas créer un plan de tournée pendant que vous avez une tournée ouverte",
+  "@cantCreatePlanWhileOpened": {
+    "description": "Vous ne pouvez pas créer un plan de tournée pendant que vous avez une tournée ouverte"
+  },
+  "cnrc": "CNRC",
+  "@cnrc": {
+    "description": "CNRC"
+  },
+  "searchClient": "Rechercher un client",
+  "@searchClient": {
+    "description": "Rechercher un client"
+  },
+  "uploadFile": "Télécharger un fichier",
+  "@uploadFile": {
+    "description": "Télécharger un fichier"
+  },
+  "cantCreateVisit": "Vous ne pouvez pas créer une visite pour ce client",
+  "@cantCreateVisit": {
+    "description": "Vous ne pouvez pas créer une visite pour ce client"
   }
 }

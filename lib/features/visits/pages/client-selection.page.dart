@@ -13,11 +13,15 @@ class ClientSelectionForm extends StatefulWidget {
   final List<TourDetail> clients;
   final Map<String, dynamic> data;
   final QuillController quillController;
-  const ClientSelectionForm(
-      {super.key,
-      required this.data,
-      required this.clients,
-      required this.quillController});
+  final Function()? onQuillFocus;
+
+  const ClientSelectionForm({
+    super.key,
+    required this.data,
+    required this.clients,
+    required this.quillController,
+    this.onQuillFocus,
+  });
 
   @override
   State<ClientSelectionForm> createState() => _ClientSelectionFormState();
@@ -27,9 +31,22 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
   final FocusNode _quillFocusNode = FocusNode();
 
   @override
+  void initState() {
+    super.initState();
+    _quillFocusNode.addListener(_handleQuillFocusChange);
+  }
+
+  @override
   void dispose() {
+    _quillFocusNode.removeListener(_handleQuillFocusChange);
     _quillFocusNode.dispose();
     super.dispose();
+  }
+
+  void _handleQuillFocusChange() {
+    if (_quillFocusNode.hasFocus) {
+      widget.onQuillFocus?.call();
+    }
   }
 
   @override

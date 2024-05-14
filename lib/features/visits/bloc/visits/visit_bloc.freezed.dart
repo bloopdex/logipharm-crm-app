@@ -21,6 +21,7 @@ mixin _$VisitEvent {
     required TResult Function() started,
     required TResult Function(DateTime? start, DateTime? end) search,
     required TResult Function(DateTime? start, DateTime? end) load,
+    required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$VisitEvent {
     TResult? Function()? started,
     TResult? Function(DateTime? start, DateTime? end)? search,
     TResult? Function(DateTime? start, DateTime? end)? load,
+    TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$VisitEvent {
     TResult Function()? started,
     TResult Function(DateTime? start, DateTime? end)? search,
     TResult Function(DateTime? start, DateTime? end)? load,
+    TResult Function()? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$VisitEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_Search value) search,
     required TResult Function(_Load value) load,
+    required TResult Function(_Reset value) reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$VisitEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_Search value)? search,
     TResult? Function(_Load value)? load,
+    TResult? Function(_Reset value)? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$VisitEvent {
     TResult Function(_Started value)? started,
     TResult Function(_Search value)? search,
     TResult Function(_Load value)? load,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +127,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function(DateTime? start, DateTime? end) search,
     required TResult Function(DateTime? start, DateTime? end) load,
+    required TResult Function() reset,
   }) {
     return started();
   }
@@ -131,6 +138,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(DateTime? start, DateTime? end)? search,
     TResult? Function(DateTime? start, DateTime? end)? load,
+    TResult? Function()? reset,
   }) {
     return started?.call();
   }
@@ -141,6 +149,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(DateTime? start, DateTime? end)? search,
     TResult Function(DateTime? start, DateTime? end)? load,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -155,6 +164,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_Search value) search,
     required TResult Function(_Load value) load,
+    required TResult Function(_Reset value) reset,
   }) {
     return started(this);
   }
@@ -165,6 +175,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_Search value)? search,
     TResult? Function(_Load value)? load,
+    TResult? Function(_Reset value)? reset,
   }) {
     return started?.call(this);
   }
@@ -175,6 +186,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_Search value)? search,
     TResult Function(_Load value)? load,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -263,6 +275,7 @@ class _$SearchImpl implements _Search {
     required TResult Function() started,
     required TResult Function(DateTime? start, DateTime? end) search,
     required TResult Function(DateTime? start, DateTime? end) load,
+    required TResult Function() reset,
   }) {
     return search(start, end);
   }
@@ -273,6 +286,7 @@ class _$SearchImpl implements _Search {
     TResult? Function()? started,
     TResult? Function(DateTime? start, DateTime? end)? search,
     TResult? Function(DateTime? start, DateTime? end)? load,
+    TResult? Function()? reset,
   }) {
     return search?.call(start, end);
   }
@@ -283,6 +297,7 @@ class _$SearchImpl implements _Search {
     TResult Function()? started,
     TResult Function(DateTime? start, DateTime? end)? search,
     TResult Function(DateTime? start, DateTime? end)? load,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -297,6 +312,7 @@ class _$SearchImpl implements _Search {
     required TResult Function(_Started value) started,
     required TResult Function(_Search value) search,
     required TResult Function(_Load value) load,
+    required TResult Function(_Reset value) reset,
   }) {
     return search(this);
   }
@@ -307,6 +323,7 @@ class _$SearchImpl implements _Search {
     TResult? Function(_Started value)? started,
     TResult? Function(_Search value)? search,
     TResult? Function(_Load value)? load,
+    TResult? Function(_Reset value)? reset,
   }) {
     return search?.call(this);
   }
@@ -317,6 +334,7 @@ class _$SearchImpl implements _Search {
     TResult Function(_Started value)? started,
     TResult Function(_Search value)? search,
     TResult Function(_Load value)? load,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -411,6 +429,7 @@ class _$LoadImpl implements _Load {
     required TResult Function() started,
     required TResult Function(DateTime? start, DateTime? end) search,
     required TResult Function(DateTime? start, DateTime? end) load,
+    required TResult Function() reset,
   }) {
     return load(start, end);
   }
@@ -421,6 +440,7 @@ class _$LoadImpl implements _Load {
     TResult? Function()? started,
     TResult? Function(DateTime? start, DateTime? end)? search,
     TResult? Function(DateTime? start, DateTime? end)? load,
+    TResult? Function()? reset,
   }) {
     return load?.call(start, end);
   }
@@ -431,6 +451,7 @@ class _$LoadImpl implements _Load {
     TResult Function()? started,
     TResult Function(DateTime? start, DateTime? end)? search,
     TResult Function(DateTime? start, DateTime? end)? load,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -445,6 +466,7 @@ class _$LoadImpl implements _Load {
     required TResult Function(_Started value) started,
     required TResult Function(_Search value) search,
     required TResult Function(_Load value) load,
+    required TResult Function(_Reset value) reset,
   }) {
     return load(this);
   }
@@ -455,6 +477,7 @@ class _$LoadImpl implements _Load {
     TResult? Function(_Started value)? started,
     TResult? Function(_Search value)? search,
     TResult? Function(_Load value)? load,
+    TResult? Function(_Reset value)? reset,
   }) {
     return load?.call(this);
   }
@@ -465,6 +488,7 @@ class _$LoadImpl implements _Load {
     TResult Function(_Started value)? started,
     TResult Function(_Search value)? search,
     TResult Function(_Load value)? load,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -483,6 +507,120 @@ abstract class _Load implements VisitEvent {
   @JsonKey(ignore: true)
   _$$LoadImplCopyWith<_$LoadImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ResetImplCopyWith<$Res> {
+  factory _$$ResetImplCopyWith(
+          _$ResetImpl value, $Res Function(_$ResetImpl) then) =
+      __$$ResetImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResetImplCopyWithImpl<$Res>
+    extends _$VisitEventCopyWithImpl<$Res, _$ResetImpl>
+    implements _$$ResetImplCopyWith<$Res> {
+  __$$ResetImplCopyWithImpl(
+      _$ResetImpl _value, $Res Function(_$ResetImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ResetImpl implements _Reset {
+  const _$ResetImpl();
+
+  @override
+  String toString() {
+    return 'VisitEvent.reset()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ResetImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(DateTime? start, DateTime? end) search,
+    required TResult Function(DateTime? start, DateTime? end) load,
+    required TResult Function() reset,
+  }) {
+    return reset();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(DateTime? start, DateTime? end)? search,
+    TResult? Function(DateTime? start, DateTime? end)? load,
+    TResult? Function()? reset,
+  }) {
+    return reset?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(DateTime? start, DateTime? end)? search,
+    TResult Function(DateTime? start, DateTime? end)? load,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Search value) search,
+    required TResult Function(_Load value) load,
+    required TResult Function(_Reset value) reset,
+  }) {
+    return reset(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Search value)? search,
+    TResult? Function(_Load value)? load,
+    TResult? Function(_Reset value)? reset,
+  }) {
+    return reset?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Search value)? search,
+    TResult Function(_Load value)? load,
+    TResult Function(_Reset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Reset implements VisitEvent {
+  const factory _Reset() = _$ResetImpl;
 }
 
 /// @nodoc

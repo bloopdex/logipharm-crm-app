@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../../logic/file/file_cubit.dart';
 import '../../../shared/services/helpers/dio.helper.dart';
 import '../../auth/services/auth.repository.dart';
 
@@ -30,9 +31,19 @@ class HireRepository {
         "dateDebut": startDate,
         "dateFin": endDate,
         "region": query,
-        'page': page,
-        'pageSize': size,
+        "page": page,
+        "pageSize": size,
       },
+    );
+  }
+
+  static Future<Response> file({required String hireId, required FileModel file}) async {
+    final String token = (await AuthRepository.token) ?? "";
+
+    return await DioHelper.uploadImage(
+      file.url,
+      '/file/upload?id=$hireId&typeAttachment=2',
+      token,
     );
   }
 }

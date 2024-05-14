@@ -7,6 +7,7 @@ class ProfileCard extends StatelessWidget {
   final String? image;
   final String text;
   final TextStyle? textStyle;
+  final Color? backgroundColor;
 
   const ProfileCard({
     super.key,
@@ -14,6 +15,7 @@ class ProfileCard extends StatelessWidget {
     this.image,
     required this.text,
     this.textStyle,
+    this.backgroundColor,
   });
 
   @override
@@ -22,8 +24,9 @@ class ProfileCard extends StatelessWidget {
       width: size?.sp ?? 50.sp,
       height: size?.sp ?? 50.sp,
       alignment: Alignment.center,
+      padding: EdgeInsets.all(kPaddingSm2),
       decoration: BoxDecoration(
-        color: kBgGrayVisibility1,
+        color: backgroundColor ?? kBgGrayVisibility1,
         shape: BoxShape.circle,
         border: Border.all(
           color: kBorder3,
@@ -41,8 +44,13 @@ class ProfileCard extends StatelessWidget {
               ),
             )
           : Center(
-              child: Text(text.initials.toUpperCase(),
-                  style: textStyle ?? context.textTheme.bodySmall),
+              child: Text(
+                text.initials.toUpperCase(),
+                style: textStyle ?? context.textTheme.bodySmall,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.clip,
+                maxLines: 1,
+              ),
             ),
     );
   }

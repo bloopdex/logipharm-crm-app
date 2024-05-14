@@ -18,6 +18,7 @@ class Person with _$Person {
     @JsonKey(name: 'regionId') String? regionId,
     @JsonKey(name: 'adresse') String? address,
     @JsonKey(name: 'latitude') double? latitude,
+    @JsonKey(name: 'superviseur') int? supervisor,
     @JsonKey(name: 'longitude') double? longitude,
     @JsonKey(name: 'codePostal') String? postalCode,
     @JsonKey(name: 'boitePostale') String? postBox,

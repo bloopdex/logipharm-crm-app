@@ -11,4 +11,6 @@ class VisitEvent with _$VisitEvent {
     DateTime? start,
     DateTime? end,
   }) = _Load;
+
+  const factory VisitEvent.reset() = _Reset;
 }

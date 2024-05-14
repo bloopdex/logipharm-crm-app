@@ -1,12 +1,13 @@
-import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:map_launcher/map_launcher.dart';
 
 import '../../core/core.dart';
+import '../../logic/auth/auth_bloc.dart';
 import '../../shared/widgets/buttons/circlebutton.text.widget.dart';
 import '../hiring/create-hire.page.dart';
 import '../todo/create-event.page.dart';
@@ -22,6 +23,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<AuthBloc>().user;
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
       child: Container(
@@ -48,12 +50,13 @@ class HomePage extends StatelessWidget {
               final Tour? current = state.maybeWhen(
                 loaded: (tours, hasReachedMax, currentPage) {
                   return tours
-                      .where((element) =>
-                          element.statusFlag == StatuFlags.opened.value)
+                      .where((element) => (element.statusFlag == StatuFlags.opened.value &&
+                          element.delegate.id == user.id.id))
                       .firstOrNull;
                 },
                 orElse: () => null,
               );
+
               return Column(children: [
                 if (current != null)
                   Column(
@@ -70,6 +73,34 @@ class HomePage extends StatelessWidget {
                   ),
               ]);
             }),
+            if (user.supervisor == 0)
+              BlocBuilder<TourPlanBloc, TourPlanState>(
+                builder: (context, state) {
+                  return state.maybeWhen(orElse: () {
+                    return const SizedBox.shrink();
+                  }, loaded: (tours, hasReachedMax, currentPage) {
+                    final opened = tours
+                        .where((element) => element.statusFlag == StatuFlags.opened.value)
+                        .toList();
+
+                    return Container(
+                      margin: EdgeInsets.only(bottom: kSpacingX5),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: opened
+                              .map(
+                                (e) => Container(
+                                    padding: EdgeInsets.symmetric(horizontal: kSpacingX2),
+                                    child: CurrentWidgetCardSupervisor(tour: e)),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    );
+                  });
+                },
+              ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -78,7 +109,20 @@ class HomePage extends StatelessWidget {
                     icon: Icons.offline_bolt_rounded,
                     text: context.i10n.homeCreateNewPlan,
                     onPressed: () {
-                      context.push(const CreatePlanPage());
+                      final current = context.read<TourPlanBloc>().state.maybeWhen(
+                            loaded: (tours, hasReachedMax, currentPage) {
+                              return tours
+                                  .where((element) => element.statusFlag == StatuFlags.opened.value)
+                                  .firstOrNull;
+                            },
+                            orElse: () => null,
+                          );
+                      final user = context.read<AuthBloc>().user;
+                      if (current == null || user.supervisor == 0) {
+                        Navigator.pushNamed(context, CreatePlanPage.routeName);
+                      } else {
+                        context.errorSnackBar(context.i10n.cantCreatePlanWhileOpened);
+                      }
                     },
                   ),
                 ),
@@ -87,40 +131,37 @@ class HomePage extends StatelessWidget {
                     icon: Icons.fact_check_rounded,
                     text: context.i10n.homeCreateNewVisit,
                     onPressed: () {
-                      final current =
-                          context.read<TourPlanBloc>().state.maybeWhen(
-                                loaded: (tours, hasReachedMax, currentPage) {
-                                  return tours
-                                      .where((element) =>
-                                          element.statusFlag ==
-                                          StatuFlags.opened.value)
-                                      .firstOrNull;
-                                },
-                                orElse: () => null,
-                              );
+                      final current = context.read<TourPlanBloc>().state.maybeWhen(
+                            loaded: (tours, hasReachedMax, currentPage) {
+                              return tours
+                                  .where((element) => element.statusFlag == StatuFlags.opened.value)
+                                  .firstOrNull;
+                            },
+                            orElse: () => null,
+                          );
                       if (current != null &&
                           current.pharmacies != null &&
-                          current.pharmacies!.isNotEmpty) {
+                          current.pharmacies!.isNotEmpty &&
+                          user.supervisor != 0) {
                         context.push(
                           CreateVisitPage(
                             tour: current,
-                            pharmacieId: current.pharmacies!.first.pharmacy!.id
-                                .toString(),
+                            pharmacieId: current.pharmacies!.first.pharmacy!.id.toString(),
                           ),
                         );
                       }
                     },
                     color: context.watch<TourPlanBloc>().state.maybeWhen(
-                                  loaded: (tours, hasReachedMax, currentPage) {
-                                    return tours
-                                        .where((element) =>
-                                            element.statusFlag ==
-                                            StatuFlags.opened.value)
-                                        .firstOrNull;
-                                  },
-                                  orElse: () => null,
-                                ) ==
-                            null
+                                      loaded: (tours, hasReachedMax, currentPage) {
+                                        return tours
+                                            .where((element) =>
+                                                element.statusFlag == StatuFlags.opened.value)
+                                            .firstOrNull;
+                                      },
+                                      orElse: () => null,
+                                    ) ==
+                                null ||
+                            user.supervisor == 0
                         ? kBgGrayVisibility4
                         : kPrimaryColor,
                   ),
@@ -158,45 +199,67 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(kSpacingX3),
                 ),
-                child: BlocBuilder<ClientsCubit, ClientsState>(
+                child: BlocBuilder<TourPlanBloc, TourPlanState>(
                   builder: (context, state) {
+                    final user = context.user;
+                    final Tour? current = state.maybeWhen(
+                      loaded: (tours, hasReachedMax, currentPage) {
+                        return tours
+                            .where((element) => (element.statusFlag == StatuFlags.opened.value &&
+                                element.delegate.id == user.id.id))
+                            .firstOrNull;
+                      },
+                      orElse: () => null,
+                    );
+
                     return FlutterMap(
                       options: const MapOptions(
-                        initialCenter: LatLng(36.7525, 3.04197),
-                        initialZoom: 12,
+                        initialCenter: LatLng(30.7525, 3.04197),
+                        initialZoom: 5,
                       ),
                       children: [
                         TileLayer(
-                          urlTemplate:
-                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                           userAgentPackageName: 'com.a2sdz.crm',
                         ),
                         MarkerLayer(
-                            markers: state.maybeWhen(
-                          orElse: () => [],
-                          loaded: (clients) => clients.map((e) {
-                            if (e.latitude == null || e.longitude == null) {
-                              return Marker(
-                                  point: LatLng(0, 0), child: Container());
-                            }
-                            return Marker(
-                              point: LatLng(e.latitude!, e.longitude!),
-                              child: InkWell(
-                                onTap: () async {
-                                  final availableMaps =
-                                      await MapLauncher.installedMaps;
-                                  await availableMaps.first.showMarker(
-                                    coords: Coords(e.latitude!, e.longitude!),
-                                    title: context.i10n.clientAddress,
-                                  );
-                                },
-                                child: ProfileCard(
-                                  text: e.fullName,
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        )),
+                          markers: current?.pharmacies
+                                  ?.where((element) => (element.pharmacy?.latitude != null &&
+                                      element.pharmacy?.longitude != null))
+                                  .map((e) {
+                                return Marker(
+                                  width: 50.sp,
+                                  height: 50.sp,
+                                  point:
+                                      LatLng(e.pharmacy!.latitude ?? 0, e.pharmacy!.longitude ?? 0),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      final availableMaps = await MapLauncher.installedMaps;
+                                      await availableMaps.first.showMarker(
+                                        coords: Coords(
+                                            e.pharmacy!.latitude ?? 0, e.pharmacy!.longitude ?? 0),
+                                        title: e.pharmacy!.fullName,
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 50.sp,
+                                      height: 50.sp,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: kCardinal,
+                                      ),
+                                      child: ProfileCard(
+                                        backgroundColor: kCardinal,
+                                        text: e.pharmacy!.fullName,
+                                        textStyle:
+                                            context.textTheme.bodySmall!.copyWith(color: kWhite),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList() ??
+                              [],
+                        ),
                       ],
                     );
                   },

@@ -1,3 +1,5 @@
+import 'package:crm/features/clients/blocs/observation_cubit.dart';
+import 'package:crm/features/clients/client-details.page.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/core/enums.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
@@ -5,6 +7,8 @@ import 'package:crm/shared/widgets/popup/confirmation.popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:map_launcher/map_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/core.dart';
 import '../../shared/widgets/buttons/button.widget.dart';
@@ -47,10 +51,8 @@ class TourPlanDetailPage extends StatelessWidget {
         },
         child: Container(
           constraints: BoxConstraints(
-            maxHeight:
-                context.height - context.appBarSize - context.paddingBottom,
-            minHeight:
-                context.height - context.appBarSize - context.paddingBottom,
+            maxHeight: context.height - context.appBarSize - context.paddingBottom,
+            minHeight: context.height - context.appBarSize - context.paddingBottom,
             maxWidth: context.width,
             minWidth: context.width,
           ),
@@ -61,8 +63,7 @@ class TourPlanDetailPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.vertical(
-                    bottom:
-                        Radius.elliptical(context.width * 2, context.width / 3),
+                    bottom: Radius.elliptical(context.width * 2, context.width / 3),
                   ),
                 ),
               ),
@@ -77,8 +78,7 @@ class TourPlanDetailPage extends StatelessWidget {
                       color: kBgGrayVisibility2,
                       borderRadius: BorderRadius.circular(kSpacingX4),
                     ),
-                    child: Icon(Icons.bolt,
-                        size: kSpacingX9, color: kBgGrayVisibility6),
+                    child: Icon(Icons.bolt, size: kSpacingX9, color: kBgGrayVisibility6),
                   ),
                   SizedBox(height: kSpacingX5),
                   Text(
@@ -331,8 +331,7 @@ class TourClientsTab extends StatefulWidget {
   State<TourClientsTab> createState() => _TourClientsTabState();
 }
 
-class _TourClientsTabState extends State<TourClientsTab>
-    with TickerProviderStateMixin {
+class _TourClientsTabState extends State<TourClientsTab> with TickerProviderStateMixin {
   late TabController controller;
 
   @override
@@ -392,12 +391,10 @@ class TourClientsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.user;
     List<TourDetail> pharmacies = [];
     if (flag != StatuFlags.all.value) {
-      pharmacies = tour.pharmacies
-              ?.where((element) => element.statusFlag == flag)
-              .toList() ??
-          [];
+      pharmacies = tour.pharmacies?.where((element) => element.statusFlag == flag).toList() ?? [];
     } else {
       pharmacies = tour.pharmacies ?? [];
     }
@@ -406,45 +403,118 @@ class TourClientsList extends StatelessWidget {
       itemBuilder: (context, index) {
         final pharmacy = pharmacies[index];
         return ListTile(
+          onTap: () {
+            context.read<ObservationCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
+            context.push(
+              ClientDetailsPage(client: pharmacy.pharmacy!),
+            );
+          },
           leading: ProfileCard(
             text: pharmacy.pharmacy?.fullName ?? "",
           ),
-          title: Text(pharmacy.pharmacy!.fullName),
-          subtitle:
-              pharmacy.reportText != null ? Text(pharmacy.reportText!) : null,
+          title: Text(
+            pharmacy.pharmacy?.fullName ?? "",
+            maxLines: 3,
+            softWrap: true,
+            style: context.textTheme.bodyMedium!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: pharmacy.reportText != null ? Text(pharmacy.reportText!) : null,
           trailing: pharmacy.statusFlag != StatuFlags.pending.value
               ? Icon(
                   Icons.done_all_rounded,
                   color: kSuccessColor,
                 )
-              : InkWell(
-                  onTap: () {
-                    if (tour.statusFlag == StatuFlags.opened.value) {
-                      context.push(CreateVisitPage(
-                        tour: tour,
-                        pharmacieId: pharmacy.pharmacy!.id.toString(),
-                      ));
-                    }
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.add_rounded,
-                        color: tour.statusFlag == StatuFlags.opened.value
-                            ? kPrimaryColor
-                            : kText5,
-                      ),
-                      Text(
-                        context.i10n.tourDetailsVisitClient,
-                        style: context.textTheme.headlineSmall!.copyWith(
-                          color: tour.statusFlag == StatuFlags.opened.value
-                              ? kPrimaryColor
-                              : kText5,
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(children: [
+                      InkWell(
+                        onTap: () async {
+                          final Uri _phoneLaunchUri = Uri.parse(
+                              'tel://${pharmacy.pharmacy?.tel1Fixe ?? pharmacy.pharmacy?.tel2Fixe ?? pharmacy.pharmacy?.telMobile ?? ""}');
+
+                          if (pharmacy.pharmacy?.tel1Fixe != null ||
+                              pharmacy.pharmacy?.tel2Fixe != null ||
+                              pharmacy.pharmacy?.telMobile != null) {
+                            await launchUrl(_phoneLaunchUri);
+                          }
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(kPaddingSm3),
+                          decoration: BoxDecoration(
+                            color: kPrimaryColor.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(kRadiusRounded),
+                          ),
+                          child: Icon(
+                            Icons.phone_rounded,
+                            size: kSpacingX4,
+                            color: kPrimaryColor,
+                          ),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                      SizedBox(width: kSpacingX2),
+                      InkWell(
+                        onTap: () async {
+                          if (pharmacy.pharmacy?.latitude == null ||
+                              pharmacy.pharmacy?.longitude == null) {
+                            return;
+                          }
+                          final availableMaps = await MapLauncher.installedMaps;
+                          await availableMaps.first.showMarker(
+                            coords:
+                                Coords(pharmacy.pharmacy!.latitude!, pharmacy.pharmacy!.longitude!),
+                            title: context.i10n.clientAddress,
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(kPaddingSm3),
+                          decoration: BoxDecoration(
+                            color: kPrimaryColor.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(kRadiusRounded),
+                          ),
+                          child: Icon(
+                            Icons.map_rounded,
+                            size: kSpacingX4,
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                      ),
+                    ]),
+                    InkWell(
+                      onTap: () {
+                        if (tour.statusFlag == StatuFlags.opened.value &&
+                            tour.delegate.id == user.id.id) {
+                          context.push(CreateVisitPage(
+                            tour: tour,
+                            pharmacieId: pharmacy.pharmacy?.id.toString(),
+                          ));
+                        }
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.add_rounded,
+                            color: tour.statusFlag == StatuFlags.opened.value &&
+                                    tour.delegate.id == user.id.id
+                                ? kPrimaryColor
+                                : kText5,
+                          ),
+                          Text(
+                            context.i10n.tourDetailsVisitClient,
+                            style: context.textTheme.headlineSmall!.copyWith(
+                              color: tour.statusFlag == StatuFlags.opened.value &&
+                                      tour.delegate.id == user.id.id
+                                  ? kPrimaryColor
+                                  : kText5,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
         );
       },

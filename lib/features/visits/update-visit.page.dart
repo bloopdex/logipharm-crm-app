@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:crm/features/tour-plan/models/tour.dart';
+import 'package:crm/features/visits/bloc/visits/visit_bloc.dart';
 import 'package:crm/features/visits/pages/creation-successful.page.dart';
 import 'package:crm/shared/services/helpers/location.helper.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,19 @@ class UpdateVisitPage extends StatefulWidget {
 
 class _UpdateVisitPageState extends State<UpdateVisitPage> {
   QuillController _quillController = QuillController.basic();
+  final ScrollController _scrollController = ScrollController();
 
   Map<String, dynamic> data = {};
+
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 3000),
+        curve: Curves.easeOut,
+      );
+    });
+  }
 
   @override
   void initState() {
@@ -121,23 +133,14 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                       maxWidth: context.width,
                       minWidth: context.width,
                       maxHeight: context.read<CounterCubit>().state == 0
-                          ? context.height -
-                              context.appBarSize -
-                              context.paddingBottom -
-                              160.sp
-                          : context.height -
-                              context.appBarSize -
-                              context.paddingBottom,
+                          ? context.height - context.appBarSize - context.paddingBottom - 160.sp
+                          : context.height - context.appBarSize - context.paddingBottom,
                       minHeight: context.read<CounterCubit>().state == 0
-                          ? context.height -
-                              context.appBarSize -
-                              context.paddingBottom -
-                              160.sp
-                          : context.height -
-                              context.appBarSize -
-                              context.paddingBottom,
+                          ? context.height - context.appBarSize - context.paddingBottom - 160.sp
+                          : context.height - context.appBarSize - context.paddingBottom,
                     ),
                     child: SingleChildScrollView(
+                      controller: _scrollController,
                       child: BlocBuilder<CounterCubit, int>(
                         builder: (context, state) {
                           return Container(
@@ -169,58 +172,45 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                                   child: state == 0
                                       ? ClientSelectionForm(
                                           quillController: _quillController,
+                                          onQuillFocus: _scrollToBottom,
                                           clients: [widget.tour],
                                           data: data,
                                         )
-                                      : VisitValidateUpdatePage(
-                                          tour: widget.tour, data: data),
+                                      : VisitValidateUpdatePage(tour: widget.tour, data: data),
                                 ),
                                 SizedBox(height: kSpacingX4),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: kPaddingMd2),
+                                  padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
                                   child: CustomButton(
-                                    text: state < 1
-                                        ? context.i10n.next
-                                        : context.i10n.validate,
+                                    text: state < 1 ? context.i10n.next : context.i10n.validate,
                                     onPressed: () async {
                                       switch (state) {
                                         case 0:
                                           if (data['dateDebut'] == null ||
                                               data['pharmacieId'] == null ||
                                               data['motif'] == null ||
-                                              _quillController.document
-                                                  .toPlainText()
-                                                  .isEmpty) {
+                                              _quillController.document.toPlainText().isEmpty) {
                                             return;
                                           }
-                                          data['document'] =
-                                              _quillController.document;
-                                          context
-                                              .read<CounterCubit>()
-                                              .increment();
+                                          data['document'] = _quillController.document;
+                                          context.read<CounterCubit>().increment();
                                           setState(() {});
                                           break;
                                         case 1:
-                                          data['rapportText'] = _quillController
-                                              .document
-                                              .toPlainText();
-                                          data['rapport'] = _quillController
-                                              .document
+                                          data['rapportText'] =
+                                              _quillController.document.toPlainText();
+                                          data['rapport'] = _quillController.document
                                               .toDelta()
                                               .toJson()
                                               .toString();
-                                          final position = await LocationHelper
-                                              .getCurrentPosition();
+                                          final position =
+                                              await LocationHelper.getCurrentPosition();
                                           if (position != null) {
-                                            data['latitude'] =
-                                                position.latitude;
-                                            data['longitude'] =
-                                                position.longitude;
+                                            data['latitude'] = position.latitude;
+                                            data['longitude'] = position.longitude;
                                           }
-                                          context
-                                              .read<VisitCreationCubit>()
-                                              .validate(data: data);
+                                          context.read<VisitCreationCubit>().validate(data: data);
+                                          context.read<VisitBloc>().add(const VisitEvent.started());
                                       }
                                     },
                                   ),

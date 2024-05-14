@@ -55,5 +55,9 @@
         <string>https</string>
         <string>http</string>
     </array>
+    <key>NSDocumentsDirectory</key>
+    <string>A2S CRM needs access to your documents directory to pick files.</string>
+    <key>NSLibraryDirectory</key>
+    <string>A2S CRM needs access to your library directory to pick files.</string>
 </dict>
 </plist>

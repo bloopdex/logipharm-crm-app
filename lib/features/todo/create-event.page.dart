@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/core.dart';
+import '../../shared/services/helpers/notification.helper.dart';
 import '../../shared/widgets/buttons/button.widget.dart';
 import 'cubit/todo_cubit.dart';
 
 class CreateEventPage extends StatefulWidget {
   final Todo? todo;
+
   const CreateEventPage({super.key, this.todo});
 
   @override
@@ -77,10 +79,8 @@ class _CreateEventPageState extends State<CreateEventPage> {
       ),
       body: Container(
         constraints: BoxConstraints(
-          minHeight:
-              context.height - context.appBarSize - context.paddingBottom,
-          maxHeight:
-              context.height - context.appBarSize - context.paddingBottom,
+          minHeight: context.height - context.appBarSize - context.paddingBottom,
+          maxHeight: context.height - context.appBarSize - context.paddingBottom,
           minWidth: context.width,
           maxWidth: context.width,
         ),
@@ -223,8 +223,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                         child: Wrap(
                           spacing: kSpacingX3,
                           alignment: WrapAlignment.center,
-                          children:
-                              List<Widget>.generate(colors.length, (int index) {
+                          children: List<Widget>.generate(colors.length, (int index) {
                             return Container(
                               width: kSpacingX9,
                               height: kSpacingX9,
@@ -244,8 +243,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 selected: selectedColor == colors[index],
                                 onSelected: (bool selected) {
                                   setState(() {
-                                    selectedColor =
-                                        selected ? colors[index] : null;
+                                    selectedColor = selected ? colors[index] : null;
                                   });
                                 },
                                 backgroundColor: colors[index],
@@ -253,8 +251,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 padding: EdgeInsets.all(kSpacingX14),
                                 showCheckmark: false,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(kRadiusRounded),
+                                  borderRadius: BorderRadius.circular(kRadiusRounded),
                                 ),
                               ),
                             );
@@ -290,12 +287,17 @@ class _CreateEventPageState extends State<CreateEventPage> {
                       } else {
                         context.read<TodoCubit>().add(todo);
                       }
+                      NotificationService().showScheduledNotification(
+                        id: 1,
+                        title: event['title'],
+                        body: event['notes'],
+                        payload: '',
+                        scheduledDate: selectedDate.subtract(const Duration(minutes: 5)),
+                      );
                       context.pop();
                     }
                   },
-                  text: widget.todo == null
-                      ? context.i10n.add
-                      : context.i10n.update,
+                  text: widget.todo == null ? context.i10n.add : context.i10n.update,
                 ),
               ),
             ],

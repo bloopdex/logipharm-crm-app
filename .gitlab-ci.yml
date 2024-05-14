@@ -1,0 +1,65 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  ANDROID_FOLDER_ID: "replace_with_your_android_folder_id_in_google_drive"
+  IOS_FOLDER_ID: "replace_with_your_ios_folder_id_in_google_drive"
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .gradle/
+    - .pub-cache/
+
+build_android:
+  stage: build
+  image: cirrusci/flutter:latest
+  script:
+    - flutter pub get
+    - flutter build apk --release
+  artifacts:
+    paths:
+      - build/app/outputs/flutter-apk/*.apk
+    expire_in: 1 week
+  only:
+    - branches
+
+build_ios:
+  stage: build
+  image: cirrusci/flutter:latest
+  script:
+    - flutter pub get
+    - flutter build ios --release --no-codesign
+  artifacts:
+    paths:
+      - build/ios/iphoneos/*.ipa
+    expire_in: 1 week
+  only:
+    - branches
+
+deploy_android_to_google_drive:
+  stage: deploy
+  image: google/cloud-sdk:alpine
+  script:
+    - echo $GOOGLE_CREDENTIALS > /tmp/gdrive-service-account.json
+    - gcloud auth activate-service-account --key-file /tmp/gdrive-service-account.json
+    - apk --no-cache add curl
+    - curl -L https://github.com/prasmussen/gdrive/releases/download/2.1.0/gdrive-linux-x64 -o gdrive
+    - chmod +x gdrive
+    - FOLDER_NAME=$(echo $CI_COMMIT_REF_NAME | sed 's/[^a-zA-Z0-9]/_/g')
+    - FOLDER_ID=$(./gdrive list --no-header --query "name = '$FOLDER_NAME' and mimeType = 'application/vnd.google-apps.folder'" | awk '{print $1}')
+    - if [ -z "$FOLDER_ID" ]; then
+      echo "Folder does not exist, creating folder."
+      FOLDER_ID=$(./gdrive mkdir $FOLDER_NAME --parent $ROOT_FOLDER_ID | awk '{print $2}')
+      else
+      echo "Folder already exists."
+      fi
+    - ./gdrive upload --parent $FOLDER_ID build/app/outputs/flutter-apk/*.apk
+  dependencies:
+    - build_android
+  only:
+    - branches

@@ -1,6 +1,7 @@
 import 'package:crm/features/clients/blocs/observation_cubit.dart';
 import 'package:crm/models/person/person.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
+import 'package:crm/shared/widgets/loading/loader.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,10 +41,8 @@ class ClientDetailsPage extends StatelessWidget {
       ),
       body: Container(
         constraints: BoxConstraints(
-          maxHeight:
-              context.height - context.appBarSize - context.paddingBottom,
-          minHeight:
-              context.height - context.appBarSize - context.paddingBottom,
+          maxHeight: context.height - context.appBarSize - context.paddingBottom,
+          minHeight: context.height - context.appBarSize - context.paddingBottom,
           maxWidth: context.width,
           minWidth: context.width,
         ),
@@ -54,8 +53,7 @@ class ClientDetailsPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: kPrimaryColor,
                 borderRadius: BorderRadius.vertical(
-                  bottom:
-                      Radius.elliptical(context.width * 2, context.width / 3),
+                  bottom: Radius.elliptical(context.width * 2, context.width / 3),
                 ),
               ),
             ),
@@ -84,8 +82,7 @@ class ClientDetailsPage extends StatelessWidget {
                         onTap: () async {
                           final availableMaps = await MapLauncher.installedMaps;
                           await availableMaps.first.showMarker(
-                            coords: Coords(
-                                client.latitude ?? 0, client.longitude ?? 0),
+                            coords: Coords(client.latitude ?? 0, client.longitude ?? 0),
                             title: client.fullName,
                           );
                         },
@@ -94,8 +91,7 @@ class ClientDetailsPage extends StatelessWidget {
                           children: [
                             Flexible(
                               child: FutureBuilder(
-                                future:
-                                    LocationHelper.addressFromLongitudeLatitude(
+                                future: LocationHelper.addressFromLongitudeLatitude(
                                   latitude: client.latitude ?? 0,
                                   longitude: client.longitude ?? 0,
                                 ),
@@ -146,8 +142,7 @@ class ClientDetailsPage extends StatelessWidget {
                             padding: EdgeInsets.all(kPaddingSm3),
                             decoration: BoxDecoration(
                               color: kPrimaryColor.withOpacity(0.1),
-                              borderRadius:
-                                  BorderRadius.circular(kRadiusRounded),
+                              borderRadius: BorderRadius.circular(kRadiusRounded),
                             ),
                             child: Row(
                               children: [
@@ -190,8 +185,7 @@ class ClientDetailsPage extends StatelessWidget {
                             padding: EdgeInsets.all(kPaddingSm3),
                             decoration: BoxDecoration(
                               color: kPrimaryColor.withOpacity(0.1),
-                              borderRadius:
-                                  BorderRadius.circular(kRadiusRounded),
+                              borderRadius: BorderRadius.circular(kRadiusRounded),
                             ),
                             child: Row(
                               children: [
@@ -202,8 +196,7 @@ class ClientDetailsPage extends StatelessWidget {
                                 ),
                                 SizedBox(width: kSpacingX2),
                                 Text(
-                                  client.email != null &&
-                                          client.email!.isNotEmpty
+                                  client.email != null && client.email!.isNotEmpty
                                       ? client.email!
                                       : context.i10n.noEmail,
                                   style: context.textTheme.bodyMedium,
@@ -261,8 +254,7 @@ class ClientOptionsTab extends StatefulWidget {
   State<ClientOptionsTab> createState() => _ClientOptionsTabState();
 }
 
-class _ClientOptionsTabState extends State<ClientOptionsTab>
-    with SingleTickerProviderStateMixin {
+class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -327,66 +319,86 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
           child: TabBarView(controller: _tabController, children: [
             BlocBuilder<ObservationCubit, ObservationState>(
               builder: (context, state) {
-                return state.maybeWhen(orElse: () {
-                  return Container(
-                    child: Center(
-                      child: Text(context.i10n.noObservations),
-                    ),
-                  );
-                }, loaded: (observations) {
-                  if (observations.isEmpty) {
-                    return Center(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SVG(
-                          'empty-states/info.svg',
-                          height: 175.sp,
-                        ),
-                        SizedBox(height: kSpacingX3),
-                        Text(
-                          context.i10n.noObservations,
-                          style: context.textTheme.headlineMedium,
-                        ),
-                        SizedBox(height: kSpacingX2),
-                        Text(
-                          context.i10n.noObservationsDesc,
-                          style: context.textTheme.bodyMedium,
-                        ),
-                      ],
-                    ));
-                  }
-                  return ListView.builder(
-                    itemCount: observations.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Row(
+                return state.maybeWhen(
+                    orElse: () {
+                      return Center(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SVG(
+                            'empty-states/info.svg',
+                            height: 175.sp,
+                          ),
+                          SizedBox(height: kSpacingX3),
+                          Text(
+                            context.i10n.noObservations,
+                            style: context.textTheme.headlineMedium,
+                          ),
+                          SizedBox(height: kSpacingX2),
+                          Text(
+                            context.i10n.noObservationsDesc,
+                            style: context.textTheme.bodyMedium,
+                          ),
+                        ],
+                      ));
+                    },
+                    loading: () => Center(child: Loader()),
+                    loaded: (observations) {
+                      if (observations.isEmpty) {
+                        return Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Expanded(
-                              child: Text(
-                                observations[index].title,
-                                style: context.textTheme.headlineMedium,
-                              ),
+                            SVG(
+                              'empty-states/info.svg',
+                              height: 175.sp,
                             ),
-                            SizedBox(width: kSpacingX1),
+                            SizedBox(height: kSpacingX3),
                             Text(
-                              observations[index].date,
+                              context.i10n.noObservations,
+                              style: context.textTheme.headlineMedium,
+                            ),
+                            SizedBox(height: kSpacingX2),
+                            Text(
+                              context.i10n.noObservationsDesc,
                               style: context.textTheme.bodyMedium,
                             ),
                           ],
-                        ),
-                        subtitle: Text(
-                          observations[index].reportText,
-                          softWrap: true,
-                          maxLines: 3,
-                          style: context.textTheme.bodyMedium,
-                        ),
+                        ));
+                      }
+                      return ListView.builder(
+                        itemCount: observations.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    observations[index].title,
+                                    style: context.textTheme.headlineMedium,
+                                  ),
+                                ),
+                                SizedBox(width: kSpacingX1),
+                                Text(
+                                  observations[index].date,
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ],
+                            ),
+                            subtitle: Text(
+                              observations[index].reportText,
+                              softWrap: true,
+                              maxLines: 3,
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          );
+                        },
                       );
-                    },
-                  );
-                });
+                    });
               },
             ),
             Container(

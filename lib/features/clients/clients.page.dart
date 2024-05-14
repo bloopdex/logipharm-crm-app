@@ -50,9 +50,7 @@ class _ClientsPageState extends State<ClientsPage> {
                 clients = context.read<ClientsCubit>().state.maybeWhen(
                       orElse: () => [],
                       loaded: (clients) => clients.where((element) {
-                        return element.fullName
-                            .toLowerCase()
-                            .contains(state.toLowerCase());
+                        return element.fullName.toLowerCase().contains(state.toLowerCase());
                       }).toList(),
                     );
               });
@@ -64,10 +62,8 @@ class _ClientsPageState extends State<ClientsPage> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
             constraints: BoxConstraints(
-              minHeight:
-                  context.height - context.appBarSize - context.paddingBottom,
-              maxHeight:
-                  context.height - context.appBarSize - context.paddingBottom,
+              minHeight: context.height - context.appBarSize - context.paddingBottom,
+              maxHeight: context.height - context.appBarSize - context.paddingBottom,
               minWidth: context.width,
               maxWidth: context.width,
             ),
@@ -111,8 +107,7 @@ class _ClientsPageState extends State<ClientsPage> {
                         },
                         child: ListView.separated(
                           itemCount: clients.length,
-                          separatorBuilder: (context, index) =>
-                              SizedBox(height: kSpacingX3),
+                          separatorBuilder: (context, index) => SizedBox(height: kSpacingX3),
                           itemBuilder: (context, index) {
                             return ClientCard(client: clients[index]);
                           },
@@ -156,10 +151,7 @@ class ClientCard extends StatelessWidget {
               final Uri _phoneLaunchUri = Uri.parse(
                   'tel://${client.telMobile ?? client.tel1Fixe ?? client.tel2Fixe ?? ""}');
 
-              if (client.tel1Fixe != null ||
-                  client.tel2Fixe != null ||
-                  client.telMobile != null) {
-                print(_phoneLaunchUri);
+              if (client.tel1Fixe != null || client.tel2Fixe != null || client.telMobile != null) {
                 await launchUrl(_phoneLaunchUri);
               }
             },

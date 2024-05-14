@@ -38,8 +38,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter the address"),
         "addressRequired":
             MessageLookupByLibrary.simpleMessage("Address is required"),
+        "allRegions": MessageLookupByLibrary.simpleMessage("All Regions"),
         "authLoginDescription": MessageLookupByLibrary.simpleMessage(
             "And have access to all the features of the application"),
+        "authLoginError": MessageLookupByLibrary.simpleMessage(
+            "Invalid username or password"),
         "authLoginPassword": MessageLookupByLibrary.simpleMessage("Password"),
         "authLoginPasswordPlaceholder":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
@@ -53,6 +56,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "authLoginUsernameRequired":
             MessageLookupByLibrary.simpleMessage("Username is required"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "cantCreatePlanWhileOpened": MessageLookupByLibrary.simpleMessage(
+            "Can\'t create plan while opened plan"),
+        "cantCreateVisit":
+            MessageLookupByLibrary.simpleMessage("Can\'t create visit"),
         "claims": MessageLookupByLibrary.simpleMessage("Claims"),
         "clientAddress": MessageLookupByLibrary.simpleMessage("Client Address"),
         "clientDetails": MessageLookupByLibrary.simpleMessage("Client Details"),
@@ -63,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Close Tour Plan"),
         "closeTourPlanDesc": MessageLookupByLibrary.simpleMessage(
             "Ferme le plan de tournée actuel."),
+        "cnrc": MessageLookupByLibrary.simpleMessage("CNRC"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "completed": MessageLookupByLibrary.simpleMessage("Completed"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
@@ -158,6 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Region is required"),
         "rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "searchClient": MessageLookupByLibrary.simpleMessage("Search Client"),
         "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
         "selectDateRange":
             MessageLookupByLibrary.simpleMessage("Select Date Range"),
@@ -279,6 +288,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Overview and Validation"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "updateVisit": MessageLookupByLibrary.simpleMessage("Update Visit"),
+        "uploadFile": MessageLookupByLibrary.simpleMessage("Upload File"),
         "validate": MessageLookupByLibrary.simpleMessage("Validate"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("View Details"),
         "visitAlreadyEntered":

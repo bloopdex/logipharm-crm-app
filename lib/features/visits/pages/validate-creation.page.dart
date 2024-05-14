@@ -10,12 +10,10 @@ import '../bloc/visit-creation/visit_creation_cubit.dart';
 class VisitValidateCreationPage extends StatelessWidget {
   final Tour tour;
   final Map<String, dynamic> data;
-  const VisitValidateCreationPage(
-      {super.key, required this.data, required this.tour});
+  const VisitValidateCreationPage({super.key, required this.data, required this.tour});
 
   @override
   Widget build(BuildContext context) {
-    print('tour: $tour');
     final TourDetail? client = tour.pharmacies?.firstWhere(
       (element) => element.pharmacy!.id.toString() == data['pharmacieId'],
     );
@@ -90,10 +88,8 @@ class VisitValidateCreationPage extends StatelessWidget {
                             border: Border.all(color: kCodGray.shade300),
                           ),
                           child: Center(
-                            child: Text(
-                                client?.pharmacy?.fullName.initials ?? "",
-                                textAlign: TextAlign.center,
-                                style: context.textTheme.bodyMedium),
+                            child: Text(client?.pharmacy?.fullName.initials ?? "",
+                                textAlign: TextAlign.center, style: context.textTheme.bodyMedium),
                           ),
                         ),
                         SizedBox(width: kSpacingX4),
@@ -114,12 +110,9 @@ class VisitValidateCreationPage extends StatelessWidget {
                               client?.pharmacy?.latitude != null &&
                                       client?.pharmacy?.longitude != null
                                   ? FutureBuilder(
-                                      future: LocationHelper
-                                          .addressFromLongitudeLatitude(
-                                        latitude:
-                                            client?.pharmacy?.latitude ?? 0,
-                                        longitude:
-                                            client?.pharmacy?.longitude ?? 0,
+                                      future: LocationHelper.addressFromLongitudeLatitude(
+                                        latitude: client?.pharmacy?.latitude ?? 0,
+                                        longitude: client?.pharmacy?.longitude ?? 0,
                                       ),
                                       builder: (context, snapshot) {
                                         return Text(
@@ -159,8 +152,7 @@ class VisitValidateCreationPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: kPaddingMd2, vertical: kPaddingSm3),
+                    padding: EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingSm3),
                     decoration: BoxDecoration(
                       border: Border.all(color: kBorder3),
                       borderRadius: BorderRadius.circular(kSpacingX3),

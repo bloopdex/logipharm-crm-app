@@ -4,6 +4,7 @@ import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/delegate_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/bloc/wilaya_cubit.dart';
+import 'package:crm/features/tour-plan/core/enums.dart';
 import 'package:crm/features/tour-plan/create-plan.page.dart';
 import 'package:crm/logic/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
@@ -45,18 +46,28 @@ class _NavigationScreenState extends State<NavigationScreen> {
               ),
               backgroundColor: Colors.white,
               elevation: 0,
-              actions: [
-                if (layout.current.value == 2) const CustomDateRangePicker()
-              ],
+              actions: [if (layout.current.value == 2) const CustomDateRangePicker()],
             ),
             body: layout.currentScreen,
-            floatingActionButtonLocation:
-                layout.current.value == 3 ? ExpandableFab.location : null,
+            floatingActionButtonLocation: layout.current.value == 3 ? ExpandableFab.location : null,
             floatingActionButton: layout.current.value == 1
                 ? FloatingActionButton(
                     heroTag: 'createPlan',
                     onPressed: () {
-                      Navigator.pushNamed(context, CreatePlanPage.routeName);
+                      final current = context.read<TourPlanBloc>().state.maybeWhen(
+                            loaded: (tours, hasReachedMax, currentPage) {
+                              return tours
+                                  .where((element) => element.statusFlag == StatuFlags.opened.value)
+                                  .firstOrNull;
+                            },
+                            orElse: () => null,
+                          );
+                      final user = context.read<AuthBloc>().user;
+                      if (current == null || user.supervisor == 0) {
+                        Navigator.pushNamed(context, CreatePlanPage.routeName);
+                      } else {
+                        context.errorSnackBar(context.i10n.cantCreatePlanWhileOpened);
+                      }
                     },
                     child: Icon(Icons.add_outlined, color: kWhite),
                   )
@@ -118,8 +129,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(context.i10n.todoEvent,
-                                      style: context.textTheme.labelLarge!
-                                          .copyWith(color: kWhite)),
+                                      style: context.textTheme.labelLarge!.copyWith(color: kWhite)),
                                   SizedBox(width: kSpacingX3),
                                   Icon(
                                     Icons.event_rounded,
@@ -158,8 +168,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(context.i10n.todoTask,
-                                      style: context.textTheme.labelLarge!
-                                          .copyWith(color: kWhite)),
+                                      style: context.textTheme.labelLarge!.copyWith(color: kWhite)),
                                   SizedBox(width: kSpacingX3),
                                   Icon(
                                     Icons.check_circle_outline_rounded,
@@ -198,12 +207,16 @@ class _NavigationScreenState extends State<NavigationScreen> {
         )) {
       context.read<ClientsCubit>().load();
     }
-    if (context.read<TourPlanBloc>().state.maybeWhen(
-        orElse: () => true, loaded: (tours, _, __) => tours.isEmpty)) {
+    if (context
+        .read<TourPlanBloc>()
+        .state
+        .maybeWhen(orElse: () => true, loaded: (tours, _, __) => tours.isEmpty)) {
       context.read<TourPlanBloc>().add(const TourPlanEvent.started());
     }
-    if (context.read<VisitBloc>().state.maybeWhen(
-        orElse: () => true, loaded: (visits, _, __) => visits.isEmpty)) {
+    if (context
+        .read<VisitBloc>()
+        .state
+        .maybeWhen(orElse: () => true, loaded: (visits, _, __) => visits.isEmpty)) {
       context.read<VisitBloc>().add(const VisitEvent.started());
     }
     super.initState();

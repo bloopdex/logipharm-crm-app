@@ -1,6 +1,7 @@
 import 'package:crm/features/todo/cubit/todo_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/visits/bloc/visits/visit_bloc.dart';
+import 'package:crm/logic/file/file_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,6 +34,7 @@ import 'logic/localizations/localizations_bloc.dart';
 import 'logic/search/search_cubit.dart';
 import 'logic/time.range/time_range_cubit.dart';
 import 'shared/services/helpers/dio.helper.dart';
+import 'shared/services/helpers/notification.helper.dart';
 import 'shared/widgets/error/error.screen.dart';
 // import 'shared/widgets/error/noconnection.screen.dart';
 import 'shared/widgets/loading/loading.screen.dart';
@@ -40,12 +42,12 @@ import 'shared/widgets/loading/loading.screen.dart';
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await NotificationService().init();
   await ScreenUtil.ensureScreenSize();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb
-        ? HydratedStorage.webStorageDirectory
-        : await getApplicationDocumentsDirectory(),
+    storageDirectory:
+        kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
   );
 
   runApp(const MyApp());
@@ -82,14 +84,13 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
     ScreenUtil.init(
       context,
       designSize: const Size(393, 852),
-      minTextAdapt: true,
-      splitScreenMode: true,
+      minTextAdapt: false,
+      splitScreenMode: false,
     );
 
     return MultiBlocProvider(
         providers: [
-          BlocProvider<LocalizationsBloc>(
-              create: (context) => LocalizationsBloc()),
+          BlocProvider<LocalizationsBloc>(create: (context) => LocalizationsBloc()),
           BlocProvider(
             create: (context) => authBloc,
           ),
@@ -97,10 +98,11 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
             create: (context) => LoginBloc(authBloc),
           ),
           BlocProvider<NavigationCubit>(create: (context) => NavigationCubit()),
+          BlocProvider<FileCubit>(create: (context) => FileCubit()),
+          BlocProvider<FileLoadingCubit>(create: (context) => FileLoadingCubit()),
           BlocProvider<TimeRangeCubit>(create: (context) => TimeRangeCubit()),
           BlocProvider<SearchCubit>(create: (context) => SearchCubit()),
-          BlocProvider<CounterCubit>(
-              create: (context) => CounterCubit()..reset()),
+          BlocProvider<CounterCubit>(create: (context) => CounterCubit()..reset()),
           BlocProvider<DelegateCubit>(
             lazy: false,
             create: (context) => DelegateCubit()..load(),
@@ -113,21 +115,18 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
             lazy: false,
             create: (context) => ClientsCubit()..load(),
           ),
-          BlocProvider<TourCreationCubit>(
-              create: (context) => TourCreationCubit()),
+          BlocProvider<TourCreationCubit>(create: (context) => TourCreationCubit()),
           BlocProvider<TourPlanBloc>(
             create: (context) => TourPlanBloc(),
           ),
-          BlocProvider<VisitCreationCubit>(
-              create: (context) => VisitCreationCubit()),
+          BlocProvider<VisitCreationCubit>(create: (context) => VisitCreationCubit()),
           BlocProvider<TodoCubit>(create: (context) => TodoCubit()),
           BlocProvider<VisitBloc>(create: (context) => VisitBloc()),
           BlocProvider<ObservationCubit>(
             create: (context) => ObservationCubit(),
           ),
         ],
-        child: BlocBuilder<LocalizationsBloc, LocalizationsState>(
-            builder: (context, state) {
+        child: BlocBuilder<LocalizationsBloc, LocalizationsState>(builder: (context, state) {
           return MaterialApp(
               title: 'Logipharm-CRM',
               debugShowCheckedModeBanner: false,
@@ -160,8 +159,7 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
                           FlutterNativeSplash.remove();
                           return const LoadingScreen();
                         },
-                        authenticated: (user, tempError) =>
-                            const NavigationScreen(),
+                        authenticated: (user, tempError) => const NavigationScreen(),
                         unauthenticated: () => const LoginScreen(),
                         failure: (message) {
                           return ErrorScreen(
@@ -181,8 +179,7 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
 class MyScrollBehavior extends ScrollBehavior {
   @override
-  Widget buildOverscrollIndicator(
-      BuildContext context, Widget child, ScrollableDetails details) {
+  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
     return child;
   }
 }

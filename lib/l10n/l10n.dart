@@ -430,6 +430,16 @@ class S {
     );
   }
 
+  /// `Invalid username or password`
+  String get authLoginError {
+    return Intl.message(
+      'Invalid username or password',
+      name: 'authLoginError',
+      desc: 'Invalid username or password',
+      args: [],
+    );
+  }
+
   /// `{count} Client`
   String tourClient(int count) {
     return Intl.message(
@@ -2012,6 +2022,66 @@ class S {
       'Add Claim',
       name: 'addClaim',
       desc: 'Add Claim',
+      args: [],
+    );
+  }
+
+  /// `All Regions`
+  String get allRegions {
+    return Intl.message(
+      'All Regions',
+      name: 'allRegions',
+      desc: 'All Regions',
+      args: [],
+    );
+  }
+
+  /// `Can't create plan while opened plan`
+  String get cantCreatePlanWhileOpened {
+    return Intl.message(
+      'Can\'t create plan while opened plan',
+      name: 'cantCreatePlanWhileOpened',
+      desc: 'You can\'t create a new plan while you have an opened plan',
+      args: [],
+    );
+  }
+
+  /// `CNRC`
+  String get cnrc {
+    return Intl.message(
+      'CNRC',
+      name: 'cnrc',
+      desc: 'CNRC',
+      args: [],
+    );
+  }
+
+  /// `Search Client`
+  String get searchClient {
+    return Intl.message(
+      'Search Client',
+      name: 'searchClient',
+      desc: 'Search Client',
+      args: [],
+    );
+  }
+
+  /// `Upload File`
+  String get uploadFile {
+    return Intl.message(
+      'Upload File',
+      name: 'uploadFile',
+      desc: 'Upload File',
+      args: [],
+    );
+  }
+
+  /// `Can't create visit`
+  String get cantCreateVisit {
+    return Intl.message(
+      'Can\'t create visit',
+      name: 'cantCreateVisit',
+      desc: 'You can\'t create a visit',
       args: [],
     );
   }

@@ -1,10 +1,15 @@
+import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
+import 'package:crm/features/tour-plan/tour-plan-details.page.dart';
 import 'package:crm/shared/widgets/buttons/button.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/core.dart';
 import '../../../shared/widgets/image/svg.dart';
 import '../../../shared/widgets/popup/modalbottomsheet.popup.dart';
+import '../../navigation/navigation.screen.dart';
+import '../bloc/tour-creation/tour_creation_cubit.dart';
 
 class CreationSuccessfulPage extends StatelessWidget {
   const CreationSuccessfulPage({super.key});
@@ -17,78 +22,111 @@ class CreationSuccessfulPage extends StatelessWidget {
         backgroundColor: kCeruleanBlue.shade900,
         automaticallyImplyLeading: false,
       ),
-      body: Container(
-        padding: EdgeInsets.only(
-          left: kPaddingMd2,
-          right: kPaddingMd2,
-          bottom: context.paddingBottom,
-        ),
-        constraints: BoxConstraints(
-          maxHeight: context.height,
-          maxWidth: context.width,
-        ),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 140.sp,
-                    height: 140.sp,
-                    padding: EdgeInsets.all(kSpacingX8),
-                    decoration: BoxDecoration(
-                      color: kCeruleanBlue.shade600,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: kCeruleanBlue.shade900),
+      body: BlocListener<TourPlanBloc, TourPlanState>(
+        listener: (context, state) {
+          state.maybeWhen(
+            orElse: () {},
+            failure: (message) {
+              context.errorSnackBar(message);
+            },
+          );
+        },
+        child: Container(
+          padding: EdgeInsets.only(
+            left: kPaddingMd2,
+            right: kPaddingMd2,
+            bottom: context.paddingBottom,
+          ),
+          constraints: BoxConstraints(
+            maxHeight: context.height,
+            maxWidth: context.width,
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 140.sp,
+                      height: 140.sp,
+                      padding: EdgeInsets.all(kSpacingX8),
+                      decoration: BoxDecoration(
+                        color: kCeruleanBlue.shade600,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: kCeruleanBlue.shade900),
+                      ),
+                      child: SVG(
+                        'tour.svg',
+                        icon: true,
+                        height: 20.sp,
+                        fit: BoxFit.fitHeight,
+                      ),
                     ),
-                    child: SVG(
-                      'tour.svg',
-                      icon: true,
-                      height: 20.sp,
-                      fit: BoxFit.fitHeight,
+                    SizedBox(height: kSpacingX10),
+                    Text(
+                      context.i10n.tourCreationSuccessTitle,
+                      textAlign: TextAlign.center,
+                      maxLines: 3,
+                      softWrap: true,
+                      style: context.textTheme.displayLarge!.copyWith(color: kWhite),
                     ),
-                  ),
-                  SizedBox(height: kSpacingX10),
-                  Text(
-                    context.i10n.tourCreationSuccessTitle,
-                    textAlign: TextAlign.center,
-                    style:
-                        context.textTheme.displayLarge!.copyWith(color: kWhite),
-                  ),
-                  SizedBox(height: kSpacingX4),
-                  Text(
-                    context.i10n.tourCreationSuccessDescription,
-                    textAlign: TextAlign.center,
-                    style: context.textTheme.bodyLarge!.copyWith(color: kWhite),
-                  ),
-                ],
-              ),
-            ),
-            Column(
-              children: [
-                CustomButton(
-                  text: context.i10n.finish,
-                  onPressed: () {
-                    context.pop();
-                  },
+                    SizedBox(height: kSpacingX4),
+                    Text(
+                      context.i10n.tourCreationSuccessDescription,
+                      textAlign: TextAlign.center,
+                      maxLines: 5,
+                      softWrap: true,
+                      style: context.textTheme.bodyLarge!.copyWith(color: kWhite),
+                    ),
+                  ],
                 ),
-                SizedBox(height: kSpacingX5),
-                ModalBottomSheet(
-                  icon: const SVG('tour.svg', icon: true),
-                  confirmText: context.i10n.viewDetails,
-                  cancelText: context.i10n.later,
-                  title: context.i10n.tourCreationStartTour,
-                  subtitle: context.i10n.tourCreationStartTourDescription,
-                  child: CustomButton(
-                    text: context.i10n.viewDetails,
-                    backgroundColor: kBgButtonSecondary,
-                    textColor: kText1,
-                  ),
-                )
-              ],
-            )
-          ],
+              ),
+              BlocBuilder<TourCreationCubit, TourCreationState>(
+                builder: (context, state) {
+                  return Column(
+                    children: [
+                      CustomButton(
+                        text: context.i10n.start,
+                        onPressed: () {
+                          state.maybeWhen(
+                            orElse: () {},
+                            loaded: (tour) {
+                              context.read<TourPlanBloc>().add(
+                                    TourPlanEvent.startTour(tourId: tour.tourId),
+                                  );
+                            },
+                          );
+                        },
+                      ),
+                      SizedBox(height: kSpacingX5),
+                      ModalBottomSheet(
+                        icon: const SVG('tour.svg', icon: true),
+                        confirmText: context.i10n.viewDetails,
+                        cancelText: context.i10n.later,
+                        title: context.i10n.tourCreationStartTour,
+                        subtitle: context.i10n.tourCreationStartTourDescription,
+                        onConfirm: () {
+                          context.pop();
+                          state.maybeWhen(
+                              orElse: () {},
+                              loaded: (tour) {
+                                context.pushReplacement(TourPlanDetailPage(tour: tour));
+                              });
+                        },
+                        onCancel: () => context.pushAndRemoveUntil(const NavigationScreen()),
+                        child: CustomButton(
+                          text: context.i10n.viewDetails,
+                          backgroundColor: kBgButtonSecondary,
+                          textColor: kText1,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

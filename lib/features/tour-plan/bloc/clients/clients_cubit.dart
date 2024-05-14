@@ -18,9 +18,8 @@ class ClientsCubit extends Cubit<ClientsState> {
     try {
       final Response response = await ClientRepository.get();
       if (response.statusCode == 200) {
-        List<Person> clients = response.data['body']
-            .map<Person>((client) => Person.fromJson(client))
-            .toList();
+        List<Person> clients =
+            response.data['body'].map<Person>((client) => Person.fromJson(client)).toList();
         emit(ClientsState.loaded(clients));
       } else {
         emit(const ClientsState.loaded([]));
@@ -31,30 +30,42 @@ class ClientsCubit extends Cubit<ClientsState> {
   }
 
   Future<void> filter(String regionId) async {
-    if (state.maybeWhen(
-      orElse: () => false,
-      loaded: (clients) => clients.isEmpty,
-    )) {
-      emit(const ClientsState.loading());
-      final Response response = await ClientRepository.get();
-      if (response.statusCode == 200) {
-        List<Person> clients = response.data['body']
-            .map<Person>((client) => Person.fromJson(client))
-            .toList();
-        emit(ClientsState.loaded(
-            clients.where((element) => element.regionId == regionId).toList()));
-      } else {
-        emit(const ClientsState.loaded([]));
+    try {
+      if (state.maybeWhen(
+        orElse: () => false,
+        loaded: (clients) => clients.isEmpty,
+      )) {
+        emit(const ClientsState.loading());
+        final Response response = await ClientRepository.get();
+        if (response.statusCode == 200) {
+          List<Person> clients =
+              response.data['body'].map<Person>((client) => Person.fromJson(client)).toList();
+          emit(
+            ClientsState.loaded(
+              clients.where((element) => element.regionId == regionId || regionId.isEmpty).toList(),
+            ),
+          );
+          return;
+        } else {
+          emit(const ClientsState.loaded([]));
+        }
       }
+      if (regionId.isNotEmpty) {
+        emit(
+          state.maybeWhen(
+            orElse: () => const ClientsState.loaded([]),
+            loaded: (clients) => ClientsState.loaded(
+              clients.where((element) => element.regionId == regionId).toList(),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      emit(const ClientsState.error('An error occurred'));
     }
-    if (regionId.isEmpty) {
-      emit(const ClientsState.loaded([]));
-    } else {
-      List<Person> filteredClients = state.maybeWhen(
-          orElse: () => [],
-          loaded: (state) =>
-              state.where((element) => element.regionId == regionId).toList());
-      emit(ClientsState.loaded(filteredClients));
-    }
+  }
+
+  void reset() {
+    emit(const ClientsState.initial());
   }
 }

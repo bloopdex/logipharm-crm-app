@@ -4,12 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../l10n/l10n.dart';
 import '../../../../logic/auth/auth_bloc.dart';
 import '../../services/auth.repository.dart';
 
-part 'login_state.dart';
-part 'login_event.dart';
 part 'login_bloc.freezed.dart';
+part 'login_event.dart';
+part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthBloc authBloc;
@@ -23,7 +24,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(const LoginState.loading());
       res = await AuthRepository.login(event.username, event.password);
       if (res.statusCode != 200) {
-        emit(LoginState.failure(res.data['codeError']));
+        if (res.data['codeError'] == 'error.authentication.badCredential') {
+          emit(LoginState.failure(S.current.authLoginError));
+        } else {
+          emit(LoginState.failure(res.data['codeError']));
+        }
         return;
       }
       emit(const LoginState.success());
@@ -32,8 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       ));
       emit(const LoginState.initial());
     } catch (e) {
-      emit(LoginState.failure(
-          res != null ? res.data['codeError'] : 'auth:error:login-failed'));
+      emit(LoginState.failure(res != null ? res.data['codeError'] : 'auth:error:login-failed'));
     }
   }
 }

@@ -48,16 +48,19 @@ class AddClientsForm extends StatelessWidget {
                   return CustomDropDownInput(
                       data: data,
                       mapKey: 'regionId',
-                      onChanged: (value) =>
-                          context.read<ClientsCubit>().filter(value ?? ""),
-                      items: state
-                          .map(
-                            (e) => CustomDropDownItem(
-                              label: e.name,
-                              value: e.code.toString(),
-                            ),
-                          )
-                          .toList());
+                      onChanged: (value) => context.read<ClientsCubit>().filter(value ?? ""),
+                      items: [
+                        CustomDropDownItem(
+                          label: context.i10n.allRegions,
+                          value: "",
+                        ),
+                        ...state.map(
+                          (e) => CustomDropDownItem(
+                            label: e.name,
+                            value: e.code.toString(),
+                          ),
+                        )
+                      ]);
                 },
               ),
               SizedBox(height: kSpacingX5),
@@ -76,12 +79,16 @@ class AddClientsForm extends StatelessWidget {
               child: clientState.maybeWhen(
                 orElse: () => ListView.separated(
                   itemBuilder: (context, index) => const ClientCardShimmer(),
-                  separatorBuilder: (context, index) =>
-                      SizedBox(height: kSpacingX4),
+                  separatorBuilder: (context, index) => SizedBox(height: kSpacingX4),
                   itemCount: 6,
                 ),
                 loaded: (clients) {
-                  if (clients.isEmpty) {
+                  final filtered = clients
+                      .where(
+                        (e) => e.supervisor == int.tryParse(data['delegueId']),
+                      )
+                      .toList();
+                  if (filtered.isEmpty) {
                     return const ClientCardEmpty();
                   }
                   return BlocBuilder<SelectionCubit, SelectionState>(
@@ -90,10 +97,10 @@ class AddClientsForm extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) => ClientCard(
-                          client: clients[index],
+                          client: filtered[index],
                           data: data,
                           checked: selection.selected.contains(
-                            clients[index].id.toString(),
+                            filtered[index].id.toString(),
                           ),
                         ),
                         itemCount: clients.length,

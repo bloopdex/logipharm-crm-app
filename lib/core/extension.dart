@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../l10n/l10n.dart';
+import '../logic/auth/auth_bloc.dart';
+import '../models/user/user.dart';
 
 extension ColorExtension on Color {
   Color get lighter => Color.fromARGB(
@@ -32,8 +34,7 @@ extension TranslationBlocExtension on Bloc {
 
 extension GetTheme on BuildContext {
   TextTheme get textTheme => Theme.of(this).textTheme;
-  ButtonStyle get elevatedButtonTheme =>
-      Theme.of(this).elevatedButtonTheme.style!;
+  ButtonStyle get elevatedButtonTheme => Theme.of(this).elevatedButtonTheme.style!;
 }
 
 extension Navigation on BuildContext {
@@ -115,7 +116,7 @@ extension SnackBarExtension on BuildContext {
       behavior: SnackBarBehavior.floating,
       backgroundColor: Colors.transparent,
       content: AwesomeSnackbarContent(
-        title: 'Error', // Update the title to indicate error
+        title: 'Error',
         message: message,
         contentType: ContentType.failure,
       ),
@@ -211,13 +212,16 @@ extension StringExtensions on String {
     return split(" ").map((e) => e.capitalize()).toList().join(" ");
   }
 
-  String get initials =>
-      split(" ").map((String e) => e.isNotEmpty ? e[0] : '').join();
+  String get initials => split(" ").map((String e) => e.isNotEmpty ? e[0] : '').join();
 
   bool get isEmail => RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(this);
   bool get isPhoneNumber => RegExp(r'^\+?0[0-9]{9}$').hasMatch(this);
   bool get isNumeric => double.tryParse(this) != null;
   bool get isAlphabetic => RegExp(r'^[a-zA-Z]+$').hasMatch(this);
+}
+
+extension BlocContextExtension on BuildContext {
+  User get user => BlocProvider.of<AuthBloc>(this).user;
 }
 
 T getRandomElement<T>(List<T> list) {

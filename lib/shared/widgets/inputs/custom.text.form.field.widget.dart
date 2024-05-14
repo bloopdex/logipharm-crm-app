@@ -17,8 +17,10 @@ class CustomTextFormField extends StatelessWidget {
     this.autoFillHints = const [],
     this.onChanged,
     this.controller,
+    this.focusNode,
   });
 
+  final FocusNode? focusNode;
   final String? initialValue;
   final String? hintText;
   final TextInputType keyboardType;
@@ -37,6 +39,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: focusNode,
       controller: controller,
       initialValue: initialValue,
       autocorrect: false,
