@@ -30,7 +30,7 @@ build_android:
 
 build_ios:
   stage: build
-  image: ghcr.io/cirruslabs/flutter
+  image: ghcr.io/cirruslabs/flutter:3.19.6
   script:
     - flutter pub get
     - flutter build ios --release --no-codesign
