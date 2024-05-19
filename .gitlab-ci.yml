@@ -3,8 +3,7 @@ stages:
   - deploy
 
 variables:
-  ANDROID_FOLDER_ID: "replace_with_your_android_folder_id_in_google_drive"
-  IOS_FOLDER_ID: "replace_with_your_ios_folder_id_in_google_drive"
+  ANDROID_FOLDER_ID: "1YAD85zI_JrYqCUzz1yQ10ul6Sz2Nif7Q"
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
@@ -24,19 +23,6 @@ build_android:
   artifacts:
     paths:
       - build/app/outputs/flutter-apk/*.apk
-    expire_in: 1 week
-  only:
-    - branches
-
-build_ios:
-  stage: build
-  image: ghcr.io/cirruslabs/flutter:3.19.6
-  script:
-    - flutter pub get
-    - flutter build ios --release --no-codesign
-  artifacts:
-    paths:
-      - build/ios/iphoneos/*.ipa
     expire_in: 1 week
   only:
     - branches
