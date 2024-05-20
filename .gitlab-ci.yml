@@ -37,11 +37,12 @@ deploy_android_to_google_drive:
     - apk --no-cache add curl
     - curl -L https://github.com/prasmussen/gdrive/releases/download/2.1.0/gdrive-linux-x64 -o gdrive
     - chmod +x gdrive
+    - ./gdrive version # Verify gdrive binary
     - FOLDER_NAME=$(echo $CI_COMMIT_REF_NAME | sed 's/[^a-zA-Z0-9]/_/g')
     - FOLDER_ID=$(./gdrive list --no-header --query "name = '$FOLDER_NAME' and mimeType = 'application/vnd.google-apps.folder'" | awk '{print $1}')
     - if [ -z "$FOLDER_ID" ]; then
       echo "Folder does not exist, creating folder."
-      FOLDER_ID=$(./gdrive mkdir $FOLDER_NAME --parent $ROOT_FOLDER_ID | awk '{print $2}')
+      FOLDER_ID=$(./gdrive mkdir $FOLDER_NAME --parent $ANDROID_FOLDER_ID | awk '{print $2}')
       else
       echo "Folder already exists."
       fi
