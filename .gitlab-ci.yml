@@ -37,8 +37,8 @@ deploy_to_firebase:
     - firebase --version
     - firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
       --app 1:880351652544:android:2313a2055c4d7e86cf1b25 \
-      --groups a2s-staff \
-      --token "${FIREBASE_TOKEN}" \
+      --groups "a2s-staff" \
+      --token "1//03ZefODG3bqIgCgYIARAAGAMSNwF-L9IrhcU6-3A-HlRUb_jt_l8vskQ-2SR64WjaMIYv6ZZAGKnFRYq3bj6pLmzt9d3Hv80HPm8" \
       --release-notes "Automated release from CI"
   dependencies:
     - build_android
