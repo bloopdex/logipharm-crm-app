@@ -4,6 +4,7 @@ stages:
 
 variables:
   ANDROID_FOLDER_ID: "1YAD85zI_JrYqCUzz1yQ10ul6Sz2Nif7Q"
+  FIREBASE_TOKEN: "${FIREBASE_TOKEN}"
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
@@ -27,28 +28,18 @@ build_android:
   only:
     - branches
 
-deploy_android_to_google_drive:
+deploy_to_firebase:
   stage: deploy
   image: google/cloud-sdk:alpine
   script:
-    - cp credentials/gdrive-service-account.json /tmp/gdrive-service-account.json
-    - cat /tmp/gdrive-service-account.json # Debug step to print JSON content
-    - gcloud auth activate-service-account --key-file /tmp/gdrive-service-account.json
-    - apk --no-cache add curl
-    - curl -fsSL https://github.com/prasmussen/gdrive/releases/download/2.1.0/gdrive-linux-x64 -o gdrive
-    - chmod +x gdrive
-    - ls -l gdrive # List the details of the downloaded binary
-    - file gdrive # Check the file type of the downloaded binary
-    - ./gdrive version # Verify gdrive binary
-    - FOLDER_NAME=$(echo $CI_COMMIT_REF_NAME | sed 's/[^a-zA-Z0-9]/_/g')
-    - FOLDER_ID=$(./gdrive list --no-header --query "name = '$FOLDER_NAME' and mimeType = 'application/vnd.google-apps.folder'" | awk '{print $1}')
-    - if [ -z "$FOLDER_ID" ]; then
-      echo "Folder does not exist, creating folder."
-      FOLDER_ID=$(./gdrive mkdir $FOLDER_NAME --parent $ANDROID_FOLDER_ID | awk '{print $2}')
-      else
-      echo "Folder already exists."
-      fi
-    - ./gdrive upload --parent $FOLDER_ID build/app/outputs/flutter-apk/*.apk
+    - apk add --no-cache nodejs npm
+    - npm install -g firebase-tools
+    - firebase --version
+    - firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
+      --app 1:880351652544:android:2313a2055c4d7e86cf1b25 \
+      --groups a2s-staff \
+      --token "$FIREBASE_TOKEN" \
+      --release-notes "Automated release from CI"
   dependencies:
     - build_android
   only:
