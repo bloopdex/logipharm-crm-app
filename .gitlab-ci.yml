@@ -31,7 +31,8 @@ deploy_android_to_google_drive:
   stage: deploy
   image: google/cloud-sdk:alpine
   script:
-    - echo $GOOGLE_CREDENTIALS > /tmp/gdrive-service-account.json
+    - cp credentials/gdrive-service-account.json /tmp/gdrive-service-account.json
+    - cat /tmp/gdrive-service-account.json # Debug step to print JSON content
     - gcloud auth activate-service-account --key-file /tmp/gdrive-service-account.json
     - apk --no-cache add curl
     - curl -L https://github.com/prasmussen/gdrive/releases/download/2.1.0/gdrive-linux-x64 -o gdrive
