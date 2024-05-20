@@ -35,8 +35,10 @@ deploy_android_to_google_drive:
     - cat /tmp/gdrive-service-account.json # Debug step to print JSON content
     - gcloud auth activate-service-account --key-file /tmp/gdrive-service-account.json
     - apk --no-cache add curl
-    - curl -L https://github.com/prasmussen/gdrive/releases/download/2.1.0/gdrive-linux-x64 -o gdrive
+    - curl -fsSL https://github.com/prasmussen/gdrive/releases/download/2.1.0/gdrive-linux-x64 -o gdrive
     - chmod +x gdrive
+    - ls -l gdrive # List the details of the downloaded binary
+    - file gdrive # Check the file type of the downloaded binary
     - ./gdrive version # Verify gdrive binary
     - FOLDER_NAME=$(echo $CI_COMMIT_REF_NAME | sed 's/[^a-zA-Z0-9]/_/g')
     - FOLDER_ID=$(./gdrive list --no-header --query "name = '$FOLDER_NAME' and mimeType = 'application/vnd.google-apps.folder'" | awk '{print $1}')
