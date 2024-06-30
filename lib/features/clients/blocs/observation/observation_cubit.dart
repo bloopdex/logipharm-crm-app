@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:crm/features/clients/repositories/observation.repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../models/observation.dart';
+import '../../models/observation/observation.dart';
 
 part 'observation_cubit.freezed.dart';
 part 'observation_state.dart';

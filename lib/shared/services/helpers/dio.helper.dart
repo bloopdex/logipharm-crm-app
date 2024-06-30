@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -28,7 +29,42 @@ class DioHelper {
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
     };
-    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // Print the request method and URL
+        log('Request ${options.method}: ${options.uri}');
+        print('Request ${options.method}: ${options.uri}');
+
+        // Print request headers (if any)
+        log('Headers: ${options.headers}');
+        print('Headers: ${options.headers}');
+
+        // Print request data (if any)
+        if (options.data != null) {
+          log('Data: ${options.data}');
+          print('Data: ${options.data}');
+        }
+
+        // Continue with the request
+        handler.next(options);
+      },
+      onResponse: (e, handler) {
+        // Do something with response data
+        log('Response: ${e.data}');
+        print('Response: ${e.data}');
+        handler.next(e);
+      },
+      onError: (e, handler) {
+        // Do something with response error
+        log('Error: ${e.message}');
+        print('Error: ${e.message}');
+        if (e.response != null) {
+          log('Error response data: ${e.response!.data}');
+          print('Error response data: ${e.response!.data}');
+        }
+        handler.next(e);
+      },
+    ));
   }
 
   static Future<Response> getData({

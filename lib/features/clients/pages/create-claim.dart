@@ -1,33 +1,36 @@
 import 'dart:convert';
 
 import 'package:crm/shared/widgets/buttons/button.widget.dart';
+import 'package:crm/shared/widgets/loading/loader.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/core.dart';
-import '../blocs/observation/observation_cubit.dart';
+import '../blocs/claims-motifs/motifs_cubit.dart';
+import '../blocs/claims/claim_cubit.dart';
 
-class CreateObservationPage extends StatefulWidget {
+class CreateClaimPage extends StatefulWidget {
   final int pharmacyId;
 
-  const CreateObservationPage({super.key, required this.pharmacyId});
+  const CreateClaimPage({super.key, required this.pharmacyId});
 
   @override
-  State<CreateObservationPage> createState() => _CreateObservationPageState();
+  State<CreateClaimPage> createState() => _CreateClaimPageState();
 }
 
-class _CreateObservationPageState extends State<CreateObservationPage> {
+class _CreateClaimPageState extends State<CreateClaimPage> {
   final QuillController _quillController = QuillController.basic();
+
   final FocusNode _quillFocusNode = FocusNode();
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final Map<String, dynamic> observation = {};
+  final Map<String, dynamic> claim = {};
 
   @override
   void initState() {
-    observation['pharmacieId'] = widget.pharmacyId;
+    claim['pharmacieId'] = widget.pharmacyId;
     super.initState();
   }
 
@@ -39,11 +42,11 @@ class _CreateObservationPageState extends State<CreateObservationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ObservationCubit, ObservationState>(
+    return BlocListener<ClaimCubit, ClaimState>(
       listener: (context, state) {
         state.maybeWhen(
           orElse: () {},
-          loaded: (observations) {
+          loaded: (claims) {
             context.pop();
           },
           error: (error) {
@@ -63,7 +66,7 @@ class _CreateObservationPageState extends State<CreateObservationPage> {
             },
           ),
           title: Text(
-            context.i10n.addObservation,
+            context.i10n.addClaim,
             style: context.textTheme.headlineMedium,
           ),
           bottom: PreferredSize(
@@ -99,34 +102,50 @@ class _CreateObservationPageState extends State<CreateObservationPage> {
               child: Column(
                 children: [
                   const Divider(),
-                  TextFormField(
-                    initialValue: observation['titre'],
-                    style: context.textTheme.displayMedium,
-                    cursorColor: kPrimaryColor,
-                    maxLines: 2,
-                    onSaved: (String? value) {
-                      observation['titre'] = value;
+                  // Dropdown menu for motifs using ClaimMotifCubit
+                  BlocBuilder<ClaimMotifCubit, ClaimMotifState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        orElse: () => Container(),
+                        loading: () => const Center(
+                          child: Loader(),
+                        ),
+                        loaded: (motifs) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: kPaddingLg1,
+                              vertical: kPaddingSm1,
+                            ),
+                            child: DropdownButtonFormField<String>(
+                              decoration: InputDecoration(
+                                labelText: context.i10n.homeHello,
+                                labelStyle: context.textTheme.bodyLarge,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(kPaddingSm3),
+                                ),
+                              ),
+                              value: claim['motif'],
+                              onChanged: (String? value) {
+                                setState(() {
+                                  claim['motif'] = value;
+                                });
+                              },
+                              items: motifs
+                                  .map<DropdownMenuItem<String>>((motif) => DropdownMenuItem(
+                                        value: motif.id.toString(),
+                                        child: Text(motif.label),
+                                      ))
+                                  .toList(),
+                            ),
+                          );
+                        },
+                        error: (error) {
+                          return Center(child: Text(error));
+                        },
+                      );
                     },
-                    validator: (String? value) {
-                      if (value!.isEmpty) {
-                        return context.i10n.todoTitleError;
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        hintText: context.i10n.todoTitlePlaceholder,
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        hintStyle: context.textTheme.displayMedium,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: kPaddingLg1,
-                          vertical: kPaddingSm1,
-                        )),
                   ),
-                  Divider(),
+                  const Divider(),
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
@@ -156,10 +175,10 @@ class _CreateObservationPageState extends State<CreateObservationPage> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            observation['rapportText'] = _quillController.document.toPlainText();
-                            observation['rapport'] =
+                            claim['rapportText'] = _quillController.document.toPlainText();
+                            claim['rapport'] =
                                 json.encode(_quillController.document.toDelta().toJson());
-                            context.read<ObservationCubit>().create(data: observation);
+                            context.read<ClaimCubit>().create(data: claim);
                             context.pop();
                           }
                         }),

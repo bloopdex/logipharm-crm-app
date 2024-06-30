@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:crm/features/navigation/navigation.screen.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/models/tour.dart';
 import 'package:crm/features/visits/pages/creation-successful.page.dart';
@@ -23,6 +22,7 @@ class CreateVisitPage extends StatefulWidget {
   static const String routeName = '/create-plan';
   final Tour tour;
   final String? pharmacieId;
+
   const CreateVisitPage({super.key, required this.tour, this.pharmacieId});
 
   @override
@@ -65,7 +65,6 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
             orElse: () {},
             loaded: (visit) {
               context.read<TourPlanBloc>().add(const TourPlanEvent.started());
-              context.pushAndRemoveUntil(const NavigationScreen());
             });
       },
       builder: (context, state) {
@@ -178,7 +177,8 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                 ),
                                 SizedBox(height: kSpacingX4),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                                  padding: EdgeInsets.only(
+                                      left: kPaddingMd2, right: kPaddingMd2, bottom: kPaddingLg1),
                                   child: CustomButton(
                                     text: state < 1 ? context.i10n.next : context.i10n.validate,
                                     onPressed: () async {
@@ -204,6 +204,19 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                           if (position != null) {
                                             data['latitude'] = position.latitude;
                                             data['longitude'] = position.longitude;
+                                          }
+                                          // check if pharmacyId in data exist in pharmacy list without using firstWhere
+                                          final clients = widget.tour.pharmacies
+                                                  ?.where(
+                                                    (element) =>
+                                                        element.pharmacy?.id.toString() ==
+                                                        data['pharmacieId'],
+                                                  )
+                                                  .toList() ??
+                                              [];
+                                          final client = clients.isNotEmpty ? clients.first : null;
+                                          if (client == null) {
+                                            data.remove('tourneeId');
                                           }
                                           context.read<VisitCreationCubit>().validate(data: data);
                                       }

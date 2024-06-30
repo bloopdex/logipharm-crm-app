@@ -1,13 +1,13 @@
 import 'package:crm/core/core.dart';
 import 'package:crm/shared/widgets/inputs/custom.text.form.field.widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
+import '../../../models/person/person.dart';
 import '../../../shared/widgets/inputs/date.picker.input.dart';
 import '../../../shared/widgets/inputs/dropdown.input.dart';
 import '../../tour-plan/models/tour.dart';
+import '../add_client_selection.dart';
 
 class ClientSelectionForm extends StatefulWidget {
   final List<TourDetail> clients;
@@ -29,6 +29,7 @@ class ClientSelectionForm extends StatefulWidget {
 
 class _ClientSelectionFormState extends State<ClientSelectionForm> {
   final FocusNode _quillFocusNode = FocusNode();
+  Person? pharmacy = null;
 
   @override
   void initState() {
@@ -71,18 +72,45 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
             style: context.textTheme.bodyMedium,
           ),
           SizedBox(height: kSpacingX1),
-          CustomDropDownInput(
-            data: widget.data,
-            mapKey: 'pharmacieId',
-            items: widget.clients
-                .where((e) => e.pharmacy != null)
-                .map(
-                  (e) => CustomDropDownItem(
-                    label: e.pharmacy?.fullName ?? "",
-                    value: e.pharmacy!.id.toString(),
-                  ),
-                )
-                .toList(),
+          Row(
+            children: [
+              Expanded(
+                child: CustomDropDownInput(
+                  data: widget.data,
+                  mapKey: 'pharmacieId',
+                  items: [
+                    if (pharmacy != null)
+                      CustomDropDownItem(
+                        label: pharmacy!.fullName,
+                        value: pharmacy!.id.toString(),
+                      ),
+                    ...widget.clients.where((e) => e.pharmacy != null).map(
+                          (e) => CustomDropDownItem(
+                            label: e.pharmacy?.fullName ?? "",
+                            value: e.pharmacy!.id.toString(),
+                          ),
+                        ),
+                  ],
+                ),
+              ),
+              SizedBox(width: kPaddingSm2),
+              IconButton(
+                onPressed: () async {
+                  Person? pharmacy = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AddClientSelection()),
+                  );
+
+                  if (!context.mounted || pharmacy == null) return;
+
+                  setState(() {
+                    widget.data['pharmacieId'] = pharmacy.id.toString();
+                    this.pharmacy = pharmacy;
+                  });
+                },
+                icon: const Icon(Icons.add),
+              ),
+            ],
           ),
           SizedBox(height: kSpacingX5),
           Text(
@@ -126,7 +154,6 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                 controller: widget.quillController,
                 scrollable: true,
                 autoFocus: false,
-                readOnly: false,
                 placeholder: context.i10n.visitCreationRapportPlaceholder,
                 expands: false,
                 showCursor: true,

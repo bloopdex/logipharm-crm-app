@@ -6,6 +6,7 @@ import 'package:crm/shared/services/helpers/location.helper.dart';
 import 'package:crm/shared/widgets/buttons/button.widget.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:crm/shared/widgets/inputs/custom.text.form.field.widget.dart';
+import 'package:crm/shared/widgets/loading/loader.widget.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,7 @@ import '../tour-plan/models/wilaya/wilaya.dart';
 
 class CreateHirePage extends StatelessWidget {
   final Map<String, dynamic>? initialData;
+
   const CreateHirePage({super.key, this.initialData});
 
   @override
@@ -65,9 +67,6 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
         listener: (context, state) {
           state.maybeWhen(
               orElse: () {},
-              initial: () {
-                context.pop();
-              },
               loaded: (hire) {
                 final files = context.read<FileCubit>().state.maybeWhen(
                       loaded: (files) => files,
@@ -80,6 +79,7 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                   context.read<HireCreationCubit>().file(hire.id, value);
                   context.read<FileCubit>().removeFile(key);
                 });
+                context.pop();
               });
         },
         child: GestureDetector(
@@ -192,10 +192,8 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                               label: context.i10n.regionPlaceholder,
                               value: '',
                             ),
-                            ...state
-                                .map((e) =>
-                                    CustomDropDownItem(label: e.name, value: e.code.toString()))
-                                .toList(),
+                            ...state.map(
+                                (e) => CustomDropDownItem(label: e.name, value: e.code.toString())),
                           ],
                         );
                       },
@@ -370,21 +368,29 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                       },
                     ),
                     SizedBox(height: kSpacingX10),
-                    CustomButton(
-                      text: context.i10n.hire,
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          final position = await LocationHelper.getCurrentPosition();
-                          if (position != null) {
-                            data['latitude'] = position.latitude;
-                            data['longitude'] = position.longitude;
-                          }
-
-                          await context.read<HireCreationCubit>().create(data);
+                    BlocBuilder<HireCreationCubit, HireCreationState>(
+                      builder: (context, state) {
+                        if (state.maybeWhen(orElse: () => false, loading: () => true)) {
+                          return const Loader();
                         }
+                        return CustomButton(
+                          text: context.i10n.hire,
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                              final position = await LocationHelper.getCurrentPosition();
+                              if (position != null) {
+                                data['latitude'] = position.latitude;
+                                data['longitude'] = position.longitude;
+                              }
+
+                              await context.read<HireCreationCubit>().create(data);
+                            }
+                          },
+                        );
                       },
                     ),
+                    SizedBox(height: kSpacingX6),
                   ],
                 ),
               ),

@@ -8,8 +8,8 @@ part of 'hire.dart';
 
 _$HireImpl _$$HireImplFromJson(Map<String, dynamic> json) => _$HireImpl(
       id: json['id'] as String,
-      companyId: json['companyId'] as int,
-      delegateId: json['delegueId'] as int,
+      companyId: (json['companyId'] as num).toInt(),
+      delegateId: (json['delegueId'] as num).toInt(),
       delegateType: json['delegueType'] as String,
       lastName: json['nom'] as String?,
       firstName: json['prenom'] as String?,
@@ -18,7 +18,7 @@ _$HireImpl _$$HireImplFromJson(Map<String, dynamic> json) => _$HireImpl(
       address: json['address'] as String?,
       telephone: json['telephone'] as String?,
       email: json['email'] as String?,
-      statusFlag: json['statusFlag'] as int,
+      statusFlag: (json['statusFlag'] as num).toInt(),
       statusName: json['statusName'] as String,
       remark: json['remarque'] as String?,
     );

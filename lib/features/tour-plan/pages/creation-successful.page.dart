@@ -29,6 +29,9 @@ class CreationSuccessfulPage extends StatelessWidget {
             failure: (message) {
               context.errorSnackBar(message);
             },
+            loaded: (tour, _, __) {
+              context.pushAndRemoveUntil(const NavigationScreen());
+            },
           );
         },
         child: Container(

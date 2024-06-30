@@ -1,4 +1,5 @@
 import 'package:crm/core/core.dart';
+import 'package:crm/features/auth/login.screen.dart';
 import 'package:crm/features/todo/create-event.page.dart';
 import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/delegate_cubit.dart';
@@ -29,162 +30,175 @@ class NavigationScreen extends StatefulWidget {
 class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NavigationCubit, NavigationState>(
-      builder: (context, state) {
-        NavigationCubit layout = NavigationCubit.get(context);
-        return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(
-              centerTitle: layout.current.value != 0,
-              title: Text(
-                layout.current.value == 0
-                    ? "${context.i10n.homeHello} ${context.read<AuthBloc>().user.fullName}"
-                    : layout.title,
-                style: context.textTheme.displaySmall,
-              ),
-              backgroundColor: Colors.white,
-              elevation: 0,
-              actions: [if (layout.current.value == 2) const CustomDateRangePicker()],
-            ),
-            body: layout.currentScreen,
-            floatingActionButtonLocation: layout.current.value == 3 ? ExpandableFab.location : null,
-            floatingActionButton: layout.current.value == 1
-                ? FloatingActionButton(
-                    heroTag: 'createPlan',
-                    onPressed: () {
-                      final current = context.read<TourPlanBloc>().state.maybeWhen(
-                            loaded: (tours, hasReachedMax, currentPage) {
-                              return tours
-                                  .where((element) => element.statusFlag == StatuFlags.opened.value)
-                                  .firstOrNull;
-                            },
-                            orElse: () => null,
-                          );
-                      final user = context.read<AuthBloc>().user;
-                      if (current == null || user.supervisor == 0) {
-                        Navigator.pushNamed(context, CreatePlanPage.routeName);
-                      } else {
-                        context.errorSnackBar(context.i10n.cantCreatePlanWhileOpened);
-                      }
-                    },
-                    child: Icon(Icons.add_outlined, color: kWhite),
-                  )
-                : layout.current.value == 3
-                    ? ExpandableFab(
-                        key: const Key('todoFab'),
-                        distance: 50.sp,
-                        type: ExpandableFabType.up,
-                        duration: Duration.zero,
-                        childrenOffset: Offset(0, kSpacingX3),
-                        openButtonBuilder: FloatingActionButtonBuilder(
-                          size: kSpacingX7,
-                          builder: (context, onPressed, progress) {
-                            return FloatingActionButton(
-                              heroTag: 'openTask',
-                              onPressed: onPressed,
-                              child: const Icon(Icons.add_rounded),
-                            );
-                          },
-                        ),
-                        closeButtonBuilder: FloatingActionButtonBuilder(
-                          size: kSpacingX7,
-                          builder: (context, onPressed, progress) {
-                            return FloatingActionButton(
-                              heroTag: 'closeTask',
-                              onPressed: onPressed,
-                              child: const Icon(Icons.close_rounded),
-                            );
-                          },
-                        ),
-                        children: [
-                          InkWell(
-                            key: const Key('createEvent'),
-                            onTap: () {
-                              context.push(const CreateEventPage());
-                            },
-                            child: Container(
-                              width: 170.sp,
-                              height: 50.sp,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: kPaddingMd3,
-                                vertical: kPaddingMd2,
-                              ),
-                              decoration: BoxDecoration(
-                                color: kCeruleanBlue.shade500,
-                                // Bottom border
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: kWhite,
-                                    width: 1,
-                                  ),
-                                ),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(kPaddingLg1),
-                                  bottomRight: Radius.circular(kPaddingLg1),
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(context.i10n.todoEvent,
-                                      style: context.textTheme.labelLarge!.copyWith(color: kWhite)),
-                                  SizedBox(width: kSpacingX3),
-                                  Icon(
-                                    Icons.event_rounded,
-                                    color: kWhite,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            key: const Key('createTask'),
-                            onTap: () {
-                              context.push(const CreateTaskPage());
-                            },
-                            child: Container(
-                              width: 170.sp,
-                              height: 50.sp,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: kPaddingMd3,
-                                vertical: kPaddingMd2,
-                              ),
-                              decoration: BoxDecoration(
-                                color: kCeruleanBlue.shade500,
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: kWhite,
-                                    width: 1,
-                                  ),
-                                ),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(kPaddingLg1),
-                                  topRight: Radius.circular(kPaddingLg1),
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(context.i10n.todoTask,
-                                      style: context.textTheme.labelLarge!.copyWith(color: kWhite)),
-                                  SizedBox(width: kSpacingX3),
-                                  Icon(
-                                    Icons.check_circle_outline_rounded,
-                                    color: kWhite,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    : null,
-            bottomNavigationBar: CustomBottomNavigationBar(layout: layout),
-          ),
-        );
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        state.maybeWhen(
+            orElse: () {},
+            unauthenticated: () {
+              context.pushAndRemoveUntil(const LoginScreen());
+            });
       },
+      child: BlocBuilder<NavigationCubit, NavigationState>(
+        builder: (context, state) {
+          NavigationCubit layout = NavigationCubit.get(context);
+          return GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              appBar: AppBar(
+                centerTitle: layout.current.value != 0,
+                title: Text(
+                  layout.current.value == 0
+                      ? "${context.i10n.homeHello} ${context.read<AuthBloc>().user.fullName}"
+                      : layout.title,
+                  style: context.textTheme.displaySmall,
+                ),
+                backgroundColor: Colors.white,
+                elevation: 0,
+                actions: [if (layout.current.value == 2) const CustomDateRangePicker()],
+              ),
+              body: layout.currentScreen,
+              floatingActionButtonLocation:
+                  layout.current.value == 3 ? ExpandableFab.location : null,
+              floatingActionButton: layout.current.value == 1
+                  ? FloatingActionButton(
+                      heroTag: 'createPlan',
+                      onPressed: () {
+                        final current = context.read<TourPlanBloc>().state.maybeWhen(
+                              loaded: (tours, hasReachedMax, currentPage) {
+                                return tours
+                                    .where(
+                                        (element) => element.statusFlag == StatuFlags.opened.value)
+                                    .firstOrNull;
+                              },
+                              orElse: () => null,
+                            );
+                        final user = context.read<AuthBloc>().user;
+                        if (current == null || user.supervisor == 0) {
+                          Navigator.pushNamed(context, CreatePlanPage.routeName);
+                        } else {
+                          context.errorSnackBar(context.i10n.cantCreatePlanWhileOpened);
+                        }
+                      },
+                      child: Icon(Icons.add_outlined, color: kWhite),
+                    )
+                  : layout.current.value == 3
+                      ? ExpandableFab(
+                          key: const Key('todoFab'),
+                          distance: 50.sp,
+                          type: ExpandableFabType.up,
+                          duration: Duration.zero,
+                          childrenOffset: Offset(0, kSpacingX3),
+                          openButtonBuilder: FloatingActionButtonBuilder(
+                            size: kSpacingX7,
+                            builder: (context, onPressed, progress) {
+                              return FloatingActionButton(
+                                heroTag: 'openTask',
+                                onPressed: onPressed,
+                                child: const Icon(Icons.add_rounded),
+                              );
+                            },
+                          ),
+                          closeButtonBuilder: FloatingActionButtonBuilder(
+                            size: kSpacingX7,
+                            builder: (context, onPressed, progress) {
+                              return FloatingActionButton(
+                                heroTag: 'closeTask',
+                                onPressed: onPressed,
+                                child: const Icon(Icons.close_rounded),
+                              );
+                            },
+                          ),
+                          children: [
+                            InkWell(
+                              key: const Key('createEvent'),
+                              onTap: () {
+                                context.push(const CreateEventPage());
+                              },
+                              child: Container(
+                                width: 170.sp,
+                                height: 50.sp,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: kPaddingMd3,
+                                  vertical: kPaddingMd2,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: kCeruleanBlue.shade500,
+                                  // Bottom border
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: kWhite,
+                                      width: 1,
+                                    ),
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(kPaddingLg1),
+                                    bottomRight: Radius.circular(kPaddingLg1),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(context.i10n.todoEvent,
+                                        style:
+                                            context.textTheme.labelLarge!.copyWith(color: kWhite)),
+                                    SizedBox(width: kSpacingX3),
+                                    Icon(
+                                      Icons.event_rounded,
+                                      color: kWhite,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              key: const Key('createTask'),
+                              onTap: () {
+                                context.push(const CreateTaskPage());
+                              },
+                              child: Container(
+                                width: 170.sp,
+                                height: 50.sp,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: kPaddingMd3,
+                                  vertical: kPaddingMd2,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: kCeruleanBlue.shade500,
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: kWhite,
+                                      width: 1,
+                                    ),
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(kPaddingLg1),
+                                    topRight: Radius.circular(kPaddingLg1),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(context.i10n.todoTask,
+                                        style:
+                                            context.textTheme.labelLarge!.copyWith(color: kWhite)),
+                                    SizedBox(width: kSpacingX3),
+                                    Icon(
+                                      Icons.check_circle_outline_rounded,
+                                      color: kWhite,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : null,
+              bottomNavigationBar: CustomBottomNavigationBar(layout: layout),
+            ),
+          );
+        },
+      ),
     );
   }
 

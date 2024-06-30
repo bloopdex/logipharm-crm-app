@@ -103,7 +103,7 @@ class AddClientsForm extends StatelessWidget {
                             filtered[index].id.toString(),
                           ),
                         ),
-                        itemCount: clients.length,
+                        itemCount: filtered.length,
                       );
                     },
                   );

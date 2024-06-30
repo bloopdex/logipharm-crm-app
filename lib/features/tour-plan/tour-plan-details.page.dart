@@ -1,4 +1,4 @@
-import 'package:crm/features/clients/blocs/observation_cubit.dart';
+import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
 import 'package:crm/features/clients/client-details.page.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/core/enums.dart';

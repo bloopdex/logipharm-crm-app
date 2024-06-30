@@ -1,4 +1,5 @@
-import 'package:crm/features/clients/blocs/observation_cubit.dart';
+import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
+import 'package:crm/features/clients/pages/create-claim.dart';
 import 'package:crm/models/person/person.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:crm/shared/widgets/loading/loader.widget.dart';
@@ -39,208 +40,225 @@ class ClientDetailsPage extends StatelessWidget {
           style: context.textTheme.headlineMedium!.copyWith(color: kWhite),
         ),
       ),
-      body: Container(
-        constraints: BoxConstraints(
-          maxHeight: context.height - context.appBarSize - context.paddingBottom,
-          minHeight: context.height - context.appBarSize - context.paddingBottom,
-          maxWidth: context.width,
-          minWidth: context.width,
-        ),
-        child: Stack(
-          children: [
-            Container(
-              height: 40.sp,
-              decoration: BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.elliptical(context.width * 2, context.width / 3),
+      body: SingleChildScrollView(
+        child: Container(
+          constraints: BoxConstraints(
+            maxHeight: context.height - context.appBarSize - context.paddingBottom,
+            minHeight: context.height - context.appBarSize - context.paddingBottom,
+            maxWidth: context.width,
+            minWidth: context.width,
+          ),
+          child: Stack(
+            children: [
+              Container(
+                height: 40.sp,
+                decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.elliptical(context.width * 2, context.width / 3),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: kPaddingMd2,
-                vertical: kPaddingSm3,
-              ),
-              child: Column(
-                children: [
-                  ProfileCard(
-                    size: 60,
-                    text: client.fullName,
-                  ),
-                  SizedBox(height: kSpacingX5),
-                  Center(
-                    child: Text(
-                      client.fullName,
-                      style: context.textTheme.headlineMedium,
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: kPaddingMd2,
+                  vertical: kPaddingSm3,
+                ),
+                child: Column(
+                  children: [
+                    ProfileCard(
+                      size: 60,
+                      text: client.fullName,
                     ),
-                  ),
-                  SizedBox(height: kSpacingX5),
-                  if (client.latitude != null && client.longitude != null)
-                    Center(
-                      child: InkWell(
-                        onTap: () async {
-                          final availableMaps = await MapLauncher.installedMaps;
-                          await availableMaps.first.showMarker(
-                            coords: Coords(client.latitude ?? 0, client.longitude ?? 0),
-                            title: client.fullName,
-                          );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Flexible(
-                              child: FutureBuilder(
-                                future: LocationHelper.addressFromLongitudeLatitude(
-                                  latitude: client.latitude ?? 0,
-                                  longitude: client.longitude ?? 0,
-                                ),
-                                builder: (context, snapshot) {
-                                  return Text(
-                                    snapshot.data ?? "",
-                                    textAlign: TextAlign.center,
-                                    style: context.textTheme.headlineMedium,
-                                  );
-                                },
-                              ),
-                            ),
-                            SizedBox(width: kSpacingX1),
-                            Icon(
-                              Icons.location_on_rounded,
-                              color: kPrimaryColor,
-                              size: kSpacingX5,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  if (client.latitude == null && client.longitude == null)
+                    SizedBox(height: kSpacingX5),
                     Center(
                       child: Text(
-                        context.i10n.noAddress,
-                        style: context.textTheme.bodyLarge,
+                        client.fullName,
+                        style: context.textTheme.headlineMedium,
                       ),
                     ),
-                  SizedBox(height: kSpacingX3),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: kPaddingSm3),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
+                    SizedBox(height: kSpacingX5),
+                    if (client.latitude != null && client.longitude != null)
+                      Center(
+                        child: InkWell(
                           onTap: () async {
-                            final Uri _phoneLaunchUri = Uri.parse(
-                                'tel://${client.telMobile ?? client.tel1Fixe ?? client.tel2Fixe ?? ""}');
-
-                            if (client.tel1Fixe != null ||
-                                client.tel2Fixe != null ||
-                                client.telMobile != null) {
-                              await launchUrl(_phoneLaunchUri);
-                            }
+                            final availableMaps = await MapLauncher.installedMaps;
+                            await availableMaps.first.showMarker(
+                              coords: Coords(client.latitude ?? 0, client.longitude ?? 0),
+                              title: client.fullName,
+                            );
                           },
-                          child: Container(
-                            padding: EdgeInsets.all(kPaddingSm3),
-                            decoration: BoxDecoration(
-                              color: kPrimaryColor.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(kRadiusRounded),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.phone_rounded,
-                                  size: kSpacingX6,
-                                  color: kPrimaryColor,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                child: FutureBuilder(
+                                  future: LocationHelper.addressFromLongitudeLatitude(
+                                    latitude: client.latitude ?? 0,
+                                    longitude: client.longitude ?? 0,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    return Text(
+                                      snapshot.data ?? "",
+                                      textAlign: TextAlign.center,
+                                      style: context.textTheme.headlineMedium,
+                                    );
+                                  },
                                 ),
-                                SizedBox(width: kSpacingX2),
-                                Text(
-                                  client.telMobile ??
-                                      client.tel1Fixe ??
-                                      client.tel2Fixe ??
-                                      context.i10n.noPhone,
-                                  style: context.textTheme.bodyMedium,
-                                ),
-                              ],
-                            ),
+                              ),
+                              SizedBox(width: kSpacingX1),
+                              Icon(
+                                Icons.location_on_rounded,
+                                color: kPrimaryColor,
+                                size: kSpacingX5,
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: kSpacingX3),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: kPaddingSm3),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            final Uri _emailLaunchUri = Uri.parse(
-                                'mailto:${client.email ?? ""}?subject=${'A2S IS THE BEST'}');
+                      ),
+                    if (client.latitude == null && client.longitude == null)
+                      Center(
+                        child: Text(
+                          context.i10n.noAddress,
+                          style: context.textTheme.bodyLarge,
+                        ),
+                      ),
+                    SizedBox(height: kSpacingX3),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: kPaddingSm3),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              final Uri phoneLaunchUri = Uri.parse(
+                                  'tel://${client.telMobile ?? client.tel1Fixe ?? client.tel2Fixe ?? ""}');
 
-                            if (client.email != null) {
-                              await launchUrl(_emailLaunchUri);
-                            }
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(kPaddingSm3),
-                            decoration: BoxDecoration(
-                              color: kPrimaryColor.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(kRadiusRounded),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.email_rounded,
-                                  size: kSpacingX6,
-                                  color: kPrimaryColor,
-                                ),
-                                SizedBox(width: kSpacingX2),
-                                Text(
-                                  client.email != null && client.email!.isNotEmpty
-                                      ? client.email!
-                                      : context.i10n.noEmail,
-                                  style: context.textTheme.bodyMedium,
-                                ),
-                              ],
+                              if (client.tel1Fixe != null ||
+                                  client.tel2Fixe != null ||
+                                  client.telMobile != null) {
+                                await launchUrl(phoneLaunchUri);
+                              }
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(kPaddingSm3),
+                              decoration: BoxDecoration(
+                                color: kPrimaryColor.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(kRadiusRounded),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.phone_rounded,
+                                    size: kSpacingX6,
+                                    color: kPrimaryColor,
+                                  ),
+                                  SizedBox(width: kSpacingX2),
+                                  Text(
+                                    client.telMobile ??
+                                        client.tel1Fixe ??
+                                        client.tel2Fixe ??
+                                        context.i10n.noPhone,
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: kSpacingX3),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: kPaddingSm3),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              final Uri emailLaunchUri = Uri.parse(
+                                  'mailto:${client.email ?? ""}?subject=${'A2S IS THE BEST'}');
+
+                              if (client.email != null) {
+                                await launchUrl(emailLaunchUri);
+                              }
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(kPaddingSm3),
+                              decoration: BoxDecoration(
+                                color: kPrimaryColor.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(kRadiusRounded),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.email_rounded,
+                                    size: kSpacingX6,
+                                    color: kPrimaryColor,
+                                  ),
+                                  SizedBox(width: kSpacingX2),
+                                  Text(
+                                    client.email != null && client.email!.isNotEmpty
+                                        ? client.email!
+                                        : context.i10n.noEmail,
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: kSpacingX3),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Expanded(child: SizedBox.shrink()),
+                        Expanded(
+                          child: CircleButtonText(
+                            icon: Icons.note_alt_rounded,
+                            text: context.i10n.addObservation,
+                            onPressed: () {
+                              context.push(CreateObservationPage(
+                                pharmacyId: client.id,
+                              ));
+                            },
+                          ),
                         ),
+                        Expanded(
+                          child: CircleButtonText(
+                            icon: Icons.note_alt_rounded,
+                            text: context.i10n.addObservation,
+                            onPressed: () {
+                              context.push(CreateObservationPage(
+                                pharmacyId: client.id,
+                              ));
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: CircleButtonText(
+                            icon: Icons.warning_rounded,
+                            text: context.i10n.addClaim,
+                            color: kBrightSun,
+                            onPressed: () {
+                              context.push(CreateClaimPage(
+                                pharmacyId: client.id,
+                              ));
+                            },
+                          ),
+                        ),
+                        const Expanded(child: SizedBox.shrink()),
                       ],
                     ),
-                  ),
-                  SizedBox(height: kSpacingX3),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Expanded(child: SizedBox.shrink()),
-                      Expanded(
-                        child: CircleButtonText(
-                          icon: Icons.note_alt_rounded,
-                          text: context.i10n.addObservation,
-                          onPressed: () {
-                            context.push(CreateObservationPage(
-                              pharmacyId: client.id,
-                            ));
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: CircleButtonText(
-                          icon: Icons.warning_rounded,
-                          text: context.i10n.addClaim,
-                          color: kBrightSun,
-                          onPressed: () {},
-                        ),
-                      ),
-                      const Expanded(child: SizedBox.shrink()),
-                    ],
-                  ),
-                  SizedBox(height: kSpacingX3),
-                  const Expanded(child: ClientOptionsTab())
-                ],
+                    SizedBox(height: kSpacingX3),
+                    const Expanded(child: ClientOptionsTab())
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -288,7 +306,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.remove_red_eye_rounded),
+                      const Icon(Icons.remove_red_eye_rounded),
                       SizedBox(width: kSpacingX1),
                       Text(context.i10n.observations),
                     ],
@@ -304,7 +322,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.assignment_rounded),
+                      const Icon(Icons.assignment_rounded),
                       SizedBox(width: kSpacingX1),
                       Text(context.i10n.claims),
                     ],
@@ -344,7 +362,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                         ],
                       ));
                     },
-                    loading: () => Center(child: Loader()),
+                    loading: () => const Center(child: Loader()),
                     loaded: (observations) {
                       if (observations.isEmpty) {
                         return Center(
@@ -401,30 +419,28 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                     });
               },
             ),
-            Container(
-              child: Center(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SVG(
-                    'empty-states/info.svg',
-                    height: 175.sp,
-                  ),
-                  SizedBox(height: kSpacingX3),
-                  Text(
-                    context.i10n.noClaims,
-                    style: context.textTheme.headlineMedium,
-                  ),
-                  SizedBox(height: kSpacingX2),
-                  Text(
-                    context.i10n.noClaimsDesc,
-                    style: context.textTheme.bodyMedium,
-                  ),
-                ],
-              )),
-            ),
+            Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SVG(
+                  'empty-states/info.svg',
+                  height: 175.sp,
+                ),
+                SizedBox(height: kSpacingX3),
+                Text(
+                  context.i10n.noClaims,
+                  style: context.textTheme.headlineMedium,
+                ),
+                SizedBox(height: kSpacingX2),
+                Text(
+                  context.i10n.noClaimsDesc,
+                  style: context.textTheme.bodyMedium,
+                ),
+              ],
+            )),
           ]),
         ),
       ],

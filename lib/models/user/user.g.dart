@@ -11,12 +11,12 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       lastName: json['nom'] as String,
       firstName: json['prenom'] as String?,
       loginCode: json['loginCode'] as String,
-      actionFlag: json['actionFlag'] as int,
+      actionFlag: (json['actionFlag'] as num).toInt(),
       regionId: json['regionId'] as String,
       address: json['adresse'] as String?,
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
-      supervisor: json['superviseur'] as int?,
+      supervisor: (json['superviseur'] as num?)?.toInt(),
       fullName: json['fullName'] as String,
     );
 
@@ -36,8 +36,8 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     };
 
 _$IdImpl _$$IdImplFromJson(Map<String, dynamic> json) => _$IdImpl(
-      id: json['id'] as int,
-      companyId: json['cmpId'] as int,
+      id: (json['id'] as num).toInt(),
+      companyId: (json['cmpId'] as num).toInt(),
       typeTier: json['typeTier'] as String,
     );
 

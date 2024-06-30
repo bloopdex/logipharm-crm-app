@@ -8,9 +8,9 @@ part of 'observation.dart';
 
 _$ObservationImpl _$$ObservationImplFromJson(Map<String, dynamic> json) =>
     _$ObservationImpl(
-      pharmacyId: json['pharmacieId'] as int,
+      pharmacyId: (json['pharmacieId'] as num).toInt(),
       date: json['date'] as String,
-      type: json['type'] as int,
+      type: (json['type'] as num).toInt(),
       title: json['titre'] as String,
       reason: json['motif'] as String?,
       report: json['rapport'] as String,

@@ -10,8 +10,7 @@ import '../bloc/visit-creation/visit_creation_cubit.dart';
 class VisitValidateUpdatePage extends StatelessWidget {
   final TourDetail tour;
   final Map<String, dynamic> data;
-  const VisitValidateUpdatePage(
-      {super.key, required this.data, required this.tour});
+  const VisitValidateUpdatePage({super.key, required this.data, required this.tour});
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +85,7 @@ class VisitValidateUpdatePage extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(tour.pharmacy?.fullName.initials ?? "",
-                                textAlign: TextAlign.center,
-                                style: context.textTheme.bodyMedium),
+                                textAlign: TextAlign.center, style: context.textTheme.bodyMedium),
                           ),
                         ),
                         SizedBox(width: kSpacingX4),
@@ -105,14 +103,11 @@ class VisitValidateUpdatePage extends StatelessWidget {
                                 style: context.textTheme.displaySmall,
                               ),
                               SizedBox(height: kSpacingX1),
-                              tour.pharmacy?.latitude != null &&
-                                      tour.pharmacy?.longitude != null
+                              tour.pharmacy?.latitude != null && tour.pharmacy?.longitude != null
                                   ? FutureBuilder(
-                                      future: LocationHelper
-                                          .addressFromLongitudeLatitude(
+                                      future: LocationHelper.addressFromLongitudeLatitude(
                                         latitude: tour.pharmacy?.latitude ?? 0,
-                                        longitude:
-                                            tour.pharmacy?.longitude ?? 0,
+                                        longitude: tour.pharmacy?.longitude ?? 0,
                                       ),
                                       builder: (context, snapshot) {
                                         return Text(
@@ -152,19 +147,18 @@ class VisitValidateUpdatePage extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: kPaddingMd2, vertical: kPaddingSm3),
+                    padding: EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingSm3),
                     decoration: BoxDecoration(
                       border: Border.all(color: kBorder3),
                       borderRadius: BorderRadius.circular(kSpacingX3),
                     ),
                     child: QuillEditor.basic(
                       configurations: QuillEditorConfigurations(
-                        readOnly: true,
                         showCursor: false,
                         controller: QuillController(
                           document: data['document'],
                           selection: const TextSelection.collapsed(offset: 0),
+                          readOnly: true,
                         ),
                       ),
                     ),

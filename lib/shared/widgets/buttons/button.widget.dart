@@ -1,13 +1,13 @@
-import '../../../core/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/const.dart';
+import '../../../core/extension.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
-    required this.text,
+    this.text,
     this.onPressed,
     this.backgroundColor = kCeruleanBlue,
     this.textColor = Colors.white,
@@ -15,7 +15,8 @@ class CustomButton extends StatelessWidget {
     this.icon,
     this.disabled = false,
   });
-  final String text;
+
+  final String? text;
   final IconData? icon;
   final Color textColor;
   final double? height;
@@ -48,11 +49,11 @@ class CustomButton extends StatelessWidget {
                 SizedBox(width: kSpacingX1)
               ],
             ),
-          Text(text,
-              maxLines: 2,
-              textAlign: TextAlign.center,
-              style:
-                  context.textTheme.headlineMedium!.copyWith(color: textColor)),
+          if (text != null)
+            Text(text!,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                style: context.textTheme.headlineMedium!.copyWith(color: textColor)),
         ],
       ),
     );

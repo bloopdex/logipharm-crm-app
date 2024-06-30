@@ -1,5 +1,4 @@
 import 'package:crm/core/core.dart';
-import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,16 +11,15 @@ import '../../models/person/person.dart';
 import '../../shared/widgets/image/svg.dart';
 import '../../shared/widgets/inputs/search.text.field.widget.dart';
 import '../tour-plan/bloc/clients/clients_cubit.dart';
-import 'client-details.page.dart';
 
-class ClientsPage extends StatefulWidget {
-  const ClientsPage({super.key});
+class AddClientSelection extends StatefulWidget {
+  const AddClientSelection({super.key});
 
   @override
-  State<ClientsPage> createState() => _ClientsPageState();
+  State<AddClientSelection> createState() => _AddClientSelectionState();
 }
 
-class _ClientsPageState extends State<ClientsPage> {
+class _AddClientSelectionState extends State<AddClientSelection> {
   List<Person> clients = [];
 
   @override
@@ -133,10 +131,7 @@ class ClientCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        context.read<ObservationCubit>().get(pharmacyId: client.id);
-        context.push(
-          ClientDetailsPage(client: client),
-        );
+        Navigator.pop(context, client);
       },
       leading: ProfileCard(
         text: client.fullName,
@@ -148,11 +143,11 @@ class ClientCard extends StatelessWidget {
         children: [
           InkWell(
             onTap: () async {
-              final Uri _phoneLaunchUri = Uri.parse(
+              final Uri phoneLaunchUri = Uri.parse(
                   'tel://${client.telMobile ?? client.tel1Fixe ?? client.tel2Fixe ?? ""}');
 
               if (client.tel1Fixe != null || client.tel2Fixe != null || client.telMobile != null) {
-                await launchUrl(_phoneLaunchUri);
+                await launchUrl(phoneLaunchUri);
               }
             },
             child: Container(
@@ -175,6 +170,7 @@ class ClientCard extends StatelessWidget {
                 return;
               }
               final availableMaps = await MapLauncher.installedMaps;
+              if (!context.mounted) return;
               await availableMaps.first.showMarker(
                 coords: Coords(client.latitude!, client.longitude!),
                 title: context.i10n.clientAddress,

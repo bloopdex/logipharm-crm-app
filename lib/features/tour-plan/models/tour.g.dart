@@ -8,12 +8,12 @@ part of 'tour.dart';
 
 _$TourImpl _$$TourImplFromJson(Map<String, dynamic> json) => _$TourImpl(
       tourId: json['tourneeId'] as String,
-      companyId: json['companyId'] as int,
+      companyId: (json['companyId'] as num).toInt(),
       regionId: json['regionId'] as String,
       regionName: json['regionName'] as String?,
       startDate: json['dateDebut'] as String,
       endDate: json['dateFin'] as String,
-      statusFlag: json['statusFlag'] as int,
+      statusFlag: (json['statusFlag'] as num).toInt(),
       statusName: json['statusName'] as String?,
       effectiveStartDate: json['dateDebutEffective'] as String?,
       effectiveEndDate: json['dateFinEffective'] as String?,
@@ -21,8 +21,8 @@ _$TourImpl _$$TourImplFromJson(Map<String, dynamic> json) => _$TourImpl(
       supervisor: json['superviseur'] == null
           ? null
           : Person.fromJson(json['superviseur'] as Map<String, dynamic>),
-      totalClients: json['totalClients'] as int?,
-      visitedClients: json['visitedClients'] as int?,
+      totalClients: (json['totalClients'] as num?)?.toInt(),
+      visitedClients: (json['visitedClients'] as num?)?.toInt(),
       pharmacies: (json['tourneeDetails'] as List<dynamic>?)
           ?.map((e) => TourDetail.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -51,11 +51,11 @@ _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
     _$TourDetailImpl(
       id: json['id'] as String,
       masterTourId: json['tourneMaitreId'] as String,
-      companyId: json['companyId'] as int,
+      companyId: (json['companyId'] as num).toInt(),
       regionId: json['regionId'] as String?,
       startDate: json['dateDebut'] as String?,
       endDate: json['dateFin'] as String?,
-      statusFlag: json['statusFlag'] as int?,
+      statusFlag: (json['statusFlag'] as num?)?.toInt(),
       statusName: json['statusName'] as String?,
       reason: json['motif'] as String?,
       report: json['repport'] as String?,

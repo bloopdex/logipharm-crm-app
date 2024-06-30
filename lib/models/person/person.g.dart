@@ -7,17 +7,17 @@ part of 'person.dart';
 // **************************************************************************
 
 _$PersonImpl _$$PersonImplFromJson(Map<String, dynamic> json) => _$PersonImpl(
-      id: json['id'] as int,
-      companyId: json['cmpId'] as int,
+      id: (json['id'] as num).toInt(),
+      companyId: (json['cmpId'] as num).toInt(),
       typeTier: json['typeTier'] as String,
       lastName: json['nom'] as String,
       firstName: json['prenom'] as String?,
       loginCode: json['loginCode'] as String,
-      actionFlag: json['actionFlag'] as int,
+      actionFlag: (json['actionFlag'] as num).toInt(),
       regionId: json['regionId'] as String?,
       address: json['adresse'] as String?,
       latitude: (json['latitude'] as num?)?.toDouble(),
-      supervisor: json['superviseur'] as int?,
+      supervisor: (json['superviseur'] as num?)?.toInt(),
       longitude: (json['longitude'] as num?)?.toDouble(),
       postalCode: json['codePostal'] as String?,
       postBox: json['boitePostale'] as String?,
