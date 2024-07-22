@@ -36,6 +36,8 @@ mixin _$Person {
   int get actionFlag => throw _privateConstructorUsedError;
   @JsonKey(name: 'regionId')
   String? get regionId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ville')
+  String? get ville => throw _privateConstructorUsedError;
   @JsonKey(name: 'adresse')
   String? get address => throw _privateConstructorUsedError;
   @JsonKey(name: 'latitude')
@@ -86,6 +88,7 @@ abstract class $PersonCopyWith<$Res> {
       @JsonKey(name: 'loginCode') String loginCode,
       @JsonKey(name: 'actionFlag') int actionFlag,
       @JsonKey(name: 'regionId') String? regionId,
+      @JsonKey(name: 'ville') String? ville,
       @JsonKey(name: 'adresse') String? address,
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'superviseur') int? supervisor,
@@ -124,6 +127,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? loginCode = null,
     Object? actionFlag = null,
     Object? regionId = freezed,
+    Object? ville = freezed,
     Object? address = freezed,
     Object? latitude = freezed,
     Object? supervisor = freezed,
@@ -172,6 +176,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
       regionId: freezed == regionId
           ? _value.regionId
           : regionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ville: freezed == ville
+          ? _value.ville
+          : ville // ignore: cast_nullable_to_non_nullable
               as String?,
       address: freezed == address
           ? _value.address
@@ -253,6 +261,7 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       @JsonKey(name: 'loginCode') String loginCode,
       @JsonKey(name: 'actionFlag') int actionFlag,
       @JsonKey(name: 'regionId') String? regionId,
+      @JsonKey(name: 'ville') String? ville,
       @JsonKey(name: 'adresse') String? address,
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'superviseur') int? supervisor,
@@ -289,6 +298,7 @@ class __$$PersonImplCopyWithImpl<$Res>
     Object? loginCode = null,
     Object? actionFlag = null,
     Object? regionId = freezed,
+    Object? ville = freezed,
     Object? address = freezed,
     Object? latitude = freezed,
     Object? supervisor = freezed,
@@ -337,6 +347,10 @@ class __$$PersonImplCopyWithImpl<$Res>
       regionId: freezed == regionId
           ? _value.regionId
           : regionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ville: freezed == ville
+          ? _value.ville
+          : ville // ignore: cast_nullable_to_non_nullable
               as String?,
       address: freezed == address
           ? _value.address
@@ -414,6 +428,7 @@ class _$PersonImpl implements _Person {
       @JsonKey(name: 'loginCode') required this.loginCode,
       @JsonKey(name: 'actionFlag') required this.actionFlag,
       @JsonKey(name: 'regionId') this.regionId,
+      @JsonKey(name: 'ville') this.ville,
       @JsonKey(name: 'adresse') this.address,
       @JsonKey(name: 'latitude') this.latitude,
       @JsonKey(name: 'superviseur') this.supervisor,
@@ -457,6 +472,9 @@ class _$PersonImpl implements _Person {
   @override
   @JsonKey(name: 'regionId')
   final String? regionId;
+  @override
+  @JsonKey(name: 'ville')
+  final String? ville;
   @override
   @JsonKey(name: 'adresse')
   final String? address;
@@ -505,7 +523,7 @@ class _$PersonImpl implements _Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, supervisor: $supervisor, longitude: $longitude, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName)';
+    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, ville: $ville, address: $address, latitude: $latitude, supervisor: $supervisor, longitude: $longitude, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName)';
   }
 
   @override
@@ -528,6 +546,7 @@ class _$PersonImpl implements _Person {
                 other.actionFlag == actionFlag) &&
             (identical(other.regionId, regionId) ||
                 other.regionId == regionId) &&
+            (identical(other.ville, ville) || other.ville == ville) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
@@ -565,6 +584,7 @@ class _$PersonImpl implements _Person {
         loginCode,
         actionFlag,
         regionId,
+        ville,
         address,
         latitude,
         supervisor,
@@ -606,6 +626,7 @@ abstract class _Person implements Person {
           @JsonKey(name: 'loginCode') required final String loginCode,
           @JsonKey(name: 'actionFlag') required final int actionFlag,
           @JsonKey(name: 'regionId') final String? regionId,
+          @JsonKey(name: 'ville') final String? ville,
           @JsonKey(name: 'adresse') final String? address,
           @JsonKey(name: 'latitude') final double? latitude,
           @JsonKey(name: 'superviseur') final int? supervisor,
@@ -649,6 +670,9 @@ abstract class _Person implements Person {
   @override
   @JsonKey(name: 'regionId')
   String? get regionId;
+  @override
+  @JsonKey(name: 'ville')
+  String? get ville;
   @override
   @JsonKey(name: 'adresse')
   String? get address;

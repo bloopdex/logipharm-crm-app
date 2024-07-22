@@ -144,7 +144,9 @@ BoxShadow kDropShadowSecondary = BoxShadow(
 );
 const String HTTPS = 'https://';
 const String HTTP = 'http://';
+// const String baseUrl = 'client.vecopharm-dz.com';
 const String baseUrl = 'pharmadrive.damnserver.com';
+// const String baseUrl = '192.168.1.20';
 const String port = "8085";
 const String version = '';
 

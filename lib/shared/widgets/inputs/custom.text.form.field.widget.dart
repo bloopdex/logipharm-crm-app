@@ -18,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.controller,
     this.focusNode,
+    this.readOnly = false,
   });
 
   final FocusNode? focusNode;
@@ -35,10 +36,12 @@ class CustomTextFormField extends StatelessWidget {
   final int minLines;
   final List<String> autoFillHints;
   final String? Function(String?)? onChanged;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly,
       focusNode: focusNode,
       controller: controller,
       initialValue: initialValue,

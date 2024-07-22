@@ -3,12 +3,14 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:crm/core/core.dart';
+import 'package:crm/features/tour-plan/services/goal.repository.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/logger.dart';
 import '../../../../shared/utils/date.formatter.dart';
+import '../../models/goal/goal.dart';
 import '../../models/tour.dart';
 import '../../services/tour.repository.dart';
 
@@ -53,9 +55,18 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
           visitedClients: visitedClients,
         );
       }).toList();
+      bool hasReachedMax = response.data['body']['last'];
+
+      response = await GoalRepository.get();
+      var rawGoal = response.data['body'];
+      Goal goal = Goal.fromJson(rawGoal);
 
       emit(TourPlanState.loaded(
-          tours: tours, hasReachedMax: response.data['body']['last'], currentPage: 0));
+        tours: tours,
+        hasReachedMax: hasReachedMax,
+        currentPage: 0,
+        goal: goal,
+      ));
     } catch (e) {
       ILogger.error(e.toString());
       emit(const TourPlanState.failure(message: "errors:something-went-wrong"));
@@ -63,6 +74,7 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
   }
 
   Future<void> _search(_Search event, Emitter<TourPlanState> emit) async {
+    Goal goal = (state as _Loaded).goal;
     emit(const TourPlanState.loading());
     try {
       Response response = await TourRepository.get(
@@ -90,7 +102,11 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
       }).toList();
 
       emit(TourPlanState.loaded(
-          tours: tours, hasReachedMax: response.data['body']['last'], currentPage: 0));
+        tours: tours,
+        hasReachedMax: response.data['body']['last'],
+        currentPage: 0,
+        goal: goal,
+      ));
     } catch (e) {
       ILogger.error(e.toString());
       emit(const TourPlanState.failure(message: "errors:something-went-wrong"));
@@ -127,9 +143,11 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
           }).toList();
 
           emit(TourPlanState.loaded(
-              tours: currentState.tours + tours,
-              hasReachedMax: response.data['body']['last'],
-              currentPage: currentState.currentPage + 1));
+            tours: currentState.tours + tours,
+            hasReachedMax: response.data['body']['last'],
+            currentPage: currentState.currentPage + 1,
+            goal: currentState.goal,
+          ));
         } catch (e) {
           ILogger.error(e.toString());
           emit(const TourPlanState.failure(message: "errors:something-went-wrong"));

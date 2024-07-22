@@ -50,7 +50,7 @@ class MenuPage extends StatelessWidget {
                       text: context.i10n.homeCreateNewPlan,
                       onPressed: () {
                         final current = context.read<TourPlanBloc>().state.maybeWhen(
-                              loaded: (tours, hasReachedMax, currentPage) {
+                              loaded: (tours, hasReachedMax, currentPage, ___) {
                                 return tours
                                     .where(
                                         (element) => element.statusFlag == StatuFlags.opened.value)
@@ -73,7 +73,7 @@ class MenuPage extends StatelessWidget {
                       text: context.i10n.homeCreateNewVisit,
                       onPressed: () {
                         final current = context.read<TourPlanBloc>().state.maybeWhen(
-                              loaded: (tours, hasReachedMax, currentPage) {
+                              loaded: (tours, hasReachedMax, currentPage, goal) {
                                 return tours
                                     .where(
                                         (element) => element.statusFlag == StatuFlags.opened.value)
@@ -94,7 +94,7 @@ class MenuPage extends StatelessWidget {
                         }
                       },
                       color: context.watch<TourPlanBloc>().state.maybeWhen(
-                                        loaded: (tours, hasReachedMax, currentPage) {
+                                        loaded: (tours, hasReachedMax, currentPage, goal) {
                                           return tours
                                               .where((element) =>
                                                   element.statusFlag == StatuFlags.opened.value)

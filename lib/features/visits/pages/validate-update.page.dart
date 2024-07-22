@@ -50,6 +50,8 @@ class VisitValidateUpdatePage extends StatelessWidget {
                               SizedBox(height: kSpacingX1),
                               Text(
                                 message,
+                                softWrap: true,
+                                maxLines: 3,
                                 style: context.textTheme.bodyMedium,
                               ),
                             ],

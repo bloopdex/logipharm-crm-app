@@ -1,5 +1,6 @@
 import 'package:crm/core/core.dart';
 import 'package:crm/shared/services/helpers/location.helper.dart';
+import 'package:crm/shared/widgets/inputs/custom.text.form.field.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,7 @@ import '../models/wilaya/wilaya.dart';
 
 class AddClientsForm extends StatelessWidget {
   final Map<String, dynamic> data;
+
   const AddClientsForm({super.key, required this.data});
 
   @override
@@ -22,8 +24,9 @@ class AddClientsForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        Container(
           padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+          color: Colors.white,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +51,8 @@ class AddClientsForm extends StatelessWidget {
                   return CustomDropDownInput(
                       data: data,
                       mapKey: 'regionId',
-                      onChanged: (value) => context.read<ClientsCubit>().filter(value ?? ""),
+                      onChanged: (value) =>
+                          context.read<ClientsCubit>().filter(regionId: value ?? ""),
                       items: [
                         CustomDropDownItem(
                           label: context.i10n.allRegions,
@@ -63,6 +67,16 @@ class AddClientsForm extends StatelessWidget {
                       ]);
                 },
               ),
+              SizedBox(height: kSpacingX2),
+              CustomTextFormField(
+                data: data,
+                mapKey: 'commune',
+                hintText: context.i10n.tourCreationCommuneLabel,
+                onChanged: (value) {
+                  context.read<ClientsCubit>().filter(commune: value ?? "");
+                  return null;
+                },
+              ),
               SizedBox(height: kSpacingX5),
               Text(
                 context.i10n.tourCreationClientsLabel,
@@ -75,41 +89,42 @@ class AddClientsForm extends StatelessWidget {
         BlocBuilder<ClientsCubit, ClientsState>(
           builder: (context, clientState) {
             return Expanded(
-                child: Container(
-              child: clientState.maybeWhen(
-                orElse: () => ListView.separated(
-                  itemBuilder: (context, index) => const ClientCardShimmer(),
-                  separatorBuilder: (context, index) => SizedBox(height: kSpacingX4),
-                  itemCount: 6,
-                ),
-                loaded: (clients) {
-                  final filtered = clients
-                      .where(
-                        (e) => e.supervisor == int.tryParse(data['delegueId']),
-                      )
-                      .toList();
-                  if (filtered.isEmpty) {
-                    return const ClientCardEmpty();
-                  }
-                  return BlocBuilder<SelectionCubit, SelectionState>(
-                    builder: (context, selection) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) => ClientCard(
-                          client: filtered[index],
-                          data: data,
-                          checked: selection.selected.contains(
-                            filtered[index].id.toString(),
+              child: Container(
+                child: clientState.maybeWhen(
+                  orElse: () => ListView.separated(
+                    itemBuilder: (context, index) => const ClientCardShimmer(),
+                    separatorBuilder: (context, index) => SizedBox(height: kSpacingX4),
+                    itemCount: 6,
+                  ),
+                  loaded: (clients) {
+                    final filtered = clients
+                        .where(
+                          (e) => e.supervisor == int.tryParse(data['delegueId']),
+                        )
+                        .toList();
+                    if (filtered.isEmpty) {
+                      return const SingleChildScrollView(child: ClientCardEmpty());
+                    }
+                    return BlocBuilder<SelectionCubit, SelectionState>(
+                      builder: (context, selection) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index) => ClientCard(
+                            client: filtered[index],
+                            data: data,
+                            checked: selection.selected.contains(
+                              '${filtered[index].id.toString()}:${filtered[index].typeTier}',
+                            ),
                           ),
-                        ),
-                        itemCount: filtered.length,
-                      );
-                    },
-                  );
-                },
+                          itemCount: filtered.length,
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
-            ));
+            );
           },
         ),
       ],
@@ -187,6 +202,7 @@ class ClientCard extends StatelessWidget {
   final Person client;
   final bool checked;
   final Map<String, dynamic> data;
+
   const ClientCard({
     super.key,
     required this.client,
@@ -226,7 +242,7 @@ class ClientCard extends StatelessWidget {
         tileColor: checked ? kCeruleanBlue.shade100 : null,
         value: checked,
         onChanged: (value) {
-          context.read<SelectionCubit>().select(client.id.toString());
+          context.read<SelectionCubit>().select('${client.id.toString()}:${client.typeTier}');
           data['pharmacieIds'] = context.read<SelectionCubit>().state.selected;
         });
   }

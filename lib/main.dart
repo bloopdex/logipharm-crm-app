@@ -4,8 +4,10 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:battery/battery.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:battery_plus/battery_plus.dart';
+import 'package:crm/features/clients/blocs/claims-motifs/motifs_cubit.dart';
+import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
+import 'package:crm/features/menu/cubits/change_password_cubit.dart';
 import 'package:crm/features/todo/cubit/todo_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/visits/bloc/visits/visit_bloc.dart';
@@ -24,8 +26,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:telephony/telephony.dart';
-import 'package:wifi_info_flutter/wifi_info_flutter.dart';
+import 'package:workmanager/workmanager.dart';
 
 import 'core/const.dart';
 import 'core/routes.dart';
@@ -33,6 +34,7 @@ import 'core/theme.dart';
 import 'features/auth/bloc/login/login_bloc.dart';
 import 'features/auth/login.screen.dart';
 import 'features/auth/services/auth.repository.dart';
+import 'features/clients/blocs/claims/claim_cubit.dart';
 import 'features/clients/blocs/observation/observation_cubit.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
@@ -51,6 +53,8 @@ import 'logic/time.range/time_range_cubit.dart';
 import 'shared/widgets/error/error.screen.dart';
 import 'shared/widgets/loading/loading.screen.dart';
 
+const platform = MethodChannel('crm.a2s.dz/battery');
+
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -63,7 +67,25 @@ void main() async {
   await DioHelper.init();
   await initializeService();
 
+  Workmanager().initialize(
+    callbackDispatcher,
+    isInDebugMode: true,
+  );
+  Workmanager().registerPeriodicTask(
+    "update-location-crm",
+    "UpdateLocation",
+    frequency: const Duration(minutes: 15),
+  );
+
   runApp(const MyApp());
+}
+
+@pragma('vm:entry-point')
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    await updateLocalization();
+    return Future.value(true);
+  });
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalPlugin = FlutterLocalNotificationsPlugin();
@@ -120,25 +142,26 @@ void onStart(ServiceInstance service) {
 
   Timer.periodic(const Duration(minutes: 1), (timer) async {
     await updateLocalization();
-    flutterLocalPlugin.show(
-      90,
-      "A2S Fetch Your Location Successfully",
-      "Last Update At ${DateTime.now()}",
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          "a2s fetch location",
-          "A2S is fetching your location",
-          ongoing: true,
-          icon: "app_icon",
-        ),
-      ),
-    );
+    // flutterLocalPlugin.show(
+    //   90,
+    //   "A2S Fetch Your Location Successfully",
+    //   "Last Update At ${DateTime.now()}",
+    //   const NotificationDetails(
+    //     android: AndroidNotificationDetails(
+    //       "a2s fetch location",
+    //       "A2S is fetching your location",
+    //       ongoing: true,
+    //       icon: "app_icon",
+    //     ),
+    //   ),
+    // );
   });
 }
 
 Future<void> updateLocalization() async {
   try {
     log('Updating location...');
+
     final token = await AuthRepository.token;
     if (token == null) {
       log("There is no token");
@@ -193,7 +216,7 @@ Future<LocationData> getCurrentLocation() async {
 
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
-    return Future.error('Location services are disabled.');
+    await Geolocator.openLocationSettings();
   }
 
   permission = await Geolocator.checkPermission();
@@ -218,35 +241,22 @@ Future<LocationData> getCurrentLocation() async {
     bearing: position.heading,
     altitude: position.altitude,
     accuracy: position.accuracy,
-    hdop: 0.0, // This is a placeholder, replace with actual value if available
+    hdop: 0.0,
   );
-}
-
-Future<String> getCellInfo() async {
-  final Telephony telephony = Telephony.instance;
-
-  if (await telephony.requestPhoneAndSmsPermissions ?? false) {}
-  return '';
-}
-
-Future<String> getWifiInfo() async {
-  var connectivityResult = await (Connectivity().checkConnectivity());
-  if (connectivityResult.contains(ConnectivityResult.wifi)) {
-    final wifiBSSID = await WifiInfo().getWifiBSSID();
-    final wifiSignalStrength = await WifiInfo().getWifiBSSID();
-    return '$wifiBSSID:$wifiSignalStrength';
-  }
-  return '';
 }
 
 Future<BatteryInfo?> getBatteryInfo() async {
   try {
-    final battery = Battery();
-    final batteryLevel = await battery.batteryLevel;
+    Battery battery = Battery();
+    int level = await battery.batteryLevel;
+    bool charging = (await battery.batteryState) == BatteryState.charging;
 
-    return BatteryInfo(level: batteryLevel.toDouble());
+    return BatteryInfo(
+      level: level,
+      charging: charging,
+    );
   } catch (e) {
-    log("Error getting battery info: $e");
+    log("Error getting battery data: $e");
     return null;
   }
 }
@@ -274,10 +284,12 @@ class LocationData {
 }
 
 class BatteryInfo {
-  final double level;
+  final int level;
+  final bool charging;
 
   BatteryInfo({
     required this.level,
+    this.charging = false,
   });
 }
 
@@ -331,6 +343,7 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<TimeRangeCubit>(create: (context) => TimeRangeCubit()),
           BlocProvider<SearchCubit>(create: (context) => SearchCubit()),
           BlocProvider<CounterCubit>(create: (context) => CounterCubit()..reset()),
+          BlocProvider<ChangePasswordCubit>(create: (context) => ChangePasswordCubit()),
           BlocProvider<DelegateCubit>(
             lazy: false,
             create: (context) => DelegateCubit()..load(),
@@ -350,9 +363,10 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<VisitCreationCubit>(create: (context) => VisitCreationCubit()),
           BlocProvider<TodoCubit>(create: (context) => TodoCubit()),
           BlocProvider<VisitBloc>(create: (context) => VisitBloc()),
-          BlocProvider<ObservationCubit>(
-            create: (context) => ObservationCubit(),
-          ),
+          BlocProvider<ObservationCubit>(create: (context) => ObservationCubit()),
+          BlocProvider<ClaimCubit>(create: (context) => ClaimCubit()),
+          BlocProvider<ClaimMotifCubit>(create: (context) => ClaimMotifCubit()),
+          BlocProvider<ClientDetailsCubit>(create: (context) => ClientDetailsCubit()),
         ],
         child: BlocBuilder<LocalizationsBloc, LocalizationsState>(builder: (context, state) {
           return MediaQuery(

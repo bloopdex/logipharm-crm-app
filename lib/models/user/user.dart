@@ -9,16 +9,17 @@ part 'user.g.dart';
 class User with _$User {
   const factory User({
     @JsonKey(name: 'id') required Id id,
-    @JsonKey(name: 'nom') required String lastName,
+    @JsonKey(name: 'nom') required String? lastName,
     @JsonKey(name: 'prenom') String? firstName,
-    @JsonKey(name: 'loginCode') required String loginCode,
-    @JsonKey(name: 'actionFlag') required int actionFlag,
-    @JsonKey(name: 'regionId') required String regionId,
+    @JsonKey(name: 'loginCode') required String? loginCode,
+    @JsonKey(name: 'actionFlag') required int? actionFlag,
+    @JsonKey(name: 'regionId') required String? regionId,
     @JsonKey(name: 'adresse') String? address,
     @JsonKey(name: 'latitude') double? latitude,
     @JsonKey(name: 'longitude') double? longitude,
     @JsonKey(name: 'superviseur') int? supervisor,
-    @JsonKey(name: 'fullName') required String fullName,
+    @JsonKey(name: 'addViseHorsPlan') required int addVisitOutPlanPrivilege,
+    @JsonKey(name: 'fullName') required String? fullName,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

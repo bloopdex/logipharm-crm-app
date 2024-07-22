@@ -8,6 +8,7 @@ class TourPlanState with _$TourPlanState {
     required List<Tour> tours,
     required bool hasReachedMax,
     required int currentPage,
+    required Goal goal,
   }) = _Loaded;
   const factory TourPlanState.failure({required String message}) = _Failure;
 }

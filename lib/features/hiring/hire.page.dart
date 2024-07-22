@@ -71,12 +71,8 @@ class _HirePageContentState extends State<HirePageContent> {
               context.read<HireBloc>().add(
                     HireEvent.search(
                       query: state,
-                      start: context
-                          .read<TimeRangeCubit>()
-                          .state
-                          .validatedStartDate,
-                      end:
-                          context.read<TimeRangeCubit>().state.validatedEndDate,
+                      start: context.read<TimeRangeCubit>().state.validatedStartDate,
+                      end: context.read<TimeRangeCubit>().state.validatedEndDate,
                     ),
                   );
             },
@@ -98,10 +94,8 @@ class _HirePageContentState extends State<HirePageContent> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
             constraints: BoxConstraints(
-              minHeight:
-                  context.height - context.appBarSize - context.paddingBottom,
-              maxHeight:
-                  context.height - context.appBarSize - context.paddingBottom,
+              minHeight: context.height - context.appBarSize - context.paddingBottom,
+              maxHeight: context.height - context.appBarSize - context.paddingBottom,
               minWidth: context.width,
               maxWidth: context.width,
             ),
@@ -124,7 +118,7 @@ class _HirePageContentState extends State<HirePageContent> {
                     builder: (context, state) {
                       return RefreshIndicator(
                         onRefresh: () async {
-                          context.read<HireBloc>().add(HireEvent.started());
+                          context.read<HireBloc>().add(const HireEvent.started());
                         },
                         child: state.maybeWhen(
                           orElse: () => const SizedBox.shrink(),
@@ -158,6 +152,9 @@ class _HirePageContentState extends State<HirePageContent> {
                                     text: context.i10n.createNewHirement,
                                     backgroundColor: kBgButtonSecondary,
                                     textColor: kText1,
+                                    onPressed: () {
+                                      context.push(const CreateHirePage());
+                                    },
                                   ),
                                 ],
                               ));
@@ -175,14 +172,11 @@ class _HirePageContentState extends State<HirePageContent> {
                                   leading: ProfileCard(
                                     text: '${hire.lastName} ${hire.firstName}',
                                   ),
-                                  title: Text(
-                                      '${hire.lastName} ${hire.firstName}',
+                                  title: Text('${hire.lastName} ${hire.firstName}',
                                       style: context.textTheme.bodyLarge),
-                                  subtitle: Text(
-                                      hire.remark ?? context.i10n.noNote,
+                                  subtitle: Text(hire.remark ?? context.i10n.noNote,
                                       style: context.textTheme.bodyMedium),
-                                  trailing:
-                                      HireStatusCard(status: hire.statusFlag),
+                                  trailing: HireStatusCard(status: hire.statusFlag),
                                 );
                               },
                             );
@@ -204,8 +198,7 @@ class _HirePageContentState extends State<HirePageContent> {
   }
 
   void _loadMore() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
+    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
       context.read<HireBloc>().add(HireEvent.load(
             query: context.read<SearchCubit>().state,

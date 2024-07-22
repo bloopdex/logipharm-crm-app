@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:crm/shared/widgets/buttons/button.widget.dart';
 import 'package:crm/shared/widgets/loading/loader.widget.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +29,7 @@ class _CreateClaimPageState extends State<CreateClaimPage> {
   @override
   void initState() {
     claim['pharmacieId'] = widget.pharmacyId;
+    context.read<ClaimMotifCubit>().get();
     super.initState();
   }
 
@@ -118,21 +117,22 @@ class _CreateClaimPageState extends State<CreateClaimPage> {
                             ),
                             child: DropdownButtonFormField<String>(
                               decoration: InputDecoration(
-                                labelText: context.i10n.homeHello,
+                                labelText: context.i10n.motif,
                                 labelStyle: context.textTheme.bodyLarge,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(kPaddingSm3),
                                 ),
                               ),
-                              value: claim['motif'],
+                              value: claim['titre'],
                               onChanged: (String? value) {
                                 setState(() {
+                                  claim['titre'] = value;
                                   claim['motif'] = value;
                                 });
                               },
                               items: motifs
                                   .map<DropdownMenuItem<String>>((motif) => DropdownMenuItem(
-                                        value: motif.id.toString(),
+                                        value: motif.label,
                                         child: Text(motif.label),
                                       ))
                                   .toList(),
@@ -176,10 +176,8 @@ class _CreateClaimPageState extends State<CreateClaimPage> {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             claim['rapportText'] = _quillController.document.toPlainText();
-                            claim['rapport'] =
-                                json.encode(_quillController.document.toDelta().toJson());
+                            claim['rapport'] = _quillController.document.toPlainText();
                             context.read<ClaimCubit>().create(data: claim);
-                            context.pop();
                           }
                         }),
                   ),

@@ -10,7 +10,7 @@ part 'motifs_state.dart';
 class ClaimMotifCubit extends Cubit<ClaimMotifState> {
   ClaimMotifCubit() : super(const ClaimMotifState.initial());
 
-  Future<void> get({required int pharmacyId}) async {
+  Future<void> get() async {
     emit(const ClaimMotifState.loading());
     try {
       final response = await ClaimRepository.motifs();

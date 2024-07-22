@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crm/core/core.dart';
 import 'package:crm/shared/widgets/inputs/custom.text.form.field.widget.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +31,23 @@ class ClientSelectionForm extends StatefulWidget {
 
 class _ClientSelectionFormState extends State<ClientSelectionForm> {
   final FocusNode _quillFocusNode = FocusNode();
-  Person? pharmacy = null;
+  Person? pharmacy;
 
   @override
   void initState() {
     super.initState();
+    log('pharmacy: $pharmacy');
+    if (widget.data['pharmacieId'] != null) {
+      pharmacy = widget.clients
+          .where((element) =>
+              '${element.pharmacy?.id.toString()}:${element.pharmacy?.typeTier}' ==
+              widget.data['pharmacieId'])
+          .firstOrNull
+          ?.pharmacy;
+    } else {
+      pharmacy = widget.clients.firstOrNull?.pharmacy;
+    }
+    log('pharmacy: $pharmacy');
     _quillFocusNode.addListener(_handleQuillFocusChange);
   }
 
@@ -82,34 +96,44 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                     if (pharmacy != null)
                       CustomDropDownItem(
                         label: pharmacy!.fullName,
-                        value: pharmacy!.id.toString(),
+                        value: '${pharmacy!.id}:${pharmacy!.typeTier}',
                       ),
-                    ...widget.clients.where((e) => e.pharmacy != null).map(
+                    ...widget.clients
+                        .where((e) =>
+                            e.pharmacy != null &&
+                            '${e.pharmacy?.id}:${e.pharmacy?.typeTier}' !=
+                                widget.data['pharmacieId'])
+                        .map(
                           (e) => CustomDropDownItem(
                             label: e.pharmacy?.fullName ?? "",
-                            value: e.pharmacy!.id.toString(),
+                            value: '${e.pharmacy?.id}:${e.pharmacy?.typeTier}',
                           ),
                         ),
                   ],
                 ),
               ),
-              SizedBox(width: kPaddingSm2),
-              IconButton(
-                onPressed: () async {
-                  Person? pharmacy = await Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const AddClientSelection()),
-                  );
+              if (context.user.addVisitOutPlanPrivilege == 1)
+                Row(
+                  children: [
+                    SizedBox(width: kPaddingSm2),
+                    IconButton(
+                      onPressed: () async {
+                        Person? pharmacy = await Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const AddClientSelection()),
+                        );
 
-                  if (!context.mounted || pharmacy == null) return;
+                        if (!context.mounted || pharmacy == null) return;
 
-                  setState(() {
-                    widget.data['pharmacieId'] = pharmacy.id.toString();
-                    this.pharmacy = pharmacy;
-                  });
-                },
-                icon: const Icon(Icons.add),
-              ),
+                        setState(() {
+                          widget.data['pharmacieId'] = pharmacy.id.toString();
+                          this.pharmacy = pharmacy;
+                        });
+                      },
+                      icon: const Icon(Icons.add),
+                    ),
+                  ],
+                ),
             ],
           ),
           SizedBox(height: kSpacingX5),

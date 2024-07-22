@@ -20,22 +20,24 @@ CommercialRegister _$CommercialRegisterFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CommercialRegister {
+  @JsonKey(name: 'id')
+  num get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'commercialRegisterNumber')
   String get commercialRegisterNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'region')
-  String get region => throw _privateConstructorUsedError;
+  String? get region => throw _privateConstructorUsedError;
   @JsonKey(name: 'lastName')
-  String get lastName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: 'firstName')
-  String get firstName => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: 'adress')
-  String get address => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
   @JsonKey(name: 'stateWilaya')
-  String get stateWilaya => throw _privateConstructorUsedError;
+  String? get stateWilaya => throw _privateConstructorUsedError;
   @JsonKey(name: 'mnuicipality')
-  String get municipality => throw _privateConstructorUsedError;
+  String? get municipality => throw _privateConstructorUsedError;
   @JsonKey(name: 'commercialRegisterStatus')
-  String get commercialRegisterStatus => throw _privateConstructorUsedError;
+  String? get commercialRegisterStatus => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,16 +52,17 @@ abstract class $CommercialRegisterCopyWith<$Res> {
       _$CommercialRegisterCopyWithImpl<$Res, CommercialRegister>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'commercialRegisterNumber')
+      {@JsonKey(name: 'id') num id,
+      @JsonKey(name: 'commercialRegisterNumber')
       String commercialRegisterNumber,
-      @JsonKey(name: 'region') String region,
-      @JsonKey(name: 'lastName') String lastName,
-      @JsonKey(name: 'firstName') String firstName,
-      @JsonKey(name: 'adress') String address,
-      @JsonKey(name: 'stateWilaya') String stateWilaya,
-      @JsonKey(name: 'mnuicipality') String municipality,
+      @JsonKey(name: 'region') String? region,
+      @JsonKey(name: 'lastName') String? lastName,
+      @JsonKey(name: 'firstName') String? firstName,
+      @JsonKey(name: 'adress') String? address,
+      @JsonKey(name: 'stateWilaya') String? stateWilaya,
+      @JsonKey(name: 'mnuicipality') String? municipality,
       @JsonKey(name: 'commercialRegisterStatus')
-      String commercialRegisterStatus});
+      String? commercialRegisterStatus});
 }
 
 /// @nodoc
@@ -75,48 +78,53 @@ class _$CommercialRegisterCopyWithImpl<$Res, $Val extends CommercialRegister>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? commercialRegisterNumber = null,
-    Object? region = null,
-    Object? lastName = null,
-    Object? firstName = null,
-    Object? address = null,
-    Object? stateWilaya = null,
-    Object? municipality = null,
-    Object? commercialRegisterStatus = null,
+    Object? region = freezed,
+    Object? lastName = freezed,
+    Object? firstName = freezed,
+    Object? address = freezed,
+    Object? stateWilaya = freezed,
+    Object? municipality = freezed,
+    Object? commercialRegisterStatus = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as num,
       commercialRegisterNumber: null == commercialRegisterNumber
           ? _value.commercialRegisterNumber
           : commercialRegisterNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      region: null == region
+      region: freezed == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: null == firstName
+              as String?,
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
+              as String?,
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      stateWilaya: null == stateWilaya
+              as String?,
+      stateWilaya: freezed == stateWilaya
           ? _value.stateWilaya
           : stateWilaya // ignore: cast_nullable_to_non_nullable
-              as String,
-      municipality: null == municipality
+              as String?,
+      municipality: freezed == municipality
           ? _value.municipality
           : municipality // ignore: cast_nullable_to_non_nullable
-              as String,
-      commercialRegisterStatus: null == commercialRegisterStatus
+              as String?,
+      commercialRegisterStatus: freezed == commercialRegisterStatus
           ? _value.commercialRegisterStatus
           : commercialRegisterStatus // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -130,16 +138,17 @@ abstract class _$$CommercialRegisterImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'commercialRegisterNumber')
+      {@JsonKey(name: 'id') num id,
+      @JsonKey(name: 'commercialRegisterNumber')
       String commercialRegisterNumber,
-      @JsonKey(name: 'region') String region,
-      @JsonKey(name: 'lastName') String lastName,
-      @JsonKey(name: 'firstName') String firstName,
-      @JsonKey(name: 'adress') String address,
-      @JsonKey(name: 'stateWilaya') String stateWilaya,
-      @JsonKey(name: 'mnuicipality') String municipality,
+      @JsonKey(name: 'region') String? region,
+      @JsonKey(name: 'lastName') String? lastName,
+      @JsonKey(name: 'firstName') String? firstName,
+      @JsonKey(name: 'adress') String? address,
+      @JsonKey(name: 'stateWilaya') String? stateWilaya,
+      @JsonKey(name: 'mnuicipality') String? municipality,
       @JsonKey(name: 'commercialRegisterStatus')
-      String commercialRegisterStatus});
+      String? commercialRegisterStatus});
 }
 
 /// @nodoc
@@ -153,48 +162,53 @@ class __$$CommercialRegisterImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? commercialRegisterNumber = null,
-    Object? region = null,
-    Object? lastName = null,
-    Object? firstName = null,
-    Object? address = null,
-    Object? stateWilaya = null,
-    Object? municipality = null,
-    Object? commercialRegisterStatus = null,
+    Object? region = freezed,
+    Object? lastName = freezed,
+    Object? firstName = freezed,
+    Object? address = freezed,
+    Object? stateWilaya = freezed,
+    Object? municipality = freezed,
+    Object? commercialRegisterStatus = freezed,
   }) {
     return _then(_$CommercialRegisterImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as num,
       commercialRegisterNumber: null == commercialRegisterNumber
           ? _value.commercialRegisterNumber
           : commercialRegisterNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      region: null == region
+      region: freezed == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: null == firstName
+              as String?,
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
+              as String?,
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      stateWilaya: null == stateWilaya
+              as String?,
+      stateWilaya: freezed == stateWilaya
           ? _value.stateWilaya
           : stateWilaya // ignore: cast_nullable_to_non_nullable
-              as String,
-      municipality: null == municipality
+              as String?,
+      municipality: freezed == municipality
           ? _value.municipality
           : municipality // ignore: cast_nullable_to_non_nullable
-              as String,
-      commercialRegisterStatus: null == commercialRegisterStatus
+              as String?,
+      commercialRegisterStatus: freezed == commercialRegisterStatus
           ? _value.commercialRegisterStatus
           : commercialRegisterStatus // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -203,7 +217,8 @@ class __$$CommercialRegisterImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CommercialRegisterImpl implements _CommercialRegister {
   const _$CommercialRegisterImpl(
-      {@JsonKey(name: 'commercialRegisterNumber')
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'commercialRegisterNumber')
       required this.commercialRegisterNumber,
       @JsonKey(name: 'region') required this.region,
       @JsonKey(name: 'lastName') required this.lastName,
@@ -218,33 +233,36 @@ class _$CommercialRegisterImpl implements _CommercialRegister {
       _$$CommercialRegisterImplFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
+  final num id;
+  @override
   @JsonKey(name: 'commercialRegisterNumber')
   final String commercialRegisterNumber;
   @override
   @JsonKey(name: 'region')
-  final String region;
+  final String? region;
   @override
   @JsonKey(name: 'lastName')
-  final String lastName;
+  final String? lastName;
   @override
   @JsonKey(name: 'firstName')
-  final String firstName;
+  final String? firstName;
   @override
   @JsonKey(name: 'adress')
-  final String address;
+  final String? address;
   @override
   @JsonKey(name: 'stateWilaya')
-  final String stateWilaya;
+  final String? stateWilaya;
   @override
   @JsonKey(name: 'mnuicipality')
-  final String municipality;
+  final String? municipality;
   @override
   @JsonKey(name: 'commercialRegisterStatus')
-  final String commercialRegisterStatus;
+  final String? commercialRegisterStatus;
 
   @override
   String toString() {
-    return 'CommercialRegister(commercialRegisterNumber: $commercialRegisterNumber, region: $region, lastName: $lastName, firstName: $firstName, address: $address, stateWilaya: $stateWilaya, municipality: $municipality, commercialRegisterStatus: $commercialRegisterStatus)';
+    return 'CommercialRegister(id: $id, commercialRegisterNumber: $commercialRegisterNumber, region: $region, lastName: $lastName, firstName: $firstName, address: $address, stateWilaya: $stateWilaya, municipality: $municipality, commercialRegisterStatus: $commercialRegisterStatus)';
   }
 
   @override
@@ -252,6 +270,7 @@ class _$CommercialRegisterImpl implements _CommercialRegister {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CommercialRegisterImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(
                     other.commercialRegisterNumber, commercialRegisterNumber) ||
                 other.commercialRegisterNumber == commercialRegisterNumber) &&
@@ -274,6 +293,7 @@ class _$CommercialRegisterImpl implements _CommercialRegister {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       commercialRegisterNumber,
       region,
       lastName,
@@ -300,45 +320,49 @@ class _$CommercialRegisterImpl implements _CommercialRegister {
 
 abstract class _CommercialRegister implements CommercialRegister {
   const factory _CommercialRegister(
-          {@JsonKey(name: 'commercialRegisterNumber')
+          {@JsonKey(name: 'id') required final num id,
+          @JsonKey(name: 'commercialRegisterNumber')
           required final String commercialRegisterNumber,
-          @JsonKey(name: 'region') required final String region,
-          @JsonKey(name: 'lastName') required final String lastName,
-          @JsonKey(name: 'firstName') required final String firstName,
-          @JsonKey(name: 'adress') required final String address,
-          @JsonKey(name: 'stateWilaya') required final String stateWilaya,
-          @JsonKey(name: 'mnuicipality') required final String municipality,
+          @JsonKey(name: 'region') required final String? region,
+          @JsonKey(name: 'lastName') required final String? lastName,
+          @JsonKey(name: 'firstName') required final String? firstName,
+          @JsonKey(name: 'adress') required final String? address,
+          @JsonKey(name: 'stateWilaya') required final String? stateWilaya,
+          @JsonKey(name: 'mnuicipality') required final String? municipality,
           @JsonKey(name: 'commercialRegisterStatus')
-          required final String commercialRegisterStatus}) =
+          required final String? commercialRegisterStatus}) =
       _$CommercialRegisterImpl;
 
   factory _CommercialRegister.fromJson(Map<String, dynamic> json) =
       _$CommercialRegisterImpl.fromJson;
 
   @override
+  @JsonKey(name: 'id')
+  num get id;
+  @override
   @JsonKey(name: 'commercialRegisterNumber')
   String get commercialRegisterNumber;
   @override
   @JsonKey(name: 'region')
-  String get region;
+  String? get region;
   @override
   @JsonKey(name: 'lastName')
-  String get lastName;
+  String? get lastName;
   @override
   @JsonKey(name: 'firstName')
-  String get firstName;
+  String? get firstName;
   @override
   @JsonKey(name: 'adress')
-  String get address;
+  String? get address;
   @override
   @JsonKey(name: 'stateWilaya')
-  String get stateWilaya;
+  String? get stateWilaya;
   @override
   @JsonKey(name: 'mnuicipality')
-  String get municipality;
+  String? get municipality;
   @override
   @JsonKey(name: 'commercialRegisterStatus')
-  String get commercialRegisterStatus;
+  String? get commercialRegisterStatus;
   @override
   @JsonKey(ignore: true)
   _$$CommercialRegisterImplCopyWith<_$CommercialRegisterImpl> get copyWith =>

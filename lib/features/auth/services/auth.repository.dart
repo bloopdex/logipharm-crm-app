@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'auth.api.dart';
 
 class AuthRepository {
-  static Future<SharedPreferences> get _prefs async =>
-      await SharedPreferences.getInstance();
+  static const FlutterSecureStorage _secureStorage = FlutterSecureStorage();
 
   static Future<Response> login(String username, String password) async {
     Response response = await AuthApi.login(username, password);
@@ -38,52 +37,48 @@ class AuthRepository {
   }
 
   static Future<void> setToken(String token) async {
-    SharedPreferences prefs = await _prefs;
-    await prefs.setString('token', 'Bearer $token');
+    await _secureStorage.write(key: 'token', value: 'Bearer $token');
   }
 
   static Future<void> setRefreshToken(String token) async {
-    SharedPreferences prefs = await _prefs;
-    await prefs.setString('refresh-token', token);
+    await _secureStorage.write(key: 'refresh-token', value: token);
   }
 
   static Future<void> setFirstTime(int firstTime) async {
-    SharedPreferences prefs = await _prefs;
-    await prefs.setInt('firstTime', firstTime);
+    await _secureStorage.write(key: 'firstTime', value: firstTime.toString());
   }
 
   static Future<void> setCompany(int companyId) async {
-    SharedPreferences prefs = await _prefs;
-    await prefs.setInt('companyId', companyId);
+    await _secureStorage.write(key: 'companyId', value: companyId.toString());
   }
 
   static Future<String?> getToken() async {
-    SharedPreferences prefs = await _prefs;
-    return prefs.getString('token');
+    return await _secureStorage.read(key: 'token');
   }
 
   static Future<String?> getRefreshToken() async {
-    SharedPreferences prefs = await _prefs;
-    return prefs.getString('refresh-token');
+    return await _secureStorage.read(key: 'refresh-token');
   }
 
   static Future<int> getFirstTime() async {
-    SharedPreferences prefs = await _prefs;
-    return prefs.getInt('firstTime') ?? 1;
+    String? value = await _secureStorage.read(key: 'firstTime');
+    return value != null ? int.parse(value) : 1;
   }
 
   static Future<int?> getCompany() async {
-    SharedPreferences prefs = await _prefs;
-    return prefs.getInt('companyId');
+    String? value = await _secureStorage.read(key: 'companyId');
+    return value != null ? int.parse(value) : null;
   }
 
   static Future<void> deleteToken() async {
-    SharedPreferences prefs = await _prefs;
-    await prefs.remove('token');
+    await _secureStorage.delete(key: 'token');
   }
 
   static Future<String?> get token async => await getToken();
+
   static Future<String?> get refreshToken async => await getRefreshToken();
+
   static Future<int?> get companyId async => getCompany();
+
   static Future<int> get firstTime async => getFirstTime();
 }

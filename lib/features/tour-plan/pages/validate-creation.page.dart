@@ -28,7 +28,7 @@ class ValidateCreationPage extends StatelessWidget {
         orElse: () => [],
         loaded: (clients) => clients
             .where((element) =>
-                data['pharmacieIds']?.contains(element.id.toString()))
+                data['pharmacieIds']?.contains('${element.id.toString()}:${element.typeTier}'))
             .toList());
 
     return Padding(
@@ -147,8 +147,7 @@ class ValidateCreationPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
                   child: Text(
-                    context.i10n
-                        .tourValidationClientLabelNumber(clients.length),
+                    context.i10n.tourValidationClientLabelNumber(clients.length),
                     style: context.textTheme.headlineSmall,
                   ),
                 ),
@@ -177,11 +176,9 @@ class ValidateCreationPage extends StatelessWidget {
                           child: Text(client.fullName.initials),
                         ),
                         title: Text(client.fullName),
-                        subtitle: client.latitude != null &&
-                                client.longitude != null
+                        subtitle: client.latitude != null && client.longitude != null
                             ? FutureBuilder(
-                                future:
-                                    LocationHelper.addressFromLongitudeLatitude(
+                                future: LocationHelper.addressFromLongitudeLatitude(
                                   latitude: client.latitude ?? 0,
                                   longitude: client.longitude ?? 0,
                                 ),

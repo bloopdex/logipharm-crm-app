@@ -21,4 +21,14 @@ class CommercialRegisterRepository {
       token: token,
     );
   }
+
+  static Future<Response> update({required Map<String, dynamic> data}) async {
+    final token = await AuthRepository.token;
+
+    return await DioHelper.putData(
+      token: token,
+      url: '/tiers/prospect',
+      data: data,
+    );
+  }
 }

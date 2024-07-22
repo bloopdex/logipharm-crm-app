@@ -9,19 +9,21 @@ part of 'commercial_register.dart';
 _$CommercialRegisterImpl _$$CommercialRegisterImplFromJson(
         Map<String, dynamic> json) =>
     _$CommercialRegisterImpl(
+      id: json['id'] as num,
       commercialRegisterNumber: json['commercialRegisterNumber'] as String,
-      region: json['region'] as String,
-      lastName: json['lastName'] as String,
-      firstName: json['firstName'] as String,
-      address: json['adress'] as String,
-      stateWilaya: json['stateWilaya'] as String,
-      municipality: json['mnuicipality'] as String,
-      commercialRegisterStatus: json['commercialRegisterStatus'] as String,
+      region: json['region'] as String?,
+      lastName: json['lastName'] as String?,
+      firstName: json['firstName'] as String?,
+      address: json['adress'] as String?,
+      stateWilaya: json['stateWilaya'] as String?,
+      municipality: json['mnuicipality'] as String?,
+      commercialRegisterStatus: json['commercialRegisterStatus'] as String?,
     );
 
 Map<String, dynamic> _$$CommercialRegisterImplToJson(
         _$CommercialRegisterImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'commercialRegisterNumber': instance.commercialRegisterNumber,
       'region': instance.region,
       'lastName': instance.lastName,

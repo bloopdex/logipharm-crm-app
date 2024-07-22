@@ -1,3 +1,4 @@
+import 'package:crm/features/clients/blocs/claims/claim_cubit.dart';
 import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
 import 'package:crm/features/clients/client-details.page.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
@@ -405,6 +406,7 @@ class TourClientsList extends StatelessWidget {
         return ListTile(
           onTap: () {
             context.read<ObservationCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
+            context.read<ClaimCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
             context.push(
               ClientDetailsPage(client: pharmacy.pharmacy!),
             );
@@ -488,7 +490,8 @@ class TourClientsList extends StatelessWidget {
                             tour.delegate.id == user.id.id) {
                           context.push(CreateVisitPage(
                             tour: tour,
-                            pharmacieId: pharmacy.pharmacy?.id.toString(),
+                            pharmacieId:
+                                '${pharmacy.pharmacy?.id.toString()}:${pharmacy.pharmacy?.typeTier}',
                           ));
                         }
                       },

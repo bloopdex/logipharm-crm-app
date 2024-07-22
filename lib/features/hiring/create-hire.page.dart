@@ -180,6 +180,7 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                       builder: (context, state) {
                         return CustomDropDownInput(
                           data: data,
+                          initialValue: data['regionId'],
                           mapKey: 'regionId',
                           validator: (value) {
                             if (value == null || value.isEmpty) {

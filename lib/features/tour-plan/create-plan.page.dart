@@ -7,9 +7,9 @@ import '../../logic/counter_cubit.dart';
 import '../../logic/selection_cubit.dart';
 import '../../shared/widgets/buttons/button.widget.dart';
 import '../../shared/widgets/navigation/stepper.widget.dart';
-import 'pages/add-clients.page.dart';
 import 'bloc/delegate_cubit.dart';
 import 'bloc/tour-creation/tour_creation_cubit.dart';
+import 'pages/add-clients.page.dart';
 import 'pages/creation-loading.page.dart';
 import 'pages/creation-successful.page.dart';
 import 'pages/delegate-selection.page.dart';
@@ -40,8 +40,7 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<SelectionCubit>(
-            lazy: false, create: (context) => SelectionCubit()..clear()),
+        BlocProvider<SelectionCubit>(lazy: false, create: (context) => SelectionCubit()..clear()),
       ],
       child: BlocBuilder<TourCreationCubit, TourCreationState>(
         builder: (context, state) {
@@ -80,12 +79,8 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
                       constraints: BoxConstraints(
                         maxWidth: context.width,
                         minWidth: context.width,
-                        maxHeight: context.height -
-                            context.appBarSize -
-                            context.paddingBottom,
-                        minHeight: context.height -
-                            context.appBarSize -
-                            context.paddingBottom,
+                        maxHeight: context.height - context.appBarSize - context.paddingBottom,
+                        minHeight: context.height - context.appBarSize - context.paddingBottom,
                       ),
                       child: BlocBuilder<CounterCubit, int>(
                         builder: (context, state) {
@@ -106,28 +101,20 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
                               ),
                               SizedBox(height: kSpacingX4),
                               Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: kPaddingMd2),
+                                padding: EdgeInsets.only(
+                                    right: kPaddingMd2, left: kPaddingMd2, bottom: kPaddingMd2),
                                 child: CustomButton(
-                                  text: state < 2
-                                      ? context.i10n.next
-                                      : context.i10n.validate,
+                                  text: state < 2 ? context.i10n.next : context.i10n.validate,
                                   onPressed: () {
                                     switch (state) {
                                       case 0:
                                         if (data['delegueId'] == null) {
                                           return;
                                         }
-                                        context
-                                            .read<CounterCubit>()
-                                            .increment();
+                                        context.read<CounterCubit>().increment();
                                         break;
                                       case 1:
-                                        if (context
-                                            .read<SelectionCubit>()
-                                            .state
-                                            .selected
-                                            .isEmpty) {
+                                        if (context.read<SelectionCubit>().state.selected.isEmpty) {
                                           return;
                                         }
                                         data['pharmacieIds'] = context
@@ -136,14 +123,10 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
                                             .selected
                                             .map((e) => e)
                                             .toList();
-                                        context
-                                            .read<CounterCubit>()
-                                            .increment();
+                                        context.read<CounterCubit>().increment();
                                         break;
                                       case 2:
-                                        context
-                                            .read<TourCreationCubit>()
-                                            .validate(data: data);
+                                        context.read<TourCreationCubit>().validate(data: data);
                                         break;
                                     }
                                   },

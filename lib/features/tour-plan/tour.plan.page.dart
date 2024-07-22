@@ -56,7 +56,7 @@ class PlanTourPage extends StatelessWidget {
           builder: (context, state) {
             final user = context.user;
             final Tour? current = state.maybeWhen(
-              loaded: (tours, hasReachedMax, currentPage) {
+              loaded: (tours, hasReachedMax, currentPage, goal) {
                 return tours
                     .where((element) => (element.statusFlag == StatuFlags.opened.value &&
                         element.delegate.id == user.id.id))

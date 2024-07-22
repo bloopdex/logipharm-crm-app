@@ -1,5 +1,6 @@
 import 'package:crm/core/core.dart';
 import 'package:crm/features/cnrc/cubit/commercial_register_cubit.dart';
+import 'package:crm/features/cnrc/update-cnrc.page.dart';
 import 'package:crm/features/hiring/create-hire.page.dart';
 import 'package:crm/logic/search/search_cubit.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
@@ -103,56 +104,71 @@ class _CommercialRegisterContentState extends State<CommercialRegisterContent> {
                         return ListView.builder(
                           controller: _scrollController,
                           itemBuilder: (context, index) {
-                            return ListTile(
-                                contentPadding: EdgeInsets.symmetric(vertical: kPaddingSm1),
-                                leading: ProfileCard(
-                                  text: '${cnrc[index].firstName} ${cnrc[index].lastName}',
-                                ),
-                                title: Text('${cnrc[index].firstName} ${cnrc[index].lastName}',
-                                    maxLines: 2,
-                                    softWrap: true,
-                                    style: context.textTheme.headlineMedium!.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: kPrimaryColor,
-                                    )),
-                                subtitle: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      cnrc[index].stateWilaya,
-                                      style: context.textTheme.bodyMedium!
-                                          .copyWith(fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      cnrc[index].address,
-                                      style: context.textTheme.bodyMedium!.copyWith(
-                                        fontSize: 12.sp,
-                                      ),
+                            return GestureDetector(
+                              onLongPress: () {
+                                context.push(UpdateCNRCPage(
+                                  initialData: {
+                                    'id': '${cnrc[index].id}',
+                                    'nom': '${cnrc[index].lastName}',
+                                    'prenom': '${cnrc[index].firstName}',
+                                    'address': cnrc[index].address ?? '',
+                                    'regionId': cnrc[index].stateWilaya ?? '',
+                                  },
+                                ));
+                              },
+                              child: ListTile(
+                                  contentPadding: EdgeInsets.symmetric(vertical: kPaddingSm1),
+                                  leading: ProfileCard(
+                                    text: '${cnrc[index].firstName} ${cnrc[index].lastName}',
+                                  ),
+                                  title: Text('${cnrc[index].firstName} ${cnrc[index].lastName}',
                                       maxLines: 2,
                                       softWrap: true,
-                                    ),
-                                  ],
-                                ),
-                                trailing: TextButton(
-                                  onPressed: () {
-                                    context.pushReplacement(
-                                      CreateHirePage(
-                                        initialData: {
-                                          'nom': '${cnrc[index].lastName}',
-                                          'prenom': '${cnrc[index].firstName}',
-                                          'address': '${cnrc[index].address}',
-                                        },
+                                      style: context.textTheme.headlineMedium!.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: kPrimaryColor,
+                                      )),
+                                  subtitle: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        cnrc[index].stateWilaya ?? context.i10n.noRegion,
+                                        style: context.textTheme.bodyMedium!
+                                            .copyWith(fontWeight: FontWeight.w600),
                                       ),
-                                    );
-                                  },
-                                  child: Text(
-                                    context.i10n.hire,
-                                    style: context.textTheme.bodyMedium!.copyWith(
-                                      color: kPrimaryColor,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                      Text(
+                                        cnrc[index].address ?? context.i10n.noAddress,
+                                        style: context.textTheme.bodyMedium!.copyWith(
+                                          fontSize: 12.sp,
+                                        ),
+                                        maxLines: 2,
+                                        softWrap: true,
+                                      ),
+                                    ],
                                   ),
-                                ));
+                                  trailing: TextButton(
+                                    onPressed: () {
+                                      context.pushReplacement(
+                                        CreateHirePage(
+                                          initialData: {
+                                            'id': '${cnrc[index].id}',
+                                            'nom': '${cnrc[index].lastName}',
+                                            'prenom': '${cnrc[index].firstName}',
+                                            'address': cnrc[index].address ?? '',
+                                            'regionId': cnrc[index].stateWilaya ?? '',
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      context.i10n.hire,
+                                      style: context.textTheme.bodyMedium!.copyWith(
+                                        color: kPrimaryColor,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  )),
+                            );
                           },
                           itemCount: cnrc.length,
                         );

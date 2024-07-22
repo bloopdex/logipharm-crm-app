@@ -29,7 +29,7 @@ class ClientsCubit extends Cubit<ClientsState> {
     }
   }
 
-  Future<void> filter(String regionId) async {
+  Future<void> filter({String regionId = "", String commune = ""}) async {
     try {
       if (state.maybeWhen(
         orElse: () => false,
@@ -50,12 +50,18 @@ class ClientsCubit extends Cubit<ClientsState> {
           emit(const ClientsState.loaded([]));
         }
       }
-      if (regionId.isNotEmpty) {
+      if (regionId.isNotEmpty || commune.isNotEmpty) {
         emit(
           state.maybeWhen(
             orElse: () => const ClientsState.loaded([]),
             loaded: (clients) => ClientsState.loaded(
-              clients.where((element) => element.regionId == regionId).toList(),
+              clients.where((element) {
+                if (commune.isNotEmpty) {
+                  return element.regionId == regionId && element.ville == commune;
+                } else {
+                  return element.regionId == regionId;
+                }
+              }).toList(),
             ),
           ),
         );

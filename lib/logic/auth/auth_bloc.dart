@@ -7,7 +7,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../features/auth/services/auth.repository.dart';
 import '../../models/user/user.dart';
-import '../../shared/services/helpers/networkinfo.helper.dart';
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
@@ -22,15 +21,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_ChangePassword>(_changePassword);
   }
 
-  FutureOr<void> _onAppStarted(
-      _AppStarted event, Emitter<AuthState> emit) async {
+  FutureOr<void> _onAppStarted(_AppStarted event, Emitter<AuthState> emit) async {
     try {
       emit(const _Loading());
-      final isConnected = await NetworkInfo.isConnected;
-      if (!isConnected) {
-        emit(const _Failure('Auth Errors:no-internet-connection'));
-        return;
-      }
 
       final token = await AuthRepository.token;
       if (token != null) {
@@ -70,8 +63,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  FutureOr<void> _onUpdateUser(
-      _UpdateUser event, Emitter<AuthState> emit) async {
+  FutureOr<void> _onUpdateUser(_UpdateUser event, Emitter<AuthState> emit) async {
     try {
       final emitEvent = await setuser(event.token);
       emit(emitEvent);
@@ -82,8 +74,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  FutureOr<void> _changePassword(
-      _ChangePassword event, Emitter<AuthState> emit) async {
+  FutureOr<void> _changePassword(_ChangePassword event, Emitter<AuthState> emit) async {
     try {
       emit(const _Loading());
       final Map<String, String> data = {
@@ -129,6 +120,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     latitude: null,
     longitude: null,
     supervisor: null,
+    addVisitOutPlanPrivilege: 0,
     fullName: '',
   );
 

@@ -14,6 +14,7 @@ import '../todo/create-event.page.dart';
 import '../tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import '../tour-plan/core/enums.dart';
 import '../tour-plan/create-plan.page.dart';
+import '../tour-plan/models/goal/goal.dart';
 import '../tour-plan/models/tour.dart';
 import '../tour-plan/widget/current.plan.widget.dart';
 import '../visits/create-visit.page.dart';
@@ -47,8 +48,14 @@ class HomePage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             BlocBuilder<TourPlanBloc, TourPlanState>(builder: (context, state) {
+              final Goal? goal = state.maybeWhen(
+                orElse: () => null,
+                loaded: (tours, hasReachedMax, currentPage, goal) {
+                  return goal;
+                },
+              );
               final Tour? current = state.maybeWhen(
-                loaded: (tours, hasReachedMax, currentPage) {
+                loaded: (tours, hasReachedMax, currentPage, goal) {
                   return tours
                       .where((element) => (element.statusFlag == StatuFlags.opened.value &&
                           element.delegate.id == user.id.id))
@@ -58,6 +65,48 @@ class HomePage extends StatelessWidget {
               );
 
               return Column(children: [
+                if (goal != null)
+                  Container(
+                    padding: EdgeInsets.all(kPaddingMd2),
+                    width: context.width,
+                    margin: EdgeInsets.only(bottom: kSpacingX5),
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.circular(kPaddingSm3),
+                      border: Border.all(
+                        color: kPrimaryColor,
+                        width: 2.sp,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          context.i10n.goalOfDay,
+                          style: context.textTheme.headlineSmall!.copyWith(color: kWhite),
+                        ),
+                        SizedBox(height: kSpacingX2),
+                        RichText(
+                            text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '${goal.visitNumber}/',
+                              style: context.textTheme.headlineMedium!
+                                  .copyWith(color: kWhite, fontSize: 25.h),
+                            ),
+                            TextSpan(
+                              text: '${goal.objective}',
+                              style: context.textTheme.bodyMedium!.copyWith(color: kWhite),
+                            ),
+                            TextSpan(
+                              text: ' ${context.i10n.visitsToday}',
+                              style: context.textTheme.bodyMedium!.copyWith(color: kWhite),
+                            ),
+                          ],
+                        )),
+                      ],
+                    ),
+                  ),
                 if (current != null)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +127,7 @@ class HomePage extends StatelessWidget {
                 builder: (context, state) {
                   return state.maybeWhen(orElse: () {
                     return const SizedBox.shrink();
-                  }, loaded: (tours, hasReachedMax, currentPage) {
+                  }, loaded: (tours, hasReachedMax, currentPage, goal) {
                     final opened = tours
                         .where((element) => element.statusFlag == StatuFlags.opened.value)
                         .toList();
@@ -110,7 +159,7 @@ class HomePage extends StatelessWidget {
                     text: context.i10n.homeCreateNewPlan,
                     onPressed: () {
                       final current = context.read<TourPlanBloc>().state.maybeWhen(
-                            loaded: (tours, hasReachedMax, currentPage) {
+                            loaded: (tours, hasReachedMax, currentPage, goal) {
                               return tours
                                   .where((element) => element.statusFlag == StatuFlags.opened.value)
                                   .firstOrNull;
@@ -132,7 +181,7 @@ class HomePage extends StatelessWidget {
                     text: context.i10n.homeCreateNewVisit,
                     onPressed: () {
                       final current = context.read<TourPlanBloc>().state.maybeWhen(
-                            loaded: (tours, hasReachedMax, currentPage) {
+                            loaded: (tours, hasReachedMax, currentPage, goal) {
                               return tours
                                   .where((element) => element.statusFlag == StatuFlags.opened.value)
                                   .firstOrNull;
@@ -152,7 +201,7 @@ class HomePage extends StatelessWidget {
                       }
                     },
                     color: context.watch<TourPlanBloc>().state.maybeWhen(
-                                      loaded: (tours, hasReachedMax, currentPage) {
+                                      loaded: (tours, hasReachedMax, currentPage, goal) {
                                         return tours
                                             .where((element) =>
                                                 element.statusFlag == StatuFlags.opened.value)
@@ -203,7 +252,7 @@ class HomePage extends StatelessWidget {
                   builder: (context, state) {
                     final user = context.user;
                     final Tour? current = state.maybeWhen(
-                      loaded: (tours, hasReachedMax, currentPage) {
+                      loaded: (tours, hasReachedMax, currentPage, goal) {
                         return tours
                             .where((element) => (element.statusFlag == StatuFlags.opened.value &&
                                 element.delegate.id == user.id.id))

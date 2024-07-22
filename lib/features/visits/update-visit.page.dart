@@ -194,6 +194,8 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                                           }
                                           data['document'] = _quillController.document;
                                           context.read<CounterCubit>().increment();
+                                          // check if mounted
+                                          if (!mounted) return;
                                           setState(() {});
                                           break;
                                         case 1:

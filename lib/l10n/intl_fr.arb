@@ -28,9 +28,9 @@
   "@viewDetails": {
     "description": "Voir les détails"
   },
-  "save": "Enregistrer",
+  "save": "Sauvegarder",
   "@save": {
-    "description": "Enregistrer"
+    "description": "Sauvegarder"
   },
   "cancel": "Annuler",
   "@cancel": {
@@ -48,9 +48,9 @@
   "@validate": {
     "description": "Valider"
   },
-  "createdAt": "Créé le",
+  "createdAt": "Créé à",
   "@createdAt": {
-    "description": "Créé le"
+    "description": "Créé à"
   },
   "pending": "En attente",
   "@pending": {
@@ -72,9 +72,9 @@
   "@refused": {
     "description": "Refusé"
   },
-  "selectDateRange": "Sélectionner une plage de dates",
+  "selectDateRange": "Sélectionner la période",
   "@selectDateRange": {
-    "description": "Sélectionner une plage de dates"
+    "description": "Sélectionner la période"
   },
   "startDate": "Date de début",
   "@startDate": {
@@ -130,7 +130,7 @@
   },
   "authLoginUsernamePlaceholder": "Entrez votre nom d'utilisateur",
   "@authLoginUsernamePlaceholder": {
-    "description": "Espace pour le nom d'utilisateur"
+    "description": "Champ du nom d'utilisateur"
   },
   "authLoginUsernameRequired": "Le nom d'utilisateur est requis",
   "@authLoginUsernameRequired": {
@@ -142,7 +142,7 @@
   },
   "authLoginPasswordPlaceholder": "Entrez votre mot de passe",
   "@authLoginPasswordPlaceholder": {
-    "description": "Espace pour le mot de passe"
+    "description": "Champ du mot de passe"
   },
   "authLoginPasswordRequired": "Le mot de passe est requis",
   "@authLoginPasswordRequired": {
@@ -152,9 +152,9 @@
   "@authLoginSubmit": {
     "description": "Soumettre la connexion"
   },
-  "authLoginError": "Nom d'utilisateur ou mot de passe incorrect",
+  "authLoginError": "Nom d'utilisateur ou mot de passe invalide",
   "@authLoginError": {
-    "description": "Nom d'utilisateur ou mot de passe incorrect"
+    "description": "Nom d'utilisateur ou mot de passe invalide"
   },
   "tourClient": "{count} Client",
   "@tourClient": {
@@ -176,13 +176,13 @@
       }
     }
   },
-  "tourCurrentTour": "Tournée actuelle",
+  "tourCurrentTour": "Visite actuelle",
   "@tourCurrentTour": {
-    "description": "Tournée actuelle"
+    "description": "Visite actuelle"
   },
-  "tourSearchPerWilaya": "Recherche par wilaya",
+  "tourSearchPerWilaya": "Rechercher par wilaya",
   "@tourSearchPerWilaya": {
-    "description": "Recherche par wilaya"
+    "description": "Rechercher par wilaya"
   },
   "tourAllPlans": "Tous les plans",
   "@tourAllPlans": {
@@ -214,9 +214,9 @@
   },
   "tourEmptyPlans": "Aucun plan trouvé",
   "@tourEmptyPlans": {
-    "description": "Aucun plan"
+    "description": "Aucun plan trouvé"
   },
-  "tourEmptyPlansDescription": "Vous n'avez aucun plan pour le moment",
+  "tourEmptyPlansDescription": "Vous n'avez encore aucun plan",
   "@tourEmptyPlansDescription": {
     "description": "Description des plans vides"
   },
@@ -224,13 +224,13 @@
   "@tourCreateNewPlan": {
     "description": "Créer un nouveau plan"
   },
-  "tourCreationTourDetailsTitle": "Détails de la tournée",
+  "tourCreationTourDetailsTitle": "Détails de la visite",
   "@tourCreationTourDetailsTitle": {
-    "description": "Titre des détails de la tournée"
+    "description": "Titre des détails de la visite"
   },
-  "tourCreationTourDetailsDescription": "Choisissez le délégué responsable de ce plan de tournée et entrez la date prévue pour la tournée.",
+  "tourCreationTourDetailsDescription": "Choisissez le délégué responsable de ce plan de visite et entrez la date prévue pour la visite.",
   "@tourCreationTourDetailsDescription": {
-    "description": "Description des détails de la tournée"
+    "description": "Description des détails de la visite"
   },
   "tourCreationTourDetailsDelegateLabel": "Délégué",
   "@tourCreationTourDetailsDelegateLabel": {
@@ -242,19 +242,19 @@
   },
   "tourCreationClientVisitsTitle": "Clients à visiter",
   "@tourCreationClientVisitsTitle": {
-    "description": "Titre des visites client"
+    "description": "Titre des clients à visiter"
   },
-  "tourCreationClientVisitsDescription": "Sélectionnez les clients que vous souhaitez visiter pendant cette tournée.",
+  "tourCreationClientVisitsDescription": "Sélectionnez les clients que vous souhaitez visiter pendant cette visite.",
   "@tourCreationClientVisitsDescription": {
-    "description": "Description des visites client"
+    "description": "Description des clients à visiter"
   },
   "tourCreationRegionLabel": "Région",
   "@tourCreationRegionLabel": {
     "description": "Région"
   },
-  "tourCreationRegionPlaceholder": "Sélectionnez une région",
+  "tourCreationRegionPlaceholder": "Sélectionner une région",
   "@tourCreationRegionPlaceholder": {
-    "description": "Espace pour la région"
+    "description": "Champ de la région"
   },
   "tourCreationClientsLabel": "Clients",
   "@tourCreationClientsLabel": {
@@ -262,7 +262,7 @@
   },
   "tourCreationClientEmptyTitle": "Aucun client trouvé",
   "@tourCreationClientEmptyTitle": {
-    "description": "Titre clients vides"
+    "description": "Titre des clients vides"
   },
   "tourCreationClientEmptyDescription": "Aucun client trouvé dans cette région",
   "@tourCreationClientEmptyDescription": {
@@ -272,57 +272,65 @@
   "@tourCreationNoAddress": {
     "description": "Pas d'adresse"
   },
-  "tourValidationTitle": "Aperçu et Validation",
+  "tourValidationTitle": "Aperçu et validation",
   "@tourValidationTitle": {
-    "description": "Aperçu et Validation"
+    "description": "Aperçu et validation"
   },
-  "tourValidationPlanBy": "Plan de tournée, par:",
+  "tourValidationPlanBy": "Plan de visite, par :",
   "@tourValidationPlanBy": {
-    "description": "Plan de tournée, par:"
+    "description": "Plan de visite, par :"
   },
   "tourValidationRegion": "Région",
   "@tourValidationRegion": {
     "description": "Région"
   },
-  "tourCreationInProgressTitle": "La création du plan de tournée est en cours",
+  "tourCreationInProgressTitle": "La création du plan de visite est en cours",
   "@tourCreationInProgressTitle": {
-    "description": "La création du plan de tournée est en cours"
+    "description": "La création du plan de visite est en cours"
   },
-  "tourCreationInProgressDescription": "Nous finalisons les détails de votre plan de tournée. Merci de votre patience.",
+  "tourCreationInProgressDescription": "Nous finalisons les détails de votre plan de visite. Merci pour votre patience.",
   "@tourCreationInProgressDescription": {
-    "description": "Nous finalisons les détails de votre plan de tournée. Merci de votre patience."
+    "description": "Nous finalisons les détails de votre plan de visite. Merci pour votre patience."
   },
   "tourCreationErrorTitle": "Une erreur s'est produite",
   "@tourCreationErrorTitle": {
     "description": "Une erreur s'est produite"
   },
-  "tourCreationErrorDescription": "Une erreur s'est produite lors de la création du plan de tournée. Veuillez réessayer plus tard.",
+  "tourCreationErrorDescription": "Une erreur s'est produite lors de la création du plan de visite. Veuillez réessayer plus tard.",
   "@tourCreationErrorDescription": {
-    "description": "Une erreur s'est produite lors de la création du plan de tournée. Veuillez réessayer plus tard."
+    "description": "Une erreur s'est produite lors de la création du plan de visite. Veuillez réessayer plus tard."
   },
-  "tourCreationSuccessTitle": "Plan de tournée créé avec succès",
+  "tourCreationSuccessTitle": "Plan de visite créé avec succès",
   "@tourCreationSuccessTitle": {
-    "description": "Plan de tournée créé avec succès"
+    "description": "Plan de visite créé avec succès"
   },
-  "tourCreationSuccessDescription": "Votre plan de tournée a été créé avec succès. Vous pouvez maintenant consulter et gérer vos tournées planifiées.",
+  "tourCreationSuccessDescription": "Votre plan de visite a été créé avec succès. Vous pouvez maintenant consulter et gérer vos visites prévues.",
   "@tourCreationSuccessDescription": {
-    "description": "Votre plan de tournée a été créé avec succès. Vous pouvez maintenant consulter et gérer vos tournées planifiées."
+    "description": "Votre plan de visite a été créé avec succès. Vous pouvez maintenant consulter et gérer vos visites prévues."
   },
-  "tourCreationStartTour": "Voulez-vous commencer la tournée maintenant?",
+  "tourCreationStartTour": "Voulez-vous démarrer la visite maintenant ?",
   "@tourCreationStartTour": {
-    "description": "Voulez-vous commencer la tournée maintenant?"
+    "description": "Voulez-vous démarrer la visite maintenant ?"
   },
-  "tourCreationStartTourDescription": "Vous pouvez commencer la tournée maintenant ou plus tard depuis la liste des tournées planifiées.",
+  "tourCreationStartTourDescription": "Vous pouvez démarrer la visite maintenant ou plus tard à partir de la liste des visites prévues.",
   "@tourCreationStartTourDescription": {
-    "description": "Vous pouvez commencer la tournée maintenant ou plus tard depuis la liste des tournées planifiées."
+    "description": "Vous pouvez démarrer la visite maintenant ou plus tard à partir de la liste des visites prévues."
   },
-  "tourDetailsTitle": "Détails de la tournée",
+  "tourCreationCommuneLabel": "Commune",
+  "@tourCreationCommuneLabel": {
+    "description": "Commune"
+  },
+  "tourCreationName": "Nom",
+  "@tourCreationName": {
+    "description": "Nom"
+  },
+  "tourDetailsTitle": "Détails de la visite",
   "@tourDetailsTitle": {
-    "description": "Détails de la tournée"
+    "description": "Détails de la visite"
   },
-  "tourDetailsTourBy": "Plan de tournée par",
+  "tourDetailsTourBy": "Plan de visite par",
   "@tourDetailsTourBy": {
-    "description": "Plan de tournée par"
+    "description": "Plan de visite par"
   },
   "tourDetailsRegion": "Région",
   "@tourDetailsRegion": {
@@ -336,13 +344,13 @@
   "@tourDetailsAllClients": {
     "description": "Tous les clients"
   },
-  "tourDetailsVisited": "Visités",
+  "tourDetailsVisited": "Visité",
   "@tourDetailsVisited": {
-    "description": "Visités"
+    "description": "Visité"
   },
-  "tourDetailsNonVisited": "Non visités",
+  "tourDetailsNonVisited": "Non visité",
   "@tourDetailsNonVisited": {
-    "description": "Non visités"
+    "description": "Non visité"
   },
   "tourDetailsNonVisitedClients": "Clients non visités",
   "@tourDetailsNonVisitedClients": {
@@ -352,17 +360,17 @@
   "@tourDetailsVisitedClients": {
     "description": "Clients visités"
   },
-  "tourDetailsVisitClient": "Visiter un client",
+  "tourDetailsVisitClient": "Visiter le client",
   "@tourDetailsVisitClient": {
-    "description": "Visiter un client"
+    "description": "Visiter le client"
   },
-  "tourErrorExistOpenTour": "Vous avez une tournée ouverte",
+  "tourErrorExistOpenTour": "Vous avez une visite ouverte",
   "@tourErrorExistOpenTour": {
-    "description": "Vous avez une tournée ouverte"
+    "description": "Vous avez une visite ouverte"
   },
-  "tourErrorExistClosedTour": "La tournée est déjà clôturée",
+  "tourErrorExistClosedTour": "La visite est déjà fermée",
   "@tourErrorExistClosedTour": {
-    "description": "La tournée est déjà clôturée"
+    "description": "La visite est déjà fermée"
   },
   "tourErrorResourceRequireAuthentication": "Vous devez être authentifié pour accéder à cette ressource",
   "@tourErrorResourceRequireAuthentication": {
@@ -390,9 +398,9 @@
   "@homeCreateNewEvent": {
     "description": "Créer un nouvel événement"
   },
-  "homeHireNewClient": "Recruter un nouveau client",
+  "homeHireNewClient": "Embaucher un nouveau client",
   "@homeHireNewClient": {
-    "description": "Recruter un nouveau client"
+    "description": "Embaucher un nouveau client"
   },
   "homeMyClients": "Mes clients",
   "@homeMyClients": {
@@ -406,9 +414,9 @@
   "@homePendingPlan": {
     "description": "Plan en attente"
   },
-  "homePendingHire": "Recrutement en attente",
+  "homePendingHire": "Embauche en attente",
   "@homePendingHire": {
-    "description": "Recrutement en attente"
+    "description": "Embauche en attente"
   },
   "homeHello": "Bonjour",
   "@homeHello": {
@@ -418,9 +426,9 @@
   "@visitCreationInProgressTitle": {
     "description": "La création de la visite est en cours"
   },
-  "visitCreationInProgressDescription": "Nous finalisons les détails de votre visite. Merci de votre patience.",
+  "visitCreationInProgressDescription": "Nous finalisons les détails de votre visite. Merci pour votre patience.",
   "@visitCreationInProgressDescription": {
-    "description": "Nous finalisons les détails de votre visite. Merci de votre patience."
+    "description": "Nous finalisons les détails de votre visite. Merci pour votre patience."
   },
   "visitCreationSuccessTitle": "Visite créée avec succès",
   "@visitCreationSuccessTitle": {
@@ -430,9 +438,9 @@
   "@visitCreationSuccessDescription": {
     "description": "Votre visite a été créée avec succès. Vous pouvez maintenant consulter et gérer vos visites."
   },
-  "visitCreationTitle": "Nouvelle Visite",
+  "visitCreationTitle": "Nouvelle visite",
   "@visitCreationTitle": {
-    "description": "Nouvelle Visite"
+    "description": "Nouvelle visite"
   },
   "visitCreationDescription": "Créer une nouvelle visite pour un client",
   "@visitCreationDescription": {
@@ -442,9 +450,9 @@
   "@visitCreationClientLabel": {
     "description": "Client"
   },
-  "visitCreationClientPlaceholder": "Sélectionnez un client",
+  "visitCreationClientPlaceholder": "Sélectionner un client",
   "@visitCreationClientPlaceholder": {
-    "description": "Espace pour sélectionner un client"
+    "description": "Champ du client"
   },
   "visitCreationDateLabel": "Date",
   "@visitCreationDateLabel": {
@@ -456,7 +464,7 @@
   },
   "visitCreationReasonPlaceholder": "Entrez la raison de la visite",
   "@visitCreationReasonPlaceholder": {
-    "description": "Espace pour la raison de la visite"
+    "description": "Champ de la raison"
   },
   "visitCreationRapportLabel": "Rapport",
   "@visitCreationRapportLabel": {
@@ -468,19 +476,19 @@
   },
   "visitCreationRapportPlaceholder": "Entrez le rapport de la visite",
   "@visitCreationRapportPlaceholder": {
-    "description": "Espace pour le rapport de la visite"
+    "description": "Champ du rapport"
   },
-  "visitValidationTitle": "Aperçu et Validation",
+  "visitValidationTitle": "Aperçu et validation",
   "@visitValidationTitle": {
-    "description": "Aperçu et Validation"
+    "description": "Aperçu et validation"
   },
   "visitValidationClient": "Client",
   "@visitValidationClient": {
     "description": "Client"
   },
-  "visitValidationVisitedAt": "Visitée le",
+  "visitValidationVisitedAt": "Visité le",
   "@visitValidationVisitedAt": {
-    "description": "Visitée le"
+    "description": "Visité le"
   },
   "visitValidationReason": "Raison",
   "@visitValidationReason": {
@@ -490,13 +498,13 @@
   "@visitValidationRapport": {
     "description": "Rapport"
   },
-  "visitTourIsntOpen": "La tournée n'est pas ouverte",
+  "visitTourIsntOpen": "La visite n'est pas ouverte",
   "@visitTourIsntOpen": {
-    "description": "La tournée n'est pas ouverte"
+    "description": "La visite n'est pas ouverte"
   },
-  "visitAlreadyEntered": "La visite est déjà saisie",
+  "visitAlreadyEntered": "La visite est déjà entrée",
   "@visitAlreadyEntered": {
-    "description": "La visite est déjà saisie"
+    "description": "La visite est déjà entrée"
   },
   "visitDetailsTitle": "Détails de la visite",
   "@visitDetailsTitle": {
@@ -514,9 +522,9 @@
   "@visitsEmpty": {
     "description": "Aucune visite trouvée"
   },
-  "visitsEmptyDescription": "Vous n'avez aucune visite pour le moment",
+  "visitsEmptyDescription": "Vous n'avez encore aucune visite",
   "@visitsEmptyDescription": {
-    "description": "Vous n'avez aucune visite pour le moment"
+    "description": "Vous n'avez encore aucune visite"
   },
   "todoTask": "Tâche",
   "@todoTask": {
@@ -540,7 +548,7 @@
   },
   "todoTitlePlaceholder": "Entrez le titre",
   "@todoTitlePlaceholder": {
-    "description": "Espace pour le titre"
+    "description": "Champ du titre"
   },
   "todoTitleError": "Le titre est requis",
   "@todoTitleError": {
@@ -552,7 +560,7 @@
   },
   "todoDetailsPlaceholder": "Entrez les détails",
   "@todoDetailsPlaceholder": {
-    "description": "Espace pour les détails"
+    "description": "Champ des détails"
   },
   "todoDetailsError": "Les détails sont requis",
   "@todoDetailsError": {
@@ -582,13 +590,45 @@
   "@clientList": {
     "description": "Liste des clients"
   },
-  "hiring": "Recrutement",
-  "@hiring": {
-    "description": "Recrutement"
+  "analytics": "Analyses",
+  "@analytics": {
+    "description": "Analyses"
   },
-  "fileCNRC": "Dossier CNRC",
+  "noAnalytics": "Aucune analyse trouvée",
+  "@noAnalytics": {
+    "description": "Aucune analyse trouvée"
+  },
+  "noAnalyticsDesc": "Aucune analyse trouvée pour ce client",
+  "@noAnalyticsDesc": {
+    "description": "Aucune analyse trouvée pour ce client"
+  },
+  "totalHt": "Total HT",
+  "@totalHt": {
+    "description": "Total HT"
+  },
+  "totalTtc": "Total TTC",
+  "@totalTtc": {
+    "description": "Total TTC"
+  },
+  "ceiling": "Plafond",
+  "@ceiling": {
+    "description": "Plafond"
+  },
+  "totalRest": "Reste total à payer",
+  "@totalRest": {
+    "description": "Reste total"
+  },
+  "totalPayment": "Paiement total",
+  "@totalPayment": {
+    "description": "Paiement total"
+  },
+  "hiring": "Embauche",
+  "@hiring": {
+    "description": "Embauche"
+  },
+  "fileCNRC": "Fichier CNRC",
   "@fileCNRC": {
-    "description": "Dossier CNRC"
+    "description": "Fichier CNRC"
   },
   "system": "Système",
   "@system": {
@@ -610,9 +650,9 @@
   "@noHirement": {
     "description": "Aucun recrutement trouvé"
   },
-  "youDontHaveAnyHirement": "Vous n'avez aucun recrutement pour le moment",
+  "youDontHaveAnyHirement": "Vous n'avez encore aucun recrutement",
   "@youDontHaveAnyHirement": {
-    "description": "Vous n'avez aucun recrutement pour le moment"
+    "description": "Vous n'avez encore aucun recrutement"
   },
   "createNewHirement": "Créer un nouveau recrutement",
   "@createNewHirement": {
@@ -640,7 +680,7 @@
   },
   "lastNamePlaceholder": "Entrez le nom de famille",
   "@lastNamePlaceholder": {
-    "description": "Espace pour le nom de famille"
+    "description": "Champ du nom de famille"
   },
   "lastNameRequired": "Le nom de famille est requis",
   "@lastNameRequired": {
@@ -656,7 +696,7 @@
   },
   "firstNamePlaceholder": "Entrez le prénom",
   "@firstNamePlaceholder": {
-    "description": "Espace pour le prénom"
+    "description": "Champ du prénom"
   },
   "firstNameRequired": "Le prénom est requis",
   "@firstNameRequired": {
@@ -666,9 +706,9 @@
   "@region": {
     "description": "Région"
   },
-  "regionPlaceholder": "Sélectionnez une région",
+  "regionPlaceholder": "Sélectionner une région",
   "@regionPlaceholder": {
-    "description": "Espace pour sélectionner une région"
+    "description": "Champ de la région"
   },
   "regionRequired": "La région est requise",
   "@regionRequired": {
@@ -688,7 +728,7 @@
   },
   "addressPlaceholder": "Entrez l'adresse",
   "@addressPlaceholder": {
-    "description": "Espace pour l'adresse"
+    "description": "Champ de l'adresse"
   },
   "addressRequired": "L'adresse est requise",
   "@addressRequired": {
@@ -700,31 +740,31 @@
   },
   "phonePlaceholder": "Entrez le téléphone",
   "@phonePlaceholder": {
-    "description": "Espace pour le téléphone"
+    "description": "Champ du téléphone"
   },
   "phoneRequired": "Le téléphone est requis",
   "@phoneRequired": {
     "description": "Le téléphone est requis"
   },
-  "email": "E-mail",
+  "email": "Email",
   "@email": {
-    "description": "E-mail"
+    "description": "Email"
   },
-  "noEmail": "Pas d'e-mail",
+  "noEmail": "Pas d'email",
   "@noEmail": {
-    "description": "Pas d'e-mail"
+    "description": "Pas d'email"
   },
-  "emailPlaceholder": "Entrez l'e-mail",
+  "emailPlaceholder": "Entrez l'email",
   "@emailPlaceholder": {
-    "description": "Espace pour l'e-mail"
+    "description": "Champ de l'email"
   },
-  "emailRequired": "L'e-mail est requis",
+  "emailRequired": "L'email est requis",
   "@emailRequired": {
-    "description": "L'e-mail est requis"
+    "description": "L'email est requis"
   },
-  "emailInvalid": "Entrez un e-mail valide",
+  "emailInvalid": "Entrez un email valide",
   "@emailInvalid": {
-    "description": "Entrez un e-mail valide"
+    "description": "Entrez un email valide"
   },
   "note": "Note",
   "@note": {
@@ -732,23 +772,23 @@
   },
   "notePlaceholder": "Entrez la note",
   "@notePlaceholder": {
-    "description": "Espace pour la note"
+    "description": "Champ de la note"
   },
-  "hire": "Recruter",
+  "hire": "Embaucher",
   "@hire": {
-    "description": "Recruter"
+    "description": "Embaucher"
   },
-  "hireDetails": "Détails du recrutement",
+  "hireDetails": "Détails de l'embauche",
   "@hireDetails": {
-    "description": "Détails du recrutement"
+    "description": "Détails de l'embauche"
   },
   "waitingForDecision": "En attente de décision",
   "@waitingForDecision": {
     "description": "En attente de décision"
   },
-  "hired": "Recruté",
+  "hired": "Embauché",
   "@hired": {
-    "description": "Recruté"
+    "description": "Embauché"
   },
   "rejected": "Rejeté",
   "@rejected": {
@@ -762,9 +802,9 @@
   "@clientAddress": {
     "description": "Adresse du client"
   },
-  "closeTourPlan": "Fermer le plan de tournée",
+  "closeTourPlan": "Fermer le plan de visite",
   "@closeTourPlan": {
-    "description": "Fermer le plan de tournée"
+    "description": "Fermer le plan de visite"
   },
   "closeTourPlanDesc": "Ferme le plan de tournée actuel.",
   "@closeTourPlanDesc": {
@@ -806,13 +846,29 @@
   "@addClaim": {
     "description": "Ajouter une réclamation"
   },
+  "motif": "Motif",
+  "@motif": {
+    "description": "Motif"
+  },
+  "noMotif": "Pas de motif",
+  "@noMotif": {
+    "description": "Pas de motif"
+  },
+  "noMotifDesc": "Aucun motif trouvé pour cette observation",
+  "@noMotifDesc": {
+    "description": "Aucun motif trouvé pour cette observation"
+  },
+  "addMotif": "Ajouter un motif",
+  "@addMotif": {
+    "description": "Ajouter un motif"
+  },
   "allRegions": "Toutes les régions",
   "@allRegions": {
     "description": "Toutes les régions"
   },
-  "cantCreatePlanWhileOpened": "Vous ne pouvez pas créer un plan de tournée pendant que vous avez une tournée ouverte",
+  "cantCreatePlanWhileOpened": "Impossible de créer un plan pendant qu'un plan est ouvert",
   "@cantCreatePlanWhileOpened": {
-    "description": "Vous ne pouvez pas créer un plan de tournée pendant que vous avez une tournée ouverte"
+    "description": "Vous ne pouvez pas créer un nouveau plan tant que vous avez un plan ouvert"
   },
   "cnrc": "CNRC",
   "@cnrc": {
@@ -822,12 +878,76 @@
   "@searchClient": {
     "description": "Rechercher un client"
   },
-  "uploadFile": "Télécharger un fichier",
+  "uploadFile": "Téléverser un fichier",
   "@uploadFile": {
-    "description": "Télécharger un fichier"
+    "description": "Téléverser un fichier"
   },
-  "cantCreateVisit": "Vous ne pouvez pas créer une visite pour ce client",
+  "cantCreateVisit": "Impossible de créer une visite",
   "@cantCreateVisit": {
-    "description": "Vous ne pouvez pas créer une visite pour ce client"
+    "description": "Vous ne pouvez pas créer une visite"
+  },
+  "visitPrivilegeMissing": "Vous n'avez pas le privilège de créer une visite",
+  "@visitPrivilegeMissing": {
+    "description": "Vous n'avez pas le privilège de créer une visite"
+  },
+  "goalOfDay": "Objectif du jour",
+  "@goalOfDay": {
+    "description": "Objectif du jour"
+  },
+  "visitsToday": "Visites aujourd'hui",
+  "@visitsToday": {
+    "description": "Visites aujourd'hui"
+  },
+  "changePassword": "Changer le mot de passe",
+  "@changePassword": {
+    "description": "Changer le mot de passe"
+  },
+  "oldPassword": "Ancien mot de passe",
+  "@oldPassword": {
+    "description": "Ancien mot de passe"
+  },
+  "oldPasswordPlaceholder": "Entrez votre ancien mot de passe",
+  "@oldPasswordPlaceholder": {
+    "description": "Champ de l'ancien mot de passe"
+  },
+  "oldPasswordRequired": "L'ancien mot de passe est requis",
+  "@oldPasswordRequired": {
+    "description": "L'ancien mot de passe est requis"
+  },
+  "newPassword": "Nouveau mot de passe",
+  "@newPassword": {
+    "description": "Nouveau mot de passe"
+  },
+  "newPasswordPlaceholder": "Entrez votre nouveau mot de passe",
+  "@newPasswordPlaceholder": {
+    "description": "Champ du nouveau mot de passe"
+  },
+  "newPasswordRequired": "Le nouveau mot de passe est requis",
+  "@newPasswordRequired": {
+    "description": "Le nouveau mot de passe est requis"
+  },
+  "confirmPassword": "Confirmer le mot de passe",
+  "@confirmPassword": {
+    "description": "Confirmer le mot de passe"
+  },
+  "confirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
+  "@confirmPasswordPlaceholder": {
+    "description": "Champ de confirmation du mot de passe"
+  },
+  "confirmPasswordRequired": "La confirmation du mot de passe est requise",
+  "@confirmPasswordRequired": {
+    "description": "La confirmation du mot de passe est requise"
+  },
+  "passwordNotMatch": "Les mots de passe ne correspondent pas",
+  "@passwordNotMatch": {
+    "description": "Les mots de passe ne correspondent pas"
+  },
+  "passwordChanged": "Mot de passe changé avec succès",
+  "@passwordChanged": {
+    "description": "Mot de passe changé avec succès"
+  },
+  "passwordChangedFailed": "Échec du changement de mot de passe",
+  "@passwordChangedFailed": {
+    "description": "Échec du changement de mot de passe"
   }
 }

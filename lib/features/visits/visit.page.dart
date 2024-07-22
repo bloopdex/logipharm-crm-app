@@ -34,12 +34,8 @@ class _VisitPageState extends State<VisitPage> {
       constraints: BoxConstraints(
         maxWidth: context.width,
         minWidth: context.width,
-        maxHeight: context.height -
-            context.appBarSize -
-            context.bottomNavigationBarSize,
-        minHeight: context.height -
-            context.appBarSize -
-            context.bottomNavigationBarSize,
+        maxHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
+        minHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
       ),
       child: MultiBlocListener(
         listeners: [
@@ -112,8 +108,7 @@ class _VisitPageState extends State<VisitPage> {
   }
 
   void _loadMore() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
+    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
       context.read<VisitBloc>().add(const VisitEvent.load());
     }
@@ -127,18 +122,9 @@ class VisitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
+    return GestureDetector(
       key: Key(visit.id.toString()),
-      direction: DismissDirection.endToStart,
-      background: Container(
-        color: kPrimaryColor,
-        alignment: Alignment.centerRight,
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Icon(Icons.edit, color: Colors.white),
-        ),
-      ),
-      onDismissed: (direction) {
+      onLongPress: () {
         context.push(UpdateVisitPage(tour: visit));
       },
       child: ListTile(
@@ -174,13 +160,10 @@ class VisitCard extends StatelessWidget {
                 color: kCeruleanBlue.shade100,
                 borderRadius: BorderRadius.circular(kPaddingSm3),
               ),
-              child:
-                  Text(visit.reason ?? "", style: context.textTheme.bodyLarge),
+              child: Text(visit.reason ?? "", style: context.textTheme.bodyLarge),
             ),
             Text(visit.reportText ?? "",
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: context.textTheme.bodyMedium),
+                maxLines: 2, overflow: TextOverflow.ellipsis, style: context.textTheme.bodyMedium),
           ],
         ),
       ),

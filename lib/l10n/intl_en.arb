@@ -216,7 +216,7 @@
   "@tourEmptyPlans": {
     "description": "Empty Plans"
   },
-  "tourEmptyPlansDescription": "You don''t have any plans yet",
+  "tourEmptyPlansDescription": "You don't have any plans yet",
   "@tourEmptyPlansDescription": {
     "description": "Empty Plans Description"
   },
@@ -315,6 +315,14 @@
   "tourCreationStartTourDescription": "You can start the tour now or later from the list of planned tours.",
   "@tourCreationStartTourDescription": {
     "description": "You can start the tour now or later from the list of planned tours."
+  },
+  "tourCreationCommuneLabel": "Commune",
+  "@tourCreationCommuneLabel": {
+    "description": "Commune"
+  },
+  "tourCreationName": "Name",
+  "@tourCreationName": {
+    "description": "Name"
   },
   "tourDetailsTitle": "Tour Details",
   "@tourDetailsTitle": {
@@ -490,13 +498,13 @@
   "@visitValidationRapport": {
     "description": "Rapport"
   },
-  "visitTourIsntOpen": "The tour isn''t open",
+  "visitTourIsntOpen": "The tour isn't open",
   "@visitTourIsntOpen": {
     "description": "The tour isn't open"
   },
-  "visitAlreadyEntered": "The visit is already entred",
+  "visitAlreadyEntered": "The visit is already entered",
   "@visitAlreadyEntered": {
-    "description": "The visit is already entred"
+    "description": "The visit is already entered"
   },
   "visitDetailsTitle": "Visit Details",
   "@visitDetailsTitle": {
@@ -514,7 +522,7 @@
   "@visitsEmpty": {
     "description": "No visits found"
   },
-  "visitsEmptyDescription": "You don''t have any visits yet",
+  "visitsEmptyDescription": "You don't have any visits yet",
   "@visitsEmptyDescription": {
     "description": "You don't have any visits yet"
   },
@@ -554,9 +562,9 @@
   "@todoDetailsPlaceholder": {
     "description": "Enter the details"
   },
-  "todoDetailsError": "Details is required",
+  "todoDetailsError": "Details are required",
   "@todoDetailsError": {
-    "description": "Details is required"
+    "description": "Details are required"
   },
   "supervisorRole": "Supervisor",
   "@supervisorRole": {
@@ -581,6 +589,38 @@
   "clientList": "Client List",
   "@clientList": {
     "description": "Client List"
+  },
+  "analytics": "Analytics",
+  "@analytics": {
+    "description": "Analytics"
+  },
+  "noAnalytics": "No analytics found",
+  "@noAnalytics": {
+    "description": "No analytics found"
+  },
+  "noAnalyticsDesc": "No analytics found for this client",
+  "@noAnalyticsDesc": {
+    "description": "No analytics found for this client"
+  },
+  "totalHt": "Total HT",
+  "@totalHt": {
+    "description": "Total HT"
+  },
+  "totalTtc": "Total TTC",
+  "@totalTtc": {
+    "description": "Total TTC"
+  },
+  "ceiling": "Ceiling",
+  "@ceiling": {
+    "description": "Ceiling"
+  },
+  "totalRest": "Total Rest For Payment",
+  "@totalRest": {
+    "description": "Total Rest"
+  },
+  "totalPayment": "Total Payment",
+  "@totalPayment": {
+    "description": "Total Payment"
   },
   "hiring": "Hiring",
   "@hiring": {
@@ -610,7 +650,7 @@
   "@noHirement": {
     "description": "No hirement found"
   },
-  "youDontHaveAnyHirement": "You don''t have any hirement yet",
+  "youDontHaveAnyHirement": "You don't have any hirement yet",
   "@youDontHaveAnyHirement": {
     "description": "You don't have any hirement yet"
   },
@@ -766,9 +806,9 @@
   "@closeTourPlan": {
     "description": "Close Tour Plan"
   },
-  "closeTourPlanDesc": "Ferme le plan de tournée actuel.",
+  "closeTourPlanDesc": "Close the current tour plan.",
   "@closeTourPlanDesc": {
-    "description": "Ferme le plan de tournée actuel."
+    "description": "Close the current tour plan."
   },
   "clients": "Clients",
   "@clients": {
@@ -806,6 +846,22 @@
   "@addClaim": {
     "description": "Add Claim"
   },
+  "motif": "Motif",
+  "@motif": {
+    "description": "Motif"
+  },
+  "noMotif": "No motif",
+  "@noMotif": {
+    "description": "No motif"
+  },
+  "noMotifDesc": "No motif found for this observation",
+  "@noMotifDesc": {
+    "description": "No motif found for this observation"
+  },
+  "addMotif": "Add Motif",
+  "@addMotif": {
+    "description": "Add Motif"
+  },
   "allRegions": "All Regions",
   "@allRegions": {
     "description": "All Regions"
@@ -829,5 +885,69 @@
   "cantCreateVisit": "Can't create visit",
   "@cantCreateVisit": {
     "description": "You can't create a visit"
+  },
+  "visitPrivilegeMissing": "You don't have the privilege to create a visit",
+  "@visitPrivilegeMissing": {
+    "description": "You don't have the privilege to create a visit"
+  },
+  "goalOfDay": "Goal of the day",
+  "@goalOfDay": {
+    "description": "Goal of the day"
+  },
+  "visitsToday": "Visits today",
+  "@visitsToday": {
+    "description": "Visits today"
+  },
+  "changePassword": "Change Password",
+  "@changePassword": {
+    "description": "Change Password"
+  },
+  "oldPassword": "Old Password",
+  "@oldPassword": {
+    "description": "Old Password"
+  },
+  "oldPasswordPlaceholder": "Enter your old password",
+  "@oldPasswordPlaceholder": {
+    "description": "Enter your old password"
+  },
+  "oldPasswordRequired": "Old password is required",
+  "@oldPasswordRequired": {
+    "description": "Old password is required"
+  },
+  "newPassword": "New Password",
+  "@newPassword": {
+    "description": "New Password"
+  },
+  "newPasswordPlaceholder": "Enter your new password",
+  "@newPasswordPlaceholder": {
+    "description": "Enter your new password"
+  },
+  "newPasswordRequired": "New password is required",
+  "@newPasswordRequired": {
+    "description": "New password is required"
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm Password"
+  },
+  "confirmPasswordPlaceholder": "Confirm your new password",
+  "@confirmPasswordPlaceholder": {
+    "description": "Confirm your new password"
+  },
+  "confirmPasswordRequired": "Confirm password is required",
+  "@confirmPasswordRequired": {
+    "description": "Confirm password is required"
+  },
+  "passwordNotMatch": "Passwords do not match",
+  "@passwordNotMatch": {
+    "description": "Passwords do not match"
+  },
+  "passwordChanged": "Password changed successfully",
+  "@passwordChanged": {
+    "description": "Password changed successfully"
+  },
+  "passwordChangedFailed": "Failed to change password",
+  "@passwordChangedFailed": {
+    "description": "Failed to change password"
   }
 }

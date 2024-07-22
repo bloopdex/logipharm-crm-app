@@ -1,5 +1,6 @@
 import 'package:crm/core/core.dart';
 import 'package:crm/features/auth/login.screen.dart';
+import 'package:crm/features/menu/sections/change_password_page.dart';
 import 'package:crm/features/todo/create-event.page.dart';
 import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/delegate_cubit.dart';
@@ -8,6 +9,7 @@ import 'package:crm/features/tour-plan/bloc/wilaya_cubit.dart';
 import 'package:crm/features/tour-plan/core/enums.dart';
 import 'package:crm/features/tour-plan/create-plan.page.dart';
 import 'package:crm/logic/auth/auth_bloc.dart';
+import 'package:crm/logic/localizations/localizations_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -55,7 +57,27 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 ),
                 backgroundColor: Colors.white,
                 elevation: 0,
-                actions: [if (layout.current.value == 2) const CustomDateRangePicker()],
+                actions: [
+                  if (layout.current.value == 2) const CustomDateRangePicker(),
+                  if (layout.current.value == 4) ...{
+                    IconButton(
+                      icon: const Icon(Icons.language, color: kCeruleanBlue),
+                      onPressed: () {
+                        context.read<LocalizationsBloc>().add(LocalizationsEvent.changeLocale(
+                            locale:
+                                context.read<LocalizationsBloc>().state.locale == const Locale('en')
+                                    ? const Locale('fr')
+                                    : const Locale('en')));
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.settings),
+                      onPressed: () {
+                        context.push(const ChangePasswordScreen());
+                      },
+                    ),
+                  }
+                ],
               ),
               body: layout.currentScreen,
               floatingActionButtonLocation:
@@ -65,7 +87,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                       heroTag: 'createPlan',
                       onPressed: () {
                         final current = context.read<TourPlanBloc>().state.maybeWhen(
-                              loaded: (tours, hasReachedMax, currentPage) {
+                              loaded: (tours, hasReachedMax, currentPage, goal) {
                                 return tours
                                     .where(
                                         (element) => element.statusFlag == StatuFlags.opened.value)
@@ -224,7 +246,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     if (context
         .read<TourPlanBloc>()
         .state
-        .maybeWhen(orElse: () => true, loaded: (tours, _, __) => tours.isEmpty)) {
+        .maybeWhen(orElse: () => true, loaded: (tours, _, __, ___) => tours.isEmpty)) {
       context.read<TourPlanBloc>().add(const TourPlanEvent.started());
     }
     if (context
@@ -233,6 +255,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
         .maybeWhen(orElse: () => true, loaded: (visits, _, __) => visits.isEmpty)) {
       context.read<VisitBloc>().add(const VisitEvent.started());
     }
+
     super.initState();
   }
 }

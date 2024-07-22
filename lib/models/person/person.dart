@@ -16,6 +16,7 @@ class Person with _$Person {
     @JsonKey(name: 'loginCode') required String loginCode,
     @JsonKey(name: 'actionFlag') required int actionFlag,
     @JsonKey(name: 'regionId') String? regionId,
+    @JsonKey(name: 'ville') String? ville,
     @JsonKey(name: 'adresse') String? address,
     @JsonKey(name: 'latitude') double? latitude,
     @JsonKey(name: 'superviseur') int? supervisor,

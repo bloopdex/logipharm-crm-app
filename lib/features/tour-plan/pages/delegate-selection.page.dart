@@ -1,4 +1,5 @@
 import 'package:crm/core/core.dart';
+import 'package:crm/shared/widgets/inputs/custom.text.form.field.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,6 +30,18 @@ class DelegateSelectionForm extends StatelessWidget {
           ),
           SizedBox(height: kSpacingX7),
           Text(
+            context.i10n.tourCreationName,
+            style: context.textTheme.bodyMedium,
+          ),
+          SizedBox(height: kSpacingX1),
+          CustomTextFormField(
+            data: data,
+            mapKey: 'nom',
+            hintText: context.i10n.tourCreationName,
+            onChanged: (value) => data['nom'] = value,
+          ),
+          SizedBox(height: kSpacingX5),
+          Text(
             context.i10n.tourCreationTourDetailsDelegateLabel,
             style: context.textTheme.bodyMedium,
           ),
@@ -39,8 +52,7 @@ class DelegateSelectionForm extends StatelessWidget {
                   data: data,
                   mapKey: 'delegueId',
                   items: state
-                      .map((e) => CustomDropDownItem(
-                          label: e.fullName, value: e.id.toString()))
+                      .map((e) => CustomDropDownItem(label: e.fullName, value: e.id.toString()))
                       .toList());
             },
           ),

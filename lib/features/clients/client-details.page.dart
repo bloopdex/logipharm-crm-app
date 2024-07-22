@@ -1,6 +1,9 @@
+import 'package:crm/features/clients/blocs/claims/claim_cubit.dart';
+import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
 import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
 import 'package:crm/features/clients/pages/create-claim.dart';
 import 'package:crm/models/person/person.dart';
+import 'package:crm/shared/utils/money.formatter.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:crm/shared/widgets/loading/loader.widget.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +17,7 @@ import '../../shared/services/helpers/location.helper.dart';
 import '../../shared/widgets/buttons/circlebutton.text.widget.dart';
 import '../../shared/widgets/image/svg.dart';
 import 'pages/create-observation.dart';
+import 'widgets/pie_chart.dart';
 
 class ClientDetailsPage extends StatelessWidget {
   final Person client;
@@ -228,17 +232,6 @@ class ClientDetailsPage extends StatelessWidget {
                         ),
                         Expanded(
                           child: CircleButtonText(
-                            icon: Icons.note_alt_rounded,
-                            text: context.i10n.addObservation,
-                            onPressed: () {
-                              context.push(CreateObservationPage(
-                                pharmacyId: client.id,
-                              ));
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child: CircleButtonText(
                             icon: Icons.warning_rounded,
                             text: context.i10n.addClaim,
                             color: kBrightSun,
@@ -277,7 +270,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -296,7 +289,24 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
             labelColor: kPrimaryColor,
             unselectedLabelColor: kCodGray,
             tabAlignment: TabAlignment.center,
+            isScrollable: true,
             tabs: [
+              Tab(
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: context.width / 3,
+                    minWidth: context.width / 3,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.analytics),
+                      SizedBox(width: kSpacingX1),
+                      Text(context.i10n.analytics),
+                    ],
+                  ),
+                ),
+              ),
               Tab(
                 child: Container(
                   constraints: BoxConstraints(
@@ -335,6 +345,152 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
         SizedBox(height: kSpacingX3),
         Expanded(
           child: TabBarView(controller: _tabController, children: [
+            BlocBuilder<ClientDetailsCubit, ClientDetailsState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                    orElse: () {
+                      return Center(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SVG(
+                            'empty-states/info.svg',
+                            height: 175.sp,
+                          ),
+                          SizedBox(height: kSpacingX3),
+                          Text(
+                            context.i10n.noAnalytics,
+                            style: context.textTheme.headlineMedium,
+                          ),
+                          SizedBox(height: kSpacingX2),
+                          Text(
+                            context.i10n.noAnalyticsDesc,
+                            style: context.textTheme.bodyMedium,
+                          ),
+                        ],
+                      ));
+                    },
+                    loading: () => const Center(child: Loader()),
+                    loaded: (statistics) {
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  context.i10n.ceiling,
+                                  style: context.textTheme.headlineMedium,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    MoneyHelper.format(context, statistics.ceiling.toDouble()),
+                                    textAlign: TextAlign.end,
+                                    style: context.textTheme.headlineMedium!.copyWith(
+                                      fontSize: 25.h,
+                                      color: kPrimaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(),
+                            SizedBox(height: kSpacingX3),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  context.i10n.totalHt,
+                                  style: context.textTheme.headlineMedium,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    MoneyHelper.format(context, statistics.totalHt.toDouble()),
+                                    textAlign: TextAlign.end,
+                                    style: context.textTheme.headlineMedium!.copyWith(
+                                      fontSize: 25.h,
+                                      color: kPrimaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(),
+                            SizedBox(height: kSpacingX3),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  context.i10n.totalTtc,
+                                  style: context.textTheme.headlineMedium,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    MoneyHelper.format(context, statistics.totalTtc.toDouble()),
+                                    textAlign: TextAlign.end,
+                                    style: context.textTheme.headlineMedium!.copyWith(
+                                      fontSize: 25.h,
+                                      color: kPrimaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(),
+                            SizedBox(height: kSpacingX3),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  context.i10n.totalPayment,
+                                  style: context.textTheme.headlineMedium,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    MoneyHelper.format(context, statistics.totalPayment.toDouble()),
+                                    textAlign: TextAlign.end,
+                                    style: context.textTheme.headlineMedium!.copyWith(
+                                      fontSize: 25.h,
+                                      color: kPrimaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(),
+                            SizedBox(height: kSpacingX3),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  context.i10n.totalRest,
+                                  style: context.textTheme.headlineMedium,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    MoneyHelper.format(context, statistics.totalRest.toDouble()),
+                                    textAlign: TextAlign.end,
+                                    style: context.textTheme.headlineMedium!.copyWith(
+                                      fontSize: 25.h,
+                                      color: kPrimaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(),
+                            SizedBox(height: kSpacingX3),
+                            PieChartSample3(
+                              reclamations: statistics.clientReclamations,
+                            )
+                          ],
+                        ),
+                      );
+                    });
+              },
+            ),
             BlocBuilder<ObservationCubit, ObservationState>(
               builder: (context, state) {
                 return state.maybeWhen(
@@ -419,28 +575,90 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                     });
               },
             ),
-            Center(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SVG(
-                  'empty-states/info.svg',
-                  height: 175.sp,
-                ),
-                SizedBox(height: kSpacingX3),
-                Text(
-                  context.i10n.noClaims,
-                  style: context.textTheme.headlineMedium,
-                ),
-                SizedBox(height: kSpacingX2),
-                Text(
-                  context.i10n.noClaimsDesc,
-                  style: context.textTheme.bodyMedium,
-                ),
-              ],
-            )),
+            BlocBuilder<ClaimCubit, ClaimState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                    orElse: () {
+                      return Center(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SVG(
+                            'empty-states/info.svg',
+                            height: 175.sp,
+                          ),
+                          SizedBox(height: kSpacingX3),
+                          Text(
+                            context.i10n.noClaims,
+                            style: context.textTheme.headlineMedium,
+                          ),
+                          SizedBox(height: kSpacingX2),
+                          Text(
+                            context.i10n.noClaimsDesc,
+                            style: context.textTheme.bodyMedium,
+                          ),
+                        ],
+                      ));
+                    },
+                    loading: () => const Center(child: Loader()),
+                    loaded: (claims) {
+                      if (claims.isEmpty) {
+                        return Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SVG(
+                              'empty-states/info.svg',
+                              height: 175.sp,
+                            ),
+                            SizedBox(height: kSpacingX3),
+                            Text(
+                              context.i10n.noClaims,
+                              style: context.textTheme.headlineMedium,
+                            ),
+                            SizedBox(height: kSpacingX2),
+                            Text(
+                              context.i10n.noClaimsDesc,
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          ],
+                        ));
+                      }
+                      return ListView.builder(
+                        itemCount: claims.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    claims[index].motif,
+                                    style: context.textTheme.headlineMedium,
+                                  ),
+                                ),
+                                SizedBox(width: kSpacingX1),
+                                Text(
+                                  claims[index].date,
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ],
+                            ),
+                            subtitle: Text(
+                              claims[index].rapportText,
+                              softWrap: true,
+                              maxLines: 3,
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          );
+                        },
+                      );
+                    });
+              },
+            ),
           ]),
         ),
       ],

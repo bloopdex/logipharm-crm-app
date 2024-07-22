@@ -1,4 +1,6 @@
 import 'package:crm/core/core.dart';
+import 'package:crm/features/clients/blocs/claims/claim_cubit.dart';
+import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
 import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,7 @@ class _ClientsPageState extends State<ClientsPage> {
   void initState() {
     clients = context.read<ClientsCubit>().state.maybeWhen(
           orElse: () => [],
-          loaded: (clients) => clients,
+          loaded: (clients) => clients.where((element) => element.typeTier == "1").toList(),
         );
     super.initState();
   }
@@ -127,6 +129,7 @@ class _ClientsPageState extends State<ClientsPage> {
 
 class ClientCard extends StatelessWidget {
   final Person client;
+
   const ClientCard({super.key, required this.client});
 
   @override
@@ -134,6 +137,8 @@ class ClientCard extends StatelessWidget {
     return ListTile(
       onTap: () {
         context.read<ObservationCubit>().get(pharmacyId: client.id);
+        context.read<ClaimCubit>().get(pharmacyId: client.id);
+        context.read<ClientDetailsCubit>().load(clientId: client.id);
         context.push(
           ClientDetailsPage(client: client),
         );

@@ -16,9 +16,9 @@ class ProfileSection extends StatelessWidget {
         horizontal: kPaddingMd1,
       ),
       leading: ProfileCard(
-        text: user.fullName,
+        text: user.fullName ?? "no-name",
       ),
-      title: Text(user.fullName, style: context.textTheme.bodyLarge),
+      title: Text(user.fullName ?? "no-name", style: context.textTheme.bodyLarge),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -32,15 +32,11 @@ class ProfileSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(kPaddingSm3),
             ),
             child: Text(
-                user.id.typeTier != "3"
-                    ? context.i10n.supervisorRole
-                    : context.i10n.delegateRole,
+                user.id.typeTier != "3" ? context.i10n.supervisorRole : context.i10n.delegateRole,
                 style: context.textTheme.bodyLarge),
           ),
           Text(context.i10n.manageProfile,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: context.textTheme.bodyMedium),
+              maxLines: 2, overflow: TextOverflow.ellipsis, style: context.textTheme.bodyMedium),
         ],
       ),
     );

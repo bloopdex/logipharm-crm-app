@@ -19,7 +19,9 @@ class VisitValidateCreationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     List<TourDetail> clients = tour.pharmacies
             ?.where(
-              (element) => element.pharmacy?.id.toString() == data['pharmacieId'],
+              (element) =>
+                  '${element.pharmacy?.id.toString()}:${element.pharmacy?.typeTier}' ==
+                  data['pharmacieId'],
             )
             .toList() ??
         [];
@@ -29,9 +31,13 @@ class VisitValidateCreationPage extends StatelessWidget {
       pharmacy = context.read<ClientsCubit>().state.maybeWhen(
           orElse: () => null,
           loaded: (clients) {
-            return clients.firstWhere(
-              (element) => element.id.toString() == data['pharmacieId'],
-            );
+            return clients
+                .where(
+                  (element) =>
+                      '${element.id.toString()}:${element.typeTier}' ==
+                      data['pharmacieId'],
+                )
+                .firstOrNull;
           });
     }
     return Padding(
@@ -70,6 +76,8 @@ class VisitValidateCreationPage extends StatelessWidget {
                               SizedBox(height: kSpacingX1),
                               Text(
                                 message,
+                                softWrap: true,
+                                maxLines: 3,
                                 style: context.textTheme.bodyMedium,
                               ),
                             ],

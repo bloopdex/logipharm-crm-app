@@ -560,10 +560,10 @@ class S {
     );
   }
 
-  /// `You don''t have any plans yet`
+  /// `You don't have any plans yet`
   String get tourEmptyPlansDescription {
     return Intl.message(
-      'You don\'\'t have any plans yet',
+      'You don\'t have any plans yet',
       name: 'tourEmptyPlansDescription',
       desc: 'Empty Plans Description',
       args: [],
@@ -810,6 +810,26 @@ class S {
       name: 'tourCreationStartTourDescription',
       desc:
           'You can start the tour now or later from the list of planned tours.',
+      args: [],
+    );
+  }
+
+  /// `Commune`
+  String get tourCreationCommuneLabel {
+    return Intl.message(
+      'Commune',
+      name: 'tourCreationCommuneLabel',
+      desc: 'Commune',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get tourCreationName {
+    return Intl.message(
+      'Name',
+      name: 'tourCreationName',
+      desc: 'Name',
       args: [],
     );
   }
@@ -1236,22 +1256,22 @@ class S {
     );
   }
 
-  /// `The tour isn''t open`
+  /// `The tour isn't open`
   String get visitTourIsntOpen {
     return Intl.message(
-      'The tour isn\'\'t open',
+      'The tour isn\'t open',
       name: 'visitTourIsntOpen',
       desc: 'The tour isn\'t open',
       args: [],
     );
   }
 
-  /// `The visit is already entred`
+  /// `The visit is already entered`
   String get visitAlreadyEntered {
     return Intl.message(
-      'The visit is already entred',
+      'The visit is already entered',
       name: 'visitAlreadyEntered',
-      desc: 'The visit is already entred',
+      desc: 'The visit is already entered',
       args: [],
     );
   }
@@ -1296,10 +1316,10 @@ class S {
     );
   }
 
-  /// `You don''t have any visits yet`
+  /// `You don't have any visits yet`
   String get visitsEmptyDescription {
     return Intl.message(
-      'You don\'\'t have any visits yet',
+      'You don\'t have any visits yet',
       name: 'visitsEmptyDescription',
       desc: 'You don\'t have any visits yet',
       args: [],
@@ -1396,12 +1416,12 @@ class S {
     );
   }
 
-  /// `Details is required`
+  /// `Details are required`
   String get todoDetailsError {
     return Intl.message(
-      'Details is required',
+      'Details are required',
       name: 'todoDetailsError',
-      desc: 'Details is required',
+      desc: 'Details are required',
       args: [],
     );
   }
@@ -1462,6 +1482,86 @@ class S {
       'Client List',
       name: 'clientList',
       desc: 'Client List',
+      args: [],
+    );
+  }
+
+  /// `Analytics`
+  String get analytics {
+    return Intl.message(
+      'Analytics',
+      name: 'analytics',
+      desc: 'Analytics',
+      args: [],
+    );
+  }
+
+  /// `No analytics found`
+  String get noAnalytics {
+    return Intl.message(
+      'No analytics found',
+      name: 'noAnalytics',
+      desc: 'No analytics found',
+      args: [],
+    );
+  }
+
+  /// `No analytics found for this client`
+  String get noAnalyticsDesc {
+    return Intl.message(
+      'No analytics found for this client',
+      name: 'noAnalyticsDesc',
+      desc: 'No analytics found for this client',
+      args: [],
+    );
+  }
+
+  /// `Total HT`
+  String get totalHt {
+    return Intl.message(
+      'Total HT',
+      name: 'totalHt',
+      desc: 'Total HT',
+      args: [],
+    );
+  }
+
+  /// `Total TTC`
+  String get totalTtc {
+    return Intl.message(
+      'Total TTC',
+      name: 'totalTtc',
+      desc: 'Total TTC',
+      args: [],
+    );
+  }
+
+  /// `Ceiling`
+  String get ceiling {
+    return Intl.message(
+      'Ceiling',
+      name: 'ceiling',
+      desc: 'Ceiling',
+      args: [],
+    );
+  }
+
+  /// `Total Rest For Payment`
+  String get totalRest {
+    return Intl.message(
+      'Total Rest For Payment',
+      name: 'totalRest',
+      desc: 'Total Rest',
+      args: [],
+    );
+  }
+
+  /// `Total Payment`
+  String get totalPayment {
+    return Intl.message(
+      'Total Payment',
+      name: 'totalPayment',
+      desc: 'Total Payment',
       args: [],
     );
   }
@@ -1536,10 +1636,10 @@ class S {
     );
   }
 
-  /// `You don''t have any hirement yet`
+  /// `You don't have any hirement yet`
   String get youDontHaveAnyHirement {
     return Intl.message(
-      'You don\'\'t have any hirement yet',
+      'You don\'t have any hirement yet',
       name: 'youDontHaveAnyHirement',
       desc: 'You don\'t have any hirement yet',
       args: [],
@@ -1926,12 +2026,12 @@ class S {
     );
   }
 
-  /// `Ferme le plan de tournée actuel.`
+  /// `Close the current tour plan.`
   String get closeTourPlanDesc {
     return Intl.message(
-      'Ferme le plan de tournée actuel.',
+      'Close the current tour plan.',
       name: 'closeTourPlanDesc',
-      desc: 'Ferme le plan de tournée actuel.',
+      desc: 'Close the current tour plan.',
       args: [],
     );
   }
@@ -2026,6 +2126,46 @@ class S {
     );
   }
 
+  /// `Motif`
+  String get motif {
+    return Intl.message(
+      'Motif',
+      name: 'motif',
+      desc: 'Motif',
+      args: [],
+    );
+  }
+
+  /// `No motif`
+  String get noMotif {
+    return Intl.message(
+      'No motif',
+      name: 'noMotif',
+      desc: 'No motif',
+      args: [],
+    );
+  }
+
+  /// `No motif found for this observation`
+  String get noMotifDesc {
+    return Intl.message(
+      'No motif found for this observation',
+      name: 'noMotifDesc',
+      desc: 'No motif found for this observation',
+      args: [],
+    );
+  }
+
+  /// `Add Motif`
+  String get addMotif {
+    return Intl.message(
+      'Add Motif',
+      name: 'addMotif',
+      desc: 'Add Motif',
+      args: [],
+    );
+  }
+
   /// `All Regions`
   String get allRegions {
     return Intl.message(
@@ -2082,6 +2222,166 @@ class S {
       'Can\'t create visit',
       name: 'cantCreateVisit',
       desc: 'You can\'t create a visit',
+      args: [],
+    );
+  }
+
+  /// `You don't have the privilege to create a visit`
+  String get visitPrivilegeMissing {
+    return Intl.message(
+      'You don\'t have the privilege to create a visit',
+      name: 'visitPrivilegeMissing',
+      desc: 'You don\'t have the privilege to create a visit',
+      args: [],
+    );
+  }
+
+  /// `Goal of the day`
+  String get goalOfDay {
+    return Intl.message(
+      'Goal of the day',
+      name: 'goalOfDay',
+      desc: 'Goal of the day',
+      args: [],
+    );
+  }
+
+  /// `Visits today`
+  String get visitsToday {
+    return Intl.message(
+      'Visits today',
+      name: 'visitsToday',
+      desc: 'Visits today',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get changePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'changePassword',
+      desc: 'Change Password',
+      args: [],
+    );
+  }
+
+  /// `Old Password`
+  String get oldPassword {
+    return Intl.message(
+      'Old Password',
+      name: 'oldPassword',
+      desc: 'Old Password',
+      args: [],
+    );
+  }
+
+  /// `Enter your old password`
+  String get oldPasswordPlaceholder {
+    return Intl.message(
+      'Enter your old password',
+      name: 'oldPasswordPlaceholder',
+      desc: 'Enter your old password',
+      args: [],
+    );
+  }
+
+  /// `Old password is required`
+  String get oldPasswordRequired {
+    return Intl.message(
+      'Old password is required',
+      name: 'oldPasswordRequired',
+      desc: 'Old password is required',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: 'New Password',
+      args: [],
+    );
+  }
+
+  /// `Enter your new password`
+  String get newPasswordPlaceholder {
+    return Intl.message(
+      'Enter your new password',
+      name: 'newPasswordPlaceholder',
+      desc: 'Enter your new password',
+      args: [],
+    );
+  }
+
+  /// `New password is required`
+  String get newPasswordRequired {
+    return Intl.message(
+      'New password is required',
+      name: 'newPasswordRequired',
+      desc: 'New password is required',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPassword',
+      desc: 'Confirm Password',
+      args: [],
+    );
+  }
+
+  /// `Confirm your new password`
+  String get confirmPasswordPlaceholder {
+    return Intl.message(
+      'Confirm your new password',
+      name: 'confirmPasswordPlaceholder',
+      desc: 'Confirm your new password',
+      args: [],
+    );
+  }
+
+  /// `Confirm password is required`
+  String get confirmPasswordRequired {
+    return Intl.message(
+      'Confirm password is required',
+      name: 'confirmPasswordRequired',
+      desc: 'Confirm password is required',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get passwordNotMatch {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'passwordNotMatch',
+      desc: 'Passwords do not match',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully`
+  String get passwordChanged {
+    return Intl.message(
+      'Password changed successfully',
+      name: 'passwordChanged',
+      desc: 'Password changed successfully',
+      args: [],
+    );
+  }
+
+  /// `Failed to change password`
+  String get passwordChangedFailed {
+    return Intl.message(
+      'Failed to change password',
+      name: 'passwordChangedFailed',
+      desc: 'Failed to change password',
       args: [],
     );
   }

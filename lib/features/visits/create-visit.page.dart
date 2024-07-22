@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/models/tour.dart';
@@ -55,6 +56,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
     data['dateDebut'] = DateTime.now().YYYYMMdd();
     data['pharmacieId'] = widget.pharmacieId?.toString();
     data['tourneeId'] = widget.tour.tourId;
+    log('tourneeId: ${widget.tour.tourId}');
   }
 
   @override
@@ -192,6 +194,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                           }
                                           data['document'] = _quillController.document;
                                           context.read<CounterCubit>().increment();
+                                          if (!context.mounted) return;
                                           setState(() {});
                                           break;
                                         case 1:
@@ -204,19 +207,6 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                           if (position != null) {
                                             data['latitude'] = position.latitude;
                                             data['longitude'] = position.longitude;
-                                          }
-                                          // check if pharmacyId in data exist in pharmacy list without using firstWhere
-                                          final clients = widget.tour.pharmacies
-                                                  ?.where(
-                                                    (element) =>
-                                                        element.pharmacy?.id.toString() ==
-                                                        data['pharmacieId'],
-                                                  )
-                                                  .toList() ??
-                                              [];
-                                          final client = clients.isNotEmpty ? clients.first : null;
-                                          if (client == null) {
-                                            data.remove('tourneeId');
                                           }
                                           context.read<VisitCreationCubit>().validate(data: data);
                                       }

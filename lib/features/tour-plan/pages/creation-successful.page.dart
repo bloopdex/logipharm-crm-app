@@ -29,7 +29,7 @@ class CreationSuccessfulPage extends StatelessWidget {
             failure: (message) {
               context.errorSnackBar(message);
             },
-            loaded: (tour, _, __) {
+            loaded: (tour, _, __, ___) {
               context.pushAndRemoveUntil(const NavigationScreen());
             },
           );
@@ -127,7 +127,8 @@ class CreationSuccessfulPage extends StatelessWidget {
                     ],
                   );
                 },
-              )
+              ),
+              SizedBox(height: kPaddingMd2),
             ],
           ),
         ),
