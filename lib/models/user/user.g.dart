@@ -17,7 +17,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
       supervisor: (json['superviseur'] as num?)?.toInt(),
-      addVisitOutPlanPrivilege: (json['addViseHorsPlan'] as num).toInt(),
+      addVisitOutPlanPrivilege: (json['addViseHorsPlan'] as num?)?.toInt(),
       fullName: json['fullName'] as String?,
     );
 
@@ -38,9 +38,9 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     };
 
 _$IdImpl _$$IdImplFromJson(Map<String, dynamic> json) => _$IdImpl(
-      id: (json['id'] as num).toInt(),
-      companyId: (json['cmpId'] as num).toInt(),
-      typeTier: json['typeTier'] as String,
+      id: (json['id'] as num?)?.toInt(),
+      companyId: (json['cmpId'] as num?)?.toInt(),
+      typeTier: json['typeTier'] as String?,
     );
 
 Map<String, dynamic> _$$IdImplToJson(_$IdImpl instance) => <String, dynamic>{

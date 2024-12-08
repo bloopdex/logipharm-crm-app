@@ -8,6 +8,10 @@
   "@confirm": {
     "description": "Confirmer"
   },
+  "back": "Retour",
+  "@back": {
+    "description": "Retour"
+  },
   "start": "Démarrer",
   "@start": {
     "description": "Démarrer"
@@ -183,6 +187,10 @@
   "tourSearchPerWilaya": "Rechercher par wilaya",
   "@tourSearchPerWilaya": {
     "description": "Rechercher par wilaya"
+  },
+  "tourSearchPerCommune": "Rechercher par commune",
+  "@tourSearchPerCommune": {
+    "description": "Rechercher par commune"
   },
   "tourAllPlans": "Tous les plans",
   "@tourAllPlans": {
@@ -398,9 +406,9 @@
   "@homeCreateNewEvent": {
     "description": "Créer un nouvel événement"
   },
-  "homeHireNewClient": "Embaucher un nouveau client",
+  "homeHireNewClient": "Recruter un nouveau client",
   "@homeHireNewClient": {
-    "description": "Embaucher un nouveau client"
+    "description": "Recruter un nouveau client"
   },
   "homeMyClients": "Mes clients",
   "@homeMyClients": {
@@ -414,9 +422,9 @@
   "@homePendingPlan": {
     "description": "Plan en attente"
   },
-  "homePendingHire": "Embauche en attente",
+  "homePendingHire": "Recrute en attente",
   "@homePendingHire": {
-    "description": "Embauche en attente"
+    "description": "Recrute en attente"
   },
   "homeHello": "Bonjour",
   "@homeHello": {
@@ -526,6 +534,10 @@
   "@visitsEmptyDescription": {
     "description": "Vous n'avez encore aucune visite"
   },
+  "visitErrorDate": "La date doit être après la date du plan de tournee",
+  "@visitErrorDate": {
+    "description": "La date doit être après la date du plan tournee"
+  },
   "todoTask": "Tâche",
   "@todoTask": {
     "description": "Tâche"
@@ -622,9 +634,9 @@
   "@totalPayment": {
     "description": "Paiement total"
   },
-  "hiring": "Embauche",
+  "hiring": "Recrutement",
   "@hiring": {
-    "description": "Embauche"
+    "description": "Recrutement"
   },
   "fileCNRC": "Fichier CNRC",
   "@fileCNRC": {
@@ -702,6 +714,14 @@
   "@firstNameRequired": {
     "description": "Le prénom est requis"
   },
+  "name": "Nom",
+  "@name": {
+    "description": "Nom"
+  },
+  "noName": "Pas de nom",
+  "@noName": {
+    "description": "Pas de nom"
+  },
   "region": "Région",
   "@region": {
     "description": "Région"
@@ -774,13 +794,13 @@
   "@notePlaceholder": {
     "description": "Champ de la note"
   },
-  "hire": "Embaucher",
+  "hire": "Recruter",
   "@hire": {
-    "description": "Embaucher"
+    "description": "Recruter"
   },
-  "hireDetails": "Détails de l'embauche",
+  "hireDetails": "Détails de l'Recrute",
   "@hireDetails": {
-    "description": "Détails de l'embauche"
+    "description": "Détails de l'Recrute"
   },
   "waitingForDecision": "En attente de décision",
   "@waitingForDecision": {
@@ -866,6 +886,10 @@
   "@allRegions": {
     "description": "Toutes les régions"
   },
+  "allCommunes": "Toutes les communes",
+  "@allCommunes": {
+    "description": "Toutes les communes"
+  },
   "cantCreatePlanWhileOpened": "Impossible de créer un plan pendant qu'un plan est ouvert",
   "@cantCreatePlanWhileOpened": {
     "description": "Vous ne pouvez pas créer un nouveau plan tant que vous avez un plan ouvert"
@@ -949,5 +973,77 @@
   "passwordChangedFailed": "Échec du changement de mot de passe",
   "@passwordChangedFailed": {
     "description": "Échec du changement de mot de passe"
+  },
+  "passwordLengthError": "Le mot de passe doit contenir au moins 6 caractères",
+  "@passwordLengthError": {
+    "description": "Le mot de passe doit contenir au moins 6 caractères"
+  },
+  "blockageCommercial": "Blocage commercial",
+  "@blockageCommercial": {
+    "description": "Blocage commercial"
+  },
+  "blockageFinancial": "Blocage financier",
+  "@blockageFinancial": {
+    "description": "Blocage financier"
+  },
+  "moreDetails": "Plus de détails",
+  "@moreDetails": {
+    "description": "Plus de détails"
+  },
+  "category": "Catégorie",
+  "@category": {
+    "description": "Catégorie"
+  },
+  "noCategory": "Pas de catégorie",
+  "@noCategory": {
+    "description": "Pas de catégorie"
+  },
+  "solvability": "Solvaibilité",
+  "@solvability": {
+    "description": "Solvaibilité"
+  },
+  "noSolvability": "Pas de solvaibilité",
+  "@noSolvability": {
+    "description": "Pas de solvaibilité"
+  },
+  "modePaie": "Mode de paiement",
+  "@modePaie": {
+    "description": "Mode de paiement"
+  },
+  "noModePaie": "Pas de mode de paiement",
+  "@noModePaie": {
+    "description": "Pas de mode de paiement"
+  },
+  "addGrossiste": "Ajouter un grossiste",
+  "@addGrossiste": {
+    "description": "Ajouter un grossiste"
+  },
+  "grossiste": "Grossiste",
+  "@grossiste": {
+    "description": "Grossiste"
+  },
+  "noGrossiste": "Pas de grossiste",
+  "@noGrossiste": {
+    "description": "Pas de grossiste"
+  },
+  "addEtablissement": "Ajouter un établissement",
+  "@addEtablissement": {
+    "description": "Ajouter un établissement"
+  },
+  "etablissement": "Etablissement",
+  "@etablissement": {
+    "description": "Etablissement"
+  },
+  "noEtablissement": "Pas d'établissement",
+  "@noEtablissement": {
+    "description": "Pas d'établissement"
+  },
+  "selectClient": "Sélectionner un client",
+  "@selectClient": {
+    "description": "Sélectionner un client"
+  },
+  "selectReason": "Sélectionner une raison",
+  "@selectReason": {
+    "description": "Sélectionner une raison"
   }
 }

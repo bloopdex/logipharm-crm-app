@@ -50,7 +50,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         state.locale.languageCode != 'ar'
                             ? Icons.chevron_left
                             : Icons.chevron_right,
-                        size: 20.sp,
+                        size: 20.h,
                       );
                     },
                   ),
@@ -95,6 +95,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       data: changeData,
                       mapKey: 'newPassword',
                       prefixIcon: Icons.lock,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return context.i10n.newPasswordRequired;
+                        }
+                        if (value.length < 6) {
+                          return context.i10n.passwordLengthError;
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: kSpacingX2),
                     Text(
@@ -106,6 +115,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       data: changeData,
                       mapKey: 'confirmNewPassword',
                       prefixIcon: Icons.lock,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return context.i10n.confirmPasswordRequired;
+                        }
+                        if (value.length < 6) {
+                          return context.i10n.passwordLengthError;
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: kSpacingX2),
                     BlocBuilder<ChangePasswordCubit, ChangePasswordState>(

@@ -18,14 +18,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       selectedItemColor: kCeruleanBlue,
       unselectedItemColor: kCodGray.shade800,
-      selectedLabelStyle:
-          const TextStyle(color: kCeruleanBlue, fontWeight: FontWeight.bold),
-      unselectedLabelStyle:
-          TextStyle(color: kCodGray.shade800, fontWeight: FontWeight.w500),
-      selectedFontSize: 10.sp,
-      unselectedFontSize: 10.sp,
+      selectedLabelStyle: const TextStyle(color: kCeruleanBlue, fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(color: kCodGray.shade800, fontWeight: FontWeight.w500),
+      selectedFontSize: 10.h,
+      unselectedFontSize: 10.h,
       showUnselectedLabels: true,
-      iconSize: 20.sp,
+      iconSize: 20.h,
       currentIndex: layout.current.value.toInt(),
       onTap: (value) {
         layout.change(value);

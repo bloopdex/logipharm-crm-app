@@ -31,7 +31,11 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
     super.initState();
     context.read<CounterCubit>().reset();
     context.read<TourCreationCubit>().reset();
-    final delegate = context.read<DelegateCubit>().state.first.id.toString();
+    // Get the delegate id from the delegate cubit
+    String? delegate;
+    if (context.read<DelegateCubit>().state.isNotEmpty) {
+      delegate = context.read<DelegateCubit>().state.first.id.toString();
+    }
     data['delegueId'] = delegate;
     data['dateDebut'] = DateTime.now().YYYYMMdd();
   }
@@ -65,7 +69,7 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
                               return CustomStepper(
                                 activeStep: state,
                                 steps: 3,
-                                stepHeight: 4.sp,
+                                stepHeight: 4.h,
                               );
                             },
                           ),

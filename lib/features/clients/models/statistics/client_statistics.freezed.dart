@@ -189,9 +189,9 @@ ClientStatistics _$ClientStatisticsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ClientStatistics {
   @JsonKey(name: 'companyId')
-  num get companyId => throw _privateConstructorUsedError;
+  num? get companyId => throw _privateConstructorUsedError;
   @JsonKey(name: 'clientId')
-  num get clientId => throw _privateConstructorUsedError;
+  num? get clientId => throw _privateConstructorUsedError;
   @JsonKey(name: 'blocageCommercial')
   bool get commercialBlockage => throw _privateConstructorUsedError;
   @JsonKey(name: 'blocageFinancier')
@@ -223,8 +223,8 @@ abstract class $ClientStatisticsCopyWith<$Res> {
       _$ClientStatisticsCopyWithImpl<$Res, ClientStatistics>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'companyId') num companyId,
-      @JsonKey(name: 'clientId') num clientId,
+      {@JsonKey(name: 'companyId') num? companyId,
+      @JsonKey(name: 'clientId') num? clientId,
       @JsonKey(name: 'blocageCommercial') bool commercialBlockage,
       @JsonKey(name: 'blocageFinancier') bool financialBlockage,
       @JsonKey(name: 'totalHt') num totalHt,
@@ -249,8 +249,8 @@ class _$ClientStatisticsCopyWithImpl<$Res, $Val extends ClientStatistics>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? companyId = null,
-    Object? clientId = null,
+    Object? companyId = freezed,
+    Object? clientId = freezed,
     Object? commercialBlockage = null,
     Object? financialBlockage = null,
     Object? totalHt = null,
@@ -261,14 +261,14 @@ class _$ClientStatisticsCopyWithImpl<$Res, $Val extends ClientStatistics>
     Object? clientReclamations = null,
   }) {
     return _then(_value.copyWith(
-      companyId: null == companyId
+      companyId: freezed == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
-              as num,
-      clientId: null == clientId
+              as num?,
+      clientId: freezed == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
-              as num,
+              as num?,
       commercialBlockage: null == commercialBlockage
           ? _value.commercialBlockage
           : commercialBlockage // ignore: cast_nullable_to_non_nullable
@@ -314,8 +314,8 @@ abstract class _$$ClientStatisticsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'companyId') num companyId,
-      @JsonKey(name: 'clientId') num clientId,
+      {@JsonKey(name: 'companyId') num? companyId,
+      @JsonKey(name: 'clientId') num? clientId,
       @JsonKey(name: 'blocageCommercial') bool commercialBlockage,
       @JsonKey(name: 'blocageFinancier') bool financialBlockage,
       @JsonKey(name: 'totalHt') num totalHt,
@@ -338,8 +338,8 @@ class __$$ClientStatisticsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? companyId = null,
-    Object? clientId = null,
+    Object? companyId = freezed,
+    Object? clientId = freezed,
     Object? commercialBlockage = null,
     Object? financialBlockage = null,
     Object? totalHt = null,
@@ -350,14 +350,14 @@ class __$$ClientStatisticsImplCopyWithImpl<$Res>
     Object? clientReclamations = null,
   }) {
     return _then(_$ClientStatisticsImpl(
-      companyId: null == companyId
+      companyId: freezed == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
-              as num,
-      clientId: null == clientId
+              as num?,
+      clientId: freezed == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
-              as num,
+              as num?,
       commercialBlockage: null == commercialBlockage
           ? _value.commercialBlockage
           : commercialBlockage // ignore: cast_nullable_to_non_nullable
@@ -416,10 +416,10 @@ class _$ClientStatisticsImpl implements _ClientStatistics {
 
   @override
   @JsonKey(name: 'companyId')
-  final num companyId;
+  final num? companyId;
   @override
   @JsonKey(name: 'clientId')
-  final num clientId;
+  final num? clientId;
   @override
   @JsonKey(name: 'blocageCommercial')
   final bool commercialBlockage;
@@ -513,8 +513,8 @@ class _$ClientStatisticsImpl implements _ClientStatistics {
 
 abstract class _ClientStatistics implements ClientStatistics {
   const factory _ClientStatistics(
-      {@JsonKey(name: 'companyId') required final num companyId,
-      @JsonKey(name: 'clientId') required final num clientId,
+      {@JsonKey(name: 'companyId') required final num? companyId,
+      @JsonKey(name: 'clientId') required final num? clientId,
       @JsonKey(name: 'blocageCommercial')
       required final bool commercialBlockage,
       @JsonKey(name: 'blocageFinancier') required final bool financialBlockage,
@@ -532,10 +532,10 @@ abstract class _ClientStatistics implements ClientStatistics {
 
   @override
   @JsonKey(name: 'companyId')
-  num get companyId;
+  num? get companyId;
   @override
   @JsonKey(name: 'clientId')
-  num get clientId;
+  num? get clientId;
   @override
   @JsonKey(name: 'blocageCommercial')
   bool get commercialBlockage;

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -20,9 +21,10 @@ class ClientsCubit extends Cubit<ClientsState> {
       if (response.statusCode == 200) {
         List<Person> clients =
             response.data['body'].map<Person>((client) => Person.fromJson(client)).toList();
-        emit(ClientsState.loaded(clients));
+        // Initially, the filtered clients list is the same as the full clients list
+        emit(ClientsState.loaded(allClients: clients, filteredClients: clients));
       } else {
-        emit(const ClientsState.loaded([]));
+        emit(const ClientsState.loaded(allClients: [], filteredClients: []));
       }
     } catch (e) {
       emit(const ClientsState.error('An error occurred'));
@@ -31,41 +33,34 @@ class ClientsCubit extends Cubit<ClientsState> {
 
   Future<void> filter({String regionId = "", String commune = ""}) async {
     try {
-      if (state.maybeWhen(
-        orElse: () => false,
-        loaded: (clients) => clients.isEmpty,
-      )) {
-        emit(const ClientsState.loading());
-        final Response response = await ClientRepository.get();
-        if (response.statusCode == 200) {
-          List<Person> clients =
-              response.data['body'].map<Person>((client) => Person.fromJson(client)).toList();
-          emit(
-            ClientsState.loaded(
-              clients.where((element) => element.regionId == regionId || regionId.isEmpty).toList(),
-            ),
-          );
-          return;
-        } else {
-          emit(const ClientsState.loaded([]));
-        }
-      }
-      if (regionId.isNotEmpty || commune.isNotEmpty) {
-        emit(
-          state.maybeWhen(
-            orElse: () => const ClientsState.loaded([]),
-            loaded: (clients) => ClientsState.loaded(
-              clients.where((element) {
-                if (commune.isNotEmpty) {
-                  return element.regionId == regionId && element.ville == commune;
-                } else {
-                  return element.regionId == regionId;
-                }
-              }).toList(),
-            ),
-          ),
-        );
-      }
+      state.maybeWhen(
+        loaded: (allClients, filteredClients) {
+          // Start with the full list of clients
+          var filteredList = allClients;
+
+          // Apply region filter if provided
+          if (regionId.isNotEmpty) {
+            filteredList = filteredList.where((element) => element.regionId == regionId).toList();
+          }
+
+          // Apply commune filter if provided
+          if (commune.isNotEmpty) {
+            filteredList = filteredList.where((element) {
+              final ville = element.ville?.toLowerCase() ?? '';
+              final searchCommune = commune.toLowerCase();
+
+              debugPrint('Commune: $commune');
+              debugPrint('Ville: $ville');
+
+              return ville.contains(searchCommune);
+            }).toList();
+          }
+
+          // Emit new state with updated filtered clients
+          emit(ClientsState.loaded(allClients: allClients, filteredClients: filteredList));
+        },
+        orElse: () {},
+      );
     } catch (e) {
       emit(const ClientsState.error('An error occurred'));
     }

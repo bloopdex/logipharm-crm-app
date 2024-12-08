@@ -33,7 +33,7 @@ class TourCreationLoadingPage extends StatelessWidget {
               ),
               SizedBox(height: kSpacingX12),
               LoadingAnimationWidget.prograssiveDots(
-                  color: kPrimaryColor, size: 50.sp)
+                  color: kPrimaryColor, size: 50.h)
             ],
           )),
     );

@@ -3,6 +3,7 @@ import 'package:crm/features/auth/login.screen.dart';
 import 'package:crm/features/menu/sections/change_password_page.dart';
 import 'package:crm/features/todo/create-event.page.dart';
 import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
+import 'package:crm/features/tour-plan/bloc/commune_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/delegate_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/bloc/wilaya_cubit.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../shared/widgets/inputs/daterange.picker.input.dart';
 import '../../shared/widgets/navigation/bottom.navigation.bar.widget.dart';
 import '../todo/create-todo.page.dart';
+import '../tour-plan/bloc/visit_motif_cubit.dart';
 import '../visits/bloc/visits/visit_bloc.dart';
 import 'cubit/navigation_cubit.dart';
 
@@ -107,7 +109,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   : layout.current.value == 3
                       ? ExpandableFab(
                           key: const Key('todoFab'),
-                          distance: 50.sp,
+                          distance: 50.h,
                           type: ExpandableFabType.up,
                           duration: Duration.zero,
                           childrenOffset: Offset(0, kSpacingX3),
@@ -138,8 +140,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
                                 context.push(const CreateEventPage());
                               },
                               child: Container(
-                                width: 170.sp,
-                                height: 50.sp,
+                                width: 170.h,
+                                height: 50.h,
                                 padding: EdgeInsets.symmetric(
                                   horizontal: kPaddingMd3,
                                   vertical: kPaddingMd2,
@@ -179,8 +181,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
                                 context.push(const CreateTaskPage());
                               },
                               child: Container(
-                                width: 170.sp,
-                                height: 50.sp,
+                                width: 170.h,
+                                height: 50.h,
                                 padding: EdgeInsets.symmetric(
                                   horizontal: kPaddingMd3,
                                   vertical: kPaddingMd2,
@@ -237,9 +239,15 @@ class _NavigationScreenState extends State<NavigationScreen> {
     if (context.read<WilayaCubit>().state.isEmpty) {
       context.read<WilayaCubit>().load();
     }
+    if (context.read<CommuneCubit>().state.isEmpty) {
+      context.read<CommuneCubit>().load();
+    }
+    if (context.read<MotifVisitCubit>().state.isEmpty) {
+      context.read<MotifVisitCubit>().load();
+    }
     if (context.read<ClientsCubit>().state.maybeWhen(
           orElse: () => true,
-          loaded: (clients) => clients.isEmpty,
+          loaded: (all, filter) => all.isEmpty,
         )) {
       context.read<ClientsCubit>().load();
     }

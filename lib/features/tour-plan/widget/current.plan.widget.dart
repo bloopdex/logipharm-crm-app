@@ -28,7 +28,7 @@ class CurrentWidgetCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(kPaddingSm3),
           border: Border.all(
             color: kPrimaryColor,
-            width: 2.sp,
+            width: 2.h,
           ),
         ),
         child: Column(
@@ -109,7 +109,7 @@ class CurrentWidgetCard extends StatelessWidget {
               backgroundColor: kCeruleanBlue.shade500,
               color: kBgGrayVisibility2,
               borderRadius: BorderRadius.circular(kRadiusRounded),
-              minHeight: 5.sp,
+              minHeight: 5.h,
               semanticsValue:
                   "${(tour.visitedClients! / (tour.totalClients! != 0 ? tour.totalClients! : 1) * 100).toInt()}%",
               semanticsLabel: context.i10n.tourProgress(
@@ -140,7 +140,7 @@ class CurrentWidgetCardSupervisor extends StatelessWidget {
       },
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: 200.sp,
+          maxWidth: 200.h,
         ),
         padding: EdgeInsets.all(kPaddingMd2),
         decoration: BoxDecoration(
@@ -148,7 +148,7 @@ class CurrentWidgetCardSupervisor extends StatelessWidget {
           borderRadius: BorderRadius.circular(kPaddingSm3),
           border: Border.all(
             color: kPrimaryColor,
-            width: 2.sp,
+            width: 2.h,
           ),
         ),
         child: Column(
@@ -229,7 +229,7 @@ class CurrentWidgetCardSupervisor extends StatelessWidget {
               backgroundColor: kCeruleanBlue.shade500,
               color: kBgGrayVisibility2,
               borderRadius: BorderRadius.circular(kRadiusRounded),
-              minHeight: 5.sp,
+              minHeight: 5.h,
               semanticsValue:
                   "${(tour.visitedClients! / (tour.totalClients! != 0 ? tour.totalClients! : 1) * 100).toInt()}%",
               semanticsLabel: context.i10n.tourProgress(

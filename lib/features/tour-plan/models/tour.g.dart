@@ -11,6 +11,7 @@ _$TourImpl _$$TourImplFromJson(Map<String, dynamic> json) => _$TourImpl(
       companyId: (json['companyId'] as num).toInt(),
       regionId: json['regionId'] as String,
       regionName: json['regionName'] as String?,
+      name: json['nom'] as String?,
       startDate: json['dateDebut'] as String,
       endDate: json['dateFin'] as String,
       statusFlag: (json['statusFlag'] as num).toInt(),
@@ -34,6 +35,7 @@ Map<String, dynamic> _$$TourImplToJson(_$TourImpl instance) =>
       'companyId': instance.companyId,
       'regionId': instance.regionId,
       'regionName': instance.regionName,
+      'nom': instance.name,
       'dateDebut': instance.startDate,
       'dateFin': instance.endDate,
       'statusFlag': instance.statusFlag,
@@ -57,7 +59,9 @@ _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
       endDate: json['dateFin'] as String?,
       statusFlag: (json['statusFlag'] as num?)?.toInt(),
       statusName: json['statusName'] as String?,
-      reason: json['motif'] as String?,
+      reason: json['motif'] == null
+          ? null
+          : Motif.fromJson(json['motif'] as Map<String, dynamic>),
       report: json['repport'] as String?,
       reportText: json['repportText'] as String?,
       latitude: (json['latitude'] as num?)?.toDouble(),
@@ -83,4 +87,15 @@ Map<String, dynamic> _$$TourDetailImplToJson(_$TourDetailImpl instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'pharmacie': instance.pharmacy,
+    };
+
+_$MotifImpl _$$MotifImplFromJson(Map<String, dynamic> json) => _$MotifImpl(
+      id: (json['id'] as num).toInt(),
+      label: json['label'] as String,
+    );
+
+Map<String, dynamic> _$$MotifImplToJson(_$MotifImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'label': instance.label,
     };

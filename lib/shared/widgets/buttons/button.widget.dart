@@ -29,9 +29,11 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: disabled ? () {} : onPressed,
       style: context.elevatedButtonTheme.copyWith(
-        backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+        backgroundColor: MaterialStateProperty.resolveWith(
+          (states) => disabled ? kBgGrayVisibility3 : backgroundColor,
+        ),
         minimumSize: MaterialStateProperty.all<Size>(
-          Size(double.infinity, height ?? 50.sp),
+          Size(double.infinity, height ?? 50.h),
         ),
       ),
       child: Row(
@@ -44,7 +46,7 @@ class CustomButton extends StatelessWidget {
                 Icon(
                   icon,
                   color: textColor,
-                  size: 20.sp,
+                  size: 20.h,
                 ),
                 SizedBox(width: kSpacingX1)
               ],

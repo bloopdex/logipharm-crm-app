@@ -135,7 +135,7 @@ class _HirePageContentState extends State<HirePageContent> {
                                 children: [
                                   SVG(
                                     'empty-states/info.svg',
-                                    height: 175.sp,
+                                    height: 175.h,
                                   ),
                                   SizedBox(height: kSpacingX3),
                                   Text(

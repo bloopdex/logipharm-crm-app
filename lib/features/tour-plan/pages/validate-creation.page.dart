@@ -26,7 +26,7 @@ class ValidateCreationPage extends StatelessWidget {
     // get the clients from the cubit by pharmacy id
     final clients = context.read<ClientsCubit>().state.maybeWhen(
         orElse: () => [],
-        loaded: (clients) => clients
+        loaded: (all, filter) => all
             .where((element) =>
                 data['pharmacieIds']?.contains('${element.id.toString()}:${element.typeTier}'))
             .toList());
@@ -163,8 +163,8 @@ class ValidateCreationPage extends StatelessWidget {
                           vertical: 0,
                         ),
                         leading: Container(
-                          width: 48.sp,
-                          height: 48.sp,
+                          width: 48.h,
+                          height: 48.h,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: kBgGrayVisibility1,

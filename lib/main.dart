@@ -9,6 +9,7 @@ import 'package:crm/features/clients/blocs/claims-motifs/motifs_cubit.dart';
 import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
 import 'package:crm/features/menu/cubits/change_password_cubit.dart';
 import 'package:crm/features/todo/cubit/todo_cubit.dart';
+import 'package:crm/features/tour-plan/bloc/commune_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/visits/bloc/visits/visit_bloc.dart';
 import 'package:crm/logic/file/file_cubit.dart';
@@ -35,12 +36,15 @@ import 'features/auth/bloc/login/login_bloc.dart';
 import 'features/auth/login.screen.dart';
 import 'features/auth/services/auth.repository.dart';
 import 'features/clients/blocs/claims/claim_cubit.dart';
+import 'features/clients/blocs/etablissement/etablissement_cubit.dart';
+import 'features/clients/blocs/grossiste/grossiste_cubit.dart';
 import 'features/clients/blocs/observation/observation_cubit.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
 import 'features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'features/tour-plan/bloc/delegate_cubit.dart';
 import 'features/tour-plan/bloc/tour-creation/tour_creation_cubit.dart';
+import 'features/tour-plan/bloc/visit_motif_cubit.dart';
 import 'features/tour-plan/bloc/wilaya_cubit.dart';
 import 'features/tour-plan/core/controller.dart';
 import 'features/visits/bloc/visit-creation/visit_creation_cubit.dart';
@@ -350,7 +354,11 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ),
           BlocProvider<WilayaCubit>(
             lazy: false,
-            create: (context) => WilayaCubit()..load(),
+            create: (context) => WilayaCubit(),
+          ),
+          BlocProvider<CommuneCubit>(
+            lazy: false,
+            create: (context) => CommuneCubit(),
           ),
           BlocProvider<ClientsCubit>(
             lazy: false,
@@ -367,6 +375,9 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<ClaimCubit>(create: (context) => ClaimCubit()),
           BlocProvider<ClaimMotifCubit>(create: (context) => ClaimMotifCubit()),
           BlocProvider<ClientDetailsCubit>(create: (context) => ClientDetailsCubit()),
+          BlocProvider<MotifVisitCubit>(create: (context) => MotifVisitCubit()),
+          BlocProvider<GrossisteCubit>(create: (context) => GrossisteCubit()),
+          BlocProvider<EtablissementCubit>(create: (context) => EtablissementCubit()),
         ],
         child: BlocBuilder<LocalizationsBloc, LocalizationsState>(builder: (context, state) {
           return MediaQuery(

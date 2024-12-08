@@ -28,6 +28,8 @@ mixin _$Tour {
   String get regionId => throw _privateConstructorUsedError;
   @JsonKey(name: 'regionName')
   String? get regionName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nom')
+  String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'dateDebut')
   String get startDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'dateFin')
@@ -66,6 +68,7 @@ abstract class $TourCopyWith<$Res> {
       @JsonKey(name: 'companyId') int companyId,
       @JsonKey(name: 'regionId') String regionId,
       @JsonKey(name: 'regionName') String? regionName,
+      @JsonKey(name: 'nom') String? name,
       @JsonKey(name: 'dateDebut') String startDate,
       @JsonKey(name: 'dateFin') String endDate,
       @JsonKey(name: 'statusFlag') int statusFlag,
@@ -99,6 +102,7 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
     Object? companyId = null,
     Object? regionId = null,
     Object? regionName = freezed,
+    Object? name = freezed,
     Object? startDate = null,
     Object? endDate = null,
     Object? statusFlag = null,
@@ -127,6 +131,10 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
       regionName: freezed == regionName
           ? _value.regionName
           : regionName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       startDate: null == startDate
           ? _value.startDate
@@ -208,6 +216,7 @@ abstract class _$$TourImplCopyWith<$Res> implements $TourCopyWith<$Res> {
       @JsonKey(name: 'companyId') int companyId,
       @JsonKey(name: 'regionId') String regionId,
       @JsonKey(name: 'regionName') String? regionName,
+      @JsonKey(name: 'nom') String? name,
       @JsonKey(name: 'dateDebut') String startDate,
       @JsonKey(name: 'dateFin') String endDate,
       @JsonKey(name: 'statusFlag') int statusFlag,
@@ -240,6 +249,7 @@ class __$$TourImplCopyWithImpl<$Res>
     Object? companyId = null,
     Object? regionId = null,
     Object? regionName = freezed,
+    Object? name = freezed,
     Object? startDate = null,
     Object? endDate = null,
     Object? statusFlag = null,
@@ -268,6 +278,10 @@ class __$$TourImplCopyWithImpl<$Res>
       regionName: freezed == regionName
           ? _value.regionName
           : regionName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       startDate: null == startDate
           ? _value.startDate
@@ -325,6 +339,7 @@ class _$TourImpl implements _Tour {
       @JsonKey(name: 'companyId') required this.companyId,
       @JsonKey(name: 'regionId') required this.regionId,
       @JsonKey(name: 'regionName') this.regionName,
+      @JsonKey(name: 'nom') this.name,
       @JsonKey(name: 'dateDebut') required this.startDate,
       @JsonKey(name: 'dateFin') required this.endDate,
       @JsonKey(name: 'statusFlag') required this.statusFlag,
@@ -353,6 +368,9 @@ class _$TourImpl implements _Tour {
   @override
   @JsonKey(name: 'regionName')
   final String? regionName;
+  @override
+  @JsonKey(name: 'nom')
+  final String? name;
   @override
   @JsonKey(name: 'dateDebut')
   final String startDate;
@@ -396,7 +414,7 @@ class _$TourImpl implements _Tour {
 
   @override
   String toString() {
-    return 'Tour(tourId: $tourId, companyId: $companyId, regionId: $regionId, regionName: $regionName, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, statusName: $statusName, effectiveStartDate: $effectiveStartDate, effectiveEndDate: $effectiveEndDate, delegate: $delegate, supervisor: $supervisor, totalClients: $totalClients, visitedClients: $visitedClients, pharmacies: $pharmacies)';
+    return 'Tour(tourId: $tourId, companyId: $companyId, regionId: $regionId, regionName: $regionName, name: $name, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, statusName: $statusName, effectiveStartDate: $effectiveStartDate, effectiveEndDate: $effectiveEndDate, delegate: $delegate, supervisor: $supervisor, totalClients: $totalClients, visitedClients: $visitedClients, pharmacies: $pharmacies)';
   }
 
   @override
@@ -411,6 +429,7 @@ class _$TourImpl implements _Tour {
                 other.regionId == regionId) &&
             (identical(other.regionName, regionName) ||
                 other.regionName == regionName) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
@@ -442,6 +461,7 @@ class _$TourImpl implements _Tour {
       companyId,
       regionId,
       regionName,
+      name,
       startDate,
       endDate,
       statusFlag,
@@ -474,6 +494,7 @@ abstract class _Tour implements Tour {
       @JsonKey(name: 'companyId') required final int companyId,
       @JsonKey(name: 'regionId') required final String regionId,
       @JsonKey(name: 'regionName') final String? regionName,
+      @JsonKey(name: 'nom') final String? name,
       @JsonKey(name: 'dateDebut') required final String startDate,
       @JsonKey(name: 'dateFin') required final String endDate,
       @JsonKey(name: 'statusFlag') required final int statusFlag,
@@ -501,6 +522,9 @@ abstract class _Tour implements Tour {
   @override
   @JsonKey(name: 'regionName')
   String? get regionName;
+  @override
+  @JsonKey(name: 'nom')
+  String? get name;
   @override
   @JsonKey(name: 'dateDebut')
   String get startDate;
@@ -563,7 +587,7 @@ mixin _$TourDetail {
   @JsonKey(name: 'statusName')
   String? get statusName => throw _privateConstructorUsedError;
   @JsonKey(name: 'motif')
-  String? get reason => throw _privateConstructorUsedError;
+  Motif? get reason => throw _privateConstructorUsedError;
   @JsonKey(name: 'repport')
   String? get report => throw _privateConstructorUsedError;
   @JsonKey(name: 'repportText')
@@ -596,13 +620,14 @@ abstract class $TourDetailCopyWith<$Res> {
       @JsonKey(name: 'dateFin') String? endDate,
       @JsonKey(name: 'statusFlag') int? statusFlag,
       @JsonKey(name: 'statusName') String? statusName,
-      @JsonKey(name: 'motif') String? reason,
+      @JsonKey(name: 'motif') Motif? reason,
       @JsonKey(name: 'repport') String? report,
       @JsonKey(name: 'repportText') String? reportText,
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'longitude') double? longitude,
       @JsonKey(name: 'pharmacie') Person? pharmacy});
 
+  $MotifCopyWith<$Res>? get reason;
   $PersonCopyWith<$Res>? get pharmacy;
 }
 
@@ -670,7 +695,7 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
       reason: freezed == reason
           ? _value.reason
           : reason // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Motif?,
       report: freezed == report
           ? _value.report
           : report // ignore: cast_nullable_to_non_nullable
@@ -692,6 +717,18 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
           : pharmacy // ignore: cast_nullable_to_non_nullable
               as Person?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MotifCopyWith<$Res>? get reason {
+    if (_value.reason == null) {
+      return null;
+    }
+
+    return $MotifCopyWith<$Res>(_value.reason!, (value) {
+      return _then(_value.copyWith(reason: value) as $Val);
+    });
   }
 
   @override
@@ -724,13 +761,15 @@ abstract class _$$TourDetailImplCopyWith<$Res>
       @JsonKey(name: 'dateFin') String? endDate,
       @JsonKey(name: 'statusFlag') int? statusFlag,
       @JsonKey(name: 'statusName') String? statusName,
-      @JsonKey(name: 'motif') String? reason,
+      @JsonKey(name: 'motif') Motif? reason,
       @JsonKey(name: 'repport') String? report,
       @JsonKey(name: 'repportText') String? reportText,
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'longitude') double? longitude,
       @JsonKey(name: 'pharmacie') Person? pharmacy});
 
+  @override
+  $MotifCopyWith<$Res>? get reason;
   @override
   $PersonCopyWith<$Res>? get pharmacy;
 }
@@ -797,7 +836,7 @@ class __$$TourDetailImplCopyWithImpl<$Res>
       reason: freezed == reason
           ? _value.reason
           : reason // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Motif?,
       report: freezed == report
           ? _value.report
           : report // ignore: cast_nullable_to_non_nullable
@@ -870,7 +909,7 @@ class _$TourDetailImpl implements _TourDetail {
   final String? statusName;
   @override
   @JsonKey(name: 'motif')
-  final String? reason;
+  final Motif? reason;
   @override
   @JsonKey(name: 'repport')
   final String? report;
@@ -966,7 +1005,7 @@ abstract class _TourDetail implements TourDetail {
       @JsonKey(name: 'dateFin') final String? endDate,
       @JsonKey(name: 'statusFlag') final int? statusFlag,
       @JsonKey(name: 'statusName') final String? statusName,
-      @JsonKey(name: 'motif') final String? reason,
+      @JsonKey(name: 'motif') final Motif? reason,
       @JsonKey(name: 'repport') final String? report,
       @JsonKey(name: 'repportText') final String? reportText,
       @JsonKey(name: 'latitude') final double? latitude,
@@ -1002,7 +1041,7 @@ abstract class _TourDetail implements TourDetail {
   String? get statusName;
   @override
   @JsonKey(name: 'motif')
-  String? get reason;
+  Motif? get reason;
   @override
   @JsonKey(name: 'repport')
   String? get report;
@@ -1021,5 +1060,165 @@ abstract class _TourDetail implements TourDetail {
   @override
   @JsonKey(ignore: true)
   _$$TourDetailImplCopyWith<_$TourDetailImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Motif _$MotifFromJson(Map<String, dynamic> json) {
+  return _Motif.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Motif {
+  @JsonKey(name: 'id')
+  int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'label')
+  String get label => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MotifCopyWith<Motif> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MotifCopyWith<$Res> {
+  factory $MotifCopyWith(Motif value, $Res Function(Motif) then) =
+      _$MotifCopyWithImpl<$Res, Motif>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int id, @JsonKey(name: 'label') String label});
+}
+
+/// @nodoc
+class _$MotifCopyWithImpl<$Res, $Val extends Motif>
+    implements $MotifCopyWith<$Res> {
+  _$MotifCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$MotifImplCopyWith<$Res> implements $MotifCopyWith<$Res> {
+  factory _$$MotifImplCopyWith(
+          _$MotifImpl value, $Res Function(_$MotifImpl) then) =
+      __$$MotifImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int id, @JsonKey(name: 'label') String label});
+}
+
+/// @nodoc
+class __$$MotifImplCopyWithImpl<$Res>
+    extends _$MotifCopyWithImpl<$Res, _$MotifImpl>
+    implements _$$MotifImplCopyWith<$Res> {
+  __$$MotifImplCopyWithImpl(
+      _$MotifImpl _value, $Res Function(_$MotifImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+  }) {
+    return _then(_$MotifImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MotifImpl implements _Motif {
+  const _$MotifImpl(
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'label') required this.label});
+
+  factory _$MotifImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MotifImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'id')
+  final int id;
+  @override
+  @JsonKey(name: 'label')
+  final String label;
+
+  @override
+  String toString() {
+    return 'Motif(id: $id, label: $label)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MotifImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.label, label) || other.label == label));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, label);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MotifImplCopyWith<_$MotifImpl> get copyWith =>
+      __$$MotifImplCopyWithImpl<_$MotifImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MotifImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Motif implements Motif {
+  const factory _Motif(
+      {@JsonKey(name: 'id') required final int id,
+      @JsonKey(name: 'label') required final String label}) = _$MotifImpl;
+
+  factory _Motif.fromJson(Map<String, dynamic> json) = _$MotifImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'id')
+  int get id;
+  @override
+  @JsonKey(name: 'label')
+  String get label;
+  @override
+  @JsonKey(ignore: true)
+  _$$MotifImplCopyWith<_$MotifImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

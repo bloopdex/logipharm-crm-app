@@ -60,7 +60,7 @@ class TourPlanDetailPage extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                height: 40.sp,
+                height: 40.h,
                 decoration: BoxDecoration(
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.vertical(
@@ -71,8 +71,8 @@ class TourPlanDetailPage extends StatelessWidget {
               Column(
                 children: [
                   Container(
-                    width: 60.sp,
-                    height: 60.sp,
+                    width: 60.h,
+                    height: 60.h,
                     padding: EdgeInsets.all(kPaddingSm3),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
@@ -413,6 +413,7 @@ class TourClientsList extends StatelessWidget {
           },
           leading: ProfileCard(
             text: pharmacy.pharmacy?.fullName ?? "",
+            borderColor: pharmacy.pharmacy?.prospect ?? false ? kCardinal : kCeruleanBlue,
           ),
           title: Text(
             pharmacy.pharmacy?.fullName ?? "",

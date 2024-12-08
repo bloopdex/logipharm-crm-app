@@ -43,6 +43,9 @@ class VisitCreationCubit extends Cubit<VisitCreationState> {
           case 'error.privilege.add.visit':
             emit(VisitCreationState.failure(message: S.current.visitPrivilegeMissing));
             return;
+          case 'error.visit.date':
+            emit(VisitCreationState.failure(message: S.current.visitErrorDate));
+            return;
           default:
             emit(VisitCreationState.failure(message: S.current.error));
             return;

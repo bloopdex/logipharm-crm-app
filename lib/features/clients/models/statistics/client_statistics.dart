@@ -19,8 +19,8 @@ class ClientReclamation with _$ClientReclamation {
 @freezed
 class ClientStatistics with _$ClientStatistics {
   const factory ClientStatistics({
-    @JsonKey(name: 'companyId') required num companyId,
-    @JsonKey(name: 'clientId') required num clientId,
+    @JsonKey(name: 'companyId') required num? companyId,
+    @JsonKey(name: 'clientId') required num? clientId,
     @JsonKey(name: 'blocageCommercial') required bool commercialBlockage,
     @JsonKey(name: 'blocageFinancier') required bool financialBlockage,
     @JsonKey(name: 'totalHt') required num totalHt,

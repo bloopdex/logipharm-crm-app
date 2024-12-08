@@ -8,6 +8,10 @@
   "@confirm": {
     "description": "Confirm"
   },
+  "back": "Back",
+  "@back": {
+    "description": "Back"
+  },
   "start": "Start",
   "@start": {
     "description": "Start"
@@ -183,6 +187,10 @@
   "tourSearchPerWilaya": "Search per wilaya",
   "@tourSearchPerWilaya": {
     "description": "Search per wilaya"
+  },
+  "tourSearchPerCommune": "Search per commune",
+  "@tourSearchPerCommune": {
+    "description": "Search per commune"
   },
   "tourAllPlans": "All Plans",
   "@tourAllPlans": {
@@ -526,6 +534,18 @@
   "@visitsEmptyDescription": {
     "description": "You don't have any visits yet"
   },
+  "visitErrorDate": "The date has to be after the date of the tour plan",
+  "@visitErrorDate": {
+    "description": "The date has to be after the date of the tour plan"
+  },
+  "selectClient": "Select Client",
+  "@selectClient": {
+    "description": "Select Client"
+  },
+  "selectReason": "Select Reason",
+  "@selectReason": {
+    "description": "Select Reason"
+  },
   "todoTask": "Task",
   "@todoTask": {
     "description": "Task"
@@ -702,6 +722,14 @@
   "@firstNameRequired": {
     "description": "First name is required"
   },
+  "name": "Name",
+  "@name": {
+    "description": "Name"
+  },
+  "noName": "No name",
+  "@noName": {
+    "description": "No name"
+  },
   "region": "Region",
   "@region": {
     "description": "Region"
@@ -866,6 +894,10 @@
   "@allRegions": {
     "description": "All Regions"
   },
+  "allCommunes": "All Communes",
+  "@allCommunes": {
+    "description": "All Communes"
+  },
   "cantCreatePlanWhileOpened": "Can't create plan while opened plan",
   "@cantCreatePlanWhileOpened": {
     "description": "You can't create a new plan while you have an opened plan"
@@ -949,5 +981,71 @@
   "passwordChangedFailed": "Failed to change password",
   "@passwordChangedFailed": {
     "description": "Failed to change password"
-  }
+  },
+  "passwordLengthError": "Password must be at least 6 characters",
+  "@passwordLengthError": {
+    "description": "Password must be at least 6 characters"
+  },
+  "blockageCommercial": "Commercial Blockage",
+  "@blockageCommercial": {
+    "description": "Commercial Blockage"
+  },
+  "blockageFinancial": "Financial Blockage",
+  "@blockageFinancial": {
+    "description": "Financial Blockage"
+  },
+  "moreDetails": "More Details",
+  "@moreDetails": {
+    "description": "More Details"
+  },
+  "category": "Category",
+  "@category": {
+    "description": "Category"
+  },
+  "noCategory": "No category",
+  "@noCategory": {
+    "description": "No category"
+  },
+  "solvability": "Solvability",
+  "@solvability": {
+    "description": "Solvability"
+  },
+  "noSolvability": "No solvability",
+  "@noSolvability": {
+    "description": "No solvability"
+  },
+  "modePaie": "Mode de paiement",
+  "@modePaie": {
+    "description": "Mode de paiement"
+  },
+  "noModePaie": "No mode de paiement",
+  "@noModePaie": {
+    "description": "No mode de paiement"
+  },
+  "addGrossiste": "Add Grossiste",
+  "@addGrossiste": {
+    "description": "Add Grossiste"
+  },
+  "grossiste": "Grossiste",
+  "@grossiste": {
+    "description": "Grossiste"
+  },
+  "noGrossiste": "No grossiste",
+  "@noGrossiste": {
+    "description": "No grossiste"
+  },
+  "noGrossisteDesc": "No grossiste found for this client",
+  "addEtablissement": "Add Etablissement",
+  "@addEtablissement": {
+    "description": "Add Etablissement"
+  },
+  "etablissement": "Etablissement",
+  "@etablissement": {
+    "description": "Etablissement"
+  },
+  "noEtablissement": "No etablissement",
+  "@noEtablissement": {
+    "description": "No etablissement"
+  },
+  "noEtablissementDesc": "No etablissement found for this client"
 }

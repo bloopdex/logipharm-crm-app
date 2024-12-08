@@ -46,8 +46,8 @@ class TourStatusCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 6.sp,
-            height: 6.sp,
+            width: 6.h,
+            height: 6.h,
             decoration: BoxDecoration(
               color: color,
               shape: BoxShape.circle,

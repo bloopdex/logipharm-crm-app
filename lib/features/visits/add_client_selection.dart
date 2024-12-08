@@ -26,7 +26,7 @@ class _AddClientSelectionState extends State<AddClientSelection> {
   void initState() {
     clients = context.read<ClientsCubit>().state.maybeWhen(
           orElse: () => [],
-          loaded: (clients) => clients,
+          loaded: (all, filter) => all,
         );
     super.initState();
   }
@@ -47,7 +47,7 @@ class _AddClientSelectionState extends State<AddClientSelection> {
               setState(() {
                 clients = context.read<ClientsCubit>().state.maybeWhen(
                       orElse: () => [],
-                      loaded: (clients) => clients.where((element) {
+                      loaded: (all, filter) => clients.where((element) {
                         return element.fullName.toLowerCase().contains(state.toLowerCase());
                       }).toList(),
                     );
@@ -83,7 +83,7 @@ class _AddClientSelectionState extends State<AddClientSelection> {
                             children: [
                               SVG(
                                 'empty-states/info.svg',
-                                height: 175.sp,
+                                height: 175.h,
                               ),
                               SizedBox(height: kSpacingX3),
                               Text(

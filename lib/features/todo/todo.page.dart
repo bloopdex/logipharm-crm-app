@@ -17,19 +17,14 @@ class TodoPage extends StatelessWidget {
         constraints: BoxConstraints(
           maxWidth: context.width,
           minWidth: context.width,
-          maxHeight: context.height -
-              context.appBarSize -
-              context.bottomNavigationBarSize,
-          minHeight: context.height -
-              context.appBarSize -
-              context.bottomNavigationBarSize,
+          maxHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
+          minHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
         ),
         child: SfCalendar(
           view: CalendarView.schedule,
           backgroundColor: kWhite,
           appointmentBuilder: (context, calendarAppointmentDetails) {
-            final Todo appointment =
-                calendarAppointmentDetails.appointments.first as Todo;
+            final Todo appointment = calendarAppointmentDetails.appointments.first as Todo;
             return Container(
               padding: EdgeInsets.all(kSpacingX3),
               decoration: BoxDecoration(
@@ -49,8 +44,7 @@ class TodoPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(appointment.subject,
-                              style: context.textTheme.bodyMedium),
+                          Text(appointment.subject, style: context.textTheme.bodyMedium),
                           Text(
                             appointment.notes ?? '',
                             style: context.textTheme.bodySmall,
@@ -69,7 +63,7 @@ class TodoPage extends StatelessWidget {
             backgroundColor: kWhite,
             textStyle: TextStyle(
               color: kText1,
-              fontSize: 20.sp,
+              fontSize: 20.h,
             ),
           ),
           viewHeaderStyle: ViewHeaderStyle(
@@ -82,7 +76,7 @@ class TodoPage extends StatelessWidget {
           appointmentTextStyle: context.textTheme.bodyMedium!,
           showDatePickerButton: true,
           scheduleViewSettings: ScheduleViewSettings(
-            appointmentItemHeight: 70.sp,
+            appointmentItemHeight: 70.h,
             appointmentTextStyle: TextStyle(
               color: kText1,
               fontSize: 14,
@@ -100,7 +94,7 @@ class TodoPage extends StatelessWidget {
               backgroundColor: kWhite,
               monthTextStyle: TextStyle(
                 color: kText1,
-                fontSize: 20.sp,
+                fontSize: 20.h,
               ),
             ),
           ),
@@ -110,8 +104,8 @@ class TodoPage extends StatelessWidget {
               constraints: BoxConstraints(
                 maxWidth: context.width,
                 minWidth: context.width,
-                maxHeight: 50.sp,
-                minHeight: 50.sp,
+                maxHeight: 50.h,
+                minHeight: 50.h,
               ),
               padding: EdgeInsets.all(kSpacingX5),
               decoration: BoxDecoration(

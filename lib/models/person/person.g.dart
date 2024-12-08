@@ -13,13 +13,13 @@ _$PersonImpl _$$PersonImplFromJson(Map<String, dynamic> json) => _$PersonImpl(
       lastName: json['nom'] as String,
       firstName: json['prenom'] as String?,
       loginCode: json['loginCode'] as String,
-      actionFlag: (json['actionFlag'] as num).toInt(),
+      activeFlag: (json['activeFlag'] as num).toInt(),
       regionId: json['regionId'] as String?,
       ville: json['ville'] as String?,
       address: json['adresse'] as String?,
       latitude: (json['latitude'] as num?)?.toDouble(),
-      supervisor: (json['superviseur'] as num?)?.toInt(),
       longitude: (json['longitude'] as num?)?.toDouble(),
+      supervisor: (json['superviseur'] as num?)?.toInt(),
       postalCode: json['codePostal'] as String?,
       postBox: json['boitePostale'] as String?,
       email: json['email'] as String?,
@@ -31,6 +31,14 @@ _$PersonImpl _$$PersonImplFromJson(Map<String, dynamic> json) => _$PersonImpl(
       telMobile: json['telMobile'] as String?,
       fax: json['fax'] as String?,
       fullName: json['fullName'] as String,
+      prospect: json['prospect'] as bool?,
+      solvabilite: json['solvabilite'] == null
+          ? null
+          : Solvabilite.fromJson(json['solvabilite'] as Map<String, dynamic>),
+      modePaie: json['modePaie'] == null
+          ? null
+          : ModePaie.fromJson(json['modePaie'] as Map<String, dynamic>),
+      categoryLabel: json['categorieLibelle'] as String?,
     );
 
 Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
@@ -41,13 +49,13 @@ Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
       'nom': instance.lastName,
       'prenom': instance.firstName,
       'loginCode': instance.loginCode,
-      'actionFlag': instance.actionFlag,
+      'activeFlag': instance.activeFlag,
       'regionId': instance.regionId,
       'ville': instance.ville,
       'adresse': instance.address,
       'latitude': instance.latitude,
-      'superviseur': instance.supervisor,
       'longitude': instance.longitude,
+      'superviseur': instance.supervisor,
       'codePostal': instance.postalCode,
       'boitePostale': instance.postBox,
       'email': instance.email,
@@ -59,4 +67,32 @@ Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
       'telMobile': instance.telMobile,
       'fax': instance.fax,
       'fullName': instance.fullName,
+      'prospect': instance.prospect,
+      'solvabilite': instance.solvabilite,
+      'modePaie': instance.modePaie,
+      'categorieLibelle': instance.categoryLabel,
+    };
+
+_$SolvabiliteImpl _$$SolvabiliteImplFromJson(Map<String, dynamic> json) =>
+    _$SolvabiliteImpl(
+      id: (json['id'] as num).toInt(),
+      label: json['label'] as String,
+    );
+
+Map<String, dynamic> _$$SolvabiliteImplToJson(_$SolvabiliteImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'label': instance.label,
+    };
+
+_$ModePaieImpl _$$ModePaieImplFromJson(Map<String, dynamic> json) =>
+    _$ModePaieImpl(
+      id: (json['id'] as num).toInt(),
+      label: json['label'] as String,
+    );
+
+Map<String, dynamic> _$$ModePaieImplToJson(_$ModePaieImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'label': instance.label,
     };

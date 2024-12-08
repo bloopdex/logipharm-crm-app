@@ -70,6 +70,16 @@ class S {
     );
   }
 
+  /// `Back`
+  String get back {
+    return Intl.message(
+      'Back',
+      name: 'back',
+      desc: 'Back',
+      args: [],
+    );
+  }
+
   /// `Start`
   String get start {
     return Intl.message(
@@ -476,6 +486,16 @@ class S {
       'Search per wilaya',
       name: 'tourSearchPerWilaya',
       desc: 'Search per wilaya',
+      args: [],
+    );
+  }
+
+  /// `Search per commune`
+  String get tourSearchPerCommune {
+    return Intl.message(
+      'Search per commune',
+      name: 'tourSearchPerCommune',
+      desc: 'Search per commune',
       args: [],
     );
   }
@@ -1326,6 +1346,36 @@ class S {
     );
   }
 
+  /// `The date has to be after the date of the tour plan`
+  String get visitErrorDate {
+    return Intl.message(
+      'The date has to be after the date of the tour plan',
+      name: 'visitErrorDate',
+      desc: 'The date has to be after the date of the tour plan',
+      args: [],
+    );
+  }
+
+  /// `Select Client`
+  String get selectClient {
+    return Intl.message(
+      'Select Client',
+      name: 'selectClient',
+      desc: 'Select Client',
+      args: [],
+    );
+  }
+
+  /// `Select Reason`
+  String get selectReason {
+    return Intl.message(
+      'Select Reason',
+      name: 'selectReason',
+      desc: 'Select Reason',
+      args: [],
+    );
+  }
+
   /// `Task`
   String get todoTask {
     return Intl.message(
@@ -1766,6 +1816,26 @@ class S {
     );
   }
 
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: 'Name',
+      args: [],
+    );
+  }
+
+  /// `No name`
+  String get noName {
+    return Intl.message(
+      'No name',
+      name: 'noName',
+      desc: 'No name',
+      args: [],
+    );
+  }
+
   /// `Region`
   String get region {
     return Intl.message(
@@ -2176,6 +2246,16 @@ class S {
     );
   }
 
+  /// `All Communes`
+  String get allCommunes {
+    return Intl.message(
+      'All Communes',
+      name: 'allCommunes',
+      desc: 'All Communes',
+      args: [],
+    );
+  }
+
   /// `Can't create plan while opened plan`
   String get cantCreatePlanWhileOpened {
     return Intl.message(
@@ -2382,6 +2462,186 @@ class S {
       'Failed to change password',
       name: 'passwordChangedFailed',
       desc: 'Failed to change password',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 6 characters`
+  String get passwordLengthError {
+    return Intl.message(
+      'Password must be at least 6 characters',
+      name: 'passwordLengthError',
+      desc: 'Password must be at least 6 characters',
+      args: [],
+    );
+  }
+
+  /// `Commercial Blockage`
+  String get blockageCommercial {
+    return Intl.message(
+      'Commercial Blockage',
+      name: 'blockageCommercial',
+      desc: 'Commercial Blockage',
+      args: [],
+    );
+  }
+
+  /// `Financial Blockage`
+  String get blockageFinancial {
+    return Intl.message(
+      'Financial Blockage',
+      name: 'blockageFinancial',
+      desc: 'Financial Blockage',
+      args: [],
+    );
+  }
+
+  /// `More Details`
+  String get moreDetails {
+    return Intl.message(
+      'More Details',
+      name: 'moreDetails',
+      desc: 'More Details',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get category {
+    return Intl.message(
+      'Category',
+      name: 'category',
+      desc: 'Category',
+      args: [],
+    );
+  }
+
+  /// `No category`
+  String get noCategory {
+    return Intl.message(
+      'No category',
+      name: 'noCategory',
+      desc: 'No category',
+      args: [],
+    );
+  }
+
+  /// `Solvability`
+  String get solvability {
+    return Intl.message(
+      'Solvability',
+      name: 'solvability',
+      desc: 'Solvability',
+      args: [],
+    );
+  }
+
+  /// `No solvability`
+  String get noSolvability {
+    return Intl.message(
+      'No solvability',
+      name: 'noSolvability',
+      desc: 'No solvability',
+      args: [],
+    );
+  }
+
+  /// `Mode de paiement`
+  String get modePaie {
+    return Intl.message(
+      'Mode de paiement',
+      name: 'modePaie',
+      desc: 'Mode de paiement',
+      args: [],
+    );
+  }
+
+  /// `No mode de paiement`
+  String get noModePaie {
+    return Intl.message(
+      'No mode de paiement',
+      name: 'noModePaie',
+      desc: 'No mode de paiement',
+      args: [],
+    );
+  }
+
+  /// `Add Grossiste`
+  String get addGrossiste {
+    return Intl.message(
+      'Add Grossiste',
+      name: 'addGrossiste',
+      desc: 'Add Grossiste',
+      args: [],
+    );
+  }
+
+  /// `Grossiste`
+  String get grossiste {
+    return Intl.message(
+      'Grossiste',
+      name: 'grossiste',
+      desc: 'Grossiste',
+      args: [],
+    );
+  }
+
+  /// `No grossiste`
+  String get noGrossiste {
+    return Intl.message(
+      'No grossiste',
+      name: 'noGrossiste',
+      desc: 'No grossiste',
+      args: [],
+    );
+  }
+
+  /// `No grossiste found for this client`
+  String get noGrossisteDesc {
+    return Intl.message(
+      'No grossiste found for this client',
+      name: 'noGrossisteDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Etablissement`
+  String get addEtablissement {
+    return Intl.message(
+      'Add Etablissement',
+      name: 'addEtablissement',
+      desc: 'Add Etablissement',
+      args: [],
+    );
+  }
+
+  /// `Etablissement`
+  String get etablissement {
+    return Intl.message(
+      'Etablissement',
+      name: 'etablissement',
+      desc: 'Etablissement',
+      args: [],
+    );
+  }
+
+  /// `No etablissement`
+  String get noEtablissement {
+    return Intl.message(
+      'No etablissement',
+      name: 'noEtablissement',
+      desc: 'No etablissement',
+      args: [],
+    );
+  }
+
+  /// `No etablissement found for this client`
+  String get noEtablissementDesc {
+    return Intl.message(
+      'No etablissement found for this client',
+      name: 'noEtablissementDesc',
+      desc: '',
       args: [],
     );
   }

@@ -17,11 +17,11 @@ class LoadingScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CustomLocalImage(image: 'logo.png', width: 145.sp),
+          CustomLocalImage(image: 'logo.png', width: 145.h),
           SizedBox(height: kSpacingX3),
           LoadingAnimationWidget.staggeredDotsWave(
             color: kCeruleanBlue,
-            size: 30.sp,
+            size: 30.h,
           ),
         ],
       )),

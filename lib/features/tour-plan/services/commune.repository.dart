@@ -8,7 +8,7 @@ class CommuneRepository {
     final String token = (await AuthRepository.token) ?? "";
 
     return await DioHelper.getData(
-      url: '/commune/',
+      url: '/commune',
       token: token,
     );
   }

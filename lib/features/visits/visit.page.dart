@@ -67,7 +67,7 @@ class _VisitPageState extends State<VisitPage> {
                       children: [
                         SVG(
                           'empty-states/info.svg',
-                          height: 175.sp,
+                          height: 175.h,
                         ),
                         SizedBox(height: kSpacingX3),
                         Text(
@@ -160,7 +160,7 @@ class VisitCard extends StatelessWidget {
                 color: kCeruleanBlue.shade100,
                 borderRadius: BorderRadius.circular(kPaddingSm3),
               ),
-              child: Text(visit.reason ?? "", style: context.textTheme.bodyLarge),
+              child: Text(visit.reason?.label ?? "", style: context.textTheme.bodyLarge),
             ),
             Text(visit.reportText ?? "",
                 maxLines: 2, overflow: TextOverflow.ellipsis, style: context.textTheme.bodyMedium),

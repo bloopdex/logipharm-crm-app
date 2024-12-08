@@ -104,7 +104,7 @@ class _TourListWidgetState extends State<TourListWidget> {
             children: [
               SVG(
                 'empty-states/info.svg',
-                height: 175.sp,
+                height: 175.h,
               ),
               SizedBox(height: kSpacingX3),
               Text(

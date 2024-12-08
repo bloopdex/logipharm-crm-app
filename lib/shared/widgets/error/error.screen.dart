@@ -29,14 +29,11 @@ class ErrorScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CustomLocalImage(image: 'errors/404.png', width: 300.sp),
+                  CustomLocalImage(image: 'errors/404.png', width: 300.h),
                   SizedBox(height: kSpacingX2),
                   Text(
                     message,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(color: kCeruleanBlue),
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(color: kCeruleanBlue),
                   ),
                 ],
               ),

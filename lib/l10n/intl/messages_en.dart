@@ -31,6 +31,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "active": MessageLookupByLibrary.simpleMessage("Active"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addClaim": MessageLookupByLibrary.simpleMessage("Add Claim"),
+        "addEtablissement":
+            MessageLookupByLibrary.simpleMessage("Add Etablissement"),
+        "addGrossiste": MessageLookupByLibrary.simpleMessage("Add Grossiste"),
         "addMotif": MessageLookupByLibrary.simpleMessage("Add Motif"),
         "addObservation":
             MessageLookupByLibrary.simpleMessage("Add Observation"),
@@ -39,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter the address"),
         "addressRequired":
             MessageLookupByLibrary.simpleMessage("Address is required"),
+        "allCommunes": MessageLookupByLibrary.simpleMessage("All Communes"),
         "allRegions": MessageLookupByLibrary.simpleMessage("All Regions"),
         "analytics": MessageLookupByLibrary.simpleMessage("Analytics"),
         "authLoginDescription": MessageLookupByLibrary.simpleMessage(
@@ -57,11 +61,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter your username"),
         "authLoginUsernameRequired":
             MessageLookupByLibrary.simpleMessage("Username is required"),
+        "back": MessageLookupByLibrary.simpleMessage("Back"),
+        "blockageCommercial":
+            MessageLookupByLibrary.simpleMessage("Commercial Blockage"),
+        "blockageFinancial":
+            MessageLookupByLibrary.simpleMessage("Financial Blockage"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cantCreatePlanWhileOpened": MessageLookupByLibrary.simpleMessage(
             "Can\'t create plan while opened plan"),
         "cantCreateVisit":
             MessageLookupByLibrary.simpleMessage("Can\'t create visit"),
+        "category": MessageLookupByLibrary.simpleMessage("Category"),
         "ceiling": MessageLookupByLibrary.simpleMessage("Ceiling"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
@@ -102,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Email is required"),
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "etablissement": MessageLookupByLibrary.simpleMessage("Etablissement"),
         "fileCNRC": MessageLookupByLibrary.simpleMessage("File CNRC"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
         "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
@@ -110,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "firstNameRequired":
             MessageLookupByLibrary.simpleMessage("First name is required"),
         "goalOfDay": MessageLookupByLibrary.simpleMessage("Goal of the day"),
+        "grossiste": MessageLookupByLibrary.simpleMessage("Grossiste"),
         "hire": MessageLookupByLibrary.simpleMessage("Hire"),
         "hireDetails": MessageLookupByLibrary.simpleMessage("Hire Details"),
         "hired": MessageLookupByLibrary.simpleMessage("Hired"),
@@ -138,7 +150,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "later": MessageLookupByLibrary.simpleMessage("Later"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "manageProfile": MessageLookupByLibrary.simpleMessage("Manage Profile"),
+        "modePaie": MessageLookupByLibrary.simpleMessage("Mode de paiement"),
+        "moreDetails": MessageLookupByLibrary.simpleMessage("More Details"),
         "motif": MessageLookupByLibrary.simpleMessage("Motif"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "navHome": MessageLookupByLibrary.simpleMessage("Home"),
         "navMenu": MessageLookupByLibrary.simpleMessage("Menu"),
         "navPlans": MessageLookupByLibrary.simpleMessage("Plans"),
@@ -155,16 +170,27 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No analytics found"),
         "noAnalyticsDesc": MessageLookupByLibrary.simpleMessage(
             "No analytics found for this client"),
+        "noCategory": MessageLookupByLibrary.simpleMessage("No category"),
         "noClaims": MessageLookupByLibrary.simpleMessage("No claims"),
         "noClaimsDesc": MessageLookupByLibrary.simpleMessage(
             "No claims found for this client"),
         "noEmail": MessageLookupByLibrary.simpleMessage("No email"),
+        "noEtablissement":
+            MessageLookupByLibrary.simpleMessage("No etablissement"),
+        "noEtablissementDesc": MessageLookupByLibrary.simpleMessage(
+            "No etablissement found for this client"),
         "noFirstName": MessageLookupByLibrary.simpleMessage("No first name"),
+        "noGrossiste": MessageLookupByLibrary.simpleMessage("No grossiste"),
+        "noGrossisteDesc": MessageLookupByLibrary.simpleMessage(
+            "No grossiste found for this client"),
         "noHirement": MessageLookupByLibrary.simpleMessage("No hirement found"),
         "noLastName": MessageLookupByLibrary.simpleMessage("No last name"),
+        "noModePaie":
+            MessageLookupByLibrary.simpleMessage("No mode de paiement"),
         "noMotif": MessageLookupByLibrary.simpleMessage("No motif"),
         "noMotifDesc": MessageLookupByLibrary.simpleMessage(
             "No motif found for this observation"),
+        "noName": MessageLookupByLibrary.simpleMessage("No name"),
         "noNote": MessageLookupByLibrary.simpleMessage("No Note"),
         "noObservations":
             MessageLookupByLibrary.simpleMessage("No observations"),
@@ -172,6 +198,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "No observations found for this client"),
         "noPhone": MessageLookupByLibrary.simpleMessage("No phone"),
         "noRegion": MessageLookupByLibrary.simpleMessage("No region"),
+        "noSolvability": MessageLookupByLibrary.simpleMessage("No solvability"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
         "notePlaceholder":
             MessageLookupByLibrary.simpleMessage("Enter the note"),
@@ -186,6 +213,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password changed successfully"),
         "passwordChangedFailed":
             MessageLookupByLibrary.simpleMessage("Failed to change password"),
+        "passwordLengthError": MessageLookupByLibrary.simpleMessage(
+            "Password must be at least 6 characters"),
         "passwordNotMatch":
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
         "pending": MessageLookupByLibrary.simpleMessage("Pending"),
@@ -203,9 +232,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "searchClient": MessageLookupByLibrary.simpleMessage("Search Client"),
+        "selectClient": MessageLookupByLibrary.simpleMessage("Select Client"),
         "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
         "selectDateRange":
             MessageLookupByLibrary.simpleMessage("Select Date Range"),
+        "selectReason": MessageLookupByLibrary.simpleMessage("Select Reason"),
+        "solvability": MessageLookupByLibrary.simpleMessage("Solvability"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "supervisorRole": MessageLookupByLibrary.simpleMessage("Supervisor"),
@@ -322,6 +354,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pending Plans"),
         "tourPendingStatus": MessageLookupByLibrary.simpleMessage("Pending"),
         "tourProgress": m1,
+        "tourSearchPerCommune":
+            MessageLookupByLibrary.simpleMessage("Search per commune"),
         "tourSearchPerWilaya":
             MessageLookupByLibrary.simpleMessage("Search per wilaya"),
         "tourValidationClientLabelNumber": m2,
@@ -365,6 +399,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "visitCreationTitle": MessageLookupByLibrary.simpleMessage("New Visit"),
         "visitDetailsTitle":
             MessageLookupByLibrary.simpleMessage("Visit Details"),
+        "visitErrorDate": MessageLookupByLibrary.simpleMessage(
+            "The date has to be after the date of the tour plan"),
         "visitPrivilegeMissing": MessageLookupByLibrary.simpleMessage(
             "You don\'t have the privilege to create a visit"),
         "visitTourIsntOpen":

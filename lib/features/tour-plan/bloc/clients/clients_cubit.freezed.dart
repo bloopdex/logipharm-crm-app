@@ -20,7 +20,9 @@ mixin _$ClientsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Person> clients) loaded,
+    required TResult Function(
+            List<Person> allClients, List<Person> filteredClients)
+        loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,8 @@ mixin _$ClientsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Person> clients)? loaded,
+    TResult? Function(List<Person> allClients, List<Person> filteredClients)?
+        loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +39,8 @@ mixin _$ClientsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Person> clients)? loaded,
+    TResult Function(List<Person> allClients, List<Person> filteredClients)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -126,7 +130,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Person> clients) loaded,
+    required TResult Function(
+            List<Person> allClients, List<Person> filteredClients)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -137,7 +143,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Person> clients)? loaded,
+    TResult? Function(List<Person> allClients, List<Person> filteredClients)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -148,7 +155,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Person> clients)? loaded,
+    TResult Function(List<Person> allClients, List<Person> filteredClients)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -240,7 +248,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Person> clients) loaded,
+    required TResult Function(
+            List<Person> allClients, List<Person> filteredClients)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -251,7 +261,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Person> clients)? loaded,
+    TResult? Function(List<Person> allClients, List<Person> filteredClients)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -262,7 +273,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Person> clients)? loaded,
+    TResult Function(List<Person> allClients, List<Person> filteredClients)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -320,7 +332,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Person> clients});
+  $Res call({List<Person> allClients, List<Person> filteredClients});
 }
 
 /// @nodoc
@@ -334,12 +346,17 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? clients = null,
+    Object? allClients = null,
+    Object? filteredClients = null,
   }) {
     return _then(_$LoadedImpl(
-      null == clients
-          ? _value._clients
-          : clients // ignore: cast_nullable_to_non_nullable
+      allClients: null == allClients
+          ? _value._allClients
+          : allClients // ignore: cast_nullable_to_non_nullable
+              as List<Person>,
+      filteredClients: null == filteredClients
+          ? _value._filteredClients
+          : filteredClients // ignore: cast_nullable_to_non_nullable
               as List<Person>,
     ));
   }
@@ -348,19 +365,31 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(final List<Person> clients) : _clients = clients;
+  const _$LoadedImpl(
+      {required final List<Person> allClients,
+      required final List<Person> filteredClients})
+      : _allClients = allClients,
+        _filteredClients = filteredClients;
 
-  final List<Person> _clients;
+  final List<Person> _allClients;
   @override
-  List<Person> get clients {
-    if (_clients is EqualUnmodifiableListView) return _clients;
+  List<Person> get allClients {
+    if (_allClients is EqualUnmodifiableListView) return _allClients;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_clients);
+    return EqualUnmodifiableListView(_allClients);
+  }
+
+  final List<Person> _filteredClients;
+  @override
+  List<Person> get filteredClients {
+    if (_filteredClients is EqualUnmodifiableListView) return _filteredClients;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filteredClients);
   }
 
   @override
   String toString() {
-    return 'ClientsState.loaded(clients: $clients)';
+    return 'ClientsState.loaded(allClients: $allClients, filteredClients: $filteredClients)';
   }
 
   @override
@@ -368,12 +397,17 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            const DeepCollectionEquality().equals(other._clients, _clients));
+            const DeepCollectionEquality()
+                .equals(other._allClients, _allClients) &&
+            const DeepCollectionEquality()
+                .equals(other._filteredClients, _filteredClients));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_clients));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_allClients),
+      const DeepCollectionEquality().hash(_filteredClients));
 
   @JsonKey(ignore: true)
   @override
@@ -386,10 +420,12 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Person> clients) loaded,
+    required TResult Function(
+            List<Person> allClients, List<Person> filteredClients)
+        loaded,
     required TResult Function(String message) error,
   }) {
-    return loaded(clients);
+    return loaded(allClients, filteredClients);
   }
 
   @override
@@ -397,10 +433,11 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Person> clients)? loaded,
+    TResult? Function(List<Person> allClients, List<Person> filteredClients)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
-    return loaded?.call(clients);
+    return loaded?.call(allClients, filteredClients);
   }
 
   @override
@@ -408,12 +445,13 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Person> clients)? loaded,
+    TResult Function(List<Person> allClients, List<Person> filteredClients)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(clients);
+      return loaded(allClients, filteredClients);
     }
     return orElse();
   }
@@ -457,9 +495,12 @@ class _$LoadedImpl implements _Loaded {
 }
 
 abstract class _Loaded implements ClientsState {
-  const factory _Loaded(final List<Person> clients) = _$LoadedImpl;
+  const factory _Loaded(
+      {required final List<Person> allClients,
+      required final List<Person> filteredClients}) = _$LoadedImpl;
 
-  List<Person> get clients;
+  List<Person> get allClients;
+  List<Person> get filteredClients;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -531,7 +572,9 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Person> clients) loaded,
+    required TResult Function(
+            List<Person> allClients, List<Person> filteredClients)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -542,7 +585,8 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Person> clients)? loaded,
+    TResult? Function(List<Person> allClients, List<Person> filteredClients)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -553,7 +597,8 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Person> clients)? loaded,
+    TResult Function(List<Person> allClients, List<Person> filteredClients)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

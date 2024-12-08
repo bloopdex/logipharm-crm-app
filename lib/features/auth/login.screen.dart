@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const Spacer(flex: 3),
                       CustomLocalImage(
-                        width: 100.sp,
+                        width: 100.h,
                         image: 'logo.png',
                       ),
                       SizedBox(height: kSpacingX8),

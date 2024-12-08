@@ -1,7 +1,11 @@
 import 'package:crm/features/clients/blocs/claims/claim_cubit.dart';
 import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
+import 'package:crm/features/clients/blocs/etablissement/etablissement_cubit.dart';
+import 'package:crm/features/clients/blocs/grossiste/grossiste_cubit.dart';
 import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
 import 'package:crm/features/clients/pages/create-claim.dart';
+import 'package:crm/features/clients/pages/create-etablissements.dart';
+import 'package:crm/features/clients/pages/create-grossiste.dart';
 import 'package:crm/models/person/person.dart';
 import 'package:crm/shared/utils/money.formatter.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
@@ -13,7 +17,6 @@ import 'package:map_launcher/map_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/core.dart';
-import '../../shared/services/helpers/location.helper.dart';
 import '../../shared/widgets/buttons/circlebutton.text.widget.dart';
 import '../../shared/widgets/image/svg.dart';
 import 'pages/create-observation.dart';
@@ -55,7 +58,7 @@ class ClientDetailsPage extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                height: 40.sp,
+                height: 40.h,
                 decoration: BoxDecoration(
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.vertical(
@@ -82,51 +85,40 @@ class ClientDetailsPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: kSpacingX5),
-                    if (client.latitude != null && client.longitude != null)
-                      Center(
-                        child: InkWell(
-                          onTap: () async {
-                            final availableMaps = await MapLauncher.installedMaps;
-                            await availableMaps.first.showMarker(
-                              coords: Coords(client.latitude ?? 0, client.longitude ?? 0),
-                              title: client.fullName,
-                            );
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                child: FutureBuilder(
-                                  future: LocationHelper.addressFromLongitudeLatitude(
-                                    latitude: client.latitude ?? 0,
-                                    longitude: client.longitude ?? 0,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    return Text(
-                                      snapshot.data ?? "",
-                                      textAlign: TextAlign.center,
-                                      style: context.textTheme.headlineMedium,
-                                    );
-                                  },
-                                ),
-                              ),
-                              SizedBox(width: kSpacingX1),
-                              Icon(
-                                Icons.location_on_rounded,
+                    Center(
+                      child: InkWell(
+                        onTap: () async {
+                          final availableMaps = await MapLauncher.installedMaps;
+                          await availableMaps.first.showMarker(
+                            coords: Coords(client.latitude ?? 0, client.longitude ?? 0),
+                            title: client.fullName,
+                          );
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: Icon(
+                                Icons.my_location,
                                 color: kPrimaryColor,
-                                size: kSpacingX5,
                               ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(width: kSpacingX1),
+                            Flexible(
+                              flex: 6,
+                              child: Text(
+                                client.address ?? context.i10n.noAddress,
+                                textAlign: TextAlign.center,
+                                style: context.textTheme.bodyMedium,
+                                softWrap: true,
+                                maxLines: 2,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    if (client.latitude == null && client.longitude == null)
-                      Center(
-                        child: Text(
-                          context.i10n.noAddress,
-                          style: context.textTheme.bodyLarge,
-                        ),
-                      ),
+                    ),
                     SizedBox(height: kSpacingX3),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: kPaddingSm3),
@@ -216,9 +208,92 @@ class ClientDetailsPage extends StatelessWidget {
                     ),
                     SizedBox(height: kSpacingX3),
                     Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(kPaddingSm3),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: context.read<ClientDetailsCubit>().state.maybeWhen(
+                                      orElse: () => kCardinal,
+                                      loaded: (statistics) {
+                                        if (!statistics.commercialBlockage) {
+                                          return kSuccessColor;
+                                        } else {
+                                          return kCardinal;
+                                        }
+                                      }),
+                                ),
+                                child: Icon(
+                                  context.read<ClientDetailsCubit>().state.maybeWhen(
+                                      orElse: () => Icons.error,
+                                      loaded: (statistics) {
+                                        if (!statistics.commercialBlockage) {
+                                          return Icons.check;
+                                        } else {
+                                          return Icons.error;
+                                        }
+                                      }),
+                                  color: kWhite,
+                                  size: kSpacingX7,
+                                ),
+                              ),
+                              Text(
+                                context.i10n.blockageCommercial,
+                                softWrap: true,
+                                maxLines: 2,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(width: kSpacingX3),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(kPaddingSm3),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: context.read<ClientDetailsCubit>().state.maybeWhen(
+                                      orElse: () => kCardinal,
+                                      loaded: (statistics) {
+                                        if (!statistics.financialBlockage) {
+                                          return kSuccessColor;
+                                        } else {
+                                          return kCardinal;
+                                        }
+                                      }),
+                                ),
+                                child: Icon(
+                                  context.read<ClientDetailsCubit>().state.maybeWhen(
+                                      orElse: () => Icons.error,
+                                      loaded: (statistics) {
+                                        if (!statistics.financialBlockage) {
+                                          return Icons.check;
+                                        } else {
+                                          return Icons.error;
+                                        }
+                                      }),
+                                  color: kWhite,
+                                  size: kSpacingX7,
+                                ),
+                              ),
+                              Text(
+                                context.i10n.blockageFinancial,
+                                softWrap: true,
+                                maxLines: 2,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: kSpacingX3),
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Expanded(child: SizedBox.shrink()),
                         Expanded(
                           child: CircleButtonText(
                             icon: Icons.note_alt_rounded,
@@ -242,11 +317,37 @@ class ClientDetailsPage extends StatelessWidget {
                             },
                           ),
                         ),
-                        const Expanded(child: SizedBox.shrink()),
+                        // Supplier
+                        Expanded(
+                          child: CircleButtonText(
+                            icon: Icons.supervisor_account_rounded,
+                            text: context.i10n.addGrossiste,
+                            onPressed: () {
+                              context.push(CreateGrossistePage(
+                                pharmacyId: client.id,
+                              ));
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: CircleButtonText(
+                            icon: Icons.home_work_rounded,
+                            text: context.i10n.addEtablissement,
+                            onPressed: () {
+                              context.push(CreateEtablissementPage(
+                                pharmacyId: client.id,
+                              ));
+                            },
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(height: kSpacingX3),
-                    const Expanded(child: ClientOptionsTab())
+                    Expanded(
+                      child: ClientOptionsTab(
+                        client: client,
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -259,7 +360,9 @@ class ClientDetailsPage extends StatelessWidget {
 }
 
 class ClientOptionsTab extends StatefulWidget {
-  const ClientOptionsTab({super.key});
+  const ClientOptionsTab({super.key, required this.client});
+
+  final Person client;
 
   @override
   State<ClientOptionsTab> createState() => _ClientOptionsTabState();
@@ -270,7 +373,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 6, vsync: this);
     super.initState();
   }
 
@@ -339,6 +442,54 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                   ),
                 ),
               ),
+              Tab(
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: context.width / 3,
+                    minWidth: context.width / 3,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.supervisor_account_rounded),
+                      SizedBox(width: kSpacingX1),
+                      Text(context.i10n.grossiste),
+                    ],
+                  ),
+                ),
+              ),
+              Tab(
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: context.width / 3,
+                    minWidth: context.width / 3,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.home_work_rounded),
+                      SizedBox(width: kSpacingX1),
+                      Text(context.i10n.etablissement),
+                    ],
+                  ),
+                ),
+              ),
+              Tab(
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: context.width / 3,
+                    minWidth: context.width / 3,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.assignment_rounded),
+                      SizedBox(width: kSpacingX1),
+                      Text(context.i10n.moreDetails),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -357,7 +508,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                         children: [
                           SVG(
                             'empty-states/info.svg',
-                            height: 175.sp,
+                            height: 175.h,
                           ),
                           SizedBox(height: kSpacingX3),
                           Text(
@@ -503,7 +654,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                         children: [
                           SVG(
                             'empty-states/info.svg',
-                            height: 175.sp,
+                            height: 175.h,
                           ),
                           SizedBox(height: kSpacingX3),
                           Text(
@@ -529,7 +680,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                           children: [
                             SVG(
                               'empty-states/info.svg',
-                              height: 175.sp,
+                              height: 175.h,
                             ),
                             SizedBox(height: kSpacingX3),
                             Text(
@@ -587,7 +738,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                         children: [
                           SVG(
                             'empty-states/info.svg',
-                            height: 175.sp,
+                            height: 175.h,
                           ),
                           SizedBox(height: kSpacingX3),
                           Text(
@@ -613,7 +764,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                           children: [
                             SVG(
                               'empty-states/info.svg',
-                              height: 175.sp,
+                              height: 175.h,
                             ),
                             SizedBox(height: kSpacingX3),
                             Text(
@@ -658,6 +809,232 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                       );
                     });
               },
+            ),
+            BlocBuilder<GrossisteCubit, GrossisteState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                    orElse: () {
+                      return Center(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SVG(
+                            'empty-states/info.svg',
+                            height: 175.h,
+                          ),
+                          SizedBox(height: kSpacingX3),
+                          Text(
+                            context.i10n.noClaims,
+                            style: context.textTheme.headlineMedium,
+                          ),
+                          SizedBox(height: kSpacingX2),
+                          Text(
+                            context.i10n.noClaimsDesc,
+                            style: context.textTheme.bodyMedium,
+                          ),
+                        ],
+                      ));
+                    },
+                    loading: () => const Center(child: Loader()),
+                    loaded: (grossiste) {
+                      if (grossiste.isEmpty) {
+                        return Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SVG(
+                              'empty-states/info.svg',
+                              height: 175.h,
+                            ),
+                            SizedBox(height: kSpacingX3),
+                            Text(
+                              context.i10n.noGrossiste,
+                              style: context.textTheme.headlineMedium,
+                            ),
+                            SizedBox(height: kSpacingX2),
+                            Text(
+                              context.i10n.noGrossisteDesc,
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          ],
+                        ));
+                      }
+                      return ListView.builder(
+                        itemCount: grossiste.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    grossiste[index].title,
+                                    style: context.textTheme.headlineMedium,
+                                  ),
+                                ),
+                                SizedBox(width: kSpacingX1),
+                                Text(
+                                  grossiste[index].date,
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ],
+                            ),
+                            subtitle: Text(
+                              grossiste[index].reportText,
+                              softWrap: true,
+                              maxLines: 3,
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          );
+                        },
+                      );
+                    });
+              },
+            ),
+            BlocBuilder<EtablissementCubit, EtablissementState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                    orElse: () {
+                      return Center(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SVG(
+                            'empty-states/info.svg',
+                            height: 175.h,
+                          ),
+                          SizedBox(height: kSpacingX3),
+                          Text(
+                            context.i10n.noEtablissement,
+                            style: context.textTheme.headlineMedium,
+                          ),
+                          SizedBox(height: kSpacingX2),
+                          Text(
+                            context.i10n.noEtablissementDesc,
+                            style: context.textTheme.bodyMedium,
+                          ),
+                        ],
+                      ));
+                    },
+                    loading: () => const Center(child: Loader()),
+                    loaded: (etablissement) {
+                      if (etablissement.isEmpty) {
+                        return Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SVG(
+                              'empty-states/info.svg',
+                              height: 175.h,
+                            ),
+                            SizedBox(height: kSpacingX3),
+                            Text(
+                              context.i10n.noGrossiste,
+                              style: context.textTheme.headlineMedium,
+                            ),
+                            SizedBox(height: kSpacingX2),
+                            Text(
+                              context.i10n.noGrossisteDesc,
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          ],
+                        ));
+                      }
+                      return ListView.builder(
+                        itemCount: etablissement.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    etablissement[index].title,
+                                    style: context.textTheme.headlineMedium,
+                                  ),
+                                ),
+                                SizedBox(width: kSpacingX1),
+                                Text(
+                                  etablissement[index].date,
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ],
+                            ),
+                            subtitle: Text(
+                              etablissement[index].reportText,
+                              softWrap: true,
+                              maxLines: 3,
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          );
+                        },
+                      );
+                    });
+              },
+            ),
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        context.i10n.category,
+                        style: context.textTheme.headlineMedium,
+                      ),
+                      Expanded(
+                        child: Text(
+                          widget.client.categoryLabel ?? context.i10n.noCategory,
+                          textAlign: TextAlign.end,
+                          style: context.textTheme.headlineMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(),
+                  SizedBox(height: kSpacingX3),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        context.i10n.solvability,
+                        style: context.textTheme.headlineMedium,
+                      ),
+                      Expanded(
+                        child: Text(
+                          widget.client.solvabilite?.label ?? context.i10n.noSolvability,
+                          textAlign: TextAlign.end,
+                          style: context.textTheme.headlineMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(),
+                  SizedBox(height: kSpacingX3),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        context.i10n.modePaie,
+                        style: context.textTheme.headlineMedium,
+                      ),
+                      Expanded(
+                        child: Text(
+                          widget.client.modePaie?.label ?? context.i10n.noModePaie,
+                          textAlign: TextAlign.end,
+                          style: context.textTheme.headlineMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ]),
         ),

@@ -23,8 +23,8 @@ Map<String, dynamic> _$$ClientReclamationImplToJson(
 _$ClientStatisticsImpl _$$ClientStatisticsImplFromJson(
         Map<String, dynamic> json) =>
     _$ClientStatisticsImpl(
-      companyId: json['companyId'] as num,
-      clientId: json['clientId'] as num,
+      companyId: json['companyId'] as num?,
+      clientId: json['clientId'] as num?,
       commercialBlockage: json['blocageCommercial'] as bool,
       financialBlockage: json['blocageFinancier'] as bool,
       totalHt: json['totalHt'] as num,

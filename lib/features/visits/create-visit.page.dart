@@ -54,7 +54,9 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
     context.read<CounterCubit>().reset();
     context.read<VisitCreationCubit>().reset();
     data['dateDebut'] = DateTime.now().YYYYMMdd();
-    data['pharmacieId'] = widget.pharmacieId?.toString();
+    if (widget.pharmacieId != null) {
+      data['pharmacieId'] = widget.pharmacieId?.toString();
+    }
     data['tourneeId'] = widget.tour.tourId;
     log('tourneeId: ${widget.tour.tourId}');
   }
@@ -70,6 +72,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
             });
       },
       builder: (context, state) {
+        final bottomSize = context.width < 400.h ? 120.h : 80.h;
         return state.maybeWhen(
             loading: () {
               return const VisitCreationLoadingPage();
@@ -92,7 +95,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                             return CustomStepper(
                               activeStep: state,
                               steps: 2,
-                              stepHeight: 4.sp,
+                              stepHeight: 4.h,
                             );
                           },
                         ),
@@ -100,7 +103,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                     ),
                     bottom: PreferredSize(
                       preferredSize: context.read<CounterCubit>().state < 1
-                          ? Size.fromHeight(160.sp)
+                          ? Size.fromHeight(bottomSize)
                           : const Size.fromHeight(0),
                       child: context.read<CounterCubit>().state < 1
                           ? QuillToolbar.simple(
@@ -130,94 +133,110 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                       maxWidth: context.width,
                       minWidth: context.width,
                       maxHeight: context.read<CounterCubit>().state == 0
-                          ? context.height - context.appBarSize - context.paddingBottom - 160.sp
+                          ? context.height - context.appBarSize - context.paddingBottom - bottomSize
                           : context.height - context.appBarSize - context.paddingBottom,
                       minHeight: context.read<CounterCubit>().state == 0
-                          ? context.height - context.appBarSize - context.paddingBottom - 160.sp
+                          ? context.height - context.appBarSize - context.paddingBottom - bottomSize
                           : context.height - context.appBarSize - context.paddingBottom,
                     ),
-                    child: SingleChildScrollView(
-                      controller: _scrollController,
-                      child: BlocBuilder<CounterCubit, int>(
-                        builder: (context, state) {
-                          return Container(
-                            constraints: BoxConstraints(
-                              maxWidth: context.width,
-                              minWidth: context.width,
-                              maxHeight: context.read<CounterCubit>().state == 0
-                                  ? context.height -
-                                      context.appBarSize -
-                                      context.paddingBottom -
-                                      200.sp
-                                  : context.height -
-                                      context.appBarSize -
-                                      context.paddingBottom -
-                                      70.sp,
-                              minHeight: context.read<CounterCubit>().state == 0
-                                  ? context.height -
-                                      context.appBarSize -
-                                      context.paddingBottom -
-                                      200.sp
-                                  : context.height -
-                                      context.appBarSize -
-                                      context.paddingBottom -
-                                      70.sp,
+                    child: BlocBuilder<CounterCubit, int>(
+                      builder: (context, state) {
+                        return ListView(
+                          controller: _scrollController,
+                          children: [
+                            Container(
+                              constraints: BoxConstraints(
+                                maxHeight: context.height - context.height / 3,
+                                minHeight: context.height - context.height / 3,
+                              ),
+                              child: state == 0
+                                  ? ClientSelectionForm(
+                                      quillController: _quillController,
+                                      onQuillFocus: _scrollToBottom,
+                                      clients: widget.tour.pharmacies!
+                                          .where((element) => element.statusFlag == 0)
+                                          .toList(),
+                                      data: data,
+                                    )
+                                  : VisitValidateCreationPage(tour: widget.tour, data: data),
                             ),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: state == 0
-                                      ? ClientSelectionForm(
-                                          quillController: _quillController,
-                                          onQuillFocus: _scrollToBottom,
-                                          clients: widget.tour.pharmacies!
-                                              .where((element) => element.statusFlag == 0)
-                                              .toList(),
-                                          data: data,
-                                        )
-                                      : VisitValidateCreationPage(tour: widget.tour, data: data),
-                                ),
-                                SizedBox(height: kSpacingX4),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      left: kPaddingMd2, right: kPaddingMd2, bottom: kPaddingLg1),
-                                  child: CustomButton(
-                                    text: state < 1 ? context.i10n.next : context.i10n.validate,
-                                    onPressed: () async {
-                                      switch (state) {
-                                        case 0:
-                                          if (data['dateDebut'] == null ||
+                            SizedBox(height: kSpacingX4),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: kPaddingMd2, right: kPaddingMd2, bottom: kPaddingLg1),
+                              child: Row(
+                                children: [
+                                  if (state == 0)
+                                    Expanded(
+                                      child: Container(
+                                        margin: EdgeInsets.only(right: kSpacingX1),
+                                        child: CustomButton(
+                                          text: context.i10n.cancel,
+                                          backgroundColor: kCardinal,
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  if (state == 1)
+                                    Expanded(
+                                      child: Container(
+                                        margin: EdgeInsets.only(right: kSpacingX1),
+                                        child: CustomButton(
+                                          text: context.i10n.back,
+                                          backgroundColor: kCardinal,
+                                          onPressed: () {
+                                            context.read<CounterCubit>().decrement();
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  Expanded(
+                                    child: CustomButton(
+                                      text: state < 1 ? context.i10n.next : context.i10n.validate,
+                                      disabled: state == 0
+                                          ? data['dateDebut'] == null ||
                                               data['pharmacieId'] == null ||
                                               data['motif'] == null ||
-                                              _quillController.document.toPlainText().isEmpty) {
-                                            return;
-                                          }
-                                          data['document'] = _quillController.document;
-                                          context.read<CounterCubit>().increment();
-                                          if (!context.mounted) return;
-                                          setState(() {});
-                                          break;
-                                        case 1:
-                                          data['rapportText'] =
-                                              _quillController.document.toPlainText();
-                                          data['rapport'] = json
-                                              .encode(_quillController.document.toDelta().toJson());
-                                          final position =
-                                              await LocationHelper.getCurrentPosition();
-                                          if (position != null) {
-                                            data['latitude'] = position.latitude;
-                                            data['longitude'] = position.longitude;
-                                          }
-                                          context.read<VisitCreationCubit>().validate(data: data);
-                                      }
-                                    },
+                                              _quillController.document.toPlainText().isEmpty
+                                          : false,
+                                      onPressed: () async {
+                                        switch (state) {
+                                          case 0:
+                                            if (data['dateDebut'] == null ||
+                                                data['pharmacieId'] == null ||
+                                                data['motif'] == null ||
+                                                _quillController.document.toPlainText().isEmpty) {
+                                              return;
+                                            }
+                                            data['document'] = _quillController.document;
+                                            context.read<CounterCubit>().increment();
+                                            if (!context.mounted) return;
+                                            setState(() {});
+                                            break;
+                                          case 1:
+                                            data['rapportText'] =
+                                                _quillController.document.toPlainText();
+                                            data['rapport'] = json.encode(
+                                                _quillController.document.toDelta().toJson());
+                                            final position =
+                                                await LocationHelper.getCurrentPosition();
+                                            if (position != null) {
+                                              data['latitude'] = position.latitude;
+                                              data['longitude'] = position.longitude;
+                                            }
+                                            context.read<VisitCreationCubit>().validate(data: data);
+                                        }
+                                      },
+                                    ),
                                   ),
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                                ],
+                              ),
+                            )
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ));

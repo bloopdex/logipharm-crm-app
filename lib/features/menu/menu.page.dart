@@ -88,7 +88,8 @@ class MenuPage extends StatelessWidget {
                           context.push(
                             CreateVisitPage(
                               tour: current,
-                              pharmacieId: current.pharmacies!.first.pharmacy!.id.toString(),
+                              pharmacieId:
+                                  '${current.pharmacies!.first.pharmacy!.id.toString()}:${current.pharmacies!.first.pharmacy!.typeTier}',
                             ),
                           );
                         }

@@ -30,12 +30,11 @@ class VisitValidateCreationPage extends StatelessWidget {
     if (client == null) {
       pharmacy = context.read<ClientsCubit>().state.maybeWhen(
           orElse: () => null,
-          loaded: (clients) {
-            return clients
+          loaded: (all, filter) {
+            return all
                 .where(
                   (element) =>
-                      '${element.id.toString()}:${element.typeTier}' ==
-                      data['pharmacieId'],
+                      '${element.id.toString()}:${element.typeTier}' == data['pharmacieId'],
                 )
                 .firstOrNull;
           });

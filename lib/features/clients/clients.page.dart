@@ -1,6 +1,7 @@
 import 'package:crm/core/core.dart';
 import 'package:crm/features/clients/blocs/claims/claim_cubit.dart';
 import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
+import 'package:crm/features/clients/blocs/grossiste/grossiste_cubit.dart';
 import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import '../../models/person/person.dart';
 import '../../shared/widgets/image/svg.dart';
 import '../../shared/widgets/inputs/search.text.field.widget.dart';
 import '../tour-plan/bloc/clients/clients_cubit.dart';
+import 'blocs/etablissement/etablissement_cubit.dart';
 import 'client-details.page.dart';
 
 class ClientsPage extends StatefulWidget {
@@ -30,7 +32,7 @@ class _ClientsPageState extends State<ClientsPage> {
   void initState() {
     clients = context.read<ClientsCubit>().state.maybeWhen(
           orElse: () => [],
-          loaded: (clients) => clients.where((element) => element.typeTier == "1").toList(),
+          loaded: (all, filter) => all.where((element) => element.typeTier == "1").toList(),
         );
     super.initState();
   }
@@ -48,14 +50,23 @@ class _ClientsPageState extends State<ClientsPage> {
         listeners: [
           BlocListener<SearchCubit, String>(
             listener: (context, state) {
-              setState(() {
-                clients = context.read<ClientsCubit>().state.maybeWhen(
-                      orElse: () => [],
-                      loaded: (clients) => clients.where((element) {
-                        return element.fullName.toLowerCase().contains(state.toLowerCase());
-                      }).toList(),
-                    );
-              });
+              if (state.isEmpty) {
+                setState(() {
+                  clients = context.read<ClientsCubit>().state.maybeWhen(
+                        orElse: () => [],
+                        loaded: (all, filter) => all,
+                      );
+                });
+              } else {
+                setState(() {
+                  clients = context.read<ClientsCubit>().state.maybeWhen(
+                        orElse: () => [],
+                        loaded: (all, filter) => all.where((element) {
+                          return element.fullName.toLowerCase().contains(state.toLowerCase());
+                        }).toList(),
+                      );
+                });
+              }
             },
           ),
         ],
@@ -87,7 +98,7 @@ class _ClientsPageState extends State<ClientsPage> {
                             children: [
                               SVG(
                                 'empty-states/info.svg',
-                                height: 175.sp,
+                                height: 175.h,
                               ),
                               SizedBox(height: kSpacingX3),
                               Text(
@@ -138,6 +149,8 @@ class ClientCard extends StatelessWidget {
       onTap: () {
         context.read<ObservationCubit>().get(pharmacyId: client.id);
         context.read<ClaimCubit>().get(pharmacyId: client.id);
+        context.read<GrossisteCubit>().get(pharmacyId: client.id);
+        context.read<EtablissementCubit>().get(pharmacyId: client.id);
         context.read<ClientDetailsCubit>().load(clientId: client.id);
         context.push(
           ClientDetailsPage(client: client),
@@ -145,19 +158,20 @@ class ClientCard extends StatelessWidget {
       },
       leading: ProfileCard(
         text: client.fullName,
+        borderColor: client.prospect ?? false ? kCardinal : kCeruleanBlue,
       ),
       title: Text(client.fullName, style: context.textTheme.bodyLarge),
-      subtitle: Text(client.address ?? "", style: context.textTheme.bodyMedium),
+      subtitle: Text(client.address ?? context.i10n.noAddress, style: context.textTheme.bodyMedium),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           InkWell(
             onTap: () async {
-              final Uri _phoneLaunchUri = Uri.parse(
+              final Uri phoneLaunchUri = Uri.parse(
                   'tel://${client.telMobile ?? client.tel1Fixe ?? client.tel2Fixe ?? ""}');
 
               if (client.tel1Fixe != null || client.tel2Fixe != null || client.telMobile != null) {
-                await launchUrl(_phoneLaunchUri);
+                await launchUrl(phoneLaunchUri);
               }
             },
             child: Container(

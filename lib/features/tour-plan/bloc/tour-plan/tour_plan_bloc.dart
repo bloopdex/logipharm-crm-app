@@ -74,6 +74,7 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
   }
 
   Future<void> _search(_Search event, Emitter<TourPlanState> emit) async {
+    if (state is! _Loaded) return;
     Goal goal = (state as _Loaded).goal;
     emit(const TourPlanState.loading());
     try {

@@ -32,6 +32,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "add": MessageLookupByLibrary.simpleMessage("Ajouter"),
         "addClaim":
             MessageLookupByLibrary.simpleMessage("Ajouter une réclamation"),
+        "addEtablissement":
+            MessageLookupByLibrary.simpleMessage("Ajouter un établissement"),
+        "addGrossiste":
+            MessageLookupByLibrary.simpleMessage("Ajouter un grossiste"),
         "addMotif": MessageLookupByLibrary.simpleMessage("Ajouter un motif"),
         "addObservation":
             MessageLookupByLibrary.simpleMessage("Ajouter une observation"),
@@ -40,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Entrez l\'adresse"),
         "addressRequired":
             MessageLookupByLibrary.simpleMessage("L\'adresse est requise"),
+        "allCommunes":
+            MessageLookupByLibrary.simpleMessage("Toutes les communes"),
         "allRegions":
             MessageLookupByLibrary.simpleMessage("Toutes les régions"),
         "analytics": MessageLookupByLibrary.simpleMessage("Analyses"),
@@ -61,11 +67,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Entrez votre nom d\'utilisateur"),
         "authLoginUsernameRequired": MessageLookupByLibrary.simpleMessage(
             "Le nom d\'utilisateur est requis"),
+        "back": MessageLookupByLibrary.simpleMessage("Retour"),
+        "blockageCommercial":
+            MessageLookupByLibrary.simpleMessage("Blocage commercial"),
+        "blockageFinancial":
+            MessageLookupByLibrary.simpleMessage("Blocage financier"),
         "cancel": MessageLookupByLibrary.simpleMessage("Annuler"),
         "cantCreatePlanWhileOpened": MessageLookupByLibrary.simpleMessage(
             "Impossible de créer un plan pendant qu\'un plan est ouvert"),
         "cantCreateVisit": MessageLookupByLibrary.simpleMessage(
             "Impossible de créer une visite"),
+        "category": MessageLookupByLibrary.simpleMessage("Catégorie"),
         "ceiling": MessageLookupByLibrary.simpleMessage("Plafond"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Changer le mot de passe"),
@@ -108,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("L\'email est requis"),
         "endDate": MessageLookupByLibrary.simpleMessage("Date de fin"),
         "error": MessageLookupByLibrary.simpleMessage("Erreur"),
+        "etablissement": MessageLookupByLibrary.simpleMessage("Etablissement"),
         "fileCNRC": MessageLookupByLibrary.simpleMessage("Fichier CNRC"),
         "finish": MessageLookupByLibrary.simpleMessage("Terminer"),
         "firstName": MessageLookupByLibrary.simpleMessage("Prénom"),
@@ -116,12 +129,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "firstNameRequired":
             MessageLookupByLibrary.simpleMessage("Le prénom est requis"),
         "goalOfDay": MessageLookupByLibrary.simpleMessage("Objectif du jour"),
-        "hire": MessageLookupByLibrary.simpleMessage("Embaucher"),
+        "grossiste": MessageLookupByLibrary.simpleMessage("Grossiste"),
+        "hire": MessageLookupByLibrary.simpleMessage("Recruter"),
         "hireDetails":
-            MessageLookupByLibrary.simpleMessage("Détails de l\'embauche"),
+            MessageLookupByLibrary.simpleMessage("Détails de l\'Recrute"),
         "hired": MessageLookupByLibrary.simpleMessage("Embauché"),
         "hirement": MessageLookupByLibrary.simpleMessage("Recrutement"),
-        "hiring": MessageLookupByLibrary.simpleMessage("Embauche"),
+        "hiring": MessageLookupByLibrary.simpleMessage("Recrutement"),
         "homeCreateNewEvent":
             MessageLookupByLibrary.simpleMessage("Créer un nouvel événement"),
         "homeCreateNewPlan":
@@ -130,12 +144,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Créer une nouvelle visite"),
         "homeHello": MessageLookupByLibrary.simpleMessage("Bonjour"),
         "homeHireNewClient":
-            MessageLookupByLibrary.simpleMessage("Embaucher un nouveau client"),
+            MessageLookupByLibrary.simpleMessage("Recruter un nouveau client"),
         "homeMyClients": MessageLookupByLibrary.simpleMessage("Mes clients"),
         "homeMyTasksToday":
             MessageLookupByLibrary.simpleMessage("Mes tâches aujourd\'hui"),
         "homePendingHire":
-            MessageLookupByLibrary.simpleMessage("Embauche en attente"),
+            MessageLookupByLibrary.simpleMessage("Recrute en attente"),
         "homePendingPlan":
             MessageLookupByLibrary.simpleMessage("Plan en attente"),
         "inProgress": MessageLookupByLibrary.simpleMessage("En cours"),
@@ -148,7 +162,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("Déconnexion"),
         "manageProfile":
             MessageLookupByLibrary.simpleMessage("Gérer le profil"),
+        "modePaie": MessageLookupByLibrary.simpleMessage("Mode de paiement"),
+        "moreDetails": MessageLookupByLibrary.simpleMessage("Plus de détails"),
         "motif": MessageLookupByLibrary.simpleMessage("Motif"),
+        "name": MessageLookupByLibrary.simpleMessage("Nom"),
         "navHome": MessageLookupByLibrary.simpleMessage("Accueil"),
         "navMenu": MessageLookupByLibrary.simpleMessage("Menu"),
         "navPlans": MessageLookupByLibrary.simpleMessage("Plans"),
@@ -166,18 +183,25 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Aucune analyse trouvée"),
         "noAnalyticsDesc": MessageLookupByLibrary.simpleMessage(
             "Aucune analyse trouvée pour ce client"),
+        "noCategory": MessageLookupByLibrary.simpleMessage("Pas de catégorie"),
         "noClaims": MessageLookupByLibrary.simpleMessage("Pas de réclamations"),
         "noClaimsDesc": MessageLookupByLibrary.simpleMessage(
             "Aucune réclamation trouvée pour ce client"),
         "noEmail": MessageLookupByLibrary.simpleMessage("Pas d\'email"),
+        "noEtablissement":
+            MessageLookupByLibrary.simpleMessage("Pas d\'établissement"),
         "noFirstName": MessageLookupByLibrary.simpleMessage("Pas de prénom"),
+        "noGrossiste": MessageLookupByLibrary.simpleMessage("Pas de grossiste"),
         "noHirement":
             MessageLookupByLibrary.simpleMessage("Aucun recrutement trouvé"),
         "noLastName":
             MessageLookupByLibrary.simpleMessage("Pas de nom de famille"),
+        "noModePaie":
+            MessageLookupByLibrary.simpleMessage("Pas de mode de paiement"),
         "noMotif": MessageLookupByLibrary.simpleMessage("Pas de motif"),
         "noMotifDesc": MessageLookupByLibrary.simpleMessage(
             "Aucun motif trouvé pour cette observation"),
+        "noName": MessageLookupByLibrary.simpleMessage("Pas de nom"),
         "noNote": MessageLookupByLibrary.simpleMessage("Pas de note"),
         "noObservations":
             MessageLookupByLibrary.simpleMessage("Pas d\'observations"),
@@ -185,6 +209,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Aucune observation trouvée pour ce client"),
         "noPhone": MessageLookupByLibrary.simpleMessage("Pas de téléphone"),
         "noRegion": MessageLookupByLibrary.simpleMessage("Pas de région"),
+        "noSolvability":
+            MessageLookupByLibrary.simpleMessage("Pas de solvaibilité"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
         "notePlaceholder":
             MessageLookupByLibrary.simpleMessage("Entrez la note"),
@@ -200,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mot de passe changé avec succès"),
         "passwordChangedFailed": MessageLookupByLibrary.simpleMessage(
             "Échec du changement de mot de passe"),
+        "passwordLengthError": MessageLookupByLibrary.simpleMessage(
+            "Le mot de passe doit contenir au moins 6 caractères"),
         "passwordNotMatch": MessageLookupByLibrary.simpleMessage(
             "Les mots de passe ne correspondent pas"),
         "pending": MessageLookupByLibrary.simpleMessage("En attente"),
@@ -218,10 +246,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("Sauvegarder"),
         "searchClient":
             MessageLookupByLibrary.simpleMessage("Rechercher un client"),
+        "selectClient":
+            MessageLookupByLibrary.simpleMessage("Sélectionner un client"),
         "selectDate":
             MessageLookupByLibrary.simpleMessage("Sélectionner une date"),
         "selectDateRange":
             MessageLookupByLibrary.simpleMessage("Sélectionner la période"),
+        "selectReason":
+            MessageLookupByLibrary.simpleMessage("Sélectionner une raison"),
+        "solvability": MessageLookupByLibrary.simpleMessage("Solvaibilité"),
         "start": MessageLookupByLibrary.simpleMessage("Démarrer"),
         "startDate": MessageLookupByLibrary.simpleMessage("Date de début"),
         "supervisorRole": MessageLookupByLibrary.simpleMessage("Superviseur"),
@@ -337,6 +370,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Plans en attente"),
         "tourPendingStatus": MessageLookupByLibrary.simpleMessage("En attente"),
         "tourProgress": m1,
+        "tourSearchPerCommune":
+            MessageLookupByLibrary.simpleMessage("Rechercher par commune"),
         "tourSearchPerWilaya":
             MessageLookupByLibrary.simpleMessage("Rechercher par wilaya"),
         "tourValidationClientLabelNumber": m2,
@@ -383,6 +418,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nouvelle visite"),
         "visitDetailsTitle":
             MessageLookupByLibrary.simpleMessage("Détails de la visite"),
+        "visitErrorDate": MessageLookupByLibrary.simpleMessage(
+            "La date doit être après la date du plan de tournee"),
         "visitPrivilegeMissing": MessageLookupByLibrary.simpleMessage(
             "Vous n\'avez pas le privilège de créer une visite"),
         "visitTourIsntOpen": MessageLookupByLibrary.simpleMessage(

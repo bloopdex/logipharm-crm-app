@@ -51,7 +51,7 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
     context.read<CounterCubit>().reset();
     context.read<VisitCreationCubit>().reset();
     data['dateDebut'] = DateTime.now().YYYYMMdd();
-    data['pharmacieId'] = widget.tour.pharmacy!.id.toString();
+    data['pharmacieId'] = '${widget.tour.pharmacy!.id}:${widget.tour.pharmacy!.typeTier}';
     data['tourneeId'] = widget.tour.masterTourId;
     data['motif'] = widget.tour.reason;
     if (widget.tour.report != null) {
@@ -95,7 +95,7 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                             return CustomStepper(
                               activeStep: state,
                               steps: 2,
-                              stepHeight: 4.sp,
+                              stepHeight: 4.h,
                             );
                           },
                         ),
@@ -103,7 +103,7 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                     ),
                     bottom: PreferredSize(
                       preferredSize: context.read<CounterCubit>().state < 1
-                          ? Size.fromHeight(160.sp)
+                          ? Size.fromHeight(160.h)
                           : const Size.fromHeight(0),
                       child: context.read<CounterCubit>().state < 1
                           ? QuillToolbar.simple(
@@ -133,10 +133,10 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                       maxWidth: context.width,
                       minWidth: context.width,
                       maxHeight: context.read<CounterCubit>().state == 0
-                          ? context.height - context.appBarSize - context.paddingBottom - 160.sp
+                          ? context.height - context.appBarSize - context.paddingBottom - 160.h
                           : context.height - context.appBarSize - context.paddingBottom,
                       minHeight: context.read<CounterCubit>().state == 0
-                          ? context.height - context.appBarSize - context.paddingBottom - 160.sp
+                          ? context.height - context.appBarSize - context.paddingBottom - 160.h
                           : context.height - context.appBarSize - context.paddingBottom,
                     ),
                     child: SingleChildScrollView(
@@ -151,20 +151,20 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                                   ? context.height -
                                       context.appBarSize -
                                       context.paddingBottom -
-                                      200.sp
+                                      200.h
                                   : context.height -
                                       context.appBarSize -
                                       context.paddingBottom -
-                                      70.sp,
+                                      70.h,
                               minHeight: context.read<CounterCubit>().state == 0
                                   ? context.height -
                                       context.appBarSize -
                                       context.paddingBottom -
-                                      200.sp
+                                      200.h
                                   : context.height -
                                       context.appBarSize -
                                       context.paddingBottom -
-                                      70.sp,
+                                      70.h,
                             ),
                             child: Column(
                               children: [
@@ -211,6 +211,7 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                                             data['latitude'] = position.latitude;
                                             data['longitude'] = position.longitude;
                                           }
+                                          if (!context.mounted) return;
                                           context.read<VisitCreationCubit>().validate(data: data);
                                           context.read<VisitBloc>().add(const VisitEvent.started());
                                       }

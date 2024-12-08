@@ -43,8 +43,8 @@ class CustomDropDown extends StatelessWidget {
       iconEnabledColor: kCeruleanBlue,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
-          horizontal: 12.sp,
-          vertical: 14.sp,
+          horizontal: 12.h,
+          vertical: 14.h,
         ),
         hintText: hintText,
         hintStyle: context.textTheme.bodyMedium!.copyWith(

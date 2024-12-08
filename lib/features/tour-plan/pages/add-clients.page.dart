@@ -1,6 +1,6 @@
 import 'package:crm/core/core.dart';
-import 'package:crm/shared/services/helpers/location.helper.dart';
-import 'package:crm/shared/widgets/inputs/custom.text.form.field.widget.dart';
+import 'package:crm/features/tour-plan/bloc/commune_cubit.dart';
+import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,12 +12,20 @@ import '../../../shared/widgets/image/svg.dart';
 import '../../../shared/widgets/inputs/dropdown.input.dart';
 import '../bloc/clients/clients_cubit.dart';
 import '../bloc/wilaya_cubit.dart';
+import '../models/commune/commune.dart';
 import '../models/wilaya/wilaya.dart';
 
-class AddClientsForm extends StatelessWidget {
+class AddClientsForm extends StatefulWidget {
   final Map<String, dynamic> data;
 
   const AddClientsForm({super.key, required this.data});
+
+  @override
+  State<AddClientsForm> createState() => _AddClientsFormState();
+}
+
+class _AddClientsFormState extends State<AddClientsForm> {
+  String? regionId;
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +57,15 @@ class AddClientsForm extends StatelessWidget {
               BlocBuilder<WilayaCubit, List<Wilaya>>(
                 builder: (context, state) {
                   return CustomDropDownInput(
-                      data: data,
+                      data: widget.data,
                       mapKey: 'regionId',
-                      onChanged: (value) =>
-                          context.read<ClientsCubit>().filter(regionId: value ?? ""),
+                      onChanged: (value) {
+                        context.read<ClientsCubit>().filter(regionId: value ?? "");
+
+                        setState(() {
+                          regionId = value;
+                        });
+                      },
                       items: [
                         CustomDropDownItem(
                           label: context.i10n.allRegions,
@@ -68,13 +81,32 @@ class AddClientsForm extends StatelessWidget {
                 },
               ),
               SizedBox(height: kSpacingX2),
-              CustomTextFormField(
-                data: data,
-                mapKey: 'commune',
-                hintText: context.i10n.tourCreationCommuneLabel,
-                onChanged: (value) {
-                  context.read<ClientsCubit>().filter(commune: value ?? "");
-                  return null;
+              BlocBuilder<CommuneCubit, List<Commune>>(
+                builder: (context, state) {
+                  return CustomDropDownInput(
+                      data: widget.data,
+                      mapKey: 'communeId',
+                      onChanged: (value) => context.read<ClientsCubit>().filter(
+                            regionId: widget.data['regionId'] ?? "",
+                            commune: value ?? "",
+                          ),
+                      items: [
+                        CustomDropDownItem(
+                          label: context.i10n.allCommunes,
+                          value: "",
+                        ),
+                        ...state.where((e) {
+                          if (regionId == null) {
+                            return true;
+                          }
+                          return e.wlyCode == regionId;
+                        }).map(
+                          (e) => CustomDropDownItem(
+                            label: e.name,
+                            value: e.name,
+                          ),
+                        )
+                      ]);
                 },
               ),
               SizedBox(height: kSpacingX5),
@@ -96,10 +128,10 @@ class AddClientsForm extends StatelessWidget {
                     separatorBuilder: (context, index) => SizedBox(height: kSpacingX4),
                     itemCount: 6,
                   ),
-                  loaded: (clients) {
-                    final filtered = clients
+                  loaded: (all, filter) {
+                    final filtered = filter
                         .where(
-                          (e) => e.supervisor == int.tryParse(data['delegueId']),
+                          (e) => e.supervisor == int.tryParse(widget.data['delegueId']),
                         )
                         .toList();
                     if (filtered.isEmpty) {
@@ -112,7 +144,7 @@ class AddClientsForm extends StatelessWidget {
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) => ClientCard(
                             client: filtered[index],
-                            data: data,
+                            data: widget.data,
                             checked: selection.selected.contains(
                               '${filtered[index].id.toString()}:${filtered[index].typeTier}',
                             ),
@@ -147,7 +179,7 @@ class ClientCardEmpty extends StatelessWidget {
       children: [
         SVG(
           'empty-states/info.svg',
-          height: 175.sp,
+          height: 175.h,
         ),
         SizedBox(height: kSpacingX3),
         Text(
@@ -176,21 +208,21 @@ class ClientCardShimmer extends StatelessWidget {
       highlightColor: kBgGrayVisibility2,
       child: ListTile(
         leading: Container(
-          width: 48.sp,
-          height: 48.sp,
+          width: 48.h,
+          height: 48.h,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: kBgGrayVisibility1,
           ),
         ),
         title: Container(
-          width: 20.sp,
-          height: 22.sp,
+          width: 20.h,
+          height: 22.h,
           color: kBgGrayVisibility1,
         ),
         subtitle: Container(
-          width: 297.sp,
-          height: 22.sp,
+          width: 297.h,
+          height: 22.h,
           color: kBgGrayVisibility1,
         ),
       ),
@@ -213,32 +245,17 @@ class ClientCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-        secondary: Container(
-          width: 48.sp,
-          height: 48.sp,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: kBgGrayVisibility1,
-            border: Border.all(
-              color: kBorder3,
-            ),
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            client.fullName.initials,
-          ),
+        secondary: ProfileCard(
+          size: 48.h,
+          text: client.fullName,
+          borderColor: client.prospect ?? false ? kCardinal : kCeruleanBlue,
         ),
         title: Text(client.fullName),
-        subtitle: client.latitude != null && client.longitude != null
-            ? FutureBuilder(
-                future: LocationHelper.addressFromLongitudeLatitude(
-                  latitude: client.latitude ?? 0,
-                  longitude: client.longitude ?? 0,
-                ),
-                builder: (context, snapshot) {
-                  return Text(snapshot.data ?? "");
-                })
-            : Text(context.i10n.tourCreationNoAddress),
+        subtitle: Text(
+          client.address ?? context.i10n.noAddress,
+          softWrap: true,
+          maxLines: 2,
+        ),
         tileColor: checked ? kCeruleanBlue.shade100 : null,
         value: checked,
         onChanged: (value) {

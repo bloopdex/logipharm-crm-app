@@ -67,7 +67,7 @@ class _CreateObservationPageState extends State<CreateObservationPage> {
             style: context.textTheme.headlineMedium,
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(160.sp),
+            preferredSize: Size.fromHeight(160.h),
             child: QuillToolbar.simple(
                 configurations: QuillSimpleToolbarConfigurations(
               controller: _quillController,
@@ -91,8 +91,8 @@ class _CreateObservationPageState extends State<CreateObservationPage> {
           key: _formKey,
           child: Container(
               constraints: BoxConstraints(
-                maxHeight: context.height - context.appBarSize - context.paddingBottom - 160.sp,
-                minHeight: context.height - context.appBarSize - context.paddingBottom - 160.sp,
+                maxHeight: context.height - context.appBarSize - context.paddingBottom - 160.h,
+                minHeight: context.height - context.appBarSize - context.paddingBottom - 160.h,
                 maxWidth: context.width,
                 minWidth: context.width,
               ),

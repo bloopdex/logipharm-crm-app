@@ -107,7 +107,7 @@ class PlanTourPage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(width: kSpacingX4),
-                            Icon(Icons.arrow_forward, size: 20.sp, color: kBgGrayVisibility4),
+                            Icon(Icons.arrow_forward, size: 20.h, color: kBgGrayVisibility4),
                             SizedBox(width: kSpacingX4),
                             Text(
                               DateHelper.ddMMYYYY(state.validatedEndDate!),

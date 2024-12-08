@@ -183,8 +183,7 @@ class AppTheme {
             }
             return kCodGray.shade400;
           }),
-          overlayColor:
-              MaterialStateProperty.all(kCeruleanBlue.withOpacity(0.3)),
+          overlayColor: MaterialStateProperty.all(kCeruleanBlue.withOpacity(0.3)),
           splashRadius: 24,
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
@@ -220,8 +219,7 @@ class AppTheme {
                 width: 2,
               ),
             ),
-            contentPadding: EdgeInsets.symmetric(
-                horizontal: kSpacingX5, vertical: kSpacingX4),
+            contentPadding: EdgeInsets.symmetric(horizontal: kSpacingX5, vertical: kSpacingX4),
             hintStyle: lightTextTheme().bodySmall!.copyWith(color: kText4),
             labelStyle: lightTextTheme().bodySmall!.copyWith(color: kText4),
             errorStyle: lightTextTheme().labelSmall!.copyWith(color: kCardinal),
@@ -275,49 +273,46 @@ class AppTheme {
           elevation: 2.0,
           shadowColor: kBgBlack,
           surfaceTintColor: kCeruleanBlue.shade100,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.sp)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.h)),
           headerBackgroundColor: kCeruleanBlue.shade600,
           headerForegroundColor: kWhite,
-          headerHeadlineStyle: TextStyle(color: kWhite, fontSize: 18.sp),
-          headerHelpStyle:
-              TextStyle(color: kWhite.withOpacity(0.7), fontSize: 16.sp),
-          weekdayStyle: TextStyle(color: kCodGray.shade900, fontSize: 14.sp),
-          dayStyle: TextStyle(color: kCodGray.shade900, fontSize: 14.sp),
-          dayForegroundColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          headerHeadlineStyle: TextStyle(color: kWhite, fontSize: 18.h),
+          headerHelpStyle: TextStyle(color: kWhite.withOpacity(0.7), fontSize: 16.h),
+          weekdayStyle: TextStyle(color: kCodGray.shade900, fontSize: 14.h),
+          dayStyle: TextStyle(color: kCodGray.shade900, fontSize: 14.h),
+          dayForegroundColor:
+              MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.selected)) {
               return kWhite;
             }
             return kCodGray.shade900;
           }),
-          dayBackgroundColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          dayBackgroundColor:
+              MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.selected)) {
               return kCeruleanBlue.shade600;
             }
             return kWhite;
           }),
-          dayOverlayColor:
-              MaterialStateProperty.all(kCeruleanBlue.withOpacity(0.3)),
-          todayForegroundColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          dayOverlayColor: MaterialStateProperty.all(kCeruleanBlue.withOpacity(0.3)),
+          todayForegroundColor:
+              MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.selected)) {
               return kWhite;
             }
             return kPrimaryColor;
           }),
-          todayBackgroundColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          todayBackgroundColor:
+              MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.selected)) {
               return kPrimaryColor;
             }
             return kWhite;
           }),
           todayBorder: BorderSide(color: kPrimaryColor),
-          yearStyle: TextStyle(color: kCodGray.shade900, fontSize: 16.sp),
-          yearForegroundColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          yearStyle: TextStyle(color: kCodGray.shade900, fontSize: 16.h),
+          yearForegroundColor:
+              MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.selected)) {
               return kWhite;
             }
@@ -329,22 +324,16 @@ class AppTheme {
           rangePickerElevation: 2.0,
           rangePickerShadowColor: kBgBlack,
           rangePickerSurfaceTintColor: kCeruleanBlue.shade100,
-          rangePickerShape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.sp)),
+          rangePickerShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.h)),
           rangePickerHeaderBackgroundColor: kCeruleanBlue,
           rangePickerHeaderForegroundColor: kWhite,
-          rangePickerHeaderHeadlineStyle:
-              TextStyle(color: kWhite, fontSize: 18.sp),
-          rangePickerHeaderHelpStyle:
-              TextStyle(color: kWhite.withOpacity(0.7), fontSize: 16.sp),
+          rangePickerHeaderHeadlineStyle: TextStyle(color: kWhite, fontSize: 18.h),
+          rangePickerHeaderHelpStyle: TextStyle(color: kWhite.withOpacity(0.7), fontSize: 16.h),
           rangeSelectionBackgroundColor: kCeruleanBlue.shade100,
-          rangeSelectionOverlayColor:
-              MaterialStateProperty.all(kCeruleanBlue.shade200),
+          rangeSelectionOverlayColor: MaterialStateProperty.all(kCeruleanBlue.shade200),
           dividerColor: kBorder1,
-          cancelButtonStyle:
-              TextButton.styleFrom(foregroundColor: kCodGray.shade900),
-          confirmButtonStyle:
-              TextButton.styleFrom(foregroundColor: kCeruleanBlue.shade600),
+          cancelButtonStyle: TextButton.styleFrom(foregroundColor: kCodGray.shade900),
+          confirmButtonStyle: TextButton.styleFrom(foregroundColor: kCeruleanBlue.shade600),
         ),
         dataTableTheme: DataTableThemeData(
           dataTextStyle: lightTextTheme().bodyMedium,
@@ -398,11 +387,11 @@ class AppTheme {
               width: 2,
             ),
           ),
-          contentPadding: EdgeInsets.symmetric(
-              horizontal: kSpacingX5, vertical: kSpacingX4),
+          contentPadding: EdgeInsets.symmetric(horizontal: kSpacingX5, vertical: kSpacingX4),
           hintStyle: lightTextTheme().bodySmall!.copyWith(color: kText4),
           labelStyle: lightTextTheme().bodySmall!.copyWith(color: kText4),
           errorStyle: lightTextTheme().bodySmall!.copyWith(color: kCardinal),
+          errorMaxLines: 3,
         ),
         buttonTheme: ButtonThemeData(
           buttonColor: kCeruleanBlue,

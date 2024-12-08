@@ -1,3 +1,4 @@
+import 'package:crm/features/navigation/navigation.screen.dart';
 import 'package:crm/shared/widgets/buttons/button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,8 +34,8 @@ class VisitCreationSuccessfulPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 140.sp,
-                    height: 140.sp,
+                    width: 140.h,
+                    height: 140.h,
                     padding: EdgeInsets.all(kSpacingX8),
                     decoration: BoxDecoration(
                       color: kCeruleanBlue.shade600,
@@ -44,7 +45,7 @@ class VisitCreationSuccessfulPage extends StatelessWidget {
                     child: SVG(
                       'visit.svg',
                       icon: true,
-                      height: 20.sp,
+                      height: 20.h,
                       fit: BoxFit.fitHeight,
                     ),
                   ),
@@ -67,7 +68,7 @@ class VisitCreationSuccessfulPage extends StatelessWidget {
             CustomButton(
               text: context.i10n.finish,
               onPressed: () {
-                context.pop();
+                context.pushAndRemoveUntil(const NavigationScreen());
               },
             ),
             SizedBox(height: kPaddingLg1),

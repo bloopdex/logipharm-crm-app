@@ -1,13 +1,15 @@
 import 'dart:developer';
 
 import 'package:crm/core/core.dart';
-import 'package:crm/shared/widgets/inputs/custom.text.form.field.widget.dart';
+import 'package:crm/features/tour-plan/models/motif_visit/motif_visit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../../models/person/person.dart';
 import '../../../shared/widgets/inputs/date.picker.input.dart';
 import '../../../shared/widgets/inputs/dropdown.input.dart';
+import '../../tour-plan/bloc/visit_motif_cubit.dart';
 import '../../tour-plan/models/tour.dart';
 import '../add_client_selection.dart';
 
@@ -93,6 +95,11 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                   data: widget.data,
                   mapKey: 'pharmacieId',
                   items: [
+                    if (pharmacy == null)
+                      CustomDropDownItem(
+                        label: context.i10n.selectClient,
+                        value: "",
+                      ),
                     if (pharmacy != null)
                       CustomDropDownItem(
                         label: pharmacy!.fullName,
@@ -126,7 +133,9 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                         if (!context.mounted || pharmacy == null) return;
 
                         setState(() {
-                          widget.data['pharmacieId'] = pharmacy.id.toString();
+                          widget.data['pharmacieId'] =
+                              '${pharmacy.id.toString()}:${pharmacy.typeTier.toString()}';
+                          widget.data['tourneeId'] = null;
                           this.pharmacy = pharmacy;
                         });
                       },
@@ -152,18 +161,33 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
             style: context.textTheme.bodyMedium,
           ),
           SizedBox(height: kSpacingX1),
-          CustomTextFormField(
-            data: widget.data,
-            mapKey: 'motif',
-            initialValue: widget.data['motif'],
-            onChanged: (value) => widget.data['motif'] = value,
-            validator: (value) {
-              if (value != null && value.isEmpty) {
-                return context.i10n.visitCreationReasonError;
+          BlocBuilder<MotifVisitCubit, List<MotifVisit>>(
+            builder: (context, state) {
+              if (state.isEmpty) {
+                return const CircularProgressIndicator();
+              } else {
+                return CustomDropDownInput(
+                  data: widget.data,
+                  mapKey: 'motif',
+                  items: [
+                    CustomDropDownItem(
+                      label: context.i10n.selectReason,
+                      value: "",
+                    ),
+                    ...state.map((motif) => CustomDropDownItem(
+                          value: motif.id.toString(),
+                          label: motif.label ?? "",
+                        ))
+                  ],
+                  initialValue: widget.data['motif'],
+                  onChanged: (value) {
+                    setState(() {
+                      widget.data['motif'] = value;
+                    });
+                  },
+                );
               }
-              return null;
             },
-            hintText: context.i10n.visitCreationReasonPlaceholder,
           ),
           SizedBox(height: kSpacingX5),
           Text(

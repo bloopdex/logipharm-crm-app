@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(kPaddingSm3),
                       border: Border.all(
                         color: kPrimaryColor,
-                        width: 2.sp,
+                        width: 2.h,
                       ),
                     ),
                     child: Column(
@@ -195,7 +195,8 @@ class HomePage extends StatelessWidget {
                         context.push(
                           CreateVisitPage(
                             tour: current,
-                            pharmacieId: current.pharmacies!.first.pharmacy!.id.toString(),
+                            pharmacieId:
+                                '${current.pharmacies!.first.pharmacy!.id.toString()}:${current.pharmacies!.first.pharmacy!.typeTier}',
                           ),
                         );
                       }
@@ -277,8 +278,8 @@ class HomePage extends StatelessWidget {
                                       element.pharmacy?.longitude != null))
                                   .map((e) {
                                 return Marker(
-                                  width: 50.sp,
-                                  height: 50.sp,
+                                  width: 50.h,
+                                  height: 50.h,
                                   point:
                                       LatLng(e.pharmacy!.latitude ?? 0, e.pharmacy!.longitude ?? 0),
                                   child: InkWell(
@@ -291,8 +292,8 @@ class HomePage extends StatelessWidget {
                                       );
                                     },
                                     child: Container(
-                                      width: 50.sp,
-                                      height: 50.sp,
+                                      width: 50.h,
+                                      height: 50.h,
                                       decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: kCardinal,

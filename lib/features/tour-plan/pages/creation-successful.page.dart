@@ -51,8 +51,8 @@ class CreationSuccessfulPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 140.sp,
-                      height: 140.sp,
+                      width: 140.h,
+                      height: 140.h,
                       padding: EdgeInsets.all(kSpacingX8),
                       decoration: BoxDecoration(
                         color: kCeruleanBlue.shade600,
@@ -62,7 +62,7 @@ class CreationSuccessfulPage extends StatelessWidget {
                       child: SVG(
                         'tour.svg',
                         icon: true,
-                        height: 20.sp,
+                        height: 20.h,
                         fit: BoxFit.fitHeight,
                       ),
                     ),

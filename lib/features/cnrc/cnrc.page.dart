@@ -85,7 +85,7 @@ class _CommercialRegisterContentState extends State<CommercialRegisterContent> {
                               children: [
                                 SVG(
                                   'empty-states/info.svg',
-                                  height: 175.sp,
+                                  height: 175.h,
                                 ),
                                 SizedBox(height: kSpacingX3),
                                 Text(
@@ -139,7 +139,7 @@ class _CommercialRegisterContentState extends State<CommercialRegisterContent> {
                                       Text(
                                         cnrc[index].address ?? context.i10n.noAddress,
                                         style: context.textTheme.bodyMedium!.copyWith(
-                                          fontSize: 12.sp,
+                                          fontSize: 12.h,
                                         ),
                                         maxLines: 2,
                                         softWrap: true,
