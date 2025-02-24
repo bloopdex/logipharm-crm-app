@@ -79,7 +79,6 @@ dependencies:
   fl_chart: ^0.68.0
   url_launcher_ios: ^6.3.2
 
-
 dev_dependencies:
   analyzer: ^6.4.1
   # Code generator for Flutter
