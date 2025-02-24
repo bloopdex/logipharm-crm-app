@@ -13,7 +13,7 @@ class DioHelper {
   static Future<void> init() async {
     dio = Dio(
       BaseOptions(
-        baseUrl: '$HTTP$baseUrl:$port$version',
+        baseUrl: baseUrl,
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
         receiveDataWhenStatusError: true,

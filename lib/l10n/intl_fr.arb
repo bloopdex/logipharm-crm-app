@@ -602,6 +602,38 @@
   "@clientList": {
     "description": "Liste des clients"
   },
+  "noClientsFound": "Aucun client trouvé",
+  "@noClientsFound": {
+    "description": "Aucun client trouvé"
+  },
+  "allClients": "Tous les clients",
+  "@allClients": {
+    "description": "Tous les clients"
+  },
+  "client": "Client",
+  "@client": {
+    "description": "Client"
+  },
+  "prospect": "Prospect",
+  "@prospect": {
+    "description": "Prospect"
+  },
+  "events": "Événements",
+  "@events": {
+    "description": "Événements"
+  },
+  "noEvents": "Aucun événement trouvé",
+  "@noEvents": {
+    "description": "Aucun événement trouvé"
+  },
+  "noEventsDesc": "Aucun événement trouvé pour aujourd'hui",
+  "@noEventsDesc": {
+    "description": "Aucun événement trouvé pour aujourd'hui"
+  },
+  "clientType": "Type de client",
+  "@clientType": {
+    "description": "Type de client"
+  },
   "analytics": "Analyses",
   "@analytics": {
     "description": "Analyses"
@@ -638,9 +670,9 @@
   "@hiring": {
     "description": "Recrutement"
   },
-  "fileCNRC": "Fichier CNRC",
+  "fileCNRC": "Prospect",
   "@fileCNRC": {
-    "description": "Fichier CNRC"
+    "description": "Prospect"
   },
   "system": "Système",
   "@system": {
@@ -894,9 +926,9 @@
   "@cantCreatePlanWhileOpened": {
     "description": "Vous ne pouvez pas créer un nouveau plan tant que vous avez un plan ouvert"
   },
-  "cnrc": "CNRC",
+  "cnrc": "Prospect",
   "@cnrc": {
-    "description": "CNRC"
+    "description": "Prospect"
   },
   "searchClient": "Rechercher un client",
   "@searchClient": {

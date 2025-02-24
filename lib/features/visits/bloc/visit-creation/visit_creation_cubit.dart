@@ -46,6 +46,9 @@ class VisitCreationCubit extends Cubit<VisitCreationState> {
           case 'error.visit.date':
             emit(VisitCreationState.failure(message: S.current.visitErrorDate));
             return;
+          case 'error.tourney.is.not.open':
+            emit(VisitCreationState.failure(message: S.current.visitTourIsntOpen));
+            return;
           default:
             emit(VisitCreationState.failure(message: S.current.error));
             return;

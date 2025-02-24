@@ -31,9 +31,9 @@ mixin _$Tour {
   @JsonKey(name: 'nom')
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'dateDebut')
-  String get startDate => throw _privateConstructorUsedError;
+  String? get startDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'dateFin')
-  String get endDate => throw _privateConstructorUsedError;
+  String? get endDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'statusFlag')
   int get statusFlag => throw _privateConstructorUsedError;
   @JsonKey(name: 'statusName')
@@ -69,8 +69,8 @@ abstract class $TourCopyWith<$Res> {
       @JsonKey(name: 'regionId') String regionId,
       @JsonKey(name: 'regionName') String? regionName,
       @JsonKey(name: 'nom') String? name,
-      @JsonKey(name: 'dateDebut') String startDate,
-      @JsonKey(name: 'dateFin') String endDate,
+      @JsonKey(name: 'dateDebut') String? startDate,
+      @JsonKey(name: 'dateFin') String? endDate,
       @JsonKey(name: 'statusFlag') int statusFlag,
       @JsonKey(name: 'statusName') String? statusName,
       @JsonKey(name: 'dateDebutEffective') String? effectiveStartDate,
@@ -103,8 +103,8 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
     Object? regionId = null,
     Object? regionName = freezed,
     Object? name = freezed,
-    Object? startDate = null,
-    Object? endDate = null,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
     Object? statusFlag = null,
     Object? statusName = freezed,
     Object? effectiveStartDate = freezed,
@@ -136,14 +136,14 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      startDate: null == startDate
+      startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      endDate: null == endDate
+              as String?,
+      endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       statusFlag: null == statusFlag
           ? _value.statusFlag
           : statusFlag // ignore: cast_nullable_to_non_nullable
@@ -217,8 +217,8 @@ abstract class _$$TourImplCopyWith<$Res> implements $TourCopyWith<$Res> {
       @JsonKey(name: 'regionId') String regionId,
       @JsonKey(name: 'regionName') String? regionName,
       @JsonKey(name: 'nom') String? name,
-      @JsonKey(name: 'dateDebut') String startDate,
-      @JsonKey(name: 'dateFin') String endDate,
+      @JsonKey(name: 'dateDebut') String? startDate,
+      @JsonKey(name: 'dateFin') String? endDate,
       @JsonKey(name: 'statusFlag') int statusFlag,
       @JsonKey(name: 'statusName') String? statusName,
       @JsonKey(name: 'dateDebutEffective') String? effectiveStartDate,
@@ -250,8 +250,8 @@ class __$$TourImplCopyWithImpl<$Res>
     Object? regionId = null,
     Object? regionName = freezed,
     Object? name = freezed,
-    Object? startDate = null,
-    Object? endDate = null,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
     Object? statusFlag = null,
     Object? statusName = freezed,
     Object? effectiveStartDate = freezed,
@@ -283,14 +283,14 @@ class __$$TourImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      startDate: null == startDate
+      startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      endDate: null == endDate
+              as String?,
+      endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       statusFlag: null == statusFlag
           ? _value.statusFlag
           : statusFlag // ignore: cast_nullable_to_non_nullable
@@ -373,10 +373,10 @@ class _$TourImpl implements _Tour {
   final String? name;
   @override
   @JsonKey(name: 'dateDebut')
-  final String startDate;
+  final String? startDate;
   @override
   @JsonKey(name: 'dateFin')
-  final String endDate;
+  final String? endDate;
   @override
   @JsonKey(name: 'statusFlag')
   final int statusFlag;
@@ -495,8 +495,8 @@ abstract class _Tour implements Tour {
       @JsonKey(name: 'regionId') required final String regionId,
       @JsonKey(name: 'regionName') final String? regionName,
       @JsonKey(name: 'nom') final String? name,
-      @JsonKey(name: 'dateDebut') required final String startDate,
-      @JsonKey(name: 'dateFin') required final String endDate,
+      @JsonKey(name: 'dateDebut') required final String? startDate,
+      @JsonKey(name: 'dateFin') required final String? endDate,
       @JsonKey(name: 'statusFlag') required final int statusFlag,
       @JsonKey(name: 'statusName') final String? statusName,
       @JsonKey(name: 'dateDebutEffective') final String? effectiveStartDate,
@@ -527,10 +527,10 @@ abstract class _Tour implements Tour {
   String? get name;
   @override
   @JsonKey(name: 'dateDebut')
-  String get startDate;
+  String? get startDate;
   @override
   @JsonKey(name: 'dateFin')
-  String get endDate;
+  String? get endDate;
   @override
   @JsonKey(name: 'statusFlag')
   int get statusFlag;

@@ -1,5 +1,6 @@
 import 'package:crm/core/core.dart';
 import 'package:crm/features/tour-plan/bloc/commune_cubit.dart';
+import 'package:crm/logic/search/search_cubit.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +11,7 @@ import '../../../logic/selection_cubit.dart';
 import '../../../models/person/person.dart';
 import '../../../shared/widgets/image/svg.dart';
 import '../../../shared/widgets/inputs/dropdown.input.dart';
+import '../../../shared/widgets/inputs/search.text.field.widget.dart';
 import '../bloc/clients/clients_cubit.dart';
 import '../bloc/wilaya_cubit.dart';
 import '../models/commune/commune.dart';
@@ -29,137 +31,143 @@ class _AddClientsFormState extends State<AddClientsForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-          color: Colors.white,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                context.i10n.tourCreationClientVisitsTitle,
-                style: context.textTheme.displayMedium,
-              ),
-              SizedBox(height: kSpacingX3),
-              Text(
-                context.i10n.tourCreationClientVisitsDescription,
-                style: context.textTheme.bodyLarge,
-              ),
-              SizedBox(height: kSpacingX7),
-              Text(
-                context.i10n.tourCreationRegionLabel,
-                style: context.textTheme.bodyMedium,
-              ),
-              SizedBox(height: kSpacingX1),
-              BlocBuilder<WilayaCubit, List<Wilaya>>(
-                builder: (context, state) {
-                  return CustomDropDownInput(
-                      data: widget.data,
-                      mapKey: 'regionId',
-                      onChanged: (value) {
-                        context.read<ClientsCubit>().filter(regionId: value ?? "");
+    return BlocListener<SearchCubit, String>(
+      listener: (context, state) {
+        if (state.isNotEmpty) {
+          context.read<ClientsCubit>().filter(searchQuery: state);
+        }
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+            color: Colors.white,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  context.i10n.tourCreationClientVisitsTitle,
+                  style: context.textTheme.displayMedium,
+                ),
+                SizedBox(height: kSpacingX3),
+                Text(
+                  context.i10n.tourCreationClientVisitsDescription,
+                  style: context.textTheme.bodyLarge,
+                ),
+                SizedBox(height: kSpacingX7),
+                SearchTextField(
+                  hintText: context.i10n.clientName,
+                ),
+                SizedBox(height: kSpacingX2),
+                BlocBuilder<WilayaCubit, List<Wilaya>>(
+                  builder: (context, state) {
+                    return CustomDropDownInput(
+                        data: widget.data,
+                        mapKey: 'regionId',
+                        onChanged: (value) {
+                          context.read<ClientsCubit>().filter(regionId: value ?? "");
 
-                        setState(() {
-                          regionId = value;
-                        });
-                      },
-                      items: [
-                        CustomDropDownItem(
-                          label: context.i10n.allRegions,
-                          value: "",
-                        ),
-                        ...state.map(
-                          (e) => CustomDropDownItem(
-                            label: e.name,
-                            value: e.code.toString(),
+                          setState(() {
+                            regionId = value;
+                          });
+                        },
+                        items: [
+                          CustomDropDownItem(
+                            label: context.i10n.allRegions,
+                            value: "",
                           ),
-                        )
-                      ]);
-                },
-              ),
-              SizedBox(height: kSpacingX2),
-              BlocBuilder<CommuneCubit, List<Commune>>(
-                builder: (context, state) {
-                  return CustomDropDownInput(
-                      data: widget.data,
-                      mapKey: 'communeId',
-                      onChanged: (value) => context.read<ClientsCubit>().filter(
-                            regionId: widget.data['regionId'] ?? "",
-                            commune: value ?? "",
-                          ),
-                      items: [
-                        CustomDropDownItem(
-                          label: context.i10n.allCommunes,
-                          value: "",
-                        ),
-                        ...state.where((e) {
-                          if (regionId == null) {
-                            return true;
-                          }
-                          return e.wlyCode == regionId;
-                        }).map(
-                          (e) => CustomDropDownItem(
-                            label: e.name,
-                            value: e.name,
-                          ),
-                        )
-                      ]);
-                },
-              ),
-              SizedBox(height: kSpacingX5),
-              Text(
-                context.i10n.tourCreationClientsLabel,
-                style: context.textTheme.bodyMedium,
-              ),
-              SizedBox(height: kSpacingX1),
-            ],
-          ),
-        ),
-        BlocBuilder<ClientsCubit, ClientsState>(
-          builder: (context, clientState) {
-            return Expanded(
-              child: Container(
-                child: clientState.maybeWhen(
-                  orElse: () => ListView.separated(
-                    itemBuilder: (context, index) => const ClientCardShimmer(),
-                    separatorBuilder: (context, index) => SizedBox(height: kSpacingX4),
-                    itemCount: 6,
-                  ),
-                  loaded: (all, filter) {
-                    final filtered = filter
-                        .where(
-                          (e) => e.supervisor == int.tryParse(widget.data['delegueId']),
-                        )
-                        .toList();
-                    if (filtered.isEmpty) {
-                      return const SingleChildScrollView(child: ClientCardEmpty());
-                    }
-                    return BlocBuilder<SelectionCubit, SelectionState>(
-                      builder: (context, selection) {
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) => ClientCard(
-                            client: filtered[index],
-                            data: widget.data,
-                            checked: selection.selected.contains(
-                              '${filtered[index].id.toString()}:${filtered[index].typeTier}',
+                          ...state.map(
+                            (e) => CustomDropDownItem(
+                              label: e.name,
+                              value: e.code.toString(),
                             ),
-                          ),
-                          itemCount: filtered.length,
-                        );
-                      },
-                    );
+                          )
+                        ]);
                   },
                 ),
-              ),
-            );
-          },
-        ),
-      ],
+                SizedBox(height: kSpacingX2),
+                BlocBuilder<CommuneCubit, List<Commune>>(
+                  builder: (context, state) {
+                    return CustomDropDownInput(
+                        data: widget.data,
+                        mapKey: 'communeId',
+                        onChanged: (value) => context.read<ClientsCubit>().filter(
+                              regionId: widget.data['regionId'] ?? "",
+                              commune: value ?? "",
+                            ),
+                        items: [
+                          CustomDropDownItem(
+                            label: context.i10n.allCommunes,
+                            value: "",
+                          ),
+                          ...state.where((e) {
+                            if (regionId == null) {
+                              return true;
+                            }
+                            return e.wlyCode == regionId;
+                          }).map(
+                            (e) => CustomDropDownItem(
+                              label: e.name,
+                              value: e.name,
+                            ),
+                          )
+                        ]);
+                  },
+                ),
+                SizedBox(height: kSpacingX5),
+                Text(
+                  context.i10n.tourCreationClientsLabel,
+                  style: context.textTheme.bodyMedium,
+                ),
+                SizedBox(height: kSpacingX1),
+              ],
+            ),
+          ),
+          BlocBuilder<ClientsCubit, ClientsState>(
+            builder: (context, clientState) {
+              return Expanded(
+                child: Container(
+                  child: clientState.maybeWhen(
+                    orElse: () => ListView.separated(
+                      itemBuilder: (context, index) => const ClientCardShimmer(),
+                      separatorBuilder: (context, index) => SizedBox(height: kSpacingX4),
+                      itemCount: 6,
+                    ),
+                    loaded: (all, filter) {
+                      final filtered = filter
+                          .where(
+                            (e) => e.supervisor == int.tryParse(widget.data['delegueId']),
+                          )
+                          .toList();
+                      if (filtered.isEmpty) {
+                        return const SingleChildScrollView(child: ClientCardEmpty());
+                      }
+                      return BlocBuilder<SelectionCubit, SelectionState>(
+                        builder: (context, selection) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) => ClientCard(
+                              client: filtered[index],
+                              data: widget.data,
+                              checked: selection.selected.contains(
+                                '${filtered[index].id.toString()}:${filtered[index].typeTier}',
+                              ),
+                            ),
+                            itemCount: filtered.length,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

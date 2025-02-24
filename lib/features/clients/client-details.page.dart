@@ -207,88 +207,67 @@ class ClientDetailsPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: kSpacingX3),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
+                    BlocBuilder<ClientDetailsCubit, ClientDetailsState>(
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                          orElse: () => const Loader(),
+                          loaded: (statistics) => Row(
                             children: [
-                              Container(
-                                padding: EdgeInsets.all(kPaddingSm3),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: context.read<ClientDetailsCubit>().state.maybeWhen(
-                                      orElse: () => kCardinal,
-                                      loaded: (statistics) {
-                                        if (!statistics.commercialBlockage) {
-                                          return kSuccessColor;
-                                        } else {
-                                          return kCardinal;
-                                        }
-                                      }),
-                                ),
-                                child: Icon(
-                                  context.read<ClientDetailsCubit>().state.maybeWhen(
-                                      orElse: () => Icons.error,
-                                      loaded: (statistics) {
-                                        if (!statistics.commercialBlockage) {
-                                          return Icons.check;
-                                        } else {
-                                          return Icons.error;
-                                        }
-                                      }),
-                                  color: kWhite,
-                                  size: kSpacingX7,
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(kPaddingSm3),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: !statistics.commercialBlockage
+                                            ? kSuccessColor
+                                            : kCardinal,
+                                      ),
+                                      child: Icon(
+                                        !statistics.commercialBlockage ? Icons.check : Icons.error,
+                                        color: kWhite,
+                                        size: kSpacingX7,
+                                      ),
+                                    ),
+                                    Text(
+                                      context.i10n.blockageCommercial,
+                                      softWrap: true,
+                                      maxLines: 2,
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Text(
-                                context.i10n.blockageCommercial,
-                                softWrap: true,
-                                maxLines: 2,
+                              SizedBox(width: kSpacingX3),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(kPaddingSm3),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: !statistics.financialBlockage
+                                            ? kSuccessColor
+                                            : kCardinal,
+                                      ),
+                                      child: Icon(
+                                        !statistics.financialBlockage ? Icons.check : Icons.error,
+                                        color: kWhite,
+                                        size: kSpacingX7,
+                                      ),
+                                    ),
+                                    Text(
+                                      context.i10n.blockageFinancial,
+                                      softWrap: true,
+                                      maxLines: 2,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                        SizedBox(width: kSpacingX3),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(kPaddingSm3),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: context.read<ClientDetailsCubit>().state.maybeWhen(
-                                      orElse: () => kCardinal,
-                                      loaded: (statistics) {
-                                        if (!statistics.financialBlockage) {
-                                          return kSuccessColor;
-                                        } else {
-                                          return kCardinal;
-                                        }
-                                      }),
-                                ),
-                                child: Icon(
-                                  context.read<ClientDetailsCubit>().state.maybeWhen(
-                                      orElse: () => Icons.error,
-                                      loaded: (statistics) {
-                                        if (!statistics.financialBlockage) {
-                                          return Icons.check;
-                                        } else {
-                                          return Icons.error;
-                                        }
-                                      }),
-                                  color: kWhite,
-                                  size: kSpacingX7,
-                                ),
-                              ),
-                              Text(
-                                context.i10n.blockageFinancial,
-                                softWrap: true,
-                                maxLines: 2,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
                     SizedBox(height: kSpacingX3),
                     Row(

@@ -195,7 +195,7 @@ Future<void> updateLocalization() async {
     final response = await Dio(BaseOptions(
       validateStatus: (status) => true,
     )).post(
-      '$HTTP$baseUrl:$port$version/position',
+      '$baseUrl/position',
       options: Options(
         headers: {
           'Authorization': token,

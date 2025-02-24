@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter the address"),
         "addressRequired":
             MessageLookupByLibrary.simpleMessage("Address is required"),
+        "allClients": MessageLookupByLibrary.simpleMessage("All Clients"),
         "allCommunes": MessageLookupByLibrary.simpleMessage("All Communes"),
         "allRegions": MessageLookupByLibrary.simpleMessage("All Regions"),
         "analytics": MessageLookupByLibrary.simpleMessage("Analytics"),
@@ -76,10 +77,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "claims": MessageLookupByLibrary.simpleMessage("Claims"),
+        "client": MessageLookupByLibrary.simpleMessage("Client"),
         "clientAddress": MessageLookupByLibrary.simpleMessage("Client Address"),
         "clientDetails": MessageLookupByLibrary.simpleMessage("Client Details"),
         "clientList": MessageLookupByLibrary.simpleMessage("Client List"),
         "clientName": MessageLookupByLibrary.simpleMessage("Client Name"),
+        "clientType": MessageLookupByLibrary.simpleMessage("Client Type"),
         "clients": MessageLookupByLibrary.simpleMessage("Clients"),
         "closeTourPlan":
             MessageLookupByLibrary.simpleMessage("Close Tour Plan"),
@@ -113,7 +116,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "etablissement": MessageLookupByLibrary.simpleMessage("Etablissement"),
-        "fileCNRC": MessageLookupByLibrary.simpleMessage("File CNRC"),
+        "events": MessageLookupByLibrary.simpleMessage("Events"),
+        "fileCNRC": MessageLookupByLibrary.simpleMessage("Prospect"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
         "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
         "firstNamePlaceholder":
@@ -174,11 +178,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "noClaims": MessageLookupByLibrary.simpleMessage("No claims"),
         "noClaimsDesc": MessageLookupByLibrary.simpleMessage(
             "No claims found for this client"),
+        "noClientsFound":
+            MessageLookupByLibrary.simpleMessage("No clients found"),
         "noEmail": MessageLookupByLibrary.simpleMessage("No email"),
         "noEtablissement":
             MessageLookupByLibrary.simpleMessage("No etablissement"),
         "noEtablissementDesc": MessageLookupByLibrary.simpleMessage(
             "No etablissement found for this client"),
+        "noEvents": MessageLookupByLibrary.simpleMessage("No events found"),
+        "noEventsDesc":
+            MessageLookupByLibrary.simpleMessage("No events found for today"),
         "noFirstName": MessageLookupByLibrary.simpleMessage("No first name"),
         "noGrossiste": MessageLookupByLibrary.simpleMessage("No grossiste"),
         "noGrossisteDesc": MessageLookupByLibrary.simpleMessage(
@@ -223,6 +232,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter the phone"),
         "phoneRequired":
             MessageLookupByLibrary.simpleMessage("Phone is required"),
+        "prospect": MessageLookupByLibrary.simpleMessage("Prospect"),
         "refused": MessageLookupByLibrary.simpleMessage("Refused"),
         "region": MessageLookupByLibrary.simpleMessage("Region"),
         "regionPlaceholder":

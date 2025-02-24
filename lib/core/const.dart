@@ -144,12 +144,16 @@ BoxShadow kDropShadowSecondary = BoxShadow(
 );
 const String HTTPS = 'https://';
 const String HTTP = 'http://';
-const String baseUrl = 'saouli.damnserver.com';
+
+const String port = "8085";
+
+const String baseUrl = 'http://crm.biopure.dz:$port';
+// const String baseUrl = 'http://optipharm.damnserver.com:$port';
+// const String baseUrl = 'optipharm.damnserver.com';
+// const String baseUrl = 'http://bestpharmaouest.damnserver.com:$port';
 // const String baseUrl = 'crm.millennium-medic.com';
 // const String baseUrl = '141.94.250.58';
 // const String baseUrl = '192.168.1.19';
-const String port = "8085";
-const String version = '';
 
 const List<String> supportedLanguages = [
   'fr',

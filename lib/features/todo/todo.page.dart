@@ -46,7 +46,7 @@ class TodoPage extends StatelessWidget {
                         children: [
                           Text(appointment.subject, style: context.textTheme.bodyMedium),
                           Text(
-                            appointment.notes ?? '',
+                            appointment.notes?.replaceAll('isOccurrenceAppointment', '') ?? '',
                             style: context.textTheme.bodySmall,
                           ),
                         ],

@@ -50,10 +50,14 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
     super.initState();
     context.read<CounterCubit>().reset();
     context.read<VisitCreationCubit>().reset();
+    debugPrint('tour: ${widget.tour}');
     data['dateDebut'] = DateTime.now().YYYYMMdd();
     data['pharmacieId'] = '${widget.tour.pharmacy!.id}:${widget.tour.pharmacy!.typeTier}';
     data['tourneeId'] = widget.tour.masterTourId;
-    data['motif'] = widget.tour.reason;
+    data['motif'] = widget.tour.reason?.id.toString();
+    if (widget.tour.reason != null && widget.tour.reason?.id != -1) {
+      data['motif'] = widget.tour.reason;
+    }
     if (widget.tour.report != null) {
       try {
         List<dynamic> deltaOperations = json.decode(widget.tour.report!);

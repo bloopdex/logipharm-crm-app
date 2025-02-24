@@ -1,15 +1,13 @@
 import 'package:crm/core/core.dart';
-import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:map_launcher/map_launcher.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../logic/search/search_cubit.dart';
 import '../../models/person/person.dart';
 import '../../shared/widgets/image/svg.dart';
 import '../../shared/widgets/inputs/search.text.field.widget.dart';
+import '../clients/clients.page.dart';
 import '../tour-plan/bloc/clients/clients_cubit.dart';
 
 class AddClientSelection extends StatefulWidget {
@@ -107,7 +105,13 @@ class _AddClientSelectionState extends State<AddClientSelection> {
                           itemCount: clients.length,
                           separatorBuilder: (context, index) => SizedBox(height: kSpacingX3),
                           itemBuilder: (context, index) {
-                            return ClientCard(client: clients[index]);
+                            return ClientCard(
+                              client: clients[index],
+                              showDetails: false,
+                              onPressed: () {
+                                Navigator.of(context).pop(clients[index]);
+                              },
+                            );
                           },
                         ),
                       );
@@ -118,78 +122,6 @@ class _AddClientSelectionState extends State<AddClientSelection> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ClientCard extends StatelessWidget {
-  final Person client;
-  const ClientCard({super.key, required this.client});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {
-        Navigator.pop(context, client);
-      },
-      leading: ProfileCard(
-        text: client.fullName,
-      ),
-      title: Text(client.fullName, style: context.textTheme.bodyLarge),
-      subtitle: Text(client.address ?? "", style: context.textTheme.bodyMedium),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          InkWell(
-            onTap: () async {
-              final Uri phoneLaunchUri = Uri.parse(
-                  'tel://${client.telMobile ?? client.tel1Fixe ?? client.tel2Fixe ?? ""}');
-
-              if (client.tel1Fixe != null || client.tel2Fixe != null || client.telMobile != null) {
-                await launchUrl(phoneLaunchUri);
-              }
-            },
-            child: Container(
-              padding: EdgeInsets.all(kPaddingSm3),
-              decoration: BoxDecoration(
-                color: kPrimaryColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(kRadiusRounded),
-              ),
-              child: Icon(
-                Icons.phone_rounded,
-                size: kSpacingX4,
-                color: kPrimaryColor,
-              ),
-            ),
-          ),
-          SizedBox(width: kSpacingX2),
-          InkWell(
-            onTap: () async {
-              if (client.latitude == null || client.longitude == null) {
-                return;
-              }
-              final availableMaps = await MapLauncher.installedMaps;
-              if (!context.mounted) return;
-              await availableMaps.first.showMarker(
-                coords: Coords(client.latitude!, client.longitude!),
-                title: context.i10n.clientAddress,
-              );
-            },
-            child: Container(
-              padding: EdgeInsets.all(kPaddingSm3),
-              decoration: BoxDecoration(
-                color: kPrimaryColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(kRadiusRounded),
-              ),
-              child: Icon(
-                Icons.map_rounded,
-                size: kSpacingX4,
-                color: kPrimaryColor,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

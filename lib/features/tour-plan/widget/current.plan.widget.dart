@@ -47,7 +47,7 @@ class CurrentWidgetCard extends StatelessWidget {
                       // Use Center to align the text widget inside the container
                       child: Text(
                         DateFormat("d\nMMM").format(
-                          DateTime.parse(tour.startDate),
+                          DateTime.parse(tour.startDate ?? DateTime.now().toString()),
                         ),
                         textAlign: TextAlign.center,
                         style: context.textTheme.displaySmall!.copyWith(
@@ -167,7 +167,7 @@ class CurrentWidgetCardSupervisor extends StatelessWidget {
                       // Use Center to align the text widget inside the container
                       child: Text(
                         DateFormat("d\nMMM").format(
-                          DateTime.parse(tour.startDate),
+                          DateTime.parse(tour.startDate ?? DateTime.now().toString()),
                         ),
                         textAlign: TextAlign.center,
                         style: context.textTheme.displaySmall!.copyWith(

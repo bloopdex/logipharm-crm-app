@@ -610,6 +610,38 @@
   "@clientList": {
     "description": "Client List"
   },
+  "noClientsFound": "No clients found",
+  "@noClientsFound": {
+    "description": "No clients found"
+  },
+  "allClients": "All Clients",
+  "@allClients": {
+    "description": "All Clients"
+  },
+  "client": "Client",
+  "@client": {
+    "description": "Client"
+  },
+  "prospect": "Prospect",
+  "@prospect": {
+    "description": "Prospect"
+  },
+  "events": "Events",
+  "@events": {
+    "description": "Events"
+  },
+  "noEvents": "No events found",
+  "@noEvents": {
+    "description": "No events found"
+  },
+  "noEventsDesc": "No events found for today",
+  "@noEventsDesc": {
+    "description": "No events found for today"
+  },
+  "clientType": "Client Type",
+  "@clientType": {
+    "description": "Client Type"
+  },
   "analytics": "Analytics",
   "@analytics": {
     "description": "Analytics"
@@ -646,9 +678,9 @@
   "@hiring": {
     "description": "Hiring"
   },
-  "fileCNRC": "File CNRC",
+  "fileCNRC": "Prospect",
   "@fileCNRC": {
-    "description": "File CNRC"
+    "description": "Prospect"
   },
   "system": "System",
   "@system": {

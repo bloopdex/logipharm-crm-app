@@ -89,20 +89,6 @@ class CreationSuccessfulPage extends StatelessWidget {
                 builder: (context, state) {
                   return Column(
                     children: [
-                      CustomButton(
-                        text: context.i10n.start,
-                        onPressed: () {
-                          state.maybeWhen(
-                            orElse: () {},
-                            loaded: (tour) {
-                              context.read<TourPlanBloc>().add(
-                                    TourPlanEvent.startTour(tourId: tour.tourId),
-                                  );
-                            },
-                          );
-                        },
-                      ),
-                      SizedBox(height: kSpacingX5),
                       ModalBottomSheet(
                         icon: const SVG('tour.svg', icon: true),
                         confirmText: context.i10n.viewDetails,

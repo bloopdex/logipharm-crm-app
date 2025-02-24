@@ -13,6 +13,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/core.dart';
 import '../../shared/widgets/buttons/button.widget.dart';
+import '../clients/blocs/details/client_details_cubit.dart';
+import '../clients/blocs/etablissement/etablissement_cubit.dart';
+import '../clients/blocs/grossiste/grossiste_cubit.dart';
 import '../visits/create-visit.page.dart';
 import 'models/tour.dart';
 import 'widget/tour.status.widget.dart';
@@ -155,7 +158,7 @@ class TourPlanDetailPage extends StatelessWidget {
                           style: context.textTheme.headlineSmall,
                         ),
                         Text(
-                          tour.startDate,
+                          tour.startDate ?? '',
                           style: context.textTheme.bodyMedium,
                         ),
                       ],
@@ -407,6 +410,9 @@ class TourClientsList extends StatelessWidget {
           onTap: () {
             context.read<ObservationCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
             context.read<ClaimCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
+            context.read<GrossisteCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
+            context.read<EtablissementCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
+            context.read<ClientDetailsCubit>().load(clientId: pharmacy.pharmacy!.id);
             context.push(
               ClientDetailsPage(client: pharmacy.pharmacy!),
             );

@@ -1536,6 +1536,86 @@ class S {
     );
   }
 
+  /// `No clients found`
+  String get noClientsFound {
+    return Intl.message(
+      'No clients found',
+      name: 'noClientsFound',
+      desc: 'No clients found',
+      args: [],
+    );
+  }
+
+  /// `All Clients`
+  String get allClients {
+    return Intl.message(
+      'All Clients',
+      name: 'allClients',
+      desc: 'All Clients',
+      args: [],
+    );
+  }
+
+  /// `Client`
+  String get client {
+    return Intl.message(
+      'Client',
+      name: 'client',
+      desc: 'Client',
+      args: [],
+    );
+  }
+
+  /// `Prospect`
+  String get prospect {
+    return Intl.message(
+      'Prospect',
+      name: 'prospect',
+      desc: 'Prospect',
+      args: [],
+    );
+  }
+
+  /// `Events`
+  String get events {
+    return Intl.message(
+      'Events',
+      name: 'events',
+      desc: 'Events',
+      args: [],
+    );
+  }
+
+  /// `No events found`
+  String get noEvents {
+    return Intl.message(
+      'No events found',
+      name: 'noEvents',
+      desc: 'No events found',
+      args: [],
+    );
+  }
+
+  /// `No events found for today`
+  String get noEventsDesc {
+    return Intl.message(
+      'No events found for today',
+      name: 'noEventsDesc',
+      desc: 'No events found for today',
+      args: [],
+    );
+  }
+
+  /// `Client Type`
+  String get clientType {
+    return Intl.message(
+      'Client Type',
+      name: 'clientType',
+      desc: 'Client Type',
+      args: [],
+    );
+  }
+
   /// `Analytics`
   String get analytics {
     return Intl.message(
@@ -1626,12 +1706,12 @@ class S {
     );
   }
 
-  /// `File CNRC`
+  /// `Prospect`
   String get fileCNRC {
     return Intl.message(
-      'File CNRC',
+      'Prospect',
       name: 'fileCNRC',
-      desc: 'File CNRC',
+      desc: 'Prospect',
       args: [],
     );
   }

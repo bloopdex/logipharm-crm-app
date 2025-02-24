@@ -8,7 +8,7 @@ class VisitMotifRepository {
     final String token = (await AuthRepository.token) ?? "";
 
     return await DioHelper.getData(
-      url: '/lov/18',
+      url: '/lov/65',
       query: {
         'active': '1',
       },
