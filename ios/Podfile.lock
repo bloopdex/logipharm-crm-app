@@ -7,9 +7,6 @@ PODS:
     - Flutter
   - battery_plus (1.0.0):
     - Flutter
-  - connectivity_plus (0.0.1):
-    - Flutter
-    - FlutterMacOS
   - device_info_plus (0.0.1):
     - Flutter
   - DKImagePickerController/Core (4.3.4):
@@ -94,7 +91,6 @@ DEPENDENCIES:
   - battery (from `.symlinks/plugins/battery/ios`)
   - battery_info (from `.symlinks/plugins/battery_info/ios`)
   - battery_plus (from `.symlinks/plugins/battery_plus/ios`)
-  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/darwin`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
@@ -132,8 +128,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/battery_info/ios"
   battery_plus:
     :path: ".symlinks/plugins/battery_plus/ios"
-  connectivity_plus:
-    :path: ".symlinks/plugins/connectivity_plus/darwin"
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
   file_picker:
@@ -180,7 +174,6 @@ SPEC CHECKSUMS:
   battery: 6b19dafdbba590f03b1f0cd2f1224e3ffedadbe6
   battery_info: 09f5c9ee65394f2291c8c6227bedff345b8a730c
   battery_plus: 1ff2e16ba75af2a78387f65476057a390b47885e
-  connectivity_plus: ddd7f30999e1faaef5967c23d5b6d503d10434db
   device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
@@ -192,7 +185,7 @@ SPEC CHECKSUMS:
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   geocoding_ios: d7460f56e80e118d57678efe5c2cdc888739ff18
-  geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
+  geolocator_apple: 9bcea1918ff7f0062d98345d238ae12718acfbc1
   irondash_engine_context: 3458bf979b90d616ffb8ae03a150bafe2e860cc9
   map_launcher: 5fde49ac9a52672bf99da746599f507b4490d7b5
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46

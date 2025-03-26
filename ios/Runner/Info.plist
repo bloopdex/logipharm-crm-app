@@ -45,19 +45,66 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- Location Permissions -->
 	<key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app needs access to location when open.</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>tel</string>
-        <string>sms</string>
-        <string>mailto</string>
-        <string>https</string>
-        <string>http</string>
-    </array>
-    <key>NSDocumentsDirectory</key>
-    <string>A2S CRM needs access to your documents directory to pick files.</string>
-    <key>NSLibraryDirectory</key>
-    <string>A2S CRM needs access to your library directory to pick files.</string>
+	<string>This app needs access to location when open.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app needs access to location both when open and in the background.</string>
+
+	<!-- Photo Library Access -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library to upload documents.</string>
+
+	<!-- Document Access -->
+	<key>NSDocumentsDirectory</key>
+	<string>A2S CRM needs access to your documents directory to pick files.</string>
+	<key>NSLibraryDirectory</key>
+	<string>A2S CRM needs access to your library directory to pick files.</string>
+
+	<!-- URL Schemes -->
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tel</string>
+		<string>sms</string>
+		<string>mailto</string>
+		<string>https</string>
+		<string>http</string>
+	</array>
+
+	<!-- Privacy Manifests -->
+	<key>NSPrivacyAccessedAPIs</key>
+	<array>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryDiskSpace</string>
+			<key>NSPrivacyAccessedAPIPurpose</key>
+			<string>Used for necessary functionality</string>
+		</dict>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+			<key>NSPrivacyAccessedAPIPurpose</key>
+			<string>Used for necessary functionality</string>
+		</dict>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategorySystemBootTime</string>
+			<key>NSPrivacyAccessedAPIPurpose</key>
+			<string>Used for necessary functionality</string>
+		</dict>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPIPurpose</key>
+			<string>Used for necessary functionality</string>
+		</dict>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryNetworking</string>
+			<key>NSPrivacyAccessedAPIPurpose</key>
+			<string>Used for necessary functionality</string>
+		</dict>
+	</array>
 </dict>
 </plist>
