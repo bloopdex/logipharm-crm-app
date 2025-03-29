@@ -17,8 +17,11 @@ class CustomTextFormField extends StatelessWidget {
     this.autoFillHints = const [],
     this.onChanged,
     this.controller,
+    this.focusNode,
+    this.readOnly = false,
   });
 
+  final FocusNode? focusNode;
   final String? initialValue;
   final String? hintText;
   final TextInputType keyboardType;
@@ -33,10 +36,13 @@ class CustomTextFormField extends StatelessWidget {
   final int minLines;
   final List<String> autoFillHints;
   final String? Function(String?)? onChanged;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly,
+      focusNode: focusNode,
       controller: controller,
       initialValue: initialValue,
       autocorrect: false,

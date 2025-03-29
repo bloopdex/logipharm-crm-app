@@ -20,11 +20,14 @@ class Debouncer {
 class SearchTextField extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
+  // onChanged
+  final void Function(String)? onChanged;
 
   const SearchTextField({
     super.key,
     required this.hintText,
     this.keyboardType = TextInputType.text,
+    this.onChanged,
   });
 
   @override
@@ -38,6 +41,7 @@ class SearchTextField extends StatelessWidget {
           onChanged: (value) {
             debouncer.run(() {
               context.read<SearchCubit>().search(value);
+              onChanged?.call(value);
             });
           },
           keyboardType: keyboardType,

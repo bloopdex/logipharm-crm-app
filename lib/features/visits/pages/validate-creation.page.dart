@@ -1,8 +1,10 @@
+import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../../core/core.dart';
+import '../../../models/person/person.dart';
 import '../../../shared/services/helpers/location.helper.dart';
 import '../../tour-plan/models/tour.dart';
 import '../bloc/visit-creation/visit_creation_cubit.dart';
@@ -10,16 +12,33 @@ import '../bloc/visit-creation/visit_creation_cubit.dart';
 class VisitValidateCreationPage extends StatelessWidget {
   final Tour tour;
   final Map<String, dynamic> data;
-  const VisitValidateCreationPage(
-      {super.key, required this.data, required this.tour});
+
+  const VisitValidateCreationPage({super.key, required this.data, required this.tour});
 
   @override
   Widget build(BuildContext context) {
-    print('tour: $tour');
-    final TourDetail? client = tour.pharmacies?.firstWhere(
-      (element) => element.pharmacy!.id.toString() == data['pharmacieId'],
-    );
-
+    List<TourDetail> clients = tour.pharmacies
+            ?.where(
+              (element) =>
+                  '${element.pharmacy?.id.toString()}:${element.pharmacy?.typeTier}' ==
+                  data['pharmacieId'],
+            )
+            .toList() ??
+        [];
+    TourDetail? client = clients.isNotEmpty ? clients.first : null;
+    Person? pharmacy;
+    if (client == null) {
+      pharmacy = context.read<ClientsCubit>().state.maybeWhen(
+          orElse: () => null,
+          loaded: (all, filter) {
+            return all
+                .where(
+                  (element) =>
+                      '${element.id.toString()}:${element.typeTier}' == data['pharmacieId'],
+                )
+                .firstOrNull;
+          });
+    }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
       child: Column(
@@ -56,6 +75,8 @@ class VisitValidateCreationPage extends StatelessWidget {
                               SizedBox(height: kSpacingX1),
                               Text(
                                 message,
+                                softWrap: true,
+                                maxLines: 3,
                                 style: context.textTheme.bodyMedium,
                               ),
                             ],
@@ -91,7 +112,9 @@ class VisitValidateCreationPage extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                                client?.pharmacy?.fullName.initials ?? "",
+                                client?.pharmacy?.fullName.initials ??
+                                    pharmacy?.fullName.initials ??
+                                    "",
                                 textAlign: TextAlign.center,
                                 style: context.textTheme.bodyMedium),
                           ),
@@ -107,19 +130,19 @@ class VisitValidateCreationPage extends StatelessWidget {
                               ),
                               SizedBox(height: kSpacingX1),
                               Text(
-                                client?.pharmacy?.fullName ?? "",
+                                client?.pharmacy?.fullName ?? pharmacy?.fullName ?? "",
                                 style: context.textTheme.displaySmall,
                               ),
                               SizedBox(height: kSpacingX1),
-                              client?.pharmacy?.latitude != null &&
-                                      client?.pharmacy?.longitude != null
+                              (client?.pharmacy?.latitude != null &&
+                                          client?.pharmacy?.longitude != null) ||
+                                      (pharmacy?.latitude != null && pharmacy?.longitude != null)
                                   ? FutureBuilder(
-                                      future: LocationHelper
-                                          .addressFromLongitudeLatitude(
+                                      future: LocationHelper.addressFromLongitudeLatitude(
                                         latitude:
-                                            client?.pharmacy?.latitude ?? 0,
+                                            client?.pharmacy?.latitude ?? pharmacy?.latitude ?? 0,
                                         longitude:
-                                            client?.pharmacy?.longitude ?? 0,
+                                            client?.pharmacy?.longitude ?? pharmacy?.longitude ?? 0,
                                       ),
                                       builder: (context, snapshot) {
                                         return Text(
@@ -159,20 +182,18 @@ class VisitValidateCreationPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: kPaddingMd2, vertical: kPaddingSm3),
+                    padding: EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingSm3),
                     decoration: BoxDecoration(
                       border: Border.all(color: kBorder3),
                       borderRadius: BorderRadius.circular(kSpacingX3),
                     ),
                     child: QuillEditor.basic(
                       configurations: QuillEditorConfigurations(
-                        readOnly: true,
                         showCursor: false,
                         controller: QuillController(
-                          document: data['document'],
-                          selection: const TextSelection.collapsed(offset: 0),
-                        ),
+                            document: data['document'],
+                            selection: const TextSelection.collapsed(offset: 0),
+                            readOnly: true),
                       ),
                     ),
                   ),

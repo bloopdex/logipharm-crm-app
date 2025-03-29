@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -18,43 +19,81 @@ class ClientsCubit extends Cubit<ClientsState> {
     try {
       final Response response = await ClientRepository.get();
       if (response.statusCode == 200) {
-        List<Person> clients = response.data['body']
-            .map<Person>((client) => Person.fromJson(client))
-            .toList();
-        emit(ClientsState.loaded(clients));
+        List<Person> clients =
+            response.data['body'].map<Person>((client) => Person.fromJson(client)).toList();
+
+        clients.sort((a, b) => a.fullName.toLowerCase().compareTo(b.fullName.toLowerCase()));
+        // Initially, the filtered clients list is the same as the full clients list
+        emit(ClientsState.loaded(allClients: clients, filteredClients: clients));
       } else {
-        emit(const ClientsState.loaded([]));
+        emit(const ClientsState.loaded(allClients: [], filteredClients: []));
       }
     } catch (e) {
       emit(const ClientsState.error('An error occurred'));
     }
   }
 
-  Future<void> filter(String regionId) async {
-    if (state.maybeWhen(
-      orElse: () => false,
-      loaded: (clients) => clients.isEmpty,
-    )) {
-      emit(const ClientsState.loading());
-      final Response response = await ClientRepository.get();
-      if (response.statusCode == 200) {
-        List<Person> clients = response.data['body']
-            .map<Person>((client) => Person.fromJson(client))
-            .toList();
-        emit(ClientsState.loaded(
-            clients.where((element) => element.regionId == regionId).toList()));
-      } else {
-        emit(const ClientsState.loaded([]));
-      }
+  Future<void> filter(
+      {String searchQuery = "", String regionId = "", String commune = "", bool? prospect}) async {
+    try {
+      state.maybeWhen(
+        loaded: (allClients, filteredClients) {
+          // Start with the full list of clients
+          List<Person> filteredList = List.from(allClients);
+
+          // Apply region filter if provided
+          if (regionId.isNotEmpty) {
+            filteredList = filteredList.where((client) => client.regionId == regionId).toList();
+          }
+
+          // Apply commune filter if provided
+          if (commune.isNotEmpty) {
+            filteredList = filteredList.where((client) {
+              final ville = client.ville?.toLowerCase() ?? '';
+              final searchCommune = commune.toLowerCase();
+
+              debugPrint('Filtering by Commune: $commune');
+              debugPrint('Client Ville: $ville');
+
+              return ville.contains(searchCommune);
+            }).toList();
+          }
+
+          // Apply search query filter if provided
+          if (searchQuery.isNotEmpty) {
+            filteredList = filteredList.where((client) {
+              final fullName = client.fullName.toLowerCase();
+              final lastName = client.lastName.toLowerCase();
+              final firstName = client.firstName?.toLowerCase() ?? '';
+              final query = searchQuery.toLowerCase();
+
+              debugPrint('Filtering by Search Query: $searchQuery');
+              debugPrint('Client Full Name: $fullName');
+
+              return fullName.contains(query) ||
+                  lastName.contains(query) ||
+                  firstName.contains(query);
+            }).toList();
+          }
+
+          // Filter by client type
+          if (prospect != null) {
+            filteredList = filteredList.where((client) => client.prospect == prospect).toList();
+          }
+
+          filteredList.sort((a, b) => a.fullName.toLowerCase().compareTo(b.fullName.toLowerCase()));
+
+          // Emit new state with updated filtered clients
+          emit(ClientsState.loaded(allClients: allClients, filteredClients: filteredList));
+        },
+        orElse: () {},
+      );
+    } catch (e) {
+      emit(const ClientsState.error('An error occurred during filtering'));
     }
-    if (regionId.isEmpty) {
-      emit(const ClientsState.loaded([]));
-    } else {
-      List<Person> filteredClients = state.maybeWhen(
-          orElse: () => [],
-          loaded: (state) =>
-              state.where((element) => element.regionId == regionId).toList());
-      emit(ClientsState.loaded(filteredClients));
-    }
+  }
+
+  void reset() {
+    emit(const ClientsState.initial());
   }
 }

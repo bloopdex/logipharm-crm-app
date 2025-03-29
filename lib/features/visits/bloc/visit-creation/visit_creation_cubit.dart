@@ -35,12 +35,19 @@ class VisitCreationCubit extends Cubit<VisitCreationState> {
       } else {
         switch (response.data['codeError']) {
           case 'error.tournee.is.not.open':
-            emit(VisitCreationState.failure(
-                message: S.current.visitTourIsntOpen));
+            emit(VisitCreationState.failure(message: S.current.visitTourIsntOpen));
             return;
           case 'error.visit.already.entered':
-            emit(VisitCreationState.failure(
-                message: S.current.visitAlreadyEntered));
+            emit(VisitCreationState.failure(message: S.current.visitAlreadyEntered));
+            return;
+          case 'error.privilege.add.visit':
+            emit(VisitCreationState.failure(message: S.current.visitPrivilegeMissing));
+            return;
+          case 'error.visit.date':
+            emit(VisitCreationState.failure(message: S.current.visitErrorDate));
+            return;
+          case 'error.tourney.is.not.open':
+            emit(VisitCreationState.failure(message: S.current.visitTourIsntOpen));
             return;
           default:
             emit(VisitCreationState.failure(message: S.current.error));

@@ -11,9 +11,8 @@ class DelegateCubit extends Cubit<List<Person>> {
     try {
       final Response response = await DelegateRepository.get();
       if (response.statusCode == 200) {
-        List<Person> delegates = response.data['body']
-            .map<Person>((delegate) => Person.fromJson(delegate))
-            .toList();
+        List<Person> delegates =
+            response.data['body'].map<Person>((delegate) => Person.fromJson(delegate)).toList();
         emit(delegates);
       } else {
         emit([]);
@@ -21,5 +20,9 @@ class DelegateCubit extends Cubit<List<Person>> {
     } catch (e) {
       emit([]);
     }
+  }
+
+  void reset() {
+    emit([]);
   }
 }

@@ -20,8 +20,7 @@ class TourTabListWidget extends StatefulWidget {
   State<TourTabListWidget> createState() => _TourTabListWidgetState();
 }
 
-class _TourTabListWidgetState extends State<TourTabListWidget>
-    with TickerProviderStateMixin {
+class _TourTabListWidgetState extends State<TourTabListWidget> with TickerProviderStateMixin {
   late TabController tabController;
 
   @override
@@ -58,12 +57,9 @@ class _TourTabListWidgetState extends State<TourTabListWidget>
             controller: tabController,
             children: [
               TourListWidget(state: widget.state, flag: StatuFlags.all.value),
-              TourListWidget(
-                  state: widget.state, flag: StatuFlags.pending.value),
-              TourListWidget(
-                  state: widget.state, flag: StatuFlags.opened.value),
-              TourListWidget(
-                  state: widget.state, flag: StatuFlags.closed.value),
+              TourListWidget(state: widget.state, flag: StatuFlags.pending.value),
+              TourListWidget(state: widget.state, flag: StatuFlags.opened.value),
+              TourListWidget(state: widget.state, flag: StatuFlags.closed.value),
             ],
           ),
         ),
@@ -98,7 +94,7 @@ class _TourListWidgetState extends State<TourListWidget> {
   @override
   Widget build(BuildContext context) {
     return widget.state.maybeWhen(
-      loaded: (tours, hasReachedMax, currentPage) {
+      loaded: (tours, hasReachedMax, currentPage, goal) {
         if (tours.isEmpty) {
           return Center(
               child: Column(
@@ -108,7 +104,7 @@ class _TourListWidgetState extends State<TourListWidget> {
             children: [
               SVG(
                 'empty-states/info.svg',
-                height: 175.sp,
+                height: 175.h,
               ),
               SizedBox(height: kSpacingX3),
               Text(
@@ -126,9 +122,7 @@ class _TourListWidgetState extends State<TourListWidget> {
         // filter tours by status
         final List<Tour> filteredList;
         if (widget.flag != StatuFlags.all.value) {
-          filteredList = tours
-              .where((element) => element.statusFlag == widget.flag)
-              .toList();
+          filteredList = tours.where((element) => element.statusFlag == widget.flag).toList();
         } else {
           filteredList = tours;
         }

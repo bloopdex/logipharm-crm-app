@@ -25,6 +25,7 @@ mixin _$TourPlanEvent {
         load,
     required TResult Function(String tourId) startTour,
     required TResult Function(String tourId) closeTour,
+    required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$TourPlanEvent {
     TResult? Function(String query, DateTime? start, DateTime? end)? load,
     TResult? Function(String tourId)? startTour,
     TResult? Function(String tourId)? closeTour,
+    TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,6 +45,7 @@ mixin _$TourPlanEvent {
     TResult Function(String query, DateTime? start, DateTime? end)? load,
     TResult Function(String tourId)? startTour,
     TResult Function(String tourId)? closeTour,
+    TResult Function()? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -53,6 +56,7 @@ mixin _$TourPlanEvent {
     required TResult Function(_Load value) load,
     required TResult Function(_StartTour value) startTour,
     required TResult Function(_CloseTour value) closeTour,
+    required TResult Function(_Reset value) reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +66,7 @@ mixin _$TourPlanEvent {
     TResult? Function(_Load value)? load,
     TResult? Function(_StartTour value)? startTour,
     TResult? Function(_CloseTour value)? closeTour,
+    TResult? Function(_Reset value)? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +76,7 @@ mixin _$TourPlanEvent {
     TResult Function(_Load value)? load,
     TResult Function(_StartTour value)? startTour,
     TResult Function(_CloseTour value)? closeTour,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,6 +145,7 @@ class _$StartedImpl implements _Started {
         load,
     required TResult Function(String tourId) startTour,
     required TResult Function(String tourId) closeTour,
+    required TResult Function() reset,
   }) {
     return started();
   }
@@ -151,6 +158,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(String query, DateTime? start, DateTime? end)? load,
     TResult? Function(String tourId)? startTour,
     TResult? Function(String tourId)? closeTour,
+    TResult? Function()? reset,
   }) {
     return started?.call();
   }
@@ -163,6 +171,7 @@ class _$StartedImpl implements _Started {
     TResult Function(String query, DateTime? start, DateTime? end)? load,
     TResult Function(String tourId)? startTour,
     TResult Function(String tourId)? closeTour,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -179,6 +188,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Load value) load,
     required TResult Function(_StartTour value) startTour,
     required TResult Function(_CloseTour value) closeTour,
+    required TResult Function(_Reset value) reset,
   }) {
     return started(this);
   }
@@ -191,6 +201,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Load value)? load,
     TResult? Function(_StartTour value)? startTour,
     TResult? Function(_CloseTour value)? closeTour,
+    TResult? Function(_Reset value)? reset,
   }) {
     return started?.call(this);
   }
@@ -203,6 +214,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Load value)? load,
     TResult Function(_StartTour value)? startTour,
     TResult Function(_CloseTour value)? closeTour,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -303,6 +315,7 @@ class _$SearchImpl implements _Search {
         load,
     required TResult Function(String tourId) startTour,
     required TResult Function(String tourId) closeTour,
+    required TResult Function() reset,
   }) {
     return search(query, start, end);
   }
@@ -315,6 +328,7 @@ class _$SearchImpl implements _Search {
     TResult? Function(String query, DateTime? start, DateTime? end)? load,
     TResult? Function(String tourId)? startTour,
     TResult? Function(String tourId)? closeTour,
+    TResult? Function()? reset,
   }) {
     return search?.call(query, start, end);
   }
@@ -327,6 +341,7 @@ class _$SearchImpl implements _Search {
     TResult Function(String query, DateTime? start, DateTime? end)? load,
     TResult Function(String tourId)? startTour,
     TResult Function(String tourId)? closeTour,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -343,6 +358,7 @@ class _$SearchImpl implements _Search {
     required TResult Function(_Load value) load,
     required TResult Function(_StartTour value) startTour,
     required TResult Function(_CloseTour value) closeTour,
+    required TResult Function(_Reset value) reset,
   }) {
     return search(this);
   }
@@ -355,6 +371,7 @@ class _$SearchImpl implements _Search {
     TResult? Function(_Load value)? load,
     TResult? Function(_StartTour value)? startTour,
     TResult? Function(_CloseTour value)? closeTour,
+    TResult? Function(_Reset value)? reset,
   }) {
     return search?.call(this);
   }
@@ -367,6 +384,7 @@ class _$SearchImpl implements _Search {
     TResult Function(_Load value)? load,
     TResult Function(_StartTour value)? startTour,
     TResult Function(_CloseTour value)? closeTour,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -476,6 +494,7 @@ class _$LoadImpl implements _Load {
         load,
     required TResult Function(String tourId) startTour,
     required TResult Function(String tourId) closeTour,
+    required TResult Function() reset,
   }) {
     return load(query, start, end);
   }
@@ -488,6 +507,7 @@ class _$LoadImpl implements _Load {
     TResult? Function(String query, DateTime? start, DateTime? end)? load,
     TResult? Function(String tourId)? startTour,
     TResult? Function(String tourId)? closeTour,
+    TResult? Function()? reset,
   }) {
     return load?.call(query, start, end);
   }
@@ -500,6 +520,7 @@ class _$LoadImpl implements _Load {
     TResult Function(String query, DateTime? start, DateTime? end)? load,
     TResult Function(String tourId)? startTour,
     TResult Function(String tourId)? closeTour,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -516,6 +537,7 @@ class _$LoadImpl implements _Load {
     required TResult Function(_Load value) load,
     required TResult Function(_StartTour value) startTour,
     required TResult Function(_CloseTour value) closeTour,
+    required TResult Function(_Reset value) reset,
   }) {
     return load(this);
   }
@@ -528,6 +550,7 @@ class _$LoadImpl implements _Load {
     TResult? Function(_Load value)? load,
     TResult? Function(_StartTour value)? startTour,
     TResult? Function(_CloseTour value)? closeTour,
+    TResult? Function(_Reset value)? reset,
   }) {
     return load?.call(this);
   }
@@ -540,6 +563,7 @@ class _$LoadImpl implements _Load {
     TResult Function(_Load value)? load,
     TResult Function(_StartTour value)? startTour,
     TResult Function(_CloseTour value)? closeTour,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -634,6 +658,7 @@ class _$StartTourImpl implements _StartTour {
         load,
     required TResult Function(String tourId) startTour,
     required TResult Function(String tourId) closeTour,
+    required TResult Function() reset,
   }) {
     return startTour(tourId);
   }
@@ -646,6 +671,7 @@ class _$StartTourImpl implements _StartTour {
     TResult? Function(String query, DateTime? start, DateTime? end)? load,
     TResult? Function(String tourId)? startTour,
     TResult? Function(String tourId)? closeTour,
+    TResult? Function()? reset,
   }) {
     return startTour?.call(tourId);
   }
@@ -658,6 +684,7 @@ class _$StartTourImpl implements _StartTour {
     TResult Function(String query, DateTime? start, DateTime? end)? load,
     TResult Function(String tourId)? startTour,
     TResult Function(String tourId)? closeTour,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (startTour != null) {
@@ -674,6 +701,7 @@ class _$StartTourImpl implements _StartTour {
     required TResult Function(_Load value) load,
     required TResult Function(_StartTour value) startTour,
     required TResult Function(_CloseTour value) closeTour,
+    required TResult Function(_Reset value) reset,
   }) {
     return startTour(this);
   }
@@ -686,6 +714,7 @@ class _$StartTourImpl implements _StartTour {
     TResult? Function(_Load value)? load,
     TResult? Function(_StartTour value)? startTour,
     TResult? Function(_CloseTour value)? closeTour,
+    TResult? Function(_Reset value)? reset,
   }) {
     return startTour?.call(this);
   }
@@ -698,6 +727,7 @@ class _$StartTourImpl implements _StartTour {
     TResult Function(_Load value)? load,
     TResult Function(_StartTour value)? startTour,
     TResult Function(_CloseTour value)? closeTour,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (startTour != null) {
@@ -787,6 +817,7 @@ class _$CloseTourImpl implements _CloseTour {
         load,
     required TResult Function(String tourId) startTour,
     required TResult Function(String tourId) closeTour,
+    required TResult Function() reset,
   }) {
     return closeTour(tourId);
   }
@@ -799,6 +830,7 @@ class _$CloseTourImpl implements _CloseTour {
     TResult? Function(String query, DateTime? start, DateTime? end)? load,
     TResult? Function(String tourId)? startTour,
     TResult? Function(String tourId)? closeTour,
+    TResult? Function()? reset,
   }) {
     return closeTour?.call(tourId);
   }
@@ -811,6 +843,7 @@ class _$CloseTourImpl implements _CloseTour {
     TResult Function(String query, DateTime? start, DateTime? end)? load,
     TResult Function(String tourId)? startTour,
     TResult Function(String tourId)? closeTour,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (closeTour != null) {
@@ -827,6 +860,7 @@ class _$CloseTourImpl implements _CloseTour {
     required TResult Function(_Load value) load,
     required TResult Function(_StartTour value) startTour,
     required TResult Function(_CloseTour value) closeTour,
+    required TResult Function(_Reset value) reset,
   }) {
     return closeTour(this);
   }
@@ -839,6 +873,7 @@ class _$CloseTourImpl implements _CloseTour {
     TResult? Function(_Load value)? load,
     TResult? Function(_StartTour value)? startTour,
     TResult? Function(_CloseTour value)? closeTour,
+    TResult? Function(_Reset value)? reset,
   }) {
     return closeTour?.call(this);
   }
@@ -851,6 +886,7 @@ class _$CloseTourImpl implements _CloseTour {
     TResult Function(_Load value)? load,
     TResult Function(_StartTour value)? startTour,
     TResult Function(_CloseTour value)? closeTour,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (closeTour != null) {
@@ -870,13 +906,141 @@ abstract class _CloseTour implements TourPlanEvent {
 }
 
 /// @nodoc
+abstract class _$$ResetImplCopyWith<$Res> {
+  factory _$$ResetImplCopyWith(
+          _$ResetImpl value, $Res Function(_$ResetImpl) then) =
+      __$$ResetImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResetImplCopyWithImpl<$Res>
+    extends _$TourPlanEventCopyWithImpl<$Res, _$ResetImpl>
+    implements _$$ResetImplCopyWith<$Res> {
+  __$$ResetImplCopyWithImpl(
+      _$ResetImpl _value, $Res Function(_$ResetImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ResetImpl implements _Reset {
+  const _$ResetImpl();
+
+  @override
+  String toString() {
+    return 'TourPlanEvent.reset()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ResetImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String query, DateTime? start, DateTime? end)
+        search,
+    required TResult Function(String query, DateTime? start, DateTime? end)
+        load,
+    required TResult Function(String tourId) startTour,
+    required TResult Function(String tourId) closeTour,
+    required TResult Function() reset,
+  }) {
+    return reset();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String query, DateTime? start, DateTime? end)? search,
+    TResult? Function(String query, DateTime? start, DateTime? end)? load,
+    TResult? Function(String tourId)? startTour,
+    TResult? Function(String tourId)? closeTour,
+    TResult? Function()? reset,
+  }) {
+    return reset?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String query, DateTime? start, DateTime? end)? search,
+    TResult Function(String query, DateTime? start, DateTime? end)? load,
+    TResult Function(String tourId)? startTour,
+    TResult Function(String tourId)? closeTour,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Search value) search,
+    required TResult Function(_Load value) load,
+    required TResult Function(_StartTour value) startTour,
+    required TResult Function(_CloseTour value) closeTour,
+    required TResult Function(_Reset value) reset,
+  }) {
+    return reset(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Search value)? search,
+    TResult? Function(_Load value)? load,
+    TResult? Function(_StartTour value)? startTour,
+    TResult? Function(_CloseTour value)? closeTour,
+    TResult? Function(_Reset value)? reset,
+  }) {
+    return reset?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Search value)? search,
+    TResult Function(_Load value)? load,
+    TResult Function(_StartTour value)? startTour,
+    TResult Function(_CloseTour value)? closeTour,
+    TResult Function(_Reset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Reset implements TourPlanEvent {
+  const factory _Reset() = _$ResetImpl;
+}
+
+/// @nodoc
 mixin _$TourPlanState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Tour> tours, bool hasReachedMax, int currentPage)
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)
         loaded,
     required TResult Function(String message) failure,
   }) =>
@@ -885,7 +1049,8 @@ mixin _$TourPlanState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Tour> tours, bool hasReachedMax, int currentPage)?
+    TResult? Function(
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)?
         loaded,
     TResult? Function(String message)? failure,
   }) =>
@@ -894,7 +1059,8 @@ mixin _$TourPlanState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Tour> tours, bool hasReachedMax, int currentPage)?
+    TResult Function(
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)?
         loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
@@ -986,7 +1152,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Tour> tours, bool hasReachedMax, int currentPage)
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)
         loaded,
     required TResult Function(String message) failure,
   }) {
@@ -998,7 +1164,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Tour> tours, bool hasReachedMax, int currentPage)?
+    TResult? Function(
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)?
         loaded,
     TResult? Function(String message)? failure,
   }) {
@@ -1010,7 +1177,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Tour> tours, bool hasReachedMax, int currentPage)?
+    TResult Function(
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)?
         loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
@@ -1104,7 +1272,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Tour> tours, bool hasReachedMax, int currentPage)
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)
         loaded,
     required TResult Function(String message) failure,
   }) {
@@ -1116,7 +1284,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Tour> tours, bool hasReachedMax, int currentPage)?
+    TResult? Function(
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)?
         loaded,
     TResult? Function(String message)? failure,
   }) {
@@ -1128,7 +1297,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Tour> tours, bool hasReachedMax, int currentPage)?
+    TResult Function(
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)?
         loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
@@ -1187,7 +1357,9 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Tour> tours, bool hasReachedMax, int currentPage});
+  $Res call({List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal});
+
+  $GoalCopyWith<$Res> get goal;
 }
 
 /// @nodoc
@@ -1204,6 +1376,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
     Object? tours = null,
     Object? hasReachedMax = null,
     Object? currentPage = null,
+    Object? goal = null,
   }) {
     return _then(_$LoadedImpl(
       tours: null == tours
@@ -1218,7 +1391,19 @@ class __$$LoadedImplCopyWithImpl<$Res>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      goal: null == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as Goal,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $GoalCopyWith<$Res> get goal {
+    return $GoalCopyWith<$Res>(_value.goal, (value) {
+      return _then(_value.copyWith(goal: value));
+    });
   }
 }
 
@@ -1228,7 +1413,8 @@ class _$LoadedImpl implements _Loaded {
   const _$LoadedImpl(
       {required final List<Tour> tours,
       required this.hasReachedMax,
-      required this.currentPage})
+      required this.currentPage,
+      required this.goal})
       : _tours = tours;
 
   final List<Tour> _tours;
@@ -1243,10 +1429,12 @@ class _$LoadedImpl implements _Loaded {
   final bool hasReachedMax;
   @override
   final int currentPage;
+  @override
+  final Goal goal;
 
   @override
   String toString() {
-    return 'TourPlanState.loaded(tours: $tours, hasReachedMax: $hasReachedMax, currentPage: $currentPage)';
+    return 'TourPlanState.loaded(tours: $tours, hasReachedMax: $hasReachedMax, currentPage: $currentPage, goal: $goal)';
   }
 
   @override
@@ -1258,12 +1446,17 @@ class _$LoadedImpl implements _Loaded {
             (identical(other.hasReachedMax, hasReachedMax) ||
                 other.hasReachedMax == hasReachedMax) &&
             (identical(other.currentPage, currentPage) ||
-                other.currentPage == currentPage));
+                other.currentPage == currentPage) &&
+            (identical(other.goal, goal) || other.goal == goal));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_tours), hasReachedMax, currentPage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_tours),
+      hasReachedMax,
+      currentPage,
+      goal);
 
   @JsonKey(ignore: true)
   @override
@@ -1277,11 +1470,11 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Tour> tours, bool hasReachedMax, int currentPage)
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)
         loaded,
     required TResult Function(String message) failure,
   }) {
-    return loaded(tours, hasReachedMax, currentPage);
+    return loaded(tours, hasReachedMax, currentPage, goal);
   }
 
   @override
@@ -1289,11 +1482,12 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Tour> tours, bool hasReachedMax, int currentPage)?
+    TResult? Function(
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)?
         loaded,
     TResult? Function(String message)? failure,
   }) {
-    return loaded?.call(tours, hasReachedMax, currentPage);
+    return loaded?.call(tours, hasReachedMax, currentPage, goal);
   }
 
   @override
@@ -1301,13 +1495,14 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Tour> tours, bool hasReachedMax, int currentPage)?
+    TResult Function(
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)?
         loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(tours, hasReachedMax, currentPage);
+      return loaded(tours, hasReachedMax, currentPage, goal);
     }
     return orElse();
   }
@@ -1354,11 +1549,13 @@ abstract class _Loaded implements TourPlanState {
   const factory _Loaded(
       {required final List<Tour> tours,
       required final bool hasReachedMax,
-      required final int currentPage}) = _$LoadedImpl;
+      required final int currentPage,
+      required final Goal goal}) = _$LoadedImpl;
 
   List<Tour> get tours;
   bool get hasReachedMax;
   int get currentPage;
+  Goal get goal;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1431,7 +1628,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Tour> tours, bool hasReachedMax, int currentPage)
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)
         loaded,
     required TResult Function(String message) failure,
   }) {
@@ -1443,7 +1640,8 @@ class _$FailureImpl implements _Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Tour> tours, bool hasReachedMax, int currentPage)?
+    TResult? Function(
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)?
         loaded,
     TResult? Function(String message)? failure,
   }) {
@@ -1455,7 +1653,8 @@ class _$FailureImpl implements _Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Tour> tours, bool hasReachedMax, int currentPage)?
+    TResult Function(
+            List<Tour> tours, bool hasReachedMax, int currentPage, Goal goal)?
         loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),

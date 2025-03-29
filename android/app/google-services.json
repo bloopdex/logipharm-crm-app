@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "880351652544",
+    "project_id": "e-crm-a2s",
+    "storage_bucket": "e-crm-a2s.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880351652544:android:2313a2055c4d7e86cf1b25",
+        "android_client_info": {
+          "package_name": "com.a2sdz.crm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm4yaqCfDqlSCMrLI9TpoN0JHD1rVisa8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

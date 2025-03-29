@@ -1,11 +1,10 @@
+import 'package:crm/features/clients/clients.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/core.dart';
 import '../../../models/person/person.dart';
-import '../../../shared/services/helpers/location.helper.dart';
 import '../bloc/clients/clients_cubit.dart';
 import '../bloc/delegate_cubit.dart';
 import '../bloc/tour-creation/tour_creation_cubit.dart';
@@ -26,9 +25,9 @@ class ValidateCreationPage extends StatelessWidget {
     // get the clients from the cubit by pharmacy id
     final clients = context.read<ClientsCubit>().state.maybeWhen(
         orElse: () => [],
-        loaded: (clients) => clients
+        loaded: (all, filter) => all
             .where((element) =>
-                data['pharmacieIds']?.contains(element.id.toString()))
+                data['pharmacieIds']?.contains('${element.id.toString()}:${element.typeTier}'))
             .toList());
 
     return Padding(
@@ -147,8 +146,7 @@ class ValidateCreationPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
                   child: Text(
-                    context.i10n
-                        .tourValidationClientLabelNumber(clients.length),
+                    context.i10n.tourValidationClientLabelNumber(clients.length),
                     style: context.textTheme.headlineSmall,
                   ),
                 ),
@@ -158,38 +156,7 @@ class ValidateCreationPage extends StatelessWidget {
                     itemCount: clients.length,
                     itemBuilder: (context, index) {
                       final Person client = clients[index];
-                      return ListTile(
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: kPaddingMd2,
-                          vertical: 0,
-                        ),
-                        leading: Container(
-                          width: 48.sp,
-                          height: 48.sp,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: kBgGrayVisibility1,
-                            border: Border.all(
-                              color: kBorder3,
-                            ),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(client.fullName.initials),
-                        ),
-                        title: Text(client.fullName),
-                        subtitle: client.latitude != null &&
-                                client.longitude != null
-                            ? FutureBuilder(
-                                future:
-                                    LocationHelper.addressFromLongitudeLatitude(
-                                  latitude: client.latitude ?? 0,
-                                  longitude: client.longitude ?? 0,
-                                ),
-                                builder: (context, snapshot) {
-                                  return Text(snapshot.data ?? "");
-                                })
-                            : Text(context.i10n.tourCreationNoAddress),
-                      );
+                      return ClientCard(client: client);
                     },
                   ),
                 ),

@@ -8,16 +8,17 @@ part of 'user.dart';
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       id: Id.fromJson(json['id'] as Map<String, dynamic>),
-      lastName: json['nom'] as String,
+      lastName: json['nom'] as String?,
       firstName: json['prenom'] as String?,
-      loginCode: json['loginCode'] as String,
-      actionFlag: json['actionFlag'] as int,
-      regionId: json['regionId'] as String,
+      loginCode: json['loginCode'] as String?,
+      actionFlag: (json['actionFlag'] as num?)?.toInt(),
+      regionId: json['regionId'] as String?,
       address: json['adresse'] as String?,
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
-      supervisor: json['superviseur'] as int?,
-      fullName: json['fullName'] as String,
+      supervisor: (json['superviseur'] as num?)?.toInt(),
+      addVisitOutPlanPrivilege: (json['addViseHorsPlan'] as num?)?.toInt(),
+      fullName: json['fullName'] as String?,
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -32,13 +33,14 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'superviseur': instance.supervisor,
+      'addViseHorsPlan': instance.addVisitOutPlanPrivilege,
       'fullName': instance.fullName,
     };
 
 _$IdImpl _$$IdImplFromJson(Map<String, dynamic> json) => _$IdImpl(
-      id: json['id'] as int,
-      companyId: json['cmpId'] as int,
-      typeTier: json['typeTier'] as String,
+      id: (json['id'] as num?)?.toInt(),
+      companyId: (json['cmpId'] as num?)?.toInt(),
+      typeTier: json['typeTier'] as String?,
     );
 
 Map<String, dynamic> _$$IdImplToJson(_$IdImpl instance) => <String, dynamic>{

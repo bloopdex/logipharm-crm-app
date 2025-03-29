@@ -70,6 +70,16 @@ class S {
     );
   }
 
+  /// `Back`
+  String get back {
+    return Intl.message(
+      'Back',
+      name: 'back',
+      desc: 'Back',
+      args: [],
+    );
+  }
+
   /// `Start`
   String get start {
     return Intl.message(
@@ -430,6 +440,16 @@ class S {
     );
   }
 
+  /// `Invalid username or password`
+  String get authLoginError {
+    return Intl.message(
+      'Invalid username or password',
+      name: 'authLoginError',
+      desc: 'Invalid username or password',
+      args: [],
+    );
+  }
+
   /// `{count} Client`
   String tourClient(int count) {
     return Intl.message(
@@ -466,6 +486,16 @@ class S {
       'Search per wilaya',
       name: 'tourSearchPerWilaya',
       desc: 'Search per wilaya',
+      args: [],
+    );
+  }
+
+  /// `Search per commune`
+  String get tourSearchPerCommune {
+    return Intl.message(
+      'Search per commune',
+      name: 'tourSearchPerCommune',
+      desc: 'Search per commune',
       args: [],
     );
   }
@@ -550,10 +580,10 @@ class S {
     );
   }
 
-  /// `You don''t have any plans yet`
+  /// `You don't have any plans yet`
   String get tourEmptyPlansDescription {
     return Intl.message(
-      'You don\'\'t have any plans yet',
+      'You don\'t have any plans yet',
       name: 'tourEmptyPlansDescription',
       desc: 'Empty Plans Description',
       args: [],
@@ -800,6 +830,26 @@ class S {
       name: 'tourCreationStartTourDescription',
       desc:
           'You can start the tour now or later from the list of planned tours.',
+      args: [],
+    );
+  }
+
+  /// `Commune`
+  String get tourCreationCommuneLabel {
+    return Intl.message(
+      'Commune',
+      name: 'tourCreationCommuneLabel',
+      desc: 'Commune',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get tourCreationName {
+    return Intl.message(
+      'Name',
+      name: 'tourCreationName',
+      desc: 'Name',
       args: [],
     );
   }
@@ -1226,22 +1276,22 @@ class S {
     );
   }
 
-  /// `The tour isn''t open`
+  /// `The tour isn't open`
   String get visitTourIsntOpen {
     return Intl.message(
-      'The tour isn\'\'t open',
+      'The tour isn\'t open',
       name: 'visitTourIsntOpen',
       desc: 'The tour isn\'t open',
       args: [],
     );
   }
 
-  /// `The visit is already entred`
+  /// `The visit is already entered`
   String get visitAlreadyEntered {
     return Intl.message(
-      'The visit is already entred',
+      'The visit is already entered',
       name: 'visitAlreadyEntered',
-      desc: 'The visit is already entred',
+      desc: 'The visit is already entered',
       args: [],
     );
   }
@@ -1286,12 +1336,42 @@ class S {
     );
   }
 
-  /// `You don''t have any visits yet`
+  /// `You don't have any visits yet`
   String get visitsEmptyDescription {
     return Intl.message(
-      'You don\'\'t have any visits yet',
+      'You don\'t have any visits yet',
       name: 'visitsEmptyDescription',
       desc: 'You don\'t have any visits yet',
+      args: [],
+    );
+  }
+
+  /// `The date has to be after the date of the tour plan`
+  String get visitErrorDate {
+    return Intl.message(
+      'The date has to be after the date of the tour plan',
+      name: 'visitErrorDate',
+      desc: 'The date has to be after the date of the tour plan',
+      args: [],
+    );
+  }
+
+  /// `Select Client`
+  String get selectClient {
+    return Intl.message(
+      'Select Client',
+      name: 'selectClient',
+      desc: 'Select Client',
+      args: [],
+    );
+  }
+
+  /// `Select Reason`
+  String get selectReason {
+    return Intl.message(
+      'Select Reason',
+      name: 'selectReason',
+      desc: 'Select Reason',
       args: [],
     );
   }
@@ -1386,12 +1466,12 @@ class S {
     );
   }
 
-  /// `Details is required`
+  /// `Details are required`
   String get todoDetailsError {
     return Intl.message(
-      'Details is required',
+      'Details are required',
       name: 'todoDetailsError',
-      desc: 'Details is required',
+      desc: 'Details are required',
       args: [],
     );
   }
@@ -1456,6 +1536,166 @@ class S {
     );
   }
 
+  /// `No clients found`
+  String get noClientsFound {
+    return Intl.message(
+      'No clients found',
+      name: 'noClientsFound',
+      desc: 'No clients found',
+      args: [],
+    );
+  }
+
+  /// `All Clients`
+  String get allClients {
+    return Intl.message(
+      'All Clients',
+      name: 'allClients',
+      desc: 'All Clients',
+      args: [],
+    );
+  }
+
+  /// `Client`
+  String get client {
+    return Intl.message(
+      'Client',
+      name: 'client',
+      desc: 'Client',
+      args: [],
+    );
+  }
+
+  /// `Prospect`
+  String get prospect {
+    return Intl.message(
+      'Prospect',
+      name: 'prospect',
+      desc: 'Prospect',
+      args: [],
+    );
+  }
+
+  /// `Events`
+  String get events {
+    return Intl.message(
+      'Events',
+      name: 'events',
+      desc: 'Events',
+      args: [],
+    );
+  }
+
+  /// `No events found`
+  String get noEvents {
+    return Intl.message(
+      'No events found',
+      name: 'noEvents',
+      desc: 'No events found',
+      args: [],
+    );
+  }
+
+  /// `No events found for today`
+  String get noEventsDesc {
+    return Intl.message(
+      'No events found for today',
+      name: 'noEventsDesc',
+      desc: 'No events found for today',
+      args: [],
+    );
+  }
+
+  /// `Client Type`
+  String get clientType {
+    return Intl.message(
+      'Client Type',
+      name: 'clientType',
+      desc: 'Client Type',
+      args: [],
+    );
+  }
+
+  /// `Analytics`
+  String get analytics {
+    return Intl.message(
+      'Analytics',
+      name: 'analytics',
+      desc: 'Analytics',
+      args: [],
+    );
+  }
+
+  /// `No analytics found`
+  String get noAnalytics {
+    return Intl.message(
+      'No analytics found',
+      name: 'noAnalytics',
+      desc: 'No analytics found',
+      args: [],
+    );
+  }
+
+  /// `No analytics found for this client`
+  String get noAnalyticsDesc {
+    return Intl.message(
+      'No analytics found for this client',
+      name: 'noAnalyticsDesc',
+      desc: 'No analytics found for this client',
+      args: [],
+    );
+  }
+
+  /// `Total HT`
+  String get totalHt {
+    return Intl.message(
+      'Total HT',
+      name: 'totalHt',
+      desc: 'Total HT',
+      args: [],
+    );
+  }
+
+  /// `Total TTC`
+  String get totalTtc {
+    return Intl.message(
+      'Total TTC',
+      name: 'totalTtc',
+      desc: 'Total TTC',
+      args: [],
+    );
+  }
+
+  /// `Ceiling`
+  String get ceiling {
+    return Intl.message(
+      'Ceiling',
+      name: 'ceiling',
+      desc: 'Ceiling',
+      args: [],
+    );
+  }
+
+  /// `Total Rest For Payment`
+  String get totalRest {
+    return Intl.message(
+      'Total Rest For Payment',
+      name: 'totalRest',
+      desc: 'Total Rest',
+      args: [],
+    );
+  }
+
+  /// `Total Payment`
+  String get totalPayment {
+    return Intl.message(
+      'Total Payment',
+      name: 'totalPayment',
+      desc: 'Total Payment',
+      args: [],
+    );
+  }
+
   /// `Hiring`
   String get hiring {
     return Intl.message(
@@ -1466,12 +1706,12 @@ class S {
     );
   }
 
-  /// `File CNRC`
+  /// `Prospect`
   String get fileCNRC {
     return Intl.message(
-      'File CNRC',
+      'Prospect',
       name: 'fileCNRC',
-      desc: 'File CNRC',
+      desc: 'Prospect',
       args: [],
     );
   }
@@ -1526,10 +1766,10 @@ class S {
     );
   }
 
-  /// `You don''t have any hirement yet`
+  /// `You don't have any hirement yet`
   String get youDontHaveAnyHirement {
     return Intl.message(
-      'You don\'\'t have any hirement yet',
+      'You don\'t have any hirement yet',
       name: 'youDontHaveAnyHirement',
       desc: 'You don\'t have any hirement yet',
       args: [],
@@ -1652,6 +1892,26 @@ class S {
       'First name is required',
       name: 'firstNameRequired',
       desc: 'First name is required',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: 'Name',
+      args: [],
+    );
+  }
+
+  /// `No name`
+  String get noName {
+    return Intl.message(
+      'No name',
+      name: 'noName',
+      desc: 'No name',
       args: [],
     );
   }
@@ -1916,12 +2176,12 @@ class S {
     );
   }
 
-  /// `Ferme le plan de tournée actuel.`
+  /// `Close the current tour plan.`
   String get closeTourPlanDesc {
     return Intl.message(
-      'Ferme le plan de tournée actuel.',
+      'Close the current tour plan.',
       name: 'closeTourPlanDesc',
-      desc: 'Ferme le plan de tournée actuel.',
+      desc: 'Close the current tour plan.',
       args: [],
     );
   }
@@ -2012,6 +2272,456 @@ class S {
       'Add Claim',
       name: 'addClaim',
       desc: 'Add Claim',
+      args: [],
+    );
+  }
+
+  /// `Motif`
+  String get motif {
+    return Intl.message(
+      'Motif',
+      name: 'motif',
+      desc: 'Motif',
+      args: [],
+    );
+  }
+
+  /// `No motif`
+  String get noMotif {
+    return Intl.message(
+      'No motif',
+      name: 'noMotif',
+      desc: 'No motif',
+      args: [],
+    );
+  }
+
+  /// `No motif found for this observation`
+  String get noMotifDesc {
+    return Intl.message(
+      'No motif found for this observation',
+      name: 'noMotifDesc',
+      desc: 'No motif found for this observation',
+      args: [],
+    );
+  }
+
+  /// `Add Motif`
+  String get addMotif {
+    return Intl.message(
+      'Add Motif',
+      name: 'addMotif',
+      desc: 'Add Motif',
+      args: [],
+    );
+  }
+
+  /// `All Regions`
+  String get allRegions {
+    return Intl.message(
+      'All Regions',
+      name: 'allRegions',
+      desc: 'All Regions',
+      args: [],
+    );
+  }
+
+  /// `All Communes`
+  String get allCommunes {
+    return Intl.message(
+      'All Communes',
+      name: 'allCommunes',
+      desc: 'All Communes',
+      args: [],
+    );
+  }
+
+  /// `Can't create plan while opened plan`
+  String get cantCreatePlanWhileOpened {
+    return Intl.message(
+      'Can\'t create plan while opened plan',
+      name: 'cantCreatePlanWhileOpened',
+      desc: 'You can\'t create a new plan while you have an opened plan',
+      args: [],
+    );
+  }
+
+  /// `CNRC`
+  String get cnrc {
+    return Intl.message(
+      'CNRC',
+      name: 'cnrc',
+      desc: 'CNRC',
+      args: [],
+    );
+  }
+
+  /// `Search Client`
+  String get searchClient {
+    return Intl.message(
+      'Search Client',
+      name: 'searchClient',
+      desc: 'Search Client',
+      args: [],
+    );
+  }
+
+  /// `Upload File`
+  String get uploadFile {
+    return Intl.message(
+      'Upload File',
+      name: 'uploadFile',
+      desc: 'Upload File',
+      args: [],
+    );
+  }
+
+  /// `Can't create visit`
+  String get cantCreateVisit {
+    return Intl.message(
+      'Can\'t create visit',
+      name: 'cantCreateVisit',
+      desc: 'You can\'t create a visit',
+      args: [],
+    );
+  }
+
+  /// `You don't have the privilege to create a visit`
+  String get visitPrivilegeMissing {
+    return Intl.message(
+      'You don\'t have the privilege to create a visit',
+      name: 'visitPrivilegeMissing',
+      desc: 'You don\'t have the privilege to create a visit',
+      args: [],
+    );
+  }
+
+  /// `Goal of the day`
+  String get goalOfDay {
+    return Intl.message(
+      'Goal of the day',
+      name: 'goalOfDay',
+      desc: 'Goal of the day',
+      args: [],
+    );
+  }
+
+  /// `Visits today`
+  String get visitsToday {
+    return Intl.message(
+      'Visits today',
+      name: 'visitsToday',
+      desc: 'Visits today',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get changePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'changePassword',
+      desc: 'Change Password',
+      args: [],
+    );
+  }
+
+  /// `Old Password`
+  String get oldPassword {
+    return Intl.message(
+      'Old Password',
+      name: 'oldPassword',
+      desc: 'Old Password',
+      args: [],
+    );
+  }
+
+  /// `Enter your old password`
+  String get oldPasswordPlaceholder {
+    return Intl.message(
+      'Enter your old password',
+      name: 'oldPasswordPlaceholder',
+      desc: 'Enter your old password',
+      args: [],
+    );
+  }
+
+  /// `Old password is required`
+  String get oldPasswordRequired {
+    return Intl.message(
+      'Old password is required',
+      name: 'oldPasswordRequired',
+      desc: 'Old password is required',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: 'New Password',
+      args: [],
+    );
+  }
+
+  /// `Enter your new password`
+  String get newPasswordPlaceholder {
+    return Intl.message(
+      'Enter your new password',
+      name: 'newPasswordPlaceholder',
+      desc: 'Enter your new password',
+      args: [],
+    );
+  }
+
+  /// `New password is required`
+  String get newPasswordRequired {
+    return Intl.message(
+      'New password is required',
+      name: 'newPasswordRequired',
+      desc: 'New password is required',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPassword',
+      desc: 'Confirm Password',
+      args: [],
+    );
+  }
+
+  /// `Confirm your new password`
+  String get confirmPasswordPlaceholder {
+    return Intl.message(
+      'Confirm your new password',
+      name: 'confirmPasswordPlaceholder',
+      desc: 'Confirm your new password',
+      args: [],
+    );
+  }
+
+  /// `Confirm password is required`
+  String get confirmPasswordRequired {
+    return Intl.message(
+      'Confirm password is required',
+      name: 'confirmPasswordRequired',
+      desc: 'Confirm password is required',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get passwordNotMatch {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'passwordNotMatch',
+      desc: 'Passwords do not match',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully`
+  String get passwordChanged {
+    return Intl.message(
+      'Password changed successfully',
+      name: 'passwordChanged',
+      desc: 'Password changed successfully',
+      args: [],
+    );
+  }
+
+  /// `Failed to change password`
+  String get passwordChangedFailed {
+    return Intl.message(
+      'Failed to change password',
+      name: 'passwordChangedFailed',
+      desc: 'Failed to change password',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 6 characters`
+  String get passwordLengthError {
+    return Intl.message(
+      'Password must be at least 6 characters',
+      name: 'passwordLengthError',
+      desc: 'Password must be at least 6 characters',
+      args: [],
+    );
+  }
+
+  /// `Commercial Blockage`
+  String get blockageCommercial {
+    return Intl.message(
+      'Commercial Blockage',
+      name: 'blockageCommercial',
+      desc: 'Commercial Blockage',
+      args: [],
+    );
+  }
+
+  /// `Financial Blockage`
+  String get blockageFinancial {
+    return Intl.message(
+      'Financial Blockage',
+      name: 'blockageFinancial',
+      desc: 'Financial Blockage',
+      args: [],
+    );
+  }
+
+  /// `More Details`
+  String get moreDetails {
+    return Intl.message(
+      'More Details',
+      name: 'moreDetails',
+      desc: 'More Details',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get category {
+    return Intl.message(
+      'Category',
+      name: 'category',
+      desc: 'Category',
+      args: [],
+    );
+  }
+
+  /// `No category`
+  String get noCategory {
+    return Intl.message(
+      'No category',
+      name: 'noCategory',
+      desc: 'No category',
+      args: [],
+    );
+  }
+
+  /// `Solvability`
+  String get solvability {
+    return Intl.message(
+      'Solvability',
+      name: 'solvability',
+      desc: 'Solvability',
+      args: [],
+    );
+  }
+
+  /// `No solvability`
+  String get noSolvability {
+    return Intl.message(
+      'No solvability',
+      name: 'noSolvability',
+      desc: 'No solvability',
+      args: [],
+    );
+  }
+
+  /// `Mode de paiement`
+  String get modePaie {
+    return Intl.message(
+      'Mode de paiement',
+      name: 'modePaie',
+      desc: 'Mode de paiement',
+      args: [],
+    );
+  }
+
+  /// `No mode de paiement`
+  String get noModePaie {
+    return Intl.message(
+      'No mode de paiement',
+      name: 'noModePaie',
+      desc: 'No mode de paiement',
+      args: [],
+    );
+  }
+
+  /// `Add Grossiste`
+  String get addGrossiste {
+    return Intl.message(
+      'Add Grossiste',
+      name: 'addGrossiste',
+      desc: 'Add Grossiste',
+      args: [],
+    );
+  }
+
+  /// `Grossiste`
+  String get grossiste {
+    return Intl.message(
+      'Grossiste',
+      name: 'grossiste',
+      desc: 'Grossiste',
+      args: [],
+    );
+  }
+
+  /// `No grossiste`
+  String get noGrossiste {
+    return Intl.message(
+      'No grossiste',
+      name: 'noGrossiste',
+      desc: 'No grossiste',
+      args: [],
+    );
+  }
+
+  /// `No grossiste found for this client`
+  String get noGrossisteDesc {
+    return Intl.message(
+      'No grossiste found for this client',
+      name: 'noGrossisteDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Etablissement`
+  String get addEtablissement {
+    return Intl.message(
+      'Add Etablissement',
+      name: 'addEtablissement',
+      desc: 'Add Etablissement',
+      args: [],
+    );
+  }
+
+  /// `Etablissement`
+  String get etablissement {
+    return Intl.message(
+      'Etablissement',
+      name: 'etablissement',
+      desc: 'Etablissement',
+      args: [],
+    );
+  }
+
+  /// `No etablissement`
+  String get noEtablissement {
+    return Intl.message(
+      'No etablissement',
+      name: 'noEtablissement',
+      desc: 'No etablissement',
+      args: [],
+    );
+  }
+
+  /// `No etablissement found for this client`
+  String get noEtablissementDesc {
+    return Intl.message(
+      'No etablissement found for this client',
+      name: 'noEtablissementDesc',
+      desc: '',
       args: [],
     );
   }

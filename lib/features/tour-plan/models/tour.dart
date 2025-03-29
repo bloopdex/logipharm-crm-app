@@ -14,8 +14,9 @@ class Tour with _$Tour {
     @JsonKey(name: 'companyId') required int companyId,
     @JsonKey(name: 'regionId') required String regionId,
     @JsonKey(name: 'regionName') String? regionName,
-    @JsonKey(name: 'dateDebut') required String startDate,
-    @JsonKey(name: 'dateFin') required String endDate,
+    @JsonKey(name: 'nom') String? name,
+    @JsonKey(name: 'dateDebut') required String? startDate,
+    @JsonKey(name: 'dateFin') required String? endDate,
     @JsonKey(name: 'statusFlag') required int statusFlag,
     @JsonKey(name: 'statusName') String? statusName,
     @JsonKey(name: 'dateDebutEffective') String? effectiveStartDate,
@@ -41,7 +42,7 @@ class TourDetail with _$TourDetail {
     @JsonKey(name: 'dateFin') String? endDate,
     @JsonKey(name: 'statusFlag') int? statusFlag,
     @JsonKey(name: 'statusName') String? statusName,
-    @JsonKey(name: 'motif') String? reason,
+    @JsonKey(name: 'motif') Motif? reason,
     @JsonKey(name: 'repport') String? report,
     @JsonKey(name: 'repportText') String? reportText,
     @JsonKey(name: 'latitude') double? latitude,
@@ -49,6 +50,15 @@ class TourDetail with _$TourDetail {
     @JsonKey(name: 'pharmacie') Person? pharmacy,
   }) = _TourDetail;
 
-  factory TourDetail.fromJson(Map<String, dynamic> json) =>
-      _$TourDetailFromJson(json);
+  factory TourDetail.fromJson(Map<String, dynamic> json) => _$TourDetailFromJson(json);
+}
+
+@freezed
+class Motif with _$Motif {
+  const factory Motif({
+    @JsonKey(name: 'id') required int id,
+    @JsonKey(name: 'label') required String label,
+  }) = _Motif;
+
+  factory Motif.fromJson(Map<String, dynamic> json) => _$MotifFromJson(json);
 }

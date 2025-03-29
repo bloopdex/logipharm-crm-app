@@ -21,4 +21,6 @@ class TourPlanEvent with _$TourPlanEvent {
   const factory TourPlanEvent.closeTour({
     required String tourId,
   }) = _CloseTour;
+
+  const factory TourPlanEvent.reset() = _Reset;
 }

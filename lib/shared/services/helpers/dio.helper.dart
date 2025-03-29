@@ -3,11 +3,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-// Keep it for companies that has self-signed certificate
-// import 'package:dio/io.dart';
-// import 'dart:io';
-
-import 'package:http/http.dart' as http;
 
 import '../../../core/const.dart';
 
@@ -18,9 +13,9 @@ class DioHelper {
   static Future<void> init() async {
     dio = Dio(
       BaseOptions(
-        baseUrl: '$HTTP$baseUrl:$port$version',
-        connectTimeout: const Duration(seconds: 30),
-        receiveTimeout: const Duration(seconds: 30),
+        baseUrl: baseUrl,
+        connectTimeout: const Duration(seconds: 60),
+        receiveTimeout: const Duration(seconds: 60),
         receiveDataWhenStatusError: true,
         validateStatus: (_) => true,
         contentType: Headers.jsonContentType,
@@ -31,24 +26,20 @@ class DioHelper {
         (certificate, host, port) => true;
     (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
       HttpClient client = HttpClient();
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
+      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
     };
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         // Print the request method and URL
         log('Request ${options.method}: ${options.uri}');
-        // print('Request ${options.method}: ${options.uri}');
 
         // Print request headers (if any)
         log('Headers: ${options.headers}');
-        // print('Headers: ${options.headers}');
 
         // Print request data (if any)
         if (options.data != null) {
           log('Data: ${options.data}');
-          // print('Data: ${options.data}');
         }
 
         // Continue with the request
@@ -56,17 +47,14 @@ class DioHelper {
       },
       onResponse: (e, handler) {
         // Do something with response data
-        log('Response: ${e.data}');
-        // print('Response: ${e.data}');
+        log('Url: ${e.realUri}\nResponse: ${e.data}');
         handler.next(e);
       },
       onError: (e, handler) {
         // Do something with response error
         log('Error: ${e.message}');
-        // print('Error: ${e.message}');
         if (e.response != null) {
           log('Error response data: ${e.response!.data}');
-          // print('Error response data: ${e.response!.data}');
         }
         handler.next(e);
       },
@@ -183,27 +171,33 @@ class DioHelper {
     );
   }
 
-  static Future<String> uploadImage(
-    String? path,
+  static Future<Response> uploadImage(
+    String path,
     String url,
     String token, {
-    Map<String, String>? data,
+    Map<String, dynamic>? data,
     Map<String, dynamic>? headers,
     String method = 'POST',
   }) async {
-    http.MultipartRequest req = http.MultipartRequest(
-        method, Uri.parse('$HTTPS$baseUrl:$port/api$url'));
-    req.headers.addAll({
-      'Authorization': token,
+    // Create a FormData object
+    FormData formData = FormData.fromMap({
+      'file': await MultipartFile.fromFile(path, filename: path.split(Platform.pathSeparator).last),
+      if (data != null) ...data,
     });
-    if (path != null) {
-      req.files.add(await http.MultipartFile.fromPath('file', path));
-    }
-    if (data != null) {
-      req.fields.addAll(data);
-    }
 
-    http.StreamedResponse res = await req.send();
-    return await res.stream.bytesToString();
+    // Add headers including the authorization token
+    dio.options.headers.addAll({
+      'Authorization': token,
+      if (headers != null) ...headers,
+    });
+
+    return await dio.request(
+      url,
+      data: formData,
+      options: Options(
+        method: method,
+        contentType: 'multipart/form-data',
+      ),
+    );
   }
 }

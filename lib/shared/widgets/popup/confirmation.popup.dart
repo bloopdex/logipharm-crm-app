@@ -27,8 +27,7 @@ class ConfirmationPopUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       contentPadding: const EdgeInsets.all(0),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(kSpacingX4)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kSpacingX4)),
       backgroundColor: color,
       clipBehavior: Clip.hardEdge,
       content: Container(
@@ -49,8 +48,7 @@ class ConfirmationPopUp extends StatelessWidget {
               height: kSpacingX10,
               width: kSpacingX10,
               padding: EdgeInsets.all(kSpacingX2),
-              decoration:
-                  BoxDecoration(color: iconBackground, shape: BoxShape.circle),
+              decoration: BoxDecoration(color: iconBackground, shape: BoxShape.circle),
               child: Icon(icon, color: color),
             ),
             SizedBox(height: kSpacingX4),
@@ -68,11 +66,11 @@ class ConfirmationPopUp extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyMedium,
               ),
-            SizedBox(height: 24.sp),
+            SizedBox(height: 24.h),
             CustomButton(
               text: confirmText,
               backgroundColor: color,
-              height: 44.sp,
+              height: 44.h,
               onPressed: () => context.pop(pop: true),
             ),
             SizedBox(height: kSpacingX4),

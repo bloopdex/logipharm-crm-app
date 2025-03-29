@@ -18,6 +18,7 @@ class VisitBloc extends Bloc<VisitEvent, VisitState> {
     on<_Started>(_started);
     on<_Search>(_search);
     on<_Load>(_load);
+    on<_Reset>(_reset);
   }
 
   Future<void> _started(_Started event, Emitter<VisitState> emit) async {
@@ -27,8 +28,7 @@ class VisitBloc extends Bloc<VisitEvent, VisitState> {
         page: 0,
         size: 20,
         startDate: DateHelper.YYYYMMdd(DateTime(DateTime.now().year, 1, 1)),
-        endDate:
-            DateHelper.YYYYMMdd(DateTime.now().add(const Duration(days: 1))),
+        endDate: DateHelper.YYYYMMdd(DateTime.now().add(const Duration(days: 1))),
       );
 
       List<TourDetail> visits = response.data['body']['content']
@@ -36,9 +36,7 @@ class VisitBloc extends Bloc<VisitEvent, VisitState> {
           .toList();
 
       emit(VisitState.loaded(
-          visits: visits,
-          hasReachedMax: response.data['body']['last'],
-          currentPage: 0));
+          visits: visits, hasReachedMax: response.data['body']['last'], currentPage: 0));
     } catch (e) {
       ILogger.error(e.toString());
       emit(const VisitState.failure(message: "errors:something-went-wrong"));
@@ -53,8 +51,7 @@ class VisitBloc extends Bloc<VisitEvent, VisitState> {
         Response response = await VisitsRepository.get(
           page: currentState.currentPage + 1,
           size: 20,
-          startDate: DateHelper.YYYYMMdd(
-              event.start ?? DateTime(DateTime.now().year, 1, 1)),
+          startDate: DateHelper.YYYYMMdd(event.start ?? DateTime(DateTime.now().year, 1, 1)),
           endDate: DateHelper.YYYYMMdd(event.end ?? DateTime.now()),
         );
         List<TourDetail> visits = response.data['body']['content']
@@ -79,21 +76,22 @@ class VisitBloc extends Bloc<VisitEvent, VisitState> {
       Response response = await VisitsRepository.get(
         page: 0,
         size: 20,
-        startDate: DateHelper.YYYYMMdd(
-            event.start ?? DateTime(DateTime.now().year, 1, 1)),
-        endDate: DateHelper.YYYYMMdd(
-            event.end ?? DateTime.now().add(const Duration(days: 1))),
+        startDate: DateHelper.YYYYMMdd(event.start ?? DateTime(DateTime.now().year, 1, 1)),
+        endDate: DateHelper.YYYYMMdd(event.end ?? DateTime.now().add(const Duration(days: 1))),
       );
 
       List<TourDetail> visits = response.data['body']['content']
           .map<TourDetail>((tour) => TourDetail.fromJson(tour))
           .toList();
 
-      emit(VisitState.loaded(
-          visits: visits, hasReachedMax: false, currentPage: 0));
+      emit(VisitState.loaded(visits: visits, hasReachedMax: false, currentPage: 0));
     } catch (e) {
       ILogger.error(e.toString());
       emit(const VisitState.failure(message: "errors:something-went-wrong"));
     }
+  }
+
+  FutureOr<void> _reset(event, Emitter<VisitState> emit) {
+    emit(const VisitState.initial());
   }
 }

@@ -1,19 +1,18 @@
-import 'package:flutter/services.dart';
-
-import '../../core/extension.dart';
-import 'widget/login.button.widget.dart';
-import '../navigation/cubit/navigation_cubit.dart';
-import '../../shared/widgets/image/custom_local_image.widget.dart';
-import '../../shared/widgets/inputs/custom.text.form.field.widget.dart';
-import '../../shared/widgets/inputs/password.text.field.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/const.dart';
+import '../../core/extension.dart';
 import '../../logic/auth/auth_bloc.dart';
+import '../../shared/widgets/image/custom_local_image.widget.dart';
+import '../../shared/widgets/inputs/custom.text.form.field.widget.dart';
+import '../../shared/widgets/inputs/password.text.field.widget.dart';
 import '../../shared/widgets/loading/custom_loading.widget.dart';
+import '../navigation/cubit/navigation_cubit.dart';
 import 'bloc/login/login_bloc.dart';
+import 'widget/login.button.widget.dart';
 
 class LoginScreen extends StatefulWidget {
   static String routeName = '/auth.signin';
@@ -25,8 +24,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   Map<String, String> loginData = {
-    'username': 'YA.SI-MOUSSA',
-    'password': '123',
+    'username': '',
+    'password': '',
   };
   final formKey = GlobalKey<FormState>();
 
@@ -36,8 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         state.whenOrNull(
-          authenticated: (user, tempError) =>
-              context.pushNamedAndRemoveUntil('/layout'),
+          authenticated: (user, tempError) => context.pushNamedAndRemoveUntil('/layout'),
         );
       },
       child: Scaffold(
@@ -60,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const Spacer(flex: 3),
                       CustomLocalImage(
-                        width: 100.sp,
+                        width: 100.h,
                         image: 'logo.png',
                       ),
                       SizedBox(height: kSpacingX8),
@@ -127,8 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     message,
                                     maxLines: 2,
                                     softWrap: true,
-                                    style: context.textTheme.bodyMedium!
-                                        .copyWith(color: kCardinal),
+                                    style: context.textTheme.bodyMedium!.copyWith(color: kCardinal),
                                   ),
                                 )
                               ],

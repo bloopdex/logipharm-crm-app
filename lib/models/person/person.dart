@@ -14,11 +14,13 @@ class Person with _$Person {
     @JsonKey(name: 'nom') required String lastName,
     @JsonKey(name: 'prenom') String? firstName,
     @JsonKey(name: 'loginCode') required String loginCode,
-    @JsonKey(name: 'actionFlag') required int actionFlag,
+    @JsonKey(name: 'activeFlag') required int activeFlag,
     @JsonKey(name: 'regionId') String? regionId,
+    @JsonKey(name: 'ville') String? ville,
     @JsonKey(name: 'adresse') String? address,
     @JsonKey(name: 'latitude') double? latitude,
     @JsonKey(name: 'longitude') double? longitude,
+    @JsonKey(name: 'superviseur') int? supervisor, // Supervisor ID
     @JsonKey(name: 'codePostal') String? postalCode,
     @JsonKey(name: 'boitePostale') String? postBox,
     @JsonKey(name: 'email') String? email,
@@ -30,7 +32,31 @@ class Person with _$Person {
     @JsonKey(name: 'telMobile') String? telMobile,
     @JsonKey(name: 'fax') String? fax,
     @JsonKey(name: 'fullName') required String fullName,
+    @JsonKey(name: 'prospect') bool? prospect,
+    @JsonKey(name: 'solvabilite') Solvabilite? solvabilite, // Added solvabilite
+    @JsonKey(name: 'modePaie') ModePaie? modePaie, // Added modePaie
+    @JsonKey(name: 'categorieLibelle') String? categoryLabel,
   }) = _Person;
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
+}
+
+@freezed
+class Solvabilite with _$Solvabilite {
+  const factory Solvabilite({
+    @JsonKey(name: 'id') required int id,
+    @JsonKey(name: 'label') required String label,
+  }) = _Solvabilite;
+
+  factory Solvabilite.fromJson(Map<String, dynamic> json) => _$SolvabiliteFromJson(json);
+}
+
+@freezed
+class ModePaie with _$ModePaie {
+  const factory ModePaie({
+    @JsonKey(name: 'id') required int id,
+    @JsonKey(name: 'label') required String label,
+  }) = _ModePaie;
+
+  factory ModePaie.fromJson(Map<String, dynamic> json) => _$ModePaieFromJson(json);
 }

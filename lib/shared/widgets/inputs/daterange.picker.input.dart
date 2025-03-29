@@ -22,8 +22,9 @@ class CustomDateRangePicker extends StatelessWidget {
             final DateTimeRange? picked = await showDateRangePicker(
               context: context,
               currentDate: DateTime.now(),
-              firstDate: state.startDate,
-              lastDate: state.endDate,
+              // Allow dates from 1900 to 2100
+              firstDate: DateTime(1900),
+              lastDate: DateTime(2100),
               helpText: context.i10n.selectDateRange,
               saveText: context.i10n.save,
               confirmText: context.i10n.confirm,
@@ -34,12 +35,11 @@ class CustomDateRangePicker extends StatelessWidget {
               fieldStartLabelText: context.i10n.startDate,
               fieldEndLabelText: context.i10n.endDate,
               switchToInputEntryModeIcon: const Icon(Icons.edit_outlined),
-              switchToCalendarEntryModeIcon:
-                  const Icon(Icons.calendar_today_outlined),
+              switchToCalendarEntryModeIcon: const Icon(Icons.calendar_today_outlined),
               keyboardType: TextInputType.datetime,
               initialDateRange: DateTimeRange(
-                start: state.validatedStartDate ?? state.startDate,
-                end: state.validatedEndDate ?? state.endDate,
+                start: state.validatedStartDate ?? DateTime.now(),
+                end: state.validatedEndDate ?? DateTime.now(),
               ),
               builder: (context, child) {
                 return Align(

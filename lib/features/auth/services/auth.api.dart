@@ -41,8 +41,8 @@ class AuthApi {
 
   static Future<Response> update(Map<String, dynamic> data) async {
     String? token = await AuthRepository.token;
-    return await DioHelper.patchData(
-      url: '/clients/update-password',
+    return await DioHelper.putData(
+      url: '/tiers/password',
       token: token,
       data: data,
     );

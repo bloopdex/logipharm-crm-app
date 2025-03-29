@@ -22,10 +22,8 @@ class HireDetails extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
           constraints: BoxConstraints(
-            minHeight:
-                context.height - context.appBarSize - context.paddingBottom,
-            maxHeight:
-                context.height - context.appBarSize - context.paddingBottom,
+            minHeight: context.height - context.appBarSize - context.paddingBottom,
+            maxHeight: context.height - context.appBarSize - context.paddingBottom,
             minWidth: context.width,
             maxWidth: context.width,
           ),
@@ -36,22 +34,21 @@ class HireDetails extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                      width: 38.sp,
-                      height: 38.sp,
+                      width: 38.h,
+                      height: 38.h,
                       padding: EdgeInsets.all(kPaddingSm1),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: kPrimaryColor,
                         border: Border.all(color: kPrimaryColor, width: 2),
                       ),
-                      child:
-                          const Icon(Icons.cached_rounded, color: Colors.white),
+                      child: const Icon(Icons.cached_rounded, color: Colors.white),
                     ),
                     SizedBox(width: kSpacingX1),
                     Expanded(
                       child: Container(
-                          width: 180.sp,
-                          height: 5.sp,
+                          width: 180.h,
+                          height: 5.h,
                           color: hire.statusFlag == 0
                               ? kPrimaryColor
                               : hire.statusFlag == 1
@@ -60,8 +57,8 @@ class HireDetails extends StatelessWidget {
                     ),
                     SizedBox(width: kSpacingX1),
                     Container(
-                      width: 38.sp,
-                      height: 38.sp,
+                      width: 38.h,
+                      height: 38.h,
                       padding: EdgeInsets.all(kPaddingSm1),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -81,10 +78,8 @@ class HireDetails extends StatelessWidget {
                       child: hire.statusFlag == 0
                           ? const SizedBox.shrink()
                           : hire.statusFlag == 1
-                              ? const Icon(Icons.how_to_reg_rounded,
-                                  color: Colors.white)
-                              : const Icon(Icons.clear_rounded,
-                                  color: Colors.white),
+                              ? const Icon(Icons.how_to_reg_rounded, color: Colors.white)
+                              : const Icon(Icons.clear_rounded, color: Colors.white),
                     ),
                   ],
                 ),
@@ -97,7 +92,7 @@ class HireDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: 70.sp,
+                      width: 70.h,
                       child: Text(
                         context.i10n.homePendingHire,
                         softWrap: true,
@@ -107,7 +102,7 @@ class HireDetails extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 70.sp,
+                      width: 70.h,
                       child: Text(
                         hire.statusFlag == 0
                             ? context.i10n.waitingForDecision
@@ -131,8 +126,7 @@ class HireDetails extends StatelessWidget {
               ),
               SizedBox(height: kSpacingX6),
               Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: kPaddingMd2, vertical: kPaddingMd1),
+                padding: EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingMd1),
                 decoration: BoxDecoration(
                   border: Border.all(color: kBorder3, width: 1),
                   borderRadius: BorderRadius.circular(kSpacingX2),
@@ -180,8 +174,8 @@ class HireDetails extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kPaddingMd2, vertical: kPaddingSm3),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingSm3),
                           child: Text(
                             hire.firstName ?? context.i10n.noFirstName,
                             style: context.textTheme.bodyMedium,
@@ -194,16 +188,16 @@ class HireDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kPaddingMd2, vertical: kPaddingSm3),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingSm3),
                           child: Text(
                             context.i10n.lastName,
                             style: context.textTheme.bodyMedium,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kPaddingMd2, vertical: kPaddingSm3),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingSm3),
                           child: Text(
                             hire.lastName ?? context.i10n.noLastName,
                             style: context.textTheme.bodyMedium,
@@ -216,16 +210,16 @@ class HireDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kPaddingMd2, vertical: kPaddingSm3),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingSm3),
                           child: Text(
                             context.i10n.email,
                             style: context.textTheme.bodyMedium,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kPaddingMd2, vertical: kPaddingSm3),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingSm3),
                           child: Text(
                             hire.email ?? context.i10n.noEmail,
                             style: context.textTheme.bodyMedium,
@@ -290,8 +284,8 @@ class HireDetails extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kPaddingMd2, vertical: kPaddingSm3),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingSm3),
                           child: Text(
                             hire.regionName,
                             style: context.textTheme.bodyMedium,
@@ -304,8 +298,8 @@ class HireDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kPaddingMd2, vertical: kPaddingSm3),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: kPaddingSm3),
                           child: Text(
                             context.i10n.address,
                             style: context.textTheme.bodyMedium,

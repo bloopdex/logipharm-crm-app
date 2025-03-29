@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../logic/file/file_cubit.dart';
 import '../../models/hire.dart';
 import '../../services/hire.repository.dart';
 
@@ -22,10 +23,24 @@ class HireCreationCubit extends Cubit<HireCreationState> {
         emit(HireCreationState.loaded(hire: hire));
         return;
       } else {
-        emit(HireCreationState.failure(
-            message: response.data['message'] ?? 'An error occurred'));
+        emit(HireCreationState.failure(message: response.data['message'] ?? 'An error occurred'));
         return;
       }
+    } catch (e) {
+      log(e.toString());
+      emit(HireCreationState.failure(message: e.toString()));
+      return;
+    }
+  }
+
+  Future<void> file(String hireId, FileModel file) async {
+    emit(const HireCreationState.loading());
+    try {
+      await HireRepository.file(
+        hireId: hireId,
+        file: file,
+      );
+      emit(const HireCreationState.initial());
     } catch (e) {
       log(e.toString());
       emit(HireCreationState.failure(message: e.toString()));

@@ -7,7 +7,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/core.dart';
-import '../blocs/observation_cubit.dart';
+import '../blocs/observation/observation_cubit.dart';
 
 class CreateObservationPage extends StatefulWidget {
   final int pharmacyId;
@@ -19,7 +19,7 @@ class CreateObservationPage extends StatefulWidget {
 }
 
 class _CreateObservationPageState extends State<CreateObservationPage> {
-  QuillController _quillController = QuillController.basic();
+  final QuillController _quillController = QuillController.basic();
   final FocusNode _quillFocusNode = FocusNode();
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -67,7 +67,7 @@ class _CreateObservationPageState extends State<CreateObservationPage> {
             style: context.textTheme.headlineMedium,
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(160.sp),
+            preferredSize: Size.fromHeight(160.h),
             child: QuillToolbar.simple(
                 configurations: QuillSimpleToolbarConfigurations(
               controller: _quillController,
@@ -91,14 +91,8 @@ class _CreateObservationPageState extends State<CreateObservationPage> {
           key: _formKey,
           child: Container(
               constraints: BoxConstraints(
-                maxHeight: context.height -
-                    context.appBarSize -
-                    context.paddingBottom -
-                    160.sp,
-                minHeight: context.height -
-                    context.appBarSize -
-                    context.paddingBottom -
-                    160.sp,
+                maxHeight: context.height - context.appBarSize - context.paddingBottom - 160.h,
+                minHeight: context.height - context.appBarSize - context.paddingBottom - 160.h,
                 maxWidth: context.width,
                 minWidth: context.width,
               ),
@@ -145,9 +139,7 @@ class _CreateObservationPageState extends State<CreateObservationPage> {
                           controller: _quillController,
                           scrollable: true,
                           autoFocus: false,
-                          readOnly: false,
-                          placeholder:
-                              context.i10n.visitCreationRapportPlaceholder,
+                          placeholder: context.i10n.visitCreationRapportPlaceholder,
                           expands: false,
                           showCursor: true,
                         ),
@@ -164,13 +156,10 @@ class _CreateObservationPageState extends State<CreateObservationPage> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            observation['rapportText'] =
-                                _quillController.document.toPlainText();
-                            observation['rapport'] = json.encode(
-                                _quillController.document.toDelta().toJson());
-                            context
-                                .read<ObservationCubit>()
-                                .create(data: observation);
+                            observation['rapportText'] = _quillController.document.toPlainText();
+                            observation['rapport'] =
+                                json.encode(_quillController.document.toDelta().toJson());
+                            context.read<ObservationCubit>().create(data: observation);
                             context.pop();
                           }
                         }),

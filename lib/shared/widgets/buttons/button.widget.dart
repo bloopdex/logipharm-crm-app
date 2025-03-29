@@ -1,13 +1,13 @@
-import '../../../core/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/const.dart';
+import '../../../core/extension.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
-    required this.text,
+    this.text,
     this.onPressed,
     this.backgroundColor = kCeruleanBlue,
     this.textColor = Colors.white,
@@ -15,7 +15,8 @@ class CustomButton extends StatelessWidget {
     this.icon,
     this.disabled = false,
   });
-  final String text;
+
+  final String? text;
   final IconData? icon;
   final Color textColor;
   final double? height;
@@ -28,9 +29,11 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: disabled ? () {} : onPressed,
       style: context.elevatedButtonTheme.copyWith(
-        backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+        backgroundColor: MaterialStateProperty.resolveWith(
+          (states) => disabled ? kBgGrayVisibility3 : backgroundColor,
+        ),
         minimumSize: MaterialStateProperty.all<Size>(
-          Size(double.infinity, height ?? 50.sp),
+          Size(double.infinity, height ?? 50.h),
         ),
       ),
       child: Row(
@@ -43,16 +46,16 @@ class CustomButton extends StatelessWidget {
                 Icon(
                   icon,
                   color: textColor,
-                  size: 20.sp,
+                  size: 20.h,
                 ),
                 SizedBox(width: kSpacingX1)
               ],
             ),
-          Text(text,
-              maxLines: 2,
-              textAlign: TextAlign.center,
-              style:
-                  context.textTheme.headlineMedium!.copyWith(color: textColor)),
+          if (text != null)
+            Text(text!,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                style: context.textTheme.headlineMedium!.copyWith(color: textColor)),
         ],
       ),
     );

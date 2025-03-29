@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:crm/features/tour-plan/models/tour.dart';
+import 'package:crm/features/visits/bloc/visits/visit_bloc.dart';
 import 'package:crm/features/visits/pages/creation-successful.page.dart';
 import 'package:crm/shared/services/helpers/location.helper.dart';
 import 'package:flutter/material.dart';
@@ -30,18 +31,33 @@ class UpdateVisitPage extends StatefulWidget {
 
 class _UpdateVisitPageState extends State<UpdateVisitPage> {
   QuillController _quillController = QuillController.basic();
+  final ScrollController _scrollController = ScrollController();
 
   Map<String, dynamic> data = {};
+
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 3000),
+        curve: Curves.easeOut,
+      );
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     context.read<CounterCubit>().reset();
     context.read<VisitCreationCubit>().reset();
+    debugPrint('tour: ${widget.tour}');
     data['dateDebut'] = DateTime.now().YYYYMMdd();
-    data['pharmacieId'] = widget.tour.pharmacy!.id.toString();
+    data['pharmacieId'] = '${widget.tour.pharmacy!.id}:${widget.tour.pharmacy!.typeTier}';
     data['tourneeId'] = widget.tour.masterTourId;
-    data['motif'] = widget.tour.reason;
+    data['motif'] = widget.tour.reason?.id.toString();
+    if (widget.tour.reason != null && widget.tour.reason?.id != -1) {
+      data['motif'] = widget.tour.reason;
+    }
     if (widget.tour.report != null) {
       try {
         List<dynamic> deltaOperations = json.decode(widget.tour.report!);
@@ -83,7 +99,7 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                             return CustomStepper(
                               activeStep: state,
                               steps: 2,
-                              stepHeight: 4.sp,
+                              stepHeight: 4.h,
                             );
                           },
                         ),
@@ -91,7 +107,7 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                     ),
                     bottom: PreferredSize(
                       preferredSize: context.read<CounterCubit>().state < 1
-                          ? Size.fromHeight(160.sp)
+                          ? Size.fromHeight(160.h)
                           : const Size.fromHeight(0),
                       child: context.read<CounterCubit>().state < 1
                           ? QuillToolbar.simple(
@@ -121,23 +137,14 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                       maxWidth: context.width,
                       minWidth: context.width,
                       maxHeight: context.read<CounterCubit>().state == 0
-                          ? context.height -
-                              context.appBarSize -
-                              context.paddingBottom -
-                              160.sp
-                          : context.height -
-                              context.appBarSize -
-                              context.paddingBottom,
+                          ? context.height - context.appBarSize - context.paddingBottom - 160.h
+                          : context.height - context.appBarSize - context.paddingBottom,
                       minHeight: context.read<CounterCubit>().state == 0
-                          ? context.height -
-                              context.appBarSize -
-                              context.paddingBottom -
-                              160.sp
-                          : context.height -
-                              context.appBarSize -
-                              context.paddingBottom,
+                          ? context.height - context.appBarSize - context.paddingBottom - 160.h
+                          : context.height - context.appBarSize - context.paddingBottom,
                     ),
                     child: SingleChildScrollView(
+                      controller: _scrollController,
                       child: BlocBuilder<CounterCubit, int>(
                         builder: (context, state) {
                           return Container(
@@ -148,20 +155,20 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                                   ? context.height -
                                       context.appBarSize -
                                       context.paddingBottom -
-                                      200.sp
+                                      200.h
                                   : context.height -
                                       context.appBarSize -
                                       context.paddingBottom -
-                                      70.sp,
+                                      70.h,
                               minHeight: context.read<CounterCubit>().state == 0
                                   ? context.height -
                                       context.appBarSize -
                                       context.paddingBottom -
-                                      200.sp
+                                      200.h
                                   : context.height -
                                       context.appBarSize -
                                       context.paddingBottom -
-                                      70.sp,
+                                      70.h,
                             ),
                             child: Column(
                               children: [
@@ -169,58 +176,48 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                                   child: state == 0
                                       ? ClientSelectionForm(
                                           quillController: _quillController,
+                                          onQuillFocus: _scrollToBottom,
                                           clients: [widget.tour],
                                           data: data,
                                         )
-                                      : VisitValidateUpdatePage(
-                                          tour: widget.tour, data: data),
+                                      : VisitValidateUpdatePage(tour: widget.tour, data: data),
                                 ),
                                 SizedBox(height: kSpacingX4),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: kPaddingMd2),
+                                  padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
                                   child: CustomButton(
-                                    text: state < 1
-                                        ? context.i10n.next
-                                        : context.i10n.validate,
+                                    text: state < 1 ? context.i10n.next : context.i10n.validate,
                                     onPressed: () async {
                                       switch (state) {
                                         case 0:
                                           if (data['dateDebut'] == null ||
                                               data['pharmacieId'] == null ||
                                               data['motif'] == null ||
-                                              _quillController.document
-                                                  .toPlainText()
-                                                  .isEmpty) {
+                                              _quillController.document.toPlainText().isEmpty) {
                                             return;
                                           }
-                                          data['document'] =
-                                              _quillController.document;
-                                          context
-                                              .read<CounterCubit>()
-                                              .increment();
+                                          data['document'] = _quillController.document;
+                                          context.read<CounterCubit>().increment();
+                                          // check if mounted
+                                          if (!mounted) return;
                                           setState(() {});
                                           break;
                                         case 1:
-                                          data['rapportText'] = _quillController
-                                              .document
-                                              .toPlainText();
-                                          data['rapport'] = _quillController
-                                              .document
+                                          data['rapportText'] =
+                                              _quillController.document.toPlainText();
+                                          data['rapport'] = _quillController.document
                                               .toDelta()
                                               .toJson()
                                               .toString();
-                                          final position = await LocationHelper
-                                              .getCurrentPosition();
+                                          final position =
+                                              await LocationHelper.getCurrentPosition();
                                           if (position != null) {
-                                            data['latitude'] =
-                                                position.latitude;
-                                            data['longitude'] =
-                                                position.longitude;
+                                            data['latitude'] = position.latitude;
+                                            data['longitude'] = position.longitude;
                                           }
-                                          context
-                                              .read<VisitCreationCubit>()
-                                              .validate(data: data);
+                                          if (!context.mounted) return;
+                                          context.read<VisitCreationCubit>().validate(data: data);
+                                          context.read<VisitBloc>().add(const VisitEvent.started());
                                       }
                                     },
                                   ),

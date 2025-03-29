@@ -24,12 +24,8 @@ class PlanTourPage extends StatelessWidget {
       constraints: BoxConstraints(
         maxWidth: context.width,
         minWidth: context.width,
-        maxHeight: context.height -
-            context.appBarSize -
-            context.bottomNavigationBarSize,
-        minHeight: context.height -
-            context.appBarSize -
-            context.bottomNavigationBarSize,
+        maxHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
+        minHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
       ),
       child: MultiBlocListener(
         listeners: [
@@ -38,12 +34,8 @@ class PlanTourPage extends StatelessWidget {
               context.read<TourPlanBloc>().add(
                     TourPlanEvent.search(
                       query: state,
-                      start: context
-                          .read<TimeRangeCubit>()
-                          .state
-                          .validatedStartDate,
-                      end:
-                          context.read<TimeRangeCubit>().state.validatedEndDate,
+                      start: context.read<TimeRangeCubit>().state.validatedStartDate,
+                      end: context.read<TimeRangeCubit>().state.validatedEndDate,
                     ),
                   );
             },
@@ -62,15 +54,17 @@ class PlanTourPage extends StatelessWidget {
         ],
         child: BlocBuilder<TourPlanBloc, TourPlanState>(
           builder: (context, state) {
+            final user = context.user;
             final Tour? current = state.maybeWhen(
-              loaded: (tours, hasReachedMax, currentPage) {
+              loaded: (tours, hasReachedMax, currentPage, goal) {
                 return tours
-                    .where((element) =>
-                        element.statusFlag == StatuFlags.opened.value)
+                    .where((element) => (element.statusFlag == StatuFlags.opened.value &&
+                        element.delegate.id == user.id.id))
                     .firstOrNull;
               },
               orElse: () => null,
             );
+
             return Column(
               children: [
                 if (current != null)
@@ -99,8 +93,7 @@ class PlanTourPage extends StatelessWidget {
                 ),
                 BlocBuilder<TimeRangeCubit, TimeRangeState>(
                   builder: (context, state) {
-                    if (state.validatedStartDate != null &&
-                        state.validatedEndDate != null) {
+                    if (state.validatedStartDate != null && state.validatedEndDate != null) {
                       return Padding(
                         padding: EdgeInsets.symmetric(vertical: kSpacingX4),
                         child: Row(
@@ -114,8 +107,7 @@ class PlanTourPage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(width: kSpacingX4),
-                            Icon(Icons.arrow_forward,
-                                size: 20.sp, color: kBgGrayVisibility4),
+                            Icon(Icons.arrow_forward, size: 20.h, color: kBgGrayVisibility4),
                             SizedBox(width: kSpacingX4),
                             Text(
                               DateHelper.ddMMYYYY(state.validatedEndDate!),

@@ -32,16 +32,20 @@ mixin _$Person {
   String? get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: 'loginCode')
   String get loginCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'actionFlag')
-  int get actionFlag => throw _privateConstructorUsedError;
+  @JsonKey(name: 'activeFlag')
+  int get activeFlag => throw _privateConstructorUsedError;
   @JsonKey(name: 'regionId')
   String? get regionId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ville')
+  String? get ville => throw _privateConstructorUsedError;
   @JsonKey(name: 'adresse')
   String? get address => throw _privateConstructorUsedError;
   @JsonKey(name: 'latitude')
   double? get latitude => throw _privateConstructorUsedError;
   @JsonKey(name: 'longitude')
   double? get longitude => throw _privateConstructorUsedError;
+  @JsonKey(name: 'superviseur')
+  int? get supervisor => throw _privateConstructorUsedError; // Supervisor ID
   @JsonKey(name: 'codePostal')
   String? get postalCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'boitePostale')
@@ -64,6 +68,16 @@ mixin _$Person {
   String? get fax => throw _privateConstructorUsedError;
   @JsonKey(name: 'fullName')
   String get fullName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'prospect')
+  bool? get prospect => throw _privateConstructorUsedError;
+  @JsonKey(name: 'solvabilite')
+  Solvabilite? get solvabilite =>
+      throw _privateConstructorUsedError; // Added solvabilite
+  @JsonKey(name: 'modePaie')
+  ModePaie? get modePaie =>
+      throw _privateConstructorUsedError; // Added modePaie
+  @JsonKey(name: 'categorieLibelle')
+  String? get categoryLabel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -82,11 +96,13 @@ abstract class $PersonCopyWith<$Res> {
       @JsonKey(name: 'nom') String lastName,
       @JsonKey(name: 'prenom') String? firstName,
       @JsonKey(name: 'loginCode') String loginCode,
-      @JsonKey(name: 'actionFlag') int actionFlag,
+      @JsonKey(name: 'activeFlag') int activeFlag,
       @JsonKey(name: 'regionId') String? regionId,
+      @JsonKey(name: 'ville') String? ville,
       @JsonKey(name: 'adresse') String? address,
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'longitude') double? longitude,
+      @JsonKey(name: 'superviseur') int? supervisor,
       @JsonKey(name: 'codePostal') String? postalCode,
       @JsonKey(name: 'boitePostale') String? postBox,
       @JsonKey(name: 'email') String? email,
@@ -97,7 +113,14 @@ abstract class $PersonCopyWith<$Res> {
       @JsonKey(name: 'tel2Fixe') String? tel2Fixe,
       @JsonKey(name: 'telMobile') String? telMobile,
       @JsonKey(name: 'fax') String? fax,
-      @JsonKey(name: 'fullName') String fullName});
+      @JsonKey(name: 'fullName') String fullName,
+      @JsonKey(name: 'prospect') bool? prospect,
+      @JsonKey(name: 'solvabilite') Solvabilite? solvabilite,
+      @JsonKey(name: 'modePaie') ModePaie? modePaie,
+      @JsonKey(name: 'categorieLibelle') String? categoryLabel});
+
+  $SolvabiliteCopyWith<$Res>? get solvabilite;
+  $ModePaieCopyWith<$Res>? get modePaie;
 }
 
 /// @nodoc
@@ -119,11 +142,13 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? lastName = null,
     Object? firstName = freezed,
     Object? loginCode = null,
-    Object? actionFlag = null,
+    Object? activeFlag = null,
     Object? regionId = freezed,
+    Object? ville = freezed,
     Object? address = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? supervisor = freezed,
     Object? postalCode = freezed,
     Object? postBox = freezed,
     Object? email = freezed,
@@ -135,6 +160,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? telMobile = freezed,
     Object? fax = freezed,
     Object? fullName = null,
+    Object? prospect = freezed,
+    Object? solvabilite = freezed,
+    Object? modePaie = freezed,
+    Object? categoryLabel = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -161,13 +190,17 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.loginCode
           : loginCode // ignore: cast_nullable_to_non_nullable
               as String,
-      actionFlag: null == actionFlag
-          ? _value.actionFlag
-          : actionFlag // ignore: cast_nullable_to_non_nullable
+      activeFlag: null == activeFlag
+          ? _value.activeFlag
+          : activeFlag // ignore: cast_nullable_to_non_nullable
               as int,
       regionId: freezed == regionId
           ? _value.regionId
           : regionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ville: freezed == ville
+          ? _value.ville
+          : ville // ignore: cast_nullable_to_non_nullable
               as String?,
       address: freezed == address
           ? _value.address
@@ -181,6 +214,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
+      supervisor: freezed == supervisor
+          ? _value.supervisor
+          : supervisor // ignore: cast_nullable_to_non_nullable
+              as int?,
       postalCode: freezed == postalCode
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
@@ -225,7 +262,47 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
+      prospect: freezed == prospect
+          ? _value.prospect
+          : prospect // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      solvabilite: freezed == solvabilite
+          ? _value.solvabilite
+          : solvabilite // ignore: cast_nullable_to_non_nullable
+              as Solvabilite?,
+      modePaie: freezed == modePaie
+          ? _value.modePaie
+          : modePaie // ignore: cast_nullable_to_non_nullable
+              as ModePaie?,
+      categoryLabel: freezed == categoryLabel
+          ? _value.categoryLabel
+          : categoryLabel // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SolvabiliteCopyWith<$Res>? get solvabilite {
+    if (_value.solvabilite == null) {
+      return null;
+    }
+
+    return $SolvabiliteCopyWith<$Res>(_value.solvabilite!, (value) {
+      return _then(_value.copyWith(solvabilite: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ModePaieCopyWith<$Res>? get modePaie {
+    if (_value.modePaie == null) {
+      return null;
+    }
+
+    return $ModePaieCopyWith<$Res>(_value.modePaie!, (value) {
+      return _then(_value.copyWith(modePaie: value) as $Val);
+    });
   }
 }
 
@@ -243,11 +320,13 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       @JsonKey(name: 'nom') String lastName,
       @JsonKey(name: 'prenom') String? firstName,
       @JsonKey(name: 'loginCode') String loginCode,
-      @JsonKey(name: 'actionFlag') int actionFlag,
+      @JsonKey(name: 'activeFlag') int activeFlag,
       @JsonKey(name: 'regionId') String? regionId,
+      @JsonKey(name: 'ville') String? ville,
       @JsonKey(name: 'adresse') String? address,
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'longitude') double? longitude,
+      @JsonKey(name: 'superviseur') int? supervisor,
       @JsonKey(name: 'codePostal') String? postalCode,
       @JsonKey(name: 'boitePostale') String? postBox,
       @JsonKey(name: 'email') String? email,
@@ -258,7 +337,16 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       @JsonKey(name: 'tel2Fixe') String? tel2Fixe,
       @JsonKey(name: 'telMobile') String? telMobile,
       @JsonKey(name: 'fax') String? fax,
-      @JsonKey(name: 'fullName') String fullName});
+      @JsonKey(name: 'fullName') String fullName,
+      @JsonKey(name: 'prospect') bool? prospect,
+      @JsonKey(name: 'solvabilite') Solvabilite? solvabilite,
+      @JsonKey(name: 'modePaie') ModePaie? modePaie,
+      @JsonKey(name: 'categorieLibelle') String? categoryLabel});
+
+  @override
+  $SolvabiliteCopyWith<$Res>? get solvabilite;
+  @override
+  $ModePaieCopyWith<$Res>? get modePaie;
 }
 
 /// @nodoc
@@ -278,11 +366,13 @@ class __$$PersonImplCopyWithImpl<$Res>
     Object? lastName = null,
     Object? firstName = freezed,
     Object? loginCode = null,
-    Object? actionFlag = null,
+    Object? activeFlag = null,
     Object? regionId = freezed,
+    Object? ville = freezed,
     Object? address = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? supervisor = freezed,
     Object? postalCode = freezed,
     Object? postBox = freezed,
     Object? email = freezed,
@@ -294,6 +384,10 @@ class __$$PersonImplCopyWithImpl<$Res>
     Object? telMobile = freezed,
     Object? fax = freezed,
     Object? fullName = null,
+    Object? prospect = freezed,
+    Object? solvabilite = freezed,
+    Object? modePaie = freezed,
+    Object? categoryLabel = freezed,
   }) {
     return _then(_$PersonImpl(
       id: null == id
@@ -320,13 +414,17 @@ class __$$PersonImplCopyWithImpl<$Res>
           ? _value.loginCode
           : loginCode // ignore: cast_nullable_to_non_nullable
               as String,
-      actionFlag: null == actionFlag
-          ? _value.actionFlag
-          : actionFlag // ignore: cast_nullable_to_non_nullable
+      activeFlag: null == activeFlag
+          ? _value.activeFlag
+          : activeFlag // ignore: cast_nullable_to_non_nullable
               as int,
       regionId: freezed == regionId
           ? _value.regionId
           : regionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ville: freezed == ville
+          ? _value.ville
+          : ville // ignore: cast_nullable_to_non_nullable
               as String?,
       address: freezed == address
           ? _value.address
@@ -340,6 +438,10 @@ class __$$PersonImplCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
+      supervisor: freezed == supervisor
+          ? _value.supervisor
+          : supervisor // ignore: cast_nullable_to_non_nullable
+              as int?,
       postalCode: freezed == postalCode
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
@@ -384,6 +486,22 @@ class __$$PersonImplCopyWithImpl<$Res>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
+      prospect: freezed == prospect
+          ? _value.prospect
+          : prospect // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      solvabilite: freezed == solvabilite
+          ? _value.solvabilite
+          : solvabilite // ignore: cast_nullable_to_non_nullable
+              as Solvabilite?,
+      modePaie: freezed == modePaie
+          ? _value.modePaie
+          : modePaie // ignore: cast_nullable_to_non_nullable
+              as ModePaie?,
+      categoryLabel: freezed == categoryLabel
+          ? _value.categoryLabel
+          : categoryLabel // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -398,11 +516,13 @@ class _$PersonImpl implements _Person {
       @JsonKey(name: 'nom') required this.lastName,
       @JsonKey(name: 'prenom') this.firstName,
       @JsonKey(name: 'loginCode') required this.loginCode,
-      @JsonKey(name: 'actionFlag') required this.actionFlag,
+      @JsonKey(name: 'activeFlag') required this.activeFlag,
       @JsonKey(name: 'regionId') this.regionId,
+      @JsonKey(name: 'ville') this.ville,
       @JsonKey(name: 'adresse') this.address,
       @JsonKey(name: 'latitude') this.latitude,
       @JsonKey(name: 'longitude') this.longitude,
+      @JsonKey(name: 'superviseur') this.supervisor,
       @JsonKey(name: 'codePostal') this.postalCode,
       @JsonKey(name: 'boitePostale') this.postBox,
       @JsonKey(name: 'email') this.email,
@@ -413,7 +533,11 @@ class _$PersonImpl implements _Person {
       @JsonKey(name: 'tel2Fixe') this.tel2Fixe,
       @JsonKey(name: 'telMobile') this.telMobile,
       @JsonKey(name: 'fax') this.fax,
-      @JsonKey(name: 'fullName') required this.fullName});
+      @JsonKey(name: 'fullName') required this.fullName,
+      @JsonKey(name: 'prospect') this.prospect,
+      @JsonKey(name: 'solvabilite') this.solvabilite,
+      @JsonKey(name: 'modePaie') this.modePaie,
+      @JsonKey(name: 'categorieLibelle') this.categoryLabel});
 
   factory _$PersonImpl.fromJson(Map<String, dynamic> json) =>
       _$$PersonImplFromJson(json);
@@ -437,11 +561,14 @@ class _$PersonImpl implements _Person {
   @JsonKey(name: 'loginCode')
   final String loginCode;
   @override
-  @JsonKey(name: 'actionFlag')
-  final int actionFlag;
+  @JsonKey(name: 'activeFlag')
+  final int activeFlag;
   @override
   @JsonKey(name: 'regionId')
   final String? regionId;
+  @override
+  @JsonKey(name: 'ville')
+  final String? ville;
   @override
   @JsonKey(name: 'adresse')
   final String? address;
@@ -451,6 +578,10 @@ class _$PersonImpl implements _Person {
   @override
   @JsonKey(name: 'longitude')
   final double? longitude;
+  @override
+  @JsonKey(name: 'superviseur')
+  final int? supervisor;
+// Supervisor ID
   @override
   @JsonKey(name: 'codePostal')
   final String? postalCode;
@@ -484,10 +615,24 @@ class _$PersonImpl implements _Person {
   @override
   @JsonKey(name: 'fullName')
   final String fullName;
+  @override
+  @JsonKey(name: 'prospect')
+  final bool? prospect;
+  @override
+  @JsonKey(name: 'solvabilite')
+  final Solvabilite? solvabilite;
+// Added solvabilite
+  @override
+  @JsonKey(name: 'modePaie')
+  final ModePaie? modePaie;
+// Added modePaie
+  @override
+  @JsonKey(name: 'categorieLibelle')
+  final String? categoryLabel;
 
   @override
   String toString() {
-    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName)';
+    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, activeFlag: $activeFlag, regionId: $regionId, ville: $ville, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName, prospect: $prospect, solvabilite: $solvabilite, modePaie: $modePaie, categoryLabel: $categoryLabel)';
   }
 
   @override
@@ -506,15 +651,18 @@ class _$PersonImpl implements _Person {
                 other.firstName == firstName) &&
             (identical(other.loginCode, loginCode) ||
                 other.loginCode == loginCode) &&
-            (identical(other.actionFlag, actionFlag) ||
-                other.actionFlag == actionFlag) &&
+            (identical(other.activeFlag, activeFlag) ||
+                other.activeFlag == activeFlag) &&
             (identical(other.regionId, regionId) ||
                 other.regionId == regionId) &&
+            (identical(other.ville, ville) || other.ville == ville) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
+            (identical(other.supervisor, supervisor) ||
+                other.supervisor == supervisor) &&
             (identical(other.postalCode, postalCode) ||
                 other.postalCode == postalCode) &&
             (identical(other.postBox, postBox) || other.postBox == postBox) &&
@@ -530,7 +678,15 @@ class _$PersonImpl implements _Person {
                 other.telMobile == telMobile) &&
             (identical(other.fax, fax) || other.fax == fax) &&
             (identical(other.fullName, fullName) ||
-                other.fullName == fullName));
+                other.fullName == fullName) &&
+            (identical(other.prospect, prospect) ||
+                other.prospect == prospect) &&
+            (identical(other.solvabilite, solvabilite) ||
+                other.solvabilite == solvabilite) &&
+            (identical(other.modePaie, modePaie) ||
+                other.modePaie == modePaie) &&
+            (identical(other.categoryLabel, categoryLabel) ||
+                other.categoryLabel == categoryLabel));
   }
 
   @JsonKey(ignore: true)
@@ -543,11 +699,13 @@ class _$PersonImpl implements _Person {
         lastName,
         firstName,
         loginCode,
-        actionFlag,
+        activeFlag,
         regionId,
+        ville,
         address,
         latitude,
         longitude,
+        supervisor,
         postalCode,
         postBox,
         email,
@@ -558,7 +716,11 @@ class _$PersonImpl implements _Person {
         tel2Fixe,
         telMobile,
         fax,
-        fullName
+        fullName,
+        prospect,
+        solvabilite,
+        modePaie,
+        categoryLabel
       ]);
 
   @JsonKey(ignore: true)
@@ -583,11 +745,13 @@ abstract class _Person implements Person {
           @JsonKey(name: 'nom') required final String lastName,
           @JsonKey(name: 'prenom') final String? firstName,
           @JsonKey(name: 'loginCode') required final String loginCode,
-          @JsonKey(name: 'actionFlag') required final int actionFlag,
+          @JsonKey(name: 'activeFlag') required final int activeFlag,
           @JsonKey(name: 'regionId') final String? regionId,
+          @JsonKey(name: 'ville') final String? ville,
           @JsonKey(name: 'adresse') final String? address,
           @JsonKey(name: 'latitude') final double? latitude,
           @JsonKey(name: 'longitude') final double? longitude,
+          @JsonKey(name: 'superviseur') final int? supervisor,
           @JsonKey(name: 'codePostal') final String? postalCode,
           @JsonKey(name: 'boitePostale') final String? postBox,
           @JsonKey(name: 'email') final String? email,
@@ -598,7 +762,11 @@ abstract class _Person implements Person {
           @JsonKey(name: 'tel2Fixe') final String? tel2Fixe,
           @JsonKey(name: 'telMobile') final String? telMobile,
           @JsonKey(name: 'fax') final String? fax,
-          @JsonKey(name: 'fullName') required final String fullName}) =
+          @JsonKey(name: 'fullName') required final String fullName,
+          @JsonKey(name: 'prospect') final bool? prospect,
+          @JsonKey(name: 'solvabilite') final Solvabilite? solvabilite,
+          @JsonKey(name: 'modePaie') final ModePaie? modePaie,
+          @JsonKey(name: 'categorieLibelle') final String? categoryLabel}) =
       _$PersonImpl;
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$PersonImpl.fromJson;
@@ -622,11 +790,14 @@ abstract class _Person implements Person {
   @JsonKey(name: 'loginCode')
   String get loginCode;
   @override
-  @JsonKey(name: 'actionFlag')
-  int get actionFlag;
+  @JsonKey(name: 'activeFlag')
+  int get activeFlag;
   @override
   @JsonKey(name: 'regionId')
   String? get regionId;
+  @override
+  @JsonKey(name: 'ville')
+  String? get ville;
   @override
   @JsonKey(name: 'adresse')
   String? get address;
@@ -637,6 +808,9 @@ abstract class _Person implements Person {
   @JsonKey(name: 'longitude')
   double? get longitude;
   @override
+  @JsonKey(name: 'superviseur')
+  int? get supervisor;
+  @override // Supervisor ID
   @JsonKey(name: 'codePostal')
   String? get postalCode;
   @override
@@ -670,7 +844,346 @@ abstract class _Person implements Person {
   @JsonKey(name: 'fullName')
   String get fullName;
   @override
+  @JsonKey(name: 'prospect')
+  bool? get prospect;
+  @override
+  @JsonKey(name: 'solvabilite')
+  Solvabilite? get solvabilite;
+  @override // Added solvabilite
+  @JsonKey(name: 'modePaie')
+  ModePaie? get modePaie;
+  @override // Added modePaie
+  @JsonKey(name: 'categorieLibelle')
+  String? get categoryLabel;
+  @override
   @JsonKey(ignore: true)
   _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Solvabilite _$SolvabiliteFromJson(Map<String, dynamic> json) {
+  return _Solvabilite.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Solvabilite {
+  @JsonKey(name: 'id')
+  int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'label')
+  String get label => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SolvabiliteCopyWith<Solvabilite> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SolvabiliteCopyWith<$Res> {
+  factory $SolvabiliteCopyWith(
+          Solvabilite value, $Res Function(Solvabilite) then) =
+      _$SolvabiliteCopyWithImpl<$Res, Solvabilite>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int id, @JsonKey(name: 'label') String label});
+}
+
+/// @nodoc
+class _$SolvabiliteCopyWithImpl<$Res, $Val extends Solvabilite>
+    implements $SolvabiliteCopyWith<$Res> {
+  _$SolvabiliteCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SolvabiliteImplCopyWith<$Res>
+    implements $SolvabiliteCopyWith<$Res> {
+  factory _$$SolvabiliteImplCopyWith(
+          _$SolvabiliteImpl value, $Res Function(_$SolvabiliteImpl) then) =
+      __$$SolvabiliteImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int id, @JsonKey(name: 'label') String label});
+}
+
+/// @nodoc
+class __$$SolvabiliteImplCopyWithImpl<$Res>
+    extends _$SolvabiliteCopyWithImpl<$Res, _$SolvabiliteImpl>
+    implements _$$SolvabiliteImplCopyWith<$Res> {
+  __$$SolvabiliteImplCopyWithImpl(
+      _$SolvabiliteImpl _value, $Res Function(_$SolvabiliteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+  }) {
+    return _then(_$SolvabiliteImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SolvabiliteImpl implements _Solvabilite {
+  const _$SolvabiliteImpl(
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'label') required this.label});
+
+  factory _$SolvabiliteImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SolvabiliteImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'id')
+  final int id;
+  @override
+  @JsonKey(name: 'label')
+  final String label;
+
+  @override
+  String toString() {
+    return 'Solvabilite(id: $id, label: $label)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SolvabiliteImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.label, label) || other.label == label));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, label);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SolvabiliteImplCopyWith<_$SolvabiliteImpl> get copyWith =>
+      __$$SolvabiliteImplCopyWithImpl<_$SolvabiliteImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SolvabiliteImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Solvabilite implements Solvabilite {
+  const factory _Solvabilite(
+      {@JsonKey(name: 'id') required final int id,
+      @JsonKey(name: 'label') required final String label}) = _$SolvabiliteImpl;
+
+  factory _Solvabilite.fromJson(Map<String, dynamic> json) =
+      _$SolvabiliteImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'id')
+  int get id;
+  @override
+  @JsonKey(name: 'label')
+  String get label;
+  @override
+  @JsonKey(ignore: true)
+  _$$SolvabiliteImplCopyWith<_$SolvabiliteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ModePaie _$ModePaieFromJson(Map<String, dynamic> json) {
+  return _ModePaie.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ModePaie {
+  @JsonKey(name: 'id')
+  int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'label')
+  String get label => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ModePaieCopyWith<ModePaie> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ModePaieCopyWith<$Res> {
+  factory $ModePaieCopyWith(ModePaie value, $Res Function(ModePaie) then) =
+      _$ModePaieCopyWithImpl<$Res, ModePaie>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int id, @JsonKey(name: 'label') String label});
+}
+
+/// @nodoc
+class _$ModePaieCopyWithImpl<$Res, $Val extends ModePaie>
+    implements $ModePaieCopyWith<$Res> {
+  _$ModePaieCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ModePaieImplCopyWith<$Res>
+    implements $ModePaieCopyWith<$Res> {
+  factory _$$ModePaieImplCopyWith(
+          _$ModePaieImpl value, $Res Function(_$ModePaieImpl) then) =
+      __$$ModePaieImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int id, @JsonKey(name: 'label') String label});
+}
+
+/// @nodoc
+class __$$ModePaieImplCopyWithImpl<$Res>
+    extends _$ModePaieCopyWithImpl<$Res, _$ModePaieImpl>
+    implements _$$ModePaieImplCopyWith<$Res> {
+  __$$ModePaieImplCopyWithImpl(
+      _$ModePaieImpl _value, $Res Function(_$ModePaieImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+  }) {
+    return _then(_$ModePaieImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ModePaieImpl implements _ModePaie {
+  const _$ModePaieImpl(
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'label') required this.label});
+
+  factory _$ModePaieImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ModePaieImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'id')
+  final int id;
+  @override
+  @JsonKey(name: 'label')
+  final String label;
+
+  @override
+  String toString() {
+    return 'ModePaie(id: $id, label: $label)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ModePaieImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.label, label) || other.label == label));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, label);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ModePaieImplCopyWith<_$ModePaieImpl> get copyWith =>
+      __$$ModePaieImplCopyWithImpl<_$ModePaieImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ModePaieImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ModePaie implements ModePaie {
+  const factory _ModePaie(
+      {@JsonKey(name: 'id') required final int id,
+      @JsonKey(name: 'label') required final String label}) = _$ModePaieImpl;
+
+  factory _ModePaie.fromJson(Map<String, dynamic> json) =
+      _$ModePaieImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'id')
+  int get id;
+  @override
+  @JsonKey(name: 'label')
+  String get label;
+  @override
+  @JsonKey(ignore: true)
+  _$$ModePaieImplCopyWith<_$ModePaieImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

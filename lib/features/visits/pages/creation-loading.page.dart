@@ -32,8 +32,7 @@ class VisitCreationLoadingPage extends StatelessWidget {
                 style: context.textTheme.bodyLarge,
               ),
               SizedBox(height: kSpacingX12),
-              LoadingAnimationWidget.prograssiveDots(
-                  color: kPrimaryColor, size: 50.sp)
+              LoadingAnimationWidget.bouncingBall(color: kPrimaryColor, size: 50.h)
             ],
           )),
     );

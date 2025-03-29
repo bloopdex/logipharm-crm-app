@@ -1,10 +1,10 @@
+import 'package:crm/features/navigation/navigation.screen.dart';
 import 'package:crm/shared/widgets/buttons/button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/core.dart';
 import '../../../shared/widgets/image/svg.dart';
-import '../../../shared/widgets/popup/modalbottomsheet.popup.dart';
 
 class VisitCreationSuccessfulPage extends StatelessWidget {
   const VisitCreationSuccessfulPage({super.key});
@@ -34,8 +34,8 @@ class VisitCreationSuccessfulPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 140.sp,
-                    height: 140.sp,
+                    width: 140.h,
+                    height: 140.h,
                     padding: EdgeInsets.all(kSpacingX8),
                     decoration: BoxDecoration(
                       color: kCeruleanBlue.shade600,
@@ -45,7 +45,7 @@ class VisitCreationSuccessfulPage extends StatelessWidget {
                     child: SVG(
                       'visit.svg',
                       icon: true,
-                      height: 20.sp,
+                      height: 20.h,
                       fit: BoxFit.fitHeight,
                     ),
                   ),
@@ -53,41 +53,25 @@ class VisitCreationSuccessfulPage extends StatelessWidget {
                   Text(
                     context.i10n.visitCreationSuccessTitle,
                     textAlign: TextAlign.center,
-                    style:
-                        context.textTheme.displayLarge!.copyWith(color: kWhite),
+                    style: context.textTheme.displayLarge!.copyWith(color: kWhite),
                   ),
                   SizedBox(height: kSpacingX4),
                   Text(
                     context.i10n.visitCreationSuccessDescription,
                     textAlign: TextAlign.center,
+                    maxLines: 5,
                     style: context.textTheme.bodyLarge!.copyWith(color: kWhite),
                   ),
                 ],
               ),
             ),
-            Column(
-              children: [
-                CustomButton(
-                  text: context.i10n.finish,
-                  onPressed: () {
-                    context.pop();
-                  },
-                ),
-                SizedBox(height: kSpacingX5),
-                ModalBottomSheet(
-                  icon: const SVG('tour.svg', icon: true),
-                  confirmText: context.i10n.viewDetails,
-                  cancelText: context.i10n.later,
-                  title: context.i10n.tourCreationStartTour,
-                  subtitle: context.i10n.tourCreationStartTourDescription,
-                  child: CustomButton(
-                    text: context.i10n.viewDetails,
-                    backgroundColor: kBgButtonSecondary,
-                    textColor: kText1,
-                  ),
-                )
-              ],
-            )
+            CustomButton(
+              text: context.i10n.finish,
+              onPressed: () {
+                context.pushAndRemoveUntil(const NavigationScreen());
+              },
+            ),
+            SizedBox(height: kPaddingLg1),
           ],
         ),
       ),

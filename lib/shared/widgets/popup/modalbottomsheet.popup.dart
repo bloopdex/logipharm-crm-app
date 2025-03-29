@@ -67,8 +67,7 @@ class ModalBottomSheet extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: kCeruleanBlue.shade600,
                                 shape: BoxShape.circle,
-                                border:
-                                    Border.all(color: kCeruleanBlue.shade900),
+                                border: Border.all(color: kCeruleanBlue.shade900),
                               ),
                               child: icon,
                             ),

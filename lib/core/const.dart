@@ -100,21 +100,21 @@ Color kBgGrayVisibility6 = kCodGray.shade500;
 Color kBgBlack = kCodGray.shade900;
 Color kBgButtonSecondary = kBgGrayVisibility2;
 
-double kSpacingHalf = 2.sp;
-double kSpacingX1 = 4.sp;
-double kSpacingX2 = 6.sp;
-double kSpacingX3 = 8.sp;
-double kSpacingX4 = 12.sp;
-double kSpacingX5 = 16.sp;
-double kSpacingX6 = 20.sp;
-double kSpacingX7 = 24.sp;
-double kSpacingX8 = 32.sp;
-double kSpacingX9 = 40.sp;
-double kSpacingX10 = 52.sp;
-double kSpacingX11 = 64.sp;
-double kSpacingX12 = 72.sp;
-double kSpacingX13 = 96.sp;
-double kSpacingX14 = 500.sp;
+double kSpacingHalf = 2.h;
+double kSpacingX1 = 4.h;
+double kSpacingX2 = 6.h;
+double kSpacingX3 = 8.h;
+double kSpacingX4 = 12.h;
+double kSpacingX5 = 16.h;
+double kSpacingX6 = 20.h;
+double kSpacingX7 = 24.h;
+double kSpacingX8 = 32.h;
+double kSpacingX9 = 40.h;
+double kSpacingX10 = 52.h;
+double kSpacingX11 = 64.h;
+double kSpacingX12 = 72.h;
+double kSpacingX13 = 96.h;
+double kSpacingX14 = 500.h;
 
 double kPaddingSm1 = kSpacingHalf;
 double kPaddingSm2 = kSpacingX1;
@@ -127,7 +127,7 @@ double kPaddingLg2 = kSpacingX9;
 double kPaddingLg3 = kSpacingX10;
 double kPaddingLg4 = kSpacingX11;
 
-double kRadiusRounded = 500.sp;
+double kRadiusRounded = 500.h;
 
 BoxShadow kDropShadowPrimary = BoxShadow(
   color: Colors.black.withOpacity(.15),
@@ -144,9 +144,16 @@ BoxShadow kDropShadowSecondary = BoxShadow(
 );
 const String HTTPS = 'https://';
 const String HTTP = 'http://';
-const String baseUrl = 'pharmadrive.damnserver.com';
+
 const String port = "8085";
-const String version = '';
+
+const String baseUrl = 'http://crm.biopure.dz:$port';
+// const String baseUrl = 'http://optipharm.damnserver.com:$port';
+// const String baseUrl = 'optipharm.damnserver.com';
+// const String baseUrl = 'http://bestpharmaouest.damnserver.com:$port';
+// const String baseUrl = 'crm.millennium-medic.com';
+// const String baseUrl = '141.94.250.58';
+// const String baseUrl = '192.168.1.19';
 
 const List<String> supportedLanguages = [
   'fr',
