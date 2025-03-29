@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:crm/core/core.dart';
 import 'package:crm/features/hiring/bloc/hire-creation/hire_creation_cubit.dart';
+import 'package:crm/features/navigation/navigation.screen.dart';
 import 'package:crm/shared/services/helpers/location.helper.dart';
 import 'package:crm/shared/widgets/buttons/button.widget.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
@@ -79,7 +80,7 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                   context.read<HireCreationCubit>().file(hire.id, value);
                   context.read<FileCubit>().removeFile(key);
                 });
-                context.pop();
+                context.popAllAndPush(const NavigationScreen());
               });
         },
         child: GestureDetector(

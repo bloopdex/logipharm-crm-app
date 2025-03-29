@@ -70,23 +70,23 @@ class _CreateClaimPageState extends State<CreateClaimPage> {
           ),
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(160.h),
-            child: QuillToolbar.simple(
-                configurations: QuillSimpleToolbarConfigurations(
-              controller: _quillController,
-              showAlignmentButtons: true,
-              showBackgroundColorButton: false,
-              showColorButton: false,
-              showCodeBlock: false,
-              showQuote: false,
-              showLink: false,
-              showClearFormat: false,
-              showInlineCode: false,
-              showListCheck: false,
-              showJustifyAlignment: false,
-              showHeaderStyle: false,
-              showSearchButton: false,
-              showFontFamily: false,
-            )),
+            child: QuillSimpleToolbar(
+                controller: _quillController,
+                config: QuillSimpleToolbarConfig(
+                  showAlignmentButtons: true,
+                  showBackgroundColorButton: false,
+                  showColorButton: false,
+                  showCodeBlock: false,
+                  showQuote: false,
+                  showLink: false,
+                  showClearFormat: false,
+                  showInlineCode: false,
+                  showListCheck: false,
+                  showJustifyAlignment: false,
+                  showHeaderStyle: false,
+                  showSearchButton: false,
+                  showFontFamily: false,
+                )),
           ),
         ),
         body: Form(
@@ -154,8 +154,8 @@ class _CreateClaimPageState extends State<CreateClaimPage> {
                       ),
                       child: QuillEditor(
                         focusNode: _quillFocusNode,
-                        configurations: QuillEditorConfigurations(
-                          controller: _quillController,
+                        controller: _quillController,
+                        config: QuillEditorConfig(
                           scrollable: true,
                           autoFocus: false,
                           placeholder: context.i10n.visitCreationRapportPlaceholder,

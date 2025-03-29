@@ -7,6 +7,7 @@ import 'dart:ui';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:crm/features/clients/blocs/claims-motifs/motifs_cubit.dart';
 import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
+import 'package:crm/features/events/blocs/events/events_cubit.dart';
 import 'package:crm/features/menu/cubits/change_password_cubit.dart';
 import 'package:crm/features/todo/cubit/todo_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/commune_cubit.dart';
@@ -23,6 +24,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -65,8 +67,9 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory:
-        kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
+    storageDirectory: kIsWeb
+        ? HydratedStorageDirectory.web
+        : HydratedStorageDirectory((await getTemporaryDirectory()).path),
   );
   await DioHelper.init();
   await initializeService();
@@ -236,7 +239,7 @@ Future<LocationData> getCurrentLocation() async {
         'Location permissions are permanently denied, we cannot request permissions.');
   }
 
-  Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  Position position = await Geolocator.getCurrentPosition();
   return LocationData(
     latitude: position.latitude,
     longitude: position.longitude,
@@ -378,6 +381,7 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<MotifVisitCubit>(create: (context) => MotifVisitCubit()),
           BlocProvider<GrossisteCubit>(create: (context) => GrossisteCubit()),
           BlocProvider<EtablissementCubit>(create: (context) => EtablissementCubit()),
+          BlocProvider<EventsCubit>(create: (context) => EventsCubit()),
         ],
         child: BlocBuilder<LocalizationsBloc, LocalizationsState>(builder: (context, state) {
           return MediaQuery(
@@ -402,6 +406,7 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
+                  FlutterQuillLocalizations.delegate,
                 ],
                 routes: AppRoutes.routes,
                 home: GestureDetector(

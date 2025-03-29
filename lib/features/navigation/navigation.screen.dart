@@ -1,5 +1,6 @@
 import 'package:crm/core/core.dart';
 import 'package:crm/features/auth/login.screen.dart';
+import 'package:crm/features/events/blocs/events/events_cubit.dart';
 import 'package:crm/features/menu/sections/change_password_page.dart';
 import 'package:crm/features/todo/create-event.page.dart';
 import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
@@ -262,6 +263,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
         .state
         .maybeWhen(orElse: () => true, loaded: (visits, _, __) => visits.isEmpty)) {
       context.read<VisitBloc>().add(const VisitEvent.started());
+    }
+
+    if (context
+        .read<EventsCubit>()
+        .state
+        .maybeWhen(orElse: () => true, loaded: (events) => events.isEmpty)) {
+      context.read<EventsCubit>().loadEvents(page: 0);
     }
 
     super.initState();

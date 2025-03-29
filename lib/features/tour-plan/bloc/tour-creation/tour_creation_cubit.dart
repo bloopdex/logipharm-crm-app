@@ -1,13 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../l10n/l10n.dart';
 import '../../models/tour.dart';
 import '../../services/creation.repository.dart';
 
-part 'tour_creation_state.dart';
 part 'tour_creation_cubit.freezed.dart';
+part 'tour_creation_state.dart';
 
 class TourCreationCubit extends Cubit<TourCreationState> {
   TourCreationCubit() : super(const TourCreationState.initial());
@@ -17,6 +18,7 @@ class TourCreationCubit extends Cubit<TourCreationState> {
 
     try {
       final Response response = await CreationRepository.validate(data: data);
+      debugPrint('Response: ${response.statusCode} ${response.data}');
       if (response.statusCode == 200) {
         Tour tour = Tour.fromJson(response.data['body']);
         emit(TourCreationState.loaded(tour: tour));

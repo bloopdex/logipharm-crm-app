@@ -6,8 +6,7 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 class NotificationService {
-  static final NotificationService _notificationService =
-      NotificationService._internal();
+  static final NotificationService _notificationService = NotificationService._internal();
 
   factory NotificationService() {
     return _notificationService;
@@ -19,18 +18,14 @@ class NotificationService {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('app_icon');
 
-    const DarwinInitializationSettings initializationSettingsIOS =
-        DarwinInitializationSettings(
+    const DarwinInitializationSettings initializationSettingsIOS = DarwinInitializationSettings(
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,
     );
 
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-            android: initializationSettingsAndroid,
-            iOS: initializationSettingsIOS,
-            macOS: null);
+    const InitializationSettings initializationSettings = InitializationSettings(
+        android: initializationSettingsAndroid, iOS: initializationSettingsIOS, macOS: null);
 
     tz.initializeTimeZones();
 
@@ -43,8 +38,7 @@ class NotificationService {
     required String body,
     required String payload,
   }) async {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
+    const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
       "a2s_crm_notifications",
       "CRM Notifications",
       channelDescription: "Notifications for CRM application by A2S",
@@ -52,8 +46,7 @@ class NotificationService {
       priority: Priority.high,
       showWhen: false,
     );
-    const DarwinNotificationDetails iOSPlatformChannelSpecifics =
-        DarwinNotificationDetails(
+    const DarwinNotificationDetails iOSPlatformChannelSpecifics = DarwinNotificationDetails(
       presentAlert: true,
       presentBadge: true,
       presentSound: true,
@@ -81,8 +74,7 @@ class NotificationService {
     required String payload,
     required DateTime scheduledDate,
   }) async {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
+    const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
       "a2s_crm_notifications",
       "CRM Notifications",
       channelDescription: "Notifications for CRM application by A2S",
@@ -90,8 +82,7 @@ class NotificationService {
       priority: Priority.high,
       showWhen: false,
     );
-    const DarwinNotificationDetails iOSPlatformChannelSpecifics =
-        DarwinNotificationDetails(
+    const DarwinNotificationDetails iOSPlatformChannelSpecifics = DarwinNotificationDetails(
       presentAlert: true,
       presentBadge: true,
       presentSound: true,
@@ -110,8 +101,6 @@ class NotificationService {
       tz.TZDateTime.from(scheduledDate, tz.local),
       platformChannelSpecifics,
       androidScheduleMode: AndroidScheduleMode.alarmClock,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
       payload: payload,
     );
   }

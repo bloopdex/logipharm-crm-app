@@ -147,6 +147,7 @@ const String HTTP = 'http://';
 
 const String port = "8085";
 
+// const String baseUrl = 'http://10.0.2.2:$port';
 const String baseUrl = 'http://crm.biopure.dz:$port';
 // const String baseUrl = 'http://optipharm.damnserver.com:$port';
 // const String baseUrl = 'optipharm.damnserver.com';
