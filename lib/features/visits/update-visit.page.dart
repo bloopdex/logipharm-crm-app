@@ -110,23 +110,23 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                           ? Size.fromHeight(160.h)
                           : const Size.fromHeight(0),
                       child: context.read<CounterCubit>().state < 1
-                          ? QuillToolbar.simple(
-                              configurations: QuillSimpleToolbarConfigurations(
+                          ? QuillSimpleToolbar(
                               controller: _quillController,
-                              showAlignmentButtons: true,
-                              showBackgroundColorButton: false,
-                              showColorButton: false,
-                              showCodeBlock: false,
-                              showQuote: false,
-                              showLink: false,
-                              showClearFormat: false,
-                              showInlineCode: false,
-                              showListCheck: false,
-                              showJustifyAlignment: false,
-                              showHeaderStyle: false,
-                              showSearchButton: false,
-                              showFontFamily: false,
-                            ))
+                              config: QuillSimpleToolbarConfig(
+                                showAlignmentButtons: true,
+                                showBackgroundColorButton: false,
+                                showColorButton: false,
+                                showCodeBlock: false,
+                                showQuote: false,
+                                showLink: false,
+                                showClearFormat: false,
+                                showInlineCode: false,
+                                showListCheck: false,
+                                showJustifyAlignment: false,
+                                showHeaderStyle: false,
+                                showSearchButton: false,
+                                showFontFamily: false,
+                              ))
                           : const SizedBox.shrink(),
                     ),
                     backgroundColor: Colors.white,

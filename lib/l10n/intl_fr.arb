@@ -1077,5 +1077,38 @@
   "selectReason": "Sélectionner une raison",
   "@selectReason": {
     "description": "Sélectionner une raison"
-  }
+  },
+  "eventsTitle": "Événements",
+  "searchEvents": "Rechercher des événements",
+  "eventDetailsTitle": "Détails de l'événement",
+  "eventDetailsCreatedBy": "Créé par",
+  "noCreator": "Aucun créateur",
+  "eventTitle": "Titre de l'événement",
+  "noTitle": "Pas de titre",
+  "eventType": "Type d'événement",
+  "eventAll": "Tous les événements",
+  "eventPending": "En attente",
+  "eventInProgress": "En cours",
+  "eventCompleted": "Terminé",
+  "noEventsDescription": "Aucun événement trouvé",
+  "eventProgress": "{percentage}%",
+  "@eventProgress": {
+    "description": "Progression de l'événement",
+    "placeholders": {
+      "percentage": {
+        "description": "Pourcentage de progression",
+        "type": "int"
+      }
+    }
+  },
+  "addVisitToEvent": "Ajouter une visite à l'événement",
+  "visitAddedSuccessfully": "Visite ajoutée avec succès",
+  "visitDate": "Date de la visite",
+  "visitDatePlaceholder": "Sélectionner la date de la visite",
+  "visitDateRequired": "La date de la visite est requise",
+  "addVisit": "Ajouter une visite",
+  "createdBy": "Créé par",
+  "status": "Statut",
+  "pendingEvent": "Événement en attente",
+  "locationPermissionRequired": "La permission de localisation est requise"
 }

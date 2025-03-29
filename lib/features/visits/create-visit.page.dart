@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../core/core.dart';
 import '../../logic/counter_cubit.dart';
@@ -61,6 +62,10 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
     log('tourneeId: ${widget.tour.tourId}');
   }
 
+  void _onQuillChange() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<VisitCreationCubit, VisitCreationState>(
@@ -106,23 +111,23 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                           ? Size.fromHeight(bottomSize)
                           : const Size.fromHeight(0),
                       child: context.read<CounterCubit>().state < 1
-                          ? QuillToolbar.simple(
-                              configurations: QuillSimpleToolbarConfigurations(
+                          ? QuillSimpleToolbar(
                               controller: _quillController,
-                              showAlignmentButtons: true,
-                              showBackgroundColorButton: false,
-                              showColorButton: false,
-                              showCodeBlock: false,
-                              showQuote: false,
-                              showLink: false,
-                              showClearFormat: false,
-                              showInlineCode: false,
-                              showListCheck: false,
-                              showJustifyAlignment: false,
-                              showHeaderStyle: false,
-                              showSearchButton: false,
-                              showFontFamily: false,
-                            ))
+                              config: QuillSimpleToolbarConfig(
+                                showAlignmentButtons: true,
+                                showBackgroundColorButton: false,
+                                showColorButton: false,
+                                showCodeBlock: false,
+                                showQuote: false,
+                                showLink: false,
+                                showClearFormat: false,
+                                showInlineCode: false,
+                                showListCheck: false,
+                                showJustifyAlignment: false,
+                                showHeaderStyle: false,
+                                showSearchButton: false,
+                                showFontFamily: false,
+                              ))
                           : const SizedBox.shrink(),
                     ),
                     backgroundColor: Colors.white,
@@ -157,6 +162,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                           .where((element) => element.statusFlag == 0)
                                           .toList(),
                                       data: data,
+                                      onQuillChange: _onQuillChange,
                                     )
                                   : VisitValidateCreationPage(tour: widget.tour, data: data),
                             ),
@@ -220,13 +226,74 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                                 _quillController.document.toPlainText();
                                             data['rapport'] = json.encode(
                                                 _quillController.document.toDelta().toJson());
-                                            final position =
-                                                await LocationHelper.getCurrentPosition();
-                                            if (position != null) {
+
+                                            Position? position;
+
+                                            // First attempt to get location
+                                            try {
+                                              position = await LocationHelper.getCurrentPosition();
+                                            } on Exception {
+                                              // Initial location retrieval failed
+                                            }
+
+                                            if (position == null) {
+                                              // Check current permission status
+                                              final permission = await Geolocator.checkPermission();
+
+                                              if (permission == LocationPermission.denied) {
+                                                // Request permission again
+                                                final newPermission =
+                                                    await Geolocator.requestPermission();
+
+                                                if (newPermission ==
+                                                        LocationPermission.whileInUse ||
+                                                    newPermission == LocationPermission.always) {
+                                                  // Get position again after permission granted
+                                                  try {
+                                                    final newPosition =
+                                                        await LocationHelper.getCurrentPosition();
+                                                    if (newPosition != null) {
+                                                      data['latitude'] = newPosition.latitude;
+                                                      data['longitude'] = newPosition.longitude;
+                                                    }
+                                                  } on Exception {
+                                                    // Handle exception if user denies again
+                                                  }
+                                                } else {
+                                                  // User denied permission again
+                                                  if (context.mounted) {
+                                                    context.errorSnackBar(
+                                                        context.i10n.locationPermissionRequired);
+                                                  }
+                                                }
+                                              } else if (permission ==
+                                                  LocationPermission.deniedForever) {
+                                                // Handle permanent denial
+                                                if (context.mounted) {
+                                                  context.errorSnackBar(
+                                                      context.i10n.locationPermissionRequired);
+                                                }
+                                              }
+                                            } else {
+                                              // Position successfully obtained
                                               data['latitude'] = position.latitude;
                                               data['longitude'] = position.longitude;
                                             }
-                                            context.read<VisitCreationCubit>().validate(data: data);
+
+                                            if (data['latitude'] == null ||
+                                                data['longitude'] == null) {
+                                              if (context.mounted) {
+                                                context.errorSnackBar(
+                                                    context.i10n.locationPermissionRequired);
+                                              }
+                                              return;
+                                            }
+
+                                            if (context.mounted) {
+                                              context
+                                                  .read<VisitCreationCubit>()
+                                                  .validate(data: data);
+                                            }
                                         }
                                       },
                                     ),

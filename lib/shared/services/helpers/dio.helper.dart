@@ -47,7 +47,7 @@ class DioHelper {
       },
       onResponse: (e, handler) {
         // Do something with response data
-        log('Url: ${e.realUri}\nResponse: ${e.data}');
+        log('Url: ${e.requestOptions.method} ${e.realUri}\nResponse: ${e.data}');
         handler.next(e);
       },
       onError: (e, handler) {

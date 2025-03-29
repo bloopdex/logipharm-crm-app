@@ -11,6 +11,7 @@ class CustomDatePicker extends StatefulWidget {
   final DateTime? lastDate;
   final IconData? icon;
   final String dateFormat;
+  final Function(String)? onChanged;
 
   final DateTime? initialDate;
   const CustomDatePicker({
@@ -22,6 +23,7 @@ class CustomDatePicker extends StatefulWidget {
     this.icon,
     this.dateFormat = 'yyyy-MM-dd',
     this.initialDate,
+    this.onChanged,
   });
 
   @override
@@ -35,8 +37,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   initState() {
     super.initState();
     controller = TextEditingController();
-    controller.text = DateFormat(widget.dateFormat)
-        .format(widget.initialDate ?? DateTime.now());
+    controller.text = DateFormat(widget.dateFormat).format(widget.initialDate ?? DateTime.now());
   }
 
   @override
@@ -93,6 +94,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
             }
             widget.data[widget.mapKey] = formatted;
           });
+
+          widget.onChanged?.call(controller.text);
         }
       },
     );

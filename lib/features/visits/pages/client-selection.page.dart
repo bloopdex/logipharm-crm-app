@@ -19,6 +19,7 @@ class ClientSelectionForm extends StatefulWidget {
   final QuillController quillController;
   final Function()? onQuillFocus;
   final Tour? tour;
+  final Function()? onQuillChange;
 
   const ClientSelectionForm({
     super.key,
@@ -27,6 +28,7 @@ class ClientSelectionForm extends StatefulWidget {
     required this.quillController,
     this.onQuillFocus,
     this.tour,
+    this.onQuillChange,
   });
 
   @override
@@ -143,6 +145,7 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                                 widget.data['tourneeId'] = null;
                                 this.pharmacy = pharmacy;
                               });
+                              widget.onQuillChange?.call();
                             },
                             icon: const Icon(Icons.add),
                           ),
@@ -158,6 +161,9 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                 SizedBox(height: kSpacingX1),
                 CustomDatePicker(
                   data: widget.data,
+                  onChanged: (value) {
+                    widget.onQuillChange?.call();
+                  },
                   mapKey: 'dateDebut',
                 ),
                 SizedBox(height: kSpacingX5),
@@ -191,6 +197,7 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                           setState(() {
                             widget.data['motif'] = value;
                           });
+                          widget.onQuillChange?.call();
                         },
                       );
                     }
@@ -206,8 +213,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                   height: constraints.maxHeight * 0.4,
                   child: QuillEditor(
                     focusNode: _quillFocusNode,
-                    configurations: QuillEditorConfigurations(
-                      controller: widget.quillController,
+                    controller: widget.quillController,
+                    config: QuillEditorConfig(
                       scrollable: true,
                       autoFocus: false,
                       placeholder: context.i10n.visitCreationRapportPlaceholder,

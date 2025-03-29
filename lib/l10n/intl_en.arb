@@ -1079,5 +1079,38 @@
   "@noEtablissement": {
     "description": "No etablissement"
   },
-  "noEtablissementDesc": "No etablissement found for this client"
+  "noEtablissementDesc": "No etablissement found for this client",
+  "eventsTitle": "Events",
+  "searchEvents": "Search Events",
+  "eventDetailsTitle": "Event Details",
+  "eventDetailsCreatedBy": "Created By",
+  "noCreator": "No Creator",
+  "eventTitle": "Event Title",
+  "noTitle": "No Title",
+  "eventType": "Event Type",
+  "eventAll": "All Events",
+  "eventPending": "Pending",
+  "eventInProgress": "In Progress",
+  "eventCompleted": "Completed",
+  "noEventsDescription": "No events found",
+  "eventProgress": "{percentage}%",
+  "@eventProgress": {
+    "description": "Event Progress",
+    "placeholders": {
+      "percentage": {
+        "description": "Progress Percentage",
+        "type": "int"
+      }
+    }
+  },
+  "addVisitToEvent": "Add Visit to Event",
+  "visitAddedSuccessfully": "Visit added successfully",
+  "visitDate": "Visit Date",
+  "visitDatePlaceholder": "Select visit date",
+  "visitDateRequired": "Visit date is required",
+  "addVisit": "Add Visit",
+  "status": "Status",
+  "createdBy": "Created By",
+  "pendingEvent": "Pending Event",
+  "locationPermissionRequired": "Location permission is required"
 }

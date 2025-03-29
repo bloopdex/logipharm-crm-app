@@ -155,13 +155,13 @@ class VisitValidateUpdatePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(kSpacingX3),
                     ),
                     child: QuillEditor.basic(
-                      configurations: QuillEditorConfigurations(
+                      controller: QuillController(
+                        document: data['document'],
+                        selection: const TextSelection.collapsed(offset: 0),
+                        readOnly: true,
+                      ),
+                      config: QuillEditorConfig(
                         showCursor: false,
-                        controller: QuillController(
-                          document: data['document'],
-                          selection: const TextSelection.collapsed(offset: 0),
-                          readOnly: true,
-                        ),
                       ),
                     ),
                   ),

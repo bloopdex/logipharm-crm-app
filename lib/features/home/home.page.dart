@@ -1,14 +1,18 @@
+import 'package:crm/features/events/blocs/events/events_cubit.dart';
+import 'package:crm/features/events/event_detail_page.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:map_launcher/map_launcher.dart';
 
 import '../../core/core.dart';
 import '../../logic/auth/auth_bloc.dart';
 import '../../shared/widgets/buttons/circlebutton.text.widget.dart';
+import '../events/models/event/event.dart';
 import '../hiring/create-hire.page.dart';
 import '../todo/create-event.page.dart';
 import '../tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
@@ -47,81 +51,146 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            BlocBuilder<TourPlanBloc, TourPlanState>(builder: (context, state) {
-              final Goal? goal = state.maybeWhen(
-                orElse: () => null,
-                loaded: (tours, hasReachedMax, currentPage, goal) {
-                  return goal;
-                },
-              );
-              final Tour? current = state.maybeWhen(
-                loaded: (tours, hasReachedMax, currentPage, goal) {
-                  return tours
-                      .where((element) => (element.statusFlag == StatuFlags.opened.value &&
-                          element.delegate.id == user.id.id))
-                      .firstOrNull;
-                },
-                orElse: () => null,
-              );
+            BlocBuilder<EventsCubit, EventsState>(
+              builder: (context, events) {
+                return BlocBuilder<TourPlanBloc, TourPlanState>(builder: (context, state) {
+                  final Goal? goal = state.maybeWhen(
+                    orElse: () => null,
+                    loaded: (tours, hasReachedMax, currentPage, goal) {
+                      return goal;
+                    },
+                  );
+                  final Tour? current = state.maybeWhen(
+                    loaded: (tours, hasReachedMax, currentPage, goal) {
+                      return tours
+                          .where((element) => (element.statusFlag == StatuFlags.opened.value &&
+                              element.delegate.id == user.id.id))
+                          .firstOrNull;
+                    },
+                    orElse: () => null,
+                  );
+                  final Event? event = events.maybeWhen(
+                    orElse: () => null,
+                    loaded: (events) {
+                      return events.firstOrNull;
+                    },
+                  );
 
-              return Column(children: [
-                if (goal != null)
-                  Container(
-                    padding: EdgeInsets.all(kPaddingMd2),
-                    width: context.width,
-                    margin: EdgeInsets.only(bottom: kSpacingX5),
-                    decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.circular(kPaddingSm3),
-                      border: Border.all(
-                        color: kPrimaryColor,
-                        width: 2.h,
+                  return Column(children: [
+                    IntrinsicHeight(
+                      child: Row(
+                        children: [
+                          if (goal != null)
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.all(kPaddingMd2),
+                                margin: EdgeInsets.only(bottom: kSpacingX5, right: kSpacingX2),
+                                decoration: BoxDecoration(
+                                  color: kPrimaryColor,
+                                  borderRadius: BorderRadius.circular(kPaddingSm3),
+                                  border: Border.all(
+                                    color: kPrimaryColor,
+                                    width: 2.h,
+                                  ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      context.i10n.goalOfDay,
+                                      style:
+                                          context.textTheme.headlineSmall!.copyWith(color: kWhite),
+                                    ),
+                                    SizedBox(height: kSpacingX2),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: '${goal.visitNumber}/',
+                                            style: context.textTheme.headlineMedium!
+                                                .copyWith(color: kWhite, fontSize: 25.h),
+                                          ),
+                                          TextSpan(
+                                            text: '${goal.objective}',
+                                            style: context.textTheme.bodyMedium!
+                                                .copyWith(color: kWhite),
+                                          ),
+                                          TextSpan(
+                                            text: ' ${context.i10n.visitsToday}',
+                                            style: context.textTheme.bodyMedium!
+                                                .copyWith(color: kWhite),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          if (event != null)
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {
+                                  context.push(EventDetailPage(event: event));
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(kPaddingMd2),
+                                  margin: EdgeInsets.only(bottom: kSpacingX5),
+                                  decoration: BoxDecoration(
+                                    color: kPrimaryColor,
+                                    borderRadius: BorderRadius.circular(kPaddingSm3),
+                                    border: Border.all(
+                                      color: kPrimaryColor,
+                                      width: 2.h,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        context.i10n.pendingEvent,
+                                        style:
+                                            context.textTheme.titleSmall!.copyWith(color: kWhite),
+                                      ),
+                                      SizedBox(height: kSpacingX2),
+                                      Text(
+                                        event.titre ?? context.i10n.noTitle,
+                                        style:
+                                            context.textTheme.titleLarge!.copyWith(color: kWhite),
+                                      ),
+                                      Text(
+                                        DateFormat("dd MMM yyyy")
+                                            .format(event.date ?? DateTime.now()),
+                                        style:
+                                            context.textTheme.bodyMedium!.copyWith(color: kWhite),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          context.i10n.goalOfDay,
-                          style: context.textTheme.headlineSmall!.copyWith(color: kWhite),
-                        ),
-                        SizedBox(height: kSpacingX2),
-                        RichText(
-                            text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '${goal.visitNumber}/',
-                              style: context.textTheme.headlineMedium!
-                                  .copyWith(color: kWhite, fontSize: 25.h),
-                            ),
-                            TextSpan(
-                              text: '${goal.objective}',
-                              style: context.textTheme.bodyMedium!.copyWith(color: kWhite),
-                            ),
-                            TextSpan(
-                              text: ' ${context.i10n.visitsToday}',
-                              style: context.textTheme.bodyMedium!.copyWith(color: kWhite),
-                            ),
-                          ],
-                        )),
-                      ],
-                    ),
-                  ),
-                if (current != null)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        context.i10n.tourCurrentTour,
-                        style: context.textTheme.displaySmall,
+                    if (current != null)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            context.i10n.tourCurrentTour,
+                            style: context.textTheme.displaySmall,
+                          ),
+                          SizedBox(height: kSpacingX4),
+                          CurrentWidgetCard(tour: current),
+                          SizedBox(height: kSpacingX5),
+                        ],
                       ),
-                      SizedBox(height: kSpacingX4),
-                      CurrentWidgetCard(tour: current),
-                      SizedBox(height: kSpacingX5),
-                    ],
-                  ),
-              ]);
-            }),
+                  ]);
+                });
+              },
+            ),
             if (user.supervisor == 0)
               BlocBuilder<TourPlanBloc, TourPlanState>(
                 builder: (context, state) {

@@ -1,3 +1,4 @@
+import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,6 +18,7 @@ import 'pages/validate-creation.page.dart';
 
 class CreatePlanPage extends StatefulWidget {
   static const String routeName = '/create-plan';
+
   const CreatePlanPage({super.key});
 
   @override
@@ -31,7 +33,6 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
     super.initState();
     context.read<CounterCubit>().reset();
     context.read<TourCreationCubit>().reset();
-    // Get the delegate id from the delegate cubit
     String? delegate;
     if (context.read<DelegateCubit>().state.isNotEmpty) {
       delegate = context.read<DelegateCubit>().state.first.id.toString();
@@ -52,7 +53,11 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
               loading: () {
                 return const TourCreationLoadingPage();
               },
-              loaded: (tour) => const CreationSuccessfulPage(),
+              loaded: (tour) {
+                context.read<TourPlanBloc>().add(const TourPlanEvent.started());
+
+                return const CreationSuccessfulPage();
+              },
               orElse: () => Scaffold(
                     appBar: AppBar(
                       title: Column(

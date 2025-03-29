@@ -53,6 +53,7 @@ class VisitCreationSuccessfulPage extends StatelessWidget {
                   Text(
                     context.i10n.visitCreationSuccessTitle,
                     textAlign: TextAlign.center,
+                    maxLines: 2,
                     style: context.textTheme.displayLarge!.copyWith(color: kWhite),
                   ),
                   SizedBox(height: kSpacingX4),

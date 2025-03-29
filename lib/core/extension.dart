@@ -67,6 +67,15 @@ extension Navigation on BuildContext {
     Navigator.of(this).pop(pop);
   }
 
+  void popUntilNamed(String routeName) {
+    Navigator.of(this).popUntil(ModalRoute.withName(routeName));
+  }
+
+  void popAllAndPush(Widget page) {
+    Navigator.of(this).popUntil((route) => false);
+    Navigator.of(this).push(MaterialPageRoute(builder: (context) => page));
+  }
+
   void pushNamed(String routeName, {Object? arguments}) {
     Navigator.of(this).pushNamed(routeName, arguments: arguments);
   }
