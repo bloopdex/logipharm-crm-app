@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSPrivacyAccessedAPIs</key>
+    <array>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryDiskSpace</string>
+            <key>NSPrivacyAccessedAPIPurpose</key>
+            <string>Used for necessary functionality</string>
+        </dict>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+            <key>NSPrivacyAccessedAPIPurpose</key>
+            <string>Used for necessary functionality</string>
+        </dict>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategorySystemBootTime</string>
+            <key>NSPrivacyAccessedAPIPurpose</key>
+            <string>Used for necessary functionality</string>
+        </dict>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+            <key>NSPrivacyAccessedAPIPurpose</key>
+            <string>Used for necessary functionality</string>
+        </dict>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryNetworking</string>
+            <key>NSPrivacyAccessedAPIPurpose</key>
+            <string>Used for necessary functionality</string>
+        </dict>
+    </array>
+    <key>NSPrivacyThirdPartySDKs</key>
+    <array>
+        <dict>
+            <key>NSPrivacyThirdPartySDKName</key>
+            <string>DKImagePickerController</string>
+            <key>NSPrivacyThirdPartySDKPurpose</key>
+            <string>Image picking functionality</string>
+        </dict>
+        <dict>
+            <key>NSPrivacyThirdPartySDKName</key>
+            <string>DKPhotoGallery</string>
+            <key>NSPrivacyThirdPartySDKPurpose</key>
+            <string>Photo gallery display</string>
+        </dict>
+    </array>
+</dict>
+</plist>
