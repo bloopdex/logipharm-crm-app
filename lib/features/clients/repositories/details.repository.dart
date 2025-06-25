@@ -13,4 +13,22 @@ class ClientDetailsRepository {
       query: {'clientId': id},
     );
   }
+
+  static Future<Response> changeLocation({
+    required int id,
+    required double lon,
+    required double lat,
+  }) async {
+    final token = await AuthRepository.token;
+
+    return await DioHelper.putData(
+      url: '/tiers/pharmacie',
+      token: token,
+      data: {
+        'id': id,
+        'latitude': lat,
+        'longitude': lon,
+      },
+    );
+  }
 }

@@ -37,7 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       ));
       emit(const LoginState.initial());
     } catch (e) {
-      emit(LoginState.failure(res != null ? res.data['codeError'] : 'auth:error:login-failed'));
+      emit(LoginState.failure('auth:error:login-failed'));
     }
   }
 }

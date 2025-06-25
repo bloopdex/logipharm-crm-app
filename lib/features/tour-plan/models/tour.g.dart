@@ -69,6 +69,9 @@ _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
       pharmacy: json['pharmacie'] == null
           ? null
           : Person.fromJson(json['pharmacie'] as Map<String, dynamic>),
+      delegate: json['delegue'] == null
+          ? null
+          : Person.fromJson(json['delegue'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$TourDetailImplToJson(_$TourDetailImpl instance) =>
@@ -87,6 +90,7 @@ Map<String, dynamic> _$$TourDetailImplToJson(_$TourDetailImpl instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'pharmacie': instance.pharmacy,
+      'delegue': instance.delegate,
     };
 
 _$MotifImpl _$$MotifImplFromJson(Map<String, dynamic> json) => _$MotifImpl(

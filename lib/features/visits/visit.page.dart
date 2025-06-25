@@ -162,6 +162,13 @@ class VisitCard extends StatelessWidget {
               ),
               child: Text(visit.reason?.label ?? "", style: context.textTheme.bodyLarge),
             ),
+            SizedBox(height: kSpacingX1),
+            Text(
+              visit.delegate?.fullName ?? "",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: context.textTheme.bodyMedium,
+            ),
             Text(visit.reportText ?? "",
                 maxLines: 2, overflow: TextOverflow.ellipsis, style: context.textTheme.bodyMedium),
           ],

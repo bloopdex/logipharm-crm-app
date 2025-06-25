@@ -1,9 +1,11 @@
+// CreateVisitPage.dart
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/models/tour.dart';
 import 'package:crm/features/visits/pages/creation-successful.page.dart';
+import 'package:crm/logic/auth/auth_bloc.dart';
+import 'package:crm/models/user/user.dart';
 import 'package:crm/shared/services/helpers/location.helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +34,8 @@ class CreateVisitPage extends StatefulWidget {
 }
 
 class _CreateVisitPageState extends State<CreateVisitPage> {
+  late User user;
+
   final QuillController _quillController = QuillController.basic();
   final ScrollController _scrollController = ScrollController();
 
@@ -52,18 +56,24 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
   @override
   void initState() {
     super.initState();
+
+    user = context.read<AuthBloc>().user;
+
     context.read<CounterCubit>().reset();
     context.read<VisitCreationCubit>().reset();
-    data['dateDebut'] = DateTime.now().YYYYMMdd();
+    data['dateDebut'] = DateTime.now();
+
     if (widget.pharmacieId != null) {
       data['pharmacieId'] = widget.pharmacieId?.toString();
     }
     data['tourneeId'] = widget.tour.tourId;
-    log('tourneeId: ${widget.tour.tourId}');
   }
 
   void _onQuillChange() {
-    setState(() {});
+    setState(() {
+      debugPrint(
+          'Quill text changed: ${_quillController.document.toPlainText()} length: ${_quillController.document.toPlainText().trim().length} Valid: ${_quillController.document.toPlainText().trim().length >= (user.minReportChar ?? 1)}');
+    });
   }
 
   @override
@@ -158,6 +168,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                   ? ClientSelectionForm(
                                       quillController: _quillController,
                                       onQuillFocus: _scrollToBottom,
+                                      tour: widget.tour,
                                       clients: widget.tour.pharmacies!
                                           .where((element) => element.statusFlag == 0)
                                           .toList(),
@@ -202,18 +213,23 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                     child: CustomButton(
                                       text: state < 1 ? context.i10n.next : context.i10n.validate,
                                       disabled: state == 0
-                                          ? data['dateDebut'] == null ||
-                                              data['pharmacieId'] == null ||
+                                          ? data['pharmacieId'] == null ||
                                               data['motif'] == null ||
-                                              _quillController.document.toPlainText().isEmpty
+                                              _quillController.document
+                                                      .toPlainText()
+                                                      .trim()
+                                                      .length <
+                                                  (user.minReportChar ?? 1)
                                           : false,
                                       onPressed: () async {
                                         switch (state) {
                                           case 0:
-                                            if (data['dateDebut'] == null ||
-                                                data['pharmacieId'] == null ||
+                                            final text =
+                                                _quillController.document.toPlainText().trim();
+                                            if (data['pharmacieId'] == null ||
                                                 data['motif'] == null ||
-                                                _quillController.document.toPlainText().isEmpty) {
+                                                text.isEmpty ||
+                                                text.length < (user.minReportChar ?? 1)) {
                                               return;
                                             }
                                             data['document'] = _quillController.document;
@@ -223,7 +239,7 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                             break;
                                           case 1:
                                             data['rapportText'] =
-                                                _quillController.document.toPlainText();
+                                                _quillController.document.toPlainText().trim();
                                             data['rapport'] = json.encode(
                                                 _quillController.document.toDelta().toJson());
 

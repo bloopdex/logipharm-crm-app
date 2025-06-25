@@ -48,6 +48,8 @@ class TourDetail with _$TourDetail {
     @JsonKey(name: 'latitude') double? latitude,
     @JsonKey(name: 'longitude') double? longitude,
     @JsonKey(name: 'pharmacie') Person? pharmacy,
+    // Optional fields
+    @JsonKey(name: 'delegue') Person? delegate,
   }) = _TourDetail;
 
   factory TourDetail.fromJson(Map<String, dynamic> json) => _$TourDetailFromJson(json);

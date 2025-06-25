@@ -22,4 +22,8 @@ class DateHelper {
   static DateTime parseExtra(String date) {
     return DateFormat('yyyy-MM-ddTHH:mm:ss.SSSZ').parse(date);
   }
+
+  static DateTime parseYYYYMMdd(String date) {
+    return DateFormat('yyyy-MM-dd').parse(date);
+  }
 }

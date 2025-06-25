@@ -13,6 +13,10 @@ class CommuneCubit extends Cubit<List<Commune>> {
       if (response.statusCode == 200) {
         List<Commune> delegates =
             response.data['body'].map<Commune>((delegate) => Commune.fromJson(delegate)).toList();
+
+        // Sort the list by the 'name' property
+        delegates.sort((a, b) => a.name.compareTo(b.name));
+
         emit(delegates);
       } else {
         emit([]);

@@ -32,7 +32,7 @@ class ProfileSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(kPaddingSm3),
             ),
             child: Text(
-                user.id.typeTier != "3" ? context.i10n.supervisorRole : context.i10n.delegateRole,
+                user.typeTier != "3" ? context.i10n.supervisorRole : context.i10n.delegateRole,
                 style: context.textTheme.bodyLarge),
           ),
           Text(context.i10n.manageProfile,

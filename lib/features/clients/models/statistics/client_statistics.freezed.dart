@@ -25,8 +25,12 @@ mixin _$ClientReclamation {
   @JsonKey(name: 'number')
   int get number => throw _privateConstructorUsedError;
 
+  /// Serializes this ClientReclamation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ClientReclamation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ClientReclamationCopyWith<ClientReclamation> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$ClientReclamationCopyWithImpl<$Res, $Val extends ClientReclamation>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ClientReclamation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$ClientReclamationImplCopyWithImpl<$Res>
       $Res Function(_$ClientReclamationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClientReclamation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,11 +150,13 @@ class _$ClientReclamationImpl implements _ClientReclamation {
             (identical(other.number, number) || other.number == number));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, status, number);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClientReclamation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClientReclamationImplCopyWith<_$ClientReclamationImpl> get copyWith =>
@@ -176,8 +186,11 @@ abstract class _ClientReclamation implements ClientReclamation {
   @override
   @JsonKey(name: 'number')
   int get number;
+
+  /// Create a copy of ClientReclamation
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClientReclamationImplCopyWith<_$ClientReclamationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -210,8 +223,12 @@ mixin _$ClientStatistics {
   List<ClientReclamation> get clientReclamations =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this ClientStatistics to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ClientStatistics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ClientStatisticsCopyWith<ClientStatistics> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -246,6 +263,8 @@ class _$ClientStatisticsCopyWithImpl<$Res, $Val extends ClientStatistics>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ClientStatistics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -335,6 +354,8 @@ class __$$ClientStatisticsImplCopyWithImpl<$Res>
       $Res Function(_$ClientStatisticsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClientStatistics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -481,7 +502,7 @@ class _$ClientStatisticsImpl implements _ClientStatistics {
                 .equals(other._clientReclamations, _clientReclamations));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -496,7 +517,9 @@ class _$ClientStatisticsImpl implements _ClientStatistics {
       totalPayment,
       const DeepCollectionEquality().hash(_clientReclamations));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClientStatistics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClientStatisticsImplCopyWith<_$ClientStatisticsImpl> get copyWith =>
@@ -560,8 +583,11 @@ abstract class _ClientStatistics implements ClientStatistics {
   @override
   @JsonKey(name: 'reclamations')
   List<ClientReclamation> get clientReclamations;
+
+  /// Create a copy of ClientStatistics
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClientStatisticsImplCopyWith<_$ClientStatisticsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

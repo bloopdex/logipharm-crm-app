@@ -1,8 +1,10 @@
 import 'package:crm/features/clients/blocs/claims/claim_cubit.dart';
 import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
+import 'package:crm/features/clients/blocs/turnover/turnover_cubit.dart';
 import 'package:crm/features/clients/client-details.page.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/core/enums.dart';
+import 'package:crm/shared/utils/date.formatter.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:crm/shared/widgets/popup/confirmation.popup.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +106,14 @@ class TourPlanDetailPage extends StatelessWidget {
                       ),
                       child: CustomButton(
                         text: context.i10n.start,
+                        // disable if the start date is today not not yesterday or tomorrow
+                        disabled: tour.startDate != null &&
+                            (!DateHelper.parseYYYYMMdd(tour.startDate!).isToday()),
                         onPressed: () {
+                          if (tour.startDate != null &&
+                              DateTime.parse(tour.startDate!).isAfter(DateTime.now())) {
+                            return;
+                          }
                           context.read<TourPlanBloc>().add(
                                 TourPlanEvent.startTour(tourId: tour.tourId),
                               );
@@ -408,6 +417,7 @@ class TourClientsList extends StatelessWidget {
         final pharmacy = pharmacies[index];
         return ListTile(
           onTap: () {
+            context.read<TurnoverCubit>().fetchTurnovers(pharmacy.pharmacy!.id);
             context.read<ObservationCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
             context.read<ClaimCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
             context.read<GrossisteCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
@@ -494,7 +504,7 @@ class TourClientsList extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         if (tour.statusFlag == StatuFlags.opened.value &&
-                            tour.delegate.id == user.id.id) {
+                            tour.delegate.id == user.id) {
                           context.push(CreateVisitPage(
                             tour: tour,
                             pharmacieId:
@@ -508,7 +518,7 @@ class TourClientsList extends StatelessWidget {
                           Icon(
                             Icons.add_rounded,
                             color: tour.statusFlag == StatuFlags.opened.value &&
-                                    tour.delegate.id == user.id.id
+                                    tour.delegate.id == user.id
                                 ? kPrimaryColor
                                 : kText5,
                           ),
@@ -516,7 +526,7 @@ class TourClientsList extends StatelessWidget {
                             context.i10n.tourDetailsVisitClient,
                             style: context.textTheme.headlineSmall!.copyWith(
                               color: tour.statusFlag == StatuFlags.opened.value &&
-                                      tour.delegate.id == user.id.id
+                                      tour.delegate.id == user.id
                                   ? kPrimaryColor
                                   : kText5,
                             ),

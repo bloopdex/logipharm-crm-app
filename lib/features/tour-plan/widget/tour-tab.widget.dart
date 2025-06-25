@@ -135,6 +135,7 @@ class _TourListWidgetState extends State<TourListWidget> {
                 );
           },
           child: ListView.separated(
+            physics: const AlwaysScrollableScrollPhysics(),
             controller: scrollController,
             itemCount: filteredList.length,
             separatorBuilder: (context, index) => SizedBox(height: kSpacingX3),

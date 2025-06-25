@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(count) => "Clients (${count})";
 
+  static String m4(min) => "Rapport must be at least ${min} characters";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "active": MessageLookupByLibrary.simpleMessage("Active"),
@@ -92,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "category": MessageLookupByLibrary.simpleMessage("Category"),
     "ceiling": MessageLookupByLibrary.simpleMessage("Ceiling"),
+    "changeAddress": MessageLookupByLibrary.simpleMessage("Change Address"),
     "changePassword": MessageLookupByLibrary.simpleMessage("Change Password"),
     "claims": MessageLookupByLibrary.simpleMessage("Claims"),
     "client": MessageLookupByLibrary.simpleMessage("Client"),
@@ -107,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "cnrc": MessageLookupByLibrary.simpleMessage("CNRC"),
     "color": MessageLookupByLibrary.simpleMessage("Color"),
+    "commune": MessageLookupByLibrary.simpleMessage("Commune"),
     "completed": MessageLookupByLibrary.simpleMessage("Completed"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
@@ -218,6 +222,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "No claims found for this client",
     ),
     "noClientsFound": MessageLookupByLibrary.simpleMessage("No clients found"),
+    "noCommune": MessageLookupByLibrary.simpleMessage("No commune"),
     "noCreator": MessageLookupByLibrary.simpleMessage("No Creator"),
     "noEmail": MessageLookupByLibrary.simpleMessage("No email"),
     "noEtablissement": MessageLookupByLibrary.simpleMessage("No etablissement"),
@@ -299,7 +304,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectDateRange": MessageLookupByLibrary.simpleMessage(
       "Select Date Range",
     ),
+    "selectDateTime": MessageLookupByLibrary.simpleMessage(
+      "Select Date and Time",
+    ),
     "selectReason": MessageLookupByLibrary.simpleMessage("Select Reason"),
+    "selectTime": MessageLookupByLibrary.simpleMessage("Select Time"),
     "solvability": MessageLookupByLibrary.simpleMessage("Solvability"),
     "start": MessageLookupByLibrary.simpleMessage("Start"),
     "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
@@ -451,6 +460,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tourValidationTitle": MessageLookupByLibrary.simpleMessage(
       "Overview and Validation",
     ),
+    "turnover": MessageLookupByLibrary.simpleMessage("Turnover"),
     "update": MessageLookupByLibrary.simpleMessage("Update"),
     "updateVisit": MessageLookupByLibrary.simpleMessage("Update Visit"),
     "uploadFile": MessageLookupByLibrary.simpleMessage("Upload File"),
@@ -479,6 +489,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "visitCreationRapportLabel": MessageLookupByLibrary.simpleMessage(
       "Rapport",
     ),
+    "visitCreationRapportMinCharError": m4,
     "visitCreationRapportPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Enter the rapport of the visit",
     ),

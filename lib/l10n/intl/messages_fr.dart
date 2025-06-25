@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(count) => "Clients (${count})";
 
+  static String m4(min) =>
+      "Le rapport doit contenir au moins ${min} caractères";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "active": MessageLookupByLibrary.simpleMessage("Actif"),
@@ -98,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "category": MessageLookupByLibrary.simpleMessage("Catégorie"),
     "ceiling": MessageLookupByLibrary.simpleMessage("Plafond"),
+    "changeAddress": MessageLookupByLibrary.simpleMessage("Changer l\'adresse"),
     "changePassword": MessageLookupByLibrary.simpleMessage(
       "Changer le mot de passe",
     ),
@@ -117,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "cnrc": MessageLookupByLibrary.simpleMessage("Prospect"),
     "color": MessageLookupByLibrary.simpleMessage("Couleur"),
+    "commune": MessageLookupByLibrary.simpleMessage("Commune"),
     "completed": MessageLookupByLibrary.simpleMessage("Terminé"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirmer"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
@@ -248,6 +253,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noClientsFound": MessageLookupByLibrary.simpleMessage(
       "Aucun client trouvé",
     ),
+    "noCommune": MessageLookupByLibrary.simpleMessage("Pas de commune"),
     "noCreator": MessageLookupByLibrary.simpleMessage("Aucun créateur"),
     "noEmail": MessageLookupByLibrary.simpleMessage("Pas d\'email"),
     "noEtablissement": MessageLookupByLibrary.simpleMessage(
@@ -345,9 +351,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectDateRange": MessageLookupByLibrary.simpleMessage(
       "Sélectionner la période",
     ),
+    "selectDateTime": MessageLookupByLibrary.simpleMessage(
+      "Sélectionner la date et l\'heure",
+    ),
     "selectReason": MessageLookupByLibrary.simpleMessage(
       "Sélectionner une raison",
     ),
+    "selectTime": MessageLookupByLibrary.simpleMessage("Sélectionner l\'heure"),
     "solvability": MessageLookupByLibrary.simpleMessage("Solvaibilité"),
     "start": MessageLookupByLibrary.simpleMessage("Démarrer"),
     "startDate": MessageLookupByLibrary.simpleMessage("Date de début"),
@@ -507,6 +517,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tourValidationTitle": MessageLookupByLibrary.simpleMessage(
       "Aperçu et validation",
     ),
+    "turnover": MessageLookupByLibrary.simpleMessage("Chiffre d\'affaires"),
     "update": MessageLookupByLibrary.simpleMessage("Mettre à jour"),
     "updateVisit": MessageLookupByLibrary.simpleMessage(
       "Mettre à jour la visite",
@@ -537,6 +548,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "visitCreationRapportLabel": MessageLookupByLibrary.simpleMessage(
       "Rapport",
     ),
+    "visitCreationRapportMinCharError": m4,
     "visitCreationRapportPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Entrez le rapport de la visite",
     ),

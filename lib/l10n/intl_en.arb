@@ -1112,5 +1112,21 @@
   "status": "Status",
   "createdBy": "Created By",
   "pendingEvent": "Pending Event",
-  "locationPermissionRequired": "Location permission is required"
+  "locationPermissionRequired": "Location permission is required",
+  "changeAddress": "Change Address",
+  "commune": "Commune",
+  "noCommune": "No commune",
+  "turnover": "Turnover",
+  "selectTime": "Select Time",
+  "selectDateTime": "Select Date and Time",
+  "visitCreationRapportMinCharError": "Rapport must be at least {min} characters",
+  "@visitCreationRapportMinCharError": {
+    "description": "Rapport min char error",
+    "placeholders": {
+      "min": {
+        "description": "Minimum characters",
+        "type": "int"
+      }
+    }
+  }
 }

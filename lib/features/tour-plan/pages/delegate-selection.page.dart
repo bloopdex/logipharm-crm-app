@@ -58,7 +58,7 @@ class DelegateSelectionForm extends StatelessWidget {
           ),
           SizedBox(height: kSpacingX5),
           Text(
-            context.i10n.tourCreationTourDetailsDelegateLabel,
+            context.i10n.tourCreationTourDetailsDateLabel,
             style: context.textTheme.bodyMedium,
           ),
           SizedBox(height: kSpacingX1),

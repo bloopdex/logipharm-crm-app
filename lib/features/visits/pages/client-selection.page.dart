@@ -1,13 +1,16 @@
+// ClientSelectionForm.dart
 import 'dart:developer';
 
 import 'package:crm/core/core.dart';
 import 'package:crm/features/tour-plan/models/motif_visit/motif_visit.dart';
+import 'package:crm/models/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
+import '../../../logic/auth/auth_bloc.dart';
 import '../../../models/person/person.dart';
-import '../../../shared/widgets/inputs/date.picker.input.dart';
+import '../../../shared/widgets/inputs/date.time.picker.input.dart';
 import '../../../shared/widgets/inputs/dropdown.input.dart';
 import '../../tour-plan/bloc/visit_motif_cubit.dart';
 import '../../tour-plan/models/tour.dart';
@@ -36,25 +39,44 @@ class ClientSelectionForm extends StatefulWidget {
 }
 
 class _ClientSelectionFormState extends State<ClientSelectionForm> {
+  late User user;
+
   final FocusNode _quillFocusNode = FocusNode();
   Person? pharmacy;
+  bool isReportValid = false;
 
   @override
   void initState() {
     super.initState();
-    log('pharmacy: $pharmacy');
+
+    // Initialize the user from AuthBloc
+    user = context.read<AuthBloc>().user;
+
+    log("TourPlan Rami: ${widget.tour?.toJson()}");
+
+    // Initialize validation based on initial content
+    isReportValid =
+        widget.quillController.document.toPlainText().trim().length >= (user.minReportChar ?? 1);
+
     if (widget.data['pharmacieId'] != null) {
       pharmacy = widget.clients
-          .where((element) =>
-              '${element.pharmacy?.id.toString()}:${element.pharmacy?.typeTier}' ==
-              widget.data['pharmacieId'])
+          .where((element) {
+            return '${element.pharmacy?.id.toString()}:${element.pharmacy?.typeTier}' ==
+                widget.data['pharmacieId'];
+          })
           .firstOrNull
           ?.pharmacy;
     } else {
       pharmacy = widget.clients.firstOrNull?.pharmacy;
     }
-    log('pharmacy: $pharmacy');
     _quillFocusNode.addListener(_handleQuillFocusChange);
+    widget.quillController.addListener(() {
+      final textLength = widget.quillController.document.toPlainText().trim().length;
+      setState(() {
+        isReportValid = textLength >= (user.minReportChar ?? 1);
+      });
+      widget.onQuillChange?.call();
+    });
   }
 
   @override
@@ -126,7 +148,7 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                         ],
                       ),
                     ),
-                    if (context.user.addVisitOutPlanPrivilege == 1)
+                    if (context.user.addVisitOutPlanPrivilege == true)
                       Row(
                         children: [
                           SizedBox(width: kPaddingSm2),
@@ -159,8 +181,10 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                   style: context.textTheme.bodyMedium,
                 ),
                 SizedBox(height: kSpacingX1),
-                CustomDatePicker(
+                CustomDateTimePicker(
                   data: widget.data,
+                  firstDate: DateTime.parse(widget.tour?.startDate ?? DateTime.now().toString()),
+                  initialDate: DateTime.now(),
                   onChanged: (value) {
                     widget.onQuillChange?.call();
                   },
@@ -177,6 +201,22 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                     if (state.isEmpty) {
                       return const CircularProgressIndicator();
                     } else {
+                      // Deduplicate motifs by id
+                      final uniqueMotifs = <MotifVisit>{};
+                      final deduplicatedMotifs =
+                          state.where((motif) => uniqueMotifs.add(motif)).toList();
+
+                      // Extract values from dropdown items
+                      final itemValues = <String>[
+                        ...deduplicatedMotifs.map((motif) => motif.id.toString()),
+                      ];
+
+                      // Ensure the current value exists in items; default to empty if not
+                      final currentValue =
+                          widget.data['motif'] == null || !itemValues.contains(widget.data['motif'])
+                              ? ""
+                              : widget.data['motif'];
+
                       return CustomDropDownInput(
                         data: widget.data,
                         mapKey: 'motif',
@@ -185,14 +225,14 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                             label: context.i10n.selectReason,
                             value: "",
                           ),
-                          ...state.map(
+                          ...deduplicatedMotifs.map(
                             (motif) => CustomDropDownItem(
                               value: motif.id.toString(),
                               label: motif.label ?? "",
                             ),
-                          )
+                          ),
                         ],
-                        initialValue: '',
+                        initialValue: currentValue,
                         onChanged: (value) {
                           setState(() {
                             widget.data['motif'] = value;
@@ -224,6 +264,18 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                     scrollController: ScrollController(),
                   ),
                 ),
+                // Add error message if report is too short
+                if (!isReportValid)
+                  Padding(
+                    padding: EdgeInsets.only(top: kSpacingX1),
+                    child: Text(
+                      context.i10n.visitCreationRapportMinCharError(user.minReportChar ?? 1),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.error,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
               ],
             ),
           );

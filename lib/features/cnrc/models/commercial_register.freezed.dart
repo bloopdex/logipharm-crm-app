@@ -39,8 +39,12 @@ mixin _$CommercialRegister {
   @JsonKey(name: 'commercialRegisterStatus')
   String? get commercialRegisterStatus => throw _privateConstructorUsedError;
 
+  /// Serializes this CommercialRegister to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CommercialRegister
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CommercialRegisterCopyWith<CommercialRegister> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -75,6 +79,8 @@ class _$CommercialRegisterCopyWithImpl<$Res, $Val extends CommercialRegister>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CommercialRegister
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,6 +165,8 @@ class __$$CommercialRegisterImplCopyWithImpl<$Res>
       $Res Function(_$CommercialRegisterImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CommercialRegister
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -289,7 +297,7 @@ class _$CommercialRegisterImpl implements _CommercialRegister {
                 other.commercialRegisterStatus == commercialRegisterStatus));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -303,7 +311,9 @@ class _$CommercialRegisterImpl implements _CommercialRegister {
       municipality,
       commercialRegisterStatus);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CommercialRegister
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CommercialRegisterImplCopyWith<_$CommercialRegisterImpl> get copyWith =>
@@ -363,8 +373,11 @@ abstract class _CommercialRegister implements CommercialRegister {
   @override
   @JsonKey(name: 'commercialRegisterStatus')
   String? get commercialRegisterStatus;
+
+  /// Create a copy of CommercialRegister
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CommercialRegisterImplCopyWith<_$CommercialRegisterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -79,8 +79,12 @@ mixin _$Person {
   @JsonKey(name: 'categorieLibelle')
   String? get categoryLabel => throw _privateConstructorUsedError;
 
+  /// Serializes this Person to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PersonCopyWith<Person> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -133,6 +137,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -281,6 +287,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     ) as $Val);
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SolvabiliteCopyWith<$Res>? get solvabilite {
@@ -293,6 +301,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ModePaieCopyWith<$Res>? get modePaie {
@@ -357,6 +367,8 @@ class __$$PersonImplCopyWithImpl<$Res>
       _$PersonImpl _value, $Res Function(_$PersonImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -689,7 +701,7 @@ class _$PersonImpl implements _Person {
                 other.categoryLabel == categoryLabel));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -723,7 +735,9 @@ class _$PersonImpl implements _Person {
         categoryLabel
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
@@ -809,8 +823,8 @@ abstract class _Person implements Person {
   double? get longitude;
   @override
   @JsonKey(name: 'superviseur')
-  int? get supervisor;
-  @override // Supervisor ID
+  int? get supervisor; // Supervisor ID
+  @override
   @JsonKey(name: 'codePostal')
   String? get postalCode;
   @override
@@ -848,15 +862,18 @@ abstract class _Person implements Person {
   bool? get prospect;
   @override
   @JsonKey(name: 'solvabilite')
-  Solvabilite? get solvabilite;
-  @override // Added solvabilite
+  Solvabilite? get solvabilite; // Added solvabilite
+  @override
   @JsonKey(name: 'modePaie')
-  ModePaie? get modePaie;
-  @override // Added modePaie
+  ModePaie? get modePaie; // Added modePaie
+  @override
   @JsonKey(name: 'categorieLibelle')
   String? get categoryLabel;
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -872,8 +889,12 @@ mixin _$Solvabilite {
   @JsonKey(name: 'label')
   String get label => throw _privateConstructorUsedError;
 
+  /// Serializes this Solvabilite to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Solvabilite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SolvabiliteCopyWith<Solvabilite> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -898,6 +919,8 @@ class _$SolvabiliteCopyWithImpl<$Res, $Val extends Solvabilite>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Solvabilite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -937,6 +960,8 @@ class __$$SolvabiliteImplCopyWithImpl<$Res>
       _$SolvabiliteImpl _value, $Res Function(_$SolvabiliteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Solvabilite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -987,11 +1012,13 @@ class _$SolvabiliteImpl implements _Solvabilite {
             (identical(other.label, label) || other.label == label));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, label);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Solvabilite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SolvabiliteImplCopyWith<_$SolvabiliteImpl> get copyWith =>
@@ -1019,8 +1046,11 @@ abstract class _Solvabilite implements Solvabilite {
   @override
   @JsonKey(name: 'label')
   String get label;
+
+  /// Create a copy of Solvabilite
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SolvabiliteImplCopyWith<_$SolvabiliteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1036,8 +1066,12 @@ mixin _$ModePaie {
   @JsonKey(name: 'label')
   String get label => throw _privateConstructorUsedError;
 
+  /// Serializes this ModePaie to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ModePaie
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ModePaieCopyWith<ModePaie> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1061,6 +1095,8 @@ class _$ModePaieCopyWithImpl<$Res, $Val extends ModePaie>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ModePaie
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1100,6 +1136,8 @@ class __$$ModePaieImplCopyWithImpl<$Res>
       _$ModePaieImpl _value, $Res Function(_$ModePaieImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ModePaie
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1150,11 +1188,13 @@ class _$ModePaieImpl implements _ModePaie {
             (identical(other.label, label) || other.label == label));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, label);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ModePaie
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ModePaieImplCopyWith<_$ModePaieImpl> get copyWith =>
@@ -1182,8 +1222,11 @@ abstract class _ModePaie implements ModePaie {
   @override
   @JsonKey(name: 'label')
   String get label;
+
+  /// Create a copy of ModePaie
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ModePaieImplCopyWith<_$ModePaieImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

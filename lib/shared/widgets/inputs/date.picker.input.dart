@@ -34,16 +34,16 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   late TextEditingController controller;
 
   @override
-  initState() {
+  void initState() {
     super.initState();
     controller = TextEditingController();
-    controller.text = DateFormat(widget.dateFormat).format(widget.initialDate ?? DateTime.now());
+    final defaultDate = widget.initialDate ?? widget.firstDate ?? DateTime.now();
+    controller.text = DateFormat(widget.dateFormat).format(defaultDate);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    controller.text = context.i10n.today;
   }
 
   @override

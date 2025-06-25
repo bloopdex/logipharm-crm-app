@@ -2690,6 +2690,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Change Address`
+  String get changeAddress {
+    return Intl.message(
+      'Change Address',
+      name: 'changeAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Commune`
+  String get commune {
+    return Intl.message('Commune', name: 'commune', desc: '', args: []);
+  }
+
+  /// `No commune`
+  String get noCommune {
+    return Intl.message('No commune', name: 'noCommune', desc: '', args: []);
+  }
+
+  /// `Turnover`
+  String get turnover {
+    return Intl.message('Turnover', name: 'turnover', desc: '', args: []);
+  }
+
+  /// `Select Time`
+  String get selectTime {
+    return Intl.message('Select Time', name: 'selectTime', desc: '', args: []);
+  }
+
+  /// `Select Date and Time`
+  String get selectDateTime {
+    return Intl.message(
+      'Select Date and Time',
+      name: 'selectDateTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rapport must be at least {min} characters`
+  String visitCreationRapportMinCharError(int min) {
+    return Intl.message(
+      'Rapport must be at least $min characters',
+      name: 'visitCreationRapportMinCharError',
+      desc: 'Rapport min char error',
+      args: [min],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

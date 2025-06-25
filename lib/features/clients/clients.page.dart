@@ -3,6 +3,7 @@ import 'package:crm/features/clients/blocs/claims/claim_cubit.dart';
 import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
 import 'package:crm/features/clients/blocs/grossiste/grossiste_cubit.dart';
 import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
+import 'package:crm/features/clients/blocs/turnover/turnover_cubit.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:crm/shared/widgets/inputs/dropdown.input.dart';
 import 'package:flutter/material.dart';
@@ -302,6 +303,7 @@ class ClientCard extends StatelessWidget {
   Widget build(BuildContext context) {
     void loadClientData(BuildContext context, int clientId) {
       final cubits = [
+        context.read<TurnoverCubit>(),
         context.read<ObservationCubit>(),
         context.read<ClaimCubit>(),
         context.read<GrossisteCubit>(),
@@ -310,7 +312,10 @@ class ClientCard extends StatelessWidget {
       ];
 
       for (var cubit in cubits) {
-        if (cubit is ObservationCubit) {
+        if (cubit is TurnoverCubit) {
+          cubit.fetchTurnovers(clientId);
+        }
+        else if (cubit is ObservationCubit) {
           cubit.get(pharmacyId: clientId);
         } else if (cubit is ClaimCubit) {
           cubit.get(pharmacyId: clientId);

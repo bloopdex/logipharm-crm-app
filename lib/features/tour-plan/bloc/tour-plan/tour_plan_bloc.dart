@@ -36,7 +36,7 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
         page: 0,
         size: _pageSize,
         startDate: DateHelper.YYYYMMdd(DateTime(DateTime.now().year, 1, 1)),
-        endDate: DateHelper.YYYYMMdd(DateTime.now().add(const Duration(days: 1))),
+        endDate: DateHelper.YYYYMMdd(DateTime(DateTime.now().year, 12, 31)),
         query: "",
       );
 

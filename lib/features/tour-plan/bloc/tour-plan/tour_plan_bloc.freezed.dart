@@ -98,6 +98,9 @@ class _$TourPlanEventCopyWithImpl<$Res, $Val extends TourPlanEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -114,6 +117,9 @@ class __$$StartedImplCopyWithImpl<$Res>
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -245,6 +251,8 @@ class __$$SearchImplCopyWithImpl<$Res>
       _$SearchImpl _value, $Res Function(_$SearchImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -299,7 +307,9 @@ class _$SearchImpl implements _Search {
   @override
   int get hashCode => Object.hash(runtimeType, query, start, end);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
@@ -403,7 +413,10 @@ abstract class _Search implements TourPlanEvent {
   String get query;
   DateTime? get start;
   DateTime? get end;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -424,6 +437,8 @@ class __$$LoadImplCopyWithImpl<$Res>
   __$$LoadImplCopyWithImpl(_$LoadImpl _value, $Res Function(_$LoadImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -478,7 +493,9 @@ class _$LoadImpl implements _Load {
   @override
   int get hashCode => Object.hash(runtimeType, query, start, end);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadImplCopyWith<_$LoadImpl> get copyWith =>
@@ -582,7 +599,10 @@ abstract class _Load implements TourPlanEvent {
   String get query;
   DateTime? get start;
   DateTime? get end;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadImplCopyWith<_$LoadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -604,6 +624,8 @@ class __$$StartTourImplCopyWithImpl<$Res>
       _$StartTourImpl _value, $Res Function(_$StartTourImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -642,7 +664,9 @@ class _$StartTourImpl implements _StartTour {
   @override
   int get hashCode => Object.hash(runtimeType, tourId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StartTourImplCopyWith<_$StartTourImpl> get copyWith =>
@@ -741,7 +765,10 @@ abstract class _StartTour implements TourPlanEvent {
   const factory _StartTour({required final String tourId}) = _$StartTourImpl;
 
   String get tourId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StartTourImplCopyWith<_$StartTourImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -763,6 +790,8 @@ class __$$CloseTourImplCopyWithImpl<$Res>
       _$CloseTourImpl _value, $Res Function(_$CloseTourImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -801,7 +830,9 @@ class _$CloseTourImpl implements _CloseTour {
   @override
   int get hashCode => Object.hash(runtimeType, tourId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CloseTourImplCopyWith<_$CloseTourImpl> get copyWith =>
@@ -900,7 +931,10 @@ abstract class _CloseTour implements TourPlanEvent {
   const factory _CloseTour({required final String tourId}) = _$CloseTourImpl;
 
   String get tourId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CloseTourImplCopyWith<_$CloseTourImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -919,6 +953,9 @@ class __$$ResetImplCopyWithImpl<$Res>
   __$$ResetImplCopyWithImpl(
       _$ResetImpl _value, $Res Function(_$ResetImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TourPlanEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1109,6 +1146,9 @@ class _$TourPlanStateCopyWithImpl<$Res, $Val extends TourPlanState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TourPlanState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1125,6 +1165,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TourPlanState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1245,6 +1288,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TourPlanState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1370,6 +1416,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TourPlanState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1398,6 +1446,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of TourPlanState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GoalCopyWith<$Res> get goal {
@@ -1458,7 +1508,9 @@ class _$LoadedImpl implements _Loaded {
       currentPage,
       goal);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TourPlanState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
@@ -1556,7 +1608,10 @@ abstract class _Loaded implements TourPlanState {
   bool get hasReachedMax;
   int get currentPage;
   Goal get goal;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TourPlanState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1578,6 +1633,8 @@ class __$$FailureImplCopyWithImpl<$Res>
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TourPlanState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1616,7 +1673,9 @@ class _$FailureImpl implements _Failure {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TourPlanState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
@@ -1707,7 +1766,10 @@ abstract class _Failure implements TourPlanState {
   const factory _Failure({required final String message}) = _$FailureImpl;
 
   String get message;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TourPlanState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

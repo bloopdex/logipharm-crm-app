@@ -53,8 +53,12 @@ mixin _$Tour {
   @JsonKey(name: 'tourneeDetails')
   List<TourDetail>? get pharmacies => throw _privateConstructorUsedError;
 
+  /// Serializes this Tour to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Tour
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TourCopyWith<Tour> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -95,6 +99,8 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Tour
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -183,6 +189,8 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
     ) as $Val);
   }
 
+  /// Create a copy of Tour
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PersonCopyWith<$Res> get delegate {
@@ -191,6 +199,8 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
     });
   }
 
+  /// Create a copy of Tour
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PersonCopyWith<$Res>? get supervisor {
@@ -242,6 +252,8 @@ class __$$TourImplCopyWithImpl<$Res>
   __$$TourImplCopyWithImpl(_$TourImpl _value, $Res Function(_$TourImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Tour
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -453,7 +465,7 @@ class _$TourImpl implements _Tour {
                 .equals(other._pharmacies, _pharmacies));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -474,7 +486,9 @@ class _$TourImpl implements _Tour {
       visitedClients,
       const DeepCollectionEquality().hash(_pharmacies));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Tour
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TourImplCopyWith<_$TourImpl> get copyWith =>
@@ -558,8 +572,11 @@ abstract class _Tour implements Tour {
   @override
   @JsonKey(name: 'tourneeDetails')
   List<TourDetail>? get pharmacies;
+
+  /// Create a copy of Tour
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TourImplCopyWith<_$TourImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -597,10 +614,16 @@ mixin _$TourDetail {
   @JsonKey(name: 'longitude')
   double? get longitude => throw _privateConstructorUsedError;
   @JsonKey(name: 'pharmacie')
-  Person? get pharmacy => throw _privateConstructorUsedError;
+  Person? get pharmacy => throw _privateConstructorUsedError; // Optional fields
+  @JsonKey(name: 'delegue')
+  Person? get delegate => throw _privateConstructorUsedError;
 
+  /// Serializes this TourDetail to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TourDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TourDetailCopyWith<TourDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -625,10 +648,12 @@ abstract class $TourDetailCopyWith<$Res> {
       @JsonKey(name: 'repportText') String? reportText,
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'longitude') double? longitude,
-      @JsonKey(name: 'pharmacie') Person? pharmacy});
+      @JsonKey(name: 'pharmacie') Person? pharmacy,
+      @JsonKey(name: 'delegue') Person? delegate});
 
   $MotifCopyWith<$Res>? get reason;
   $PersonCopyWith<$Res>? get pharmacy;
+  $PersonCopyWith<$Res>? get delegate;
 }
 
 /// @nodoc
@@ -641,6 +666,8 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TourDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -658,6 +685,7 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? pharmacy = freezed,
+    Object? delegate = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -716,9 +744,15 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
           ? _value.pharmacy
           : pharmacy // ignore: cast_nullable_to_non_nullable
               as Person?,
+      delegate: freezed == delegate
+          ? _value.delegate
+          : delegate // ignore: cast_nullable_to_non_nullable
+              as Person?,
     ) as $Val);
   }
 
+  /// Create a copy of TourDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MotifCopyWith<$Res>? get reason {
@@ -731,6 +765,8 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
     });
   }
 
+  /// Create a copy of TourDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PersonCopyWith<$Res>? get pharmacy {
@@ -740,6 +776,20 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
 
     return $PersonCopyWith<$Res>(_value.pharmacy!, (value) {
       return _then(_value.copyWith(pharmacy: value) as $Val);
+    });
+  }
+
+  /// Create a copy of TourDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PersonCopyWith<$Res>? get delegate {
+    if (_value.delegate == null) {
+      return null;
+    }
+
+    return $PersonCopyWith<$Res>(_value.delegate!, (value) {
+      return _then(_value.copyWith(delegate: value) as $Val);
     });
   }
 }
@@ -766,12 +816,15 @@ abstract class _$$TourDetailImplCopyWith<$Res>
       @JsonKey(name: 'repportText') String? reportText,
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'longitude') double? longitude,
-      @JsonKey(name: 'pharmacie') Person? pharmacy});
+      @JsonKey(name: 'pharmacie') Person? pharmacy,
+      @JsonKey(name: 'delegue') Person? delegate});
 
   @override
   $MotifCopyWith<$Res>? get reason;
   @override
   $PersonCopyWith<$Res>? get pharmacy;
+  @override
+  $PersonCopyWith<$Res>? get delegate;
 }
 
 /// @nodoc
@@ -782,6 +835,8 @@ class __$$TourDetailImplCopyWithImpl<$Res>
       _$TourDetailImpl _value, $Res Function(_$TourDetailImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TourDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -799,6 +854,7 @@ class __$$TourDetailImplCopyWithImpl<$Res>
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? pharmacy = freezed,
+    Object? delegate = freezed,
   }) {
     return _then(_$TourDetailImpl(
       id: null == id
@@ -857,6 +913,10 @@ class __$$TourDetailImplCopyWithImpl<$Res>
           ? _value.pharmacy
           : pharmacy // ignore: cast_nullable_to_non_nullable
               as Person?,
+      delegate: freezed == delegate
+          ? _value.delegate
+          : delegate // ignore: cast_nullable_to_non_nullable
+              as Person?,
     ));
   }
 }
@@ -878,7 +938,8 @@ class _$TourDetailImpl implements _TourDetail {
       @JsonKey(name: 'repportText') this.reportText,
       @JsonKey(name: 'latitude') this.latitude,
       @JsonKey(name: 'longitude') this.longitude,
-      @JsonKey(name: 'pharmacie') this.pharmacy});
+      @JsonKey(name: 'pharmacie') this.pharmacy,
+      @JsonKey(name: 'delegue') this.delegate});
 
   factory _$TourDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$TourDetailImplFromJson(json);
@@ -925,10 +986,14 @@ class _$TourDetailImpl implements _TourDetail {
   @override
   @JsonKey(name: 'pharmacie')
   final Person? pharmacy;
+// Optional fields
+  @override
+  @JsonKey(name: 'delegue')
+  final Person? delegate;
 
   @override
   String toString() {
-    return 'TourDetail(id: $id, masterTourId: $masterTourId, companyId: $companyId, regionId: $regionId, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, statusName: $statusName, reason: $reason, report: $report, reportText: $reportText, latitude: $latitude, longitude: $longitude, pharmacy: $pharmacy)';
+    return 'TourDetail(id: $id, masterTourId: $masterTourId, companyId: $companyId, regionId: $regionId, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, statusName: $statusName, reason: $reason, report: $report, reportText: $reportText, latitude: $latitude, longitude: $longitude, pharmacy: $pharmacy, delegate: $delegate)';
   }
 
   @override
@@ -959,10 +1024,12 @@ class _$TourDetailImpl implements _TourDetail {
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
             (identical(other.pharmacy, pharmacy) ||
-                other.pharmacy == pharmacy));
+                other.pharmacy == pharmacy) &&
+            (identical(other.delegate, delegate) ||
+                other.delegate == delegate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -979,9 +1046,12 @@ class _$TourDetailImpl implements _TourDetail {
       reportText,
       latitude,
       longitude,
-      pharmacy);
+      pharmacy,
+      delegate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TourDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TourDetailImplCopyWith<_$TourDetailImpl> get copyWith =>
@@ -1010,7 +1080,8 @@ abstract class _TourDetail implements TourDetail {
       @JsonKey(name: 'repportText') final String? reportText,
       @JsonKey(name: 'latitude') final double? latitude,
       @JsonKey(name: 'longitude') final double? longitude,
-      @JsonKey(name: 'pharmacie') final Person? pharmacy}) = _$TourDetailImpl;
+      @JsonKey(name: 'pharmacie') final Person? pharmacy,
+      @JsonKey(name: 'delegue') final Person? delegate}) = _$TourDetailImpl;
 
   factory _TourDetail.fromJson(Map<String, dynamic> json) =
       _$TourDetailImpl.fromJson;
@@ -1056,9 +1127,15 @@ abstract class _TourDetail implements TourDetail {
   double? get longitude;
   @override
   @JsonKey(name: 'pharmacie')
-  Person? get pharmacy;
+  Person? get pharmacy; // Optional fields
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(name: 'delegue')
+  Person? get delegate;
+
+  /// Create a copy of TourDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TourDetailImplCopyWith<_$TourDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1074,8 +1151,12 @@ mixin _$Motif {
   @JsonKey(name: 'label')
   String get label => throw _privateConstructorUsedError;
 
+  /// Serializes this Motif to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Motif
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MotifCopyWith<Motif> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1098,6 +1179,8 @@ class _$MotifCopyWithImpl<$Res, $Val extends Motif>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Motif
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1136,6 +1219,8 @@ class __$$MotifImplCopyWithImpl<$Res>
       _$MotifImpl _value, $Res Function(_$MotifImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Motif
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1186,11 +1271,13 @@ class _$MotifImpl implements _Motif {
             (identical(other.label, label) || other.label == label));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, label);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Motif
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MotifImplCopyWith<_$MotifImpl> get copyWith =>
@@ -1217,8 +1304,11 @@ abstract class _Motif implements Motif {
   @override
   @JsonKey(name: 'label')
   String get label;
+
+  /// Create a copy of Motif
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MotifImplCopyWith<_$MotifImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

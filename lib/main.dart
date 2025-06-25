@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:battery_plus/battery_plus.dart';
 import 'package:crm/features/clients/blocs/claims-motifs/motifs_cubit.dart';
@@ -16,6 +15,7 @@ import 'package:crm/features/visits/bloc/visits/visit_bloc.dart';
 import 'package:crm/logic/file/file_cubit.dart';
 import 'package:crm/shared/services/helpers/dio.helper.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,6 +29,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:workmanager/workmanager.dart';
 
 import 'core/const.dart';
@@ -41,6 +42,7 @@ import 'features/clients/blocs/claims/claim_cubit.dart';
 import 'features/clients/blocs/etablissement/etablissement_cubit.dart';
 import 'features/clients/blocs/grossiste/grossiste_cubit.dart';
 import 'features/clients/blocs/observation/observation_cubit.dart';
+import 'features/clients/blocs/turnover/turnover_cubit.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
 import 'features/tour-plan/bloc/clients/clients_cubit.dart';
@@ -62,36 +64,49 @@ import 'shared/widgets/loading/loading.screen.dart';
 const platform = MethodChannel('crm.a2s.dz/battery');
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  await ScreenUtil.ensureScreenSize();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb
-        ? HydratedStorageDirectory.web
-        : HydratedStorageDirectory((await getTemporaryDirectory()).path),
-  );
-  await DioHelper.init();
-  await initializeService();
+  runZonedGuarded(() async {
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+    await ScreenUtil.ensureScreenSize();
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: kIsWeb
+          ? HydratedStorageDirectory.web
+          : HydratedStorageDirectory((await getTemporaryDirectory()).path),
+    );
 
-  Workmanager().initialize(
-    callbackDispatcher,
-    isInDebugMode: true,
-  );
-  Workmanager().registerPeriodicTask(
-    "update-location-crm",
-    "UpdateLocation",
-    frequency: const Duration(minutes: 15),
-  );
+    await DioHelper.init();
 
-  runApp(const MyApp());
+    await requestForegroundPermissions();
+    await initializeService();
+
+    Workmanager().initialize(
+      callbackDispatcher,
+      isInDebugMode: true,
+    );
+    Workmanager().registerPeriodicTask(
+      "update-location-crm",
+      "UpdateLocation",
+      frequency: const Duration(minutes: 15),
+    );
+
+    runApp(const MyApp());
+  }, (error, stackTrace) {
+    log('Uncaught error: $error');
+    log('Stack trace: $stackTrace');
+  });
 }
 
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
-    await updateLocalization();
-    return Future.value(true);
+    try {
+      await updateLocalization();
+      return Future.value(true);
+    } catch (e) {
+      log('Error in callbackDispatcher: $e');
+      return Future.value(false);
+    }
   });
 }
 
@@ -102,37 +117,40 @@ const AndroidNotificationChannel notificationChannel = AndroidNotificationChanne
     importance: Importance.high);
 
 Future<void> initializeService() async {
-  var service = FlutterBackgroundService();
-  //set for ios
-  if (Platform.isIOS) {
+  try {
+    var service = FlutterBackgroundService();
+    if (Platform.isIOS) {
+      await flutterLocalPlugin
+          .initialize(const InitializationSettings(iOS: DarwinInitializationSettings()));
+    }
+
     await flutterLocalPlugin
-        .initialize(const InitializationSettings(iOS: DarwinInitializationSettings()));
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(notificationChannel);
+
+    await service.configure(
+      androidConfiguration: AndroidConfiguration(
+        onStart: onStart,
+        autoStart: true,
+        isForegroundMode: true,
+        notificationChannelId: "a2s fetch location",
+        initialNotificationTitle: "A2S is fetching your location",
+        initialNotificationContent:
+            "This is a notification that shows that a2s is fetching ur location",
+        foregroundServiceNotificationId: 90,
+        foregroundServiceTypes: [AndroidForegroundType.location],
+      ),
+      iosConfiguration: IosConfiguration(),
+    );
+    service.startService();
+  } catch (e) {
+    log('Error initializing service: $e');
   }
-
-  await flutterLocalPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(notificationChannel);
-
-  //service init and start
-  await service.configure(
-    androidConfiguration: AndroidConfiguration(
-      onStart: onStart,
-      autoStart: true,
-      isForegroundMode: true,
-      notificationChannelId: "a2s fetch location",
-      initialNotificationTitle: "A2S is fetching your location",
-      initialNotificationContent:
-          "This is a notification that shows that a2s is fetching ur location",
-      foregroundServiceNotificationId: 90,
-    ),
-    iosConfiguration: IosConfiguration(),
-  );
-  service.startService();
 }
 
 @pragma('vm:entry-point')
 void onStart(ServiceInstance service) {
-  DartPluginRegistrant.ensureInitialized();
+  // if(kReleaseMode) DartPluginRegistrant.ensureInitialized();
   if (service is AndroidServiceInstance) {
     service.on('setAsForeground').listen((event) {
       service.setAsForegroundService();
@@ -149,20 +167,14 @@ void onStart(ServiceInstance service) {
 
   Timer.periodic(const Duration(minutes: 1), (timer) async {
     await updateLocalization();
-    // flutterLocalPlugin.show(
-    //   90,
-    //   "A2S Fetch Your Location Successfully",
-    //   "Last Update At ${DateTime.now()}",
-    //   const NotificationDetails(
-    //     android: AndroidNotificationDetails(
-    //       "a2s fetch location",
-    //       "A2S is fetching your location",
-    //       ongoing: true,
-    //       icon: "app_icon",
-    //     ),
-    //   ),
-    // );
   });
+}
+
+Future<bool> requestForegroundPermissions() async {
+  final status = await Permission.locationWhenInUse.request();
+  final foregroundStatus = await Permission.locationAlways.request();
+
+  return status.isGranted && foregroundStatus.isGranted;
 }
 
 Future<void> updateLocalization() async {
@@ -195,9 +207,18 @@ Future<void> updateLocalization() async {
 
     log("Data : ${jsonEncode(data)}");
     log("Token : $token");
-    final response = await Dio(BaseOptions(
+    final dio = Dio(BaseOptions(
       validateStatus: (status) => true,
-    )).post(
+      receiveDataWhenStatusError: true,
+    ));
+    (dio.httpClientAdapter as IOHttpClientAdapter).validateCertificate =
+        (certificate, host, port) => true;
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      HttpClient client = HttpClient();
+      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+    final response = await dio.post(
       '$baseUrl/position',
       options: Options(
         headers: {
@@ -300,6 +321,21 @@ class BatteryInfo {
   });
 }
 
+class TestAppBanner extends StatelessWidget {
+  const TestAppBanner({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Banner(
+      message: 'TEST MODE',
+      location: BannerLocation.topStart,
+      color: Colors.redAccent,
+      textStyle: const TextStyle(color: Colors.white, fontSize: 16),
+      child: Container(),
+    );
+  }
+}
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -309,6 +345,8 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> with TickerProviderStateMixin {
   late AuthBloc authBloc;
+
+  final bool isDebugMode = false; // Set to true for debug mode, false for release mode
 
   @override
   void initState() {
@@ -381,11 +419,15 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<MotifVisitCubit>(create: (context) => MotifVisitCubit()),
           BlocProvider<GrossisteCubit>(create: (context) => GrossisteCubit()),
           BlocProvider<EtablissementCubit>(create: (context) => EtablissementCubit()),
+          BlocProvider<TurnoverCubit>(create: (context) => TurnoverCubit()),
           BlocProvider<EventsCubit>(create: (context) => EventsCubit()),
         ],
         child: BlocBuilder<LocalizationsBloc, LocalizationsState>(builder: (context, state) {
           return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+            data: MediaQuery.of(context).copyWith(
+              alwaysUse24HourFormat: false,
+              textScaler: const TextScaler.linear(1.0),
+            ),
             child: MaterialApp(
                 title: 'Logipharm-CRM',
                 debugShowCheckedModeBanner: false,
@@ -409,29 +451,36 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
                   FlutterQuillLocalizations.delegate,
                 ],
                 routes: AppRoutes.routes,
-                home: GestureDetector(
-                  onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-                  child: BlocBuilder<AuthBloc, AuthState>(
-                    builder: (context, state) {
-                      return state.when(
-                          initial: () => const SizedBox.shrink(),
-                          loading: () {
-                            FlutterNativeSplash.remove();
-                            return const LoadingScreen();
+                home: Builder(builder: (context) {
+                  return Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                        child: BlocBuilder<AuthBloc, AuthState>(
+                          builder: (context, state) {
+                            return state.when(
+                                initial: () => const SizedBox.shrink(),
+                                loading: () {
+                                  FlutterNativeSplash.remove();
+                                  return const LoadingScreen();
+                                },
+                                authenticated: (user, tempError) => const NavigationScreen(),
+                                unauthenticated: () => const LoginScreen(),
+                                failure: (message) {
+                                  return ErrorScreen(
+                                    message: message,
+                                    onRetry: () {
+                                      authBloc.add(const AuthEvent.appstarted());
+                                    },
+                                  );
+                                });
                           },
-                          authenticated: (user, tempError) => const NavigationScreen(),
-                          unauthenticated: () => const LoginScreen(),
-                          failure: (message) {
-                            return ErrorScreen(
-                              message: message,
-                              onRetry: () {
-                                authBloc.add(const AuthEvent.appstarted());
-                              },
-                            );
-                          });
-                    },
-                  ),
-                )),
+                        ),
+                      ),
+                      if (isDebugMode) const TestAppBanner(),
+                    ],
+                  );
+                })),
           );
         }));
   }

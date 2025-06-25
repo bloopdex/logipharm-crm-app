@@ -75,8 +75,12 @@ mixin _$EventVisite {
   @JsonKey(name: 'delegue')
   Person? get delegue => throw _privateConstructorUsedError;
 
+  /// Serializes this EventVisite to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EventVisite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EventVisiteCopyWith<EventVisite> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -130,6 +134,8 @@ class _$EventVisiteCopyWithImpl<$Res, $Val extends EventVisite>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EventVisite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -273,6 +279,8 @@ class _$EventVisiteCopyWithImpl<$Res, $Val extends EventVisite>
     ) as $Val);
   }
 
+  /// Create a copy of EventVisite
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $EventCopyWith<$Res>? get evenement {
@@ -285,6 +293,8 @@ class _$EventVisiteCopyWithImpl<$Res, $Val extends EventVisite>
     });
   }
 
+  /// Create a copy of EventVisite
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PersonCopyWith<$Res>? get delegue {
@@ -349,6 +359,8 @@ class __$$EventVisiteImplCopyWithImpl<$Res>
       _$EventVisiteImpl _value, $Res Function(_$EventVisiteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EventVisite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -655,7 +667,7 @@ class _$EventVisiteImpl implements _EventVisite {
             (identical(other.delegue, delegue) || other.delegue == delegue));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -688,7 +700,9 @@ class _$EventVisiteImpl implements _EventVisite {
         delegue
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventVisite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EventVisiteImplCopyWith<_$EventVisiteImpl> get copyWith =>
@@ -816,8 +830,11 @@ abstract class _EventVisite implements EventVisite {
   @override
   @JsonKey(name: 'delegue')
   Person? get delegue;
+
+  /// Create a copy of EventVisite
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EventVisiteImplCopyWith<_$EventVisiteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

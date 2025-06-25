@@ -1110,5 +1110,21 @@
   "createdBy": "Créé par",
   "status": "Statut",
   "pendingEvent": "Événement en attente",
-  "locationPermissionRequired": "La permission de localisation est requise"
+  "locationPermissionRequired": "La permission de localisation est requise",
+  "changeAddress": "Changer l'adresse",
+  "commune": "Commune",
+  "noCommune": "Pas de commune",
+  "turnover": "Chiffre d'affaires",
+  "selectTime": "Sélectionner l'heure",
+  "selectDateTime": "Sélectionner la date et l'heure",
+  "visitCreationRapportMinCharError": "Le rapport doit contenir au moins {min} caractères",
+  "@visitCreationRapportMinCharError": {
+    "description": "Le rapport doit contenir au moins {min} caractères",
+    "placeholders": {
+      "min": {
+        "description": "Nombre minimum de caractères",
+        "type": "int"
+      }
+    }
+  }
 }

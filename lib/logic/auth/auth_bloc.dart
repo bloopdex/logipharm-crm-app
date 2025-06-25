@@ -101,7 +101,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return const _Unauthenticated();
       }
       _user = User.fromJson(res.data['body']);
-      AuthRepository.setCompany(_user.id.companyId ?? 0);
+      AuthRepository.setCompany(_user.companyId ?? 0);
       return _Authenticated(_user, null);
     } catch (e) {
       log("Auth Auth Error $e");
@@ -110,7 +110,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   User _user = const User(
-    id: Id(id: 0, companyId: 0, typeTier: ''),
+    id: 0,
+    companyId: 0,
+    typeTier: '',
     lastName: '',
     firstName: null,
     loginCode: '',
@@ -120,8 +122,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     latitude: null,
     longitude: null,
     supervisor: null,
-    addVisitOutPlanPrivilege: 0,
+    addVisitOutPlanPrivilege: false,
     fullName: '',
+    roleChangeLocationClient: false,
   );
 
   User get user => _user;

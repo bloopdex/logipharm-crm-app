@@ -27,8 +27,12 @@ mixin _$Wilaya {
   @JsonKey(name: 'zone')
   String get zone => throw _privateConstructorUsedError;
 
+  /// Serializes this Wilaya to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Wilaya
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WilayaCopyWith<Wilaya> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -53,6 +57,8 @@ class _$WilayaCopyWithImpl<$Res, $Val extends Wilaya>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Wilaya
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,6 +104,8 @@ class __$$WilayaImplCopyWithImpl<$Res>
       _$WilayaImpl _value, $Res Function(_$WilayaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Wilaya
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,11 +166,13 @@ class _$WilayaImpl implements _Wilaya {
             (identical(other.zone, zone) || other.zone == zone));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, code, name, zone);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Wilaya
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WilayaImplCopyWith<_$WilayaImpl> get copyWith =>
@@ -193,8 +203,11 @@ abstract class _Wilaya implements Wilaya {
   @override
   @JsonKey(name: 'zone')
   String get zone;
+
+  /// Create a copy of Wilaya
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WilayaImplCopyWith<_$WilayaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
