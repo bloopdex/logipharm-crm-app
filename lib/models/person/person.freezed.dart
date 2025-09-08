@@ -79,7 +79,7 @@ mixin _$Person {
   @JsonKey(name: 'categorieLibelle')
   String? get categoryLabel => throw _privateConstructorUsedError;
   @JsonKey(name: 'authorizedRaduis')
-  num? get authorizedRadius => throw _privateConstructorUsedError;
+  int? get authorizedRadius => throw _privateConstructorUsedError;
 
   /// Serializes this Person to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -124,7 +124,7 @@ abstract class $PersonCopyWith<$Res> {
       @JsonKey(name: 'solvabilite') Solvabilite? solvabilite,
       @JsonKey(name: 'modePaie') ModePaie? modePaie,
       @JsonKey(name: 'categorieLibelle') String? categoryLabel,
-      @JsonKey(name: 'authorizedRaduis') num? authorizedRadius});
+      @JsonKey(name: 'authorizedRaduis') int? authorizedRadius});
 
   $SolvabiliteCopyWith<$Res>? get solvabilite;
   $ModePaieCopyWith<$Res>? get modePaie;
@@ -291,7 +291,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
       authorizedRadius: freezed == authorizedRadius
           ? _value.authorizedRadius
           : authorizedRadius // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as int?,
     ) as $Val);
   }
 
@@ -360,7 +360,7 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       @JsonKey(name: 'solvabilite') Solvabilite? solvabilite,
       @JsonKey(name: 'modePaie') ModePaie? modePaie,
       @JsonKey(name: 'categorieLibelle') String? categoryLabel,
-      @JsonKey(name: 'authorizedRaduis') num? authorizedRadius});
+      @JsonKey(name: 'authorizedRaduis') int? authorizedRadius});
 
   @override
   $SolvabiliteCopyWith<$Res>? get solvabilite;
@@ -527,7 +527,7 @@ class __$$PersonImplCopyWithImpl<$Res>
       authorizedRadius: freezed == authorizedRadius
           ? _value.authorizedRadius
           : authorizedRadius // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as int?,
     ));
   }
 }
@@ -658,7 +658,7 @@ class _$PersonImpl implements _Person {
   final String? categoryLabel;
   @override
   @JsonKey(name: 'authorizedRaduis')
-  final num? authorizedRadius;
+  final int? authorizedRadius;
 
   @override
   String toString() {
@@ -802,7 +802,7 @@ abstract class _Person implements Person {
           @JsonKey(name: 'solvabilite') final Solvabilite? solvabilite,
           @JsonKey(name: 'modePaie') final ModePaie? modePaie,
           @JsonKey(name: 'categorieLibelle') final String? categoryLabel,
-          @JsonKey(name: 'authorizedRaduis') final num? authorizedRadius}) =
+          @JsonKey(name: 'authorizedRaduis') final int? authorizedRadius}) =
       _$PersonImpl;
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$PersonImpl.fromJson;
@@ -893,7 +893,7 @@ abstract class _Person implements Person {
   String? get categoryLabel;
   @override
   @JsonKey(name: 'authorizedRaduis')
-  num? get authorizedRadius;
+  int? get authorizedRadius;
 
   /// Create a copy of Person
   /// with the given fields replaced by the non-null parameter values.

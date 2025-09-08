@@ -39,7 +39,7 @@ _$PersonImpl _$$PersonImplFromJson(Map<String, dynamic> json) => _$PersonImpl(
           ? null
           : ModePaie.fromJson(json['modePaie'] as Map<String, dynamic>),
       categoryLabel: json['categorieLibelle'] as String?,
-      authorizedRadius: json['authorizedRaduis'] as num?,
+      authorizedRadius: (json['authorizedRaduis'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>

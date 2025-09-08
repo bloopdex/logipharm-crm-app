@@ -146,7 +146,7 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                                   value: '${e.pharmacy?.id}:${e.pharmacy?.typeTier}',
                                 ),
                               ),
-                        },
+                        ],
                       ),
                     ),
                     if (context.user.addVisitOutPlanPrivilege == true)
@@ -166,7 +166,7 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                                 widget.data['pharmacieId'] =
                                     '${pharmacy.id.toString()}:${pharmacy.typeTier.toString()}';
                                 widget.data['tourneeId'] = null;
-                                widget.data['clientAuthorizedRadius'] = pharmacy.authorizedRadius;
+                                this.pharmacy = pharmacy;
                               });
                               widget.onQuillChange?.call();
                             },
