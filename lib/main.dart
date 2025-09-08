@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -8,6 +7,7 @@ import 'package:crm/features/clients/blocs/claims-motifs/motifs_cubit.dart';
 import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
 import 'package:crm/features/events/blocs/events/events_cubit.dart';
 import 'package:crm/features/menu/cubits/change_password_cubit.dart';
+import 'package:crm/features/orders/blocs/product/products_cubit.dart';
 import 'package:crm/features/todo/cubit/todo_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/commune_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
@@ -30,6 +30,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:workmanager/workmanager.dart';
 
 import 'core/const.dart';
@@ -45,6 +46,8 @@ import 'features/clients/blocs/observation/observation_cubit.dart';
 import 'features/clients/blocs/turnover/turnover_cubit.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
+import 'features/orders/blocs/cart/cart_cubit.dart';
+import 'features/orders/product_details_screen.dart';
 import 'features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'features/tour-plan/bloc/delegate_cubit.dart';
 import 'features/tour-plan/bloc/tour-creation/tour_creation_cubit.dart';
@@ -75,10 +78,20 @@ void main() async {
           : HydratedStorageDirectory((await getTemporaryDirectory()).path),
     );
 
+    await SentryFlutter.init(
+      (options) {
+        options.dsn =
+            'https://7c4384a09f450f67e99ba58d721a86f1@o4508163822649344.ingest.de.sentry.io/4509638629785680';
+        options.sendDefaultPii = true;
+      },
+    );
+
+    await AuthRepository.setBaseUrl(baseUrl);
     await DioHelper.init();
 
     await requestForegroundPermissions();
     await initializeService();
+
 
     Workmanager().initialize(
       callbackDispatcher,
@@ -91,9 +104,8 @@ void main() async {
     );
 
     runApp(const MyApp());
-  }, (error, stackTrace) {
-    log('Uncaught error: $error');
-    log('Stack trace: $stackTrace');
+  }, (exception, stackTrace) async {
+    await Sentry.captureException(exception, stackTrace: stackTrace);
   });
 }
 
@@ -149,22 +161,38 @@ Future<void> initializeService() async {
 }
 
 @pragma('vm:entry-point')
-void onStart(ServiceInstance service) {
-  // if(kReleaseMode) DartPluginRegistrant.ensureInitialized();
+void onStart(ServiceInstance service) async {
+  // Call startForeground immediately for Android
   if (service is AndroidServiceInstance) {
-    service.on('setAsForeground').listen((event) {
-      service.setAsForegroundService();
-    });
+    // This is the crucial part - call startForeground immediately
+    service.setAsForegroundService();
 
-    service.on('setAsBackground').listen((event) {
-      service.setAsBackgroundService();
+    // Update the notification periodically
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      service.setForegroundNotificationInfo(
+        title: "A2S is fetching your location",
+        content: "This is a notification that shows that a2s is fetching ur location",
+      );
     });
   }
+
+  service.on('setAsForeground').listen((event) {
+    if (service is AndroidServiceInstance) {
+      service.setAsForegroundService();
+    }
+  });
+
+  service.on('setAsBackground').listen((event) {
+    if (service is AndroidServiceInstance) {
+      service.setAsBackgroundService();
+    }
+  });
 
   service.on('stopService').listen((event) {
     service.stopSelf();
   });
 
+  // Your location update logic
   Timer.periodic(const Duration(minutes: 1), (timer) async {
     await updateLocalization();
   });
@@ -205,8 +233,6 @@ Future<void> updateLocalization() async {
       data['battery'] = battery.level;
     }
 
-    log("Data : ${jsonEncode(data)}");
-    log("Token : $token");
     final dio = Dio(BaseOptions(
       validateStatus: (status) => true,
       receiveDataWhenStatusError: true,
@@ -421,6 +447,18 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<EtablissementCubit>(create: (context) => EtablissementCubit()),
           BlocProvider<TurnoverCubit>(create: (context) => TurnoverCubit()),
           BlocProvider<EventsCubit>(create: (context) => EventsCubit()),
+          BlocProvider<ProductsCubit>(
+            lazy: true,
+            create: (context) => ProductsCubit(),
+          ),
+          BlocProvider<CartCubit>(
+            lazy: true,
+            create: (context) => CartCubit(),
+          ),
+          BlocProvider<QuantityCubit>(
+            lazy: true,
+            create: (context) => QuantityCubit(),
+          ),
         ],
         child: BlocBuilder<LocalizationsBloc, LocalizationsState>(builder: (context, state) {
           return MediaQuery(

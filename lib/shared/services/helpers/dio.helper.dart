@@ -1,19 +1,25 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:crm/features/auth/services/auth.repository.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 
-import '../../../core/const.dart';
-
 class DioHelper {
   static late Dio dio;
+  static String baseUrl = '';
   static CancelToken cancelToken = CancelToken();
 
   static Future<void> init() async {
+    String? base = await AuthRepository.baseUrl;
+
+    log("Base URL: $base");
+
+    DioHelper.baseUrl = base ?? baseUrl;
+
     dio = Dio(
       BaseOptions(
-        baseUrl: baseUrl,
+        baseUrl: base ?? baseUrl,
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
         receiveDataWhenStatusError: true,

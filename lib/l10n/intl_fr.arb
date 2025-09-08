@@ -1126,5 +1126,30 @@
         "type": "int"
       }
     }
-  }
+  },
+  "expirationDate": "Date d'expiration",
+  "lot": "Lot",
+  "generic": "Generic",
+  "price": "Prix",
+  "type": "Type",
+  "ppa": "PPA",
+  "addToCart": "Ajouter au panier",
+  "emptyCart": "Panier vide",
+  "emptyCartDescription": "Vous n'avez encore aucun produit dans votre panier",
+  "addProducts": "Ajouter des produits",
+  "removeItem": "Supprimer l'article",
+  "validated": "Validé",
+  "products": "Produits",
+  "cart": "Panier",
+  "quantity": "Quantité",
+  "orders": "Commandes",
+  "searchProducts": "Rechercher des produits ...",
+  "cartConfirmDelete": "Êtes-vous sûr de vouloir supprimer cet article du panier ?",
+  "cartRemoveItem": "Supprimer l'article",
+  "cartCancelDelete": "Annuler la suppression",
+  "unitPrice": "PU",
+  "total": "Total",
+  "baseUrl": "Base URL",
+  "goalOfMonthRecrutement": "Objectif de recrutement du mois",
+  "goalOfMonthSales": "Objectif de vente du mois"
 }

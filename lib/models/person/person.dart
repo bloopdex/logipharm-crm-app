@@ -36,6 +36,7 @@ class Person with _$Person {
     @JsonKey(name: 'solvabilite') Solvabilite? solvabilite, // Added solvabilite
     @JsonKey(name: 'modePaie') ModePaie? modePaie, // Added modePaie
     @JsonKey(name: 'categorieLibelle') String? categoryLabel,
+    @JsonKey(name: 'authorizedRaduis') num? authorizedRadius,
   }) = _Person;
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);

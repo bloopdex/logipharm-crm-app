@@ -242,12 +242,14 @@ class ClientCard extends StatelessWidget {
   final Person client;
   final bool checked;
   final Map<String, dynamic> data;
+  final Function(Person)? onSelected;
 
   const ClientCard({
     super.key,
     required this.client,
     required this.checked,
     required this.data,
+    this.onSelected,
   });
 
   @override
@@ -269,6 +271,9 @@ class ClientCard extends StatelessWidget {
         onChanged: (value) {
           context.read<SelectionCubit>().select('${client.id.toString()}:${client.typeTier}');
           data['pharmacieIds'] = context.read<SelectionCubit>().state.selected;
+          if (onSelected != null) {
+            onSelected!(client);
+          }
         });
   }
 }

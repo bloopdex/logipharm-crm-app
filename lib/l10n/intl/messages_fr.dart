@@ -46,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "addObservation": MessageLookupByLibrary.simpleMessage(
       "Ajouter une observation",
     ),
+    "addProducts": MessageLookupByLibrary.simpleMessage("Ajouter des produits"),
+    "addToCart": MessageLookupByLibrary.simpleMessage("Ajouter au panier"),
     "addVisit": MessageLookupByLibrary.simpleMessage("Ajouter une visite"),
     "addVisitToEvent": MessageLookupByLibrary.simpleMessage(
       "Ajouter une visite à l\'événement",
@@ -86,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Le nom d\'utilisateur est requis",
     ),
     "back": MessageLookupByLibrary.simpleMessage("Retour"),
+    "baseUrl": MessageLookupByLibrary.simpleMessage("Base URL"),
     "blockageCommercial": MessageLookupByLibrary.simpleMessage(
       "Blocage commercial",
     ),
@@ -98,6 +101,16 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "cantCreateVisit": MessageLookupByLibrary.simpleMessage(
       "Impossible de créer une visite",
+    ),
+    "cart": MessageLookupByLibrary.simpleMessage("Panier"),
+    "cartCancelDelete": MessageLookupByLibrary.simpleMessage(
+      "Annuler la suppression",
+    ),
+    "cartConfirmDelete": MessageLookupByLibrary.simpleMessage(
+      "Êtes-vous sûr de vouloir supprimer cet article du panier ?",
+    ),
+    "cartRemoveItem": MessageLookupByLibrary.simpleMessage(
+      "Supprimer l\'article",
     ),
     "category": MessageLookupByLibrary.simpleMessage("Catégorie"),
     "ceiling": MessageLookupByLibrary.simpleMessage("Plafond"),
@@ -152,6 +165,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailRequired": MessageLookupByLibrary.simpleMessage(
       "L\'email est requis",
     ),
+    "emptyCart": MessageLookupByLibrary.simpleMessage("Panier vide"),
+    "emptyCartDescription": MessageLookupByLibrary.simpleMessage(
+      "Vous n\'avez encore aucun produit dans votre panier",
+    ),
     "endDate": MessageLookupByLibrary.simpleMessage("Date de fin"),
     "error": MessageLookupByLibrary.simpleMessage("Erreur"),
     "etablissement": MessageLookupByLibrary.simpleMessage("Etablissement"),
@@ -168,6 +185,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "eventType": MessageLookupByLibrary.simpleMessage("Type d\'événement"),
     "events": MessageLookupByLibrary.simpleMessage("Événements"),
     "eventsTitle": MessageLookupByLibrary.simpleMessage("Événements"),
+    "expirationDate": MessageLookupByLibrary.simpleMessage(
+      "Date d\'expiration",
+    ),
     "fileCNRC": MessageLookupByLibrary.simpleMessage("Prospect"),
     "finish": MessageLookupByLibrary.simpleMessage("Terminer"),
     "firstName": MessageLookupByLibrary.simpleMessage("Prénom"),
@@ -177,7 +197,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "firstNameRequired": MessageLookupByLibrary.simpleMessage(
       "Le prénom est requis",
     ),
+    "generic": MessageLookupByLibrary.simpleMessage("Generic"),
     "goalOfDay": MessageLookupByLibrary.simpleMessage("Objectif du jour"),
+    "goalOfMonthRecrutement": MessageLookupByLibrary.simpleMessage(
+      "Objectif de recrutement du mois",
+    ),
+    "goalOfMonthSales": MessageLookupByLibrary.simpleMessage(
+      "Objectif de vente du mois",
+    ),
     "grossiste": MessageLookupByLibrary.simpleMessage("Grossiste"),
     "hire": MessageLookupByLibrary.simpleMessage("Recruter"),
     "hireDetails": MessageLookupByLibrary.simpleMessage(
@@ -220,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "La permission de localisation est requise",
     ),
     "logout": MessageLookupByLibrary.simpleMessage("Déconnexion"),
+    "lot": MessageLookupByLibrary.simpleMessage("Lot"),
     "manageProfile": MessageLookupByLibrary.simpleMessage("Gérer le profil"),
     "modePaie": MessageLookupByLibrary.simpleMessage("Mode de paiement"),
     "moreDetails": MessageLookupByLibrary.simpleMessage("Plus de détails"),
@@ -304,6 +332,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "oldPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "L\'ancien mot de passe est requis",
     ),
+    "orders": MessageLookupByLibrary.simpleMessage("Commandes"),
     "passwordChanged": MessageLookupByLibrary.simpleMessage(
       "Mot de passe changé avec succès",
     ),
@@ -327,7 +356,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneRequired": MessageLookupByLibrary.simpleMessage(
       "Le téléphone est requis",
     ),
+    "ppa": MessageLookupByLibrary.simpleMessage("PPA"),
+    "price": MessageLookupByLibrary.simpleMessage("Prix"),
+    "products": MessageLookupByLibrary.simpleMessage("Produits"),
     "prospect": MessageLookupByLibrary.simpleMessage("Prospect"),
+    "quantity": MessageLookupByLibrary.simpleMessage("Quantité"),
     "refused": MessageLookupByLibrary.simpleMessage("Refusé"),
     "region": MessageLookupByLibrary.simpleMessage("Région"),
     "regionPlaceholder": MessageLookupByLibrary.simpleMessage(
@@ -337,12 +370,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "La région est requise",
     ),
     "rejected": MessageLookupByLibrary.simpleMessage("Rejeté"),
+    "removeItem": MessageLookupByLibrary.simpleMessage("Supprimer l\'article"),
     "save": MessageLookupByLibrary.simpleMessage("Sauvegarder"),
     "searchClient": MessageLookupByLibrary.simpleMessage(
       "Rechercher un client",
     ),
     "searchEvents": MessageLookupByLibrary.simpleMessage(
       "Rechercher des événements",
+    ),
+    "searchProducts": MessageLookupByLibrary.simpleMessage(
+      "Rechercher des produits ...",
     ),
     "selectClient": MessageLookupByLibrary.simpleMessage(
       "Sélectionner un client",
@@ -387,6 +424,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "todoTitlePlaceholder": MessageLookupByLibrary.simpleMessage(
       "Entrez le titre",
     ),
+    "total": MessageLookupByLibrary.simpleMessage("Total"),
     "totalHt": MessageLookupByLibrary.simpleMessage("Total HT"),
     "totalPayment": MessageLookupByLibrary.simpleMessage("Paiement total"),
     "totalRest": MessageLookupByLibrary.simpleMessage("Reste total à payer"),
@@ -518,12 +556,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Aperçu et validation",
     ),
     "turnover": MessageLookupByLibrary.simpleMessage("Chiffre d\'affaires"),
+    "type": MessageLookupByLibrary.simpleMessage("Type"),
+    "unitPrice": MessageLookupByLibrary.simpleMessage("PU"),
     "update": MessageLookupByLibrary.simpleMessage("Mettre à jour"),
     "updateVisit": MessageLookupByLibrary.simpleMessage(
       "Mettre à jour la visite",
     ),
     "uploadFile": MessageLookupByLibrary.simpleMessage("Téléverser un fichier"),
     "validate": MessageLookupByLibrary.simpleMessage("Valider"),
+    "validated": MessageLookupByLibrary.simpleMessage("Validé"),
     "viewDetails": MessageLookupByLibrary.simpleMessage("Voir les détails"),
     "visitAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Visite ajoutée avec succès",

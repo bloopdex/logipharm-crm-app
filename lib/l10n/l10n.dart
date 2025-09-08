@@ -2740,6 +2740,191 @@ class S {
       args: [min],
     );
   }
+
+  /// `Expiration Date`
+  String get expirationDate {
+    return Intl.message(
+      'Expiration Date',
+      name: 'expirationDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lot`
+  String get lot {
+    return Intl.message('Lot', name: 'lot', desc: '', args: []);
+  }
+
+  /// `Generic`
+  String get generic {
+    return Intl.message('Generic', name: 'generic', desc: '', args: []);
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message('Price', name: 'price', desc: '', args: []);
+  }
+
+  /// `Type`
+  String get type {
+    return Intl.message('Type', name: 'type', desc: '', args: []);
+  }
+
+  /// `PPA`
+  String get ppa {
+    return Intl.message('PPA', name: 'ppa', desc: '', args: []);
+  }
+
+  /// `Add to Cart`
+  String get addToCart {
+    return Intl.message('Add to Cart', name: 'addToCart', desc: '', args: []);
+  }
+
+  /// `Empty Cart`
+  String get emptyCart {
+    return Intl.message('Empty Cart', name: 'emptyCart', desc: '', args: []);
+  }
+
+  /// `Your cart is empty`
+  String get emptyCartDescription {
+    return Intl.message(
+      'Your cart is empty',
+      name: 'emptyCartDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Products`
+  String get addProducts {
+    return Intl.message(
+      'Add Products',
+      name: 'addProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove Item`
+  String get removeItem {
+    return Intl.message('Remove Item', name: 'removeItem', desc: '', args: []);
+  }
+
+  /// `Validated`
+  String get validated {
+    return Intl.message('Validated', name: 'validated', desc: '', args: []);
+  }
+
+  /// `Products`
+  String get products {
+    return Intl.message('Products', name: 'products', desc: '', args: []);
+  }
+
+  /// `Cart`
+  String get cart {
+    return Intl.message('Cart', name: 'cart', desc: '', args: []);
+  }
+
+  /// `Quantity`
+  String get quantity {
+    return Intl.message('Quantity', name: 'quantity', desc: '', args: []);
+  }
+
+  /// `Orders`
+  String get orders {
+    return Intl.message('Orders', name: 'orders', desc: '', args: []);
+  }
+
+  /// `Search Products`
+  String get searchProducts {
+    return Intl.message(
+      'Search Products',
+      name: 'searchProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this item from the cart?`
+  String get cartConfirmDelete {
+    return Intl.message(
+      'Are you sure you want to delete this item from the cart?',
+      name: 'cartConfirmDelete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove Item`
+  String get cartRemoveItem {
+    return Intl.message(
+      'Remove Item',
+      name: 'cartRemoveItem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cartCancelDelete {
+    return Intl.message('Cancel', name: 'cartCancelDelete', desc: '', args: []);
+  }
+
+  /// `UP`
+  String get unitPrice {
+    return Intl.message('UP', name: 'unitPrice', desc: '', args: []);
+  }
+
+  /// `Total`
+  String get total {
+    return Intl.message('Total', name: 'total', desc: '', args: []);
+  }
+
+  /// `Base URL`
+  String get baseUrl {
+    return Intl.message('Base URL', name: 'baseUrl', desc: '', args: []);
+  }
+
+  /// `Goal of the month recruitment`
+  String get goalOfMonthRecrutement {
+    return Intl.message(
+      'Goal of the month recruitment',
+      name: 'goalOfMonthRecrutement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recrutement this month`
+  String get recrutementThisMonth {
+    return Intl.message(
+      'Recrutement this month',
+      name: 'recrutementThisMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Goal of the month sales`
+  String get goalOfMonthSales {
+    return Intl.message(
+      'Goal of the month sales',
+      name: 'goalOfMonthSales',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sales this month`
+  String get salesThisMonth {
+    return Intl.message(
+      'Sales this month',
+      name: 'salesThisMonth',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

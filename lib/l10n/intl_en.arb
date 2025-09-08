@@ -1128,5 +1128,32 @@
         "type": "int"
       }
     }
-  }
+  },
+  "expirationDate": "Expiration Date",
+  "lot": "Lot",
+  "generic": "Generic",
+  "price": "Price",
+  "type": "Type",
+  "ppa": "PPA",
+  "addToCart": "Add to Cart",
+  "emptyCart": "Empty Cart",
+  "emptyCartDescription": "Your cart is empty",
+  "addProducts": "Add Products",
+  "removeItem": "Remove Item",
+  "validated": "Validated",
+  "products": "Products",
+  "cart": "Cart",
+  "quantity": "Quantity",
+  "orders": "Orders",
+  "searchProducts": "Search Products",
+  "cartConfirmDelete": "Are you sure you want to delete this item from the cart?",
+  "cartRemoveItem": "Remove Item",
+  "cartCancelDelete": "Cancel",
+  "unitPrice": "UP",
+  "total": "Total",
+  "baseUrl": "Base URL",
+  "goalOfMonthRecrutement": "Goal of the month recruitment",
+  "recrutementThisMonth": "Recrutement this month",
+  "goalOfMonthSales": "Goal of the month sales",
+  "salesThisMonth": "Sales this month"
 }

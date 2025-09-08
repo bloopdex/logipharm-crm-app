@@ -7,6 +7,10 @@ class DateHelper {
     return DateFormat('dd-MM-yyyy').format(date);
   }
 
+  static String MMYY(DateTime date) {
+    return DateFormat('MM/yy').format(date);
+  }
+
   static String ddMMYYYYHHMMSS(DateTime date) {
     return DateFormat('dd/MM/yyyy HH:mm:ss').format(date);
   }

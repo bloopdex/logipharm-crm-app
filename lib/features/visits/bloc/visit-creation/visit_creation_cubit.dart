@@ -20,6 +20,7 @@ class VisitCreationCubit extends Cubit<VisitCreationState> {
       'tourneeId': data['tourneeId'],
       'pharmacieId': data['pharmacieId'],
       'dateDebut': data['dateDebut'],
+      'dateFin': DateTime.now().toIso8601String(),
       'motif': data['motif'],
       'rapport': data['rapport'],
       'rapportText': data['rapportText'],

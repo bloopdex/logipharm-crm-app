@@ -2,6 +2,7 @@ import 'package:crm/features/events/blocs/events/events_cubit.dart';
 import 'package:crm/features/events/events_page.dart';
 import 'package:crm/features/hiring/create-hire.page.dart';
 import 'package:crm/features/hiring/hire.page.dart';
+import 'package:crm/features/orders/products_page.dart';
 import 'package:crm/features/todo/create-event.page.dart';
 import 'package:crm/features/tour-plan/create-plan.page.dart';
 import 'package:crm/features/visits/bloc/visits/visit_bloc.dart';
@@ -288,7 +289,6 @@ class MenuPage extends StatelessWidget {
               ),
             ),
             DividerContainer(
-              isBottom: true,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
                 child: InkWell(
@@ -316,6 +316,46 @@ class MenuPage extends StatelessWidget {
                       Expanded(
                         child: Text(
                           context.i10n.events,
+                          style: context.textTheme.bodyLarge,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: kSpacingX5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            DividerContainer(
+              isBottom: true,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                child: InkWell(
+                  onTap: () {
+                    context.push(const ProductsPage());
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        width: kSpacingX9,
+                        height: kSpacingX9,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: kCeruleanBlue.shade100,
+                        ),
+                        padding: EdgeInsets.all(kPaddingSm3),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.event_rounded,
+                          color: kCeruleanBlue,
+                        ),
+                      ),
+                      SizedBox(width: kSpacingX3),
+                      Expanded(
+                        child: Text(
+                          context.i10n.orders,
                           style: context.textTheme.bodyLarge,
                         ),
                       ),

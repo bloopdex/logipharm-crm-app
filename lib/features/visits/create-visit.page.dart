@@ -305,6 +305,8 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                               return;
                                             }
 
+                                            data["dateFin"] = DateTime.now();
+
                                             if (context.mounted) {
                                               context
                                                   .read<VisitCreationCubit>()

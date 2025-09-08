@@ -69,6 +69,7 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
     } else {
       pharmacy = widget.clients.firstOrNull?.pharmacy;
     }
+
     _quillFocusNode.addListener(_handleQuillFocusChange);
     widget.quillController.addListener(() {
       final textLength = widget.quillController.document.toPlainText().trim().length;
@@ -145,7 +146,7 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                                   value: '${e.pharmacy?.id}:${e.pharmacy?.typeTier}',
                                 ),
                               ),
-                        ],
+                        },
                       ),
                     ),
                     if (context.user.addVisitOutPlanPrivilege == true)
@@ -165,7 +166,7 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                                 widget.data['pharmacieId'] =
                                     '${pharmacy.id.toString()}:${pharmacy.typeTier.toString()}';
                                 widget.data['tourneeId'] = null;
-                                this.pharmacy = pharmacy;
+                                widget.data['clientAuthorizedRadius'] = pharmacy.authorizedRadius;
                               });
                               widget.onQuillChange?.call();
                             },

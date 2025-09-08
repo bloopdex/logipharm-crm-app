@@ -52,6 +52,11 @@ class AuthRepository {
     await _secureStorage.write(key: 'companyId', value: companyId.toString());
   }
 
+  static Future<void> setBaseUrl(String baseUrl, {bool force = false}) async {
+    String? currentBaseUrl = await _secureStorage.read(key: 'baseUrl');
+    if (force || currentBaseUrl == null) await _secureStorage.write(key: 'baseUrl', value: baseUrl);
+  }
+
   static Future<String?> getToken() async {
     return await _secureStorage.read(key: 'token');
   }
@@ -70,6 +75,10 @@ class AuthRepository {
     return value != null ? int.parse(value) : null;
   }
 
+  static Future<String?> getBaseUrl() async {
+    return await _secureStorage.read(key: 'baseUrl');
+  }
+
   static Future<void> deleteToken() async {
     await _secureStorage.delete(key: 'token');
   }
@@ -81,4 +90,6 @@ class AuthRepository {
   static Future<int?> get companyId async => getCompany();
 
   static Future<int> get firstTime async => getFirstTime();
+
+  static Future<String?> get baseUrl async => getBaseUrl();
 }

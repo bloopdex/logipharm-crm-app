@@ -39,6 +39,7 @@ _$PersonImpl _$$PersonImplFromJson(Map<String, dynamic> json) => _$PersonImpl(
           ? null
           : ModePaie.fromJson(json['modePaie'] as Map<String, dynamic>),
       categoryLabel: json['categorieLibelle'] as String?,
+      authorizedRadius: json['authorizedRaduis'] as num?,
     );
 
 Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
@@ -71,6 +72,7 @@ Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
       'solvabilite': instance.solvabilite,
       'modePaie': instance.modePaie,
       'categorieLibelle': instance.categoryLabel,
+      'authorizedRaduis': instance.authorizedRadius,
     };
 
 _$SolvabiliteImpl _$$SolvabiliteImplFromJson(Map<String, dynamic> json) =>
