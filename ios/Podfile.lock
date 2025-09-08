@@ -56,16 +56,25 @@ PODS:
     - Flutter
   - map_launcher (0.0.1):
     - Flutter
+  - package_info_plus (0.4.5):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
   - permission_handler_apple (9.3.0):
+    - Flutter
+  - printing (1.0.0):
     - Flutter
   - quill_native_bridge_ios (0.0.1):
     - Flutter
   - SDWebImage (5.21.0):
     - SDWebImage/Core (= 5.21.0)
   - SDWebImage/Core (5.21.0)
+  - Sentry/HybridSDK (8.52.1)
+  - sentry_flutter (9.3.0):
+    - Flutter
+    - FlutterMacOS
+    - Sentry/HybridSDK (= 8.52.1)
   - sqflite (0.0.3):
     - Flutter
     - FlutterMacOS
@@ -91,9 +100,12 @@ DEPENDENCIES:
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - irondash_engine_context (from `.symlinks/plugins/irondash_engine_context/ios`)
   - map_launcher (from `.symlinks/plugins/map_launcher/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - printing (from `.symlinks/plugins/printing/ios`)
   - quill_native_bridge_ios (from `.symlinks/plugins/quill_native_bridge_ios/ios`)
+  - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/darwin`)
   - super_native_extensions (from `.symlinks/plugins/super_native_extensions/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
@@ -104,6 +116,7 @@ SPEC REPOS:
     - DKImagePickerController
     - DKPhotoGallery
     - SDWebImage
+    - Sentry
     - SwiftyGif
 
 EXTERNAL SOURCES:
@@ -133,12 +146,18 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/irondash_engine_context/ios"
   map_launcher:
     :path: ".symlinks/plugins/map_launcher/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
+  printing:
+    :path: ".symlinks/plugins/printing/ios"
   quill_native_bridge_ios:
     :path: ".symlinks/plugins/quill_native_bridge_ios/ios"
+  sentry_flutter:
+    :path: ".symlinks/plugins/sentry_flutter/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/darwin"
   super_native_extensions:
@@ -164,10 +183,14 @@ SPEC CHECKSUMS:
   geolocator_apple: 9bcea1918ff7f0062d98345d238ae12718acfbc1
   irondash_engine_context: 3458bf979b90d616ffb8ae03a150bafe2e860cc9
   map_launcher: 5fde49ac9a52672bf99da746599f507b4490d7b5
+  package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
+  printing: 233e1b73bd1f4a05615548e9b5a324c98588640b
   quill_native_bridge_ios: 2b01d585fcc73d0f5eed78c0bd244ee564b06f5a
   SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
+  Sentry: 2cbbe3592f30050c60e916c63c7f5a2fa584005e
+  sentry_flutter: 072b525ea44fe9a7a2bf26ec0f0caf68ea0ddb6b
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   super_native_extensions: 4916b3c627a9c7fffdc48a23a9eca0b1ac228fa7
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
