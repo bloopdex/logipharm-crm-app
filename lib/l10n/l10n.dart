@@ -2691,6 +2691,16 @@ class S {
     );
   }
 
+  /// `You are outside the authorized radius ({radius} m) for this client`
+  String visitCreationOutsideAuthorizedRadius(int radius) {
+    return Intl.message(
+      'You are outside the authorized radius ($radius m) for this client',
+      name: 'visitCreationOutsideAuthorizedRadius',
+      desc: 'Shown when user is outside client\'s authorized radius',
+      args: [radius],
+    );
+  }
+
   /// `Change Address`
   String get changeAddress {
     return Intl.message(

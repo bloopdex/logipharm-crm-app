@@ -28,7 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(count) => "Clients (${count})";
 
-  static String m4(min) => "Rapport must be at least ${min} characters";
+  static String m4(radius) =>
+      "You are outside the authorized radius (${radius} m) for this client";
+
+  static String m5(min) => "Rapport must be at least ${min} characters";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -523,10 +526,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "visitCreationInProgressTitle": MessageLookupByLibrary.simpleMessage(
       "The Creation Of The Visit Is In Progress",
     ),
+    "visitCreationOutsideAuthorizedRadius": m4,
     "visitCreationRapportLabel": MessageLookupByLibrary.simpleMessage(
       "Rapport",
     ),
-    "visitCreationRapportMinCharError": m4,
+    "visitCreationRapportMinCharError": m5,
     "visitCreationRapportPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Enter the rapport of the visit",
     ),

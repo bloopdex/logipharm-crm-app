@@ -1111,6 +1111,16 @@
   "status": "Statut",
   "pendingEvent": "Événement en attente",
   "locationPermissionRequired": "La permission de localisation est requise",
+  "visitCreationOutsideAuthorizedRadius": "Vous êtes en dehors du rayon autorisé ({radius} m) pour ce client",
+  "@visitCreationOutsideAuthorizedRadius": {
+    "description": "Affiché lorsque l'utilisateur est en dehors du rayon autorisé du client",
+    "placeholders": {
+      "radius": {
+        "type": "int",
+        "description": "Rayon autorisé en mètres"
+      }
+    }
+  },
   "changeAddress": "Changer l'adresse",
   "commune": "Commune",
   "noCommune": "Pas de commune",

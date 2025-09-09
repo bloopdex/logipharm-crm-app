@@ -1113,6 +1113,16 @@
   "createdBy": "Created By",
   "pendingEvent": "Pending Event",
   "locationPermissionRequired": "Location permission is required",
+  "visitCreationOutsideAuthorizedRadius": "You are outside the authorized radius ({radius} m) for this client",
+  "@visitCreationOutsideAuthorizedRadius": {
+    "description": "Shown when user is outside client's authorized radius",
+    "placeholders": {
+      "radius": {
+        "type": "int",
+        "description": "Authorized radius in meters"
+      }
+    }
+  },
   "changeAddress": "Change Address",
   "commune": "Commune",
   "noCommune": "No commune",
