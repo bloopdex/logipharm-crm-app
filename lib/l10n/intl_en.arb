@@ -1080,6 +1080,13 @@
     "description": "No etablissement"
   },
   "noEtablissementDesc": "No etablissement found for this client",
+  "addVeilleConcurrentielle": "Add Competitive Watch",
+  "@addVeilleConcurrentielle": {"description": "Add Veille Concurrentielle"},
+  "veilleConcurrentielle": "Competitive Watch",
+  "@veilleConcurrentielle": {"description": "Veille Concurrentielle"},
+  "noVeilleConcurrentielle": "No competitive watch",
+  "@noVeilleConcurrentielle": {"description": "No veille concurrentielle"},
+  "noVeilleConcurrentielleDesc": "No competitive watch entries found for this client",
   "eventsTitle": "Events",
   "searchEvents": "Search Events",
   "eventDetailsTitle": "Event Details",
@@ -1165,5 +1172,13 @@
   "goalOfMonthRecrutement": "Goal of the month recruitment",
   "recrutementThisMonth": "Recrutement this month",
   "goalOfMonthSales": "Goal of the month sales",
-  "salesThisMonth": "Sales this month"
+  "salesThisMonth": "Sales this month",
+  "categoryUpdated": "Category updated",
+  "@categoryUpdated": {"description": "Category updated"},
+  "changeCategory": "Change Category",
+  "@changeCategory": {"description": "Change Category"},
+  "selectCategory": "Select Category",
+  "@selectCategory": {"description": "Select Category"},
+  "noCategoryOptions": "No categories",
+  "@noCategoryOptions": {"description": "No category options"}
 }

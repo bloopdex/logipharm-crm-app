@@ -31,4 +31,29 @@ class ClientDetailsRepository {
       },
     );
   }
+
+  static Future<Response> categories() async {
+    final token = await AuthRepository.token;
+    return await DioHelper.getData(
+      url: '/lov/26',
+      token: token,
+    );
+  }
+
+  static Future<Response> updateCategory({
+    required int id,
+    required int categorieId,
+    required String categorieLibelle,
+  }) async {
+    final token = await AuthRepository.token;
+    return await DioHelper.putData(
+      url: '/tiers/pharmacie',
+      token: token,
+      data: {
+        'id': id,
+        'categorieId': categorieId,
+        'categorieLibelle': categorieLibelle,
+      },
+    );
+  }
 }

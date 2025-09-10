@@ -2506,6 +2506,46 @@ class S {
     );
   }
 
+  /// `Add Competitive Watch`
+  String get addVeilleConcurrentielle {
+    return Intl.message(
+      'Add Competitive Watch',
+      name: 'addVeilleConcurrentielle',
+      desc: 'Add Veille Concurrentielle',
+      args: [],
+    );
+  }
+
+  /// `Competitive Watch`
+  String get veilleConcurrentielle {
+    return Intl.message(
+      'Competitive Watch',
+      name: 'veilleConcurrentielle',
+      desc: 'Veille Concurrentielle',
+      args: [],
+    );
+  }
+
+  /// `No competitive watch`
+  String get noVeilleConcurrentielle {
+    return Intl.message(
+      'No competitive watch',
+      name: 'noVeilleConcurrentielle',
+      desc: 'No veille concurrentielle',
+      args: [],
+    );
+  }
+
+  /// `No competitive watch entries found for this client`
+  String get noVeilleConcurrentielleDesc {
+    return Intl.message(
+      'No competitive watch entries found for this client',
+      name: 'noVeilleConcurrentielleDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Events`
   String get eventsTitle {
     return Intl.message('Events', name: 'eventsTitle', desc: '', args: []);
@@ -2932,6 +2972,46 @@ class S {
       'Sales this month',
       name: 'salesThisMonth',
       desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category updated`
+  String get categoryUpdated {
+    return Intl.message(
+      'Category updated',
+      name: 'categoryUpdated',
+      desc: 'Category updated',
+      args: [],
+    );
+  }
+
+  /// `Change Category`
+  String get changeCategory {
+    return Intl.message(
+      'Change Category',
+      name: 'changeCategory',
+      desc: 'Change Category',
+      args: [],
+    );
+  }
+
+  /// `Select Category`
+  String get selectCategory {
+    return Intl.message(
+      'Select Category',
+      name: 'selectCategory',
+      desc: 'Select Category',
+      args: [],
+    );
+  }
+
+  /// `No categories`
+  String get noCategoryOptions {
+    return Intl.message(
+      'No categories',
+      name: 'noCategoryOptions',
+      desc: 'No category options',
       args: [],
     );
   }

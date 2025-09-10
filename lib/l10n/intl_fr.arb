@@ -1070,6 +1070,13 @@
   "@noEtablissement": {
     "description": "Pas d'établissement"
   },
+  "addVeilleConcurrentielle": "Ajouter une veille concurrentielle",
+  "@addVeilleConcurrentielle": {"description": "Ajouter une veille concurrentielle"},
+  "veilleConcurrentielle": "Veille Concurrentielle",
+  "@veilleConcurrentielle": {"description": "Veille Concurrentielle"},
+  "noVeilleConcurrentielle": "Pas de veille concurrentielle",
+  "@noVeilleConcurrentielle": {"description": "Pas de veille concurrentielle"},
+  "noVeilleConcurrentielleDesc": "Pas d'entrée de veille concurrentielle trouvée pour ce client",
   "selectClient": "Sélectionner un client",
   "@selectClient": {
     "description": "Sélectionner un client"
@@ -1090,7 +1097,7 @@
   "eventPending": "En attente",
   "eventInProgress": "En cours",
   "eventCompleted": "Terminé",
-  "noEventsDescription": "Aucun événement trouvé",
+  "noEventsDescription": "Aucun év��nement trouvé",
   "eventProgress": "{percentage}%",
   "@eventProgress": {
     "description": "Progression de l'événement",
@@ -1161,5 +1168,13 @@
   "total": "Total",
   "baseUrl": "Base URL",
   "goalOfMonthRecrutement": "Objectif de recrutement du mois",
-  "goalOfMonthSales": "Objectif de vente du mois"
+  "goalOfMonthSales": "Objectif de vente du mois",
+  "categoryUpdated": "Catégorie mise à jour",
+  "@categoryUpdated": {"description": "Catégorie mise à jour"},
+  "changeCategory": "Changer la catégorie",
+  "@changeCategory": {"description": "Changer la catégorie"},
+  "selectCategory": "Sélectionner une catégorie",
+  "@selectCategory": {"description": "Sélectionner une catégorie"},
+  "noCategoryOptions": "Aucune catégorie",
+  "@noCategoryOptions": {"description": "Aucune catégorie"}
 }

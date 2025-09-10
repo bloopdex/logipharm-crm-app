@@ -51,6 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addProducts": MessageLookupByLibrary.simpleMessage("Ajouter des produits"),
     "addToCart": MessageLookupByLibrary.simpleMessage("Ajouter au panier"),
+    "addVeilleConcurrentielle": MessageLookupByLibrary.simpleMessage(
+      "Ajouter une veille concurrentielle",
+    ),
     "addVisit": MessageLookupByLibrary.simpleMessage("Ajouter une visite"),
     "addVisitToEvent": MessageLookupByLibrary.simpleMessage(
       "Ajouter une visite à l\'événement",
@@ -116,8 +119,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Supprimer l\'article",
     ),
     "category": MessageLookupByLibrary.simpleMessage("Catégorie"),
+    "categoryUpdated": MessageLookupByLibrary.simpleMessage(
+      "Catégorie mise à jour",
+    ),
     "ceiling": MessageLookupByLibrary.simpleMessage("Plafond"),
     "changeAddress": MessageLookupByLibrary.simpleMessage("Changer l\'adresse"),
+    "changeCategory": MessageLookupByLibrary.simpleMessage(
+      "Changer la catégorie",
+    ),
     "changePassword": MessageLookupByLibrary.simpleMessage(
       "Changer le mot de passe",
     ),
@@ -277,6 +286,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Aucune analyse trouvée pour ce client",
     ),
     "noCategory": MessageLookupByLibrary.simpleMessage("Pas de catégorie"),
+    "noCategoryOptions": MessageLookupByLibrary.simpleMessage(
+      "Aucune catégorie",
+    ),
     "noClaims": MessageLookupByLibrary.simpleMessage("Pas de réclamations"),
     "noClaimsDesc": MessageLookupByLibrary.simpleMessage(
       "Aucune réclamation trouvée pour ce client",
@@ -295,7 +307,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Aucun événement trouvé pour aujourd\'hui",
     ),
     "noEventsDescription": MessageLookupByLibrary.simpleMessage(
-      "Aucun événement trouvé",
+      "Aucun év��nement trouvé",
     ),
     "noFirstName": MessageLookupByLibrary.simpleMessage("Pas de prénom"),
     "noGrossiste": MessageLookupByLibrary.simpleMessage("Pas de grossiste"),
@@ -324,6 +336,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Pas de solvaibilité",
     ),
     "noTitle": MessageLookupByLibrary.simpleMessage("Pas de titre"),
+    "noVeilleConcurrentielle": MessageLookupByLibrary.simpleMessage(
+      "Pas de veille concurrentielle",
+    ),
+    "noVeilleConcurrentielleDesc": MessageLookupByLibrary.simpleMessage(
+      "Pas d\'entrée de veille concurrentielle trouvée pour ce client",
+    ),
     "note": MessageLookupByLibrary.simpleMessage("Note"),
     "notePlaceholder": MessageLookupByLibrary.simpleMessage("Entrez la note"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
@@ -383,6 +401,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "searchProducts": MessageLookupByLibrary.simpleMessage(
       "Rechercher des produits ...",
+    ),
+    "selectCategory": MessageLookupByLibrary.simpleMessage(
+      "Sélectionner une catégorie",
     ),
     "selectClient": MessageLookupByLibrary.simpleMessage(
       "Sélectionner un client",
@@ -568,6 +589,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "uploadFile": MessageLookupByLibrary.simpleMessage("Téléverser un fichier"),
     "validate": MessageLookupByLibrary.simpleMessage("Valider"),
     "validated": MessageLookupByLibrary.simpleMessage("Validé"),
+    "veilleConcurrentielle": MessageLookupByLibrary.simpleMessage(
+      "Veille Concurrentielle",
+    ),
     "viewDetails": MessageLookupByLibrary.simpleMessage("Voir les détails"),
     "visitAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Visite ajoutée avec succès",

@@ -46,6 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "addObservation": MessageLookupByLibrary.simpleMessage("Add Observation"),
     "addProducts": MessageLookupByLibrary.simpleMessage("Add Products"),
     "addToCart": MessageLookupByLibrary.simpleMessage("Add to Cart"),
+    "addVeilleConcurrentielle": MessageLookupByLibrary.simpleMessage(
+      "Add Competitive Watch",
+    ),
     "addVisit": MessageLookupByLibrary.simpleMessage("Add Visit"),
     "addVisitToEvent": MessageLookupByLibrary.simpleMessage(
       "Add Visit to Event",
@@ -105,8 +108,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "cartRemoveItem": MessageLookupByLibrary.simpleMessage("Remove Item"),
     "category": MessageLookupByLibrary.simpleMessage("Category"),
+    "categoryUpdated": MessageLookupByLibrary.simpleMessage("Category updated"),
     "ceiling": MessageLookupByLibrary.simpleMessage("Ceiling"),
     "changeAddress": MessageLookupByLibrary.simpleMessage("Change Address"),
+    "changeCategory": MessageLookupByLibrary.simpleMessage("Change Category"),
     "changePassword": MessageLookupByLibrary.simpleMessage("Change Password"),
     "claims": MessageLookupByLibrary.simpleMessage("Claims"),
     "client": MessageLookupByLibrary.simpleMessage("Client"),
@@ -242,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "No analytics found for this client",
     ),
     "noCategory": MessageLookupByLibrary.simpleMessage("No category"),
+    "noCategoryOptions": MessageLookupByLibrary.simpleMessage("No categories"),
     "noClaims": MessageLookupByLibrary.simpleMessage("No claims"),
     "noClaimsDesc": MessageLookupByLibrary.simpleMessage(
       "No claims found for this client",
@@ -283,6 +289,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "noRegion": MessageLookupByLibrary.simpleMessage("No region"),
     "noSolvability": MessageLookupByLibrary.simpleMessage("No solvability"),
     "noTitle": MessageLookupByLibrary.simpleMessage("No Title"),
+    "noVeilleConcurrentielle": MessageLookupByLibrary.simpleMessage(
+      "No competitive watch",
+    ),
+    "noVeilleConcurrentielleDesc": MessageLookupByLibrary.simpleMessage(
+      "No competitive watch entries found for this client",
+    ),
     "note": MessageLookupByLibrary.simpleMessage("Note"),
     "notePlaceholder": MessageLookupByLibrary.simpleMessage("Enter the note"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
@@ -335,6 +347,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchClient": MessageLookupByLibrary.simpleMessage("Search Client"),
     "searchEvents": MessageLookupByLibrary.simpleMessage("Search Events"),
     "searchProducts": MessageLookupByLibrary.simpleMessage("Search Products"),
+    "selectCategory": MessageLookupByLibrary.simpleMessage("Select Category"),
     "selectClient": MessageLookupByLibrary.simpleMessage("Select Client"),
     "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
     "selectDateRange": MessageLookupByLibrary.simpleMessage(
@@ -505,6 +518,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "uploadFile": MessageLookupByLibrary.simpleMessage("Upload File"),
     "validate": MessageLookupByLibrary.simpleMessage("Validate"),
     "validated": MessageLookupByLibrary.simpleMessage("Validated"),
+    "veilleConcurrentielle": MessageLookupByLibrary.simpleMessage(
+      "Competitive Watch",
+    ),
     "viewDetails": MessageLookupByLibrary.simpleMessage("View Details"),
     "visitAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Visit added successfully",

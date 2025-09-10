@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:crm/features/clients/blocs/claims-motifs/motifs_cubit.dart';
 import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
+import 'package:crm/features/clients/blocs/veille_concurrentielle/veille_concurrentielle_cubit.dart';
 import 'package:crm/features/events/blocs/events/events_cubit.dart';
 import 'package:crm/features/menu/cubits/change_password_cubit.dart';
 import 'package:crm/features/orders/blocs/product/products_cubit.dart';
@@ -39,6 +40,7 @@ import 'core/theme.dart';
 import 'features/auth/bloc/login/login_bloc.dart';
 import 'features/auth/login.screen.dart';
 import 'features/auth/services/auth.repository.dart';
+import 'features/clients/blocs/categories/category_cubit.dart';
 import 'features/clients/blocs/claims/claim_cubit.dart';
 import 'features/clients/blocs/etablissement/etablissement_cubit.dart';
 import 'features/clients/blocs/grossiste/grossiste_cubit.dart';
@@ -91,7 +93,6 @@ void main() async {
 
     await requestForegroundPermissions();
     await initializeService();
-
 
     Workmanager().initialize(
       callbackDispatcher,
@@ -445,6 +446,8 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<MotifVisitCubit>(create: (context) => MotifVisitCubit()),
           BlocProvider<GrossisteCubit>(create: (context) => GrossisteCubit()),
           BlocProvider<EtablissementCubit>(create: (context) => EtablissementCubit()),
+          BlocProvider<VeilleConcurrentielleCubit>(
+              create: (context) => VeilleConcurrentielleCubit()),
           BlocProvider<TurnoverCubit>(create: (context) => TurnoverCubit()),
           BlocProvider<EventsCubit>(create: (context) => EventsCubit()),
           BlocProvider<ProductsCubit>(
@@ -459,6 +462,7 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
             lazy: true,
             create: (context) => QuantityCubit(),
           ),
+          BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
         ],
         child: BlocBuilder<LocalizationsBloc, LocalizationsState>(builder: (context, state) {
           return MediaQuery(

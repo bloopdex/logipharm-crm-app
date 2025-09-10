@@ -24,18 +24,148 @@ import '../../logic/auth/auth_bloc.dart';
 import '../../shared/services/helpers/location.helper.dart';
 import '../../shared/widgets/buttons/circlebutton.text.widget.dart';
 import '../../shared/widgets/image/svg.dart';
+import 'blocs/categories/category_cubit.dart';
 import 'blocs/turnover/turnover_cubit.dart';
+import 'blocs/veille_concurrentielle/veille_concurrentielle_cubit.dart';
 import 'pages/create-observation.dart';
+import 'pages/create-veille-concurrentielle.dart';
 import 'widgets/pie_chart.dart';
 import 'widgets/turnover_pillar_chart.dart';
 
-class ClientDetailsPage extends StatelessWidget {
+class ClientDetailsPage extends StatefulWidget {
   final Person client;
 
   const ClientDetailsPage({super.key, required this.client});
 
   @override
+  State<ClientDetailsPage> createState() => _ClientDetailsPageState();
+}
+
+class _ClientDetailsPageState extends State<ClientDetailsPage> {
+  String? _categoryLabel;
+  int? _selectedCategoryId;
+  String? _selectedCategoryLabel;
+
+  @override
+  void initState() {
+    _categoryLabel = widget.client.categoryLabel;
+    super.initState();
+  }
+
+  void _openCategorySheet() {
+    context.read<CategoryCubit>().get();
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (ctx) {
+        return Padding(
+          padding: EdgeInsets.fromLTRB(16, 16, 16, MediaQuery.of(ctx).padding.bottom + 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                      child: Text(context.i10n.changeCategory,
+                          style: context.textTheme.headlineMedium)),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => Navigator.of(ctx).pop(),
+                  )
+                ],
+              ),
+              const Divider(),
+              BlocBuilder<CategoryCubit, CategoryState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    loading: () => const Padding(
+                      padding: EdgeInsets.all(24.0),
+                      child: CircularProgressIndicator(),
+                    ),
+                    error: (m) => Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(m, style: context.textTheme.bodyMedium),
+                    ),
+                    loaded: (categories) {
+                      if (categories.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(context.i10n.noCategoryOptions),
+                        );
+                      }
+                      return DropdownButtonFormField<int>(
+                        value: _selectedCategoryId,
+                        decoration: InputDecoration(
+                          labelText: context.i10n.selectCategory,
+                          border: const OutlineInputBorder(),
+                        ),
+                        items: categories
+                            .map((c) => DropdownMenuItem<int>(
+                                  value: c.id,
+                                  child: Text(c.label),
+                                ))
+                            .toList(),
+                        onChanged: (v) {
+                          setState(() {
+                            _selectedCategoryId = v;
+                            _selectedCategoryLabel = categories.firstWhere((c) => c.id == v).label;
+                          });
+                        },
+                      );
+                    },
+                    orElse: () => const SizedBox.shrink(),
+                  );
+                },
+              ),
+              SizedBox(height: kSpacingX3),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.of(ctx).pop(),
+                      child: Text(context.i10n.cancel),
+                    ),
+                  ),
+                  SizedBox(width: kSpacingX2),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: _selectedCategoryId == null
+                          ? null
+                          : () async {
+                              final id = widget.client.id;
+                              final catId = _selectedCategoryId!;
+                              final catLabel = _selectedCategoryLabel ?? '';
+                              await context.read<ClientDetailsCubit>().updateCategory(
+                                    clientId: id,
+                                    categorieId: catId,
+                                    categorieLibelle: catLabel,
+                                  );
+                              if (mounted) {
+                                setState(() {
+                                  _categoryLabel = catLabel;
+                                });
+                                context.successSnackBar(context.i10n.categoryUpdated);
+                                Navigator.of(ctx).pop();
+                              }
+                            },
+                      child: Text(context.i10n.save),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final client = widget.client;
     final user = context.read<AuthBloc>().user;
 
     return Scaffold(
@@ -407,12 +537,25 @@ class ClientDetailsPage extends StatelessWidget {
                             },
                           ),
                         ),
+                        Expanded(
+                          child: CircleButtonText(
+                            icon: Icons.visibility_outlined,
+                            text: context.i10n.addVeilleConcurrentielle,
+                            onPressed: () {
+                              context.push(CreateVeilleConcurrentiellePage(
+                                pharmacyId: client.id,
+                              ));
+                            },
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(height: kSpacingX3),
                     Expanded(
                       child: ClientOptionsTab(
                         client: client,
+                        categoryLabel: _categoryLabel,
+                        onCategoryTap: _openCategorySheet,
                       ),
                     )
                   ],
@@ -427,9 +570,12 @@ class ClientDetailsPage extends StatelessWidget {
 }
 
 class ClientOptionsTab extends StatefulWidget {
-  const ClientOptionsTab({super.key, required this.client});
+  const ClientOptionsTab(
+      {super.key, required this.client, required this.categoryLabel, required this.onCategoryTap});
 
   final Person client;
+  final String? categoryLabel;
+  final VoidCallback onCategoryTap;
 
   @override
   State<ClientOptionsTab> createState() => _ClientOptionsTabState();
@@ -440,7 +586,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
 
   @override
   void initState() {
-    _tabController = TabController(length: 7, vsync: this);
+    _tabController = TabController(length: 8, vsync: this);
     super.initState();
   }
 
@@ -553,6 +699,27 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                       const Icon(Icons.home_work_rounded),
                       SizedBox(width: kSpacingX1),
                       Text(context.i10n.etablissement),
+                    ],
+                  ),
+                ),
+              ),
+              Tab(
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: context.width / 3,
+                    minWidth: context.width / 3,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.visibility_outlined),
+                      SizedBox(width: kSpacingX1),
+                      Expanded(
+                        child: Text(
+                          context.i10n.veilleConcurrentielle,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -1075,24 +1242,124 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                     });
               },
             ),
+            BlocBuilder<VeilleConcurrentielleCubit, VeilleConcurrentielleState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                    orElse: () {
+                      return Center(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SVG(
+                            'empty-states/info.svg',
+                            height: 175.h,
+                          ),
+                          SizedBox(height: kSpacingX3),
+                          Text(
+                            context.i10n.noVeilleConcurrentielle,
+                            style: context.textTheme.headlineMedium,
+                          ),
+                          SizedBox(height: kSpacingX2),
+                          Text(
+                            context.i10n.noVeilleConcurrentielleDesc,
+                            style: context.textTheme.bodyMedium,
+                          ),
+                        ],
+                      ));
+                    },
+                    loading: () => const Center(child: Loader()),
+                    loaded: (veilles) {
+                      if (veilles.isEmpty) {
+                        return Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SVG(
+                              'empty-states/info.svg',
+                              height: 175.h,
+                            ),
+                            SizedBox(height: kSpacingX3),
+                            Text(
+                              context.i10n.noVeilleConcurrentielle,
+                              style: context.textTheme.headlineMedium,
+                            ),
+                            SizedBox(height: kSpacingX2),
+                            Text(
+                              context.i10n.noVeilleConcurrentielleDesc,
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          ],
+                        ));
+                      }
+                      return ListView.builder(
+                        itemCount: veilles.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    veilles[index].title,
+                                    style: context.textTheme.headlineMedium,
+                                  ),
+                                ),
+                                SizedBox(width: kSpacingX1),
+                                Text(
+                                  veilles[index].date,
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ],
+                            ),
+                            subtitle: Text(
+                              veilles[index].reportText,
+                              softWrap: true,
+                              maxLines: 3,
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          );
+                        },
+                      );
+                    });
+              },
+            ),
             SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        context.i10n.category,
-                        style: context.textTheme.headlineMedium,
-                      ),
-                      Expanded(
-                        child: Text(
-                          widget.client.categoryLabel ?? context.i10n.noCategory,
-                          textAlign: TextAlign.end,
+                  GestureDetector(
+                    onTap: widget.onCategoryTap,
+                    behavior: HitTestBehavior.opaque,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          context.i10n.category,
                           style: context.textTheme.headlineMedium,
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  widget.categoryLabel ?? context.i10n.noCategory,
+                                  textAlign: TextAlign.end,
+                                  style: context.textTheme.headlineMedium,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ),
+                              SizedBox(width: kSpacingX1),
+                              Icon(Icons.edit, size: kSpacingX5, color: kPrimaryColor),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   const Divider(),
                   SizedBox(height: kSpacingX3),

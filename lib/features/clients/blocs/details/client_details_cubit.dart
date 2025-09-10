@@ -42,4 +42,23 @@ class ClientDetailsCubit extends Cubit<ClientDetailsState> {
       emit(ClientDetailsState.failure(message: e.toString()));
     }
   }
+
+  Future<void> updateCategory({
+    required int clientId,
+    required int categorieId,
+    required String categorieLibelle,
+  }) async {
+    emit(const ClientDetailsState.loading());
+    try {
+      final response = await ClientDetailsRepository.updateCategory(
+        id: clientId,
+        categorieId: categorieId,
+        categorieLibelle: categorieLibelle,
+      );
+      final statistics = ClientStatistics.fromJson(response.data['body']);
+      emit(ClientDetailsState.loaded(statistics: statistics));
+    } catch (e) {
+      emit(ClientDetailsState.failure(message: e.toString()));
+    }
+  }
 }
