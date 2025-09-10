@@ -48,6 +48,8 @@ mixin _$User {
   bool? get addVisitOutPlanPrivilege => throw _privateConstructorUsedError;
   @JsonKey(name: 'fullName')
   String? get fullName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'authorizedRadius')
+  num? get authorizedRadius => throw _privateConstructorUsedError;
   @JsonKey(name: 'roleChangeLocationClient')
   bool? get roleChangeLocationClient => throw _privateConstructorUsedError;
   @JsonKey(name: 'crmNbrLettres')
@@ -82,6 +84,7 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: 'superviseur') int? supervisor,
       @JsonKey(name: 'addViseHorsPlan') bool? addVisitOutPlanPrivilege,
       @JsonKey(name: 'fullName') String? fullName,
+      @JsonKey(name: 'authorizedRadius') num? authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
       @JsonKey(name: 'crmNbrLettres') int? minReportChar});
 }
@@ -115,6 +118,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? supervisor = freezed,
     Object? addVisitOutPlanPrivilege = freezed,
     Object? fullName = freezed,
+    Object? authorizedRadius = freezed,
     Object? roleChangeLocationClient = freezed,
     Object? minReportChar = freezed,
   }) {
@@ -175,6 +179,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
+      authorizedRadius: freezed == authorizedRadius
+          ? _value.authorizedRadius
+          : authorizedRadius // ignore: cast_nullable_to_non_nullable
+              as num?,
       roleChangeLocationClient: freezed == roleChangeLocationClient
           ? _value.roleChangeLocationClient
           : roleChangeLocationClient // ignore: cast_nullable_to_non_nullable
@@ -209,6 +217,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: 'superviseur') int? supervisor,
       @JsonKey(name: 'addViseHorsPlan') bool? addVisitOutPlanPrivilege,
       @JsonKey(name: 'fullName') String? fullName,
+      @JsonKey(name: 'authorizedRadius') num? authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
       @JsonKey(name: 'crmNbrLettres') int? minReportChar});
 }
@@ -239,6 +248,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? supervisor = freezed,
     Object? addVisitOutPlanPrivilege = freezed,
     Object? fullName = freezed,
+    Object? authorizedRadius = freezed,
     Object? roleChangeLocationClient = freezed,
     Object? minReportChar = freezed,
   }) {
@@ -299,6 +309,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
+      authorizedRadius: freezed == authorizedRadius
+          ? _value.authorizedRadius
+          : authorizedRadius // ignore: cast_nullable_to_non_nullable
+              as num?,
       roleChangeLocationClient: freezed == roleChangeLocationClient
           ? _value.roleChangeLocationClient
           : roleChangeLocationClient // ignore: cast_nullable_to_non_nullable
@@ -329,6 +343,7 @@ class _$UserImpl implements _User {
       @JsonKey(name: 'superviseur') this.supervisor,
       @JsonKey(name: 'addViseHorsPlan') this.addVisitOutPlanPrivilege,
       @JsonKey(name: 'fullName') this.fullName,
+      @JsonKey(name: 'authorizedRadius') this.authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient') this.roleChangeLocationClient,
       @JsonKey(name: 'crmNbrLettres') this.minReportChar});
 
@@ -378,6 +393,9 @@ class _$UserImpl implements _User {
   @JsonKey(name: 'fullName')
   final String? fullName;
   @override
+  @JsonKey(name: 'authorizedRadius')
+  final num? authorizedRadius;
+  @override
   @JsonKey(name: 'roleChangeLocationClient')
   final bool? roleChangeLocationClient;
   @override
@@ -386,7 +404,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, addVisitOutPlanPrivilege: $addVisitOutPlanPrivilege, fullName: $fullName, roleChangeLocationClient: $roleChangeLocationClient, minReportChar: $minReportChar)';
+    return 'User(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, addVisitOutPlanPrivilege: $addVisitOutPlanPrivilege, fullName: $fullName, authorizedRadius: $authorizedRadius, roleChangeLocationClient: $roleChangeLocationClient, minReportChar: $minReportChar)';
   }
 
   @override
@@ -421,6 +439,8 @@ class _$UserImpl implements _User {
                 other.addVisitOutPlanPrivilege == addVisitOutPlanPrivilege) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
+            (identical(other.authorizedRadius, authorizedRadius) ||
+                other.authorizedRadius == authorizedRadius) &&
             (identical(
                     other.roleChangeLocationClient, roleChangeLocationClient) ||
                 other.roleChangeLocationClient == roleChangeLocationClient) &&
@@ -446,6 +466,7 @@ class _$UserImpl implements _User {
       supervisor,
       addVisitOutPlanPrivilege,
       fullName,
+      authorizedRadius,
       roleChangeLocationClient,
       minReportChar);
 
@@ -481,6 +502,7 @@ abstract class _User implements User {
       @JsonKey(name: 'superviseur') final int? supervisor,
       @JsonKey(name: 'addViseHorsPlan') final bool? addVisitOutPlanPrivilege,
       @JsonKey(name: 'fullName') final String? fullName,
+      @JsonKey(name: 'authorizedRadius') final num? authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient')
       final bool? roleChangeLocationClient,
       @JsonKey(name: 'crmNbrLettres') final int? minReportChar}) = _$UserImpl;
@@ -529,6 +551,9 @@ abstract class _User implements User {
   @override
   @JsonKey(name: 'fullName')
   String? get fullName;
+  @override
+  @JsonKey(name: 'authorizedRadius')
+  num? get authorizedRadius;
   @override
   @JsonKey(name: 'roleChangeLocationClient')
   bool? get roleChangeLocationClient;

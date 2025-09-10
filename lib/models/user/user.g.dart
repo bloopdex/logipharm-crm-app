@@ -21,6 +21,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       supervisor: (json['superviseur'] as num?)?.toInt(),
       addVisitOutPlanPrivilege: json['addViseHorsPlan'] as bool?,
       fullName: json['fullName'] as String?,
+      authorizedRadius: json['authorizedRadius'] as num?,
       roleChangeLocationClient: json['roleChangeLocationClient'] as bool?,
       minReportChar: (json['crmNbrLettres'] as num?)?.toInt(),
     );
@@ -41,6 +42,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'superviseur': instance.supervisor,
       'addViseHorsPlan': instance.addVisitOutPlanPrivilege,
       'fullName': instance.fullName,
+      'authorizedRadius': instance.authorizedRadius,
       'roleChangeLocationClient': instance.roleChangeLocationClient,
       'crmNbrLettres': instance.minReportChar,
     };

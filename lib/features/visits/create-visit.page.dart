@@ -305,13 +305,13 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                               return;
                                             }
 
-                                            // Enforce client's authorized radius (if any)
+                                            // Enforce user's authorized radius (if any)
                                             try {
-                                              // Retrieve selected tour detail / pharmacy info
+                                              // Retrieve selected tour detail / pharmacy info for client coordinates
                                               final selectedId = data['pharmacieId'] as String?;
                                               double? clientLat;
                                               double? clientLng;
-                                              int? authorizedRadius;
+                                              num? authorizedRadius; // from authenticated user
 
                                               if (selectedId != null &&
                                                   widget.tour.pharmacies != null) {
@@ -327,9 +327,12 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                                     tourDetail?.pharmacy?.latitude;
                                                 clientLng = tourDetail?.longitude ??
                                                     tourDetail?.pharmacy?.longitude;
-                                                authorizedRadius =
-                                                    tourDetail?.pharmacy?.authorizedRadius;
                                               }
+
+                                              // Authorized radius comes from the authenticated user
+                                              authorizedRadius = user.authorizedRadius;
+                                              debugPrint(
+                                                  'Client coords: $clientLat, $clientLng, Authorized radius: $authorizedRadius');
 
                                               // If we have client coords and an authorized radius > 0, check distance
                                               if (clientLat != null &&
@@ -342,11 +345,13 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                                 final distanceMeters = Geolocator.distanceBetween(
                                                     clientLat, clientLng, userLat, userLng);
 
+                                                debugPrint(
+                                                    'Distance to client: $distanceMeters meters');
                                                 if (distanceMeters > authorizedRadius) {
                                                   if (context.mounted) {
                                                     context.errorSnackBar(context.i10n
                                                         .visitCreationOutsideAuthorizedRadius(
-                                                            authorizedRadius));
+                                                            authorizedRadius.toInt()));
                                                   }
                                                   return;
                                                 }
