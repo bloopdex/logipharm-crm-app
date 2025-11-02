@@ -25,6 +25,8 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       etatFlag: json['etatFlag'] as bool?,
       creerDate: DateTime.parse(json['creerDate'] as String),
       colis: (json['colis'] as num?)?.toDouble(),
+      objectif: (json['objectif'] as num?)?.toDouble(),
+      laboratoire: json['laboratoire'] as String?,
     );
 
 Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
@@ -46,4 +48,6 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'etatFlag': instance.etatFlag,
       'creerDate': instance.creerDate.toIso8601String(),
       'colis': instance.colis,
+      'objectif': instance.objectif,
+      'laboratoire': instance.laboratoire,
     };

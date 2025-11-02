@@ -49,9 +49,10 @@ class _EventListWidgetState extends State<EventListWidget> {
           );
         }
 
+        int flagToType = widget.flag == "EN_ATTENTE" ? 0 : 1; // 0 for "EN_ATTENTE", 1 for "TERMINE"
         final List<Event> filteredEvents = widget.flag == null
             ? events
-            : events.where((event) => event.statut == widget.flag).toList();
+            : events.where((event) => event.type == flagToType).toList();
 
         return RefreshIndicator(
           onRefresh: () async {

@@ -31,7 +31,6 @@ class _EventTabListWidgetState extends State<EventTabListWidget> with TickerProv
           tabs: [
             Tab(text: context.i10n.eventAll),
             Tab(text: context.i10n.eventPending), // EN_ATTENTE (1)
-            Tab(text: context.i10n.eventInProgress), // EN_COURS (2)
             Tab(text: context.i10n.eventCompleted), // TERMINE (3)
           ],
         ),
@@ -42,7 +41,6 @@ class _EventTabListWidgetState extends State<EventTabListWidget> with TickerProv
             children: [
               EventListWidget(state: widget.state, flag: null), // All events
               EventListWidget(state: widget.state, flag: "EN_ATTENTE"), // Pending (EN_ATTENTE)
-              EventListWidget(state: widget.state, flag: "EN_COURS"), // In Progress (EN_COURS)
               EventListWidget(state: widget.state, flag: "TERMINE"), // Completed (TERMINE)
             ],
           ),

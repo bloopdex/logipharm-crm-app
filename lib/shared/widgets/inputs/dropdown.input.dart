@@ -30,6 +30,8 @@ class CustomDropDownInput extends StatelessWidget {
           value: items[index].value,
           child: Text(
             items[index].label,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
         );
       }),

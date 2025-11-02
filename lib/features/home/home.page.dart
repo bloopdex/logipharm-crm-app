@@ -22,6 +22,7 @@ import '../tour-plan/models/goal/goal.dart';
 import '../tour-plan/models/tour.dart';
 import '../tour-plan/widget/current.plan.widget.dart';
 import '../visits/create-visit.page.dart';
+import '../contacts/contact_form_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -53,7 +54,8 @@ class HomePage extends StatelessWidget {
           children: [
             BlocBuilder<EventsCubit, EventsState>(
               builder: (context, events) {
-                return BlocBuilder<TourPlanBloc, TourPlanState>(builder: (context, state) {
+                return BlocBuilder<TourPlanBloc, TourPlanState>(
+                    builder: (context, state) {
                   final Goal? goal = state.maybeWhen(
                     orElse: () => null,
                     loaded: (tours, hasReachedMax, currentPage, goal) {
@@ -63,8 +65,9 @@ class HomePage extends StatelessWidget {
                   final Tour? current = state.maybeWhen(
                     loaded: (tours, hasReachedMax, currentPage, goal) {
                       return tours
-                          .where((element) => (element.statusFlag == StatuFlags.opened.value &&
-                              element.delegate.id == user.id))
+                          .where((element) =>
+                              (element.statusFlag == StatuFlags.opened.value &&
+                                  element.delegate.id == user.id))
                           .firstOrNull;
                     },
                     orElse: () => null,
@@ -84,10 +87,12 @@ class HomePage extends StatelessWidget {
                             Expanded(
                               child: Container(
                                 padding: EdgeInsets.all(kPaddingMd2),
-                                margin: EdgeInsets.only(bottom: kSpacingX5, right: kSpacingX2),
+                                margin: EdgeInsets.only(
+                                    bottom: kSpacingX5, right: kSpacingX2),
                                 decoration: BoxDecoration(
                                   color: kPrimaryColor,
-                                  borderRadius: BorderRadius.circular(kPaddingSm3),
+                                  borderRadius:
+                                      BorderRadius.circular(kPaddingSm3),
                                   border: Border.all(
                                     color: kPrimaryColor,
                                     width: 2.h,
@@ -95,12 +100,13 @@ class HomePage extends StatelessWidget {
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       context.i10n.goalOfDay,
-                                      style:
-                                          context.textTheme.headlineSmall!.copyWith(color: kWhite),
+                                      style: context.textTheme.headlineSmall!
+                                          .copyWith(color: kWhite),
                                     ),
                                     SizedBox(height: kSpacingX2),
                                     RichText(
@@ -108,8 +114,11 @@ class HomePage extends StatelessWidget {
                                         children: [
                                           TextSpan(
                                             text: '${goal.visitNumber}/',
-                                            style: context.textTheme.headlineMedium!
-                                                .copyWith(color: kWhite, fontSize: 25.h),
+                                            style: context
+                                                .textTheme.headlineMedium!
+                                                .copyWith(
+                                                    color: kWhite,
+                                                    fontSize: 25.h),
                                           ),
                                           TextSpan(
                                             text: '${goal.objective}',
@@ -117,7 +126,8 @@ class HomePage extends StatelessWidget {
                                                 .copyWith(color: kWhite),
                                           ),
                                           TextSpan(
-                                            text: ' ${context.i10n.visitsToday}',
+                                            text:
+                                                ' ${context.i10n.visitsToday}',
                                             style: context.textTheme.bodyMedium!
                                                 .copyWith(color: kWhite),
                                           ),
@@ -139,32 +149,35 @@ class HomePage extends StatelessWidget {
                                   margin: EdgeInsets.only(bottom: kSpacingX5),
                                   decoration: BoxDecoration(
                                     color: kPrimaryColor,
-                                    borderRadius: BorderRadius.circular(kPaddingSm3),
+                                    borderRadius:
+                                        BorderRadius.circular(kPaddingSm3),
                                     border: Border.all(
                                       color: kPrimaryColor,
                                       width: 2.h,
                                     ),
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         context.i10n.pendingEvent,
-                                        style:
-                                            context.textTheme.titleSmall!.copyWith(color: kWhite),
+                                        style: context.textTheme.titleSmall!
+                                            .copyWith(color: kWhite),
                                       ),
                                       SizedBox(height: kSpacingX2),
                                       Text(
                                         event.titre ?? context.i10n.noTitle,
-                                        style:
-                                            context.textTheme.titleLarge!.copyWith(color: kWhite),
+                                        style: context.textTheme.titleLarge!
+                                            .copyWith(color: kWhite),
                                       ),
                                       Text(
-                                        DateFormat("dd MMM yyyy")
-                                            .format(event.date ?? DateTime.now()),
-                                        style:
-                                            context.textTheme.bodyMedium!.copyWith(color: kWhite),
+                                        DateFormat("dd MMM yyyy").format(
+                                            event.date ?? DateTime.now()),
+                                        style: context.textTheme.bodyMedium!
+                                            .copyWith(color: kWhite),
                                       ),
                                     ],
                                   ),
@@ -198,7 +211,8 @@ class HomePage extends StatelessWidget {
                     return const SizedBox.shrink();
                   }, loaded: (tours, hasReachedMax, currentPage, goal) {
                     final opened = tours
-                        .where((element) => element.statusFlag == StatuFlags.opened.value)
+                        .where((element) =>
+                            element.statusFlag == StatuFlags.opened.value)
                         .toList();
 
                     return Container(
@@ -209,8 +223,10 @@ class HomePage extends StatelessWidget {
                           children: opened
                               .map(
                                 (e) => Container(
-                                    padding: EdgeInsets.symmetric(horizontal: kSpacingX2),
-                                    child: CurrentWidgetCardSupervisor(tour: e)),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: kSpacingX2),
+                                    child:
+                                        CurrentWidgetCardSupervisor(tour: e)),
                               )
                               .toList(),
                         ),
@@ -227,10 +243,15 @@ class HomePage extends StatelessWidget {
                     icon: Icons.offline_bolt_rounded,
                     text: context.i10n.homeCreateNewPlan,
                     onPressed: () {
-                      final current = context.read<TourPlanBloc>().state.maybeWhen(
+                      final current = context
+                          .read<TourPlanBloc>()
+                          .state
+                          .maybeWhen(
                             loaded: (tours, hasReachedMax, currentPage, goal) {
                               return tours
-                                  .where((element) => element.statusFlag == StatuFlags.opened.value)
+                                  .where((element) =>
+                                      element.statusFlag ==
+                                      StatuFlags.opened.value)
                                   .firstOrNull;
                             },
                             orElse: () => null,
@@ -239,7 +260,8 @@ class HomePage extends StatelessWidget {
                       if (current == null || user.supervisor == 0) {
                         Navigator.pushNamed(context, CreatePlanPage.routeName);
                       } else {
-                        context.errorSnackBar(context.i10n.cantCreatePlanWhileOpened);
+                        context.errorSnackBar(
+                            context.i10n.cantCreatePlanWhileOpened);
                       }
                     },
                   ),
@@ -249,10 +271,15 @@ class HomePage extends StatelessWidget {
                     icon: Icons.fact_check_rounded,
                     text: context.i10n.homeCreateNewVisit,
                     onPressed: () {
-                      final current = context.read<TourPlanBloc>().state.maybeWhen(
+                      final current = context
+                          .read<TourPlanBloc>()
+                          .state
+                          .maybeWhen(
                             loaded: (tours, hasReachedMax, currentPage, goal) {
                               return tours
-                                  .where((element) => element.statusFlag == StatuFlags.opened.value)
+                                  .where((element) =>
+                                      element.statusFlag ==
+                                      StatuFlags.opened.value)
                                   .firstOrNull;
                             },
                             orElse: () => null,
@@ -271,10 +298,12 @@ class HomePage extends StatelessWidget {
                       }
                     },
                     color: context.watch<TourPlanBloc>().state.maybeWhen(
-                                      loaded: (tours, hasReachedMax, currentPage, goal) {
+                                      loaded: (tours, hasReachedMax,
+                                          currentPage, goal) {
                                         return tours
                                             .where((element) =>
-                                                element.statusFlag == StatuFlags.opened.value)
+                                                element.statusFlag ==
+                                                StatuFlags.opened.value)
                                             .firstOrNull;
                                       },
                                       orElse: () => null,
@@ -303,6 +332,18 @@ class HomePage extends StatelessWidget {
                     },
                   ),
                 ),
+                // TODO: Enable this for company type 0 (Pharma distributor)
+                if (user.companyType == 0)
+                  Expanded(
+                    child: CircleButtonText(
+                      icon: Icons.person_add_alt_1_rounded,
+                      text: context.i10n.homeQuickAddContact,
+                      onPressed: () {
+                        // Open the create contact form directly
+                        context.push(const ContactFormPage());
+                      },
+                    ),
+                  ),
               ],
             ),
             SizedBox(height: kSpacingX5),
@@ -324,7 +365,8 @@ class HomePage extends StatelessWidget {
                     final Tour? current = state.maybeWhen(
                       loaded: (tours, hasReachedMax, currentPage, goal) {
                         return tours
-                            .where((element) => (element.statusFlag == StatuFlags.opened.value &&
+                            .where((element) => (element.statusFlag ==
+                                    StatuFlags.opened.value &&
                                 element.delegate.id == user.id))
                             .firstOrNull;
                       },
@@ -338,25 +380,29 @@ class HomePage extends StatelessWidget {
                       ),
                       children: [
                         TileLayer(
-                          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          urlTemplate:
+                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                           userAgentPackageName: 'com.a2sdz.crm',
                         ),
                         MarkerLayer(
                           markers: current?.pharmacies
-                                  ?.where((element) => (element.pharmacy?.latitude != null &&
-                                      element.pharmacy?.longitude != null))
+                                  ?.where((element) =>
+                                      (element.pharmacy?.latitude != null &&
+                                          element.pharmacy?.longitude != null))
                                   .map((e) {
                                 return Marker(
                                   width: 50.h,
                                   height: 50.h,
-                                  point:
-                                      LatLng(e.pharmacy!.latitude ?? 0, e.pharmacy!.longitude ?? 0),
+                                  point: LatLng(e.pharmacy!.latitude ?? 0,
+                                      e.pharmacy!.longitude ?? 0),
                                   child: InkWell(
                                     onTap: () async {
-                                      final availableMaps = await MapLauncher.installedMaps;
+                                      final availableMaps =
+                                          await MapLauncher.installedMaps;
                                       await availableMaps.first.showMarker(
                                         coords: Coords(
-                                            e.pharmacy!.latitude ?? 0, e.pharmacy!.longitude ?? 0),
+                                            e.pharmacy!.latitude ?? 0,
+                                            e.pharmacy!.longitude ?? 0),
                                         title: e.pharmacy!.fullName,
                                       );
                                     },
@@ -370,8 +416,8 @@ class HomePage extends StatelessWidget {
                                       child: ProfileCard(
                                         backgroundColor: kCardinal,
                                         text: e.pharmacy!.fullName,
-                                        textStyle:
-                                            context.textTheme.bodySmall!.copyWith(color: kWhite),
+                                        textStyle: context.textTheme.bodySmall!
+                                            .copyWith(color: kWhite),
                                       ),
                                     ),
                                   ),

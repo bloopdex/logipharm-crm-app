@@ -25,6 +25,8 @@ class Product with _$Product {
     @JsonKey(name: 'etatFlag') bool? etatFlag,
     @JsonKey(name: 'creerDate') required DateTime creerDate,
     @JsonKey(name: 'colis') double? colis,
+    @JsonKey(name: 'objectif') double? objectif,
+    @JsonKey(name: 'laboratoire') String? laboratoire,
   }) = _Product;
 
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);

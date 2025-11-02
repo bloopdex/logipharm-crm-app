@@ -8,6 +8,8 @@ import 'package:crm/features/clients/blocs/details/client_details_cubit.dart';
 import 'package:crm/features/clients/blocs/veille_concurrentielle/veille_concurrentielle_cubit.dart';
 import 'package:crm/features/events/blocs/events/events_cubit.dart';
 import 'package:crm/features/menu/cubits/change_password_cubit.dart';
+import 'package:crm/features/orders/blocs/order_details/order_details_cubit.dart';
+import 'package:crm/features/orders/blocs/orders/orders_cubit.dart';
 import 'package:crm/features/orders/blocs/product/products_cubit.dart';
 import 'package:crm/features/todo/cubit/todo_cubit.dart';
 import 'package:crm/features/tour-plan/bloc/commune_cubit.dart';
@@ -56,6 +58,7 @@ import 'features/tour-plan/bloc/tour-creation/tour_creation_cubit.dart';
 import 'features/tour-plan/bloc/visit_motif_cubit.dart';
 import 'features/tour-plan/bloc/wilaya_cubit.dart';
 import 'features/tour-plan/core/controller.dart';
+import 'features/visits/bloc/contact_type_cubit.dart';
 import 'features/visits/bloc/visit-creation/visit_creation_cubit.dart';
 import 'l10n/l10n.dart';
 import 'logic/auth/auth_bloc.dart';
@@ -63,7 +66,6 @@ import 'logic/counter_cubit.dart';
 import 'logic/localizations/localizations_bloc.dart';
 import 'logic/search/search_cubit.dart';
 import 'logic/time.range/time_range_cubit.dart';
-import 'shared/widgets/error/error.screen.dart';
 import 'shared/widgets/loading/loading.screen.dart';
 
 const platform = MethodChannel('crm.a2s.dz/battery');
@@ -444,6 +446,8 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<ClaimMotifCubit>(create: (context) => ClaimMotifCubit()),
           BlocProvider<ClientDetailsCubit>(create: (context) => ClientDetailsCubit()),
           BlocProvider<MotifVisitCubit>(create: (context) => MotifVisitCubit()),
+          // Contact type for visits
+          BlocProvider<ContactTypeCubit>(create: (context) => ContactTypeCubit()),
           BlocProvider<GrossisteCubit>(create: (context) => GrossisteCubit()),
           BlocProvider<EtablissementCubit>(create: (context) => EtablissementCubit()),
           BlocProvider<VeilleConcurrentielleCubit>(
@@ -463,6 +467,8 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
             create: (context) => QuantityCubit(),
           ),
           BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
+          BlocProvider<OrdersCubit>(create: (context) => OrdersCubit()),
+          BlocProvider<OrderDetailsCubit>(create: (context) => OrderDetailsCubit()),
         ],
         child: BlocBuilder<LocalizationsBloc, LocalizationsState>(builder: (context, state) {
           return MediaQuery(
@@ -501,21 +507,15 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
                         child: BlocBuilder<AuthBloc, AuthState>(
                           builder: (context, state) {
                             return state.when(
-                                initial: () => const SizedBox.shrink(),
-                                loading: () {
-                                  FlutterNativeSplash.remove();
-                                  return const LoadingScreen();
-                                },
-                                authenticated: (user, tempError) => const NavigationScreen(),
-                                unauthenticated: () => const LoginScreen(),
-                                failure: (message) {
-                                  return ErrorScreen(
-                                    message: message,
-                                    onRetry: () {
-                                      authBloc.add(const AuthEvent.appstarted());
-                                    },
-                                  );
-                                });
+                              initial: () => const SizedBox.shrink(),
+                              loading: () {
+                                FlutterNativeSplash.remove();
+                                return const LoadingScreen();
+                              },
+                              authenticated: (user, tempError) => const NavigationScreen(),
+                              unauthenticated: () => const LoginScreen(),
+                              failure: (message) => const LoginScreen(),
+                            );
                           },
                         ),
                       ),

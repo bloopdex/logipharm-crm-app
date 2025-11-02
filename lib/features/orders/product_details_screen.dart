@@ -313,6 +313,24 @@ class ProductDetailsCard extends StatelessWidget {
             border: Border.all(width: 2.h, color: kCodGray.shade200)),
         child: Column(
           children: [
+            // Laboratoire
+            Row(
+              children: [
+                Icon(Icons.science, color: kCodGray.shade700, size: 20.h),
+                SizedBox(width: kSpacingX1),
+                Expanded(
+                  child: Text(context.i10n.laboratoire, style: context.textTheme.titleMedium),
+                ),
+                Text(
+                  (medicament.laboratoire ?? '').isEmpty ? '-' : medicament.laboratoire!,
+                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  textAlign: TextAlign.end,
+                ),
+              ],
+            ),
+            SizedBox(height: kSpacingX5),
+            Container(height: 1, color: kCodGray.shade200),
+            SizedBox(height: kSpacingX5),
             Row(
               children: [
                 Icon(
@@ -337,10 +355,25 @@ class ProductDetailsCard extends StatelessWidget {
               ],
             ),
             SizedBox(height: kSpacingX5),
-            Container(
-              height: 1,
-              color: kCodGray.shade200,
+            Container(height: 1, color: kCodGray.shade200),
+            SizedBox(height: kSpacingX5),
+            // Quantity available
+            Row(
+              children: [
+                Icon(Icons.inventory, color: kCodGray.shade700, size: 20.h),
+                SizedBox(width: kSpacingX1),
+                Expanded(
+                  child: Text(context.i10n.quantity, style: context.textTheme.titleMedium),
+                ),
+                Text(
+                  '${medicament.qte}',
+                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  textAlign: TextAlign.end,
+                ),
+              ],
             ),
+            SizedBox(height: kSpacingX5),
+            Container(height: 1, color: kCodGray.shade200),
             SizedBox(height: kSpacingX5),
             Row(
               children: [
@@ -395,6 +428,77 @@ class ProductDetailsCard extends StatelessWidget {
                   style: context.textTheme.titleMedium!.copyWith(
                     color: Colors.black,
                   ),
+                  textAlign: TextAlign.end,
+                ),
+              ],
+            ),
+            SizedBox(height: kSpacingX5),
+            Container(height: 1, color: kCodGray.shade200),
+            SizedBox(height: kSpacingX5),
+            // PH price
+            Row(
+              children: [
+                Icon(Icons.price_change, color: kCodGray.shade700, size: 20.h),
+                SizedBox(width: kSpacingX1),
+                Expanded(
+                  child: Text('PH price', style: context.textTheme.titleMedium),
+                ),
+                Text(
+                  MoneyHelper.format(context, medicament.prixPh),
+                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  textAlign: TextAlign.end,
+                ),
+              ],
+            ),
+            SizedBox(height: kSpacingX5),
+            Container(height: 1, color: kCodGray.shade200),
+            SizedBox(height: kSpacingX5),
+            Row(
+              children: [
+                Icon(Icons.percent, color: kCodGray.shade700, size: 20.h),
+                SizedBox(width: kSpacingX1),
+                Expanded(
+                  child: Text('Discount (UG Vnete)', style: context.textTheme.titleMedium),
+                ),
+                Text(
+                  medicament.ugVnete == null ? '-' : '${medicament.ugVnete}',
+                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  textAlign: TextAlign.end,
+                ),
+              ],
+            ),
+            SizedBox(height: kSpacingX5),
+            Container(height: 1, color: kCodGray.shade200),
+            SizedBox(height: kSpacingX5),
+            // Colis
+            Row(
+              children: [
+                Icon(Icons.all_inbox, color: kCodGray.shade700, size: 20.h),
+                SizedBox(width: kSpacingX1),
+                Expanded(
+                  child: Text('Colis', style: context.textTheme.titleMedium),
+                ),
+                Text(
+                  medicament.colis == null ? '-' : '${medicament.colis}',
+                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  textAlign: TextAlign.end,
+                ),
+              ],
+            ),
+            SizedBox(height: kSpacingX5),
+            Container(height: 1, color: kCodGray.shade200),
+            SizedBox(height: kSpacingX5),
+            // Objectif
+            Row(
+              children: [
+                Icon(Icons.track_changes, color: kCodGray.shade700, size: 20.h),
+                SizedBox(width: kSpacingX1),
+                Expanded(
+                  child: Text('Objectif', style: context.textTheme.titleMedium),
+                ),
+                Text(
+                  medicament.objectif == null ? '-' : '${medicament.objectif}',
+                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
                   textAlign: TextAlign.end,
                 ),
               ],

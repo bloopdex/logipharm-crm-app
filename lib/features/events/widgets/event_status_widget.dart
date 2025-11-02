@@ -16,10 +16,6 @@ class EventStatusWidget extends StatelessWidget {
         color = kBrightSun.shade600;
         status = context.i10n.pending;
         break;
-      case "EN_COURS":
-        color = kPrimaryColor;
-        status = context.i10n.inProgress;
-        break;
       case "TERMINE":
         color = kSuccessColor;
         status = context.i10n.completed;

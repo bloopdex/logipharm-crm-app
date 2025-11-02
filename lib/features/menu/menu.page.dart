@@ -21,6 +21,8 @@ import '../tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import '../tour-plan/core/enums.dart';
 import '../visits/create-visit.page.dart';
 import 'sections/profile.section.dart';
+import '../offers/offers_list_page.dart';
+import '../contacts/contacts_list_page.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -32,8 +34,12 @@ class MenuPage extends StatelessWidget {
         constraints: BoxConstraints(
           maxWidth: context.width,
           minWidth: context.width,
-          maxHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
-          minHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
+          maxHeight: context.height -
+              context.appBarSize -
+              context.bottomNavigationBarSize,
+          minHeight: context.height -
+              context.appBarSize -
+              context.bottomNavigationBarSize,
         ),
         child: ListView(
           children: [
@@ -52,20 +58,26 @@ class MenuPage extends StatelessWidget {
                       icon: Icons.offline_bolt_rounded,
                       text: context.i10n.homeCreateNewPlan,
                       onPressed: () {
-                        final current = context.read<TourPlanBloc>().state.maybeWhen(
+                        final current = context
+                            .read<TourPlanBloc>()
+                            .state
+                            .maybeWhen(
                               loaded: (tours, hasReachedMax, currentPage, ___) {
                                 return tours
-                                    .where(
-                                        (element) => element.statusFlag == StatuFlags.opened.value)
+                                    .where((element) =>
+                                        element.statusFlag ==
+                                        StatuFlags.opened.value)
                                     .firstOrNull;
                               },
                               orElse: () => null,
                             );
                         final user = context.read<AuthBloc>().user;
                         if (current == null || user.supervisor == 0) {
-                          Navigator.pushNamed(context, CreatePlanPage.routeName);
+                          Navigator.pushNamed(
+                              context, CreatePlanPage.routeName);
                         } else {
-                          context.errorSnackBar(context.i10n.cantCreatePlanWhileOpened);
+                          context.errorSnackBar(
+                              context.i10n.cantCreatePlanWhileOpened);
                         }
                       },
                     ),
@@ -75,15 +87,18 @@ class MenuPage extends StatelessWidget {
                       icon: Icons.fact_check_rounded,
                       text: context.i10n.homeCreateNewVisit,
                       onPressed: () {
-                        final current = context.read<TourPlanBloc>().state.maybeWhen(
-                              loaded: (tours, hasReachedMax, currentPage, goal) {
-                                return tours
-                                    .where(
-                                        (element) => element.statusFlag == StatuFlags.opened.value)
-                                    .firstOrNull;
-                              },
-                              orElse: () => null,
-                            );
+                        final current =
+                            context.read<TourPlanBloc>().state.maybeWhen(
+                                  loaded: (tours, hasReachedMax, currentPage,
+                                      goal) {
+                                    return tours
+                                        .where((element) =>
+                                            element.statusFlag ==
+                                            StatuFlags.opened.value)
+                                        .firstOrNull;
+                                  },
+                                  orElse: () => null,
+                                );
                         if (current != null &&
                             current.pharmacies != null &&
                             current.pharmacies!.isNotEmpty &&
@@ -98,10 +113,12 @@ class MenuPage extends StatelessWidget {
                         }
                       },
                       color: context.watch<TourPlanBloc>().state.maybeWhen(
-                                        loaded: (tours, hasReachedMax, currentPage, goal) {
+                                        loaded: (tours, hasReachedMax,
+                                            currentPage, goal) {
                                           return tours
                                               .where((element) =>
-                                                  element.statusFlag == StatuFlags.opened.value)
+                                                  element.statusFlag ==
+                                                  StatuFlags.opened.value)
                                               .firstOrNull;
                                         },
                                         orElse: () => null,
@@ -136,7 +153,8 @@ class MenuPage extends StatelessWidget {
             SizedBox(height: kSpacingX5),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-              child: Text(context.i10n.consultation, style: context.textTheme.bodyLarge),
+              child: Text(context.i10n.consultation,
+                  style: context.textTheme.bodyLarge),
             ),
             SizedBox(height: kSpacingX3),
             DividerContainer(
@@ -177,6 +195,44 @@ class MenuPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
               child: InkWell(
                 onTap: () {
+                  context.push(const OffersListPage());
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      width: kSpacingX9,
+                      height: kSpacingX9,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: kCeruleanBlue.shade100,
+                      ),
+                      padding: EdgeInsets.all(kPaddingSm3),
+                      alignment: Alignment.center,
+                      child: const Icon(
+                        Icons.local_offer_rounded,
+                        color: kCeruleanBlue,
+                      ),
+                    ),
+                    SizedBox(width: kSpacingX3),
+                    Expanded(
+                      child: Text(
+                        'Offers',
+                        style: context.textTheme.bodyLarge,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: kSpacingX5,
+                    ),
+                  ],
+                ),
+              ),
+            )),
+            DividerContainer(
+                child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+              child: InkWell(
+                onTap: () {
                   context.push(const ClientsPage());
                 },
                 child: Row(
@@ -210,6 +266,46 @@ class MenuPage extends StatelessWidget {
                 ),
               ),
             )),
+            // TODO: Enable this for company type 0 (Pharma distributor)
+            if (user.companyType == 0)
+              DividerContainer(
+                  child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(ContactsListPage.routeName);
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        width: kSpacingX9,
+                        height: kSpacingX9,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: kCeruleanBlue.shade100,
+                        ),
+                        padding: EdgeInsets.all(kPaddingSm3),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.contacts_rounded,
+                          color: kCeruleanBlue,
+                        ),
+                      ),
+                      SizedBox(width: kSpacingX3),
+                      Expanded(
+                        child: Text(
+                          context.i10n.contactsTitle,
+                          style: context.textTheme.bodyLarge,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: kSpacingX5,
+                      ),
+                    ],
+                  ),
+                ),
+              )),
             DividerContainer(
                 child: Padding(
               padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
@@ -419,7 +515,9 @@ class MenuPage extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     context.read<AuthBloc>().add(const AuthEvent.loggedOut());
-                    context.read<TourPlanBloc>().add(const TourPlanEvent.reset());
+                    context
+                        .read<TourPlanBloc>()
+                        .add(const TourPlanEvent.reset());
                     context.read<VisitBloc>().add(const VisitEvent.reset());
                     context.read<ClientsCubit>().reset();
                     context.read<DelegateCubit>().reset();

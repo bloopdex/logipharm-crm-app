@@ -24,7 +24,7 @@ class _AddClientSelectionState extends State<AddClientSelection> {
   void initState() {
     clients = context.read<ClientsCubit>().state.maybeWhen(
           orElse: () => [],
-          loaded: (all, filter) => all,
+          loaded: (all, filter) => all.where((p) => p.typeTier == "1").toList(),
         );
     super.initState();
   }

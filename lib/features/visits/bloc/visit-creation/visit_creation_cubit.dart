@@ -22,6 +22,8 @@ class VisitCreationCubit extends Cubit<VisitCreationState> {
       'dateDebut': data['dateDebut'],
       'dateFin': DateTime.now().toIso8601String(),
       'motif': data['motif'],
+      // Send label for contact type
+      'contactType': data['contactType'],
       'rapport': data['rapport'],
       'rapportText': data['rapportText'],
       'longitude': data['longitude'],
@@ -36,19 +38,23 @@ class VisitCreationCubit extends Cubit<VisitCreationState> {
       } else {
         switch (response.data['codeError']) {
           case 'error.tournee.is.not.open':
-            emit(VisitCreationState.failure(message: S.current.visitTourIsntOpen));
+            emit(VisitCreationState.failure(
+                message: S.current.visitTourIsntOpen));
             return;
           case 'error.visit.already.entered':
-            emit(VisitCreationState.failure(message: S.current.visitAlreadyEntered));
+            emit(VisitCreationState.failure(
+                message: S.current.visitAlreadyEntered));
             return;
           case 'error.privilege.add.visit':
-            emit(VisitCreationState.failure(message: S.current.visitPrivilegeMissing));
+            emit(VisitCreationState.failure(
+                message: S.current.visitPrivilegeMissing));
             return;
           case 'error.visit.date':
             emit(VisitCreationState.failure(message: S.current.visitErrorDate));
             return;
           case 'error.tourney.is.not.open':
-            emit(VisitCreationState.failure(message: S.current.visitTourIsntOpen));
+            emit(VisitCreationState.failure(
+                message: S.current.visitTourIsntOpen));
             return;
           default:
             emit(VisitCreationState.failure(message: S.current.error));

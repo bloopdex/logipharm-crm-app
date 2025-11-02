@@ -71,16 +71,34 @@ class MedicamentCard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
+                          Text(
+                            '${context.i10n.laboratoire} : ${medicament.laboratoire}',
+                            style: context.textTheme.bodyMedium,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ],
                       ),
                     ),
                     SizedBox(width: kSpacingX1),
-                    Text(
-                      textDirection: TextDirection.ltr,
-                      MoneyHelper.format(context, medicament.prixPpa.toDouble()),
-                      style: context.textTheme.displaySmall!.copyWith(
-                        color: kPrimaryColor,
-                      ),
+                    Column(
+                      children: [
+                        Text(
+                          textDirection: TextDirection.ltr,
+                          MoneyHelper.format(context, medicament.prixPpa.toDouble()),
+                          style: context.textTheme.displaySmall!.copyWith(
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                        Text(
+                          medicament.objectif != null
+                              ? 'x ${medicament.objectif!.toInt()}'
+                              : 'x ${medicament.qte.toInt()}',
+                          style: context.textTheme.displaySmall!.copyWith(
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

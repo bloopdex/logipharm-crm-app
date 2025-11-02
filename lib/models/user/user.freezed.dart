@@ -24,6 +24,8 @@ mixin _$User {
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'cmpId')
   int? get companyId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cmpType')
+  int? get companyType => throw _privateConstructorUsedError;
   @JsonKey(name: 'typeTier')
   String? get typeTier => throw _privateConstructorUsedError;
   @JsonKey(name: 'nom')
@@ -72,6 +74,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'cmpId') int? companyId,
+      @JsonKey(name: 'cmpType') int? companyType,
       @JsonKey(name: 'typeTier') String? typeTier,
       @JsonKey(name: 'nom') String? lastName,
       @JsonKey(name: 'prenom') String? firstName,
@@ -106,6 +109,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = freezed,
     Object? companyId = freezed,
+    Object? companyType = freezed,
     Object? typeTier = freezed,
     Object? lastName = freezed,
     Object? firstName = freezed,
@@ -130,6 +134,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       companyId: freezed == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      companyType: freezed == companyType
+          ? _value.companyType
+          : companyType // ignore: cast_nullable_to_non_nullable
               as int?,
       typeTier: freezed == typeTier
           ? _value.typeTier
@@ -205,6 +213,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'cmpId') int? companyId,
+      @JsonKey(name: 'cmpType') int? companyType,
       @JsonKey(name: 'typeTier') String? typeTier,
       @JsonKey(name: 'nom') String? lastName,
       @JsonKey(name: 'prenom') String? firstName,
@@ -236,6 +245,7 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? companyId = freezed,
+    Object? companyType = freezed,
     Object? typeTier = freezed,
     Object? lastName = freezed,
     Object? firstName = freezed,
@@ -260,6 +270,10 @@ class __$$UserImplCopyWithImpl<$Res>
       companyId: freezed == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      companyType: freezed == companyType
+          ? _value.companyType
+          : companyType // ignore: cast_nullable_to_non_nullable
               as int?,
       typeTier: freezed == typeTier
           ? _value.typeTier
@@ -331,6 +345,7 @@ class _$UserImpl implements _User {
   const _$UserImpl(
       {@JsonKey(name: 'id') this.id,
       @JsonKey(name: 'cmpId') this.companyId,
+      @JsonKey(name: 'cmpType') this.companyType,
       @JsonKey(name: 'typeTier') this.typeTier,
       @JsonKey(name: 'nom') this.lastName,
       @JsonKey(name: 'prenom') this.firstName,
@@ -356,6 +371,9 @@ class _$UserImpl implements _User {
   @override
   @JsonKey(name: 'cmpId')
   final int? companyId;
+  @override
+  @JsonKey(name: 'cmpType')
+  final int? companyType;
   @override
   @JsonKey(name: 'typeTier')
   final String? typeTier;
@@ -404,7 +422,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, addVisitOutPlanPrivilege: $addVisitOutPlanPrivilege, fullName: $fullName, authorizedRadius: $authorizedRadius, roleChangeLocationClient: $roleChangeLocationClient, minReportChar: $minReportChar)';
+    return 'User(id: $id, companyId: $companyId, companyType: $companyType, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, addVisitOutPlanPrivilege: $addVisitOutPlanPrivilege, fullName: $fullName, authorizedRadius: $authorizedRadius, roleChangeLocationClient: $roleChangeLocationClient, minReportChar: $minReportChar)';
   }
 
   @override
@@ -415,6 +433,8 @@ class _$UserImpl implements _User {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.companyId, companyId) ||
                 other.companyId == companyId) &&
+            (identical(other.companyType, companyType) ||
+                other.companyType == companyType) &&
             (identical(other.typeTier, typeTier) ||
                 other.typeTier == typeTier) &&
             (identical(other.lastName, lastName) ||
@@ -454,6 +474,7 @@ class _$UserImpl implements _User {
       runtimeType,
       id,
       companyId,
+      companyType,
       typeTier,
       lastName,
       firstName,
@@ -490,6 +511,7 @@ abstract class _User implements User {
   const factory _User(
       {@JsonKey(name: 'id') final int? id,
       @JsonKey(name: 'cmpId') final int? companyId,
+      @JsonKey(name: 'cmpType') final int? companyType,
       @JsonKey(name: 'typeTier') final String? typeTier,
       @JsonKey(name: 'nom') final String? lastName,
       @JsonKey(name: 'prenom') final String? firstName,
@@ -515,6 +537,9 @@ abstract class _User implements User {
   @override
   @JsonKey(name: 'cmpId')
   int? get companyId;
+  @override
+  @JsonKey(name: 'cmpType')
+  int? get companyType;
   @override
   @JsonKey(name: 'typeTier')
   String? get typeTier;

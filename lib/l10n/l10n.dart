@@ -904,6 +904,136 @@ class S {
     );
   }
 
+  /// `Add contact`
+  String get homeQuickAddContact {
+    return Intl.message(
+      'Add contact',
+      name: 'homeQuickAddContact',
+      desc: 'Quick add contact button',
+      args: [],
+    );
+  }
+
+  /// `Contacts`
+  String get contactsTitle {
+    return Intl.message(
+      'Contacts',
+      name: 'contactsTitle',
+      desc: 'Contacts page title',
+      args: [],
+    );
+  }
+
+  /// `Pharmacist`
+  String get contactsPharmacien {
+    return Intl.message(
+      'Pharmacist',
+      name: 'contactsPharmacien',
+      desc: 'Category: Pharmacist',
+      args: [],
+    );
+  }
+
+  /// `Doctor`
+  String get contactsMedecin {
+    return Intl.message(
+      'Doctor',
+      name: 'contactsMedecin',
+      desc: 'Category: Doctor',
+      args: [],
+    );
+  }
+
+  /// `Patient`
+  String get contactsPatient {
+    return Intl.message(
+      'Patient',
+      name: 'contactsPatient',
+      desc: 'Category: Patient',
+      args: [],
+    );
+  }
+
+  /// `No contacts`
+  String get contactsEmpty {
+    return Intl.message(
+      'No contacts',
+      name: 'contactsEmpty',
+      desc: 'Empty contacts list',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get contactsCategorie {
+    return Intl.message(
+      'Category',
+      name: 'contactsCategorie',
+      desc: 'Category field',
+      args: [],
+    );
+  }
+
+  /// `Add contact`
+  String get contactsAdd {
+    return Intl.message(
+      'Add contact',
+      name: 'contactsAdd',
+      desc: 'Add contact',
+      args: [],
+    );
+  }
+
+  /// `Edit contact`
+  String get contactsEdit {
+    return Intl.message(
+      'Edit contact',
+      name: 'contactsEdit',
+      desc: 'Edit contact',
+      args: [],
+    );
+  }
+
+  /// `General information`
+  String get contactsGeneralInfo {
+    return Intl.message(
+      'General information',
+      name: 'contactsGeneralInfo',
+      desc: 'General information section',
+      args: [],
+    );
+  }
+
+  /// `Contact information`
+  String get contactsContactInfo {
+    return Intl.message(
+      'Contact information',
+      name: 'contactsContactInfo',
+      desc: 'Contact information section',
+      args: [],
+    );
+  }
+
+  /// `Pharmacist details`
+  String get contactsPharmacienDetails {
+    return Intl.message(
+      'Pharmacist details',
+      name: 'contactsPharmacienDetails',
+      desc: 'Pharmacist details section',
+      args: [],
+    );
+  }
+
+  /// `Doctor details`
+  String get contactsMedecinDetails {
+    return Intl.message(
+      'Doctor details',
+      name: 'contactsMedecinDetails',
+      desc: 'Doctor details section',
+      args: [],
+    );
+  }
+
   /// `Create New Visit`
   String get homeCreateNewVisit {
     return Intl.message(
@@ -2751,6 +2881,16 @@ class S {
     );
   }
 
+  /// `Location updated successfully`
+  String get locationUpdatedSuccessfully {
+    return Intl.message(
+      'Location updated successfully',
+      name: 'locationUpdatedSuccessfully',
+      desc: 'Shown when client location is updated successfully',
+      args: [],
+    );
+  }
+
   /// `Commune`
   String get commune {
     return Intl.message('Commune', name: 'commune', desc: '', args: []);
@@ -2791,14 +2931,9 @@ class S {
     );
   }
 
-  /// `Expiration Date`
+  /// `DDP`
   String get expirationDate {
-    return Intl.message(
-      'Expiration Date',
-      name: 'expirationDate',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('DDP', name: 'expirationDate', desc: '', args: []);
   }
 
   /// `Lot`
@@ -3014,6 +3149,151 @@ class S {
       desc: 'No category options',
       args: [],
     );
+  }
+
+  /// `Offers`
+  String get offersTitle {
+    return Intl.message('Offers', name: 'offersTitle', desc: '', args: []);
+  }
+
+  /// `Offer {ref}`
+  String offerDetailsTitle(String ref) {
+    return Intl.message(
+      'Offer $ref',
+      name: 'offerDetailsTitle',
+      desc: 'Offer details title',
+      args: [ref],
+    );
+  }
+
+  /// `Ville`
+  String get city {
+    return Intl.message('Ville', name: 'city', desc: '', args: []);
+  }
+
+  /// `Field is required`
+  String get fieldIsRequired {
+    return Intl.message(
+      'Field is required',
+      name: 'fieldIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message('Retry', name: 'retry', desc: '', args: []);
+  }
+
+  /// `No offers found`
+  String get emptyOffers {
+    return Intl.message(
+      'No offers found',
+      name: 'emptyOffers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No paliers found`
+  String get emptyPaliers {
+    return Intl.message(
+      'No paliers found',
+      name: 'emptyPaliers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paliers`
+  String get paliersTitle {
+    return Intl.message('Paliers', name: 'paliersTitle', desc: '', args: []);
+  }
+
+  /// `Reference`
+  String get labelReference {
+    return Intl.message(
+      'Reference',
+      name: 'labelReference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Laboratory`
+  String get labelLaboratory {
+    return Intl.message(
+      'Laboratory',
+      name: 'labelLaboratory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount`
+  String get labelAmount {
+    return Intl.message('Amount', name: 'labelAmount', desc: '', args: []);
+  }
+
+  /// `Dates`
+  String get labelDates {
+    return Intl.message('Dates', name: 'labelDates', desc: '', args: []);
+  }
+
+  /// `Type`
+  String get labelType {
+    return Intl.message('Type', name: 'labelType', desc: '', args: []);
+  }
+
+  /// `Tier Type`
+  String get labelTierType {
+    return Intl.message('Tier Type', name: 'labelTierType', desc: '', args: []);
+  }
+
+  /// `Min`
+  String get labelMin {
+    return Intl.message('Min', name: 'labelMin', desc: '', args: []);
+  }
+
+  /// `Max`
+  String get labelMax {
+    return Intl.message('Max', name: 'labelMax', desc: '', args: []);
+  }
+
+  /// `Value`
+  String get labelValue {
+    return Intl.message('Value', name: 'labelValue', desc: '', args: []);
+  }
+
+  /// `Laboratory`
+  String get laboratoire {
+    return Intl.message('Laboratory', name: 'laboratoire', desc: '', args: []);
+  }
+
+  /// `Colis`
+  String get colis {
+    return Intl.message('Colis', name: 'colis', desc: '', args: []);
+  }
+
+  /// `My Orders`
+  String get myOrders {
+    return Intl.message('My Orders', name: 'myOrders', desc: '', args: []);
+  }
+
+  /// `Sold`
+  String get sold {
+    return Intl.message('Sold', name: 'sold', desc: '', args: []);
+  }
+
+  /// `Avg`
+  String get avgRealization {
+    return Intl.message('Avg', name: 'avgRealization', desc: '', args: []);
+  }
+
+  /// `Obj`
+  String get obj {
+    return Intl.message('Obj', name: 'obj', desc: '', args: []);
   }
 }
 

@@ -148,11 +148,21 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                       maxWidth: context.width,
                       minWidth: context.width,
                       maxHeight: context.read<CounterCubit>().state == 0
-                          ? context.height - context.appBarSize - context.paddingBottom - bottomSize
-                          : context.height - context.appBarSize - context.paddingBottom,
+                          ? context.height -
+                              context.appBarSize -
+                              context.paddingBottom -
+                              bottomSize
+                          : context.height -
+                              context.appBarSize -
+                              context.paddingBottom,
                       minHeight: context.read<CounterCubit>().state == 0
-                          ? context.height - context.appBarSize - context.paddingBottom - bottomSize
-                          : context.height - context.appBarSize - context.paddingBottom,
+                          ? context.height -
+                              context.appBarSize -
+                              context.paddingBottom -
+                              bottomSize
+                          : context.height -
+                              context.appBarSize -
+                              context.paddingBottom,
                     ),
                     child: BlocBuilder<CounterCubit, int>(
                       builder: (context, state) {
@@ -170,23 +180,28 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                       onQuillFocus: _scrollToBottom,
                                       tour: widget.tour,
                                       clients: widget.tour.pharmacies!
-                                          .where((element) => element.statusFlag == 0)
+                                          .where((element) =>
+                                              element.statusFlag == 0)
                                           .toList(),
                                       data: data,
                                       onQuillChange: _onQuillChange,
                                     )
-                                  : VisitValidateCreationPage(tour: widget.tour, data: data),
+                                  : VisitValidateCreationPage(
+                                      tour: widget.tour, data: data),
                             ),
                             SizedBox(height: kSpacingX4),
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: kPaddingMd2, right: kPaddingMd2, bottom: kPaddingLg1),
+                                  left: kPaddingMd2,
+                                  right: kPaddingMd2,
+                                  bottom: kPaddingLg1),
                               child: Row(
                                 children: [
                                   if (state == 0)
                                     Expanded(
                                       child: Container(
-                                        margin: EdgeInsets.only(right: kSpacingX1),
+                                        margin:
+                                            EdgeInsets.only(right: kSpacingX1),
                                         child: CustomButton(
                                           text: context.i10n.cancel,
                                           backgroundColor: kCardinal,
@@ -199,22 +214,31 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                   if (state == 1)
                                     Expanded(
                                       child: Container(
-                                        margin: EdgeInsets.only(right: kSpacingX1),
+                                        margin:
+                                            EdgeInsets.only(right: kSpacingX1),
                                         child: CustomButton(
                                           text: context.i10n.back,
                                           backgroundColor: kCardinal,
                                           onPressed: () {
-                                            context.read<CounterCubit>().decrement();
+                                            context
+                                                .read<CounterCubit>()
+                                                .decrement();
                                           },
                                         ),
                                       ),
                                     ),
                                   Expanded(
                                     child: CustomButton(
-                                      text: state < 1 ? context.i10n.next : context.i10n.validate,
+                                      text: state < 1
+                                          ? context.i10n.next
+                                          : context.i10n.validate,
                                       disabled: state == 0
                                           ? data['pharmacieId'] == null ||
                                               data['motif'] == null ||
+                                              (data['contactType'] == null ||
+                                                  (data['contactType']
+                                                          as String)
+                                                      .isEmpty) ||
                                               _quillController.document
                                                       .toPlainText()
                                                       .trim()
@@ -224,53 +248,77 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                       onPressed: () async {
                                         switch (state) {
                                           case 0:
-                                            final text =
-                                                _quillController.document.toPlainText().trim();
+                                            final text = _quillController
+                                                .document
+                                                .toPlainText()
+                                                .trim();
                                             if (data['pharmacieId'] == null ||
                                                 data['motif'] == null ||
+                                                data['contactType'] == null ||
+                                                (data['contactType'] as String)
+                                                    .isEmpty ||
                                                 text.isEmpty ||
-                                                text.length < (user.minReportChar ?? 1)) {
+                                                text.length <
+                                                    (user.minReportChar ?? 1)) {
                                               return;
                                             }
-                                            data['document'] = _quillController.document;
-                                            context.read<CounterCubit>().increment();
+                                            data['document'] =
+                                                _quillController.document;
+                                            context
+                                                .read<CounterCubit>()
+                                                .increment();
                                             if (!context.mounted) return;
                                             setState(() {});
                                             break;
                                           case 1:
                                             data['rapportText'] =
-                                                _quillController.document.toPlainText().trim();
+                                                _quillController.document
+                                                    .toPlainText()
+                                                    .trim();
                                             data['rapport'] = json.encode(
-                                                _quillController.document.toDelta().toJson());
+                                                _quillController.document
+                                                    .toDelta()
+                                                    .toJson());
 
                                             Position? position;
 
                                             // First attempt to get location
                                             try {
-                                              position = await LocationHelper.getCurrentPosition();
+                                              position = await LocationHelper
+                                                  .getCurrentPosition();
                                             } on Exception {
                                               // Initial location retrieval failed
                                             }
 
                                             if (position == null) {
                                               // Check current permission status
-                                              final permission = await Geolocator.checkPermission();
+                                              final permission =
+                                                  await Geolocator
+                                                      .checkPermission();
 
-                                              if (permission == LocationPermission.denied) {
+                                              if (permission ==
+                                                  LocationPermission.denied) {
                                                 // Request permission again
                                                 final newPermission =
-                                                    await Geolocator.requestPermission();
+                                                    await Geolocator
+                                                        .requestPermission();
 
                                                 if (newPermission ==
-                                                        LocationPermission.whileInUse ||
-                                                    newPermission == LocationPermission.always) {
+                                                        LocationPermission
+                                                            .whileInUse ||
+                                                    newPermission ==
+                                                        LocationPermission
+                                                            .always) {
                                                   // Get position again after permission granted
                                                   try {
                                                     final newPosition =
-                                                        await LocationHelper.getCurrentPosition();
+                                                        await LocationHelper
+                                                            .getCurrentPosition();
                                                     if (newPosition != null) {
-                                                      data['latitude'] = newPosition.latitude;
-                                                      data['longitude'] = newPosition.longitude;
+                                                      data['latitude'] =
+                                                          newPosition.latitude;
+                                                      data['longitude'] =
+                                                          newPosition.longitude;
                                                     }
                                                   } on Exception {
                                                     // Handle exception if user denies again
@@ -278,29 +326,35 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                                 } else {
                                                   // User denied permission again
                                                   if (context.mounted) {
-                                                    context.errorSnackBar(
-                                                        context.i10n.locationPermissionRequired);
+                                                    context.errorSnackBar(context
+                                                        .i10n
+                                                        .locationPermissionRequired);
                                                   }
                                                 }
                                               } else if (permission ==
-                                                  LocationPermission.deniedForever) {
+                                                  LocationPermission
+                                                      .deniedForever) {
                                                 // Handle permanent denial
                                                 if (context.mounted) {
-                                                  context.errorSnackBar(
-                                                      context.i10n.locationPermissionRequired);
+                                                  context.errorSnackBar(context
+                                                      .i10n
+                                                      .locationPermissionRequired);
                                                 }
                                               }
                                             } else {
                                               // Position successfully obtained
-                                              data['latitude'] = position.latitude;
-                                              data['longitude'] = position.longitude;
+                                              data['latitude'] =
+                                                  position.latitude;
+                                              data['longitude'] =
+                                                  position.longitude;
                                             }
 
                                             if (data['latitude'] == null ||
                                                 data['longitude'] == null) {
                                               if (context.mounted) {
-                                                context.errorSnackBar(
-                                                    context.i10n.locationPermissionRequired);
+                                                context.errorSnackBar(context
+                                                    .i10n
+                                                    .locationPermissionRequired);
                                               }
                                               return;
                                             }
@@ -308,29 +362,43 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                             // Enforce user's authorized radius (if any)
                                             try {
                                               // Retrieve selected tour detail / pharmacy info for client coordinates
-                                              final selectedId = data['pharmacieId'] as String?;
+                                              final selectedId =
+                                                  data['pharmacieId']
+                                                      as String?;
                                               double? clientLat;
                                               double? clientLng;
-                                              num? authorizedRadius; // from authenticated user
+                                              num?
+                                                  authorizedRadius; // from authenticated user
 
                                               if (selectedId != null &&
-                                                  widget.tour.pharmacies != null) {
-                                                final split = selectedId.split(':');
+                                                  widget.tour.pharmacies !=
+                                                      null) {
+                                                final split =
+                                                    selectedId.split(':');
                                                 final id = split.first;
-                                                final tourDetail = widget.tour.pharmacies!
-                                                    .where(
-                                                      (t) => t.pharmacy?.id.toString() == id,
-                                                    )
-                                                    .firstOrNull;
+                                                final tourDetail =
+                                                    widget.tour.pharmacies!
+                                                        .where(
+                                                          (t) =>
+                                                              t.pharmacy?.id
+                                                                  .toString() ==
+                                                              id,
+                                                        )
+                                                        .firstOrNull;
 
-                                                clientLat = tourDetail?.latitude ??
-                                                    tourDetail?.pharmacy?.latitude;
-                                                clientLng = tourDetail?.longitude ??
-                                                    tourDetail?.pharmacy?.longitude;
+                                                clientLat =
+                                                    tourDetail?.latitude ??
+                                                        tourDetail?.pharmacy
+                                                            ?.latitude;
+                                                clientLng =
+                                                    tourDetail?.longitude ??
+                                                        tourDetail?.pharmacy
+                                                            ?.longitude;
                                               }
 
                                               // Authorized radius comes from the authenticated user
-                                              authorizedRadius = user.authorizedRadius;
+                                              authorizedRadius =
+                                                  user.authorizedRadius;
                                               debugPrint(
                                                   'Client coords: $clientLat, $clientLng, Authorized radius: $authorizedRadius');
 
@@ -339,19 +407,28 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                                   clientLng != null &&
                                                   authorizedRadius != null &&
                                                   authorizedRadius > 0) {
-                                                final userLat = data['latitude'] as double;
-                                                final userLng = data['longitude'] as double;
+                                                final userLat =
+                                                    data['latitude'] as double;
+                                                final userLng =
+                                                    data['longitude'] as double;
 
-                                                final distanceMeters = Geolocator.distanceBetween(
-                                                    clientLat, clientLng, userLat, userLng);
+                                                final distanceMeters =
+                                                    Geolocator.distanceBetween(
+                                                        clientLat,
+                                                        clientLng,
+                                                        userLat,
+                                                        userLng);
 
                                                 debugPrint(
                                                     'Distance to client: $distanceMeters meters');
-                                                if (distanceMeters > authorizedRadius) {
+                                                if (distanceMeters >
+                                                    authorizedRadius) {
                                                   if (context.mounted) {
-                                                    context.errorSnackBar(context.i10n
+                                                    context.errorSnackBar(context
+                                                        .i10n
                                                         .visitCreationOutsideAuthorizedRadius(
-                                                            authorizedRadius.toInt()));
+                                                            authorizedRadius
+                                                                .toInt()));
                                                   }
                                                   return;
                                                 }
@@ -364,6 +441,14 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                             }
 
                                             data["dateFin"] = DateTime.now();
+                                            // Ensure contactType is sent as label
+                                            if (data['contactType']
+                                                is! String) {
+                                              data['contactType'] =
+                                                  data['contactType']
+                                                          ?.toString() ??
+                                                      '';
+                                            }
 
                                             if (context.mounted) {
                                               context

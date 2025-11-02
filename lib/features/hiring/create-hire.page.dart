@@ -11,11 +11,14 @@ import 'package:crm/shared/widgets/loading/loader.widget.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart';
 
 import '../../logic/file/file_cubit.dart';
 import '../../shared/widgets/inputs/dropdown.input.dart';
 import '../tour-plan/bloc/wilaya_cubit.dart';
 import '../tour-plan/models/wilaya/wilaya.dart';
+import '../clients/models/claims/motif.dart';
+import 'services/conditions_commerciales.repository.dart';
 
 class CreateHirePage extends StatelessWidget {
   final Map<String, dynamic>? initialData;
@@ -47,12 +50,26 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
   final TextEditingController _addressController = TextEditingController();
 
   Map<String, dynamic> data = {};
+  final Set<String> _selectedConditions = <String>{};
+  Future<List<ClaimMotif>>? _conditionsFuture;
 
   @override
   void initState() {
     data = widget.initialData ?? {};
     _addressController.text = data['address'] ?? '';
+    _conditionsFuture = _fetchConditionsCommerciales();
     super.initState();
+  }
+
+  Future<List<ClaimMotif>> _fetchConditionsCommerciales() async {
+    try {
+      final Response response = await ConditionsCommercialesRepository.get();
+      if (response.statusCode == 200) {
+        final List<dynamic> body = response.data['body'] ?? [];
+        return body.map<ClaimMotif>((e) => ClaimMotif.fromJson(e)).toList();
+      }
+    } catch (_) {}
+    return [];
   }
 
   @override
@@ -89,8 +106,10 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
               constraints: BoxConstraints(
-                minHeight: context.height - context.appBarSize - context.paddingBottom,
-                maxHeight: context.height - context.appBarSize - context.paddingBottom,
+                minHeight:
+                    context.height - context.appBarSize - context.paddingBottom,
+                maxHeight:
+                    context.height - context.appBarSize - context.paddingBottom,
                 minWidth: context.width,
                 maxWidth: context.width,
               ),
@@ -194,8 +213,8 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                               label: context.i10n.regionPlaceholder,
                               value: '',
                             ),
-                            ...state.map(
-                                (e) => CustomDropDownItem(label: e.name, value: e.code.toString())),
+                            ...state.map((e) => CustomDropDownItem(
+                                label: e.name, value: e.code.toString())),
                           ],
                         );
                       },
@@ -281,12 +300,70 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                       maxLines: 4,
                     ),
                     SizedBox(height: kSpacingX7),
+                    // Conditions commerciales (multi-select checkboxes)
+                    Text(
+                      'Conditions commerciales',
+                      style: context.textTheme.bodyMedium,
+                    ),
+                    SizedBox(height: kSpacingX1),
+                    FutureBuilder<List<ClaimMotif>>(
+                      future: _conditionsFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Loader();
+                        }
+                        final items = snapshot.data ?? [];
+                        if (items.isEmpty) {
+                          return Text(
+                            'Aucune condition commerciale disponible',
+                            style: context.textTheme.bodySmall,
+                          );
+                        }
+                        return Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: kPrimaryColor.withOpacity(0.3)),
+                            borderRadius: BorderRadius.circular(kSpacingX3),
+                          ),
+                          child: Column(
+                            children: items
+                                .map(
+                                  (item) => CheckboxListTile(
+                                    value: _selectedConditions
+                                        .contains(item.label),
+                                    onChanged: (checked) {
+                                      setState(() {
+                                        if (checked == true) {
+                                          _selectedConditions.add(item.label);
+                                        } else {
+                                          _selectedConditions
+                                              .remove(item.label);
+                                        }
+                                        data['conditionsCommerciales'] =
+                                            _selectedConditions.toList();
+                                      });
+                                    },
+                                    title: Text(item.label),
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    dense: true,
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: kSpacingX7),
                     // Dotted border using Container for upload files
                     InkWell(
                       onTap: () {
-                        final cubit = BlocProvider.of<FileLoadingCubit>(context);
+                        final cubit =
+                            BlocProvider.of<FileLoadingCubit>(context);
                         cubit.startLoading();
-                        select(context, 'file-${DateTime.now().millisecondsSinceEpoch}');
+                        select(context,
+                            'file-${DateTime.now().millisecondsSinceEpoch}');
                       },
                       child: Container(
                         padding: EdgeInsets.all(kPaddingMd1),
@@ -346,7 +423,8 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                                             e.value.fileName,
                                             softWrap: true,
                                             maxLines: 2,
-                                            style: context.textTheme.bodyMedium!.copyWith(
+                                            style: context.textTheme.bodyMedium!
+                                                .copyWith(
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
@@ -359,7 +437,9 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                                         color: kPrimaryColor,
                                       ),
                                       onPressed: () {
-                                        context.read<FileCubit>().removeFile(e.key);
+                                        context
+                                            .read<FileCubit>()
+                                            .removeFile(e.key);
                                       },
                                     ),
                                   ),
@@ -372,7 +452,8 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                     SizedBox(height: kSpacingX10),
                     BlocBuilder<HireCreationCubit, HireCreationState>(
                       builder: (context, state) {
-                        if (state.maybeWhen(orElse: () => false, loading: () => true)) {
+                        if (state.maybeWhen(
+                            orElse: () => false, loading: () => true)) {
                           return const Loader();
                         }
                         return CustomButton(
@@ -380,13 +461,19 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-                              final position = await LocationHelper.getCurrentPosition();
+                              // Ensure conditionsCommerciales is present as an array of labels
+                              data['conditionsCommerciales'] =
+                                  _selectedConditions.toList();
+                              final position =
+                                  await LocationHelper.getCurrentPosition();
                               if (position != null) {
                                 data['latitude'] = position.latitude;
                                 data['longitude'] = position.longitude;
                               }
 
-                              await context.read<HireCreationCubit>().create(data);
+                              await context
+                                  .read<HireCreationCubit>()
+                                  .create(data);
                             }
                           },
                         );

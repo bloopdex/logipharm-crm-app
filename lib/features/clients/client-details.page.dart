@@ -6,7 +6,6 @@ import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
 import 'package:crm/features/clients/pages/create-claim.dart';
 import 'package:crm/features/clients/pages/create-etablissements.dart';
 import 'package:crm/features/clients/pages/create-grossiste.dart';
-import 'package:crm/features/navigation/navigation.screen.dart';
 import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'package:crm/models/person/person.dart';
 import 'package:crm/shared/utils/money.formatter.dart';
@@ -15,7 +14,8 @@ import 'package:crm/shared/widgets/loading/loader.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geolocator/geolocator.dart' show Geolocator, LocationPermission, Position;
+import 'package:geolocator/geolocator.dart'
+    show Geolocator, LocationPermission, Position;
 import 'package:map_launcher/map_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -62,7 +62,8 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
       ),
       builder: (ctx) {
         return Padding(
-          padding: EdgeInsets.fromLTRB(16, 16, 16, MediaQuery.of(ctx).padding.bottom + 16),
+          padding: EdgeInsets.fromLTRB(
+              16, 16, 16, MediaQuery.of(ctx).padding.bottom + 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -111,7 +112,8 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                         onChanged: (v) {
                           setState(() {
                             _selectedCategoryId = v;
-                            _selectedCategoryLabel = categories.firstWhere((c) => c.id == v).label;
+                            _selectedCategoryLabel =
+                                categories.firstWhere((c) => c.id == v).label;
                           });
                         },
                       );
@@ -138,7 +140,9 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                               final id = widget.client.id;
                               final catId = _selectedCategoryId!;
                               final catLabel = _selectedCategoryLabel ?? '';
-                              await context.read<ClientDetailsCubit>().updateCategory(
+                              await context
+                                  .read<ClientDetailsCubit>()
+                                  .updateCategory(
                                     clientId: id,
                                     categorieId: catId,
                                     categorieLibelle: catLabel,
@@ -147,7 +151,8 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                                 setState(() {
                                   _categoryLabel = catLabel;
                                 });
-                                context.successSnackBar(context.i10n.categoryUpdated);
+                                context.successSnackBar(
+                                    context.i10n.categoryUpdated);
                                 Navigator.of(ctx).pop();
                               }
                             },
@@ -189,8 +194,10 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
       body: SingleChildScrollView(
         child: Container(
           constraints: BoxConstraints(
-            maxHeight: context.height - context.appBarSize - context.paddingBottom,
-            minHeight: context.height - context.appBarSize - context.paddingBottom,
+            maxHeight:
+                context.height - context.appBarSize - context.paddingBottom,
+            minHeight:
+                context.height - context.appBarSize - context.paddingBottom,
             maxWidth: context.width,
             minWidth: context.width,
           ),
@@ -201,7 +208,8 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                 decoration: BoxDecoration(
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.vertical(
-                    bottom: Radius.elliptical(context.width * 2, context.width / 3),
+                    bottom:
+                        Radius.elliptical(context.width * 2, context.width / 3),
                   ),
                 ),
               ),
@@ -236,9 +244,11 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                           SizedBox(height: kSpacingX3),
                           InkWell(
                             onTap: () async {
-                              final availableMaps = await MapLauncher.installedMaps;
+                              final availableMaps =
+                                  await MapLauncher.installedMaps;
                               await availableMaps.first.showMarker(
-                                coords: Coords(client.latitude ?? 0, client.longitude ?? 0),
+                                coords: Coords(client.latitude ?? 0,
+                                    client.longitude ?? 0),
                                 title: client.fullName,
                               );
                             },
@@ -274,25 +284,30 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
 
                                 // First attempt to get location
                                 try {
-                                  position = await LocationHelper.getCurrentPosition();
+                                  position =
+                                      await LocationHelper.getCurrentPosition();
                                 } on Exception {
                                   // Initial location retrieval failed
                                 }
 
                                 if (position == null) {
                                   // Check current permission status
-                                  final permission = await Geolocator.checkPermission();
+                                  final permission =
+                                      await Geolocator.checkPermission();
 
                                   if (permission == LocationPermission.denied) {
                                     // Request permission again
-                                    final newPermission = await Geolocator.requestPermission();
+                                    final newPermission =
+                                        await Geolocator.requestPermission();
 
-                                    if (newPermission == LocationPermission.whileInUse ||
-                                        newPermission == LocationPermission.always) {
+                                    if (newPermission ==
+                                            LocationPermission.whileInUse ||
+                                        newPermission ==
+                                            LocationPermission.always) {
                                       // Get position again after permission granted
                                       try {
-                                        final newPosition =
-                                            await LocationHelper.getCurrentPosition();
+                                        final newPosition = await LocationHelper
+                                            .getCurrentPosition();
                                         if (newPosition != null) {
                                           position = newPosition;
                                         }
@@ -302,34 +317,46 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                                     } else {
                                       // User denied permission again
                                       if (context.mounted) {
-                                        context
-                                            .errorSnackBar(context.i10n.locationPermissionRequired);
+                                        context.errorSnackBar(context
+                                            .i10n.locationPermissionRequired);
                                       }
                                     }
-                                  } else if (permission == LocationPermission.deniedForever) {
+                                  } else if (permission ==
+                                      LocationPermission.deniedForever) {
                                     // Handle permanent denial
                                     if (context.mounted) {
-                                      context
-                                          .errorSnackBar(context.i10n.locationPermissionRequired);
+                                      context.errorSnackBar(context
+                                          .i10n.locationPermissionRequired);
                                     }
                                   }
                                 } else {
                                   // Position successfully obtained
-                                  position = await LocationHelper.getCurrentPosition();
+                                  position =
+                                      await LocationHelper.getCurrentPosition();
                                 }
 
                                 if (context.mounted) {
-                                  context.read<ClientDetailsCubit>().changeLocation(
-                                      clientId: client.id,
-                                      lon: position!.longitude,
-                                      lat: position.latitude);
-                                  context.read<ClientsCubit>().load();
-                                  context.popAllAndPush(NavigationScreen());
+                                  await context
+                                      .read<ClientDetailsCubit>()
+                                      .changeLocation(
+                                          clientId: client.id,
+                                          lon: position!.longitude,
+                                          lat: position.latitude);
+                                  if (context.mounted) {
+                                    context.successSnackBar(context
+                                        .i10n.locationUpdatedSuccessfully);
+                                    // Refetch the client details to get the updated location
+                                    await context
+                                        .read<ClientDetailsCubit>()
+                                        .load(clientId: client.id);
+                                    await context.read<ClientsCubit>().load();
+                                  }
                                 }
                               },
                               child: Text(
                                 context.i10n.changeAddress,
-                                style: context.textTheme.headlineMedium!.copyWith(
+                                style:
+                                    context.textTheme.headlineMedium!.copyWith(
                                   color: kPrimaryColor,
                                 ),
                               ),
@@ -358,7 +385,8 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                               padding: EdgeInsets.all(kPaddingSm3),
                               decoration: BoxDecoration(
                                 color: kPrimaryColor.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(kRadiusRounded),
+                                borderRadius:
+                                    BorderRadius.circular(kRadiusRounded),
                               ),
                               child: Row(
                                 children: [
@@ -401,7 +429,8 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                               padding: EdgeInsets.all(kPaddingSm3),
                               decoration: BoxDecoration(
                                 color: kPrimaryColor.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(kRadiusRounded),
+                                borderRadius:
+                                    BorderRadius.circular(kRadiusRounded),
                               ),
                               child: Row(
                                 children: [
@@ -412,7 +441,8 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                                   ),
                                   SizedBox(width: kSpacingX2),
                                   Text(
-                                    client.email != null && client.email!.isNotEmpty
+                                    client.email != null &&
+                                            client.email!.isNotEmpty
                                         ? client.email!
                                         : context.i10n.noEmail,
                                     style: context.textTheme.bodyMedium,
@@ -443,7 +473,9 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                                             : kCardinal,
                                       ),
                                       child: Icon(
-                                        !statistics.commercialBlockage ? Icons.check : Icons.error,
+                                        !statistics.commercialBlockage
+                                            ? Icons.check
+                                            : Icons.error,
                                         color: kWhite,
                                         size: kSpacingX7,
                                       ),
@@ -469,7 +501,9 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                                             : kCardinal,
                                       ),
                                       child: Icon(
-                                        !statistics.financialBlockage ? Icons.check : Icons.error,
+                                        !statistics.financialBlockage
+                                            ? Icons.check
+                                            : Icons.error,
                                         color: kWhite,
                                         size: kSpacingX7,
                                       ),
@@ -571,7 +605,10 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
 
 class ClientOptionsTab extends StatefulWidget {
   const ClientOptionsTab(
-      {super.key, required this.client, required this.categoryLabel, required this.onCategoryTap});
+      {super.key,
+      required this.client,
+      required this.categoryLabel,
+      required this.onCategoryTap});
 
   final Person client;
   final String? categoryLabel;
@@ -581,7 +618,8 @@ class ClientOptionsTab extends StatefulWidget {
   State<ClientOptionsTab> createState() => _ClientOptionsTabState();
 }
 
-class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerProviderStateMixin {
+class _ClientOptionsTabState extends State<ClientOptionsTab>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -801,9 +839,11 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                                 ),
                                 Expanded(
                                   child: Text(
-                                    MoneyHelper.format(context, statistics.ceiling.toDouble()),
+                                    MoneyHelper.format(
+                                        context, statistics.ceiling.toDouble()),
                                     textAlign: TextAlign.end,
-                                    style: context.textTheme.headlineMedium!.copyWith(
+                                    style: context.textTheme.headlineMedium!
+                                        .copyWith(
                                       fontSize: 25.h,
                                       color: kPrimaryColor,
                                     ),
@@ -822,9 +862,11 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                                 ),
                                 Expanded(
                                   child: Text(
-                                    MoneyHelper.format(context, statistics.totalHt.toDouble()),
+                                    MoneyHelper.format(
+                                        context, statistics.totalHt.toDouble()),
                                     textAlign: TextAlign.end,
-                                    style: context.textTheme.headlineMedium!.copyWith(
+                                    style: context.textTheme.headlineMedium!
+                                        .copyWith(
                                       fontSize: 25.h,
                                       color: kPrimaryColor,
                                     ),
@@ -843,9 +885,11 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                                 ),
                                 Expanded(
                                   child: Text(
-                                    MoneyHelper.format(context, statistics.totalTtc.toDouble()),
+                                    MoneyHelper.format(context,
+                                        statistics.totalTtc.toDouble()),
                                     textAlign: TextAlign.end,
-                                    style: context.textTheme.headlineMedium!.copyWith(
+                                    style: context.textTheme.headlineMedium!
+                                        .copyWith(
                                       fontSize: 25.h,
                                       color: kPrimaryColor,
                                     ),
@@ -864,9 +908,11 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                                 ),
                                 Expanded(
                                   child: Text(
-                                    MoneyHelper.format(context, statistics.totalPayment.toDouble()),
+                                    MoneyHelper.format(context,
+                                        statistics.totalPayment.toDouble()),
                                     textAlign: TextAlign.end,
-                                    style: context.textTheme.headlineMedium!.copyWith(
+                                    style: context.textTheme.headlineMedium!
+                                        .copyWith(
                                       fontSize: 25.h,
                                       color: kPrimaryColor,
                                     ),
@@ -885,9 +931,11 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                                 ),
                                 Expanded(
                                   child: Text(
-                                    MoneyHelper.format(context, statistics.totalRest.toDouble()),
+                                    MoneyHelper.format(context,
+                                        statistics.totalRest.toDouble()),
                                     textAlign: TextAlign.end,
-                                    style: context.textTheme.headlineMedium!.copyWith(
+                                    style: context.textTheme.headlineMedium!
+                                        .copyWith(
                                       fontSize: 25.h,
                                       color: kPrimaryColor,
                                     ),
@@ -1346,7 +1394,8 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                             children: [
                               Flexible(
                                 child: Text(
-                                  widget.categoryLabel ?? context.i10n.noCategory,
+                                  widget.categoryLabel ??
+                                      context.i10n.noCategory,
                                   textAlign: TextAlign.end,
                                   style: context.textTheme.headlineMedium,
                                   overflow: TextOverflow.ellipsis,
@@ -1354,7 +1403,8 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                                 ),
                               ),
                               SizedBox(width: kSpacingX1),
-                              Icon(Icons.edit, size: kSpacingX5, color: kPrimaryColor),
+                              Icon(Icons.edit,
+                                  size: kSpacingX5, color: kPrimaryColor),
                             ],
                           ),
                         ),
@@ -1372,7 +1422,8 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                       ),
                       Expanded(
                         child: Text(
-                          widget.client.solvabilite?.label ?? context.i10n.noSolvability,
+                          widget.client.solvabilite?.label ??
+                              context.i10n.noSolvability,
                           textAlign: TextAlign.end,
                           style: context.textTheme.headlineMedium,
                         ),
@@ -1390,7 +1441,8 @@ class _ClientOptionsTabState extends State<ClientOptionsTab> with SingleTickerPr
                       ),
                       Expanded(
                         child: Text(
-                          widget.client.modePaie?.label ?? context.i10n.noModePaie,
+                          widget.client.modePaie?.label ??
+                              context.i10n.noModePaie,
                           textAlign: TextAlign.end,
                           style: context.textTheme.headlineMedium,
                         ),

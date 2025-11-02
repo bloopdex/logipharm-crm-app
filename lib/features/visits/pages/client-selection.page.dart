@@ -15,6 +15,8 @@ import '../../../shared/widgets/inputs/dropdown.input.dart';
 import '../../tour-plan/bloc/visit_motif_cubit.dart';
 import '../../tour-plan/models/tour.dart';
 import '../add_client_selection.dart';
+import '../bloc/contact_type_cubit.dart';
+import '../models/contact_type.dart';
 
 class ClientSelectionForm extends StatefulWidget {
   final List<TourDetail> clients;
@@ -190,6 +192,43 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                     widget.onQuillChange?.call();
                   },
                   mapKey: 'dateDebut',
+                ),
+                SizedBox(height: kSpacingX5),
+                // Contact type dropdown
+                Text(
+                  'Contact type',
+                  style: context.textTheme.bodyMedium,
+                ),
+                SizedBox(height: kSpacingX1),
+                BlocBuilder<ContactTypeCubit, List<ContactType>>(
+                  builder: (context, state) {
+                    if (state.isEmpty) {
+                      return const CircularProgressIndicator();
+                    }
+                    final items = [
+                      CustomDropDownItem(label: context.i10n.selectReason, value: ''),
+                      ...state.map(
+                        (e) => CustomDropDownItem(label: e.label, value: e.label),
+                      ),
+                    ];
+
+                    final currentValue = (widget.data['contactType'] ?? '') as String;
+
+                    return CustomDropDownInput(
+                      data: widget.data,
+                      mapKey: 'contactType',
+                      items: items,
+                      initialValue: items.any((i) => i.value == currentValue)
+                          ? currentValue
+                          : items.first.value,
+                      onChanged: (value) {
+                        setState(() {
+                          widget.data['contactType'] = value ?? '';
+                        });
+                        widget.onQuillChange?.call();
+                      },
+                    );
+                  },
                 ),
                 SizedBox(height: kSpacingX5),
                 Text(

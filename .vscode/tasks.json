@@ -1,0 +1,60 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Flutter Build Runner",
+			"type": "shell",
+			"command": "flutter pub run build_runner build",
+			"group": "build"
+		},
+		{
+			"label": "Flutter Build Runner",
+			"type": "shell",
+			"command": "flutter pub run build_runner build --delete-conflicting-outputs",
+			"group": "build"
+		},
+		{
+			"label": "Flutter Build Runner",
+			"type": "shell",
+			"command": "flutter pub run build_runner build --delete-conflicting-outputs",
+			"group": "build"
+		},
+		{
+			"label": "Dart Intl Utils Generate",
+			"type": "shell",
+			"command": "dart pub global run intl_utils:generate",
+			"group": "build"
+		},
+		{
+			"label": "Dart Intl Utils Generate",
+			"type": "shell",
+			"command": "dart pub global run intl_utils:generate",
+			"group": "build"
+		},
+		// FVM variants
+		{
+			"label": "FVM: Flutter Build Runner",
+			"type": "shell",
+			"command": "fvm flutter pub run build_runner build --delete-conflicting-outputs",
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "FVM: Dart Intl Generate",
+			"type": "shell",
+			"command": "fvm dart pub run intl_utils:generate",
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "FVM: Flutter Run (debug)",
+			"type": "shell",
+			"command": "fvm flutter run",
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"problemMatcher": []
+		}
+	]
+}

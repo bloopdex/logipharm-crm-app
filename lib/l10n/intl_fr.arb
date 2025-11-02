@@ -398,6 +398,58 @@
   "@homeCreateNewPlan": {
     "description": "Créer un nouveau plan"
   },
+  "homeQuickAddContact": "Ajouter un contact",
+  "@homeQuickAddContact": {
+    "description": "Bouton ajouter contact"
+  },
+  "contactsTitle": "Contacts",
+  "@contactsTitle": {
+    "description": "Titre de la page contacts"
+  },
+  "contactsPharmacien": "Pharmacien",
+  "@contactsPharmacien": {
+    "description": "Catégorie pharmacien"
+  },
+  "contactsMedecin": "Médecin",
+  "@contactsMedecin": {
+    "description": "Catégorie médecin"
+  },
+  "contactsPatient": "Patient",
+  "@contactsPatient": {
+    "description": "Catégorie patient"
+  },
+  "contactsEmpty": "Aucun contact",
+  "@contactsEmpty": {
+    "description": "Liste contacts vide"
+  },
+  "contactsCategorie": "Catégorie",
+  "@contactsCategorie": {
+    "description": "Champ catégorie"
+  },
+  "contactsAdd": "Ajouter un contact",
+  "@contactsAdd": {
+    "description": "Ajouter contact"
+  },
+  "contactsEdit": "Modifier le contact",
+  "@contactsEdit": {
+    "description": "Modifier contact"
+  },
+  "contactsGeneralInfo": "Informations générales",
+  "@contactsGeneralInfo": {
+    "description": "Section informations générales"
+  },
+  "contactsContactInfo": "Coordonnées",
+  "@contactsContactInfo": {
+    "description": "Section coordonnées"
+  },
+  "contactsPharmacienDetails": "Détails Pharmacien",
+  "@contactsPharmacienDetails": {
+    "description": "Section détails pharmacien"
+  },
+  "contactsMedecinDetails": "Détails Médecin",
+  "@contactsMedecinDetails": {
+    "description": "Section détails médecin"
+  },
   "homeCreateNewVisit": "Créer une nouvelle visite",
   "@homeCreateNewVisit": {
     "description": "Créer une nouvelle visite"
@@ -1071,11 +1123,17 @@
     "description": "Pas d'établissement"
   },
   "addVeilleConcurrentielle": "Ajouter une veille concurrentielle",
-  "@addVeilleConcurrentielle": {"description": "Ajouter une veille concurrentielle"},
+  "@addVeilleConcurrentielle": {
+    "description": "Ajouter une veille concurrentielle"
+  },
   "veilleConcurrentielle": "Veille Concurrentielle",
-  "@veilleConcurrentielle": {"description": "Veille Concurrentielle"},
+  "@veilleConcurrentielle": {
+    "description": "Veille Concurrentielle"
+  },
   "noVeilleConcurrentielle": "Pas de veille concurrentielle",
-  "@noVeilleConcurrentielle": {"description": "Pas de veille concurrentielle"},
+  "@noVeilleConcurrentielle": {
+    "description": "Pas de veille concurrentielle"
+  },
   "noVeilleConcurrentielleDesc": "Pas d'entrée de veille concurrentielle trouvée pour ce client",
   "selectClient": "Sélectionner un client",
   "@selectClient": {
@@ -1129,6 +1187,10 @@
     }
   },
   "changeAddress": "Changer l'adresse",
+  "locationUpdatedSuccessfully": "Localisation mise à jour avec succès",
+  "@locationUpdatedSuccessfully": {
+    "description": "Affichée lorsque la localisation du client est mise à jour avec succès"
+  },
   "commune": "Commune",
   "noCommune": "Pas de commune",
   "turnover": "Chiffre d'affaires",
@@ -1144,7 +1206,7 @@
       }
     }
   },
-  "expirationDate": "Date d'expiration",
+  "expirationDate": "DDP",
   "lot": "Lot",
   "generic": "Generic",
   "price": "Prix",
@@ -1170,11 +1232,50 @@
   "goalOfMonthRecrutement": "Objectif de recrutement du mois",
   "goalOfMonthSales": "Objectif de vente du mois",
   "categoryUpdated": "Catégorie mise à jour",
-  "@categoryUpdated": {"description": "Catégorie mise à jour"},
+  "@categoryUpdated": {
+    "description": "Catégorie mise à jour"
+  },
   "changeCategory": "Changer la catégorie",
-  "@changeCategory": {"description": "Changer la catégorie"},
+  "@changeCategory": {
+    "description": "Changer la catégorie"
+  },
   "selectCategory": "Sélectionner une catégorie",
-  "@selectCategory": {"description": "Sélectionner une catégorie"},
+  "@selectCategory": {
+    "description": "Sélectionner une catégorie"
+  },
   "noCategoryOptions": "Aucune catégorie",
-  "@noCategoryOptions": {"description": "Aucune catégorie"}
+  "@noCategoryOptions": {
+    "description": "Aucune catégorie"
+  },
+  "offersTitle": "Offres",
+  "offerDetailsTitle": "Offre {ref}",
+  "@offerDetailsTitle": {
+    "description": "Titre de détails de l'offre",
+    "placeholders": {
+      "ref": {
+        "type": "String"
+      }
+    }
+  },
+  "retry": "Réessayer",
+  "city": "Ville",
+  "fieldIsRequired": "le champ est obligatoire",
+  "emptyOffers": "Aucune offre trouvée",
+  "emptyPaliers": "Aucun palier trouvé",
+  "paliersTitle": "Paliers",
+  "labelReference": "Référence",
+  "labelLaboratory": "Laboratoire",
+  "labelAmount": "Montant",
+  "labelDates": "Dates",
+  "labelType": "Type",
+  "labelTierType": "Type de palier",
+  "labelMin": "Min",
+  "labelMax": "Max",
+  "labelValue": "Valeur",
+  "laboratoire": "Laboratoire",
+  "colis": "Colis",
+  "myOrders": "Mes commandes",
+  "sold": "Vendu",
+  "avgRealization": "Avg",
+  "obj": "Obj"
 }

@@ -398,6 +398,58 @@
   "@homeCreateNewPlan": {
     "description": "Create New Plan"
   },
+  "homeQuickAddContact": "Add contact",
+  "@homeQuickAddContact": {
+    "description": "Quick add contact button"
+  },
+  "contactsTitle": "Contacts",
+  "@contactsTitle": {
+    "description": "Contacts page title"
+  },
+  "contactsPharmacien": "Pharmacist",
+  "@contactsPharmacien": {
+    "description": "Category: Pharmacist"
+  },
+  "contactsMedecin": "Doctor",
+  "@contactsMedecin": {
+    "description": "Category: Doctor"
+  },
+  "contactsPatient": "Patient",
+  "@contactsPatient": {
+    "description": "Category: Patient"
+  },
+  "contactsEmpty": "No contacts",
+  "@contactsEmpty": {
+    "description": "Empty contacts list"
+  },
+  "contactsCategorie": "Category",
+  "@contactsCategorie": {
+    "description": "Category field"
+  },
+  "contactsAdd": "Add contact",
+  "@contactsAdd": {
+    "description": "Add contact"
+  },
+  "contactsEdit": "Edit contact",
+  "@contactsEdit": {
+    "description": "Edit contact"
+  },
+  "contactsGeneralInfo": "General information",
+  "@contactsGeneralInfo": {
+    "description": "General information section"
+  },
+  "contactsContactInfo": "Contact information",
+  "@contactsContactInfo": {
+    "description": "Contact information section"
+  },
+  "contactsPharmacienDetails": "Pharmacist details",
+  "@contactsPharmacienDetails": {
+    "description": "Pharmacist details section"
+  },
+  "contactsMedecinDetails": "Doctor details",
+  "@contactsMedecinDetails": {
+    "description": "Doctor details section"
+  },
   "homeCreateNewVisit": "Create New Visit",
   "@homeCreateNewVisit": {
     "description": "Create New Visit"
@@ -1081,11 +1133,17 @@
   },
   "noEtablissementDesc": "No etablissement found for this client",
   "addVeilleConcurrentielle": "Add Competitive Watch",
-  "@addVeilleConcurrentielle": {"description": "Add Veille Concurrentielle"},
+  "@addVeilleConcurrentielle": {
+    "description": "Add Veille Concurrentielle"
+  },
   "veilleConcurrentielle": "Competitive Watch",
-  "@veilleConcurrentielle": {"description": "Veille Concurrentielle"},
+  "@veilleConcurrentielle": {
+    "description": "Veille Concurrentielle"
+  },
   "noVeilleConcurrentielle": "No competitive watch",
-  "@noVeilleConcurrentielle": {"description": "No veille concurrentielle"},
+  "@noVeilleConcurrentielle": {
+    "description": "No veille concurrentielle"
+  },
   "noVeilleConcurrentielleDesc": "No competitive watch entries found for this client",
   "eventsTitle": "Events",
   "searchEvents": "Search Events",
@@ -1131,6 +1189,10 @@
     }
   },
   "changeAddress": "Change Address",
+  "locationUpdatedSuccessfully": "Location updated successfully",
+  "@locationUpdatedSuccessfully": {
+    "description": "Shown when client location is updated successfully"
+  },
   "commune": "Commune",
   "noCommune": "No commune",
   "turnover": "Turnover",
@@ -1146,7 +1208,7 @@
       }
     }
   },
-  "expirationDate": "Expiration Date",
+  "expirationDate": "DDP",
   "lot": "Lot",
   "generic": "Generic",
   "price": "Price",
@@ -1174,11 +1236,50 @@
   "goalOfMonthSales": "Goal of the month sales",
   "salesThisMonth": "Sales this month",
   "categoryUpdated": "Category updated",
-  "@categoryUpdated": {"description": "Category updated"},
+  "@categoryUpdated": {
+    "description": "Category updated"
+  },
   "changeCategory": "Change Category",
-  "@changeCategory": {"description": "Change Category"},
+  "@changeCategory": {
+    "description": "Change Category"
+  },
   "selectCategory": "Select Category",
-  "@selectCategory": {"description": "Select Category"},
+  "@selectCategory": {
+    "description": "Select Category"
+  },
   "noCategoryOptions": "No categories",
-  "@noCategoryOptions": {"description": "No category options"}
+  "@noCategoryOptions": {
+    "description": "No category options"
+  },
+  "offersTitle": "Offers",
+  "offerDetailsTitle": "Offer {ref}",
+  "@offerDetailsTitle": {
+    "description": "Offer details title",
+    "placeholders": {
+      "ref": {
+        "type": "String"
+      }
+    }
+  },
+  "city": "Ville",
+  "fieldIsRequired": "Field is required",
+  "retry": "Retry",
+  "emptyOffers": "No offers found",
+  "emptyPaliers": "No paliers found",
+  "paliersTitle": "Paliers",
+  "labelReference": "Reference",
+  "labelLaboratory": "Laboratory",
+  "labelAmount": "Amount",
+  "labelDates": "Dates",
+  "labelType": "Type",
+  "labelTierType": "Tier Type",
+  "labelMin": "Min",
+  "labelMax": "Max",
+  "labelValue": "Value",
+  "laboratoire": "Laboratory",
+  "colis": "Colis",
+  "myOrders": "My Orders",
+  "sold": "Sold",
+  "avgRealization": "Avg",
+  "obj": "Obj"
 }

@@ -1,10 +1,15 @@
 import 'package:crm/core/core.dart';
 import 'package:crm/features/orders/blocs/product/products_cubit.dart';
+import 'package:crm/features/orders/blocs/orders/orders_cubit.dart';
+import 'package:crm/features/orders/blocs/order_details/order_details_cubit.dart';
+import 'package:crm/features/orders/blocs/realization/realization_cubit.dart';
 import 'package:crm/features/orders/widgets/medicament_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cart_screen.dart';
+import 'my_orders_screen.dart';
+import 'realization_stats_page.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -18,20 +23,22 @@ class _ProductsPageState extends State<ProductsPage> {
   late ProductsCubit _productsCubit;
 
   final TextEditingController _searchController = TextEditingController();
+  String? _selectedLab; // null => All
 
   @override
   void initState() {
     super.initState();
     _productsCubit = context.read<ProductsCubit>();
 
-    if (_productsCubit.state
-        .maybeWhen(orElse: () => true, loaded: (products) => products.isEmpty)) {
+    if (_productsCubit.state.maybeWhen(
+        orElse: () => true, loaded: (products) => products.isEmpty)) {
       _productsCubit.loadProducts(query: '');
     }
 
     // Listen to scroll events to load more products when reaching the bottom
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
         _productsCubit.loadMoreProducts(
           query: _searchController.text,
         );
@@ -52,11 +59,39 @@ class _ProductsPageState extends State<ProductsPage> {
       appBar: AppBar(
         title: Text(context.i10n.products),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.list_alt),
+            tooltip: 'My Orders',
+            onPressed: () {
+              context.push(
+                MultiBlocProvider(
+                  providers: [
+                    BlocProvider(create: (_) => OrdersCubit()..load()),
+                    BlocProvider(create: (_) => OrderDetailsCubit()),
+                    BlocProvider(create: (_) => RealizationCubit()..load()),
+                  ],
+                  child: const MyOrdersScreen(),
+                ),
+              );
+            },
+          ),
           // Cart icon to navigate to cart page
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
               context.push(CartScreen());
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.insights),
+            tooltip: 'Stats',
+            onPressed: () {
+              context.push(
+                BlocProvider(
+                  create: (_) => RealizationCubit(),
+                  child: const RealizationStatsPage(),
+                ),
+              );
             },
           ),
         ],
@@ -83,48 +118,162 @@ class _ProductsPageState extends State<ProductsPage> {
             child: BlocBuilder<ProductsCubit, ProductsState>(
               builder: (context, state) {
                 return state.when(
-                  initial: () => const Center(child: CircularProgressIndicator()),
-                  loading: () => const Center(child: CircularProgressIndicator()),
-                  loaded: (products) => RefreshIndicator(
-                    onRefresh: () async {
-                      _productsCubit.reset();
-                      await _productsCubit.loadProducts(query: _searchController.text);
-                    },
-                    child: ListView.separated(
-                      padding: EdgeInsets.symmetric(horizontal: kPaddingMd1),
-                      physics: AlwaysScrollableScrollPhysics(),
-                      controller: _scrollController,
-                      itemCount: products.length,
-                      shrinkWrap: true,
-                      separatorBuilder: (context, index) => SizedBox(height: kPaddingSm3),
-                      itemBuilder: (context, index) {
-                        final product = products[index];
-                        return MedicamentCard(medicament: product);
+                  initial: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  loaded: (products) {
+                    // Build unique lab list from products
+                    final labs = products
+                        .map((p) => (p.laboratoire ?? '').trim())
+                        .where((l) => l.isNotEmpty)
+                        .toSet()
+                        .toList()
+                      ..sort(
+                          (a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+
+                    final filtered = _selectedLab == null
+                        ? products
+                        : products
+                            .where((p) =>
+                                (p.laboratoire ?? '').trim() == _selectedLab)
+                            .toList();
+
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        _productsCubit.reset();
+                        await _productsCubit.loadProducts(
+                            query: _searchController.text);
                       },
-                    ),
-                  ),
-                  loadingMore: (products) => RefreshIndicator(
-                    onRefresh: () async {
-                      _productsCubit.reset();
-                      await _productsCubit.loadProducts(query: _searchController.text);
-                    },
-                    child: ListView.separated(
-                      padding: EdgeInsets.symmetric(horizontal: kPaddingMd1),
-                      physics: AlwaysScrollableScrollPhysics(),
-                      controller: _scrollController,
-                      itemCount: products.length + 1,
-                      // Add one more item for the loading indicator
-                      shrinkWrap: true,
-                      separatorBuilder: (context, index) => SizedBox(height: kPaddingSm3),
-                      itemBuilder: (context, index) {
-                        if (index == products.length) {
-                          return const Center(child: CircularProgressIndicator());
-                        }
-                        final product = products[index];
-                        return MedicamentCard(medicament: product);
+                      child: Column(
+                        children: [
+                          if (labs.isNotEmpty)
+                            Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: kPaddingMd1),
+                              child: DropdownButtonFormField<String>(
+                                isExpanded: true,
+                                decoration: InputDecoration(
+                                  labelText: context.i10n.labelLaboratory,
+                                  border: const OutlineInputBorder(),
+                                ),
+                                value: _selectedLab,
+                                items: [
+                                  DropdownMenuItem<String>(
+                                    value: null,
+                                    child: Text(context.i10n.eventAll),
+                                  ),
+                                  ...labs.map(
+                                    (lab) => DropdownMenuItem<String>(
+                                      value: lab,
+                                      child: Text(lab,
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (val) => setState(() {
+                                  _selectedLab = val;
+                                }),
+                              ),
+                            ),
+                          Expanded(
+                            child: ListView.separated(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: kPaddingMd1),
+                              physics: AlwaysScrollableScrollPhysics(),
+                              controller: _scrollController,
+                              itemCount: filtered.length,
+                              shrinkWrap: true,
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: kPaddingSm3),
+                              itemBuilder: (context, index) {
+                                final product = filtered[index];
+                                return MedicamentCard(medicament: product);
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  loadingMore: (products) {
+                    final labs = products
+                        .map((p) => (p.laboratoire ?? '').trim())
+                        .where((l) => l.isNotEmpty)
+                        .toSet()
+                        .toList()
+                      ..sort(
+                          (a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+
+                    final filtered = _selectedLab == null
+                        ? products
+                        : products
+                            .where((p) =>
+                                (p.laboratoire ?? '').trim() == _selectedLab)
+                            .toList();
+
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        _productsCubit.reset();
+                        await _productsCubit.loadProducts(
+                            query: _searchController.text);
                       },
-                    ),
-                  ),
+                      child: Column(
+                        children: [
+                          if (labs.isNotEmpty)
+                            Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: kPaddingMd1),
+                              child: DropdownButtonFormField<String>(
+                                isExpanded: true,
+                                decoration: InputDecoration(
+                                  labelText: context.i10n.labelLaboratory,
+                                  border: const OutlineInputBorder(),
+                                ),
+                                value: _selectedLab,
+                                items: [
+                                  DropdownMenuItem<String>(
+                                    value: null,
+                                    child: Text(context.i10n.eventAll),
+                                  ),
+                                  ...labs.map(
+                                    (lab) => DropdownMenuItem<String>(
+                                      value: lab,
+                                      child: Text(lab,
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (val) => setState(() {
+                                  _selectedLab = val;
+                                }),
+                              ),
+                            ),
+                          Expanded(
+                            child: ListView.separated(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: kPaddingMd1),
+                              physics: AlwaysScrollableScrollPhysics(),
+                              controller: _scrollController,
+                              itemCount: filtered.length + 1,
+                              // Add one more item for the loading indicator
+                              shrinkWrap: true,
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: kPaddingSm3),
+                              itemBuilder: (context, index) {
+                                if (index == filtered.length) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                }
+                                final product = filtered[index];
+                                return MedicamentCard(medicament: product);
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                   failure: (message) => Center(child: Text(message)),
                 );
               },

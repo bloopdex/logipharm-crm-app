@@ -10,6 +10,7 @@ class User with _$User {
   const factory User({
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'cmpId') int? companyId,
+    @JsonKey(name: 'cmpType') int? companyType,
     @JsonKey(name: 'typeTier') String? typeTier,
     @JsonKey(name: 'nom') String? lastName,
     @JsonKey(name: 'prenom') String? firstName,

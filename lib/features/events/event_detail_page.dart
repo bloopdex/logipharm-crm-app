@@ -89,7 +89,9 @@ class EventDetailPage extends StatelessWidget {
                         style: context.textTheme.displaySmall,
                       ),
                       SizedBox(height: kSpacingX3),
-                      Center(child: EventStatusWidget(flag: event.statut)),
+                      Center(
+                          child:
+                              EventStatusWidget(flag: event.type == 0 ? "EN_ATTENTE" : "TERMINE")),
                       const Divider(),
                       Padding(
                         padding: EdgeInsets.symmetric(

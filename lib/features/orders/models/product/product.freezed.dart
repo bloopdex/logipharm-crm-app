@@ -54,6 +54,10 @@ mixin _$Product {
   DateTime get creerDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'colis')
   double? get colis => throw _privateConstructorUsedError;
+  @JsonKey(name: 'objectif')
+  double? get objectif => throw _privateConstructorUsedError;
+  @JsonKey(name: 'laboratoire')
+  String? get laboratoire => throw _privateConstructorUsedError;
 
   /// Serializes this Product to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -86,7 +90,9 @@ abstract class $ProductCopyWith<$Res> {
       @JsonKey(name: 'ugVnete') double? ugVnete,
       @JsonKey(name: 'etatFlag') bool? etatFlag,
       @JsonKey(name: 'creerDate') DateTime creerDate,
-      @JsonKey(name: 'colis') double? colis});
+      @JsonKey(name: 'colis') double? colis,
+      @JsonKey(name: 'objectif') double? objectif,
+      @JsonKey(name: 'laboratoire') String? laboratoire});
 }
 
 /// @nodoc
@@ -121,6 +127,8 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? etatFlag = freezed,
     Object? creerDate = null,
     Object? colis = freezed,
+    Object? objectif = freezed,
+    Object? laboratoire = freezed,
   }) {
     return _then(_value.copyWith(
       cmpId: null == cmpId
@@ -191,6 +199,14 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.colis
           : colis // ignore: cast_nullable_to_non_nullable
               as double?,
+      objectif: freezed == objectif
+          ? _value.objectif
+          : objectif // ignore: cast_nullable_to_non_nullable
+              as double?,
+      laboratoire: freezed == laboratoire
+          ? _value.laboratoire
+          : laboratoire // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -219,7 +235,9 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       @JsonKey(name: 'ugVnete') double? ugVnete,
       @JsonKey(name: 'etatFlag') bool? etatFlag,
       @JsonKey(name: 'creerDate') DateTime creerDate,
-      @JsonKey(name: 'colis') double? colis});
+      @JsonKey(name: 'colis') double? colis,
+      @JsonKey(name: 'objectif') double? objectif,
+      @JsonKey(name: 'laboratoire') String? laboratoire});
 }
 
 /// @nodoc
@@ -252,6 +270,8 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? etatFlag = freezed,
     Object? creerDate = null,
     Object? colis = freezed,
+    Object? objectif = freezed,
+    Object? laboratoire = freezed,
   }) {
     return _then(_$ProductImpl(
       cmpId: null == cmpId
@@ -322,6 +342,14 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.colis
           : colis // ignore: cast_nullable_to_non_nullable
               as double?,
+      objectif: freezed == objectif
+          ? _value.objectif
+          : objectif // ignore: cast_nullable_to_non_nullable
+              as double?,
+      laboratoire: freezed == laboratoire
+          ? _value.laboratoire
+          : laboratoire // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -346,7 +374,9 @@ class _$ProductImpl implements _Product {
       @JsonKey(name: 'ugVnete') this.ugVnete,
       @JsonKey(name: 'etatFlag') this.etatFlag,
       @JsonKey(name: 'creerDate') required this.creerDate,
-      @JsonKey(name: 'colis') this.colis});
+      @JsonKey(name: 'colis') this.colis,
+      @JsonKey(name: 'objectif') this.objectif,
+      @JsonKey(name: 'laboratoire') this.laboratoire});
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductImplFromJson(json);
@@ -402,10 +432,16 @@ class _$ProductImpl implements _Product {
   @override
   @JsonKey(name: 'colis')
   final double? colis;
+  @override
+  @JsonKey(name: 'objectif')
+  final double? objectif;
+  @override
+  @JsonKey(name: 'laboratoire')
+  final String? laboratoire;
 
   @override
   String toString() {
-    return 'Product(cmpId: $cmpId, prdId: $prdId, medId: $medId, stkCode: $stkCode, commercialName: $commercialName, attribut2: $attribut2, nlot: $nlot, datePeremption: $datePeremption, prixPpa: $prixPpa, qte: $qte, prixPh: $prixPh, prixGr: $prixGr, prixShp: $prixShp, ugVnete: $ugVnete, etatFlag: $etatFlag, creerDate: $creerDate, colis: $colis)';
+    return 'Product(cmpId: $cmpId, prdId: $prdId, medId: $medId, stkCode: $stkCode, commercialName: $commercialName, attribut2: $attribut2, nlot: $nlot, datePeremption: $datePeremption, prixPpa: $prixPpa, qte: $qte, prixPh: $prixPh, prixGr: $prixGr, prixShp: $prixShp, ugVnete: $ugVnete, etatFlag: $etatFlag, creerDate: $creerDate, colis: $colis, objectif: $objectif, laboratoire: $laboratoire)';
   }
 
   @override
@@ -434,30 +470,37 @@ class _$ProductImpl implements _Product {
                 other.etatFlag == etatFlag) &&
             (identical(other.creerDate, creerDate) ||
                 other.creerDate == creerDate) &&
-            (identical(other.colis, colis) || other.colis == colis));
+            (identical(other.colis, colis) || other.colis == colis) &&
+            (identical(other.objectif, objectif) ||
+                other.objectif == objectif) &&
+            (identical(other.laboratoire, laboratoire) ||
+                other.laboratoire == laboratoire));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      cmpId,
-      prdId,
-      medId,
-      stkCode,
-      commercialName,
-      attribut2,
-      nlot,
-      datePeremption,
-      prixPpa,
-      qte,
-      prixPh,
-      prixGr,
-      prixShp,
-      ugVnete,
-      etatFlag,
-      creerDate,
-      colis);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        cmpId,
+        prdId,
+        medId,
+        stkCode,
+        commercialName,
+        attribut2,
+        nlot,
+        datePeremption,
+        prixPpa,
+        qte,
+        prixPh,
+        prixGr,
+        prixShp,
+        ugVnete,
+        etatFlag,
+        creerDate,
+        colis,
+        objectif,
+        laboratoire
+      ]);
 
   /// Create a copy of Product
   /// with the given fields replaced by the non-null parameter values.
@@ -493,7 +536,9 @@ abstract class _Product implements Product {
       @JsonKey(name: 'ugVnete') final double? ugVnete,
       @JsonKey(name: 'etatFlag') final bool? etatFlag,
       @JsonKey(name: 'creerDate') required final DateTime creerDate,
-      @JsonKey(name: 'colis') final double? colis}) = _$ProductImpl;
+      @JsonKey(name: 'colis') final double? colis,
+      @JsonKey(name: 'objectif') final double? objectif,
+      @JsonKey(name: 'laboratoire') final String? laboratoire}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
@@ -548,6 +593,12 @@ abstract class _Product implements Product {
   @override
   @JsonKey(name: 'colis')
   double? get colis;
+  @override
+  @JsonKey(name: 'objectif')
+  double? get objectif;
+  @override
+  @JsonKey(name: 'laboratoire')
+  String? get laboratoire;
 
   /// Create a copy of Product
   /// with the given fields replaced by the non-null parameter values.
