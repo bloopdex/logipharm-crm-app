@@ -9,7 +9,7 @@ part of 'user.dart';
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       id: (json['id'] as num?)?.toInt(),
       companyId: (json['cmpId'] as num?)?.toInt(),
-      companyType: (json['cmpType'] as num?)?.toInt(),
+      companyType: (json['cmpType'] as num?)?.toInt() ?? 0,
       typeTier: json['typeTier'] as String?,
       lastName: json['nom'] as String?,
       firstName: json['prenom'] as String?,

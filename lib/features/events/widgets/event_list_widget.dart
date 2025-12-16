@@ -49,10 +49,21 @@ class _EventListWidgetState extends State<EventListWidget> {
           );
         }
 
-        int flagToType = widget.flag == "EN_ATTENTE" ? 0 : 1; // 0 for "EN_ATTENTE", 1 for "TERMINE"
         final List<Event> filteredEvents = widget.flag == null
             ? events
-            : events.where((event) => event.type == flagToType).toList();
+            : events.where((event) {
+                // Prefer string-based `statut` when provided by API
+                if (event.statut != null && event.statut!.isNotEmpty) {
+                  return event.statut == widget.flag;
+                }
+                // Fallback to numeric `type` mapping: 0 -> EN_ATTENTE, 1 -> EN_COURS, 2 -> TERMINE
+                final int expectedType = widget.flag == 'EN_ATTENTE'
+                    ? 0
+                    : widget.flag == 'EN_COURS'
+                        ? 1
+                        : 2;
+                return event.type == expectedType;
+              }).toList();
 
         return RefreshIndicator(
           onRefresh: () async {

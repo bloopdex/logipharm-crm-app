@@ -147,7 +147,7 @@ const String HTTP = 'http://';
 
 const String port = "8085";
 
-const String baseUrl = 'http://127.0.0.1:$port';
+// const String baseUrl = 'http://127.0.0.1:$port';
 // const String baseUrl = 'http://bfmapp.damnserver.com:$port';
 // const String baseUrl = 'http://upromedic.hopto.org:$port';
 // const String baseUrl = 'http://bpoapp.damnserver.com:$port';
@@ -156,13 +156,14 @@ const String baseUrl = 'http://127.0.0.1:$port';
 // const String baseUrl = 'http://krdapp.damnserver.com:$port';
 // const String baseUrl = 'https://client.vecopharm-dz.com:$port';
 // const String baseUrl = 'http://192.168.0.14:$port';
-// const String baseUrl = 'http://crm.biopure.dz:$port';
+const String baseUrl = 'http://105.96.78.161:$port';
 // const String baseUrl = 'http://saouli.damnserver.com:8089';
 // const String baseUrl = 'http://192.168.9.105:8086';
 // const String baseUrl = 'http://192.168.0.14:$port';
 // const String baseUrl = 'http://10.0.2.2:$port';
 // const String baseUrl = 'http://192.168.0.109:$port';
 // const String baseUrl = 'http://optipharm.damnserver.com:$port';
+// const String baseUrl = 'http://hq.icoperdis.com:$port';
 // const String baseUrl = 'http://abm-api.damnserver.com:$port';
 // const String baseUrl = 'http://pharmadrive.damnserver.com:$port';
 // const String baseUrl = 'optipharm.damnserver.com';

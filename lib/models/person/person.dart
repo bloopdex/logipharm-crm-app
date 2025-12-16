@@ -2,6 +2,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../features/clients/models/statistics/client_statistics.dart';
+
 part 'person.freezed.dart';
 part 'person.g.dart';
 
@@ -35,7 +37,11 @@ class Person with _$Person {
     @JsonKey(name: 'prospect') bool? prospect,
     @JsonKey(name: 'solvabilite') Solvabilite? solvabilite, // Added solvabilite
     @JsonKey(name: 'modePaie') ModePaie? modePaie, // Added modePaie
+    @JsonKey(name: 'categorieId') int? categoryId,
     @JsonKey(name: 'categorieLibelle') String? categoryLabel,
+    @JsonKey(name: 'categorieId2') int? categorieId2,
+    @JsonKey(name: 'categorieLibelle2') String? categoryLabel2,
+    @JsonKey(name: 'ficheClient') ClientStatistics? clientStatistics,
   }) = _Person;
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);

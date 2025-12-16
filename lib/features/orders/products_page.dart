@@ -23,7 +23,6 @@ class _ProductsPageState extends State<ProductsPage> {
   late ProductsCubit _productsCubit;
 
   final TextEditingController _searchController = TextEditingController();
-  String? _selectedLab; // null => All
 
   @override
   void initState() {
@@ -123,22 +122,6 @@ class _ProductsPageState extends State<ProductsPage> {
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
                   loaded: (products) {
-                    // Build unique lab list from products
-                    final labs = products
-                        .map((p) => (p.laboratoire ?? '').trim())
-                        .where((l) => l.isNotEmpty)
-                        .toSet()
-                        .toList()
-                      ..sort(
-                          (a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
-
-                    final filtered = _selectedLab == null
-                        ? products
-                        : products
-                            .where((p) =>
-                                (p.laboratoire ?? '').trim() == _selectedLab)
-                            .toList();
-
                     return RefreshIndicator(
                       onRefresh: () async {
                         _productsCubit.reset();
@@ -147,47 +130,18 @@ class _ProductsPageState extends State<ProductsPage> {
                       },
                       child: Column(
                         children: [
-                          if (labs.isNotEmpty)
-                            Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: kPaddingMd1),
-                              child: DropdownButtonFormField<String>(
-                                isExpanded: true,
-                                decoration: InputDecoration(
-                                  labelText: context.i10n.labelLaboratory,
-                                  border: const OutlineInputBorder(),
-                                ),
-                                value: _selectedLab,
-                                items: [
-                                  DropdownMenuItem<String>(
-                                    value: null,
-                                    child: Text(context.i10n.eventAll),
-                                  ),
-                                  ...labs.map(
-                                    (lab) => DropdownMenuItem<String>(
-                                      value: lab,
-                                      child: Text(lab,
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
-                                  ),
-                                ],
-                                onChanged: (val) => setState(() {
-                                  _selectedLab = val;
-                                }),
-                              ),
-                            ),
                           Expanded(
                             child: ListView.separated(
                               padding:
                                   EdgeInsets.symmetric(horizontal: kPaddingMd1),
                               physics: AlwaysScrollableScrollPhysics(),
                               controller: _scrollController,
-                              itemCount: filtered.length,
+                              itemCount: products.length,
                               shrinkWrap: true,
                               separatorBuilder: (context, index) =>
                                   SizedBox(height: kPaddingSm3),
                               itemBuilder: (context, index) {
-                                final product = filtered[index];
+                                final product = products[index];
                                 return MedicamentCard(medicament: product);
                               },
                             ),
@@ -197,81 +151,31 @@ class _ProductsPageState extends State<ProductsPage> {
                     );
                   },
                   loadingMore: (products) {
-                    final labs = products
-                        .map((p) => (p.laboratoire ?? '').trim())
-                        .where((l) => l.isNotEmpty)
-                        .toSet()
-                        .toList()
-                      ..sort(
-                          (a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
-
-                    final filtered = _selectedLab == null
-                        ? products
-                        : products
-                            .where((p) =>
-                                (p.laboratoire ?? '').trim() == _selectedLab)
-                            .toList();
-
-                    return RefreshIndicator(
-                      onRefresh: () async {
-                        _productsCubit.reset();
-                        await _productsCubit.loadProducts(
-                            query: _searchController.text);
-                      },
-                      child: Column(
-                        children: [
-                          if (labs.isNotEmpty)
-                            Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: kPaddingMd1),
-                              child: DropdownButtonFormField<String>(
-                                isExpanded: true,
-                                decoration: InputDecoration(
-                                  labelText: context.i10n.labelLaboratory,
-                                  border: const OutlineInputBorder(),
-                                ),
-                                value: _selectedLab,
-                                items: [
-                                  DropdownMenuItem<String>(
-                                    value: null,
-                                    child: Text(context.i10n.eventAll),
-                                  ),
-                                  ...labs.map(
-                                    (lab) => DropdownMenuItem<String>(
-                                      value: lab,
-                                      child: Text(lab,
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
-                                  ),
-                                ],
-                                onChanged: (val) => setState(() {
-                                  _selectedLab = val;
-                                }),
-                              ),
-                            ),
-                          Expanded(
-                            child: ListView.separated(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: kPaddingMd1),
-                              physics: AlwaysScrollableScrollPhysics(),
-                              controller: _scrollController,
-                              itemCount: filtered.length + 1,
-                              // Add one more item for the loading indicator
-                              shrinkWrap: true,
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(height: kPaddingSm3),
-                              itemBuilder: (context, index) {
-                                if (index == filtered.length) {
-                                  return const Center(
-                                      child: CircularProgressIndicator());
-                                }
-                                final product = filtered[index];
-                                return MedicamentCard(medicament: product);
-                              },
-                            ),
+                    return Column(
+                      children: [
+                        Expanded(
+                          child: ListView.separated(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: kPaddingMd1),
+                            controller: _scrollController,
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            itemCount: products.length + 1,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: kPaddingSm3),
+                            itemBuilder: (context, index) {
+                              if (index == products.length) {
+                                return const Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Center(
+                                      child: CircularProgressIndicator()),
+                                );
+                              }
+                              final product = products[index];
+                              return MedicamentCard(medicament: product);
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     );
                   },
                   failure: (message) => Center(child: Text(message)),

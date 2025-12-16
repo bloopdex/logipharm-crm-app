@@ -30,6 +30,11 @@ _$ContactImpl _$$ContactImplFromJson(Map<String, dynamic> json) =>
       connaissanceProduit: json['connaissanceProduit'] as String?,
       prescripteur: json['prescripteur'] as String?,
       objections: json['objections'] as String?,
+      medecinTraitant: json['medecinTraitant'] as String?,
+      specialiteMedecin: json['specialiteMedecin'] as String?,
+      typeDiabete: json['typeDiabete'] as String?,
+      testeProduit: json['testeProduit'] as String?,
+      resultatTest: json['resultatTest'] as String?,
     );
 
 Map<String, dynamic> _$$ContactImplToJson(_$ContactImpl instance) =>
@@ -56,6 +61,11 @@ Map<String, dynamic> _$$ContactImplToJson(_$ContactImpl instance) =>
       'connaissanceProduit': instance.connaissanceProduit,
       'prescripteur': instance.prescripteur,
       'objections': instance.objections,
+      'medecinTraitant': instance.medecinTraitant,
+      'specialiteMedecin': instance.specialiteMedecin,
+      'typeDiabete': instance.typeDiabete,
+      'testeProduit': instance.testeProduit,
+      'resultatTest': instance.resultatTest,
     };
 
 _$ContactCreateUpdateImpl _$$ContactCreateUpdateImplFromJson(
@@ -82,6 +92,11 @@ _$ContactCreateUpdateImpl _$$ContactCreateUpdateImplFromJson(
       connaissanceProduit: json['connaissanceProduit'] as String?,
       prescripteur: json['prescripteur'] as String?,
       objections: json['objections'] as String?,
+      medecinTraitant: json['medecinTraitant'] as String?,
+      specialiteMedecin: json['specialiteMedecin'] as String?,
+      typeDiabete: json['typeDiabete'] as String?,
+      testeProduit: json['testeProduit'] as String?,
+      resultatTest: json['resultatTest'] as String?,
     );
 
 Map<String, dynamic> _$$ContactCreateUpdateImplToJson(
@@ -108,4 +123,9 @@ Map<String, dynamic> _$$ContactCreateUpdateImplToJson(
       'connaissanceProduit': instance.connaissanceProduit,
       'prescripteur': instance.prescripteur,
       'objections': instance.objections,
+      'medecinTraitant': instance.medecinTraitant,
+      'specialiteMedecin': instance.specialiteMedecin,
+      'typeDiabete': instance.typeDiabete,
+      'testeProduit': instance.testeProduit,
+      'resultatTest': instance.resultatTest,
     };

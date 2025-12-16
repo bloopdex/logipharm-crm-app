@@ -12,6 +12,7 @@ import 'package:map_launcher/map_launcher.dart';
 import '../../core/core.dart';
 import '../../logic/auth/auth_bloc.dart';
 import '../../shared/widgets/buttons/circlebutton.text.widget.dart';
+import '../contacts/contact_form_page.dart';
 import '../events/models/event/event.dart';
 import '../hiring/create-hire.page.dart';
 import '../todo/create-event.page.dart';
@@ -22,7 +23,6 @@ import '../tour-plan/models/goal/goal.dart';
 import '../tour-plan/models/tour.dart';
 import '../tour-plan/widget/current.plan.widget.dart';
 import '../visits/create-visit.page.dart';
-import '../contacts/contact_form_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -75,7 +75,8 @@ class HomePage extends StatelessWidget {
                   final Event? event = events.maybeWhen(
                     orElse: () => null,
                     loaded: (events) {
-                      return events.firstOrNull;
+                      return events.where((element) => element.statut == 'EN_COURS')
+                          .firstOrNull;
                     },
                   );
 
@@ -323,17 +324,17 @@ class HomePage extends StatelessWidget {
                     },
                   ),
                 ),
-                Expanded(
-                  child: CircleButtonText(
-                    icon: Icons.person_add_rounded,
-                    text: context.i10n.homeHireNewClient,
-                    onPressed: () {
-                      context.push(const CreateHirePage());
-                    },
-                  ),
-                ),
-                // TODO: Enable this for company type 0 (Pharma distributor)
                 if (user.companyType == 0)
+                  Expanded(
+                    child: CircleButtonText(
+                      icon: Icons.person_add_rounded,
+                      text: context.i10n.homeHireNewClient,
+                      onPressed: () {
+                        context.push(const CreateHirePage());
+                      },
+                    ),
+                  ),
+                if (user.companyType == 1)
                   Expanded(
                     child: CircleButtonText(
                       icon: Icons.person_add_alt_1_rounded,

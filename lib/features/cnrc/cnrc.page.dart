@@ -28,7 +28,8 @@ class CommercialRegisterContent extends StatefulWidget {
   const CommercialRegisterContent({super.key});
 
   @override
-  State<CommercialRegisterContent> createState() => _CommercialRegisterContentState();
+  State<CommercialRegisterContent> createState() =>
+      _CommercialRegisterContentState();
 }
 
 class _CommercialRegisterContentState extends State<CommercialRegisterContent> {
@@ -58,8 +59,10 @@ class _CommercialRegisterContentState extends State<CommercialRegisterContent> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
             constraints: BoxConstraints(
-              minHeight: context.height - context.appBarSize - context.paddingBottom,
-              maxHeight: context.height - context.appBarSize - context.paddingBottom,
+              minHeight:
+                  context.height - context.appBarSize - context.paddingBottom,
+              maxHeight:
+                  context.height - context.appBarSize - context.paddingBottom,
               minWidth: context.width,
               maxWidth: context.width,
             ),
@@ -69,8 +72,10 @@ class _CommercialRegisterContentState extends State<CommercialRegisterContent> {
                   hintText: context.i10n.searchClient,
                 ),
                 Expanded(
-                  child: BlocBuilder<CommercialRegisterCubit, CommercialRegisterState>(
-                    builder: (BuildContext context, CommercialRegisterState state) {
+                  child: BlocBuilder<CommercialRegisterCubit,
+                      CommercialRegisterState>(
+                    builder:
+                        (BuildContext context, CommercialRegisterState state) {
                       return state.maybeWhen(orElse: () {
                         return const Center(
                           child: Loader(),
@@ -117,28 +122,37 @@ class _CommercialRegisterContentState extends State<CommercialRegisterContent> {
                                 ));
                               },
                               child: ListTile(
-                                  contentPadding: EdgeInsets.symmetric(vertical: kPaddingSm1),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: kPaddingSm1),
                                   leading: ProfileCard(
-                                    text: '${cnrc[index].firstName} ${cnrc[index].lastName}',
+                                    text:
+                                        '${cnrc[index].firstName} ${cnrc[index].lastName}',
                                   ),
-                                  title: Text('${cnrc[index].firstName} ${cnrc[index].lastName}',
+                                  title: Text(
+                                      '${cnrc[index].firstName} ${cnrc[index].lastName}',
                                       maxLines: 2,
                                       softWrap: true,
-                                      style: context.textTheme.headlineMedium!.copyWith(
+                                      style: context.textTheme.headlineMedium!
+                                          .copyWith(
                                         fontWeight: FontWeight.w600,
                                         color: kPrimaryColor,
                                       )),
                                   subtitle: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        cnrc[index].stateWilaya ?? context.i10n.noRegion,
+                                        cnrc[index].stateWilaya ??
+                                            context.i10n.noRegion,
                                         style: context.textTheme.bodyMedium!
-                                            .copyWith(fontWeight: FontWeight.w600),
+                                            .copyWith(
+                                                fontWeight: FontWeight.w600),
                                       ),
                                       Text(
-                                        cnrc[index].address ?? context.i10n.noAddress,
-                                        style: context.textTheme.bodyMedium!.copyWith(
+                                        cnrc[index].address ??
+                                            context.i10n.noAddress,
+                                        style: context.textTheme.bodyMedium!
+                                            .copyWith(
                                           fontSize: 12.h,
                                         ),
                                         maxLines: 2,
@@ -153,16 +167,20 @@ class _CommercialRegisterContentState extends State<CommercialRegisterContent> {
                                           initialData: {
                                             'id': '${cnrc[index].id}',
                                             'nom': '${cnrc[index].lastName}',
-                                            'prenom': '${cnrc[index].firstName}',
-                                            'address': cnrc[index].address ?? '',
-                                            'regionId': cnrc[index].stateWilaya ?? '',
+                                            'prenom':
+                                                '${cnrc[index].firstName}',
+                                            'address':
+                                                cnrc[index].address ?? '',
+                                            'regionId':
+                                                cnrc[index].stateWilaya ?? '',
                                           },
                                         ),
                                       );
                                     },
                                     child: Text(
                                       context.i10n.hire,
-                                      style: context.textTheme.bodyMedium!.copyWith(
+                                      style: context.textTheme.bodyMedium!
+                                          .copyWith(
                                         color: kPrimaryColor,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -185,10 +203,9 @@ class _CommercialRegisterContentState extends State<CommercialRegisterContent> {
   }
 
   void _loadMore() {
-    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-      context.read<CommercialRegisterCubit>().loadMore(
-            query: context.read<SearchCubit>().state,
-          );
+    if (_scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent) {
+      context.read<CommercialRegisterCubit>().loadMore();
     }
   }
 }

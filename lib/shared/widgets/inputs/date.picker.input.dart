@@ -32,18 +32,41 @@ class CustomDatePicker extends StatefulWidget {
 
 class _CustomDatePickerState extends State<CustomDatePicker> {
   late TextEditingController controller;
+  DateTime? _selectedDate;
 
   @override
   void initState() {
     super.initState();
     controller = TextEditingController();
-    final defaultDate = widget.initialDate ?? widget.firstDate ?? DateTime.now();
-    controller.text = DateFormat(widget.dateFormat).format(defaultDate);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _hydrateInitialDate();
+  }
+
+  void _hydrateInitialDate() {
+    final storedValue = widget.data[widget.mapKey];
+    DateTime? defaultDate;
+
+    if (storedValue is String && storedValue.isNotEmpty) {
+      defaultDate = DateTime.tryParse(storedValue);
+    }
+
+    defaultDate ??= widget.initialDate ?? widget.firstDate ?? DateTime.now();
+    _selectedDate = defaultDate;
+
+    final formatted = DateFormat(widget.dateFormat).format(defaultDate);
+
+    if (DateFormat('yyyy-MM-dd').format(defaultDate) ==
+        DateFormat('yyyy-MM-dd').format(DateTime.now())) {
+      controller.text = context.i10n.today;
+    } else {
+      controller.text = formatted;
+    }
+
+    widget.data[widget.mapKey] = formatted;
   }
 
   @override
@@ -64,7 +87,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       onTap: () async {
         final DateTime? picked = await showDatePicker(
           context: context,
-          initialDate: widget.firstDate ?? DateTime.now(),
+          initialDate: _selectedDate ?? widget.initialDate ?? DateTime.now(),
           firstDate: widget.firstDate ?? DateTime(DateTime.now().year, 1, 1),
           lastDate: widget.lastDate ?? DateTime(DateTime.now().year, 12, 31),
           helpText: context.i10n.selectDate,
@@ -84,14 +107,19 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
             );
           },
         );
+
         if (picked != null) {
           setState(() {
+            _selectedDate = picked;
             String formatted = DateFormat(widget.dateFormat).format(picked);
-            if (DateTime.now().difference(picked).inDays == 0) {
+
+            if (DateFormat('yyyy-MM-dd').format(picked) ==
+                DateFormat('yyyy-MM-dd').format(DateTime.now())) {
               controller.text = context.i10n.today;
             } else {
               controller.text = formatted;
             }
+
             widget.data[widget.mapKey] = formatted;
           });
 

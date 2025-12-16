@@ -158,12 +158,6 @@ class _OfferHeader extends StatelessWidget {
               const SizedBox(height: 8),
             ],
             _LabelValue(
-              label: context.i10n.labelAmount,
-              value: _money(offer.montant ?? offer.montantConsom),
-              color: primary,
-            ),
-            const SizedBox(height: 8),
-            _LabelValue(
               label: context.i10n.labelDates,
               value: dates,
               color: primary,

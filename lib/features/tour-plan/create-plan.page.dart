@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/core.dart';
+import '../../logic/auth/auth_bloc.dart';
 import '../../logic/counter_cubit.dart';
 import '../../logic/selection_cubit.dart';
 import '../../shared/widgets/buttons/button.widget.dart';
@@ -27,12 +28,14 @@ class CreatePlanPage extends StatefulWidget {
 
 class _CreatePlanPageState extends State<CreatePlanPage> {
   Map<String, dynamic> data = {};
+  late final SelectionCubit _selectionCubit;
 
   @override
   void initState() {
     super.initState();
     context.read<CounterCubit>().reset();
     context.read<TourCreationCubit>().reset();
+    _selectionCubit = SelectionCubit()..clear();
     String? delegate;
     if (context.read<DelegateCubit>().state.isNotEmpty) {
       delegate = context.read<DelegateCubit>().state.first.id.toString();
@@ -42,10 +45,16 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
   }
 
   @override
+  void dispose() {
+    _selectionCubit.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<SelectionCubit>(lazy: false, create: (context) => SelectionCubit()..clear()),
+        BlocProvider<SelectionCubit>.value(value: _selectionCubit),
       ],
       child: BlocBuilder<TourCreationCubit, TourCreationState>(
         builder: (context, state) {
@@ -80,6 +89,10 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
                           ),
                         ],
                       ),
+                      leading: IconButton(
+                        icon: const Icon(Icons.chevron_left_rounded),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
                       backgroundColor: Colors.white,
                       elevation: 0,
                     ),
@@ -88,8 +101,12 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
                       constraints: BoxConstraints(
                         maxWidth: context.width,
                         minWidth: context.width,
-                        maxHeight: context.height - context.appBarSize - context.paddingBottom,
-                        minHeight: context.height - context.appBarSize - context.paddingBottom,
+                        maxHeight: context.height -
+                            context.appBarSize -
+                            context.paddingBottom,
+                        minHeight: context.height -
+                            context.appBarSize -
+                            context.paddingBottom,
                       ),
                       child: BlocBuilder<CounterCubit, int>(
                         builder: (context, state) {
@@ -111,34 +128,80 @@ class _CreatePlanPageState extends State<CreatePlanPage> {
                               SizedBox(height: kSpacingX4),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    right: kPaddingMd2, left: kPaddingMd2, bottom: kPaddingMd2),
-                                child: CustomButton(
-                                  text: state < 2 ? context.i10n.next : context.i10n.validate,
-                                  onPressed: () {
-                                    switch (state) {
-                                      case 0:
-                                        if (data['delegueId'] == null) {
-                                          return;
-                                        }
-                                        context.read<CounterCubit>().increment();
-                                        break;
-                                      case 1:
-                                        if (context.read<SelectionCubit>().state.selected.isEmpty) {
-                                          return;
-                                        }
-                                        data['pharmacieIds'] = context
-                                            .read<SelectionCubit>()
-                                            .state
-                                            .selected
-                                            .map((e) => e)
-                                            .toList();
-                                        context.read<CounterCubit>().increment();
-                                        break;
-                                      case 2:
-                                        context.read<TourCreationCubit>().validate(data: data);
-                                        break;
-                                    }
-                                  },
+                                    right: kPaddingMd2,
+                                    left: kPaddingMd2,
+                                    bottom: kPaddingMd2),
+                                child: Row(
+                                  children: [
+                                    if (state > 0) ...[
+                                      Expanded(
+                                        child: CustomButton(
+                                          backgroundColor: kCardinal,
+                                          text: context.i10n.back,
+                                          onPressed: () {
+                                            context
+                                                .read<CounterCubit>()
+                                                .decrement();
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(width: kSpacingX2),
+                                    ],
+                                    Expanded(
+                                      child: CustomButton(
+                                        text: state < 2
+                                            ? context.i10n.next
+                                            : context.i10n.validate,
+                                        onPressed: () {
+                                          switch (state) {
+                                            case 0:
+                                              if (data['delegueId'] == null) {
+                                                return;
+                                              }
+                                              context
+                                                  .read<CounterCubit>()
+                                                  .increment();
+                                              break;
+                                            case 1:
+                                              if (context
+                                                  .read<SelectionCubit>()
+                                                  .state
+                                                  .selected
+                                                  .isEmpty) {
+                                                return;
+                                              }
+                                              final user =
+                                                  context.read<AuthBloc>().user;
+                                              final selected = context
+                                                  .read<SelectionCubit>()
+                                                  .state
+                                                  .selected
+                                                  .map((e) => e)
+                                                  .toList();
+                                              if (user.companyType == 1) {
+                                                // Contacts flow: keep legacy request format
+                                                // - pharmacieIds must be ['id:typeclient', ...]
+                                                // - add contactId: 1 as a flag
+                                                data['pharmacieIds'] = selected;
+                                                data['contactId'] = 1;
+                                              } else {
+                                                // Clients flow: keep existing pharmacyIds format id:typeTier
+                                                data['pharmacieIds'] = selected;
+                                              }
+                                              context
+                                                  .read<CounterCubit>()
+                                                  .increment();
+                                              break;
+                                            case 2:
+                                              context
+                                                  .read<TourCreationCubit>()
+                                                  .validate(data: data);
+                                              break;
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               )
                             ],

@@ -406,6 +406,7 @@
   "@contactsTitle": {
     "description": "Contacts page title"
   },
+  "contacts": "Contacts",
   "contactsPharmacien": "Pharmacist",
   "@contactsPharmacien": {
     "description": "Category: Pharmacist"
@@ -1070,11 +1071,11 @@
   "@passwordLengthError": {
     "description": "Password must be at least 6 characters"
   },
-  "blockageCommercial": "Commercial Blockage",
+  "blockageCommercial": "Commercial",
   "@blockageCommercial": {
     "description": "Commercial Blockage"
   },
-  "blockageFinancial": "Financial Blockage",
+  "blockageFinancial": "Financial",
   "@blockageFinancial": {
     "description": "Financial Blockage"
   },
@@ -1154,6 +1155,7 @@
   "noTitle": "No Title",
   "eventType": "Event Type",
   "eventAll": "All Events",
+  "allLaboratories": "All Laboratories",
   "eventPending": "Pending",
   "eventInProgress": "In Progress",
   "eventCompleted": "Completed",
@@ -1213,6 +1215,109 @@
   "generic": "Generic",
   "price": "Price",
   "type": "Type",
+  "contactLabel": "Contact",
+  "@contactLabel": {
+    "description": "Single contact label"
+  },
+  "selectContact": "Select contact",
+  "@selectContact": {
+    "description": "Select contact placeholder"
+  },
+  "visitCreationContactTypeLabel": "Contact type",
+  "@visitCreationContactTypeLabel": {
+    "description": "Contact type label for visit"
+  },
+  "yesLabel": "Yes",
+  "@yesLabel": {
+    "description": "Yes label"
+  },
+  "noLabel": "No",
+  "@noLabel": {
+    "description": "No label"
+  },
+  "visitFieldNomInterlocuteur": "Interlocutor name",
+  "visitFieldFonction": "Function",
+  "visitFieldReceptionPrescription": "Prescription received",
+  "visitFieldPrescriptionDetails": "Prescription details",
+  "visitFieldProduitConcurrent": "Competing product",
+  "visitFieldObjections": "Objections",
+  "visitFieldPotentiel": "Potential",
+  "visitFieldConnaissanceProduit": "Product knowledge",
+  "visitFieldPrescripteur": "Prescriber",
+  "visitFieldPromessePrescription": "Prescription commitment",
+  "visitFieldMedecinTraitant": "Attending physician",
+  "visitFieldSpecialiteMedecin": "Doctor's specialty",
+  "visitFieldTypeDiabete": "Diabetes type",
+  "visitFieldPatientConnaissanceProduit": "Patient product knowledge",
+  "visitFieldTesteProduit": "Tested product",
+  "visitFieldResultatTest": "Test result",
+  "phone1": "Phone 1",
+  "@phone1": {
+    "description": "First phone number"
+  },
+  "phone2": "Phone 2",
+  "@phone2": {
+    "description": "Second phone number"
+  },
+  "contactWilayaId": "Wilaya ID",
+  "contactRegionLib": "Region name",
+  "contactVilId": "City ID",
+  "contactDelegueId": "Delegate ID",
+  "contactRcCode": "RC code",
+  "contactFiscalCode": "Fiscal code",
+  "contactNis": "NIS",
+  "contactArticleCode": "Article code",
+  "contactSpecialite": "Specialty",
+  "contactPotentiel": "Potential",
+  "contactConnaissanceProduit": "Product knowledge",
+  "contactPrescripteur": "Prescriber",
+  "contactObjections": "Objections",
+  "contactMedecinTraitant": "Attending physician",
+  "contactSpecialiteMedecin": "Doctor's specialty",
+  "contactTypeDiabete": "Diabetes type",
+  "contactPatientConnaissanceProduit": "Patient product knowledge",
+  "contactTesteProduit": "Tested product",
+  "contactResultatTest": "Test result",
+  "visitHintNomInterlocuteur": "Enter the interlocutor name",
+  "visitHintFonction": "Enter the interlocutor function",
+  "visitHintReceptionPrescription": "Was a prescription received?",
+  "visitHintPrescriptionDetails": "Describe prescription details",
+  "visitHintProduitConcurrent": "Mention any competing product",
+  "visitHintObjections": "Note any objections raised",
+  "visitHintPotentiel": "Indicate potential level",
+  "visitHintConnaissanceProduit": "Does the contact know the product?",
+  "visitHintPrescripteur": "Is the contact a prescriber?",
+  "visitHintPromessePrescription": "Any commitment to prescribe?",
+  "visitHintMedecinTraitant": "Enter attending physician name",
+  "visitHintSpecialiteMedecin": "Enter doctor's specialty",
+  "visitHintTypeDiabete": "Enter diabetes type",
+  "visitHintPatientConnaissanceProduit": "Does the patient know the product?",
+  "visitHintTesteProduit": "Has the product been tested?",
+  "visitHintResultatTest": "Enter test result",
+  "emailHint": "name@example.com",
+  "phone1Hint": "+213 5x xx xx xx",
+  "phone2Hint": "+213 7x xx xx xx",
+  "addressHint": "Street and number",
+  "cityHint": "Enter city name",
+  "contactWilayaIdHint": "Enter wilaya code",
+  "contactRegionLibHint": "Enter region name",
+  "contactVilIdHint": "Enter city code",
+  "contactDelegueIdHint": "Enter delegate ID",
+  "contactRcCodeHint": "Commercial register number",
+  "contactFiscalCodeHint": "Tax identification number",
+  "contactNisHint": "Statistical ID (NIS)",
+  "contactArticleCodeHint": "Article code if applicable",
+  "contactSpecialiteHint": "Medical specialty",
+  "contactPotentielHint": "Potential level",
+  "contactConnaissanceProduitHint": "Product knowledge (Yes/No)",
+  "contactPrescripteurHint": "Prescriber (Yes/No)",
+  "contactObjectionsHint": "Enter objections if any",
+  "contactMedecinTraitantHint": "Attending physician name",
+  "contactSpecialiteMedecinHint": "Physician's specialty",
+  "contactTypeDiabeteHint": "Diabetes type",
+  "contactPatientConnaissanceProduitHint": "Patient knowledge (Yes/No)",
+  "contactTesteProduitHint": "Tested product (Yes/No)",
+  "contactResultatTestHint": "Test result details",
   "ppa": "PPA",
   "addToCart": "Add to Cart",
   "emptyCart": "Empty Cart",

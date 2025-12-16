@@ -7,9 +7,11 @@ import 'package:crm/shared/widgets/loading/loader.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import '../../logic/time.range/time_range_cubit.dart';
 import '../../shared/widgets/image/svg.dart';
+import 'visit-detail.page.dart' as general_visit_detail;
 
 class VisitPage extends StatefulWidget {
   const VisitPage({super.key});
@@ -34,8 +36,12 @@ class _VisitPageState extends State<VisitPage> {
       constraints: BoxConstraints(
         maxWidth: context.width,
         minWidth: context.width,
-        maxHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
-        minHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
+        maxHeight: context.height -
+            context.appBarSize -
+            context.bottomNavigationBarSize,
+        minHeight: context.height -
+            context.appBarSize -
+            context.bottomNavigationBarSize,
       ),
       child: MultiBlocListener(
         listeners: [
@@ -57,7 +63,7 @@ class _VisitPageState extends State<VisitPage> {
                 context.read<VisitBloc>().add(const VisitEvent.started());
               },
               child: state.maybeWhen(
-                loaded: (visits, _, __) {
+                loaded: (visits, hasReachedMax, __) {
                   if (visits.isEmpty) {
                     return Center(
                         child: Column(
@@ -82,10 +88,50 @@ class _VisitPageState extends State<VisitPage> {
                       ],
                     ));
                   }
+                  // Group visits by date (yyyy-MM-dd)
+                  final Map<String, List<TourDetail>> groups = {};
+                  for (final v in visits) {
+                    final key = _dateKey(v.startDate);
+                    groups.putIfAbsent(key, () => []).add(v);
+                  }
+                  final keys = groups.keys.toList()
+                    ..sort((a, b) => b.compareTo(a));
+
+                  final items = <_GroupItem>[];
+                  for (final k in keys) {
+                    items.add(_GroupItem.header(k));
+                    for (final v in groups[k]!) {
+                      items.add(_GroupItem.item(v));
+                    }
+                  }
+
                   return ListView.builder(
-                    itemCount: visits.length,
+                    controller: _scrollController,
+                    itemCount: items.length,
                     itemBuilder: (context, index) {
-                      return VisitCard(visit: visits[index]);
+                      final it = items[index];
+                      if (it.isHeader) {
+                        return Padding(
+                          padding: EdgeInsets.fromLTRB(kPaddingMd2, kPaddingMd2,
+                              kPaddingMd2, kPaddingSm2),
+                          child: Text(
+                            _displayDate(context, it.header!),
+                            style: context.textTheme.titleMedium,
+                          ),
+                        );
+                      }
+                      final visit = it.visit!;
+                      return GestureDetector(
+                        key: Key(visit.id.toString()),
+                        onTap: () {
+                          context.push(general_visit_detail.VisitDetailPage(
+                              visit: visit));
+                        },
+                        onLongPress: () {
+                          context.push(UpdateVisitPage(tour: visit));
+                        },
+                        child: VisitCard(visit: visit),
+                      );
                     },
                   );
                 },
@@ -108,11 +154,47 @@ class _VisitPageState extends State<VisitPage> {
   }
 
   void _loadMore() {
-    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
       context.read<VisitBloc>().add(const VisitEvent.load());
     }
   }
+}
+
+String _dateKey(String? iso) {
+  if (iso == null || iso.isEmpty) return '—';
+  try {
+    final d = DateTime.tryParse(iso);
+    if (d == null) return iso;
+    return DateFormat('yyyy-MM-dd').format(d);
+  } catch (_) {
+    return iso;
+  }
+}
+
+String _displayDate(BuildContext context, String isoOrKey) {
+  try {
+    final d = DateTime.tryParse(isoOrKey) ?? DateTime.parse(isoOrKey);
+    return DateFormat.yMMMMd(Localizations.localeOf(context).toString())
+        .format(d);
+  } catch (_) {
+    return isoOrKey;
+  }
+}
+
+class _GroupItem {
+  final String? header;
+  final TourDetail? visit;
+  final bool isHeader;
+
+  _GroupItem.header(this.header)
+      : visit = null,
+        isHeader = true;
+
+  _GroupItem.item(this.visit)
+      : header = null,
+        isHeader = false;
 }
 
 class VisitCard extends StatelessWidget {
@@ -131,21 +213,10 @@ class VisitCard extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(
           horizontal: kPaddingMd1,
         ),
-        leading: ProfileCard(
-          text: visit.pharmacy?.fullName ?? "",
-        ),
-        title: Row(
-          children: [
-            Expanded(
-              child: Text(
-                visit.pharmacy?.fullName ?? "",
-                maxLines: 1,
-                style: context.textTheme.bodyLarge,
-              ),
-            ),
-            SizedBox(width: kSpacingHalf),
-            Text(visit.startDate ?? "", style: context.textTheme.bodySmall),
-          ],
+        title: Text(
+          visit.pharmacy?.fullName ?? "",
+          maxLines: 1,
+          style: context.textTheme.bodyLarge,
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +231,8 @@ class VisitCard extends StatelessWidget {
                 color: kCeruleanBlue.shade100,
                 borderRadius: BorderRadius.circular(kPaddingSm3),
               ),
-              child: Text(visit.reason?.label ?? "", style: context.textTheme.bodyLarge),
+              child: Text(visit.reason?.label ?? "",
+                  style: context.textTheme.bodyLarge),
             ),
             SizedBox(height: kSpacingX1),
             Text(
@@ -169,8 +241,17 @@ class VisitCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: context.textTheme.bodyMedium,
             ),
+            Text(
+              visit.masterTourTitle ?? context.i10n.noTitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: context.textTheme.bodyMedium,
+            ),
+            SizedBox(height: kSpacingX1),
             Text(visit.reportText ?? "",
-                maxLines: 2, overflow: TextOverflow.ellipsis, style: context.textTheme.bodyMedium),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: context.textTheme.bodyMedium),
           ],
         ),
       ),

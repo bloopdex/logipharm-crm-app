@@ -591,6 +591,8 @@ mixin _$TourDetail {
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'tourneMaitreId')
   String get masterTourId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tourneTitle')
+  String? get masterTourTitle => throw _privateConstructorUsedError;
   @JsonKey(name: 'companyId')
   int get companyId => throw _privateConstructorUsedError;
   @JsonKey(name: 'regionId')
@@ -637,6 +639,7 @@ abstract class $TourDetailCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'tourneMaitreId') String masterTourId,
+      @JsonKey(name: 'tourneTitle') String? masterTourTitle,
       @JsonKey(name: 'companyId') int companyId,
       @JsonKey(name: 'regionId') String? regionId,
       @JsonKey(name: 'dateDebut') String? startDate,
@@ -673,6 +676,7 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
   $Res call({
     Object? id = null,
     Object? masterTourId = null,
+    Object? masterTourTitle = freezed,
     Object? companyId = null,
     Object? regionId = freezed,
     Object? startDate = freezed,
@@ -696,6 +700,10 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
           ? _value.masterTourId
           : masterTourId // ignore: cast_nullable_to_non_nullable
               as String,
+      masterTourTitle: freezed == masterTourTitle
+          ? _value.masterTourTitle
+          : masterTourTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
       companyId: null == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
@@ -805,6 +813,7 @@ abstract class _$$TourDetailImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'tourneMaitreId') String masterTourId,
+      @JsonKey(name: 'tourneTitle') String? masterTourTitle,
       @JsonKey(name: 'companyId') int companyId,
       @JsonKey(name: 'regionId') String? regionId,
       @JsonKey(name: 'dateDebut') String? startDate,
@@ -842,6 +851,7 @@ class __$$TourDetailImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? masterTourId = null,
+    Object? masterTourTitle = freezed,
     Object? companyId = null,
     Object? regionId = freezed,
     Object? startDate = freezed,
@@ -865,6 +875,10 @@ class __$$TourDetailImplCopyWithImpl<$Res>
           ? _value.masterTourId
           : masterTourId // ignore: cast_nullable_to_non_nullable
               as String,
+      masterTourTitle: freezed == masterTourTitle
+          ? _value.masterTourTitle
+          : masterTourTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
       companyId: null == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
@@ -927,6 +941,7 @@ class _$TourDetailImpl implements _TourDetail {
   const _$TourDetailImpl(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'tourneMaitreId') required this.masterTourId,
+      @JsonKey(name: 'tourneTitle') this.masterTourTitle,
       @JsonKey(name: 'companyId') required this.companyId,
       @JsonKey(name: 'regionId') this.regionId,
       @JsonKey(name: 'dateDebut') this.startDate,
@@ -950,6 +965,9 @@ class _$TourDetailImpl implements _TourDetail {
   @override
   @JsonKey(name: 'tourneMaitreId')
   final String masterTourId;
+  @override
+  @JsonKey(name: 'tourneTitle')
+  final String? masterTourTitle;
   @override
   @JsonKey(name: 'companyId')
   final int companyId;
@@ -993,7 +1011,7 @@ class _$TourDetailImpl implements _TourDetail {
 
   @override
   String toString() {
-    return 'TourDetail(id: $id, masterTourId: $masterTourId, companyId: $companyId, regionId: $regionId, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, statusName: $statusName, reason: $reason, report: $report, reportText: $reportText, latitude: $latitude, longitude: $longitude, pharmacy: $pharmacy, delegate: $delegate)';
+    return 'TourDetail(id: $id, masterTourId: $masterTourId, masterTourTitle: $masterTourTitle, companyId: $companyId, regionId: $regionId, startDate: $startDate, endDate: $endDate, statusFlag: $statusFlag, statusName: $statusName, reason: $reason, report: $report, reportText: $reportText, latitude: $latitude, longitude: $longitude, pharmacy: $pharmacy, delegate: $delegate)';
   }
 
   @override
@@ -1004,6 +1022,8 @@ class _$TourDetailImpl implements _TourDetail {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.masterTourId, masterTourId) ||
                 other.masterTourId == masterTourId) &&
+            (identical(other.masterTourTitle, masterTourTitle) ||
+                other.masterTourTitle == masterTourTitle) &&
             (identical(other.companyId, companyId) ||
                 other.companyId == companyId) &&
             (identical(other.regionId, regionId) ||
@@ -1035,6 +1055,7 @@ class _$TourDetailImpl implements _TourDetail {
       runtimeType,
       id,
       masterTourId,
+      masterTourTitle,
       companyId,
       regionId,
       startDate,
@@ -1069,6 +1090,7 @@ abstract class _TourDetail implements TourDetail {
   const factory _TourDetail(
       {@JsonKey(name: 'id') required final String id,
       @JsonKey(name: 'tourneMaitreId') required final String masterTourId,
+      @JsonKey(name: 'tourneTitle') final String? masterTourTitle,
       @JsonKey(name: 'companyId') required final int companyId,
       @JsonKey(name: 'regionId') final String? regionId,
       @JsonKey(name: 'dateDebut') final String? startDate,
@@ -1092,6 +1114,9 @@ abstract class _TourDetail implements TourDetail {
   @override
   @JsonKey(name: 'tourneMaitreId')
   String get masterTourId;
+  @override
+  @JsonKey(name: 'tourneTitle')
+  String? get masterTourTitle;
   @override
   @JsonKey(name: 'companyId')
   int get companyId;

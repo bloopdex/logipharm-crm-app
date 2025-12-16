@@ -300,6 +300,109 @@
   "@tourCreationInProgressDescription": {
     "description": "Nous finalisons les détails de votre plan de visite. Merci pour votre patience."
   },
+  "contactLabel": "Contact",
+  "@contactLabel": {
+    "description": "Libellé contact (singulier)"
+  },
+  "selectContact": "Sélectionner un contact",
+  "@selectContact": {
+    "description": "Placeholder sélectionner contact"
+  },
+  "visitCreationContactTypeLabel": "Type de contact",
+  "@visitCreationContactTypeLabel": {
+    "description": "Libellé type de contact"
+  },
+  "yesLabel": "Oui",
+  "@yesLabel": {
+    "description": "Libellé Oui"
+  },
+  "noLabel": "Non",
+  "@noLabel": {
+    "description": "Libellé Non"
+  },
+  "visitFieldNomInterlocuteur": "Nom de l'interlocuteur",
+  "visitFieldFonction": "Fonction",
+  "visitFieldReceptionPrescription": "Réception d'ordonnance",
+  "visitFieldPrescriptionDetails": "Détails de l'ordonnance",
+  "visitFieldProduitConcurrent": "Produit concurrent",
+  "visitFieldObjections": "Objections",
+  "visitFieldPotentiel": "Potentiel",
+  "visitFieldConnaissanceProduit": "Connaissance du produit",
+  "visitFieldPrescripteur": "Prescripteur",
+  "visitFieldPromessePrescription": "Promesse de prescription",
+  "visitFieldMedecinTraitant": "Médecin traitant",
+  "visitFieldSpecialiteMedecin": "Spécialité du médecin",
+  "visitFieldTypeDiabete": "Type de diabète",
+  "visitFieldPatientConnaissanceProduit": "Connaissance du produit (patient)",
+  "visitFieldTesteProduit": "Produit testé",
+  "visitFieldResultatTest": "Résultat du test",
+  "phone1": "Téléphone 1",
+  "@phone1": {
+    "description": "Premier numéro de téléphone"
+  },
+  "phone2": "Téléphone 2",
+  "@phone2": {
+    "description": "Deuxième numéro de téléphone"
+  },
+  "contactWilayaId": "ID wilaya",
+  "contactRegionLib": "Nom de la région",
+  "contactVilId": "ID ville",
+  "contactDelegueId": "ID délégué",
+  "contactRcCode": "Code RC",
+  "contactFiscalCode": "Code fiscal",
+  "contactNis": "NIS",
+  "contactArticleCode": "Code article",
+  "contactSpecialite": "Spécialité",
+  "contactPotentiel": "Potentiel",
+  "contactConnaissanceProduit": "Connaissance du produit",
+  "contactPrescripteur": "Prescripteur",
+  "contactObjections": "Objections",
+  "contactMedecinTraitant": "Médecin traitant",
+  "contactSpecialiteMedecin": "Spécialité du médecin",
+  "contactTypeDiabete": "Type de diabète",
+  "contactPatientConnaissanceProduit": "Connaissance du produit (patient)",
+  "contactTesteProduit": "Produit testé",
+  "contactResultatTest": "Résultat du test",
+  "visitHintNomInterlocuteur": "Saisir le nom de l'interlocuteur",
+  "visitHintFonction": "Saisir la fonction de l'interlocuteur",
+  "visitHintReceptionPrescription": "Une ordonnance a-t-elle été reçue ?",
+  "visitHintPrescriptionDetails": "Décrire les détails de l'ordonnance",
+  "visitHintProduitConcurrent": "Mentionner un produit concurrent",
+  "visitHintObjections": "Noter les objections soulevées",
+  "visitHintPotentiel": "Indiquer le niveau de potentiel",
+  "visitHintConnaissanceProduit": "Le contact connaît-il le produit ?",
+  "visitHintPrescripteur": "Le contact est-il prescripteur ?",
+  "visitHintPromessePrescription": "Promesse de prescription ?",
+  "visitHintMedecinTraitant": "Nom du médecin traitant",
+  "visitHintSpecialiteMedecin": "Spécialité du médecin",
+  "visitHintTypeDiabete": "Type de diabète",
+  "visitHintPatientConnaissanceProduit": "Le patient connaît-il le produit ?",
+  "visitHintTesteProduit": "Le produit a-t-il été testé ?",
+  "visitHintResultatTest": "Saisir le résultat du test",
+  "emailHint": "nom@exemple.com",
+  "phone1Hint": "+213 5x xx xx xx",
+  "phone2Hint": "+213 7x xx xx xx",
+  "addressHint": "Rue et numéro",
+  "cityHint": "Saisir le nom de la ville",
+  "contactWilayaIdHint": "Saisir le code wilaya",
+  "contactRegionLibHint": "Saisir le nom de la région",
+  "contactVilIdHint": "Saisir le code de la ville",
+  "contactDelegueIdHint": "Saisir l'ID du délégué",
+  "contactRcCodeHint": "Numéro du registre du commerce",
+  "contactFiscalCodeHint": "Numéro d'identification fiscale",
+  "contactNisHint": "NIS (ID statistique)",
+  "contactArticleCodeHint": "Code article si applicable",
+  "contactSpecialiteHint": "Spécialité médicale",
+  "contactPotentielHint": "Niveau de potentiel",
+  "contactConnaissanceProduitHint": "Connaissance du produit (Oui/Non)",
+  "contactPrescripteurHint": "Prescripteur (Oui/Non)",
+  "contactObjectionsHint": "Saisir les objections le cas échéant",
+  "contactMedecinTraitantHint": "Nom du médecin traitant",
+  "contactSpecialiteMedecinHint": "Spécialité du médecin",
+  "contactTypeDiabeteHint": "Type de diabète",
+  "contactPatientConnaissanceProduitHint": "Connaissance du produit (Oui/Non)",
+  "contactTesteProduitHint": "Produit testé (Oui/Non)",
+  "contactResultatTestHint": "Détails du résultat du test",
   "tourCreationErrorTitle": "Une erreur s'est produite",
   "@tourCreationErrorTitle": {
     "description": "Une erreur s'est produite"
@@ -406,6 +509,7 @@
   "@contactsTitle": {
     "description": "Titre de la page contacts"
   },
+  "contacts": "Contacts",
   "contactsPharmacien": "Pharmacien",
   "@contactsPharmacien": {
     "description": "Catégorie pharmacien"
@@ -1062,11 +1166,11 @@
   "@passwordLengthError": {
     "description": "Le mot de passe doit contenir au moins 6 caractères"
   },
-  "blockageCommercial": "Blocage commercial",
+  "blockageCommercial": "Commercial",
   "@blockageCommercial": {
     "description": "Blocage commercial"
   },
-  "blockageFinancial": "Blocage financier",
+  "blockageFinancial": "Financier",
   "@blockageFinancial": {
     "description": "Blocage financier"
   },
@@ -1152,6 +1256,7 @@
   "noTitle": "Pas de titre",
   "eventType": "Type d'événement",
   "eventAll": "Tous les événements",
+  "allLaboratories": "Tous les laboratoires",
   "eventPending": "En attente",
   "eventInProgress": "En cours",
   "eventCompleted": "Terminé",

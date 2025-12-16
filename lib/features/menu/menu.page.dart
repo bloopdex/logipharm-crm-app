@@ -15,14 +15,15 @@ import '../../logic/auth/auth_bloc.dart';
 import '../../shared/widgets/buttons/circlebutton.text.widget.dart';
 import '../clients/clients.page.dart';
 import '../cnrc/cnrc.page.dart';
+import '../contacts/contacts_list_page.dart';
+import '../offers/offers_list_page.dart';
+import '../statistics/monthly_statistics_page.dart';
 import '../tour-plan/bloc/clients/clients_cubit.dart';
 import '../tour-plan/bloc/delegate_cubit.dart';
 import '../tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import '../tour-plan/core/enums.dart';
 import '../visits/create-visit.page.dart';
 import 'sections/profile.section.dart';
-import '../offers/offers_list_page.dart';
-import '../contacts/contacts_list_page.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -34,12 +35,8 @@ class MenuPage extends StatelessWidget {
         constraints: BoxConstraints(
           maxWidth: context.width,
           minWidth: context.width,
-          maxHeight: context.height -
-              context.appBarSize -
-              context.bottomNavigationBarSize,
-          minHeight: context.height -
-              context.appBarSize -
-              context.bottomNavigationBarSize,
+          maxHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
+          minHeight: context.height - context.appBarSize - context.bottomNavigationBarSize,
         ),
         child: ListView(
           children: [
@@ -58,26 +55,20 @@ class MenuPage extends StatelessWidget {
                       icon: Icons.offline_bolt_rounded,
                       text: context.i10n.homeCreateNewPlan,
                       onPressed: () {
-                        final current = context
-                            .read<TourPlanBloc>()
-                            .state
-                            .maybeWhen(
+                        final current = context.read<TourPlanBloc>().state.maybeWhen(
                               loaded: (tours, hasReachedMax, currentPage, ___) {
                                 return tours
-                                    .where((element) =>
-                                        element.statusFlag ==
-                                        StatuFlags.opened.value)
+                                    .where(
+                                        (element) => element.statusFlag == StatuFlags.opened.value)
                                     .firstOrNull;
                               },
                               orElse: () => null,
                             );
                         final user = context.read<AuthBloc>().user;
                         if (current == null || user.supervisor == 0) {
-                          Navigator.pushNamed(
-                              context, CreatePlanPage.routeName);
+                          Navigator.pushNamed(context, CreatePlanPage.routeName);
                         } else {
-                          context.errorSnackBar(
-                              context.i10n.cantCreatePlanWhileOpened);
+                          context.errorSnackBar(context.i10n.cantCreatePlanWhileOpened);
                         }
                       },
                     ),
@@ -87,18 +78,15 @@ class MenuPage extends StatelessWidget {
                       icon: Icons.fact_check_rounded,
                       text: context.i10n.homeCreateNewVisit,
                       onPressed: () {
-                        final current =
-                            context.read<TourPlanBloc>().state.maybeWhen(
-                                  loaded: (tours, hasReachedMax, currentPage,
-                                      goal) {
-                                    return tours
-                                        .where((element) =>
-                                            element.statusFlag ==
-                                            StatuFlags.opened.value)
-                                        .firstOrNull;
-                                  },
-                                  orElse: () => null,
-                                );
+                        final current = context.read<TourPlanBloc>().state.maybeWhen(
+                              loaded: (tours, hasReachedMax, currentPage, goal) {
+                                return tours
+                                    .where(
+                                        (element) => element.statusFlag == StatuFlags.opened.value)
+                                    .firstOrNull;
+                              },
+                              orElse: () => null,
+                            );
                         if (current != null &&
                             current.pharmacies != null &&
                             current.pharmacies!.isNotEmpty &&
@@ -113,12 +101,10 @@ class MenuPage extends StatelessWidget {
                         }
                       },
                       color: context.watch<TourPlanBloc>().state.maybeWhen(
-                                        loaded: (tours, hasReachedMax,
-                                            currentPage, goal) {
+                                        loaded: (tours, hasReachedMax, currentPage, goal) {
                                           return tours
                                               .where((element) =>
-                                                  element.statusFlag ==
-                                                  StatuFlags.opened.value)
+                                                  element.statusFlag == StatuFlags.opened.value)
                                               .firstOrNull;
                                         },
                                         orElse: () => null,
@@ -153,41 +139,45 @@ class MenuPage extends StatelessWidget {
             SizedBox(height: kSpacingX5),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-              child: Text(context.i10n.consultation,
-                  style: context.textTheme.bodyLarge),
+              child: Text(context.i10n.consultation, style: context.textTheme.bodyLarge),
             ),
             SizedBox(height: kSpacingX3),
             DividerContainer(
                 child: Padding(
               padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-              child: Row(
-                children: [
-                  Container(
-                    width: kSpacingX9,
-                    height: kSpacingX9,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: kCeruleanBlue.shade100,
+              child: InkWell(
+                onTap: () {
+                  context.push(const MonthlyStatisticsPage());
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      width: kSpacingX9,
+                      height: kSpacingX9,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: kCeruleanBlue.shade100,
+                      ),
+                      padding: EdgeInsets.all(kPaddingSm3),
+                      alignment: Alignment.center,
+                      child: const Icon(
+                        Icons.analytics_rounded,
+                        color: kCeruleanBlue,
+                      ),
                     ),
-                    padding: EdgeInsets.all(kPaddingSm3),
-                    alignment: Alignment.center,
-                    child: const Icon(
-                      Icons.analytics_rounded,
-                      color: kCeruleanBlue,
+                    SizedBox(width: kSpacingX3),
+                    Expanded(
+                      child: Text(
+                        context.i10n.dashboard,
+                        style: context.textTheme.bodyLarge,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: kSpacingX3),
-                  Expanded(
-                    child: Text(
-                      context.i10n.dashboard,
-                      style: context.textTheme.bodyLarge,
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: kSpacingX5,
                     ),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: kSpacingX5,
-                  ),
-                ],
+                  ],
+                ),
               ),
             )),
             DividerContainer(
@@ -228,46 +218,46 @@ class MenuPage extends StatelessWidget {
                 ),
               ),
             )),
-            DividerContainer(
-                child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-              child: InkWell(
-                onTap: () {
-                  context.push(const ClientsPage());
-                },
-                child: Row(
-                  children: [
-                    Container(
-                      width: kSpacingX9,
-                      height: kSpacingX9,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: kCeruleanBlue.shade100,
-                      ),
-                      padding: EdgeInsets.all(kPaddingSm3),
-                      alignment: Alignment.center,
-                      child: const Icon(
-                        Icons.group_rounded,
-                        color: kCeruleanBlue,
-                      ),
-                    ),
-                    SizedBox(width: kSpacingX3),
-                    Expanded(
-                      child: Text(
-                        context.i10n.clientList,
-                        style: context.textTheme.bodyLarge,
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: kSpacingX5,
-                    ),
-                  ],
-                ),
-              ),
-            )),
-            // TODO: Enable this for company type 0 (Pharma distributor)
             if (user.companyType == 0)
+              DividerContainer(
+                  child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                child: InkWell(
+                  onTap: () {
+                    context.push(const ClientsPage());
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        width: kSpacingX9,
+                        height: kSpacingX9,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: kCeruleanBlue.shade100,
+                        ),
+                        padding: EdgeInsets.all(kPaddingSm3),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.group_rounded,
+                          color: kCeruleanBlue,
+                        ),
+                      ),
+                      SizedBox(width: kSpacingX3),
+                      Expanded(
+                        child: Text(
+                          context.i10n.clientList,
+                          style: context.textTheme.bodyLarge,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: kSpacingX5,
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+            if (user.companyType == 1)
               DividerContainer(
                   child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
@@ -306,51 +296,13 @@ class MenuPage extends StatelessWidget {
                   ),
                 ),
               )),
-            DividerContainer(
-                child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-              child: InkWell(
-                onTap: () {
-                  context.push(const HirePage());
-                },
-                child: Row(
-                  children: [
-                    Container(
-                      width: kSpacingX9,
-                      height: kSpacingX9,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: kCeruleanBlue.shade100,
-                      ),
-                      padding: EdgeInsets.all(kPaddingSm3),
-                      alignment: Alignment.center,
-                      child: const Icon(
-                        Icons.assignment_ind_rounded,
-                        color: kCeruleanBlue,
-                      ),
-                    ),
-                    SizedBox(width: kSpacingX3),
-                    Expanded(
-                      child: Text(
-                        context.i10n.hiring,
-                        style: context.textTheme.bodyLarge,
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: kSpacingX5,
-                    ),
-                  ],
-                ),
-              ),
-            )),
-            DividerContainer(
-              isBottom: false,
-              child: Padding(
+            if (user.companyType == 0)
+              DividerContainer(
+                  child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
                 child: InkWell(
                   onTap: () {
-                    context.push(const CommercialRegisterPage());
+                    context.push(const HirePage());
                   },
                   child: Row(
                     children: [
@@ -364,14 +316,14 @@ class MenuPage extends StatelessWidget {
                         padding: EdgeInsets.all(kPaddingSm3),
                         alignment: Alignment.center,
                         child: const Icon(
-                          Icons.insert_drive_file_rounded,
+                          Icons.assignment_ind_rounded,
                           color: kCeruleanBlue,
                         ),
                       ),
                       SizedBox(width: kSpacingX3),
                       Expanded(
                         child: Text(
-                          context.i10n.fileCNRC,
+                          context.i10n.hiring,
                           style: context.textTheme.bodyLarge,
                         ),
                       ),
@@ -382,8 +334,48 @@ class MenuPage extends StatelessWidget {
                     ],
                   ),
                 ),
+              )),
+            if (user.companyType == 0)
+              DividerContainer(
+                isBottom: false,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                  child: InkWell(
+                    onTap: () {
+                      context.push(const CommercialRegisterPage());
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          width: kSpacingX9,
+                          height: kSpacingX9,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: kCeruleanBlue.shade100,
+                          ),
+                          padding: EdgeInsets.all(kPaddingSm3),
+                          alignment: Alignment.center,
+                          child: const Icon(
+                            Icons.insert_drive_file_rounded,
+                            color: kCeruleanBlue,
+                          ),
+                        ),
+                        SizedBox(width: kSpacingX3),
+                        Expanded(
+                          child: Text(
+                            context.i10n.fileCNRC,
+                            style: context.textTheme.bodyLarge,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: kSpacingX5,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
             DividerContainer(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
@@ -444,7 +436,7 @@ class MenuPage extends StatelessWidget {
                         padding: EdgeInsets.all(kPaddingSm3),
                         alignment: Alignment.center,
                         child: const Icon(
-                          Icons.event_rounded,
+                          Icons.shopping_bag_rounded,
                           color: kCeruleanBlue,
                         ),
                       ),
@@ -515,9 +507,7 @@ class MenuPage extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     context.read<AuthBloc>().add(const AuthEvent.loggedOut());
-                    context
-                        .read<TourPlanBloc>()
-                        .add(const TourPlanEvent.reset());
+                    context.read<TourPlanBloc>().add(const TourPlanEvent.reset());
                     context.read<VisitBloc>().add(const VisitEvent.reset());
                     context.read<ClientsCubit>().reset();
                     context.read<DelegateCubit>().reset();

@@ -12,7 +12,8 @@ class EventTabListWidget extends StatefulWidget {
   State<EventTabListWidget> createState() => _EventTabListWidgetState();
 }
 
-class _EventTabListWidgetState extends State<EventTabListWidget> with TickerProviderStateMixin {
+class _EventTabListWidgetState extends State<EventTabListWidget>
+    with TickerProviderStateMixin {
   late TabController tabController;
 
   @override
@@ -30,8 +31,9 @@ class _EventTabListWidgetState extends State<EventTabListWidget> with TickerProv
           controller: tabController,
           tabs: [
             Tab(text: context.i10n.eventAll),
-            Tab(text: context.i10n.eventPending), // EN_ATTENTE (1)
-            Tab(text: context.i10n.eventCompleted), // TERMINE (3)
+            Tab(text: context.i10n.eventPending), // EN_ATTENTE
+            Tab(text: context.i10n.eventInProgress), // EN_COURS
+            Tab(text: context.i10n.eventCompleted), // TERMINE
           ],
         ),
         SizedBox(height: kSpacingX4),
@@ -40,8 +42,13 @@ class _EventTabListWidgetState extends State<EventTabListWidget> with TickerProv
             controller: tabController,
             children: [
               EventListWidget(state: widget.state, flag: null), // All events
-              EventListWidget(state: widget.state, flag: "EN_ATTENTE"), // Pending (EN_ATTENTE)
-              EventListWidget(state: widget.state, flag: "TERMINE"), // Completed (TERMINE)
+              EventListWidget(
+                  state: widget.state,
+                  flag: "EN_ATTENTE"), // Pending (EN_ATTENTE)
+              EventListWidget(
+                  state: widget.state, flag: "EN_COURS"), // Started (EN_COURS)
+              EventListWidget(
+                  state: widget.state, flag: "TERMINE"), // Completed (TERMINE)
             ],
           ),
         ),

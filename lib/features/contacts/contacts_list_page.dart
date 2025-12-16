@@ -7,6 +7,8 @@ import 'models/contact.dart';
 import 'contact_form_page.dart';
 import 'contact_details_page.dart';
 import '../../shared/widgets/container/profile-container.widget.dart';
+import '../../shared/widgets/inputs/search.text.field.widget.dart';
+import '../../shared/widgets/inputs/dropdown.input.dart';
 
 class ContactsListPage extends StatefulWidget {
   static const routeName = '/contacts';
@@ -19,6 +21,10 @@ class ContactsListPage extends StatefulWidget {
 class _ContactsListPageState extends State<ContactsListPage> {
   final ValueNotifier<Set<String>> _selectedCats =
       ValueNotifier({'1', '2', '3'});
+
+  String _searchQuery = '';
+  String _selectedWilaya = '';
+  String _selectedCommune = '';
 
   @override
   void initState() {
@@ -47,54 +53,215 @@ class _ContactsListPageState extends State<ContactsListPage> {
       ),
       body: Column(
         children: [
+          // Search and region filters
           Padding(
             padding: EdgeInsets.all(kPaddingMd2),
-            child: Wrap(
-              spacing: kSpacingX2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FilterChip(
-                  label: Text(context.i10n.contactsPharmacien),
-                  selected: _selectedCats.value.contains('1'),
-                  onSelected: (v) {
-                    setState(() {
-                      v
-                          ? _selectedCats.value.add('1')
-                          : _selectedCats.value.remove('1');
-                    });
-                    context
-                        .read<ContactsCubit>()
-                        .load(categories: _selectedCats.value.toList());
-                  },
+                SearchTextField(
+                  hintText: context.i10n.searchClient,
+                  onChanged: (value) => setState(() {
+                    _searchQuery = value.trim();
+                  }),
                 ),
-                FilterChip(
-                  label: Text(context.i10n.contactsMedecin),
-                  selected: _selectedCats.value.contains('2'),
-                  onSelected: (v) {
-                    setState(() {
-                      v
-                          ? _selectedCats.value.add('2')
-                          : _selectedCats.value.remove('2');
-                    });
-                    context
-                        .read<ContactsCubit>()
-                        .load(categories: _selectedCats.value.toList());
-                  },
-                ),
-                FilterChip(
-                  label: Text(context.i10n.contactsPatient),
-                  selected: _selectedCats.value.contains('3'),
-                  onSelected: (v) {
-                    setState(() {
-                      v
-                          ? _selectedCats.value.add('3')
-                          : _selectedCats.value.remove('3');
-                    });
-                    context
-                        .read<ContactsCubit>()
-                        .load(categories: _selectedCats.value.toList());
+                SizedBox(height: kSpacingX2),
+                BlocBuilder<ContactsCubit, ContactsState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      loaded: (contacts) {
+                        // Build wilaya options from contacts
+                        final Map<String, String> wilayaMap = {};
+                        for (final c in contacts) {
+                          final id = (c.wilayaId ?? '').trim();
+                          final label = (c.regionLib ?? '').trim();
+                          if (id.isEmpty || label.isEmpty) continue;
+                          wilayaMap.putIfAbsent(id, () => label);
+                        }
+
+                        // Build commune options from contacts, optionally filtered by selected wilaya
+                        final Map<String, String> communeMap = {};
+                        for (final c in contacts) {
+                          final wilayaMatches = _selectedWilaya.isEmpty
+                              ? true
+                              : (c.wilayaId ?? '') == _selectedWilaya;
+                          if (!wilayaMatches) continue;
+                          final id = (c.vilId ?? '').trim();
+                          final label = (c.ville ?? '').trim();
+                          if (id.isEmpty || label.isEmpty) continue;
+                          communeMap.putIfAbsent(id, () => label);
+                        }
+
+                        final wilayaItems = <CustomDropDownItem>[
+                          CustomDropDownItem(
+                            label: context.i10n.allRegions,
+                            value: '',
+                          ),
+                          ...wilayaMap.entries.map(
+                            (e) => CustomDropDownItem(
+                              label: e.value,
+                              value: e.key,
+                            ),
+                          )
+                        ];
+
+                        final communeItems = <CustomDropDownItem>[
+                          CustomDropDownItem(
+                            label: context.i10n.allCommunes,
+                            value: '',
+                          ),
+                          ...communeMap.entries.map(
+                            (e) => CustomDropDownItem(
+                              label: e.value,
+                              value: e.key,
+                            ),
+                          )
+                        ];
+
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: CustomDropDownInput(
+                                data: const {},
+                                mapKey: 'wilayaId',
+                                initialValue: _selectedWilaya,
+                                items: wilayaItems,
+                                onChanged: (val) {
+                                  setState(() {
+                                    _selectedWilaya = val ?? '';
+                                    _selectedCommune = '';
+                                  });
+                                },
+                              ),
+                            ),
+                            SizedBox(width: kSpacingX2),
+                            Expanded(
+                              child: CustomDropDownInput(
+                                data: const {},
+                                mapKey: 'vilId',
+                                initialValue: _selectedCommune,
+                                items: communeItems,
+                                onChanged: (val) {
+                                  setState(() {
+                                    _selectedCommune = val ?? '';
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      orElse: () => const SizedBox.shrink(),
+                    );
                   },
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+            child: BlocBuilder<ContactsCubit, ContactsState>(
+              builder: (context, state) {
+                int pharmCount = 0, medCount = 0, patientCount = 0;
+                state.maybeWhen(
+                  loaded: (contacts) {
+                    for (final c in contacts) {
+                      switch (c.categorie) {
+                        case '1':
+                          pharmCount++;
+                          break;
+                        case '2':
+                          medCount++;
+                          break;
+                        case '3':
+                          patientCount++;
+                          break;
+                      }
+                    }
+                  },
+                  orElse: () {},
+                );
+
+                Widget chip({
+                  required String id,
+                  required IconData icon,
+                  required String label,
+                  required int count,
+                  Color? color,
+                }) {
+                  final selected = _selectedCats.value.contains(id);
+                  final bg = selected
+                      ? (color ?? kCeruleanBlue).withOpacity(0.12)
+                      : kBgGrayVisibility1;
+                  final border =
+                      selected ? (color ?? kCeruleanBlue) : Colors.transparent;
+                  final textStyle = context.textTheme.labelLarge!.copyWith(
+                    color: selected
+                        ? (color ?? kCeruleanBlue)
+                        : Theme.of(context).colorScheme.onSurface,
+                  );
+
+                  return ChoiceChip(
+                    avatar: Icon(icon,
+                        size: 18,
+                        color: selected
+                            ? (color ?? kCeruleanBlue)
+                            : Theme.of(context).colorScheme.onSurface),
+                    label: Text(count > 0 ? '$label ($count)' : label,
+                        style: textStyle),
+                    selected: selected,
+                    pressElevation: 0,
+                    backgroundColor: bg,
+                    selectedColor: bg,
+                    side: BorderSide(color: border, width: 1),
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity:
+                        const VisualDensity(horizontal: -2, vertical: -2),
+                    onSelected: (v) {
+                      setState(() {
+                        v
+                            ? _selectedCats.value.add(id)
+                            : _selectedCats.value.remove(id);
+                      });
+                      context
+                          .read<ContactsCubit>()
+                          .load(categories: _selectedCats.value.toList());
+                    },
+                  );
+                }
+
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(vertical: kSpacingX2),
+                  child: Row(
+                    children: [
+                      chip(
+                        id: '1',
+                        icon: Icons.local_pharmacy_outlined,
+                        label: context.i10n.contactsPharmacien,
+                        count: pharmCount,
+                        color: kCeruleanBlue,
+                      ),
+                      SizedBox(width: kSpacingX2),
+                      chip(
+                        id: '2',
+                        icon: Icons.medical_information_outlined,
+                        label: context.i10n.contactsMedecin,
+                        count: medCount,
+                        color: kHighland,
+                      ),
+                      SizedBox(width: kSpacingX2),
+                      chip(
+                        id: '3',
+                        icon: Icons.person_outline,
+                        label: context.i10n.contactsPatient,
+                        count: patientCount,
+                        color: kCardinal,
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           ),
           Expanded(
@@ -106,7 +273,31 @@ class _ContactsListPageState extends State<ContactsListPage> {
                       const Center(child: CircularProgressIndicator()),
                   error: (message) => Center(child: Text(message)),
                   loaded: (contacts) {
-                    if (contacts.isEmpty) {
+                    // Apply search and dropdown filters locally
+                    final q = _searchQuery.toLowerCase();
+                    final filtered = contacts.where((c) {
+                      final inSearch = q.isEmpty
+                          ? true
+                          : [
+                              c.nom ?? '',
+                              c.prenom ?? '',
+                              c.ville ?? '',
+                              c.regionLib ?? '',
+                            ]
+                              .map((e) => e.toLowerCase())
+                              .any((e) => e.contains(q));
+
+                      final inWilaya = _selectedWilaya.isEmpty
+                          ? true
+                          : (c.wilayaId ?? '') == _selectedWilaya;
+                      final inCommune = _selectedCommune.isEmpty
+                          ? true
+                          : (c.vilId ?? '') == _selectedCommune;
+
+                      return inSearch && inWilaya && inCommune;
+                    }).toList();
+
+                    if (filtered.isEmpty) {
                       return Center(child: Text(context.i10n.contactsEmpty));
                     }
                     return ListView.builder(
@@ -114,8 +305,8 @@ class _ContactsListPageState extends State<ContactsListPage> {
                         horizontal: kPaddingMd2,
                         vertical: kPaddingSm3,
                       ),
-                      itemCount: contacts.length,
-                      itemBuilder: (_, i) => _ContactCard(contact: contacts[i]),
+                      itemCount: filtered.length,
+                      itemBuilder: (_, i) => _ContactCard(contact: filtered[i]),
                     );
                   },
                 );

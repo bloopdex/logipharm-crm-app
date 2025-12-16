@@ -10,9 +10,9 @@ class TurnoverPillarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool showFakeData = turnovers.isEmpty;
-    final data = showFakeData ? _generateFakeData() : turnovers;
-    final maxValue = _getMaxValue(data);
+    final List<Turnover> normalized =
+        turnovers.isEmpty ? [] : _normalizeMonths(turnovers);
+    final maxValue = _getMaxValue(normalized);
 
     return SingleChildScrollView(
       child: SizedBox(
@@ -40,7 +40,7 @@ class TurnoverPillarChart extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                _buildSyncfusionChart(data, maxValue, showFakeData),
+                _buildSyncfusionChart(normalized, maxValue, false),
               ],
             ),
           ),
@@ -49,7 +49,8 @@ class TurnoverPillarChart extends StatelessWidget {
     );
   }
 
-  Widget _buildSyncfusionChart(List<Turnover> data, double maxValue, bool showFakeData) {
+  Widget _buildSyncfusionChart(
+      List<Turnover> data, double maxValue, bool showFakeData) {
     final color = showFakeData ? Colors.blue.withOpacity(0.3) : Colors.green;
 
     return Expanded(
@@ -76,7 +77,8 @@ class TurnoverPillarChart extends StatelessWidget {
           // Changed from ChartSeries to CartesianSeries
           BarSeries<Turnover, String>(
             dataSource: data,
-            xValueMapper: (turnover, _) => _getMonthAbbreviation(turnover.month),
+            xValueMapper: (turnover, _) =>
+                _getMonthAbbreviation(turnover.month),
             yValueMapper: (turnover, _) => turnover.turnover,
             color: color,
             borderRadius: BorderRadius.circular(4),
@@ -87,14 +89,21 @@ class TurnoverPillarChart extends StatelessWidget {
     );
   }
 
-  List<Turnover> _generateFakeData() {
-    return List.generate(
-        12,
-        (index) => Turnover(
-              year: DateTime.now().year,
-              month: index + 1,
-              turnover: (index + 1) * 1500.0,
-            ));
+  // Ensure months are always shown Jan..Dec in order, filling missing months with 0
+  List<Turnover> _normalizeMonths(List<Turnover> input) {
+    final Map<int, num> byMonth = {for (var i = 1; i <= 12; i++) i: 0};
+    for (final t in input) {
+      final m = t.month.toInt().clamp(1, 12);
+      // If multiple entries for a month, sum them
+      byMonth[m] = (byMonth[m] ?? 0) + (t.turnover);
+    }
+    final currentYear =
+        input.isNotEmpty ? input.first.year : DateTime.now().year;
+    final List<Turnover> out = [
+      for (var m = 1; m <= 12; m++)
+        Turnover(year: currentYear, month: m, turnover: byMonth[m] ?? 0)
+    ];
+    return out;
   }
 
   double _getMaxValue(List<Turnover> data) {

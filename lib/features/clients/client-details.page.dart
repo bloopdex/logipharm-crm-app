@@ -48,7 +48,7 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
 
   @override
   void initState() {
-    _categoryLabel = widget.client.categoryLabel;
+    _categoryLabel = widget.client.categoryLabel2;
     super.initState();
   }
 
@@ -61,108 +61,119 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (ctx) {
-        return Padding(
-          padding: EdgeInsets.fromLTRB(
-              16, 16, 16, MediaQuery.of(ctx).padding.bottom + 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                  16, 16, 16, MediaQuery.of(ctx).padding.bottom + 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(
-                      child: Text(context.i10n.changeCategory,
-                          style: context.textTheme.headlineMedium)),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.of(ctx).pop(),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Text(context.i10n.changeCategory,
+                              style: context.textTheme.headlineMedium)),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => Navigator.of(ctx).pop(),
+                      )
+                    ],
+                  ),
+                  const Divider(),
+                  BlocBuilder<CategoryCubit, CategoryState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        loading: () => const Padding(
+                          padding: EdgeInsets.all(24.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                        error: (m) => Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(m, style: context.textTheme.bodyMedium),
+                        ),
+                        loaded: (categories) {
+                          if (categories.isEmpty) {
+                            return Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(context.i10n.noCategoryOptions),
+                            );
+                          }
+                          return DropdownButtonFormField<int>(
+                            value: _selectedCategoryId,
+                            decoration: InputDecoration(
+                              labelText: context.i10n.selectCategory,
+                              border: const OutlineInputBorder(),
+                            ),
+                            items: categories
+                                .map((c) => DropdownMenuItem<int>(
+                                      value: c.id,
+                                      child: Text(c.label),
+                                    ))
+                                .toList(),
+                            onChanged: (v) {
+                              setModalState(() {
+                                _selectedCategoryId = v;
+                                _selectedCategoryLabel = categories
+                                    .firstWhere((c) => c.id == v)
+                                    .label;
+                              });
+                            },
+                          );
+                        },
+                        orElse: () => const SizedBox.shrink(),
+                      );
+                    },
+                  ),
+                  SizedBox(height: kSpacingX3),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () => Navigator.of(ctx).pop(),
+                          child: Text(context.i10n.cancel),
+                        ),
+                      ),
+                      SizedBox(width: kSpacingX2),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: _selectedCategoryId == null
+                              ? null
+                              : () async {
+                                  final id = widget.client.id;
+                                  final catId = _selectedCategoryId!;
+                                  final catLabel = _selectedCategoryLabel ?? '';
+                                  await context
+                                      .read<ClientDetailsCubit>()
+                                      .updateCategory(
+                                        clientId: id,
+                                        categorieId: catId,
+                                        categorieLibelle: catLabel,
+                                      );
+
+                                  // Reload client details after update
+                                  await context
+                                      .read<ClientsCubit>()
+                                      .load();
+
+                                  if (mounted) {
+                                    setState(() {
+                                      _categoryLabel = catLabel;
+                                    });
+                                    context.successSnackBar(
+                                        context.i10n.categoryUpdated);
+                                    Navigator.of(ctx).pop();
+                                  }
+                                },
+                          child: Text(context.i10n.save),
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),
-              const Divider(),
-              BlocBuilder<CategoryCubit, CategoryState>(
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    loading: () => const Padding(
-                      padding: EdgeInsets.all(24.0),
-                      child: CircularProgressIndicator(),
-                    ),
-                    error: (m) => Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(m, style: context.textTheme.bodyMedium),
-                    ),
-                    loaded: (categories) {
-                      if (categories.isEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(context.i10n.noCategoryOptions),
-                        );
-                      }
-                      return DropdownButtonFormField<int>(
-                        value: _selectedCategoryId,
-                        decoration: InputDecoration(
-                          labelText: context.i10n.selectCategory,
-                          border: const OutlineInputBorder(),
-                        ),
-                        items: categories
-                            .map((c) => DropdownMenuItem<int>(
-                                  value: c.id,
-                                  child: Text(c.label),
-                                ))
-                            .toList(),
-                        onChanged: (v) {
-                          setState(() {
-                            _selectedCategoryId = v;
-                            _selectedCategoryLabel =
-                                categories.firstWhere((c) => c.id == v).label;
-                          });
-                        },
-                      );
-                    },
-                    orElse: () => const SizedBox.shrink(),
-                  );
-                },
-              ),
-              SizedBox(height: kSpacingX3),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () => Navigator.of(ctx).pop(),
-                      child: Text(context.i10n.cancel),
-                    ),
-                  ),
-                  SizedBox(width: kSpacingX2),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: _selectedCategoryId == null
-                          ? null
-                          : () async {
-                              final id = widget.client.id;
-                              final catId = _selectedCategoryId!;
-                              final catLabel = _selectedCategoryLabel ?? '';
-                              await context
-                                  .read<ClientDetailsCubit>()
-                                  .updateCategory(
-                                    clientId: id,
-                                    categorieId: catId,
-                                    categorieLibelle: catLabel,
-                                  );
-                              if (mounted) {
-                                setState(() {
-                                  _categoryLabel = catLabel;
-                                });
-                                context.successSnackBar(
-                                    context.i10n.categoryUpdated);
-                                Navigator.of(ctx).pop();
-                              }
-                            },
-                      child: Text(context.i10n.save),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+            );
+          },
         );
       },
     );
@@ -468,12 +479,12 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                                       padding: EdgeInsets.all(kPaddingSm3),
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: !statistics.commercialBlockage
+                                        color: !(statistics.commercialBlockage ?? false)
                                             ? kSuccessColor
                                             : kCardinal,
                                       ),
                                       child: Icon(
-                                        !statistics.commercialBlockage
+                                        !(statistics.commercialBlockage ?? false)
                                             ? Icons.check
                                             : Icons.error,
                                         color: kWhite,
@@ -496,12 +507,12 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                                       padding: EdgeInsets.all(kPaddingSm3),
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: !statistics.financialBlockage
+                                        color: !(statistics.financialBlockage ?? false)
                                             ? kSuccessColor
                                             : kCardinal,
                                       ),
                                       child: Icon(
-                                        !statistics.financialBlockage
+                                        !(statistics.financialBlockage ?? false)
                                             ? Icons.check
                                             : Icons.error,
                                         color: kWhite,
@@ -790,7 +801,13 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                   orElse: () => const Center(child: Loader()),
                   loading: () => const Center(child: Loader()),
                   loaded: (turnovers, hasReachedMax) {
-                    return TurnoverPillarChart(turnovers: turnovers);
+                    // Hide the graph for prospect type (typeTier == '14')
+                    if (widget.client.typeTier == '14') {
+                      return const SizedBox.shrink();
+                    }
+                    return TurnoverPillarChart(
+                        turnovers:
+                            widget.client.typeTier == '14' ? [] : turnovers);
                   },
                   failure: (message) {
                     return Center(child: Text(message));
@@ -840,7 +857,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                                 Expanded(
                                   child: Text(
                                     MoneyHelper.format(
-                                        context, statistics.ceiling.toDouble()),
+                                        context, (statistics.ceiling ?? 0).toDouble()),
                                     textAlign: TextAlign.end,
                                     style: context.textTheme.headlineMedium!
                                         .copyWith(
@@ -863,7 +880,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                                 Expanded(
                                   child: Text(
                                     MoneyHelper.format(
-                                        context, statistics.totalHt.toDouble()),
+                                        context, (statistics.totalHt ?? 0).toDouble()),
                                     textAlign: TextAlign.end,
                                     style: context.textTheme.headlineMedium!
                                         .copyWith(
@@ -886,7 +903,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                                 Expanded(
                                   child: Text(
                                     MoneyHelper.format(context,
-                                        statistics.totalTtc.toDouble()),
+                                        (statistics.totalTtc ?? 0).toDouble()),
                                     textAlign: TextAlign.end,
                                     style: context.textTheme.headlineMedium!
                                         .copyWith(
@@ -909,7 +926,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                                 Expanded(
                                   child: Text(
                                     MoneyHelper.format(context,
-                                        statistics.totalPayment.toDouble()),
+                                        (statistics.totalPayment ?? 0).toDouble()),
                                     textAlign: TextAlign.end,
                                     style: context.textTheme.headlineMedium!
                                         .copyWith(
@@ -932,7 +949,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                                 Expanded(
                                   child: Text(
                                     MoneyHelper.format(context,
-                                        statistics.totalRest.toDouble()),
+                                        (statistics.totalRest ?? 0).toDouble()),
                                     textAlign: TextAlign.end,
                                     style: context.textTheme.headlineMedium!
                                         .copyWith(

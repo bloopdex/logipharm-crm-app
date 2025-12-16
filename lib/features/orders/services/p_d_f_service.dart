@@ -36,8 +36,7 @@ class PDFService {
         ),
         build: (pw.Context context) {
           return [
-            _buildHeader(invoiceNumber, invoiceDate),
-            pw.SizedBox(height: 20),
+            // Header removed as requested (confidential/company header not shown)
             _buildClientInfo(client),
             pw.SizedBox(height: 20),
             _buildItemsTable(cartItems),
@@ -53,49 +52,7 @@ class PDFService {
     return pdf.save();
   }
 
-  static pw.Widget _buildHeader(String invoiceNumber, DateTime invoiceDate) {
-    return pw.Row(
-      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-      children: [
-        pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
-          children: [
-            pw.Text(
-              'INVOICE',
-              style: pw.TextStyle(
-                fontSize: 24,
-                fontWeight: pw.FontWeight.bold,
-                color: PdfColors.blue800,
-              ),
-            ),
-            pw.Text(
-              'Invoice #: $invoiceNumber',
-              style: const pw.TextStyle(fontSize: 12),
-            ),
-            pw.Text(
-              'Date: ${invoiceDate.day}/${invoiceDate.month}/${invoiceDate.year}',
-              style: const pw.TextStyle(fontSize: 12),
-            ),
-          ],
-        ),
-        pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.end,
-          children: [
-            pw.Text(
-              'Biopure',
-              style: pw.TextStyle(
-                fontSize: 16,
-                fontWeight: pw.FontWeight.bold,
-              ),
-            ),
-            pw.Text('Your Address Line 1', style: const pw.TextStyle(fontSize: 10)),
-            pw.Text('Your Address Line 2', style: const pw.TextStyle(fontSize: 10)),
-            pw.Text('Phone: +1234567890', style: const pw.TextStyle(fontSize: 10)),
-          ],
-        ),
-      ],
-    );
-  }
+  // Header removed
 
   static pw.Widget _buildClientInfo(Person client) {
     return pw.Container(
@@ -123,9 +80,11 @@ class PDFService {
             ),
           ),
           if (client.email != null)
-            pw.Text('Email: ${client.email}', style: const pw.TextStyle(fontSize: 10)),
+            pw.Text('Email: ${client.email}',
+                style: const pw.TextStyle(fontSize: 10)),
           if (client.tel1Fixe != null)
-            pw.Text('Phone: ${client.tel1Fixe}', style: const pw.TextStyle(fontSize: 10)),
+            pw.Text('Phone: ${client.tel1Fixe}',
+                style: const pw.TextStyle(fontSize: 10)),
         ],
       ),
     );
@@ -136,11 +95,11 @@ class PDFService {
     return pw.Table(
       border: pw.TableBorder.all(color: PdfColors.grey300),
       columnWidths: {
-        0: const pw.FlexColumnWidth(3),
-        2: const pw.FlexColumnWidth(1.5),
-        1: const pw.FlexColumnWidth(1),
-        2: const pw.FlexColumnWidth(1.5),
-        3: const pw.FlexColumnWidth(1.5),
+        0: const pw.FlexColumnWidth(3), // Produit
+        1: const pw.FlexColumnWidth(1), // DDP
+        2: const pw.FlexColumnWidth(1.5), // Quantite
+        3: const pw.FlexColumnWidth(1.5), // PU
+        4: const pw.FlexColumnWidth(1.5), // Montant
       },
       children: [
         // Header
@@ -199,7 +158,8 @@ class PDFService {
               mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
               children: [
                 pw.Text('Subtotal:', style: const pw.TextStyle(fontSize: 12)),
-                pw.Text('$totalAmount', style: const pw.TextStyle(fontSize: 12)),
+                pw.Text('$totalAmount',
+                    style: const pw.TextStyle(fontSize: 12)),
               ],
             ),
             pw.Divider(color: PdfColors.blue200),
@@ -287,7 +247,8 @@ class PDFService {
 
         if (sdkInt >= 30) {
           // Android 11+ - Check if we have MANAGE_EXTERNAL_STORAGE permission
-          final hasPermission = await Permission.manageExternalStorage.isGranted;
+          final hasPermission =
+              await Permission.manageExternalStorage.isGranted;
           if (!hasPermission) {
             final status = await Permission.manageExternalStorage.request();
             if (status != PermissionStatus.granted) {

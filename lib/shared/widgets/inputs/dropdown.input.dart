@@ -20,6 +20,7 @@ class CustomDropDownInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
+      isExpanded: true,
       value: initialValue != null && initialValue!.isNotEmpty
           ? initialValue
           : items.isNotEmpty

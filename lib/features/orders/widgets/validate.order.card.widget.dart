@@ -8,16 +8,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../models/person/person.dart';
 import '../../../shared/services/helpers/money_helper.dart';
-import '../../visits/add_client_selection.dart';
+import 'order_add_client_selection.dart';
 import '../services/p_d_f_service.dart';
 
 class ValidateOrderCard extends StatefulWidget {
   const ValidateOrderCard({
     super.key,
     required this.total,
+    this.generateInvoiceOnValidate = false,
   });
 
   final num total;
+  final bool generateInvoiceOnValidate;
 
   @override
   State<ValidateOrderCard> createState() => _ValidateOrderCardState();
@@ -58,7 +60,7 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
           );
 
           // Save PDF to device
-          final fileName = 'invoice_${invoiceNumber}.pdf';
+          final fileName = 'invoice_$invoiceNumber.pdf';
           final filePath = await PDFService.saveAndDownloadPDF(
             pdfBytes: pdfBytes,
             fileName: fileName,
@@ -127,7 +129,8 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Invoice Generated'),
-          content: Text('Your invoice has been generated successfully. What would you like to do?'),
+          content: Text(
+              'Your invoice has been generated successfully. What would you like to do?'),
           actions: [
             TextButton(
               onPressed: () {
@@ -177,7 +180,8 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
     return Container(
       decoration: BoxDecoration(
         color: kBgGrayVisibility2,
-        border: Border.all(color: kBorder3, strokeAlign: BorderSide.strokeAlignOutside),
+        border: Border.all(
+            color: kBorder3, strokeAlign: BorderSide.strokeAlignOutside),
       ),
       padding: EdgeInsets.symmetric(
         horizontal: kSpacingX2,
@@ -196,11 +200,81 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
                 child: Text(
                   MoneyHelper.format(context, widget.total.toDouble()),
                   textAlign: TextAlign.end,
-                  style: context.textTheme.headlineLarge!.copyWith(color: kPrimaryColor),
+                  style: context.textTheme.headlineLarge!
+                      .copyWith(color: kPrimaryColor),
                   textDirection: TextDirection.ltr,
                 ),
               ),
             ],
+          ),
+          SizedBox(height: kSpacingX2),
+          OutlinedButton(
+            style: ButtonStyle(
+              padding: WidgetStateProperty.all(
+                EdgeInsets.symmetric(
+                  horizontal: 24.h,
+                  vertical: 12.h,
+                ),
+              ),
+              elevation: WidgetStateProperty.all(0),
+              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kSpacingX1),
+                  side: BorderSide(color: kPrimaryColor),
+                ),
+              ),
+            ),
+            onPressed: _isGeneratingPDF
+                ? null
+                : () async {
+                    Person? selectedClient = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OrderAddClientSelection(),
+                      ),
+                    );
+
+                    if (!context.mounted || selectedClient == null) return;
+
+                    await _generateAndDownloadInvoice(selectedClient);
+                  },
+            child: _isGeneratingPDF
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 16.h,
+                        height: 16.h,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                        ),
+                      ),
+                      SizedBox(width: kSpacingX2),
+                      Text(
+                        'Generating Invoice...',
+                        style: context.textTheme.headlineMedium!
+                            .copyWith(color: kPrimaryColor),
+                      ),
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.description_outlined,
+                        size: 20.h,
+                        color: kPrimaryColor,
+                      ),
+                      SizedBox(width: kSpacingX2),
+                      Text(
+                        'Generate Invoice',
+                        style: context.textTheme.headlineMedium!
+                            .copyWith(color: kPrimaryColor),
+                      ),
+                    ],
+                  ),
           ),
           SizedBox(height: kSpacingX2),
           ElevatedButton(
@@ -225,17 +299,19 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
                     Person? selectedClient = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const AddClientSelection(),
+                        builder: (context) => const OrderAddClientSelection(),
                       ),
                     );
 
                     if (!context.mounted || selectedClient == null) return;
 
-                    await _generateAndDownloadInvoice(selectedClient);
+                    // Generate invoice only if enabled
+                    if (widget.generateInvoiceOnValidate) {
+                      await _generateAndDownloadInvoice(selectedClient);
+                      if (!context.mounted) return;
+                    }
 
-                    if (!context.mounted) return;
-
-                    // Validate cart first
+                    // Validate cart
                     context.read<CartCubit>().validateCart({
                       'clientId': selectedClient.id,
                     });
@@ -250,14 +326,15 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
                         height: 16.h,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(kBgGrayVisibility1),
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(kBgGrayVisibility1),
                         ),
                       ),
                       SizedBox(width: kSpacingX2),
                       Text(
                         'Generating Invoice...',
-                        style:
-                            context.textTheme.headlineMedium!.copyWith(color: kBgGrayVisibility1),
+                        style: context.textTheme.headlineMedium!
+                            .copyWith(color: kBgGrayVisibility1),
                       ),
                     ],
                   )
@@ -272,8 +349,8 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
                       SizedBox(width: kSpacingX2),
                       Text(
                         context.i10n.validate,
-                        style:
-                            context.textTheme.headlineMedium!.copyWith(color: kBgGrayVisibility1),
+                        style: context.textTheme.headlineMedium!
+                            .copyWith(color: kBgGrayVisibility1),
                       ),
                     ],
                   ),

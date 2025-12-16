@@ -16,17 +16,23 @@ class EventStatusWidget extends StatelessWidget {
         color = kBrightSun.shade600;
         status = context.i10n.pending;
         break;
+      case "EN_COURS":
+        color = kCeruleanBlue;
+        status = context.i10n.inProgress;
+        break;
       case "TERMINE":
         color = kSuccessColor;
         status = context.i10n.completed;
         break;
       default:
         color = kCodGray;
+        status = '';
         break;
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: kPaddingSm3, vertical: kPaddingSm2),
+      padding:
+          EdgeInsets.symmetric(horizontal: kPaddingSm3, vertical: kPaddingSm2),
       decoration: BoxDecoration(
         color: color.withOpacity(0.2),
         borderRadius: BorderRadius.circular(kPaddingSm3),

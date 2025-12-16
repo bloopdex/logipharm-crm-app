@@ -452,12 +452,11 @@ class _CreateHirePageContentState extends State<CreateHirePageContent> {
                     SizedBox(height: kSpacingX10),
                     BlocBuilder<HireCreationCubit, HireCreationState>(
                       builder: (context, state) {
-                        if (state.maybeWhen(
-                            orElse: () => false, loading: () => true)) {
-                          return const Loader();
-                        }
+                        final isLoading = state.maybeWhen(
+                            orElse: () => false, loading: () => true);
                         return CustomButton(
                           text: context.i10n.hire,
+                          isLoading: isLoading,
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();

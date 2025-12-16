@@ -19,7 +19,7 @@ part 'tour_plan_event.dart';
 part 'tour_plan_state.dart';
 
 class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
-  static const int _pageSize = 100;
+  static const int _pageSize = 10;
   TourPlanBloc() : super(const _Initial()) {
     on<_Started>(_started);
     on<_Search>(_search);

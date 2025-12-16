@@ -24,7 +24,7 @@ mixin _$User {
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'cmpId')
   int? get companyId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'cmpType')
+  @JsonKey(name: 'cmpType', defaultValue: 0)
   int? get companyType => throw _privateConstructorUsedError;
   @JsonKey(name: 'typeTier')
   String? get typeTier => throw _privateConstructorUsedError;
@@ -74,7 +74,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'cmpId') int? companyId,
-      @JsonKey(name: 'cmpType') int? companyType,
+      @JsonKey(name: 'cmpType', defaultValue: 0) int? companyType,
       @JsonKey(name: 'typeTier') String? typeTier,
       @JsonKey(name: 'nom') String? lastName,
       @JsonKey(name: 'prenom') String? firstName,
@@ -213,7 +213,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'cmpId') int? companyId,
-      @JsonKey(name: 'cmpType') int? companyType,
+      @JsonKey(name: 'cmpType', defaultValue: 0) int? companyType,
       @JsonKey(name: 'typeTier') String? typeTier,
       @JsonKey(name: 'nom') String? lastName,
       @JsonKey(name: 'prenom') String? firstName,
@@ -345,7 +345,7 @@ class _$UserImpl implements _User {
   const _$UserImpl(
       {@JsonKey(name: 'id') this.id,
       @JsonKey(name: 'cmpId') this.companyId,
-      @JsonKey(name: 'cmpType') this.companyType,
+      @JsonKey(name: 'cmpType', defaultValue: 0) this.companyType,
       @JsonKey(name: 'typeTier') this.typeTier,
       @JsonKey(name: 'nom') this.lastName,
       @JsonKey(name: 'prenom') this.firstName,
@@ -372,7 +372,7 @@ class _$UserImpl implements _User {
   @JsonKey(name: 'cmpId')
   final int? companyId;
   @override
-  @JsonKey(name: 'cmpType')
+  @JsonKey(name: 'cmpType', defaultValue: 0)
   final int? companyType;
   @override
   @JsonKey(name: 'typeTier')
@@ -511,7 +511,7 @@ abstract class _User implements User {
   const factory _User(
       {@JsonKey(name: 'id') final int? id,
       @JsonKey(name: 'cmpId') final int? companyId,
-      @JsonKey(name: 'cmpType') final int? companyType,
+      @JsonKey(name: 'cmpType', defaultValue: 0) final int? companyType,
       @JsonKey(name: 'typeTier') final String? typeTier,
       @JsonKey(name: 'nom') final String? lastName,
       @JsonKey(name: 'prenom') final String? firstName,
@@ -538,7 +538,7 @@ abstract class _User implements User {
   @JsonKey(name: 'cmpId')
   int? get companyId;
   @override
-  @JsonKey(name: 'cmpType')
+  @JsonKey(name: 'cmpType', defaultValue: 0)
   int? get companyType;
   @override
   @JsonKey(name: 'typeTier')

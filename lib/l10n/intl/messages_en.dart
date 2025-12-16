@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Add Visit to Event",
     ),
     "address": MessageLookupByLibrary.simpleMessage("Address"),
+    "addressHint": MessageLookupByLibrary.simpleMessage("Street and number"),
     "addressPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Enter the address",
     ),
@@ -64,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "allClients": MessageLookupByLibrary.simpleMessage("All Clients"),
     "allCommunes": MessageLookupByLibrary.simpleMessage("All Communes"),
+    "allLaboratories": MessageLookupByLibrary.simpleMessage("All Laboratories"),
     "allRegions": MessageLookupByLibrary.simpleMessage("All Regions"),
     "analytics": MessageLookupByLibrary.simpleMessage("Analytics"),
     "authLoginDescription": MessageLookupByLibrary.simpleMessage(
@@ -91,12 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "avgRealization": MessageLookupByLibrary.simpleMessage("Avg"),
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "baseUrl": MessageLookupByLibrary.simpleMessage("Base URL"),
-    "blockageCommercial": MessageLookupByLibrary.simpleMessage(
-      "Commercial Blockage",
-    ),
-    "blockageFinancial": MessageLookupByLibrary.simpleMessage(
-      "Financial Blockage",
-    ),
+    "blockageCommercial": MessageLookupByLibrary.simpleMessage("Commercial"),
+    "blockageFinancial": MessageLookupByLibrary.simpleMessage("Financial"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cantCreatePlanWhileOpened": MessageLookupByLibrary.simpleMessage(
       "Can\'t create plan while opened plan",
@@ -117,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "changeCategory": MessageLookupByLibrary.simpleMessage("Change Category"),
     "changePassword": MessageLookupByLibrary.simpleMessage("Change Password"),
     "city": MessageLookupByLibrary.simpleMessage("Ville"),
+    "cityHint": MessageLookupByLibrary.simpleMessage("Enter city name"),
     "claims": MessageLookupByLibrary.simpleMessage("Claims"),
     "client": MessageLookupByLibrary.simpleMessage("Client"),
     "clientAddress": MessageLookupByLibrary.simpleMessage("Client Address"),
@@ -143,6 +142,91 @@ class MessageLookup extends MessageLookupByLibrary {
       "Confirm password is required",
     ),
     "consultation": MessageLookupByLibrary.simpleMessage("Consultation"),
+    "contactArticleCode": MessageLookupByLibrary.simpleMessage("Article code"),
+    "contactArticleCodeHint": MessageLookupByLibrary.simpleMessage(
+      "Article code if applicable",
+    ),
+    "contactConnaissanceProduit": MessageLookupByLibrary.simpleMessage(
+      "Product knowledge",
+    ),
+    "contactConnaissanceProduitHint": MessageLookupByLibrary.simpleMessage(
+      "Product knowledge (Yes/No)",
+    ),
+    "contactDelegueId": MessageLookupByLibrary.simpleMessage("Delegate ID"),
+    "contactDelegueIdHint": MessageLookupByLibrary.simpleMessage(
+      "Enter delegate ID",
+    ),
+    "contactFiscalCode": MessageLookupByLibrary.simpleMessage("Fiscal code"),
+    "contactFiscalCodeHint": MessageLookupByLibrary.simpleMessage(
+      "Tax identification number",
+    ),
+    "contactLabel": MessageLookupByLibrary.simpleMessage("Contact"),
+    "contactMedecinTraitant": MessageLookupByLibrary.simpleMessage(
+      "Attending physician",
+    ),
+    "contactMedecinTraitantHint": MessageLookupByLibrary.simpleMessage(
+      "Attending physician name",
+    ),
+    "contactNis": MessageLookupByLibrary.simpleMessage("NIS"),
+    "contactNisHint": MessageLookupByLibrary.simpleMessage(
+      "Statistical ID (NIS)",
+    ),
+    "contactObjections": MessageLookupByLibrary.simpleMessage("Objections"),
+    "contactObjectionsHint": MessageLookupByLibrary.simpleMessage(
+      "Enter objections if any",
+    ),
+    "contactPatientConnaissanceProduit": MessageLookupByLibrary.simpleMessage(
+      "Patient product knowledge",
+    ),
+    "contactPatientConnaissanceProduitHint":
+        MessageLookupByLibrary.simpleMessage("Patient knowledge (Yes/No)"),
+    "contactPotentiel": MessageLookupByLibrary.simpleMessage("Potential"),
+    "contactPotentielHint": MessageLookupByLibrary.simpleMessage(
+      "Potential level",
+    ),
+    "contactPrescripteur": MessageLookupByLibrary.simpleMessage("Prescriber"),
+    "contactPrescripteurHint": MessageLookupByLibrary.simpleMessage(
+      "Prescriber (Yes/No)",
+    ),
+    "contactRcCode": MessageLookupByLibrary.simpleMessage("RC code"),
+    "contactRcCodeHint": MessageLookupByLibrary.simpleMessage(
+      "Commercial register number",
+    ),
+    "contactRegionLib": MessageLookupByLibrary.simpleMessage("Region name"),
+    "contactRegionLibHint": MessageLookupByLibrary.simpleMessage(
+      "Enter region name",
+    ),
+    "contactResultatTest": MessageLookupByLibrary.simpleMessage("Test result"),
+    "contactResultatTestHint": MessageLookupByLibrary.simpleMessage(
+      "Test result details",
+    ),
+    "contactSpecialite": MessageLookupByLibrary.simpleMessage("Specialty"),
+    "contactSpecialiteHint": MessageLookupByLibrary.simpleMessage(
+      "Medical specialty",
+    ),
+    "contactSpecialiteMedecin": MessageLookupByLibrary.simpleMessage(
+      "Doctor\'s specialty",
+    ),
+    "contactSpecialiteMedecinHint": MessageLookupByLibrary.simpleMessage(
+      "Physician\'s specialty",
+    ),
+    "contactTesteProduit": MessageLookupByLibrary.simpleMessage(
+      "Tested product",
+    ),
+    "contactTesteProduitHint": MessageLookupByLibrary.simpleMessage(
+      "Tested product (Yes/No)",
+    ),
+    "contactTypeDiabete": MessageLookupByLibrary.simpleMessage("Diabetes type"),
+    "contactTypeDiabeteHint": MessageLookupByLibrary.simpleMessage(
+      "Diabetes type",
+    ),
+    "contactVilId": MessageLookupByLibrary.simpleMessage("City ID"),
+    "contactVilIdHint": MessageLookupByLibrary.simpleMessage("Enter city code"),
+    "contactWilayaId": MessageLookupByLibrary.simpleMessage("Wilaya ID"),
+    "contactWilayaIdHint": MessageLookupByLibrary.simpleMessage(
+      "Enter wilaya code",
+    ),
+    "contacts": MessageLookupByLibrary.simpleMessage("Contacts"),
     "contactsAdd": MessageLookupByLibrary.simpleMessage("Add contact"),
     "contactsCategorie": MessageLookupByLibrary.simpleMessage("Category"),
     "contactsContactInfo": MessageLookupByLibrary.simpleMessage(
@@ -172,6 +256,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
     "delegateRole": MessageLookupByLibrary.simpleMessage("Delegate"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "emailHint": MessageLookupByLibrary.simpleMessage("name@example.com"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("Enter a valid email"),
     "emailPlaceholder": MessageLookupByLibrary.simpleMessage("Enter the email"),
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
@@ -318,6 +403,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "No grossiste found for this client",
     ),
     "noHirement": MessageLookupByLibrary.simpleMessage("No hirement found"),
+    "noLabel": MessageLookupByLibrary.simpleMessage("No"),
     "noLastName": MessageLookupByLibrary.simpleMessage("No last name"),
     "noModePaie": MessageLookupByLibrary.simpleMessage("No mode de paiement"),
     "noMotif": MessageLookupByLibrary.simpleMessage("No motif"),
@@ -371,6 +457,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "pending": MessageLookupByLibrary.simpleMessage("Pending"),
     "pendingEvent": MessageLookupByLibrary.simpleMessage("Pending Event"),
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
+    "phone1": MessageLookupByLibrary.simpleMessage("Phone 1"),
+    "phone1Hint": MessageLookupByLibrary.simpleMessage("+213 5x xx xx xx"),
+    "phone2": MessageLookupByLibrary.simpleMessage("Phone 2"),
+    "phone2Hint": MessageLookupByLibrary.simpleMessage("+213 7x xx xx xx"),
     "phonePlaceholder": MessageLookupByLibrary.simpleMessage("Enter the phone"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("Phone is required"),
     "ppa": MessageLookupByLibrary.simpleMessage("PPA"),
@@ -399,6 +489,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchProducts": MessageLookupByLibrary.simpleMessage("Search Products"),
     "selectCategory": MessageLookupByLibrary.simpleMessage("Select Category"),
     "selectClient": MessageLookupByLibrary.simpleMessage("Select Client"),
+    "selectContact": MessageLookupByLibrary.simpleMessage("Select contact"),
     "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
     "selectDateRange": MessageLookupByLibrary.simpleMessage(
       "Select Date Range",
@@ -583,6 +674,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "visitCreationClientPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Select a client",
     ),
+    "visitCreationContactTypeLabel": MessageLookupByLibrary.simpleMessage(
+      "Contact type",
+    ),
     "visitCreationDateLabel": MessageLookupByLibrary.simpleMessage("Date"),
     "visitCreationDescription": MessageLookupByLibrary.simpleMessage(
       "Create a new visit for a client",
@@ -626,6 +720,95 @@ class MessageLookup extends MessageLookupByLibrary {
     "visitErrorDate": MessageLookupByLibrary.simpleMessage(
       "The date has to be after the date of the tour plan",
     ),
+    "visitFieldConnaissanceProduit": MessageLookupByLibrary.simpleMessage(
+      "Product knowledge",
+    ),
+    "visitFieldFonction": MessageLookupByLibrary.simpleMessage("Function"),
+    "visitFieldMedecinTraitant": MessageLookupByLibrary.simpleMessage(
+      "Attending physician",
+    ),
+    "visitFieldNomInterlocuteur": MessageLookupByLibrary.simpleMessage(
+      "Interlocutor name",
+    ),
+    "visitFieldObjections": MessageLookupByLibrary.simpleMessage("Objections"),
+    "visitFieldPatientConnaissanceProduit":
+        MessageLookupByLibrary.simpleMessage("Patient product knowledge"),
+    "visitFieldPotentiel": MessageLookupByLibrary.simpleMessage("Potential"),
+    "visitFieldPrescripteur": MessageLookupByLibrary.simpleMessage(
+      "Prescriber",
+    ),
+    "visitFieldPrescriptionDetails": MessageLookupByLibrary.simpleMessage(
+      "Prescription details",
+    ),
+    "visitFieldProduitConcurrent": MessageLookupByLibrary.simpleMessage(
+      "Competing product",
+    ),
+    "visitFieldPromessePrescription": MessageLookupByLibrary.simpleMessage(
+      "Prescription commitment",
+    ),
+    "visitFieldReceptionPrescription": MessageLookupByLibrary.simpleMessage(
+      "Prescription received",
+    ),
+    "visitFieldResultatTest": MessageLookupByLibrary.simpleMessage(
+      "Test result",
+    ),
+    "visitFieldSpecialiteMedecin": MessageLookupByLibrary.simpleMessage(
+      "Doctor\'s specialty",
+    ),
+    "visitFieldTesteProduit": MessageLookupByLibrary.simpleMessage(
+      "Tested product",
+    ),
+    "visitFieldTypeDiabete": MessageLookupByLibrary.simpleMessage(
+      "Diabetes type",
+    ),
+    "visitHintConnaissanceProduit": MessageLookupByLibrary.simpleMessage(
+      "Does the contact know the product?",
+    ),
+    "visitHintFonction": MessageLookupByLibrary.simpleMessage(
+      "Enter the interlocutor function",
+    ),
+    "visitHintMedecinTraitant": MessageLookupByLibrary.simpleMessage(
+      "Enter attending physician name",
+    ),
+    "visitHintNomInterlocuteur": MessageLookupByLibrary.simpleMessage(
+      "Enter the interlocutor name",
+    ),
+    "visitHintObjections": MessageLookupByLibrary.simpleMessage(
+      "Note any objections raised",
+    ),
+    "visitHintPatientConnaissanceProduit": MessageLookupByLibrary.simpleMessage(
+      "Does the patient know the product?",
+    ),
+    "visitHintPotentiel": MessageLookupByLibrary.simpleMessage(
+      "Indicate potential level",
+    ),
+    "visitHintPrescripteur": MessageLookupByLibrary.simpleMessage(
+      "Is the contact a prescriber?",
+    ),
+    "visitHintPrescriptionDetails": MessageLookupByLibrary.simpleMessage(
+      "Describe prescription details",
+    ),
+    "visitHintProduitConcurrent": MessageLookupByLibrary.simpleMessage(
+      "Mention any competing product",
+    ),
+    "visitHintPromessePrescription": MessageLookupByLibrary.simpleMessage(
+      "Any commitment to prescribe?",
+    ),
+    "visitHintReceptionPrescription": MessageLookupByLibrary.simpleMessage(
+      "Was a prescription received?",
+    ),
+    "visitHintResultatTest": MessageLookupByLibrary.simpleMessage(
+      "Enter test result",
+    ),
+    "visitHintSpecialiteMedecin": MessageLookupByLibrary.simpleMessage(
+      "Enter doctor\'s specialty",
+    ),
+    "visitHintTesteProduit": MessageLookupByLibrary.simpleMessage(
+      "Has the product been tested?",
+    ),
+    "visitHintTypeDiabete": MessageLookupByLibrary.simpleMessage(
+      "Enter diabetes type",
+    ),
     "visitPrivilegeMissing": MessageLookupByLibrary.simpleMessage(
       "You don\'t have the privilege to create a visit",
     ),
@@ -649,6 +832,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "waitingForDecision": MessageLookupByLibrary.simpleMessage(
       "Waiting for decision",
     ),
+    "yesLabel": MessageLookupByLibrary.simpleMessage("Yes"),
     "youDontHaveAnyHirement": MessageLookupByLibrary.simpleMessage(
       "You don\'t have any hirement yet",
     ),

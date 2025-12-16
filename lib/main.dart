@@ -48,6 +48,8 @@ import 'features/clients/blocs/etablissement/etablissement_cubit.dart';
 import 'features/clients/blocs/grossiste/grossiste_cubit.dart';
 import 'features/clients/blocs/observation/observation_cubit.dart';
 import 'features/clients/blocs/turnover/turnover_cubit.dart';
+import 'features/statistics/cubit/monthly_statistics_cubit.dart';
+import 'features/contacts/bloc/contacts_cubit.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
 import 'features/orders/blocs/cart/cart_cubit.dart';
@@ -60,6 +62,7 @@ import 'features/tour-plan/bloc/wilaya_cubit.dart';
 import 'features/tour-plan/core/controller.dart';
 import 'features/visits/bloc/contact_type_cubit.dart';
 import 'features/visits/bloc/visit-creation/visit_creation_cubit.dart';
+import 'features/contacts/bloc/specialite_lov_cubit.dart';
 import 'l10n/l10n.dart';
 import 'logic/auth/auth_bloc.dart';
 import 'logic/counter_cubit.dart';
@@ -125,22 +128,26 @@ void callbackDispatcher() {
   });
 }
 
-final FlutterLocalNotificationsPlugin flutterLocalPlugin = FlutterLocalNotificationsPlugin();
-const AndroidNotificationChannel notificationChannel = AndroidNotificationChannel(
-    "a2s fetch location", "A2S is fetching your location",
-    description: "This is a notification that shows that a2s is fetching ur location",
-    importance: Importance.high);
+final FlutterLocalNotificationsPlugin flutterLocalPlugin =
+    FlutterLocalNotificationsPlugin();
+const AndroidNotificationChannel notificationChannel =
+    AndroidNotificationChannel(
+        "a2s fetch location", "A2S is fetching your location",
+        description:
+            "This is a notification that shows that a2s is fetching ur location",
+        importance: Importance.high);
 
 Future<void> initializeService() async {
   try {
     var service = FlutterBackgroundService();
     if (Platform.isIOS) {
-      await flutterLocalPlugin
-          .initialize(const InitializationSettings(iOS: DarwinInitializationSettings()));
+      await flutterLocalPlugin.initialize(
+          const InitializationSettings(iOS: DarwinInitializationSettings()));
     }
 
     await flutterLocalPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(notificationChannel);
 
     await service.configure(
@@ -174,7 +181,8 @@ void onStart(ServiceInstance service) async {
     Timer.periodic(const Duration(seconds: 5), (timer) {
       service.setForegroundNotificationInfo(
         title: "A2S is fetching your location",
-        content: "This is a notification that shows that a2s is fetching ur location",
+        content:
+            "This is a notification that shows that a2s is fetching ur location",
       );
     });
   }
@@ -244,7 +252,8 @@ Future<void> updateLocalization() async {
         (certificate, host, port) => true;
     (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
       HttpClient client = HttpClient();
-      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
       return client;
     };
     final response = await dio.post(
@@ -375,7 +384,8 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> with TickerProviderStateMixin {
   late AuthBloc authBloc;
 
-  final bool isDebugMode = false; // Set to true for debug mode, false for release mode
+  final bool isDebugMode =
+      false; // Set to true for debug mode, false for release mode
 
   @override
   void initState() {
@@ -404,7 +414,8 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
     return MultiBlocProvider(
         providers: [
-          BlocProvider<LocalizationsBloc>(create: (context) => LocalizationsBloc()),
+          BlocProvider<LocalizationsBloc>(
+              create: (context) => LocalizationsBloc()),
           BlocProvider(
             create: (context) => authBloc,
           ),
@@ -413,11 +424,14 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ),
           BlocProvider<NavigationCubit>(create: (context) => NavigationCubit()),
           BlocProvider<FileCubit>(create: (context) => FileCubit()),
-          BlocProvider<FileLoadingCubit>(create: (context) => FileLoadingCubit()),
+          BlocProvider<FileLoadingCubit>(
+              create: (context) => FileLoadingCubit()),
           BlocProvider<TimeRangeCubit>(create: (context) => TimeRangeCubit()),
           BlocProvider<SearchCubit>(create: (context) => SearchCubit()),
-          BlocProvider<CounterCubit>(create: (context) => CounterCubit()..reset()),
-          BlocProvider<ChangePasswordCubit>(create: (context) => ChangePasswordCubit()),
+          BlocProvider<CounterCubit>(
+              create: (context) => CounterCubit()..reset()),
+          BlocProvider<ChangePasswordCubit>(
+              create: (context) => ChangePasswordCubit()),
           BlocProvider<DelegateCubit>(
             lazy: false,
             create: (context) => DelegateCubit()..load(),
@@ -434,22 +448,30 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
             lazy: false,
             create: (context) => ClientsCubit()..load(),
           ),
-          BlocProvider<TourCreationCubit>(create: (context) => TourCreationCubit()),
+          BlocProvider<TourCreationCubit>(
+              create: (context) => TourCreationCubit()),
           BlocProvider<TourPlanBloc>(
             create: (context) => TourPlanBloc(),
           ),
-          BlocProvider<VisitCreationCubit>(create: (context) => VisitCreationCubit()),
+          BlocProvider<VisitCreationCubit>(
+              create: (context) => VisitCreationCubit()),
           BlocProvider<TodoCubit>(create: (context) => TodoCubit()),
           BlocProvider<VisitBloc>(create: (context) => VisitBloc()),
-          BlocProvider<ObservationCubit>(create: (context) => ObservationCubit()),
+          BlocProvider<ObservationCubit>(
+              create: (context) => ObservationCubit()),
           BlocProvider<ClaimCubit>(create: (context) => ClaimCubit()),
           BlocProvider<ClaimMotifCubit>(create: (context) => ClaimMotifCubit()),
-          BlocProvider<ClientDetailsCubit>(create: (context) => ClientDetailsCubit()),
+          BlocProvider<SpecialiteLovCubit>(
+              create: (context) => SpecialiteLovCubit()),
+          BlocProvider<ClientDetailsCubit>(
+              create: (context) => ClientDetailsCubit()),
           BlocProvider<MotifVisitCubit>(create: (context) => MotifVisitCubit()),
           // Contact type for visits
-          BlocProvider<ContactTypeCubit>(create: (context) => ContactTypeCubit()),
+          BlocProvider<ContactTypeCubit>(
+              create: (context) => ContactTypeCubit()),
           BlocProvider<GrossisteCubit>(create: (context) => GrossisteCubit()),
-          BlocProvider<EtablissementCubit>(create: (context) => EtablissementCubit()),
+          BlocProvider<EtablissementCubit>(
+              create: (context) => EtablissementCubit()),
           BlocProvider<VeilleConcurrentielleCubit>(
               create: (context) => VeilleConcurrentielleCubit()),
           BlocProvider<TurnoverCubit>(create: (context) => TurnoverCubit()),
@@ -468,9 +490,14 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ),
           BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
           BlocProvider<OrdersCubit>(create: (context) => OrdersCubit()),
-          BlocProvider<OrderDetailsCubit>(create: (context) => OrderDetailsCubit()),
+          BlocProvider<OrderDetailsCubit>(
+              create: (context) => OrderDetailsCubit()),
+          BlocProvider<ContactsCubit>(create: (context) => ContactsCubit()),
+          BlocProvider<MonthlyStatisticsCubit>(
+              create: (context) => MonthlyStatisticsCubit()),
         ],
-        child: BlocBuilder<LocalizationsBloc, LocalizationsState>(builder: (context, state) {
+        child: BlocBuilder<LocalizationsBloc, LocalizationsState>(
+            builder: (context, state) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(
               alwaysUse24HourFormat: false,
@@ -503,7 +530,8 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
                   return Stack(
                     children: [
                       GestureDetector(
-                        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                        onTap: () =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
                         child: BlocBuilder<AuthBloc, AuthState>(
                           builder: (context, state) {
                             return state.when(
@@ -512,7 +540,8 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
                                 FlutterNativeSplash.remove();
                                 return const LoadingScreen();
                               },
-                              authenticated: (user, tempError) => const NavigationScreen(),
+                              authenticated: (user, tempError) =>
+                                  const NavigationScreen(),
                               unauthenticated: () => const LoginScreen(),
                               failure: (message) => const LoginScreen(),
                             );
@@ -530,7 +559,8 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
 class MyScrollBehavior extends ScrollBehavior {
   @override
-  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
     return child;
   }
 }

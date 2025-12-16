@@ -26,7 +26,8 @@ class _ClientSelectionPopupState extends State<ClientSelectionPopup> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: 24.h),
+            padding:
+                EdgeInsets.symmetric(horizontal: kPaddingMd2, vertical: 24.h),
             color: Colors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,11 +54,14 @@ class _ClientSelectionPopupState extends State<ClientSelectionPopup> {
                         final client = filtered[index];
                         return ListTile(
                           title: Text(client.fullName),
-                          subtitle: Text(client.address ?? context.i10n.noAddress),
+                          subtitle:
+                              Text(client.address ?? context.i10n.noAddress),
                           leading: CircleAvatar(
                             child: Text(client.fullName.characters.first),
                           ),
-                          trailing: _selectedClient == client ? const Icon(Icons.check) : null,
+                          trailing: _selectedClient == client
+                              ? const Icon(Icons.check)
+                              : null,
                           onTap: () {
                             setState(() {
                               _selectedClient = client;
@@ -74,7 +78,8 @@ class _ClientSelectionPopupState extends State<ClientSelectionPopup> {
             },
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: kSpacingX2, vertical: 16.h),
+            padding:
+                EdgeInsets.symmetric(horizontal: kSpacingX2, vertical: 16.h),
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pop(context, _selectedClient);

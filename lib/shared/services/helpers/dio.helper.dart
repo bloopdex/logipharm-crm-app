@@ -26,13 +26,15 @@ class DioHelper {
         validateStatus: (_) => true,
         contentType: Headers.jsonContentType,
         responseType: ResponseType.json,
+        listFormat: ListFormat.multiCompatible,
       ),
     );
     (dio.httpClientAdapter as IOHttpClientAdapter).validateCertificate =
         (certificate, host, port) => true;
     (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
       HttpClient client = HttpClient();
-      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
       return client;
     };
     dio.interceptors.add(InterceptorsWrapper(
@@ -79,8 +81,20 @@ class DioHelper {
     if (headers != null) {
       header.addAll(headers);
     }
-    return await dio.get(url,
-        queryParameters: query,
+
+    // Manually encode query parameters to use %20 instead of +
+    String? queryString;
+    if (query != null && query.isNotEmpty) {
+      queryString = query.entries
+          .where((e) => e.value != null)
+          .map((e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
+          .join('&');
+    }
+
+    final fullUrl = queryString != null ? '$url?$queryString' : url;
+
+    return await dio.get(fullUrl,
         cancelToken: cancelToken,
         options: Options(
           headers: header,
@@ -187,7 +201,8 @@ class DioHelper {
   }) async {
     // Create a FormData object
     FormData formData = FormData.fromMap({
-      'file': await MultipartFile.fromFile(path, filename: path.split(Platform.pathSeparator).last),
+      'file': await MultipartFile.fromFile(path,
+          filename: path.split(Platform.pathSeparator).last),
       if (data != null) ...data,
     });
 

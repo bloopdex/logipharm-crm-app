@@ -35,9 +35,17 @@ class Contact with _$Contact {
     @JsonKey(name: 'connaissanceProduit') String? connaissanceProduit,
     @JsonKey(name: 'prescripteur') String? prescripteur,
     @JsonKey(name: 'objections') String? objections,
+
+    // Patient extras (new)
+    @JsonKey(name: 'medecinTraitant') String? medecinTraitant,
+    @JsonKey(name: 'specialiteMedecin') String? specialiteMedecin,
+    @JsonKey(name: 'typeDiabete') String? typeDiabete,
+    @JsonKey(name: 'testeProduit') String? testeProduit,
+    @JsonKey(name: 'resultatTest') String? resultatTest,
   }) = _Contact;
 
-  factory Contact.fromJson(Map<String, dynamic> json) => _$ContactFromJson(json);
+  factory Contact.fromJson(Map<String, dynamic> json) =>
+      _$ContactFromJson(json);
 }
 
 @freezed
@@ -68,6 +76,13 @@ class ContactCreateUpdate with _$ContactCreateUpdate {
     @JsonKey(name: 'connaissanceProduit') String? connaissanceProduit,
     @JsonKey(name: 'prescripteur') String? prescripteur,
     @JsonKey(name: 'objections') String? objections,
+
+    // Patient extras (new)
+    @JsonKey(name: 'medecinTraitant') String? medecinTraitant,
+    @JsonKey(name: 'specialiteMedecin') String? specialiteMedecin,
+    @JsonKey(name: 'typeDiabete') String? typeDiabete,
+    @JsonKey(name: 'testeProduit') String? testeProduit,
+    @JsonKey(name: 'resultatTest') String? resultatTest,
   }) = _ContactCreateUpdate;
 
   factory ContactCreateUpdate.fromJson(Map<String, dynamic> json) =>

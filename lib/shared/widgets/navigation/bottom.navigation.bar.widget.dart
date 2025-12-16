@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/core.dart';
 import '../../../features/navigation/cubit/navigation_cubit.dart';
+import '../../../logic/search/search_cubit.dart';
+import '../../../logic/time.range/time_range_cubit.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({
@@ -18,14 +20,23 @@ class CustomBottomNavigationBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       selectedItemColor: kCeruleanBlue,
       unselectedItemColor: kCodGray.shade800,
-      selectedLabelStyle: const TextStyle(color: kCeruleanBlue, fontWeight: FontWeight.bold),
-      unselectedLabelStyle: TextStyle(color: kCodGray.shade800, fontWeight: FontWeight.w500),
+      selectedLabelStyle:
+          const TextStyle(color: kCeruleanBlue, fontWeight: FontWeight.bold),
+      unselectedLabelStyle:
+          TextStyle(color: kCodGray.shade800, fontWeight: FontWeight.w500),
       selectedFontSize: 10.h,
       unselectedFontSize: 10.h,
       showUnselectedLabels: true,
       iconSize: 20.h,
       currentIndex: layout.current.value.toInt(),
       onTap: (value) {
+        // Reset date and search filters when changing pages
+        try {
+          TimeRangeCubit.get(context).reset();
+        } catch (_) {}
+        try {
+          SearchCubit.get(context).reset();
+        } catch (_) {}
         layout.change(value);
       },
       items: [

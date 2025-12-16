@@ -79,7 +79,7 @@ class _OffersViewState extends State<_OffersView> {
                         items: [
                           DropdownMenuItem<String>(
                             value: null,
-                            child: Text(context.i10n.eventAll),
+                            child: Text(context.i10n.allLaboratories),
                           ),
                           ...labs.map(
                             (lab) => DropdownMenuItem<String>(
@@ -194,12 +194,7 @@ class _OfferCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
               ],
-              _LabelValue(
-                label: context.i10n.labelAmount,
-                value: _money(offer.montant ?? offer.montantConsom),
-                color: primary,
-              ),
-              const SizedBox(height: 8),
+              // Amount is confidential: removed from the offers list view
               _LabelValue(
                 label: context.i10n.labelDates,
                 value: dates,
@@ -224,11 +219,7 @@ class _OfferCard extends StatelessWidget {
     }
   }
 
-  String _money(num? value) {
-    if (value == null) return '-';
-    final f = NumberFormat.currency(symbol: 'DA', decimalDigits: 0);
-    return f.format(value);
-  }
+  // Amount formatting removed because amount is hidden in offers list
 }
 
 class _LabelValue extends StatelessWidget {

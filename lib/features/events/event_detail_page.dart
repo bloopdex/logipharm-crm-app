@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'add_visit_to_event_page.dart';
 import 'blocs/visits/event_visits_bloc.dart';
 import 'models/event/event.dart';
+import '../../shared/utils/date.formatter.dart' as shared_date_helper;
 
 class EventDetailPage extends StatelessWidget {
   final Event event;
@@ -18,7 +19,8 @@ class EventDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => EventVisitsBloc()..add(EventVisitsEvent.started(id: event.id!)),
+      create: (context) =>
+          EventVisitsBloc()..add(EventVisitsEvent.started(id: event.id!)),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -37,20 +39,25 @@ class EventDetailPage extends StatelessWidget {
             style: context.textTheme.headlineMedium!.copyWith(color: kWhite),
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            context.push(AddVisitToEventPage(event: event));
-          },
-          backgroundColor: kPrimaryColor,
-          label: Text(context.i10n.addVisit),
-          icon: Icon(Icons.add, color: kWhite),
-        ),
+        // Show FAB only when event statut is EN_COURS; ignore legacy type.
+        floatingActionButton: (event.statut == 'EN_COURS')
+            ? FloatingActionButton.extended(
+                onPressed: () {
+                  context.push(AddVisitToEventPage(event: event));
+                },
+                backgroundColor: kPrimaryColor,
+                label: Text(context.i10n.addVisit),
+                icon: Icon(Icons.add, color: kWhite),
+              )
+            : null,
         body: BlocBuilder<EventVisitsBloc, EventVisitsState>(
           builder: (context, state) {
             return Container(
               constraints: BoxConstraints(
-                maxHeight: context.height - context.appBarSize - context.paddingBottom,
-                minHeight: context.height - context.appBarSize - context.paddingBottom,
+                maxHeight:
+                    context.height - context.appBarSize - context.paddingBottom,
+                minHeight:
+                    context.height - context.appBarSize - context.paddingBottom,
                 maxWidth: context.width,
                 minWidth: context.width,
               ),
@@ -61,7 +68,8 @@ class EventDetailPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: kPrimaryColor,
                       borderRadius: BorderRadius.vertical(
-                        bottom: Radius.elliptical(context.width * 2, context.width / 3),
+                        bottom: Radius.elliptical(
+                            context.width * 2, context.width / 3),
                       ),
                     ),
                   ),
@@ -76,7 +84,8 @@ class EventDetailPage extends StatelessWidget {
                           color: kBgGrayVisibility2,
                           borderRadius: BorderRadius.circular(kSpacingX4),
                         ),
-                        child: Icon(Icons.event, size: kSpacingX9, color: kBgGrayVisibility6),
+                        child: Icon(Icons.event,
+                            size: kSpacingX9, color: kBgGrayVisibility6),
                       ),
                       SizedBox(height: kSpacingX5),
                       Text(
@@ -90,8 +99,12 @@ class EventDetailPage extends StatelessWidget {
                       ),
                       SizedBox(height: kSpacingX3),
                       Center(
-                          child:
-                              EventStatusWidget(flag: event.type == 0 ? "EN_ATTENTE" : "TERMINE")),
+                        child: EventStatusWidget(
+                          flag: (event.statut?.isNotEmpty ?? false)
+                              ? event.statut!
+                              : 'EN_ATTENTE',
+                        ),
+                      ),
                       const Divider(),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -138,23 +151,57 @@ class EventDetailPage extends StatelessWidget {
                       Expanded(
                         child: state.maybeWhen(
                           loaded: (eventVisits, hasReachedMax, currentPage) {
-                            return ListView.builder(
-                              itemCount: eventVisits.length,
-                              itemBuilder: (context, index) {
-                                final visit = eventVisits[index];
-                                return ListTile(
-                                  onTap: () {
-                                    context.push(VisitDetailPage(visit: visit));
-                                  },
-                                  title: Text('${visit.nom ?? ''} ${visit.prenom ?? ''}'),
-                                  subtitle: Text(DateFormat("dd MMM yyyy")
-                                      .format(visit.date ?? DateTime.now())),
-                                  trailing: Text(visit.remarque ?? 'No Remark'),
-                                );
+                            final start =
+                                shared_date_helper.DateHelper.YYYYMMdd(
+                                    DateTime(DateTime.now().year, 1, 1));
+                            final end = shared_date_helper.DateHelper.YYYYMMdd(
+                                DateTime.now().add(const Duration(days: 1)));
+
+                            return NotificationListener<ScrollNotification>(
+                              onNotification: (notification) {
+                                if (notification.metrics.pixels >=
+                                        notification.metrics.maxScrollExtent -
+                                            100 &&
+                                    !hasReachedMax) {
+                                  context.read<EventVisitsBloc>().add(
+                                        EventVisitsEvent.load(
+                                          id: event.id!,
+                                          startDate: start,
+                                          endDate: end,
+                                        ),
+                                      );
+                                }
+                                return false;
                               },
+                              child: ListView.builder(
+                                itemCount: eventVisits.length,
+                                itemBuilder: (context, index) {
+                                  final visit = eventVisits[index];
+                                  return ListTile(
+                                    onTap: () {
+                                      context
+                                          .push(VisitDetailPage(visit: visit));
+                                    },
+                                    title: Text(
+                                        '${visit.nom ?? ''} ${visit.prenom ?? ''}'),
+                                    subtitle: Text(DateFormat("dd MMM yyyy")
+                                        .format(visit.date ?? DateTime.now())),
+                                    trailing: SizedBox(
+                                      width: context.width * 0.35,
+                                      child: Text(
+                                        visit.remarque ?? 'No Remark',
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.end,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                             );
                           },
-                          loading: () => const Center(child: CircularProgressIndicator()),
+                          loading: () =>
+                              const Center(child: CircularProgressIndicator()),
                           failure: (message) => Center(child: Text(message)),
                           orElse: () => const Center(child: Text('No data')),
                         ),

@@ -36,6 +36,7 @@ class TourDetail with _$TourDetail {
   const factory TourDetail({
     @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'tourneMaitreId') required String masterTourId,
+    @JsonKey(name: 'tourneTitle') String? masterTourTitle,
     @JsonKey(name: 'companyId') required int companyId,
     @JsonKey(name: 'regionId') String? regionId,
     @JsonKey(name: 'dateDebut') String? startDate,
