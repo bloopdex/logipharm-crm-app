@@ -1,4 +1,5 @@
 import 'package:crm/features/orders/widgets/empty.state.dart';
+import 'package:crm/features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,6 +28,22 @@ class _CartScreenState extends State<CartScreen> {
     super.initState();
     context.read<CartCubit>().loadCart();
     controller.addListener(loadMore);
+
+    // Load initial clients data
+    final shouldLoadClients = context.read<ClientsCubit>().state.maybeWhen(
+          orElse: () => true,
+          loaded: (all, filter) => all.isEmpty,
+        );
+
+    if (shouldLoadClients) {
+      // Check if user is restricted delegate
+      bool isDelegateRestricted = false;
+      try {
+        isDelegateRestricted = context.user.delegueType == 1;
+      } catch (_) {}
+
+      context.read<ClientsCubit>().load(usePagination: isDelegateRestricted);
+    }
   }
 
   @override
@@ -68,11 +85,12 @@ class _CartScreenState extends State<CartScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: kSpacingX2),
+                            padding:
+                                EdgeInsets.symmetric(horizontal: kSpacingX2),
                             child: Text(
                               "$totalElements ${context.i10n.products}",
-                              style:
-                                  context.textTheme.titleMedium!.copyWith(color: kCodGray.shade700),
+                              style: context.textTheme.titleMedium!
+                                  .copyWith(color: kCodGray.shade700),
                             ),
                           ),
                           Expanded(
@@ -85,7 +103,8 @@ class _CartScreenState extends State<CartScreen> {
                                 cart: cart[index],
                                 key: Key('cart-item-$index'),
                               ),
-                              separatorBuilder: (context, index) => Divider(height: kSpacingX1),
+                              separatorBuilder: (context, index) =>
+                                  Divider(height: kSpacingX1),
                               itemCount: cart.length,
                             ),
                           ),

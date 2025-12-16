@@ -18,31 +18,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDelegateRestricted = (context.user.delegueType == 1);
     if (isDelegateRestricted) {
-      return BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: kCeruleanBlue,
-        unselectedItemColor: kCodGray.shade800,
-        selectedLabelStyle:
-            const TextStyle(color: kCeruleanBlue, fontWeight: FontWeight.bold),
-        unselectedLabelStyle:
-            TextStyle(color: kCodGray.shade800, fontWeight: FontWeight.w500),
-        selectedFontSize: 10.h,
-        unselectedFontSize: 10.h,
-        showUnselectedLabels: true,
-        iconSize: 20.h,
-        // Force single item index to 0
-        currentIndex: 0,
-        onTap: (value) {
-          layout.menu();
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.dashboard_outlined),
-            activeIcon: const Icon(Icons.dashboard),
-            label: context.i10n.navMenu,
-          ),
-        ],
-      );
+      return const SizedBox.shrink();
     }
 
     return BottomNavigationBar(

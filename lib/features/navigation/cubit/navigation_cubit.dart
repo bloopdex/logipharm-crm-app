@@ -36,8 +36,6 @@ extension AppScreensExtension on AppScreen {
         return const TodoPage();
       case AppScreen.menu:
         return const MenuPage();
-      default:
-        return const SizedBox.shrink();
     }
   }
 }

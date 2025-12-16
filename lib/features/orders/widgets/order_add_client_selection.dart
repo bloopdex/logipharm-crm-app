@@ -21,16 +21,45 @@ class OrderAddClientSelection extends StatefulWidget {
 class _OrderAddClientSelectionState extends State<OrderAddClientSelection> {
   List<Person> clients = [];
   List<Person> filtered = [];
+  final ScrollController _scrollController = ScrollController();
+  bool _isDelegateRestricted = false;
 
   @override
   void initState() {
     super.initState();
+    _isDelegateRestricted = _checkIfDelegateRestricted();
+
     final initial = context.read<ClientsCubit>().state.maybeWhen(
           orElse: () => <Person>[],
           loaded: (all, filter) => all,
         );
     clients = _applyBusinessRules(initial);
     filtered = clients;
+
+    if (_isDelegateRestricted) {
+      _scrollController.addListener(_onScroll);
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  bool _checkIfDelegateRestricted() {
+    try {
+      return context.user.delegueType == 1;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 200) {
+      context.read<ClientsCubit>().load(isPagination: true);
+    }
   }
 
   List<Person> _applyBusinessRules(List<Person> source) {
@@ -113,12 +142,12 @@ class _OrderAddClientSelectionState extends State<OrderAddClientSelection> {
                               ),
                               SizedBox(height: kSpacingX3),
                               Text(
-                                context.i10n.tourEmptyPlans,
+                                context.i10n.noClientsFound,
                                 style: context.textTheme.headlineMedium,
                               ),
                               SizedBox(height: kSpacingX2),
                               Text(
-                                context.i10n.tourEmptyPlansDescription,
+                                context.i10n.tourCreationClientEmptyDescription,
                                 style: context.textTheme.bodyMedium,
                               ),
                             ],
@@ -130,6 +159,7 @@ class _OrderAddClientSelectionState extends State<OrderAddClientSelection> {
                           await context.read<ClientsCubit>().load();
                         },
                         child: ListView.separated(
+                          controller: _scrollController,
                           itemCount: filtered.length,
                           separatorBuilder: (context, index) =>
                               SizedBox(height: kSpacingX3),

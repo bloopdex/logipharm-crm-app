@@ -16,26 +16,85 @@ class ClientsCubit extends Cubit<ClientsState> {
 
   static ClientsCubit get(context) => BlocProvider.of<ClientsCubit>(context);
 
-  Future<void> load() async {
-    emit(const ClientsState.loading());
+  int _currentPage = 0;
+  final int _pageSize = 15;
+  bool _hasMoreData = true;
+  bool _isLoadingMore = false;
+  bool _usePagination = false;
+
+  Future<void> load(
+      {bool isPagination = false, bool usePagination = false}) async {
+    if (isPagination) {
+      if (_isLoadingMore || !_hasMoreData) return;
+      _isLoadingMore = true;
+    } else {
+      _currentPage = 0;
+      _hasMoreData = true;
+      _usePagination = usePagination;
+      emit(const ClientsState.loading());
+    }
+
     try {
-      final Response response = await ClientRepository.get();
+      late Response response;
+
+      if (_usePagination) {
+        response =
+            await ClientRepository.get(page: _currentPage, size: _pageSize);
+      } else {
+        response = await ClientRepository.get();
+      }
+
       if (response.statusCode == 200) {
-        List<Person> clients = response.data['body']
+        List<Person> pageClients = response.data['body']
             .map<Person>((client) => Person.fromJson(client))
             .toList();
 
-        clients.sort((a, b) =>
+        pageClients.sort((a, b) =>
             a.fullName.toLowerCase().compareTo(b.fullName.toLowerCase()));
-        // Initially, the filtered clients list is the same as the full clients list
-        emit(
-            ClientsState.loaded(allClients: clients, filteredClients: clients));
+
+        if (isPagination && _usePagination) {
+          // Get state and append new clients
+          state.maybeWhen(
+            loaded: (allClients, filteredClients) {
+              final updatedClients = [...allClients, ...pageClients];
+              _currentPage++;
+              _hasMoreData = pageClients.length == _pageSize;
+
+              emit(ClientsState.loaded(
+                allClients: updatedClients,
+                filteredClients: updatedClients,
+              ));
+            },
+            orElse: () {
+              _currentPage++;
+              _hasMoreData = pageClients.length == _pageSize;
+              emit(ClientsState.loaded(
+                allClients: pageClients,
+                filteredClients: pageClients,
+              ));
+            },
+          );
+        } else {
+          // Initial load or no pagination
+          if (_usePagination) {
+            _currentPage++;
+            _hasMoreData = pageClients.length == _pageSize;
+          }
+          emit(ClientsState.loaded(
+            allClients: pageClients,
+            filteredClients: pageClients,
+          ));
+        }
       } else {
         emit(const ClientsState.loaded(allClients: [], filteredClients: []));
       }
     } catch (e) {
       log('ClientsCubit@load Error: $e');
       emit(const ClientsState.error('An error occurred'));
+    } finally {
+      if (isPagination) {
+        _isLoadingMore = false;
+      }
     }
   }
 
