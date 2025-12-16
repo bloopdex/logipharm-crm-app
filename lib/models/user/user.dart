@@ -25,6 +25,7 @@ class User with _$User {
     @JsonKey(name: 'fullName') String? fullName,
     @JsonKey(name: 'authorizedRadius') num? authorizedRadius,
     @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
+    @JsonKey(name: 'delegueType') num? delegueType,
     @JsonKey(name: 'crmNbrLettres') int? minReportChar,
   }) = _User;
 

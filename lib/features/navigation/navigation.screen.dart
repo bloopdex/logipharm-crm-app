@@ -245,6 +245,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   @override
   void initState() {
+    // If delegateType is 1, restrict to Menu tab
+    final user = context.read<AuthBloc>().user;
+    if (user.delegueType == 1) {
+      NavigationCubit.get(context).menu();
+    }
     if (context.read<DelegateCubit>().state.isEmpty) {
       context.read<DelegateCubit>().load();
     }

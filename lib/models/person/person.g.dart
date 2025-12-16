@@ -46,6 +46,8 @@ _$PersonImpl _$$PersonImplFromJson(Map<String, dynamic> json) => _$PersonImpl(
           ? null
           : ClientStatistics.fromJson(
               json['ficheClient'] as Map<String, dynamic>),
+      laboratoireCode: json['laboratoireCode'] as String?,
+      delegueType: json['delegueType'] as num?,
     );
 
 Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
@@ -82,6 +84,8 @@ Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
       'categorieId2': instance.categorieId2,
       'categorieLibelle2': instance.categoryLabel2,
       'ficheClient': instance.clientStatistics,
+      'laboratoireCode': instance.laboratoireCode,
+      'delegueType': instance.delegueType,
     };
 
 _$SolvabiliteImpl _$$SolvabiliteImplFromJson(Map<String, dynamic> json) =>

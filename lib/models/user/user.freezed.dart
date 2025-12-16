@@ -54,6 +54,8 @@ mixin _$User {
   num? get authorizedRadius => throw _privateConstructorUsedError;
   @JsonKey(name: 'roleChangeLocationClient')
   bool? get roleChangeLocationClient => throw _privateConstructorUsedError;
+  @JsonKey(name: 'delegueType')
+  num? get delegueType => throw _privateConstructorUsedError;
   @JsonKey(name: 'crmNbrLettres')
   int? get minReportChar => throw _privateConstructorUsedError;
 
@@ -89,6 +91,7 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: 'fullName') String? fullName,
       @JsonKey(name: 'authorizedRadius') num? authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
+      @JsonKey(name: 'delegueType') num? delegueType,
       @JsonKey(name: 'crmNbrLettres') int? minReportChar});
 }
 
@@ -124,6 +127,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? fullName = freezed,
     Object? authorizedRadius = freezed,
     Object? roleChangeLocationClient = freezed,
+    Object? delegueType = freezed,
     Object? minReportChar = freezed,
   }) {
     return _then(_value.copyWith(
@@ -195,6 +199,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.roleChangeLocationClient
           : roleChangeLocationClient // ignore: cast_nullable_to_non_nullable
               as bool?,
+      delegueType: freezed == delegueType
+          ? _value.delegueType
+          : delegueType // ignore: cast_nullable_to_non_nullable
+              as num?,
       minReportChar: freezed == minReportChar
           ? _value.minReportChar
           : minReportChar // ignore: cast_nullable_to_non_nullable
@@ -228,6 +236,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: 'fullName') String? fullName,
       @JsonKey(name: 'authorizedRadius') num? authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
+      @JsonKey(name: 'delegueType') num? delegueType,
       @JsonKey(name: 'crmNbrLettres') int? minReportChar});
 }
 
@@ -260,6 +269,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? fullName = freezed,
     Object? authorizedRadius = freezed,
     Object? roleChangeLocationClient = freezed,
+    Object? delegueType = freezed,
     Object? minReportChar = freezed,
   }) {
     return _then(_$UserImpl(
@@ -331,6 +341,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.roleChangeLocationClient
           : roleChangeLocationClient // ignore: cast_nullable_to_non_nullable
               as bool?,
+      delegueType: freezed == delegueType
+          ? _value.delegueType
+          : delegueType // ignore: cast_nullable_to_non_nullable
+              as num?,
       minReportChar: freezed == minReportChar
           ? _value.minReportChar
           : minReportChar // ignore: cast_nullable_to_non_nullable
@@ -360,6 +374,7 @@ class _$UserImpl implements _User {
       @JsonKey(name: 'fullName') this.fullName,
       @JsonKey(name: 'authorizedRadius') this.authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient') this.roleChangeLocationClient,
+      @JsonKey(name: 'delegueType') this.delegueType,
       @JsonKey(name: 'crmNbrLettres') this.minReportChar});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -417,12 +432,15 @@ class _$UserImpl implements _User {
   @JsonKey(name: 'roleChangeLocationClient')
   final bool? roleChangeLocationClient;
   @override
+  @JsonKey(name: 'delegueType')
+  final num? delegueType;
+  @override
   @JsonKey(name: 'crmNbrLettres')
   final int? minReportChar;
 
   @override
   String toString() {
-    return 'User(id: $id, companyId: $companyId, companyType: $companyType, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, addVisitOutPlanPrivilege: $addVisitOutPlanPrivilege, fullName: $fullName, authorizedRadius: $authorizedRadius, roleChangeLocationClient: $roleChangeLocationClient, minReportChar: $minReportChar)';
+    return 'User(id: $id, companyId: $companyId, companyType: $companyType, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, addVisitOutPlanPrivilege: $addVisitOutPlanPrivilege, fullName: $fullName, authorizedRadius: $authorizedRadius, roleChangeLocationClient: $roleChangeLocationClient, delegueType: $delegueType, minReportChar: $minReportChar)';
   }
 
   @override
@@ -464,32 +482,36 @@ class _$UserImpl implements _User {
             (identical(
                     other.roleChangeLocationClient, roleChangeLocationClient) ||
                 other.roleChangeLocationClient == roleChangeLocationClient) &&
+            (identical(other.delegueType, delegueType) ||
+                other.delegueType == delegueType) &&
             (identical(other.minReportChar, minReportChar) ||
                 other.minReportChar == minReportChar));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      companyId,
-      companyType,
-      typeTier,
-      lastName,
-      firstName,
-      loginCode,
-      actionFlag,
-      regionId,
-      address,
-      latitude,
-      longitude,
-      supervisor,
-      addVisitOutPlanPrivilege,
-      fullName,
-      authorizedRadius,
-      roleChangeLocationClient,
-      minReportChar);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        companyId,
+        companyType,
+        typeTier,
+        lastName,
+        firstName,
+        loginCode,
+        actionFlag,
+        regionId,
+        address,
+        latitude,
+        longitude,
+        supervisor,
+        addVisitOutPlanPrivilege,
+        fullName,
+        authorizedRadius,
+        roleChangeLocationClient,
+        delegueType,
+        minReportChar
+      ]);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -527,6 +549,7 @@ abstract class _User implements User {
       @JsonKey(name: 'authorizedRadius') final num? authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient')
       final bool? roleChangeLocationClient,
+      @JsonKey(name: 'delegueType') final num? delegueType,
       @JsonKey(name: 'crmNbrLettres') final int? minReportChar}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -582,6 +605,9 @@ abstract class _User implements User {
   @override
   @JsonKey(name: 'roleChangeLocationClient')
   bool? get roleChangeLocationClient;
+  @override
+  @JsonKey(name: 'delegueType')
+  num? get delegueType;
   @override
   @JsonKey(name: 'crmNbrLettres')
   int? get minReportChar;

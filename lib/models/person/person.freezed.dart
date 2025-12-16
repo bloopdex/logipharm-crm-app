@@ -86,6 +86,10 @@ mixin _$Person {
   String? get categoryLabel2 => throw _privateConstructorUsedError;
   @JsonKey(name: 'ficheClient')
   ClientStatistics? get clientStatistics => throw _privateConstructorUsedError;
+  @JsonKey(name: 'laboratoireCode')
+  String? get laboratoireCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'delegueType')
+  num? get delegueType => throw _privateConstructorUsedError;
 
   /// Serializes this Person to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -133,7 +137,9 @@ abstract class $PersonCopyWith<$Res> {
       @JsonKey(name: 'categorieLibelle') String? categoryLabel,
       @JsonKey(name: 'categorieId2') int? categorieId2,
       @JsonKey(name: 'categorieLibelle2') String? categoryLabel2,
-      @JsonKey(name: 'ficheClient') ClientStatistics? clientStatistics});
+      @JsonKey(name: 'ficheClient') ClientStatistics? clientStatistics,
+      @JsonKey(name: 'laboratoireCode') String? laboratoireCode,
+      @JsonKey(name: 'delegueType') num? delegueType});
 
   $SolvabiliteCopyWith<$Res>? get solvabilite;
   $ModePaieCopyWith<$Res>? get modePaie;
@@ -187,6 +193,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? categorieId2 = freezed,
     Object? categoryLabel2 = freezed,
     Object? clientStatistics = freezed,
+    Object? laboratoireCode = freezed,
+    Object? delegueType = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -317,6 +325,14 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.clientStatistics
           : clientStatistics // ignore: cast_nullable_to_non_nullable
               as ClientStatistics?,
+      laboratoireCode: freezed == laboratoireCode
+          ? _value.laboratoireCode
+          : laboratoireCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      delegueType: freezed == delegueType
+          ? _value.delegueType
+          : delegueType // ignore: cast_nullable_to_non_nullable
+              as num?,
     ) as $Val);
   }
 
@@ -402,7 +418,9 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       @JsonKey(name: 'categorieLibelle') String? categoryLabel,
       @JsonKey(name: 'categorieId2') int? categorieId2,
       @JsonKey(name: 'categorieLibelle2') String? categoryLabel2,
-      @JsonKey(name: 'ficheClient') ClientStatistics? clientStatistics});
+      @JsonKey(name: 'ficheClient') ClientStatistics? clientStatistics,
+      @JsonKey(name: 'laboratoireCode') String? laboratoireCode,
+      @JsonKey(name: 'delegueType') num? delegueType});
 
   @override
   $SolvabiliteCopyWith<$Res>? get solvabilite;
@@ -457,6 +475,8 @@ class __$$PersonImplCopyWithImpl<$Res>
     Object? categorieId2 = freezed,
     Object? categoryLabel2 = freezed,
     Object? clientStatistics = freezed,
+    Object? laboratoireCode = freezed,
+    Object? delegueType = freezed,
   }) {
     return _then(_$PersonImpl(
       id: null == id
@@ -587,6 +607,14 @@ class __$$PersonImplCopyWithImpl<$Res>
           ? _value.clientStatistics
           : clientStatistics // ignore: cast_nullable_to_non_nullable
               as ClientStatistics?,
+      laboratoireCode: freezed == laboratoireCode
+          ? _value.laboratoireCode
+          : laboratoireCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      delegueType: freezed == delegueType
+          ? _value.delegueType
+          : delegueType // ignore: cast_nullable_to_non_nullable
+              as num?,
     ));
   }
 }
@@ -626,7 +654,9 @@ class _$PersonImpl implements _Person {
       @JsonKey(name: 'categorieLibelle') this.categoryLabel,
       @JsonKey(name: 'categorieId2') this.categorieId2,
       @JsonKey(name: 'categorieLibelle2') this.categoryLabel2,
-      @JsonKey(name: 'ficheClient') this.clientStatistics});
+      @JsonKey(name: 'ficheClient') this.clientStatistics,
+      @JsonKey(name: 'laboratoireCode') this.laboratoireCode,
+      @JsonKey(name: 'delegueType') this.delegueType});
 
   factory _$PersonImpl.fromJson(Map<String, dynamic> json) =>
       _$$PersonImplFromJson(json);
@@ -730,10 +760,16 @@ class _$PersonImpl implements _Person {
   @override
   @JsonKey(name: 'ficheClient')
   final ClientStatistics? clientStatistics;
+  @override
+  @JsonKey(name: 'laboratoireCode')
+  final String? laboratoireCode;
+  @override
+  @JsonKey(name: 'delegueType')
+  final num? delegueType;
 
   @override
   String toString() {
-    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, activeFlag: $activeFlag, regionId: $regionId, ville: $ville, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName, prospect: $prospect, solvabilite: $solvabilite, modePaie: $modePaie, categoryId: $categoryId, categoryLabel: $categoryLabel, categorieId2: $categorieId2, categoryLabel2: $categoryLabel2, clientStatistics: $clientStatistics)';
+    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, activeFlag: $activeFlag, regionId: $regionId, ville: $ville, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName, prospect: $prospect, solvabilite: $solvabilite, modePaie: $modePaie, categoryId: $categoryId, categoryLabel: $categoryLabel, categorieId2: $categorieId2, categoryLabel2: $categoryLabel2, clientStatistics: $clientStatistics, laboratoireCode: $laboratoireCode, delegueType: $delegueType)';
   }
 
   @override
@@ -795,7 +831,11 @@ class _$PersonImpl implements _Person {
             (identical(other.categoryLabel2, categoryLabel2) ||
                 other.categoryLabel2 == categoryLabel2) &&
             (identical(other.clientStatistics, clientStatistics) ||
-                other.clientStatistics == clientStatistics));
+                other.clientStatistics == clientStatistics) &&
+            (identical(other.laboratoireCode, laboratoireCode) ||
+                other.laboratoireCode == laboratoireCode) &&
+            (identical(other.delegueType, delegueType) ||
+                other.delegueType == delegueType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -833,7 +873,9 @@ class _$PersonImpl implements _Person {
         categoryLabel,
         categorieId2,
         categoryLabel2,
-        clientStatistics
+        clientStatistics,
+        laboratoireCode,
+        delegueType
       ]);
 
   /// Create a copy of Person
@@ -885,8 +927,9 @@ abstract class _Person implements Person {
       @JsonKey(name: 'categorieLibelle') final String? categoryLabel,
       @JsonKey(name: 'categorieId2') final int? categorieId2,
       @JsonKey(name: 'categorieLibelle2') final String? categoryLabel2,
-      @JsonKey(name: 'ficheClient')
-      final ClientStatistics? clientStatistics}) = _$PersonImpl;
+      @JsonKey(name: 'ficheClient') final ClientStatistics? clientStatistics,
+      @JsonKey(name: 'laboratoireCode') final String? laboratoireCode,
+      @JsonKey(name: 'delegueType') final num? delegueType}) = _$PersonImpl;
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$PersonImpl.fromJson;
 
@@ -986,6 +1029,12 @@ abstract class _Person implements Person {
   @override
   @JsonKey(name: 'ficheClient')
   ClientStatistics? get clientStatistics;
+  @override
+  @JsonKey(name: 'laboratoireCode')
+  String? get laboratoireCode;
+  @override
+  @JsonKey(name: 'delegueType')
+  num? get delegueType;
 
   /// Create a copy of Person
   /// with the given fields replaced by the non-null parameter values.
