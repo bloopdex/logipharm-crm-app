@@ -115,7 +115,7 @@ class AppTheme {
           titleTextStyle: lightTextTheme().bodyMedium,
         ),
         dialogBackgroundColor: Colors.white,
-        dialogTheme: DialogTheme(
+        dialogTheme: DialogThemeData(
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.transparent,
           shape: RoundedRectangleBorder(
@@ -254,7 +254,7 @@ class AppTheme {
           }),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        tabBarTheme: TabBarTheme(
+        tabBarTheme: TabBarThemeData(
           indicatorColor: kTextPrimary,
           indicatorSize: TabBarIndicatorSize.tab,
           indicator: BoxDecoration(

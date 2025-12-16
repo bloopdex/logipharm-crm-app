@@ -20,6 +20,7 @@ class CustomDropDownInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
+      isExpanded: true,
       value: initialValue != null && initialValue!.isNotEmpty
           ? initialValue
           : items.isNotEmpty
@@ -30,6 +31,8 @@ class CustomDropDownInput extends StatelessWidget {
           value: items[index].value,
           child: Text(
             items[index].label,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
         );
       }),

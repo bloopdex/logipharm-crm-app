@@ -25,8 +25,12 @@ mixin _$ClaimMotif {
   @JsonKey(name: 'label')
   String get label => throw _privateConstructorUsedError;
 
+  /// Serializes this ClaimMotif to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ClaimMotif
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ClaimMotifCopyWith<ClaimMotif> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$ClaimMotifCopyWithImpl<$Res, $Val extends ClaimMotif>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ClaimMotif
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -90,6 +96,8 @@ class __$$ClaimMotifImplCopyWithImpl<$Res>
       _$ClaimMotifImpl _value, $Res Function(_$ClaimMotifImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClaimMotif
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,11 +148,13 @@ class _$ClaimMotifImpl implements _ClaimMotif {
             (identical(other.label, label) || other.label == label));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, label);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClaimMotif
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClaimMotifImplCopyWith<_$ClaimMotifImpl> get copyWith =>
@@ -172,8 +182,11 @@ abstract class _ClaimMotif implements ClaimMotif {
   @override
   @JsonKey(name: 'label')
   String get label;
+
+  /// Create a copy of ClaimMotif
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClaimMotifImplCopyWith<_$ClaimMotifImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

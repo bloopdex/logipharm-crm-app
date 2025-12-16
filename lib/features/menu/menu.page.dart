@@ -2,6 +2,7 @@ import 'package:crm/features/events/blocs/events/events_cubit.dart';
 import 'package:crm/features/events/events_page.dart';
 import 'package:crm/features/hiring/create-hire.page.dart';
 import 'package:crm/features/hiring/hire.page.dart';
+import 'package:crm/features/orders/products_page.dart';
 import 'package:crm/features/todo/create-event.page.dart';
 import 'package:crm/features/tour-plan/create-plan.page.dart';
 import 'package:crm/features/visits/bloc/visits/visit_bloc.dart';
@@ -14,6 +15,9 @@ import '../../logic/auth/auth_bloc.dart';
 import '../../shared/widgets/buttons/circlebutton.text.widget.dart';
 import '../clients/clients.page.dart';
 import '../cnrc/cnrc.page.dart';
+import '../contacts/contacts_list_page.dart';
+import '../offers/offers_list_page.dart';
+import '../statistics/monthly_statistics_page.dart';
 import '../tour-plan/bloc/clients/clients_cubit.dart';
 import '../tour-plan/bloc/delegate_cubit.dart';
 import '../tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
@@ -141,42 +145,9 @@ class MenuPage extends StatelessWidget {
             DividerContainer(
                 child: Padding(
               padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-              child: Row(
-                children: [
-                  Container(
-                    width: kSpacingX9,
-                    height: kSpacingX9,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: kCeruleanBlue.shade100,
-                    ),
-                    padding: EdgeInsets.all(kPaddingSm3),
-                    alignment: Alignment.center,
-                    child: const Icon(
-                      Icons.analytics_rounded,
-                      color: kCeruleanBlue,
-                    ),
-                  ),
-                  SizedBox(width: kSpacingX3),
-                  Expanded(
-                    child: Text(
-                      context.i10n.dashboard,
-                      style: context.textTheme.bodyLarge,
-                    ),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: kSpacingX5,
-                  ),
-                ],
-              ),
-            )),
-            DividerContainer(
-                child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
               child: InkWell(
                 onTap: () {
-                  context.push(const ClientsPage());
+                  context.push(const MonthlyStatisticsPage());
                 },
                 child: Row(
                   children: [
@@ -190,14 +161,14 @@ class MenuPage extends StatelessWidget {
                       padding: EdgeInsets.all(kPaddingSm3),
                       alignment: Alignment.center,
                       child: const Icon(
-                        Icons.group_rounded,
+                        Icons.analytics_rounded,
                         color: kCeruleanBlue,
                       ),
                     ),
                     SizedBox(width: kSpacingX3),
                     Expanded(
                       child: Text(
-                        context.i10n.clientList,
+                        context.i10n.dashboard,
                         style: context.textTheme.bodyLarge,
                       ),
                     ),
@@ -214,7 +185,7 @@ class MenuPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
               child: InkWell(
                 onTap: () {
-                  context.push(const HirePage());
+                  context.push(const OffersListPage());
                 },
                 child: Row(
                   children: [
@@ -228,14 +199,14 @@ class MenuPage extends StatelessWidget {
                       padding: EdgeInsets.all(kPaddingSm3),
                       alignment: Alignment.center,
                       child: const Icon(
-                        Icons.assignment_ind_rounded,
+                        Icons.local_offer_rounded,
                         color: kCeruleanBlue,
                       ),
                     ),
                     SizedBox(width: kSpacingX3),
                     Expanded(
                       child: Text(
-                        context.i10n.hiring,
+                        'Offers',
                         style: context.textTheme.bodyLarge,
                       ),
                     ),
@@ -247,13 +218,13 @@ class MenuPage extends StatelessWidget {
                 ),
               ),
             )),
-            DividerContainer(
-              isBottom: false,
-              child: Padding(
+            if (user.companyType == 0)
+              DividerContainer(
+                  child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
                 child: InkWell(
                   onTap: () {
-                    context.push(const CommercialRegisterPage());
+                    context.push(const ClientsPage());
                   },
                   child: Row(
                     children: [
@@ -267,14 +238,14 @@ class MenuPage extends StatelessWidget {
                         padding: EdgeInsets.all(kPaddingSm3),
                         alignment: Alignment.center,
                         child: const Icon(
-                          Icons.insert_drive_file_rounded,
+                          Icons.group_rounded,
                           color: kCeruleanBlue,
                         ),
                       ),
                       SizedBox(width: kSpacingX3),
                       Expanded(
                         child: Text(
-                          context.i10n.fileCNRC,
+                          context.i10n.clientList,
                           style: context.textTheme.bodyLarge,
                         ),
                       ),
@@ -285,10 +256,127 @@ class MenuPage extends StatelessWidget {
                     ],
                   ),
                 ),
+              )),
+            if (user.companyType == 1)
+              DividerContainer(
+                  child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(ContactsListPage.routeName);
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        width: kSpacingX9,
+                        height: kSpacingX9,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: kCeruleanBlue.shade100,
+                        ),
+                        padding: EdgeInsets.all(kPaddingSm3),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.contacts_rounded,
+                          color: kCeruleanBlue,
+                        ),
+                      ),
+                      SizedBox(width: kSpacingX3),
+                      Expanded(
+                        child: Text(
+                          context.i10n.contactsTitle,
+                          style: context.textTheme.bodyLarge,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: kSpacingX5,
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+            if (user.companyType == 0)
+              DividerContainer(
+                  child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                child: InkWell(
+                  onTap: () {
+                    context.push(const HirePage());
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        width: kSpacingX9,
+                        height: kSpacingX9,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: kCeruleanBlue.shade100,
+                        ),
+                        padding: EdgeInsets.all(kPaddingSm3),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.assignment_ind_rounded,
+                          color: kCeruleanBlue,
+                        ),
+                      ),
+                      SizedBox(width: kSpacingX3),
+                      Expanded(
+                        child: Text(
+                          context.i10n.hiring,
+                          style: context.textTheme.bodyLarge,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: kSpacingX5,
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+            if (user.companyType == 0)
+              DividerContainer(
+                isBottom: false,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                  child: InkWell(
+                    onTap: () {
+                      context.push(const CommercialRegisterPage());
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          width: kSpacingX9,
+                          height: kSpacingX9,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: kCeruleanBlue.shade100,
+                          ),
+                          padding: EdgeInsets.all(kPaddingSm3),
+                          alignment: Alignment.center,
+                          child: const Icon(
+                            Icons.insert_drive_file_rounded,
+                            color: kCeruleanBlue,
+                          ),
+                        ),
+                        SizedBox(width: kSpacingX3),
+                        Expanded(
+                          child: Text(
+                            context.i10n.fileCNRC,
+                            style: context.textTheme.bodyLarge,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: kSpacingX5,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
             DividerContainer(
-              isBottom: true,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
                 child: InkWell(
@@ -316,6 +404,46 @@ class MenuPage extends StatelessWidget {
                       Expanded(
                         child: Text(
                           context.i10n.events,
+                          style: context.textTheme.bodyLarge,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: kSpacingX5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            DividerContainer(
+              isBottom: true,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                child: InkWell(
+                  onTap: () {
+                    context.push(const ProductsPage());
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        width: kSpacingX9,
+                        height: kSpacingX9,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: kCeruleanBlue.shade100,
+                        ),
+                        padding: EdgeInsets.all(kPaddingSm3),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.shopping_bag_rounded,
+                          color: kCeruleanBlue,
+                        ),
+                      ),
+                      SizedBox(width: kSpacingX3),
+                      Expanded(
+                        child: Text(
+                          context.i10n.orders,
                           style: context.textTheme.bodyLarge,
                         ),
                       ),

@@ -108,7 +108,7 @@ class TourPlanCard extends StatelessWidget {
               // due date
               Text(
                 DateFormat("dd MMM yyyy").format(
-                  DateTime.parse(tour.endDate ?? DateTime.now().toString()),
+                  DateTime.parse(tour.startDate ?? DateTime.now().toString()),
                 ),
                 style: context.textTheme.bodyMedium!.copyWith(
                   color: kText4,

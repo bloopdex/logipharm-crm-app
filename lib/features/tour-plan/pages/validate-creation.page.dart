@@ -4,7 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/core.dart';
+import '../../../logic/auth/auth_bloc.dart';
 import '../../../models/person/person.dart';
+import '../../contacts/bloc/contacts_cubit.dart';
+import '../../contacts/models/contact.dart';
 import '../bloc/clients/clients_cubit.dart';
 import '../bloc/delegate_cubit.dart';
 import '../bloc/tour-creation/tour_creation_cubit.dart';
@@ -22,13 +25,30 @@ class ValidateCreationPage extends StatelessWidget {
         .state
         .firstWhere((element) => element.id.toString() == data['delegueId']);
 
-    // get the clients from the cubit by pharmacy id
+    // get the clients from the cubit by pharmacy id (default)
     final clients = context.read<ClientsCubit>().state.maybeWhen(
-        orElse: () => [],
+        orElse: () => <Person>[],
         loaded: (all, filter) => all
-            .where((element) =>
-                data['pharmacieIds']?.contains('${element.id.toString()}:${element.typeTier}'))
+            .where((element) => data['pharmacieIds']
+                ?.contains('${element.id.toString()}:${element.typeTier}'))
             .toList());
+
+    // If companyType==0 (contacts flow), resolve selected contacts from pharmacieIds (formatted as id:typeclient)
+    final user = context.read<AuthBloc>().user;
+    final List<Contact> contacts = user.companyType == 1
+        ? context.read<ContactsCubit>().state.maybeWhen(
+              orElse: () => <Contact>[],
+              loaded: (all) {
+                final ids = (data['pharmacieIds'] as List?)
+                        ?.map((e) => '$e'.split(':').first)
+                        .map((e) => int.tryParse(e))
+                        .whereType<int>()
+                        .toSet() ??
+                    <int>{};
+                return all.where((c) => ids.contains(c.id)).toList();
+              },
+            )
+        : <Contact>[];
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
@@ -146,19 +166,42 @@ class ValidateCreationPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
                   child: Text(
-                    context.i10n.tourValidationClientLabelNumber(clients.length),
+                    user.companyType == 1
+                        ? 'Contacts: ${contacts.length}'
+                        : context.i10n
+                            .tourValidationClientLabelNumber(clients.length),
                     style: context.textTheme.headlineSmall,
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: clients.length,
-                    itemBuilder: (context, index) {
-                      final Person client = clients[index];
-                      return ClientCard(client: client);
-                    },
-                  ),
+                  child: user.companyType == 1
+                      ? ListView.builder(
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: contacts.length,
+                          itemBuilder: (context, index) {
+                            final contact = contacts[index];
+                            final name = [contact.nom, contact.prenom]
+                                .where((e) => (e ?? '').isNotEmpty)
+                                .join(' ');
+                            return ListTile(
+                              leading: CircleAvatar(
+                                  child: Text(name.isNotEmpty ? name[0] : '?')),
+                              title: Text(name.isNotEmpty
+                                  ? name
+                                  : (contact.nom ?? '-')),
+                              subtitle: Text(
+                                  contact.adresse ?? context.i10n.noAddress),
+                            );
+                          },
+                        )
+                      : ListView.builder(
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: clients.length,
+                          itemBuilder: (context, index) {
+                            final Person client = clients[index];
+                            return ClientCard(client: client);
+                          },
+                        ),
                 ),
               ],
             ),

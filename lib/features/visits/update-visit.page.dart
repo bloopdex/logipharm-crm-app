@@ -52,12 +52,15 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
     context.read<VisitCreationCubit>().reset();
     debugPrint('tour: ${widget.tour}');
     data['dateDebut'] = DateTime.now().YYYYMMdd();
-    data['pharmacieId'] = '${widget.tour.pharmacy!.id}:${widget.tour.pharmacy!.typeTier}';
+    data['pharmacieId'] =
+        '${widget.tour.pharmacy!.id}:${widget.tour.pharmacy!.typeTier}';
     data['tourneeId'] = widget.tour.masterTourId;
     data['motif'] = widget.tour.reason?.id.toString();
     if (widget.tour.reason != null && widget.tour.reason?.id != -1) {
       data['motif'] = widget.tour.reason;
     }
+    // Initialize contactType if not set
+    data['contactType'] = data['contactType'] ?? '';
     if (widget.tour.report != null) {
       try {
         List<dynamic> deltaOperations = json.decode(widget.tour.report!);
@@ -137,11 +140,21 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                       maxWidth: context.width,
                       minWidth: context.width,
                       maxHeight: context.read<CounterCubit>().state == 0
-                          ? context.height - context.appBarSize - context.paddingBottom - 160.h
-                          : context.height - context.appBarSize - context.paddingBottom,
+                          ? context.height -
+                              context.appBarSize -
+                              context.paddingBottom -
+                              160.h
+                          : context.height -
+                              context.appBarSize -
+                              context.paddingBottom,
                       minHeight: context.read<CounterCubit>().state == 0
-                          ? context.height - context.appBarSize - context.paddingBottom - 160.h
-                          : context.height - context.appBarSize - context.paddingBottom,
+                          ? context.height -
+                              context.appBarSize -
+                              context.paddingBottom -
+                              160.h
+                          : context.height -
+                              context.appBarSize -
+                              context.paddingBottom,
                     ),
                     child: SingleChildScrollView(
                       controller: _scrollController,
@@ -180,44 +193,72 @@ class _UpdateVisitPageState extends State<UpdateVisitPage> {
                                           clients: [widget.tour],
                                           data: data,
                                         )
-                                      : VisitValidateUpdatePage(tour: widget.tour, data: data),
+                                      : VisitValidateUpdatePage(
+                                          tour: widget.tour, data: data),
                                 ),
                                 SizedBox(height: kSpacingX4),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: kPaddingMd2),
                                   child: CustomButton(
-                                    text: state < 1 ? context.i10n.next : context.i10n.validate,
+                                    text: state < 1
+                                        ? context.i10n.next
+                                        : context.i10n.validate,
                                     onPressed: () async {
                                       switch (state) {
                                         case 0:
                                           if (data['dateDebut'] == null ||
                                               data['pharmacieId'] == null ||
                                               data['motif'] == null ||
-                                              _quillController.document.toPlainText().isEmpty) {
+                                              (data['contactType'] == null ||
+                                                  (data['contactType']
+                                                          as String)
+                                                      .isEmpty) ||
+                                              _quillController.document
+                                                  .toPlainText()
+                                                  .isEmpty) {
                                             return;
                                           }
-                                          data['document'] = _quillController.document;
-                                          context.read<CounterCubit>().increment();
+                                          data['document'] =
+                                              _quillController.document;
+                                          context
+                                              .read<CounterCubit>()
+                                              .increment();
                                           // check if mounted
                                           if (!mounted) return;
                                           setState(() {});
                                           break;
                                         case 1:
-                                          data['rapportText'] =
-                                              _quillController.document.toPlainText();
-                                          data['rapport'] = _quillController.document
+                                          data['rapportText'] = _quillController
+                                              .document
+                                              .toPlainText();
+                                          data['rapport'] = _quillController
+                                              .document
                                               .toDelta()
                                               .toJson()
                                               .toString();
-                                          final position =
-                                              await LocationHelper.getCurrentPosition();
+                                          final position = await LocationHelper
+                                              .getCurrentPosition();
                                           if (position != null) {
-                                            data['latitude'] = position.latitude;
-                                            data['longitude'] = position.longitude;
+                                            data['latitude'] =
+                                                position.latitude;
+                                            data['longitude'] =
+                                                position.longitude;
                                           }
                                           if (!context.mounted) return;
-                                          context.read<VisitCreationCubit>().validate(data: data);
-                                          context.read<VisitBloc>().add(const VisitEvent.started());
+                                          // ensure label
+                                          if (data['contactType'] is! String) {
+                                            data['contactType'] =
+                                                data['contactType']
+                                                        ?.toString() ??
+                                                    '';
+                                          }
+                                          context
+                                              .read<VisitCreationCubit>()
+                                              .validate(data: data);
+                                          context
+                                              .read<VisitBloc>()
+                                              .add(const VisitEvent.started());
                                       }
                                     },
                                   ),

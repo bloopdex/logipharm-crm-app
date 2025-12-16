@@ -35,8 +35,12 @@ mixin _$Claim {
   @JsonKey(name: 'rapportText')
   String get rapportText => throw _privateConstructorUsedError;
 
+  /// Serializes this Claim to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Claim
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ClaimCopyWith<Claim> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -65,6 +69,8 @@ class _$ClaimCopyWithImpl<$Res, $Val extends Claim>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Claim
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -134,6 +140,8 @@ class __$$ClaimImplCopyWithImpl<$Res>
       _$ClaimImpl _value, $Res Function(_$ClaimImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Claim
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -236,12 +244,14 @@ class _$ClaimImpl implements _Claim {
                 other.rapportText == rapportText));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, pharmacieId, date, type, titre, motif, rapport, rapportText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Claim
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClaimImplCopyWith<_$ClaimImpl> get copyWith =>
@@ -289,8 +299,11 @@ abstract class _Claim implements Claim {
   @override
   @JsonKey(name: 'rapportText')
   String get rapportText;
+
+  /// Create a copy of Claim
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClaimImplCopyWith<_$ClaimImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

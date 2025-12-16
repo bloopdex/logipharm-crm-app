@@ -50,7 +50,9 @@ mixin _$LocalizationsEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LocalizationsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LocalizationsEventCopyWith<LocalizationsEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -74,6 +76,8 @@ class _$LocalizationsEventCopyWithImpl<$Res, $Val extends LocalizationsEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LocalizationsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -107,6 +111,8 @@ class __$$ChangeLocaleImplCopyWithImpl<$Res>
       _$ChangeLocaleImpl _value, $Res Function(_$ChangeLocaleImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LocalizationsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -145,7 +151,9 @@ class _$ChangeLocaleImpl implements _ChangeLocale {
   @override
   int get hashCode => Object.hash(runtimeType, locale);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LocalizationsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChangeLocaleImplCopyWith<_$ChangeLocaleImpl> get copyWith =>
@@ -214,8 +222,11 @@ abstract class _ChangeLocale implements LocalizationsEvent {
 
   @override
   Locale get locale;
+
+  /// Create a copy of LocalizationsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChangeLocaleImplCopyWith<_$ChangeLocaleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -224,7 +235,9 @@ abstract class _ChangeLocale implements LocalizationsEvent {
 mixin _$LocalizationsState {
   Locale get locale => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LocalizationsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LocalizationsStateCopyWith<LocalizationsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -248,6 +261,8 @@ class _$LocalizationsStateCopyWithImpl<$Res, $Val extends LocalizationsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LocalizationsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -281,6 +296,8 @@ class __$$LocalizationStateImplCopyWithImpl<$Res>
       $Res Function(_$LocalizationStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LocalizationsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -319,7 +336,9 @@ class _$LocalizationStateImpl implements _LocalizationState {
   @override
   int get hashCode => Object.hash(runtimeType, locale);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LocalizationsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LocalizationStateImplCopyWith<_$LocalizationStateImpl> get copyWith =>
@@ -333,8 +352,11 @@ abstract class _LocalizationState implements LocalizationsState {
 
   @override
   Locale get locale;
+
+  /// Create a copy of LocalizationsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LocalizationStateImplCopyWith<_$LocalizationStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -21,7 +21,13 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   @JsonKey(name: 'id')
-  Id get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cmpId')
+  int? get companyId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cmpType', defaultValue: 0)
+  int? get companyType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'typeTier')
+  String? get typeTier => throw _privateConstructorUsedError;
   @JsonKey(name: 'nom')
   String? get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: 'prenom')
@@ -41,12 +47,22 @@ mixin _$User {
   @JsonKey(name: 'superviseur')
   int? get supervisor => throw _privateConstructorUsedError;
   @JsonKey(name: 'addViseHorsPlan')
-  int? get addVisitOutPlanPrivilege => throw _privateConstructorUsedError;
+  bool? get addVisitOutPlanPrivilege => throw _privateConstructorUsedError;
   @JsonKey(name: 'fullName')
   String? get fullName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'authorizedRadius')
+  num? get authorizedRadius => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roleChangeLocationClient')
+  bool? get roleChangeLocationClient => throw _privateConstructorUsedError;
+  @JsonKey(name: 'crmNbrLettres')
+  int? get minReportChar => throw _privateConstructorUsedError;
 
+  /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -56,7 +72,10 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') Id id,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'cmpId') int? companyId,
+      @JsonKey(name: 'cmpType', defaultValue: 0) int? companyType,
+      @JsonKey(name: 'typeTier') String? typeTier,
       @JsonKey(name: 'nom') String? lastName,
       @JsonKey(name: 'prenom') String? firstName,
       @JsonKey(name: 'loginCode') String? loginCode,
@@ -66,10 +85,11 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'longitude') double? longitude,
       @JsonKey(name: 'superviseur') int? supervisor,
-      @JsonKey(name: 'addViseHorsPlan') int? addVisitOutPlanPrivilege,
-      @JsonKey(name: 'fullName') String? fullName});
-
-  $IdCopyWith<$Res> get id;
+      @JsonKey(name: 'addViseHorsPlan') bool? addVisitOutPlanPrivilege,
+      @JsonKey(name: 'fullName') String? fullName,
+      @JsonKey(name: 'authorizedRadius') num? authorizedRadius,
+      @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
+      @JsonKey(name: 'crmNbrLettres') int? minReportChar});
 }
 
 /// @nodoc
@@ -82,10 +102,15 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? companyId = freezed,
+    Object? companyType = freezed,
+    Object? typeTier = freezed,
     Object? lastName = freezed,
     Object? firstName = freezed,
     Object? loginCode = freezed,
@@ -97,12 +122,27 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? supervisor = freezed,
     Object? addVisitOutPlanPrivilege = freezed,
     Object? fullName = freezed,
+    Object? authorizedRadius = freezed,
+    Object? roleChangeLocationClient = freezed,
+    Object? minReportChar = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as Id,
+              as int?,
+      companyId: freezed == companyId
+          ? _value.companyId
+          : companyId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      companyType: freezed == companyType
+          ? _value.companyType
+          : companyType // ignore: cast_nullable_to_non_nullable
+              as int?,
+      typeTier: freezed == typeTier
+          ? _value.typeTier
+          : typeTier // ignore: cast_nullable_to_non_nullable
+              as String?,
       lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
@@ -142,20 +182,24 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       addVisitOutPlanPrivilege: freezed == addVisitOutPlanPrivilege
           ? _value.addVisitOutPlanPrivilege
           : addVisitOutPlanPrivilege // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as bool?,
       fullName: freezed == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
+      authorizedRadius: freezed == authorizedRadius
+          ? _value.authorizedRadius
+          : authorizedRadius // ignore: cast_nullable_to_non_nullable
+              as num?,
+      roleChangeLocationClient: freezed == roleChangeLocationClient
+          ? _value.roleChangeLocationClient
+          : roleChangeLocationClient // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      minReportChar: freezed == minReportChar
+          ? _value.minReportChar
+          : minReportChar // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $IdCopyWith<$Res> get id {
-    return $IdCopyWith<$Res>(_value.id, (value) {
-      return _then(_value.copyWith(id: value) as $Val);
-    });
   }
 }
 
@@ -167,7 +211,10 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') Id id,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'cmpId') int? companyId,
+      @JsonKey(name: 'cmpType', defaultValue: 0) int? companyType,
+      @JsonKey(name: 'typeTier') String? typeTier,
       @JsonKey(name: 'nom') String? lastName,
       @JsonKey(name: 'prenom') String? firstName,
       @JsonKey(name: 'loginCode') String? loginCode,
@@ -177,11 +224,11 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: 'latitude') double? latitude,
       @JsonKey(name: 'longitude') double? longitude,
       @JsonKey(name: 'superviseur') int? supervisor,
-      @JsonKey(name: 'addViseHorsPlan') int? addVisitOutPlanPrivilege,
-      @JsonKey(name: 'fullName') String? fullName});
-
-  @override
-  $IdCopyWith<$Res> get id;
+      @JsonKey(name: 'addViseHorsPlan') bool? addVisitOutPlanPrivilege,
+      @JsonKey(name: 'fullName') String? fullName,
+      @JsonKey(name: 'authorizedRadius') num? authorizedRadius,
+      @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
+      @JsonKey(name: 'crmNbrLettres') int? minReportChar});
 }
 
 /// @nodoc
@@ -191,10 +238,15 @@ class __$$UserImplCopyWithImpl<$Res>
   __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? companyId = freezed,
+    Object? companyType = freezed,
+    Object? typeTier = freezed,
     Object? lastName = freezed,
     Object? firstName = freezed,
     Object? loginCode = freezed,
@@ -206,12 +258,27 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? supervisor = freezed,
     Object? addVisitOutPlanPrivilege = freezed,
     Object? fullName = freezed,
+    Object? authorizedRadius = freezed,
+    Object? roleChangeLocationClient = freezed,
+    Object? minReportChar = freezed,
   }) {
     return _then(_$UserImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as Id,
+              as int?,
+      companyId: freezed == companyId
+          ? _value.companyId
+          : companyId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      companyType: freezed == companyType
+          ? _value.companyType
+          : companyType // ignore: cast_nullable_to_non_nullable
+              as int?,
+      typeTier: freezed == typeTier
+          ? _value.typeTier
+          : typeTier // ignore: cast_nullable_to_non_nullable
+              as String?,
       lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
@@ -251,11 +318,23 @@ class __$$UserImplCopyWithImpl<$Res>
       addVisitOutPlanPrivilege: freezed == addVisitOutPlanPrivilege
           ? _value.addVisitOutPlanPrivilege
           : addVisitOutPlanPrivilege // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as bool?,
       fullName: freezed == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
+      authorizedRadius: freezed == authorizedRadius
+          ? _value.authorizedRadius
+          : authorizedRadius // ignore: cast_nullable_to_non_nullable
+              as num?,
+      roleChangeLocationClient: freezed == roleChangeLocationClient
+          ? _value.roleChangeLocationClient
+          : roleChangeLocationClient // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      minReportChar: freezed == minReportChar
+          ? _value.minReportChar
+          : minReportChar // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -264,7 +343,10 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl(
-      {@JsonKey(name: 'id') required this.id,
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'cmpId') this.companyId,
+      @JsonKey(name: 'cmpType', defaultValue: 0) this.companyType,
+      @JsonKey(name: 'typeTier') this.typeTier,
       @JsonKey(name: 'nom') this.lastName,
       @JsonKey(name: 'prenom') this.firstName,
       @JsonKey(name: 'loginCode') this.loginCode,
@@ -275,14 +357,26 @@ class _$UserImpl implements _User {
       @JsonKey(name: 'longitude') this.longitude,
       @JsonKey(name: 'superviseur') this.supervisor,
       @JsonKey(name: 'addViseHorsPlan') this.addVisitOutPlanPrivilege,
-      @JsonKey(name: 'fullName') this.fullName});
+      @JsonKey(name: 'fullName') this.fullName,
+      @JsonKey(name: 'authorizedRadius') this.authorizedRadius,
+      @JsonKey(name: 'roleChangeLocationClient') this.roleChangeLocationClient,
+      @JsonKey(name: 'crmNbrLettres') this.minReportChar});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
   @JsonKey(name: 'id')
-  final Id id;
+  final int? id;
+  @override
+  @JsonKey(name: 'cmpId')
+  final int? companyId;
+  @override
+  @JsonKey(name: 'cmpType', defaultValue: 0)
+  final int? companyType;
+  @override
+  @JsonKey(name: 'typeTier')
+  final String? typeTier;
   @override
   @JsonKey(name: 'nom')
   final String? lastName;
@@ -312,14 +406,23 @@ class _$UserImpl implements _User {
   final int? supervisor;
   @override
   @JsonKey(name: 'addViseHorsPlan')
-  final int? addVisitOutPlanPrivilege;
+  final bool? addVisitOutPlanPrivilege;
   @override
   @JsonKey(name: 'fullName')
   final String? fullName;
+  @override
+  @JsonKey(name: 'authorizedRadius')
+  final num? authorizedRadius;
+  @override
+  @JsonKey(name: 'roleChangeLocationClient')
+  final bool? roleChangeLocationClient;
+  @override
+  @JsonKey(name: 'crmNbrLettres')
+  final int? minReportChar;
 
   @override
   String toString() {
-    return 'User(id: $id, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, addVisitOutPlanPrivilege: $addVisitOutPlanPrivilege, fullName: $fullName)';
+    return 'User(id: $id, companyId: $companyId, companyType: $companyType, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, addVisitOutPlanPrivilege: $addVisitOutPlanPrivilege, fullName: $fullName, authorizedRadius: $authorizedRadius, roleChangeLocationClient: $roleChangeLocationClient, minReportChar: $minReportChar)';
   }
 
   @override
@@ -328,6 +431,12 @@ class _$UserImpl implements _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.companyId, companyId) ||
+                other.companyId == companyId) &&
+            (identical(other.companyType, companyType) ||
+                other.companyType == companyType) &&
+            (identical(other.typeTier, typeTier) ||
+                other.typeTier == typeTier) &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
             (identical(other.firstName, firstName) ||
@@ -349,14 +458,24 @@ class _$UserImpl implements _User {
                     other.addVisitOutPlanPrivilege, addVisitOutPlanPrivilege) ||
                 other.addVisitOutPlanPrivilege == addVisitOutPlanPrivilege) &&
             (identical(other.fullName, fullName) ||
-                other.fullName == fullName));
+                other.fullName == fullName) &&
+            (identical(other.authorizedRadius, authorizedRadius) ||
+                other.authorizedRadius == authorizedRadius) &&
+            (identical(
+                    other.roleChangeLocationClient, roleChangeLocationClient) ||
+                other.roleChangeLocationClient == roleChangeLocationClient) &&
+            (identical(other.minReportChar, minReportChar) ||
+                other.minReportChar == minReportChar));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      companyId,
+      companyType,
+      typeTier,
       lastName,
       firstName,
       loginCode,
@@ -367,9 +486,14 @@ class _$UserImpl implements _User {
       longitude,
       supervisor,
       addVisitOutPlanPrivilege,
-      fullName);
+      fullName,
+      authorizedRadius,
+      roleChangeLocationClient,
+      minReportChar);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
@@ -385,7 +509,10 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {@JsonKey(name: 'id') required final Id id,
+      {@JsonKey(name: 'id') final int? id,
+      @JsonKey(name: 'cmpId') final int? companyId,
+      @JsonKey(name: 'cmpType', defaultValue: 0) final int? companyType,
+      @JsonKey(name: 'typeTier') final String? typeTier,
       @JsonKey(name: 'nom') final String? lastName,
       @JsonKey(name: 'prenom') final String? firstName,
       @JsonKey(name: 'loginCode') final String? loginCode,
@@ -395,14 +522,27 @@ abstract class _User implements User {
       @JsonKey(name: 'latitude') final double? latitude,
       @JsonKey(name: 'longitude') final double? longitude,
       @JsonKey(name: 'superviseur') final int? supervisor,
-      @JsonKey(name: 'addViseHorsPlan') final int? addVisitOutPlanPrivilege,
-      @JsonKey(name: 'fullName') final String? fullName}) = _$UserImpl;
+      @JsonKey(name: 'addViseHorsPlan') final bool? addVisitOutPlanPrivilege,
+      @JsonKey(name: 'fullName') final String? fullName,
+      @JsonKey(name: 'authorizedRadius') final num? authorizedRadius,
+      @JsonKey(name: 'roleChangeLocationClient')
+      final bool? roleChangeLocationClient,
+      @JsonKey(name: 'crmNbrLettres') final int? minReportChar}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
   @JsonKey(name: 'id')
-  Id get id;
+  int? get id;
+  @override
+  @JsonKey(name: 'cmpId')
+  int? get companyId;
+  @override
+  @JsonKey(name: 'cmpType', defaultValue: 0)
+  int? get companyType;
+  @override
+  @JsonKey(name: 'typeTier')
+  String? get typeTier;
   @override
   @JsonKey(name: 'nom')
   String? get lastName;
@@ -432,195 +572,24 @@ abstract class _User implements User {
   int? get supervisor;
   @override
   @JsonKey(name: 'addViseHorsPlan')
-  int? get addVisitOutPlanPrivilege;
+  bool? get addVisitOutPlanPrivilege;
   @override
   @JsonKey(name: 'fullName')
   String? get fullName;
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(name: 'authorizedRadius')
+  num? get authorizedRadius;
+  @override
+  @JsonKey(name: 'roleChangeLocationClient')
+  bool? get roleChangeLocationClient;
+  @override
+  @JsonKey(name: 'crmNbrLettres')
+  int? get minReportChar;
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Id _$IdFromJson(Map<String, dynamic> json) {
-  return _Id.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Id {
-  @JsonKey(name: 'id')
-  int? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'cmpId')
-  int? get companyId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'typeTier')
-  String? get typeTier => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $IdCopyWith<Id> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $IdCopyWith<$Res> {
-  factory $IdCopyWith(Id value, $Res Function(Id) then) =
-      _$IdCopyWithImpl<$Res, Id>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'cmpId') int? companyId,
-      @JsonKey(name: 'typeTier') String? typeTier});
-}
-
-/// @nodoc
-class _$IdCopyWithImpl<$Res, $Val extends Id> implements $IdCopyWith<$Res> {
-  _$IdCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? companyId = freezed,
-    Object? typeTier = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      companyId: freezed == companyId
-          ? _value.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      typeTier: freezed == typeTier
-          ? _value.typeTier
-          : typeTier // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$IdImplCopyWith<$Res> implements $IdCopyWith<$Res> {
-  factory _$$IdImplCopyWith(_$IdImpl value, $Res Function(_$IdImpl) then) =
-      __$$IdImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'cmpId') int? companyId,
-      @JsonKey(name: 'typeTier') String? typeTier});
-}
-
-/// @nodoc
-class __$$IdImplCopyWithImpl<$Res> extends _$IdCopyWithImpl<$Res, _$IdImpl>
-    implements _$$IdImplCopyWith<$Res> {
-  __$$IdImplCopyWithImpl(_$IdImpl _value, $Res Function(_$IdImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? companyId = freezed,
-    Object? typeTier = freezed,
-  }) {
-    return _then(_$IdImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      companyId: freezed == companyId
-          ? _value.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      typeTier: freezed == typeTier
-          ? _value.typeTier
-          : typeTier // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$IdImpl implements _Id {
-  const _$IdImpl(
-      {@JsonKey(name: 'id') this.id,
-      @JsonKey(name: 'cmpId') this.companyId,
-      @JsonKey(name: 'typeTier') this.typeTier});
-
-  factory _$IdImpl.fromJson(Map<String, dynamic> json) =>
-      _$$IdImplFromJson(json);
-
-  @override
-  @JsonKey(name: 'id')
-  final int? id;
-  @override
-  @JsonKey(name: 'cmpId')
-  final int? companyId;
-  @override
-  @JsonKey(name: 'typeTier')
-  final String? typeTier;
-
-  @override
-  String toString() {
-    return 'Id(id: $id, companyId: $companyId, typeTier: $typeTier)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$IdImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
-            (identical(other.typeTier, typeTier) ||
-                other.typeTier == typeTier));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, companyId, typeTier);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$IdImplCopyWith<_$IdImpl> get copyWith =>
-      __$$IdImplCopyWithImpl<_$IdImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$IdImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Id implements Id {
-  const factory _Id(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'cmpId') final int? companyId,
-      @JsonKey(name: 'typeTier') final String? typeTier}) = _$IdImpl;
-
-  factory _Id.fromJson(Map<String, dynamic> json) = _$IdImpl.fromJson;
-
-  @override
-  @JsonKey(name: 'id')
-  int? get id;
-  @override
-  @JsonKey(name: 'cmpId')
-  int? get companyId;
-  @override
-  @JsonKey(name: 'typeTier')
-  String? get typeTier;
-  @override
-  @JsonKey(ignore: true)
-  _$$IdImplCopyWith<_$IdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

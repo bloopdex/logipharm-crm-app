@@ -46,7 +46,9 @@ class _AddClientSelectionState extends State<AddClientSelection> {
                 clients = context.read<ClientsCubit>().state.maybeWhen(
                       orElse: () => [],
                       loaded: (all, filter) => clients.where((element) {
-                        return element.fullName.toLowerCase().contains(state.toLowerCase());
+                        return element.fullName
+                            .toLowerCase()
+                            .contains(state.toLowerCase());
                       }).toList(),
                     );
               });
@@ -58,8 +60,10 @@ class _AddClientSelectionState extends State<AddClientSelection> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
             constraints: BoxConstraints(
-              minHeight: context.height - context.appBarSize - context.paddingBottom,
-              maxHeight: context.height - context.appBarSize - context.paddingBottom,
+              minHeight:
+                  context.height - context.appBarSize - context.paddingBottom,
+              maxHeight:
+                  context.height - context.appBarSize - context.paddingBottom,
               minWidth: context.width,
               maxWidth: context.width,
             ),
@@ -103,7 +107,8 @@ class _AddClientSelectionState extends State<AddClientSelection> {
                         },
                         child: ListView.separated(
                           itemCount: clients.length,
-                          separatorBuilder: (context, index) => SizedBox(height: kSpacingX3),
+                          separatorBuilder: (context, index) =>
+                              SizedBox(height: kSpacingX3),
                           itemBuilder: (context, index) {
                             return ClientCard(
                               client: clients[index],

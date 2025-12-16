@@ -1,5 +1,6 @@
 import 'package:crm/core/core.dart';
 import 'package:crm/features/auth/login.screen.dart';
+import 'package:crm/features/contacts/bloc/contacts_cubit.dart';
 import 'package:crm/features/events/blocs/events/events_cubit.dart';
 import 'package:crm/features/menu/sections/change_password_page.dart';
 import 'package:crm/features/todo/create-event.page.dart';
@@ -21,6 +22,7 @@ import '../../shared/widgets/inputs/daterange.picker.input.dart';
 import '../../shared/widgets/navigation/bottom.navigation.bar.widget.dart';
 import '../todo/create-todo.page.dart';
 import '../tour-plan/bloc/visit_motif_cubit.dart';
+import '../visits/bloc/contact_type_cubit.dart';
 import '../visits/bloc/visits/visit_bloc.dart';
 import 'cubit/navigation_cubit.dart';
 
@@ -66,9 +68,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
                     IconButton(
                       icon: const Icon(Icons.language, color: kCeruleanBlue),
                       onPressed: () {
-                        context.read<LocalizationsBloc>().add(LocalizationsEvent.changeLocale(
-                            locale:
-                                context.read<LocalizationsBloc>().state.locale == const Locale('en')
+                        context.read<LocalizationsBloc>().add(
+                            LocalizationsEvent.changeLocale(
+                                locale: context
+                                            .read<LocalizationsBloc>()
+                                            .state
+                                            .locale ==
+                                        const Locale('en')
                                     ? const Locale('fr')
                                     : const Locale('en')));
                       },
@@ -89,20 +95,25 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   ? FloatingActionButton(
                       heroTag: 'createPlan',
                       onPressed: () {
-                        final current = context.read<TourPlanBloc>().state.maybeWhen(
-                              loaded: (tours, hasReachedMax, currentPage, goal) {
-                                return tours
-                                    .where(
-                                        (element) => element.statusFlag == StatuFlags.opened.value)
-                                    .firstOrNull;
-                              },
-                              orElse: () => null,
-                            );
+                        final current =
+                            context.read<TourPlanBloc>().state.maybeWhen(
+                                  loaded: (tours, hasReachedMax, currentPage,
+                                      goal) {
+                                    return tours
+                                        .where((element) =>
+                                            element.statusFlag ==
+                                            StatuFlags.opened.value)
+                                        .firstOrNull;
+                                  },
+                                  orElse: () => null,
+                                );
                         final user = context.read<AuthBloc>().user;
                         if (current == null || user.supervisor == 0) {
-                          Navigator.pushNamed(context, CreatePlanPage.routeName);
+                          Navigator.pushNamed(
+                              context, CreatePlanPage.routeName);
                         } else {
-                          context.errorSnackBar(context.i10n.cantCreatePlanWhileOpened);
+                          context.errorSnackBar(
+                              context.i10n.cantCreatePlanWhileOpened);
                         }
                       },
                       child: Icon(Icons.add_outlined, color: kWhite),
@@ -165,8 +176,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(context.i10n.todoEvent,
-                                        style:
-                                            context.textTheme.labelLarge!.copyWith(color: kWhite)),
+                                        style: context.textTheme.labelLarge!
+                                            .copyWith(color: kWhite)),
                                     SizedBox(width: kSpacingX3),
                                     Icon(
                                       Icons.event_rounded,
@@ -205,8 +216,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(context.i10n.todoTask,
-                                        style:
-                                            context.textTheme.labelLarge!.copyWith(color: kWhite)),
+                                        style: context.textTheme.labelLarge!
+                                            .copyWith(color: kWhite)),
                                     SizedBox(width: kSpacingX3),
                                     Icon(
                                       Icons.check_circle_outline_rounded,
@@ -246,22 +257,25 @@ class _NavigationScreenState extends State<NavigationScreen> {
     if (context.read<MotifVisitCubit>().state.isEmpty) {
       context.read<MotifVisitCubit>().load();
     }
+    if (context.read<ContactTypeCubit>().state.isEmpty) {
+      context.read<ContactTypeCubit>().load();
+    }
     if (context.read<ClientsCubit>().state.maybeWhen(
           orElse: () => true,
           loaded: (all, filter) => all.isEmpty,
         )) {
       context.read<ClientsCubit>().load();
     }
-    if (context
-        .read<TourPlanBloc>()
-        .state
-        .maybeWhen(orElse: () => true, loaded: (tours, _, __, ___) => tours.isEmpty)) {
+    if (context.read<ContactsCubit>().state.maybeWhen(
+        orElse: () => true, loaded: (contacts) => contacts.isEmpty)) {
+      context.read<ContactsCubit>().load();
+    }
+    if (context.read<TourPlanBloc>().state.maybeWhen(
+        orElse: () => true, loaded: (tours, _, __, ___) => tours.isEmpty)) {
       context.read<TourPlanBloc>().add(const TourPlanEvent.started());
     }
-    if (context
-        .read<VisitBloc>()
-        .state
-        .maybeWhen(orElse: () => true, loaded: (visits, _, __) => visits.isEmpty)) {
+    if (context.read<VisitBloc>().state.maybeWhen(
+        orElse: () => true, loaded: (visits, _, __) => visits.isEmpty)) {
       context.read<VisitBloc>().add(const VisitEvent.started());
     }
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,22 +21,29 @@ class ClientsCubit extends Cubit<ClientsState> {
     try {
       final Response response = await ClientRepository.get();
       if (response.statusCode == 200) {
-        List<Person> clients =
-            response.data['body'].map<Person>((client) => Person.fromJson(client)).toList();
+        List<Person> clients = response.data['body']
+            .map<Person>((client) => Person.fromJson(client))
+            .toList();
 
-        clients.sort((a, b) => a.fullName.toLowerCase().compareTo(b.fullName.toLowerCase()));
+        clients.sort((a, b) =>
+            a.fullName.toLowerCase().compareTo(b.fullName.toLowerCase()));
         // Initially, the filtered clients list is the same as the full clients list
-        emit(ClientsState.loaded(allClients: clients, filteredClients: clients));
+        emit(
+            ClientsState.loaded(allClients: clients, filteredClients: clients));
       } else {
         emit(const ClientsState.loaded(allClients: [], filteredClients: []));
       }
     } catch (e) {
+      log('ClientsCubit@load Error: $e');
       emit(const ClientsState.error('An error occurred'));
     }
   }
 
   Future<void> filter(
-      {String searchQuery = "", String regionId = "", String commune = "", bool? prospect}) async {
+      {String searchQuery = "",
+      String regionId = "",
+      String commune = "",
+      bool? prospect}) async {
     try {
       state.maybeWhen(
         loaded: (allClients, filteredClients) {
@@ -43,7 +52,9 @@ class ClientsCubit extends Cubit<ClientsState> {
 
           // Apply region filter if provided
           if (regionId.isNotEmpty) {
-            filteredList = filteredList.where((client) => client.regionId == regionId).toList();
+            filteredList = filteredList
+                .where((client) => client.regionId == regionId)
+                .toList();
           }
 
           // Apply commune filter if provided
@@ -78,13 +89,17 @@ class ClientsCubit extends Cubit<ClientsState> {
 
           // Filter by client type
           if (prospect != null) {
-            filteredList = filteredList.where((client) => client.prospect == prospect).toList();
+            filteredList = filteredList
+                .where((client) => client.prospect == prospect)
+                .toList();
           }
 
-          filteredList.sort((a, b) => a.fullName.toLowerCase().compareTo(b.fullName.toLowerCase()));
+          filteredList.sort((a, b) =>
+              a.fullName.toLowerCase().compareTo(b.fullName.toLowerCase()));
 
           // Emit new state with updated filtered clients
-          emit(ClientsState.loaded(allClients: allClients, filteredClients: filteredList));
+          emit(ClientsState.loaded(
+              allClients: allClients, filteredClients: filteredList));
         },
         orElse: () {},
       );

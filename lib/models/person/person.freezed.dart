@@ -76,11 +76,23 @@ mixin _$Person {
   @JsonKey(name: 'modePaie')
   ModePaie? get modePaie =>
       throw _privateConstructorUsedError; // Added modePaie
+  @JsonKey(name: 'categorieId')
+  int? get categoryId => throw _privateConstructorUsedError;
   @JsonKey(name: 'categorieLibelle')
   String? get categoryLabel => throw _privateConstructorUsedError;
+  @JsonKey(name: 'categorieId2')
+  int? get categorieId2 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'categorieLibelle2')
+  String? get categoryLabel2 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ficheClient')
+  ClientStatistics? get clientStatistics => throw _privateConstructorUsedError;
 
+  /// Serializes this Person to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PersonCopyWith<Person> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -117,10 +129,15 @@ abstract class $PersonCopyWith<$Res> {
       @JsonKey(name: 'prospect') bool? prospect,
       @JsonKey(name: 'solvabilite') Solvabilite? solvabilite,
       @JsonKey(name: 'modePaie') ModePaie? modePaie,
-      @JsonKey(name: 'categorieLibelle') String? categoryLabel});
+      @JsonKey(name: 'categorieId') int? categoryId,
+      @JsonKey(name: 'categorieLibelle') String? categoryLabel,
+      @JsonKey(name: 'categorieId2') int? categorieId2,
+      @JsonKey(name: 'categorieLibelle2') String? categoryLabel2,
+      @JsonKey(name: 'ficheClient') ClientStatistics? clientStatistics});
 
   $SolvabiliteCopyWith<$Res>? get solvabilite;
   $ModePaieCopyWith<$Res>? get modePaie;
+  $ClientStatisticsCopyWith<$Res>? get clientStatistics;
 }
 
 /// @nodoc
@@ -133,6 +150,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -163,7 +182,11 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? prospect = freezed,
     Object? solvabilite = freezed,
     Object? modePaie = freezed,
+    Object? categoryId = freezed,
     Object? categoryLabel = freezed,
+    Object? categorieId2 = freezed,
+    Object? categoryLabel2 = freezed,
+    Object? clientStatistics = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -274,13 +297,31 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.modePaie
           : modePaie // ignore: cast_nullable_to_non_nullable
               as ModePaie?,
+      categoryId: freezed == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int?,
       categoryLabel: freezed == categoryLabel
           ? _value.categoryLabel
           : categoryLabel // ignore: cast_nullable_to_non_nullable
               as String?,
+      categorieId2: freezed == categorieId2
+          ? _value.categorieId2
+          : categorieId2 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      categoryLabel2: freezed == categoryLabel2
+          ? _value.categoryLabel2
+          : categoryLabel2 // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientStatistics: freezed == clientStatistics
+          ? _value.clientStatistics
+          : clientStatistics // ignore: cast_nullable_to_non_nullable
+              as ClientStatistics?,
     ) as $Val);
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SolvabiliteCopyWith<$Res>? get solvabilite {
@@ -293,6 +334,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ModePaieCopyWith<$Res>? get modePaie {
@@ -302,6 +345,20 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
 
     return $ModePaieCopyWith<$Res>(_value.modePaie!, (value) {
       return _then(_value.copyWith(modePaie: value) as $Val);
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ClientStatisticsCopyWith<$Res>? get clientStatistics {
+    if (_value.clientStatistics == null) {
+      return null;
+    }
+
+    return $ClientStatisticsCopyWith<$Res>(_value.clientStatistics!, (value) {
+      return _then(_value.copyWith(clientStatistics: value) as $Val);
     });
   }
 }
@@ -341,12 +398,18 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       @JsonKey(name: 'prospect') bool? prospect,
       @JsonKey(name: 'solvabilite') Solvabilite? solvabilite,
       @JsonKey(name: 'modePaie') ModePaie? modePaie,
-      @JsonKey(name: 'categorieLibelle') String? categoryLabel});
+      @JsonKey(name: 'categorieId') int? categoryId,
+      @JsonKey(name: 'categorieLibelle') String? categoryLabel,
+      @JsonKey(name: 'categorieId2') int? categorieId2,
+      @JsonKey(name: 'categorieLibelle2') String? categoryLabel2,
+      @JsonKey(name: 'ficheClient') ClientStatistics? clientStatistics});
 
   @override
   $SolvabiliteCopyWith<$Res>? get solvabilite;
   @override
   $ModePaieCopyWith<$Res>? get modePaie;
+  @override
+  $ClientStatisticsCopyWith<$Res>? get clientStatistics;
 }
 
 /// @nodoc
@@ -357,6 +420,8 @@ class __$$PersonImplCopyWithImpl<$Res>
       _$PersonImpl _value, $Res Function(_$PersonImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -387,7 +452,11 @@ class __$$PersonImplCopyWithImpl<$Res>
     Object? prospect = freezed,
     Object? solvabilite = freezed,
     Object? modePaie = freezed,
+    Object? categoryId = freezed,
     Object? categoryLabel = freezed,
+    Object? categorieId2 = freezed,
+    Object? categoryLabel2 = freezed,
+    Object? clientStatistics = freezed,
   }) {
     return _then(_$PersonImpl(
       id: null == id
@@ -498,10 +567,26 @@ class __$$PersonImplCopyWithImpl<$Res>
           ? _value.modePaie
           : modePaie // ignore: cast_nullable_to_non_nullable
               as ModePaie?,
+      categoryId: freezed == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int?,
       categoryLabel: freezed == categoryLabel
           ? _value.categoryLabel
           : categoryLabel // ignore: cast_nullable_to_non_nullable
               as String?,
+      categorieId2: freezed == categorieId2
+          ? _value.categorieId2
+          : categorieId2 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      categoryLabel2: freezed == categoryLabel2
+          ? _value.categoryLabel2
+          : categoryLabel2 // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientStatistics: freezed == clientStatistics
+          ? _value.clientStatistics
+          : clientStatistics // ignore: cast_nullable_to_non_nullable
+              as ClientStatistics?,
     ));
   }
 }
@@ -537,7 +622,11 @@ class _$PersonImpl implements _Person {
       @JsonKey(name: 'prospect') this.prospect,
       @JsonKey(name: 'solvabilite') this.solvabilite,
       @JsonKey(name: 'modePaie') this.modePaie,
-      @JsonKey(name: 'categorieLibelle') this.categoryLabel});
+      @JsonKey(name: 'categorieId') this.categoryId,
+      @JsonKey(name: 'categorieLibelle') this.categoryLabel,
+      @JsonKey(name: 'categorieId2') this.categorieId2,
+      @JsonKey(name: 'categorieLibelle2') this.categoryLabel2,
+      @JsonKey(name: 'ficheClient') this.clientStatistics});
 
   factory _$PersonImpl.fromJson(Map<String, dynamic> json) =>
       _$$PersonImplFromJson(json);
@@ -627,12 +716,24 @@ class _$PersonImpl implements _Person {
   final ModePaie? modePaie;
 // Added modePaie
   @override
+  @JsonKey(name: 'categorieId')
+  final int? categoryId;
+  @override
   @JsonKey(name: 'categorieLibelle')
   final String? categoryLabel;
+  @override
+  @JsonKey(name: 'categorieId2')
+  final int? categorieId2;
+  @override
+  @JsonKey(name: 'categorieLibelle2')
+  final String? categoryLabel2;
+  @override
+  @JsonKey(name: 'ficheClient')
+  final ClientStatistics? clientStatistics;
 
   @override
   String toString() {
-    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, activeFlag: $activeFlag, regionId: $regionId, ville: $ville, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName, prospect: $prospect, solvabilite: $solvabilite, modePaie: $modePaie, categoryLabel: $categoryLabel)';
+    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, activeFlag: $activeFlag, regionId: $regionId, ville: $ville, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName, prospect: $prospect, solvabilite: $solvabilite, modePaie: $modePaie, categoryId: $categoryId, categoryLabel: $categoryLabel, categorieId2: $categorieId2, categoryLabel2: $categoryLabel2, clientStatistics: $clientStatistics)';
   }
 
   @override
@@ -685,11 +786,19 @@ class _$PersonImpl implements _Person {
                 other.solvabilite == solvabilite) &&
             (identical(other.modePaie, modePaie) ||
                 other.modePaie == modePaie) &&
+            (identical(other.categoryId, categoryId) ||
+                other.categoryId == categoryId) &&
             (identical(other.categoryLabel, categoryLabel) ||
-                other.categoryLabel == categoryLabel));
+                other.categoryLabel == categoryLabel) &&
+            (identical(other.categorieId2, categorieId2) ||
+                other.categorieId2 == categorieId2) &&
+            (identical(other.categoryLabel2, categoryLabel2) ||
+                other.categoryLabel2 == categoryLabel2) &&
+            (identical(other.clientStatistics, clientStatistics) ||
+                other.clientStatistics == clientStatistics));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -720,10 +829,16 @@ class _$PersonImpl implements _Person {
         prospect,
         solvabilite,
         modePaie,
-        categoryLabel
+        categoryId,
+        categoryLabel,
+        categorieId2,
+        categoryLabel2,
+        clientStatistics
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
@@ -739,35 +854,39 @@ class _$PersonImpl implements _Person {
 
 abstract class _Person implements Person {
   const factory _Person(
-          {@JsonKey(name: 'id') required final int id,
-          @JsonKey(name: 'cmpId') required final int companyId,
-          @JsonKey(name: 'typeTier') required final String typeTier,
-          @JsonKey(name: 'nom') required final String lastName,
-          @JsonKey(name: 'prenom') final String? firstName,
-          @JsonKey(name: 'loginCode') required final String loginCode,
-          @JsonKey(name: 'activeFlag') required final int activeFlag,
-          @JsonKey(name: 'regionId') final String? regionId,
-          @JsonKey(name: 'ville') final String? ville,
-          @JsonKey(name: 'adresse') final String? address,
-          @JsonKey(name: 'latitude') final double? latitude,
-          @JsonKey(name: 'longitude') final double? longitude,
-          @JsonKey(name: 'superviseur') final int? supervisor,
-          @JsonKey(name: 'codePostal') final String? postalCode,
-          @JsonKey(name: 'boitePostale') final String? postBox,
-          @JsonKey(name: 'email') final String? email,
-          @JsonKey(name: 'siteWeb') final String? website,
-          @JsonKey(name: 'nisCode') final String? nisCode,
-          @JsonKey(name: 'nssCode') final String? nssCode,
-          @JsonKey(name: 'tel1Fixe') final String? tel1Fixe,
-          @JsonKey(name: 'tel2Fixe') final String? tel2Fixe,
-          @JsonKey(name: 'telMobile') final String? telMobile,
-          @JsonKey(name: 'fax') final String? fax,
-          @JsonKey(name: 'fullName') required final String fullName,
-          @JsonKey(name: 'prospect') final bool? prospect,
-          @JsonKey(name: 'solvabilite') final Solvabilite? solvabilite,
-          @JsonKey(name: 'modePaie') final ModePaie? modePaie,
-          @JsonKey(name: 'categorieLibelle') final String? categoryLabel}) =
-      _$PersonImpl;
+      {@JsonKey(name: 'id') required final int id,
+      @JsonKey(name: 'cmpId') required final int companyId,
+      @JsonKey(name: 'typeTier') required final String typeTier,
+      @JsonKey(name: 'nom') required final String lastName,
+      @JsonKey(name: 'prenom') final String? firstName,
+      @JsonKey(name: 'loginCode') required final String loginCode,
+      @JsonKey(name: 'activeFlag') required final int activeFlag,
+      @JsonKey(name: 'regionId') final String? regionId,
+      @JsonKey(name: 'ville') final String? ville,
+      @JsonKey(name: 'adresse') final String? address,
+      @JsonKey(name: 'latitude') final double? latitude,
+      @JsonKey(name: 'longitude') final double? longitude,
+      @JsonKey(name: 'superviseur') final int? supervisor,
+      @JsonKey(name: 'codePostal') final String? postalCode,
+      @JsonKey(name: 'boitePostale') final String? postBox,
+      @JsonKey(name: 'email') final String? email,
+      @JsonKey(name: 'siteWeb') final String? website,
+      @JsonKey(name: 'nisCode') final String? nisCode,
+      @JsonKey(name: 'nssCode') final String? nssCode,
+      @JsonKey(name: 'tel1Fixe') final String? tel1Fixe,
+      @JsonKey(name: 'tel2Fixe') final String? tel2Fixe,
+      @JsonKey(name: 'telMobile') final String? telMobile,
+      @JsonKey(name: 'fax') final String? fax,
+      @JsonKey(name: 'fullName') required final String fullName,
+      @JsonKey(name: 'prospect') final bool? prospect,
+      @JsonKey(name: 'solvabilite') final Solvabilite? solvabilite,
+      @JsonKey(name: 'modePaie') final ModePaie? modePaie,
+      @JsonKey(name: 'categorieId') final int? categoryId,
+      @JsonKey(name: 'categorieLibelle') final String? categoryLabel,
+      @JsonKey(name: 'categorieId2') final int? categorieId2,
+      @JsonKey(name: 'categorieLibelle2') final String? categoryLabel2,
+      @JsonKey(name: 'ficheClient')
+      final ClientStatistics? clientStatistics}) = _$PersonImpl;
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$PersonImpl.fromJson;
 
@@ -809,8 +928,8 @@ abstract class _Person implements Person {
   double? get longitude;
   @override
   @JsonKey(name: 'superviseur')
-  int? get supervisor;
-  @override // Supervisor ID
+  int? get supervisor; // Supervisor ID
+  @override
   @JsonKey(name: 'codePostal')
   String? get postalCode;
   @override
@@ -848,15 +967,30 @@ abstract class _Person implements Person {
   bool? get prospect;
   @override
   @JsonKey(name: 'solvabilite')
-  Solvabilite? get solvabilite;
-  @override // Added solvabilite
+  Solvabilite? get solvabilite; // Added solvabilite
+  @override
   @JsonKey(name: 'modePaie')
-  ModePaie? get modePaie;
-  @override // Added modePaie
+  ModePaie? get modePaie; // Added modePaie
+  @override
+  @JsonKey(name: 'categorieId')
+  int? get categoryId;
+  @override
   @JsonKey(name: 'categorieLibelle')
   String? get categoryLabel;
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(name: 'categorieId2')
+  int? get categorieId2;
+  @override
+  @JsonKey(name: 'categorieLibelle2')
+  String? get categoryLabel2;
+  @override
+  @JsonKey(name: 'ficheClient')
+  ClientStatistics? get clientStatistics;
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -872,8 +1006,12 @@ mixin _$Solvabilite {
   @JsonKey(name: 'label')
   String get label => throw _privateConstructorUsedError;
 
+  /// Serializes this Solvabilite to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Solvabilite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SolvabiliteCopyWith<Solvabilite> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -898,6 +1036,8 @@ class _$SolvabiliteCopyWithImpl<$Res, $Val extends Solvabilite>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Solvabilite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -937,6 +1077,8 @@ class __$$SolvabiliteImplCopyWithImpl<$Res>
       _$SolvabiliteImpl _value, $Res Function(_$SolvabiliteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Solvabilite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -987,11 +1129,13 @@ class _$SolvabiliteImpl implements _Solvabilite {
             (identical(other.label, label) || other.label == label));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, label);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Solvabilite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SolvabiliteImplCopyWith<_$SolvabiliteImpl> get copyWith =>
@@ -1019,8 +1163,11 @@ abstract class _Solvabilite implements Solvabilite {
   @override
   @JsonKey(name: 'label')
   String get label;
+
+  /// Create a copy of Solvabilite
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SolvabiliteImplCopyWith<_$SolvabiliteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1036,8 +1183,12 @@ mixin _$ModePaie {
   @JsonKey(name: 'label')
   String get label => throw _privateConstructorUsedError;
 
+  /// Serializes this ModePaie to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ModePaie
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ModePaieCopyWith<ModePaie> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1061,6 +1212,8 @@ class _$ModePaieCopyWithImpl<$Res, $Val extends ModePaie>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ModePaie
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1100,6 +1253,8 @@ class __$$ModePaieImplCopyWithImpl<$Res>
       _$ModePaieImpl _value, $Res Function(_$ModePaieImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ModePaie
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1150,11 +1305,13 @@ class _$ModePaieImpl implements _ModePaie {
             (identical(other.label, label) || other.label == label));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, label);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ModePaie
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ModePaieImplCopyWith<_$ModePaieImpl> get copyWith =>
@@ -1182,8 +1339,11 @@ abstract class _ModePaie implements ModePaie {
   @override
   @JsonKey(name: 'label')
   String get label;
+
+  /// Create a copy of ModePaie
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ModePaieImplCopyWith<_$ModePaieImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

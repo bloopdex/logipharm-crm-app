@@ -35,6 +35,7 @@ extension TranslationBlocExtension on Bloc {
 extension GetTheme on BuildContext {
   TextTheme get textTheme => Theme.of(this).textTheme;
   ButtonStyle get elevatedButtonTheme => Theme.of(this).elevatedButtonTheme.style!;
+  ThemeData get theme => Theme.of(this);
 }
 
 extension Navigation on BuildContext {
@@ -237,4 +238,21 @@ T getRandomElement<T>(List<T> list) {
   final random = Random();
   var i = random.nextInt(list.length);
   return list[i];
+}
+
+extension DateTimeExtension on DateTime {
+  bool isToday() {
+    final now = DateTime.now();
+    return year == now.year && month == now.month && day == now.day;
+  }
+
+  bool isTomorrow() {
+    final tomorrow = DateTime.now().add(const Duration(days: 1));
+    return year == tomorrow.year && month == tomorrow.month && day == tomorrow.day;
+  }
+
+  bool isYesterday() {
+    final yesterday = DateTime.now().subtract(const Duration(days: 1));
+    return year == yesterday.year && month == yesterday.month && day == yesterday.day;
+  }
 }

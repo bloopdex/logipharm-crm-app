@@ -49,8 +49,12 @@ mixin _$Hire {
   @JsonKey(name: 'remarque')
   String? get remark => throw _privateConstructorUsedError;
 
+  /// Serializes this Hire to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Hire
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $HireCopyWith<Hire> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -86,6 +90,8 @@ class _$HireCopyWithImpl<$Res, $Val extends Hire>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Hire
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -196,6 +202,8 @@ class __$$HireImplCopyWithImpl<$Res>
   __$$HireImplCopyWithImpl(_$HireImpl _value, $Res Function(_$HireImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Hire
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -376,7 +384,7 @@ class _$HireImpl implements _Hire {
             (identical(other.remark, remark) || other.remark == remark));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -395,7 +403,9 @@ class _$HireImpl implements _Hire {
       statusName,
       remark);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Hire
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$HireImplCopyWith<_$HireImpl> get copyWith =>
@@ -470,8 +480,11 @@ abstract class _Hire implements Hire {
   @override
   @JsonKey(name: 'remarque')
   String? get remark;
+
+  /// Create a copy of Hire
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HireImplCopyWith<_$HireImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

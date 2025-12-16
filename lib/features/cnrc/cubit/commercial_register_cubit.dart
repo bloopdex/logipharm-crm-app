@@ -11,14 +11,21 @@ part 'commercial_register_state.dart';
 class CommercialRegisterCubit extends Cubit<CommercialRegisterState> {
   static const int _perPage = 20;
   CommercialRegisterCubit() : super(const CommercialRegisterState.initial());
+  String? _currentQuery;
 
   Future<void> started() async {
     try {
       emit(const CommercialRegisterState.loading());
+      _currentQuery = null;
 
-      final response = await CommercialRegisterRepository.get(page: 1, size: _perPage);
+      final response = await CommercialRegisterRepository.get(
+        page: 1,
+        size: _perPage,
+        query: _currentQuery,
+      );
 
-      final List<CommercialRegister> commercialRegisters = response.data['body']['content']
+      final List<CommercialRegister> commercialRegisters = response.data['body']
+              ['content']
           .map<CommercialRegister>((e) => CommercialRegister.fromJson(e))
           .toList();
 
@@ -33,22 +40,26 @@ class CommercialRegisterCubit extends Cubit<CommercialRegisterState> {
     }
   }
 
-  Future<void> loadMore({
-    String? query,
-  }) async {
+  Future<void> loadMore() async {
     if (state is _Loaded && !(state as _Loaded).hasReachedMax) {
       final currentState = state as _Loaded;
       final int nextPage = currentState.page + 1;
 
       try {
-        final response = await CommercialRegisterRepository.get(page: nextPage, size: _perPage);
+        final response = await CommercialRegisterRepository.get(
+          page: nextPage,
+          size: _perPage,
+          query: _currentQuery,
+        );
 
-        final List<CommercialRegister> commercialRegisters = response.data['body']['content']
+        final List<CommercialRegister> commercialRegisters = response
+            .data['body']['content']
             .map<CommercialRegister>((e) => CommercialRegister.fromJson(e))
             .toList();
 
         emit(CommercialRegisterState.loaded(
-          commercialRegisters: currentState.commercialRegisters + commercialRegisters,
+          commercialRegisters:
+              currentState.commercialRegisters + commercialRegisters,
           page: nextPage,
           hasReachedMax: response.data['body']['last'],
         ));
@@ -63,14 +74,19 @@ class CommercialRegisterCubit extends Cubit<CommercialRegisterState> {
   Future<void> search({String? query}) async {
     try {
       emit(const CommercialRegisterState.loading());
+      final normalizedQuery =
+          (query?.trim().isEmpty ?? true) ? null : query?.trim();
+      _currentQuery = normalizedQuery;
 
+      log("Searching Commercial Register with query: $_currentQuery");
       final response = await CommercialRegisterRepository.get(
-        query: query,
+        query: _currentQuery,
         page: 1,
         size: _perPage,
       );
 
-      final List<CommercialRegister> commercialRegisters = response.data['body']['content']
+      final List<CommercialRegister> commercialRegisters = response.data['body']
+              ['content']
           .map<CommercialRegister>((e) => CommercialRegister.fromJson(e))
           .toList();
 

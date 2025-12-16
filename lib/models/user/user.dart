@@ -8,7 +8,10 @@ part 'user.g.dart';
 @freezed
 class User with _$User {
   const factory User({
-    @JsonKey(name: 'id') required Id id,
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'cmpId') int? companyId,
+    @JsonKey(name: 'cmpType', defaultValue: 0) int? companyType,
+    @JsonKey(name: 'typeTier') String? typeTier,
     @JsonKey(name: 'nom') String? lastName,
     @JsonKey(name: 'prenom') String? firstName,
     @JsonKey(name: 'loginCode') String? loginCode,
@@ -18,20 +21,12 @@ class User with _$User {
     @JsonKey(name: 'latitude') double? latitude,
     @JsonKey(name: 'longitude') double? longitude,
     @JsonKey(name: 'superviseur') int? supervisor,
-    @JsonKey(name: 'addViseHorsPlan') int? addVisitOutPlanPrivilege,
+    @JsonKey(name: 'addViseHorsPlan') bool? addVisitOutPlanPrivilege,
     @JsonKey(name: 'fullName') String? fullName,
+    @JsonKey(name: 'authorizedRadius') num? authorizedRadius,
+    @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
+    @JsonKey(name: 'crmNbrLettres') int? minReportChar,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-}
-
-@freezed
-class Id with _$Id {
-  const factory Id({
-    @JsonKey(name: 'id') int? id,
-    @JsonKey(name: 'cmpId') int? companyId,
-    @JsonKey(name: 'typeTier') String? typeTier,
-  }) = _Id;
-
-  factory Id.fromJson(Map<String, dynamic> json) => _$IdFromJson(json);
 }

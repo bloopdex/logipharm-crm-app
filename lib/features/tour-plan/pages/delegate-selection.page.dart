@@ -37,6 +37,7 @@ class DelegateSelectionForm extends StatelessWidget {
           CustomTextFormField(
             data: data,
             mapKey: 'nom',
+            initialValue: (data['nom'] ?? '').toString(),
             hintText: context.i10n.tourCreationName,
             onChanged: (value) => data['nom'] = value,
           ),
@@ -52,13 +53,14 @@ class DelegateSelectionForm extends StatelessWidget {
                   data: data,
                   mapKey: 'delegueId',
                   items: state
-                      .map((e) => CustomDropDownItem(label: e.fullName, value: e.id.toString()))
+                      .map((e) => CustomDropDownItem(
+                          label: e.fullName, value: e.id.toString()))
                       .toList());
             },
           ),
           SizedBox(height: kSpacingX5),
           Text(
-            context.i10n.tourCreationTourDetailsDelegateLabel,
+            context.i10n.tourCreationTourDetailsDateLabel,
             style: context.textTheme.bodyMedium,
           ),
           SizedBox(height: kSpacingX1),

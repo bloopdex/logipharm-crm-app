@@ -10,5 +10,16 @@
         "**/.factorypath": true,
         "**/.project": true,
         "**/.settings": true
-    }
+    },
+    // Use FVM-managed Flutter SDK
+    "dart.flutterSdkPath": ".fvm/flutter_sdk",
+    // Keep .fvm out of search and watchers
+    "search.exclude": {
+        "**/.fvm": true
+    },
+    "files.watcherExclude": {
+        "**/.fvm/**": true
+    },
+    "todo-tree.tree.showBadges": true,
+    "todo-tree.tree.showCountsInTree": true
 }

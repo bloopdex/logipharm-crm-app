@@ -7,7 +7,10 @@ part of 'user.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-      id: Id.fromJson(json['id'] as Map<String, dynamic>),
+      id: (json['id'] as num?)?.toInt(),
+      companyId: (json['cmpId'] as num?)?.toInt(),
+      companyType: (json['cmpType'] as num?)?.toInt() ?? 0,
+      typeTier: json['typeTier'] as String?,
       lastName: json['nom'] as String?,
       firstName: json['prenom'] as String?,
       loginCode: json['loginCode'] as String?,
@@ -17,13 +20,19 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
       supervisor: (json['superviseur'] as num?)?.toInt(),
-      addVisitOutPlanPrivilege: (json['addViseHorsPlan'] as num?)?.toInt(),
+      addVisitOutPlanPrivilege: json['addViseHorsPlan'] as bool?,
       fullName: json['fullName'] as String?,
+      authorizedRadius: json['authorizedRadius'] as num?,
+      roleChangeLocationClient: json['roleChangeLocationClient'] as bool?,
+      minReportChar: (json['crmNbrLettres'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'cmpId': instance.companyId,
+      'cmpType': instance.companyType,
+      'typeTier': instance.typeTier,
       'nom': instance.lastName,
       'prenom': instance.firstName,
       'loginCode': instance.loginCode,
@@ -35,16 +44,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'superviseur': instance.supervisor,
       'addViseHorsPlan': instance.addVisitOutPlanPrivilege,
       'fullName': instance.fullName,
-    };
-
-_$IdImpl _$$IdImplFromJson(Map<String, dynamic> json) => _$IdImpl(
-      id: (json['id'] as num?)?.toInt(),
-      companyId: (json['cmpId'] as num?)?.toInt(),
-      typeTier: json['typeTier'] as String?,
-    );
-
-Map<String, dynamic> _$$IdImplToJson(_$IdImpl instance) => <String, dynamic>{
-      'id': instance.id,
-      'cmpId': instance.companyId,
-      'typeTier': instance.typeTier,
+      'authorizedRadius': instance.authorizedRadius,
+      'roleChangeLocationClient': instance.roleChangeLocationClient,
+      'crmNbrLettres': instance.minReportChar,
     };

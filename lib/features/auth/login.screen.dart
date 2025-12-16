@@ -1,3 +1,5 @@
+import 'package:crm/features/auth/services/auth.repository.dart';
+import 'package:crm/shared/services/helpers/dio.helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,7 @@ import 'widget/login.button.widget.dart';
 
 class LoginScreen extends StatefulWidget {
   static String routeName = '/auth.signin';
+
   const LoginScreen({super.key});
 
   @override
@@ -26,8 +29,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Map<String, String> loginData = {
     'username': '',
     'password': '',
+    'baseUrl': DioHelper.baseUrl,
   };
   final formKey = GlobalKey<FormState>();
+
+  // Base Url controller
+  final TextEditingController baseUrlController = TextEditingController(text: DioHelper.baseUrl);
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +64,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Spacer(flex: 3),
-                      CustomLocalImage(
-                        width: 100.h,
-                        image: 'logo.png',
+                      GestureDetector(
+                        onLongPress: () {
+                          _showBaseUrlBottomSheet();
+                        },
+                        child: CustomLocalImage(
+                          width: 100.h,
+                          image: 'logo.png',
+                        ),
                       ),
                       SizedBox(height: kSpacingX8),
                       Text(
@@ -84,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         autoFillHints: const [AutofillHints.username],
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return context.i10n.authLoginPasswordRequired;
+                            return context.i10n.authLoginUsernameRequired;
                           }
                           return null;
                         },
@@ -154,6 +166,63 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showBaseUrlBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Container(
+            padding: EdgeInsets.all(kSpacingX6),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  context.i10n.baseUrl,
+                  style: context.textTheme.headlineSmall,
+                ),
+                SizedBox(height: kSpacingX1),
+                CustomTextFormField(
+                  data: loginData,
+                  mapKey: 'baseUrl',
+                  hintText: context.i10n.baseUrl,
+                  controller: baseUrlController,
+                ),
+                SizedBox(height: kSpacingX5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(context.i10n.cancel),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (baseUrlController.text.isNotEmpty) {
+                          loginData['baseUrl'] = baseUrlController.text;
+                          await AuthRepository.setBaseUrl(loginData['baseUrl']!, force: true);
+                          DioHelper.init();
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Text(
+                        context.i10n.save,
+                        style: context.textTheme.labelLarge!.copyWith(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

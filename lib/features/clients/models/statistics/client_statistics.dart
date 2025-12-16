@@ -21,13 +21,13 @@ class ClientStatistics with _$ClientStatistics {
   const factory ClientStatistics({
     @JsonKey(name: 'companyId') required num? companyId,
     @JsonKey(name: 'clientId') required num? clientId,
-    @JsonKey(name: 'blocageCommercial') required bool commercialBlockage,
-    @JsonKey(name: 'blocageFinancier') required bool financialBlockage,
-    @JsonKey(name: 'totalHt') required num totalHt,
-    @JsonKey(name: 'totalTtc') required num totalTtc,
-    @JsonKey(name: 'plafond') required num ceiling,
-    @JsonKey(name: 'totalReste') required num totalRest,
-    @JsonKey(name: 'totalReglement') required num totalPayment,
+    @JsonKey(name: 'blocageCommercial') required bool? commercialBlockage,
+    @JsonKey(name: 'blocageFinancier') required bool? financialBlockage,
+    @JsonKey(name: 'totalHt') required num? totalHt,
+    @JsonKey(name: 'totalTtc') required num? totalTtc,
+    @JsonKey(name: 'plafond') required num? ceiling,
+    @JsonKey(name: 'totalReste') required num? totalRest,
+    @JsonKey(name: 'totalReglement') required num? totalPayment,
     @JsonKey(name: 'reclamations') required List<ClientReclamation> clientReclamations,
   }) = _ClientStatistics;
 

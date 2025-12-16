@@ -17,7 +17,6 @@ class CurrentEventWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigate to EventDetailPage (you need to create this page)
         context.push(EventDetailPage(event: event));
       },
       child: Container(
@@ -49,7 +48,15 @@ class CurrentEventWidget extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                         style: context.textTheme.displaySmall!.copyWith(
-                          color: kBrightSun.shade600,
+                          color: (event.statut ??
+                                      (event.type == 0
+                                          ? 'EN_ATTENTE'
+                                          : event.type == 1
+                                              ? 'EN_COURS'
+                                              : 'TERMINE')) ==
+                                  'EN_COURS'
+                              ? kCeruleanBlue
+                              : kBrightSun.shade600,
                         ),
                       ),
                     ),

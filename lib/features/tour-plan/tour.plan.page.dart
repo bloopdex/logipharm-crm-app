@@ -59,7 +59,7 @@ class PlanTourPage extends StatelessWidget {
               loaded: (tours, hasReachedMax, currentPage, goal) {
                 return tours
                     .where((element) => (element.statusFlag == StatuFlags.opened.value &&
-                        element.delegate.id == user.id.id))
+                        element.delegate.id == user.id))
                     .firstOrNull;
               },
               orElse: () => null,

@@ -7,6 +7,10 @@ class DateHelper {
     return DateFormat('dd-MM-yyyy').format(date);
   }
 
+  static String MMYY(DateTime date) {
+    return DateFormat('MM/yy').format(date);
+  }
+
   static String ddMMYYYYHHMMSS(DateTime date) {
     return DateFormat('dd/MM/yyyy HH:mm:ss').format(date);
   }
@@ -21,5 +25,9 @@ class DateHelper {
 
   static DateTime parseExtra(String date) {
     return DateFormat('yyyy-MM-ddTHH:mm:ss.SSSZ').parse(date);
+  }
+
+  static DateTime parseYYYYMMdd(String date) {
+    return DateFormat('yyyy-MM-dd').parse(date);
   }
 }

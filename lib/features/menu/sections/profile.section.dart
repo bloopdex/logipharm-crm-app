@@ -11,32 +11,79 @@ class ProfileSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<AuthBloc>().user;
-    return ListTile(
-      contentPadding: EdgeInsets.symmetric(
+    return Padding(
+      padding: EdgeInsets.symmetric(
         horizontal: kPaddingMd1,
       ),
-      leading: ProfileCard(
-        text: user.fullName ?? "no-name",
-      ),
-      title: Text(user.fullName ?? "no-name", style: context.textTheme.bodyLarge),
-      subtitle: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: kPaddingSm3,
-              vertical: kPaddingSm1,
+          ListTile(
+            leading: ProfileCard(
+              text: user.fullName ?? "no-name",
             ),
-            decoration: BoxDecoration(
-              color: kCeruleanBlue.shade100,
-              borderRadius: BorderRadius.circular(kPaddingSm3),
+            title: Text(user.fullName ?? "no-name", style: context.textTheme.bodyLarge),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: kPaddingSm3,
+                    vertical: kPaddingSm1,
+                  ),
+                  decoration: BoxDecoration(
+                    color: kCeruleanBlue.shade100,
+                    borderRadius: BorderRadius.circular(kPaddingSm3),
+                  ),
+                  child: Text(
+                      user.typeTier != "3"
+                          ? context.i10n.supervisorRole
+                          : context.i10n.delegateRole,
+                      style: context.textTheme.bodyLarge),
+                ),
+                Text(context.i10n.manageProfile,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.textTheme.bodyMedium),
+              ],
             ),
-            child: Text(
-                user.id.typeTier != "3" ? context.i10n.supervisorRole : context.i10n.delegateRole,
-                style: context.textTheme.bodyLarge),
           ),
-          Text(context.i10n.manageProfile,
-              maxLines: 2, overflow: TextOverflow.ellipsis, style: context.textTheme.bodyMedium),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: '${0} DA/',
+                  style: context.textTheme.bodyMedium,
+                ),
+                TextSpan(
+                  text: '${0} DA',
+                  style: context.textTheme.bodySmall,
+                ),
+                TextSpan(
+                  text: ' ${context.i10n.salesThisMonth}',
+                  style: context.textTheme.bodySmall,
+                ),
+              ],
+            ),
+          ),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: '${0}/',
+                  style: context.textTheme.bodyMedium,
+                ),
+                TextSpan(
+                  text: '${0}',
+                  style: context.textTheme.bodySmall,
+                ),
+                TextSpan(
+                  text: ' ${context.i10n.recrutementThisMonth}',
+                  style: context.textTheme.bodySmall,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

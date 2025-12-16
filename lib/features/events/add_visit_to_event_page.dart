@@ -4,7 +4,6 @@ import 'package:crm/shared/widgets/inputs/custom.text.form.field.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../shared/widgets/loading/loader.widget.dart';
 import 'blocs/create_visit/create_event_visit_cubit.dart';
 import 'models/event/event.dart';
 
@@ -15,6 +14,26 @@ class AddVisitToEventPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final allowed =
+        event.statut != null ? event.statut == 'EN_COURS' : event.type == 1;
+
+    if (!allowed) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(context.i10n.addVisitToEvent),
+        ),
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.all(kPaddingMd2),
+            child: Text(
+              'Visits can only be added to events with status EN_COURS.',
+              textAlign: TextAlign.center,
+              style: context.textTheme.headlineMedium,
+            ),
+          ),
+        ),
+      );
+    }
     return BlocProvider(
       create: (context) => CreateEventVisitCubit(),
       child: AddVisitToEventPageContent(event: event),
@@ -28,10 +47,12 @@ class AddVisitToEventPageContent extends StatefulWidget {
   const AddVisitToEventPageContent({super.key, required this.event});
 
   @override
-  State<AddVisitToEventPageContent> createState() => _AddVisitToEventPageContentState();
+  State<AddVisitToEventPageContent> createState() =>
+      _AddVisitToEventPageContentState();
 }
 
-class _AddVisitToEventPageContentState extends State<AddVisitToEventPageContent> {
+class _AddVisitToEventPageContentState
+    extends State<AddVisitToEventPageContent> {
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nomController = TextEditingController();
   final TextEditingController _prenomController = TextEditingController();
@@ -74,8 +95,10 @@ class _AddVisitToEventPageContentState extends State<AddVisitToEventPageContent>
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
               constraints: BoxConstraints(
-                minHeight: context.height - context.appBarSize - context.paddingBottom,
-                maxHeight: context.height - context.appBarSize - context.paddingBottom,
+                minHeight:
+                    context.height - context.appBarSize - context.paddingBottom,
+                maxHeight:
+                    context.height - context.appBarSize - context.paddingBottom,
                 minWidth: context.width,
                 maxWidth: context.width,
               ),
@@ -164,11 +187,11 @@ class _AddVisitToEventPageContentState extends State<AddVisitToEventPageContent>
                     SizedBox(height: kSpacingX7),
                     BlocBuilder<CreateEventVisitCubit, CreateEventVisitState>(
                       builder: (context, state) {
-                        if (state.maybeWhen(orElse: () => false, loading: () => true)) {
-                          return const Loader();
-                        }
+                        final loading = state.maybeWhen(
+                            orElse: () => false, loading: () => true);
                         return CustomButton(
                           text: context.i10n.addVisit,
+                          isLoading: loading,
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               final data = {
@@ -182,7 +205,9 @@ class _AddVisitToEventPageContentState extends State<AddVisitToEventPageContent>
                                 'remarque': _remarqueController.text,
                               };
 
-                              context.read<CreateEventVisitCubit>().createEventVisit(data: data);
+                              context
+                                  .read<CreateEventVisitCubit>()
+                                  .createEventVisit(data: data);
                             }
                           },
                         );

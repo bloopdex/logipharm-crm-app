@@ -27,8 +27,12 @@ mixin _$Commune {
   @JsonKey(name: 'wlyCode')
   String get wlyCode => throw _privateConstructorUsedError;
 
+  /// Serializes this Commune to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Commune
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CommuneCopyWith<Commune> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -53,6 +57,8 @@ class _$CommuneCopyWithImpl<$Res, $Val extends Commune>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Commune
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,6 +104,8 @@ class __$$CommuneImplCopyWithImpl<$Res>
       _$CommuneImpl _value, $Res Function(_$CommuneImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Commune
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,11 +166,13 @@ class _$CommuneImpl implements _Commune {
             (identical(other.wlyCode, wlyCode) || other.wlyCode == wlyCode));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, code, name, wlyCode);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Commune
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CommuneImplCopyWith<_$CommuneImpl> get copyWith =>
@@ -193,8 +203,11 @@ abstract class _Commune implements Commune {
   @override
   @JsonKey(name: 'wlyCode')
   String get wlyCode;
+
+  /// Create a copy of Commune
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CommuneImplCopyWith<_$CommuneImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

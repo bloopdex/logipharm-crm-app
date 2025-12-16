@@ -36,6 +36,7 @@ class TourDetail with _$TourDetail {
   const factory TourDetail({
     @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'tourneMaitreId') required String masterTourId,
+    @JsonKey(name: 'tourneTitle') String? masterTourTitle,
     @JsonKey(name: 'companyId') required int companyId,
     @JsonKey(name: 'regionId') String? regionId,
     @JsonKey(name: 'dateDebut') String? startDate,
@@ -48,6 +49,8 @@ class TourDetail with _$TourDetail {
     @JsonKey(name: 'latitude') double? latitude,
     @JsonKey(name: 'longitude') double? longitude,
     @JsonKey(name: 'pharmacie') Person? pharmacy,
+    // Optional fields
+    @JsonKey(name: 'delegue') Person? delegate,
   }) = _TourDetail;
 
   factory TourDetail.fromJson(Map<String, dynamic> json) => _$TourDetailFromJson(json);

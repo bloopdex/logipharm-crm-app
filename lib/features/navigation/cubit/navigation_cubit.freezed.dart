@@ -90,6 +90,9 @@ class _$NavigationStateCopyWithImpl<$Res, $Val extends NavigationState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of NavigationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -105,6 +108,9 @@ class __$$HomeImplCopyWithImpl<$Res>
     implements _$$HomeImplCopyWith<$Res> {
   __$$HomeImplCopyWithImpl(_$HomeImpl _value, $Res Function(_$HomeImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of NavigationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -225,6 +231,9 @@ class __$$PlansImplCopyWithImpl<$Res>
   __$$PlansImplCopyWithImpl(
       _$PlansImpl _value, $Res Function(_$PlansImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of NavigationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -345,6 +354,9 @@ class __$$VisitsImplCopyWithImpl<$Res>
   __$$VisitsImplCopyWithImpl(
       _$VisitsImpl _value, $Res Function(_$VisitsImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of NavigationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -464,6 +476,9 @@ class __$$TodoImplCopyWithImpl<$Res>
     implements _$$TodoImplCopyWith<$Res> {
   __$$TodoImplCopyWithImpl(_$TodoImpl _value, $Res Function(_$TodoImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of NavigationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -583,6 +598,9 @@ class __$$MenuImplCopyWithImpl<$Res>
     implements _$$MenuImplCopyWith<$Res> {
   __$$MenuImplCopyWithImpl(_$MenuImpl _value, $Res Function(_$MenuImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of NavigationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

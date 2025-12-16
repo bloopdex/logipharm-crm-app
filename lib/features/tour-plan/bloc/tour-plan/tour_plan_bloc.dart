@@ -19,7 +19,7 @@ part 'tour_plan_event.dart';
 part 'tour_plan_state.dart';
 
 class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
-  static const int _pageSize = 100;
+  static const int _pageSize = 10;
   TourPlanBloc() : super(const _Initial()) {
     on<_Started>(_started);
     on<_Search>(_search);
@@ -36,7 +36,7 @@ class TourPlanBloc extends Bloc<TourPlanEvent, TourPlanState> {
         page: 0,
         size: _pageSize,
         startDate: DateHelper.YYYYMMdd(DateTime(DateTime.now().year, 1, 1)),
-        endDate: DateHelper.YYYYMMdd(DateTime.now().add(const Duration(days: 1))),
+        endDate: DateHelper.YYYYMMdd(DateTime(DateTime.now().year, 12, 31)),
         query: "",
       );
 

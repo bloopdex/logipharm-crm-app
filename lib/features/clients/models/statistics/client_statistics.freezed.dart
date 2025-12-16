@@ -25,8 +25,12 @@ mixin _$ClientReclamation {
   @JsonKey(name: 'number')
   int get number => throw _privateConstructorUsedError;
 
+  /// Serializes this ClientReclamation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ClientReclamation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ClientReclamationCopyWith<ClientReclamation> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$ClientReclamationCopyWithImpl<$Res, $Val extends ClientReclamation>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ClientReclamation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$ClientReclamationImplCopyWithImpl<$Res>
       $Res Function(_$ClientReclamationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClientReclamation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,11 +150,13 @@ class _$ClientReclamationImpl implements _ClientReclamation {
             (identical(other.number, number) || other.number == number));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, status, number);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClientReclamation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClientReclamationImplCopyWith<_$ClientReclamationImpl> get copyWith =>
@@ -176,8 +186,11 @@ abstract class _ClientReclamation implements ClientReclamation {
   @override
   @JsonKey(name: 'number')
   int get number;
+
+  /// Create a copy of ClientReclamation
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClientReclamationImplCopyWith<_$ClientReclamationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -193,25 +206,29 @@ mixin _$ClientStatistics {
   @JsonKey(name: 'clientId')
   num? get clientId => throw _privateConstructorUsedError;
   @JsonKey(name: 'blocageCommercial')
-  bool get commercialBlockage => throw _privateConstructorUsedError;
+  bool? get commercialBlockage => throw _privateConstructorUsedError;
   @JsonKey(name: 'blocageFinancier')
-  bool get financialBlockage => throw _privateConstructorUsedError;
+  bool? get financialBlockage => throw _privateConstructorUsedError;
   @JsonKey(name: 'totalHt')
-  num get totalHt => throw _privateConstructorUsedError;
+  num? get totalHt => throw _privateConstructorUsedError;
   @JsonKey(name: 'totalTtc')
-  num get totalTtc => throw _privateConstructorUsedError;
+  num? get totalTtc => throw _privateConstructorUsedError;
   @JsonKey(name: 'plafond')
-  num get ceiling => throw _privateConstructorUsedError;
+  num? get ceiling => throw _privateConstructorUsedError;
   @JsonKey(name: 'totalReste')
-  num get totalRest => throw _privateConstructorUsedError;
+  num? get totalRest => throw _privateConstructorUsedError;
   @JsonKey(name: 'totalReglement')
-  num get totalPayment => throw _privateConstructorUsedError;
+  num? get totalPayment => throw _privateConstructorUsedError;
   @JsonKey(name: 'reclamations')
   List<ClientReclamation> get clientReclamations =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this ClientStatistics to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ClientStatistics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ClientStatisticsCopyWith<ClientStatistics> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -225,13 +242,13 @@ abstract class $ClientStatisticsCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'companyId') num? companyId,
       @JsonKey(name: 'clientId') num? clientId,
-      @JsonKey(name: 'blocageCommercial') bool commercialBlockage,
-      @JsonKey(name: 'blocageFinancier') bool financialBlockage,
-      @JsonKey(name: 'totalHt') num totalHt,
-      @JsonKey(name: 'totalTtc') num totalTtc,
-      @JsonKey(name: 'plafond') num ceiling,
-      @JsonKey(name: 'totalReste') num totalRest,
-      @JsonKey(name: 'totalReglement') num totalPayment,
+      @JsonKey(name: 'blocageCommercial') bool? commercialBlockage,
+      @JsonKey(name: 'blocageFinancier') bool? financialBlockage,
+      @JsonKey(name: 'totalHt') num? totalHt,
+      @JsonKey(name: 'totalTtc') num? totalTtc,
+      @JsonKey(name: 'plafond') num? ceiling,
+      @JsonKey(name: 'totalReste') num? totalRest,
+      @JsonKey(name: 'totalReglement') num? totalPayment,
       @JsonKey(name: 'reclamations')
       List<ClientReclamation> clientReclamations});
 }
@@ -246,18 +263,20 @@ class _$ClientStatisticsCopyWithImpl<$Res, $Val extends ClientStatistics>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ClientStatistics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? companyId = freezed,
     Object? clientId = freezed,
-    Object? commercialBlockage = null,
-    Object? financialBlockage = null,
-    Object? totalHt = null,
-    Object? totalTtc = null,
-    Object? ceiling = null,
-    Object? totalRest = null,
-    Object? totalPayment = null,
+    Object? commercialBlockage = freezed,
+    Object? financialBlockage = freezed,
+    Object? totalHt = freezed,
+    Object? totalTtc = freezed,
+    Object? ceiling = freezed,
+    Object? totalRest = freezed,
+    Object? totalPayment = freezed,
     Object? clientReclamations = null,
   }) {
     return _then(_value.copyWith(
@@ -269,34 +288,34 @@ class _$ClientStatisticsCopyWithImpl<$Res, $Val extends ClientStatistics>
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as num?,
-      commercialBlockage: null == commercialBlockage
+      commercialBlockage: freezed == commercialBlockage
           ? _value.commercialBlockage
           : commercialBlockage // ignore: cast_nullable_to_non_nullable
-              as bool,
-      financialBlockage: null == financialBlockage
+              as bool?,
+      financialBlockage: freezed == financialBlockage
           ? _value.financialBlockage
           : financialBlockage // ignore: cast_nullable_to_non_nullable
-              as bool,
-      totalHt: null == totalHt
+              as bool?,
+      totalHt: freezed == totalHt
           ? _value.totalHt
           : totalHt // ignore: cast_nullable_to_non_nullable
-              as num,
-      totalTtc: null == totalTtc
+              as num?,
+      totalTtc: freezed == totalTtc
           ? _value.totalTtc
           : totalTtc // ignore: cast_nullable_to_non_nullable
-              as num,
-      ceiling: null == ceiling
+              as num?,
+      ceiling: freezed == ceiling
           ? _value.ceiling
           : ceiling // ignore: cast_nullable_to_non_nullable
-              as num,
-      totalRest: null == totalRest
+              as num?,
+      totalRest: freezed == totalRest
           ? _value.totalRest
           : totalRest // ignore: cast_nullable_to_non_nullable
-              as num,
-      totalPayment: null == totalPayment
+              as num?,
+      totalPayment: freezed == totalPayment
           ? _value.totalPayment
           : totalPayment // ignore: cast_nullable_to_non_nullable
-              as num,
+              as num?,
       clientReclamations: null == clientReclamations
           ? _value.clientReclamations
           : clientReclamations // ignore: cast_nullable_to_non_nullable
@@ -316,13 +335,13 @@ abstract class _$$ClientStatisticsImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'companyId') num? companyId,
       @JsonKey(name: 'clientId') num? clientId,
-      @JsonKey(name: 'blocageCommercial') bool commercialBlockage,
-      @JsonKey(name: 'blocageFinancier') bool financialBlockage,
-      @JsonKey(name: 'totalHt') num totalHt,
-      @JsonKey(name: 'totalTtc') num totalTtc,
-      @JsonKey(name: 'plafond') num ceiling,
-      @JsonKey(name: 'totalReste') num totalRest,
-      @JsonKey(name: 'totalReglement') num totalPayment,
+      @JsonKey(name: 'blocageCommercial') bool? commercialBlockage,
+      @JsonKey(name: 'blocageFinancier') bool? financialBlockage,
+      @JsonKey(name: 'totalHt') num? totalHt,
+      @JsonKey(name: 'totalTtc') num? totalTtc,
+      @JsonKey(name: 'plafond') num? ceiling,
+      @JsonKey(name: 'totalReste') num? totalRest,
+      @JsonKey(name: 'totalReglement') num? totalPayment,
       @JsonKey(name: 'reclamations')
       List<ClientReclamation> clientReclamations});
 }
@@ -335,18 +354,20 @@ class __$$ClientStatisticsImplCopyWithImpl<$Res>
       $Res Function(_$ClientStatisticsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClientStatistics
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? companyId = freezed,
     Object? clientId = freezed,
-    Object? commercialBlockage = null,
-    Object? financialBlockage = null,
-    Object? totalHt = null,
-    Object? totalTtc = null,
-    Object? ceiling = null,
-    Object? totalRest = null,
-    Object? totalPayment = null,
+    Object? commercialBlockage = freezed,
+    Object? financialBlockage = freezed,
+    Object? totalHt = freezed,
+    Object? totalTtc = freezed,
+    Object? ceiling = freezed,
+    Object? totalRest = freezed,
+    Object? totalPayment = freezed,
     Object? clientReclamations = null,
   }) {
     return _then(_$ClientStatisticsImpl(
@@ -358,34 +379,34 @@ class __$$ClientStatisticsImplCopyWithImpl<$Res>
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as num?,
-      commercialBlockage: null == commercialBlockage
+      commercialBlockage: freezed == commercialBlockage
           ? _value.commercialBlockage
           : commercialBlockage // ignore: cast_nullable_to_non_nullable
-              as bool,
-      financialBlockage: null == financialBlockage
+              as bool?,
+      financialBlockage: freezed == financialBlockage
           ? _value.financialBlockage
           : financialBlockage // ignore: cast_nullable_to_non_nullable
-              as bool,
-      totalHt: null == totalHt
+              as bool?,
+      totalHt: freezed == totalHt
           ? _value.totalHt
           : totalHt // ignore: cast_nullable_to_non_nullable
-              as num,
-      totalTtc: null == totalTtc
+              as num?,
+      totalTtc: freezed == totalTtc
           ? _value.totalTtc
           : totalTtc // ignore: cast_nullable_to_non_nullable
-              as num,
-      ceiling: null == ceiling
+              as num?,
+      ceiling: freezed == ceiling
           ? _value.ceiling
           : ceiling // ignore: cast_nullable_to_non_nullable
-              as num,
-      totalRest: null == totalRest
+              as num?,
+      totalRest: freezed == totalRest
           ? _value.totalRest
           : totalRest // ignore: cast_nullable_to_non_nullable
-              as num,
-      totalPayment: null == totalPayment
+              as num?,
+      totalPayment: freezed == totalPayment
           ? _value.totalPayment
           : totalPayment // ignore: cast_nullable_to_non_nullable
-              as num,
+              as num?,
       clientReclamations: null == clientReclamations
           ? _value._clientReclamations
           : clientReclamations // ignore: cast_nullable_to_non_nullable
@@ -422,25 +443,25 @@ class _$ClientStatisticsImpl implements _ClientStatistics {
   final num? clientId;
   @override
   @JsonKey(name: 'blocageCommercial')
-  final bool commercialBlockage;
+  final bool? commercialBlockage;
   @override
   @JsonKey(name: 'blocageFinancier')
-  final bool financialBlockage;
+  final bool? financialBlockage;
   @override
   @JsonKey(name: 'totalHt')
-  final num totalHt;
+  final num? totalHt;
   @override
   @JsonKey(name: 'totalTtc')
-  final num totalTtc;
+  final num? totalTtc;
   @override
   @JsonKey(name: 'plafond')
-  final num ceiling;
+  final num? ceiling;
   @override
   @JsonKey(name: 'totalReste')
-  final num totalRest;
+  final num? totalRest;
   @override
   @JsonKey(name: 'totalReglement')
-  final num totalPayment;
+  final num? totalPayment;
   final List<ClientReclamation> _clientReclamations;
   @override
   @JsonKey(name: 'reclamations')
@@ -481,7 +502,7 @@ class _$ClientStatisticsImpl implements _ClientStatistics {
                 .equals(other._clientReclamations, _clientReclamations));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -496,7 +517,9 @@ class _$ClientStatisticsImpl implements _ClientStatistics {
       totalPayment,
       const DeepCollectionEquality().hash(_clientReclamations));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClientStatistics
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClientStatisticsImplCopyWith<_$ClientStatisticsImpl> get copyWith =>
@@ -516,13 +539,13 @@ abstract class _ClientStatistics implements ClientStatistics {
       {@JsonKey(name: 'companyId') required final num? companyId,
       @JsonKey(name: 'clientId') required final num? clientId,
       @JsonKey(name: 'blocageCommercial')
-      required final bool commercialBlockage,
-      @JsonKey(name: 'blocageFinancier') required final bool financialBlockage,
-      @JsonKey(name: 'totalHt') required final num totalHt,
-      @JsonKey(name: 'totalTtc') required final num totalTtc,
-      @JsonKey(name: 'plafond') required final num ceiling,
-      @JsonKey(name: 'totalReste') required final num totalRest,
-      @JsonKey(name: 'totalReglement') required final num totalPayment,
+      required final bool? commercialBlockage,
+      @JsonKey(name: 'blocageFinancier') required final bool? financialBlockage,
+      @JsonKey(name: 'totalHt') required final num? totalHt,
+      @JsonKey(name: 'totalTtc') required final num? totalTtc,
+      @JsonKey(name: 'plafond') required final num? ceiling,
+      @JsonKey(name: 'totalReste') required final num? totalRest,
+      @JsonKey(name: 'totalReglement') required final num? totalPayment,
       @JsonKey(name: 'reclamations')
       required final List<ClientReclamation>
           clientReclamations}) = _$ClientStatisticsImpl;
@@ -538,30 +561,33 @@ abstract class _ClientStatistics implements ClientStatistics {
   num? get clientId;
   @override
   @JsonKey(name: 'blocageCommercial')
-  bool get commercialBlockage;
+  bool? get commercialBlockage;
   @override
   @JsonKey(name: 'blocageFinancier')
-  bool get financialBlockage;
+  bool? get financialBlockage;
   @override
   @JsonKey(name: 'totalHt')
-  num get totalHt;
+  num? get totalHt;
   @override
   @JsonKey(name: 'totalTtc')
-  num get totalTtc;
+  num? get totalTtc;
   @override
   @JsonKey(name: 'plafond')
-  num get ceiling;
+  num? get ceiling;
   @override
   @JsonKey(name: 'totalReste')
-  num get totalRest;
+  num? get totalRest;
   @override
   @JsonKey(name: 'totalReglement')
-  num get totalPayment;
+  num? get totalPayment;
   @override
   @JsonKey(name: 'reclamations')
   List<ClientReclamation> get clientReclamations;
+
+  /// Create a copy of ClientStatistics
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClientStatisticsImplCopyWith<_$ClientStatisticsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -11,19 +11,6 @@ class VisitDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String getStatusText(int? statusFlag) {
-      switch (statusFlag) {
-        case 1:
-          return context.i10n.pending;
-        case 2:
-          return context.i10n.inProgress;
-        case 3:
-          return context.i10n.completed;
-        default:
-          return '';
-      }
-    }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,

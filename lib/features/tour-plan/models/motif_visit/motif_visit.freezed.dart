@@ -25,8 +25,12 @@ mixin _$MotifVisit {
   @JsonKey(name: 'label')
   String? get label => throw _privateConstructorUsedError;
 
+  /// Serializes this MotifVisit to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MotifVisit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MotifVisitCopyWith<MotifVisit> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$MotifVisitCopyWithImpl<$Res, $Val extends MotifVisit>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MotifVisit
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -90,6 +96,8 @@ class __$$MotifVisitImplCopyWithImpl<$Res>
       _$MotifVisitImpl _value, $Res Function(_$MotifVisitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MotifVisit
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,11 +148,13 @@ class _$MotifVisitImpl implements _MotifVisit {
             (identical(other.label, label) || other.label == label));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, label);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MotifVisit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MotifVisitImplCopyWith<_$MotifVisitImpl> get copyWith =>
@@ -172,8 +182,11 @@ abstract class _MotifVisit implements MotifVisit {
   @override
   @JsonKey(name: 'label')
   String? get label;
+
+  /// Create a copy of MotifVisit
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MotifVisitImplCopyWith<_$MotifVisitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -14,6 +14,7 @@ class CustomButton extends StatelessWidget {
     this.height,
     this.icon,
     this.disabled = false,
+    this.isLoading = false,
   });
 
   final String? text;
@@ -23,23 +24,34 @@ class CustomButton extends StatelessWidget {
   final void Function()? onPressed;
   final Color backgroundColor;
   final bool disabled;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: disabled ? () {} : onPressed,
+      onPressed: (disabled || isLoading) ? null : onPressed,
       style: context.elevatedButtonTheme.copyWith(
-        backgroundColor: MaterialStateProperty.resolveWith(
-          (states) => disabled ? kBgGrayVisibility3 : backgroundColor,
+        backgroundColor: WidgetStateProperty.resolveWith(
+          (states) =>
+              (disabled || isLoading) ? kBgGrayVisibility3 : backgroundColor,
         ),
-        minimumSize: MaterialStateProperty.all<Size>(
+        minimumSize: WidgetStateProperty.all<Size>(
           Size(double.infinity, height ?? 50.h),
         ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (icon != null)
+          if (isLoading) ...[
+            SizedBox(
+              width: 18.h,
+              height: 18.h,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                valueColor: AlwaysStoppedAnimation<Color>(textColor),
+              ),
+            ),
+          ] else if (icon != null)
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -51,11 +63,12 @@ class CustomButton extends StatelessWidget {
                 SizedBox(width: kSpacingX1)
               ],
             ),
-          if (text != null)
+          if (text != null && !isLoading)
             Text(text!,
                 maxLines: 2,
                 textAlign: TextAlign.center,
-                style: context.textTheme.headlineMedium!.copyWith(color: textColor)),
+                style: context.textTheme.headlineMedium!
+                    .copyWith(color: textColor)),
         ],
       ),
     );

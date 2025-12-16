@@ -38,7 +38,14 @@ _$PersonImpl _$$PersonImplFromJson(Map<String, dynamic> json) => _$PersonImpl(
       modePaie: json['modePaie'] == null
           ? null
           : ModePaie.fromJson(json['modePaie'] as Map<String, dynamic>),
+      categoryId: (json['categorieId'] as num?)?.toInt(),
       categoryLabel: json['categorieLibelle'] as String?,
+      categorieId2: (json['categorieId2'] as num?)?.toInt(),
+      categoryLabel2: json['categorieLibelle2'] as String?,
+      clientStatistics: json['ficheClient'] == null
+          ? null
+          : ClientStatistics.fromJson(
+              json['ficheClient'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
@@ -70,7 +77,11 @@ Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
       'prospect': instance.prospect,
       'solvabilite': instance.solvabilite,
       'modePaie': instance.modePaie,
+      'categorieId': instance.categoryId,
       'categorieLibelle': instance.categoryLabel,
+      'categorieId2': instance.categorieId2,
+      'categorieLibelle2': instance.categoryLabel2,
+      'ficheClient': instance.clientStatistics,
     };
 
 _$SolvabiliteImpl _$$SolvabiliteImplFromJson(Map<String, dynamic> json) =>

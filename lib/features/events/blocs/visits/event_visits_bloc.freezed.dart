@@ -69,7 +69,9 @@ mixin _$EventVisitsEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EventVisitsEventCopyWith<EventVisitsEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -93,6 +95,8 @@ class _$EventVisitsEventCopyWithImpl<$Res, $Val extends EventVisitsEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -126,6 +130,8 @@ class __$$StartedImplCopyWithImpl<$Res>
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -164,7 +170,9 @@ class _$StartedImpl implements _Started {
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StartedImplCopyWith<_$StartedImpl> get copyWith =>
@@ -251,8 +259,11 @@ abstract class _Started implements EventVisitsEvent {
 
   @override
   String get id;
+
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StartedImplCopyWith<_$StartedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -275,6 +286,8 @@ class __$$LoadImplCopyWithImpl<$Res>
   __$$LoadImplCopyWithImpl(_$LoadImpl _value, $Res Function(_$LoadImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -331,7 +344,9 @@ class _$LoadImpl implements _Load {
   @override
   int get hashCode => Object.hash(runtimeType, id, startDate, endDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadImplCopyWith<_$LoadImpl> get copyWith =>
@@ -423,8 +438,11 @@ abstract class _Load implements EventVisitsEvent {
   String get id;
   String get startDate;
   String get endDate;
+
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadImplCopyWith<_$LoadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -448,6 +466,8 @@ class __$$SearchImplCopyWithImpl<$Res>
       _$SearchImpl _value, $Res Function(_$SearchImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -504,7 +524,9 @@ class _$SearchImpl implements _Search {
   @override
   int get hashCode => Object.hash(runtimeType, id, startDate, endDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
@@ -596,8 +618,11 @@ abstract class _Search implements EventVisitsEvent {
   String get id;
   String get startDate;
   String get endDate;
+
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -621,6 +646,8 @@ class __$$ResetImplCopyWithImpl<$Res>
       _$ResetImpl _value, $Res Function(_$ResetImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -659,7 +686,9 @@ class _$ResetImpl implements _Reset {
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ResetImplCopyWith<_$ResetImpl> get copyWith =>
@@ -746,8 +775,11 @@ abstract class _Reset implements EventVisitsEvent {
 
   @override
   String get id;
+
+  /// Create a copy of EventVisitsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ResetImplCopyWith<_$ResetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -828,6 +860,9 @@ class _$EventVisitsStateCopyWithImpl<$Res, $Val extends EventVisitsState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of EventVisitsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -844,6 +879,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EventVisitsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -964,6 +1002,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EventVisitsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1088,6 +1129,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EventVisitsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1159,7 +1202,9 @@ class _$LoadedImpl implements _Loaded {
       hasReachedMax,
       currentPage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventVisitsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
@@ -1255,7 +1300,10 @@ abstract class _Loaded implements EventVisitsState {
   List<EventVisite> get eventVisits;
   bool get hasReachedMax;
   int get currentPage;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EventVisitsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1277,6 +1325,8 @@ class __$$FailureImplCopyWithImpl<$Res>
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EventVisitsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1315,7 +1365,9 @@ class _$FailureImpl implements _Failure {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventVisitsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
@@ -1406,7 +1458,10 @@ abstract class _Failure implements EventVisitsState {
   const factory _Failure({required final String message}) = _$FailureImpl;
 
   String get message;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EventVisitsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

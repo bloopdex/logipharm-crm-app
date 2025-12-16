@@ -1,8 +1,10 @@
 import 'package:crm/features/clients/blocs/claims/claim_cubit.dart';
 import 'package:crm/features/clients/blocs/observation/observation_cubit.dart';
+import 'package:crm/features/clients/blocs/turnover/turnover_cubit.dart';
 import 'package:crm/features/clients/client-details.page.dart';
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/core/enums.dart';
+import 'package:crm/shared/utils/date.formatter.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:crm/shared/widgets/popup/confirmation.popup.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,7 @@ import '../clients/blocs/details/client_details_cubit.dart';
 import '../clients/blocs/etablissement/etablissement_cubit.dart';
 import '../clients/blocs/grossiste/grossiste_cubit.dart';
 import '../visits/create-visit.page.dart';
+import '../visits/visit-detail.page.dart' as general_visit_detail;
 import 'models/tour.dart';
 import 'widget/tour.status.widget.dart';
 
@@ -55,8 +58,10 @@ class TourPlanDetailPage extends StatelessWidget {
         },
         child: Container(
           constraints: BoxConstraints(
-            maxHeight: context.height - context.appBarSize - context.paddingBottom,
-            minHeight: context.height - context.appBarSize - context.paddingBottom,
+            maxHeight:
+                context.height - context.appBarSize - context.paddingBottom,
+            minHeight:
+                context.height - context.appBarSize - context.paddingBottom,
             maxWidth: context.width,
             minWidth: context.width,
           ),
@@ -67,7 +72,8 @@ class TourPlanDetailPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.vertical(
-                    bottom: Radius.elliptical(context.width * 2, context.width / 3),
+                    bottom:
+                        Radius.elliptical(context.width * 2, context.width / 3),
                   ),
                 ),
               ),
@@ -82,7 +88,8 @@ class TourPlanDetailPage extends StatelessWidget {
                       color: kBgGrayVisibility2,
                       borderRadius: BorderRadius.circular(kSpacingX4),
                     ),
-                    child: Icon(Icons.bolt, size: kSpacingX9, color: kBgGrayVisibility6),
+                    child: Icon(Icons.bolt,
+                        size: kSpacingX9, color: kBgGrayVisibility6),
                   ),
                   SizedBox(height: kSpacingX5),
                   Text(
@@ -104,7 +111,16 @@ class TourPlanDetailPage extends StatelessWidget {
                       ),
                       child: CustomButton(
                         text: context.i10n.start,
+                        // disable if the start date is today not not yesterday or tomorrow
+                        disabled: tour.startDate != null &&
+                            (!DateHelper.parseYYYYMMdd(tour.startDate!)
+                                .isToday()),
                         onPressed: () {
+                          if (tour.startDate != null &&
+                              DateTime.parse(tour.startDate!)
+                                  .isAfter(DateTime.now())) {
+                            return;
+                          }
                           context.read<TourPlanBloc>().add(
                                 TourPlanEvent.startTour(tourId: tour.tourId),
                               );
@@ -335,7 +351,8 @@ class TourClientsTab extends StatefulWidget {
   State<TourClientsTab> createState() => _TourClientsTabState();
 }
 
-class _TourClientsTabState extends State<TourClientsTab> with TickerProviderStateMixin {
+class _TourClientsTabState extends State<TourClientsTab>
+    with TickerProviderStateMixin {
   late TabController controller;
 
   @override
@@ -398,7 +415,10 @@ class TourClientsList extends StatelessWidget {
     final user = context.user;
     List<TourDetail> pharmacies = [];
     if (flag != StatuFlags.all.value) {
-      pharmacies = tour.pharmacies?.where((element) => element.statusFlag == flag).toList() ?? [];
+      pharmacies = tour.pharmacies
+              ?.where((element) => element.statusFlag == flag)
+              .toList() ??
+          [];
     } else {
       pharmacies = tour.pharmacies ?? [];
     }
@@ -408,18 +428,38 @@ class TourClientsList extends StatelessWidget {
         final pharmacy = pharmacies[index];
         return ListTile(
           onTap: () {
-            context.read<ObservationCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
-            context.read<ClaimCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
-            context.read<GrossisteCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
-            context.read<EtablissementCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
-            context.read<ClientDetailsCubit>().load(clientId: pharmacy.pharmacy!.id);
-            context.push(
-              ClientDetailsPage(client: pharmacy.pharmacy!),
-            );
+            if (pharmacy.statusFlag != StatuFlags.pending.value) {
+              // Visit done -> open visit details
+              context
+                  .push(general_visit_detail.VisitDetailPage(visit: pharmacy));
+            } else {
+              // Pending -> open client details as before
+              context
+                  .read<TurnoverCubit>()
+                  .fetchTurnovers(pharmacy.pharmacy!.id);
+              context
+                  .read<ObservationCubit>()
+                  .get(pharmacyId: pharmacy.pharmacy!.id);
+              context.read<ClaimCubit>().get(pharmacyId: pharmacy.pharmacy!.id);
+              context
+                  .read<GrossisteCubit>()
+                  .get(pharmacyId: pharmacy.pharmacy!.id);
+              context
+                  .read<EtablissementCubit>()
+                  .get(pharmacyId: pharmacy.pharmacy!.id);
+              context
+                  .read<ClientDetailsCubit>()
+                  .load(clientId: pharmacy.pharmacy!.id);
+              context.push(
+                ClientDetailsPage(client: pharmacy.pharmacy!),
+              );
+            }
           },
           leading: ProfileCard(
             text: pharmacy.pharmacy?.fullName ?? "",
-            borderColor: pharmacy.pharmacy?.prospect ?? false ? kCardinal : kCeruleanBlue,
+            borderColor: pharmacy.pharmacy?.prospect ?? false
+                ? kCardinal
+                : kCeruleanBlue,
           ),
           title: Text(
             pharmacy.pharmacy?.fullName ?? "",
@@ -429,7 +469,9 @@ class TourClientsList extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: pharmacy.reportText != null ? Text(pharmacy.reportText!) : null,
+          subtitle:
+              pharmacy.reportText != null ? Text(pharmacy.reportText!) : null,
+          // If visit is done, allow viewing visit details from tour details
           trailing: pharmacy.statusFlag != StatuFlags.pending.value
               ? Icon(
                   Icons.done_all_rounded,
@@ -441,13 +483,13 @@ class TourClientsList extends StatelessWidget {
                     Row(children: [
                       InkWell(
                         onTap: () async {
-                          final Uri _phoneLaunchUri = Uri.parse(
+                          final Uri phoneLaunchUri = Uri.parse(
                               'tel://${pharmacy.pharmacy?.tel1Fixe ?? pharmacy.pharmacy?.tel2Fixe ?? pharmacy.pharmacy?.telMobile ?? ""}');
 
                           if (pharmacy.pharmacy?.tel1Fixe != null ||
                               pharmacy.pharmacy?.tel2Fixe != null ||
                               pharmacy.pharmacy?.telMobile != null) {
-                            await launchUrl(_phoneLaunchUri);
+                            await launchUrl(phoneLaunchUri);
                           }
                         },
                         child: Container(
@@ -472,8 +514,8 @@ class TourClientsList extends StatelessWidget {
                           }
                           final availableMaps = await MapLauncher.installedMaps;
                           await availableMaps.first.showMarker(
-                            coords:
-                                Coords(pharmacy.pharmacy!.latitude!, pharmacy.pharmacy!.longitude!),
+                            coords: Coords(pharmacy.pharmacy!.latitude!,
+                                pharmacy.pharmacy!.longitude!),
                             title: context.i10n.clientAddress,
                           );
                         },
@@ -494,7 +536,7 @@ class TourClientsList extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         if (tour.statusFlag == StatuFlags.opened.value &&
-                            tour.delegate.id == user.id.id) {
+                            tour.delegate.id == user.id) {
                           context.push(CreateVisitPage(
                             tour: tour,
                             pharmacieId:
@@ -508,17 +550,18 @@ class TourClientsList extends StatelessWidget {
                           Icon(
                             Icons.add_rounded,
                             color: tour.statusFlag == StatuFlags.opened.value &&
-                                    tour.delegate.id == user.id.id
+                                    tour.delegate.id == user.id
                                 ? kPrimaryColor
                                 : kText5,
                           ),
                           Text(
                             context.i10n.tourDetailsVisitClient,
                             style: context.textTheme.headlineSmall!.copyWith(
-                              color: tour.statusFlag == StatuFlags.opened.value &&
-                                      tour.delegate.id == user.id.id
-                                  ? kPrimaryColor
-                                  : kText5,
+                              color:
+                                  tour.statusFlag == StatuFlags.opened.value &&
+                                          tour.delegate.id == user.id
+                                      ? kPrimaryColor
+                                      : kText5,
                             ),
                           )
                         ],

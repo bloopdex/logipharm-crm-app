@@ -1,9 +1,11 @@
+// CreateVisitPage.dart
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:crm/features/tour-plan/bloc/tour-plan/tour_plan_bloc.dart';
 import 'package:crm/features/tour-plan/models/tour.dart';
 import 'package:crm/features/visits/pages/creation-successful.page.dart';
+import 'package:crm/logic/auth/auth_bloc.dart';
+import 'package:crm/models/user/user.dart';
 import 'package:crm/shared/services/helpers/location.helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +34,8 @@ class CreateVisitPage extends StatefulWidget {
 }
 
 class _CreateVisitPageState extends State<CreateVisitPage> {
+  late User user;
+
   final QuillController _quillController = QuillController.basic();
   final ScrollController _scrollController = ScrollController();
 
@@ -52,18 +56,24 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
   @override
   void initState() {
     super.initState();
+
+    user = context.read<AuthBloc>().user;
+
     context.read<CounterCubit>().reset();
     context.read<VisitCreationCubit>().reset();
-    data['dateDebut'] = DateTime.now().YYYYMMdd();
+    data['dateDebut'] = DateTime.now();
+
     if (widget.pharmacieId != null) {
       data['pharmacieId'] = widget.pharmacieId?.toString();
     }
     data['tourneeId'] = widget.tour.tourId;
-    log('tourneeId: ${widget.tour.tourId}');
   }
 
   void _onQuillChange() {
-    setState(() {});
+    setState(() {
+      debugPrint(
+          'Quill text changed: ${_quillController.document.toPlainText()} length: ${_quillController.document.toPlainText().trim().length} Valid: ${_quillController.document.toPlainText().trim().length >= (user.minReportChar ?? 1)}');
+    });
   }
 
   @override
@@ -106,6 +116,10 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                         ),
                       ],
                     ),
+                    leading: IconButton(
+                      icon: const Icon(Icons.chevron_left_rounded),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
                     bottom: PreferredSize(
                       preferredSize: context.read<CounterCubit>().state < 1
                           ? Size.fromHeight(bottomSize)
@@ -138,11 +152,21 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                       maxWidth: context.width,
                       minWidth: context.width,
                       maxHeight: context.read<CounterCubit>().state == 0
-                          ? context.height - context.appBarSize - context.paddingBottom - bottomSize
-                          : context.height - context.appBarSize - context.paddingBottom,
+                          ? context.height -
+                              context.appBarSize -
+                              context.paddingBottom -
+                              bottomSize
+                          : context.height -
+                              context.appBarSize -
+                              context.paddingBottom,
                       minHeight: context.read<CounterCubit>().state == 0
-                          ? context.height - context.appBarSize - context.paddingBottom - bottomSize
-                          : context.height - context.appBarSize - context.paddingBottom,
+                          ? context.height -
+                              context.appBarSize -
+                              context.paddingBottom -
+                              bottomSize
+                          : context.height -
+                              context.appBarSize -
+                              context.paddingBottom,
                     ),
                     child: BlocBuilder<CounterCubit, int>(
                       builder: (context, state) {
@@ -158,152 +182,303 @@ class _CreateVisitPageState extends State<CreateVisitPage> {
                                   ? ClientSelectionForm(
                                       quillController: _quillController,
                                       onQuillFocus: _scrollToBottom,
+                                      tour: widget.tour,
                                       clients: widget.tour.pharmacies!
-                                          .where((element) => element.statusFlag == 0)
+                                          .where((element) =>
+                                              element.statusFlag == 0)
                                           .toList(),
                                       data: data,
                                       onQuillChange: _onQuillChange,
                                     )
-                                  : VisitValidateCreationPage(tour: widget.tour, data: data),
+                                  : VisitValidateCreationPage(
+                                      tour: widget.tour, data: data),
                             ),
                             SizedBox(height: kSpacingX4),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: kPaddingMd2, right: kPaddingMd2, bottom: kPaddingLg1),
-                              child: Row(
-                                children: [
-                                  if (state == 0)
-                                    Expanded(
-                                      child: Container(
-                                        margin: EdgeInsets.only(right: kSpacingX1),
-                                        child: CustomButton(
-                                          text: context.i10n.cancel,
-                                          backgroundColor: kCardinal,
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  if (state == 1)
-                                    Expanded(
-                                      child: Container(
-                                        margin: EdgeInsets.only(right: kSpacingX1),
-                                        child: CustomButton(
-                                          text: context.i10n.back,
-                                          backgroundColor: kCardinal,
-                                          onPressed: () {
-                                            context.read<CounterCubit>().decrement();
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  Expanded(
-                                    child: CustomButton(
-                                      text: state < 1 ? context.i10n.next : context.i10n.validate,
-                                      disabled: state == 0
-                                          ? data['dateDebut'] == null ||
-                                              data['pharmacieId'] == null ||
-                                              data['motif'] == null ||
-                                              _quillController.document.toPlainText().isEmpty
-                                          : false,
-                                      onPressed: () async {
-                                        switch (state) {
-                                          case 0:
-                                            if (data['dateDebut'] == null ||
-                                                data['pharmacieId'] == null ||
-                                                data['motif'] == null ||
-                                                _quillController.document.toPlainText().isEmpty) {
-                                              return;
-                                            }
-                                            data['document'] = _quillController.document;
-                                            context.read<CounterCubit>().increment();
-                                            if (!context.mounted) return;
-                                            setState(() {});
-                                            break;
-                                          case 1:
-                                            data['rapportText'] =
-                                                _quillController.document.toPlainText();
-                                            data['rapport'] = json.encode(
-                                                _quillController.document.toDelta().toJson());
-
-                                            Position? position;
-
-                                            // First attempt to get location
-                                            try {
-                                              position = await LocationHelper.getCurrentPosition();
-                                            } on Exception {
-                                              // Initial location retrieval failed
-                                            }
-
-                                            if (position == null) {
-                                              // Check current permission status
-                                              final permission = await Geolocator.checkPermission();
-
-                                              if (permission == LocationPermission.denied) {
-                                                // Request permission again
-                                                final newPermission =
-                                                    await Geolocator.requestPermission();
-
-                                                if (newPermission ==
-                                                        LocationPermission.whileInUse ||
-                                                    newPermission == LocationPermission.always) {
-                                                  // Get position again after permission granted
-                                                  try {
-                                                    final newPosition =
-                                                        await LocationHelper.getCurrentPosition();
-                                                    if (newPosition != null) {
-                                                      data['latitude'] = newPosition.latitude;
-                                                      data['longitude'] = newPosition.longitude;
-                                                    }
-                                                  } on Exception {
-                                                    // Handle exception if user denies again
-                                                  }
-                                                } else {
-                                                  // User denied permission again
-                                                  if (context.mounted) {
-                                                    context.errorSnackBar(
-                                                        context.i10n.locationPermissionRequired);
-                                                  }
-                                                }
-                                              } else if (permission ==
-                                                  LocationPermission.deniedForever) {
-                                                // Handle permanent denial
-                                                if (context.mounted) {
-                                                  context.errorSnackBar(
-                                                      context.i10n.locationPermissionRequired);
-                                                }
-                                              }
-                                            } else {
-                                              // Position successfully obtained
-                                              data['latitude'] = position.latitude;
-                                              data['longitude'] = position.longitude;
-                                            }
-
-                                            if (data['latitude'] == null ||
-                                                data['longitude'] == null) {
-                                              if (context.mounted) {
-                                                context.errorSnackBar(
-                                                    context.i10n.locationPermissionRequired);
-                                              }
-                                              return;
-                                            }
-
-                                            if (context.mounted) {
-                                              context
-                                                  .read<VisitCreationCubit>()
-                                                  .validate(data: data);
-                                            }
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
                           ],
                         );
                       },
+                    ),
+                  ),
+                  bottomNavigationBar: SafeArea(
+                    top: false,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: kPaddingMd2,
+                          right: kPaddingMd2,
+                          bottom: kPaddingLg1,
+                          top: kPaddingSm1),
+                      child: BlocBuilder<CounterCubit, int>(
+                        builder: (context, state) {
+                          return Row(
+                            children: [
+                              if (state == 0)
+                                Expanded(
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: kSpacingX1),
+                                    child: CustomButton(
+                                      text: context.i10n.cancel,
+                                      backgroundColor: kCardinal,
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              if (state == 1)
+                                Expanded(
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: kSpacingX1),
+                                    child: CustomButton(
+                                      text: context.i10n.back,
+                                      backgroundColor: kCardinal,
+                                      onPressed: () {
+                                        context
+                                            .read<CounterCubit>()
+                                            .decrement();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              Expanded(
+                                child: CustomButton(
+                                  text: state < 1
+                                      ? context.i10n.next
+                                      : context.i10n.validate,
+                                  disabled:
+                                      state == 0
+                                          ? ((data['pharmacieId'] == null ||
+                                                  (data['pharmacieId']
+                                                      .toString()
+                                                      .isEmpty)) ||
+                                              data['motif'] == null ||
+                                              (data['contactType'] == null ||
+                                                  (data['contactType']
+                                                          as String)
+                                                      .isEmpty) ||
+                                              _quillController.document
+                                                      .toPlainText()
+                                                      .trim()
+                                                      .length <
+                                                  (user.minReportChar ?? 1))
+                                          : false,
+                                  onPressed: () async {
+                                    switch (state) {
+                                      case 0:
+                                        final text = _quillController.document
+                                            .toPlainText()
+                                            .trim();
+                                        if ((data['pharmacieId'] == null ||
+                                                (data['pharmacieId']
+                                                    .toString()
+                                                    .isEmpty)) ||
+                                            data['motif'] == null ||
+                                            data['contactType'] == null ||
+                                            (data['contactType'] as String)
+                                                .isEmpty ||
+                                            text.isEmpty ||
+                                            text.length <
+                                                (user.minReportChar ?? 1)) {
+                                          return;
+                                        }
+                                        data['document'] =
+                                            _quillController.document;
+                                        context
+                                            .read<CounterCubit>()
+                                            .increment();
+                                        if (!context.mounted) return;
+                                        setState(() {});
+                                        break;
+                                      case 1:
+                                        data['rapportText'] = _quillController
+                                            .document
+                                            .toPlainText()
+                                            .trim();
+                                        data['rapport'] = json.encode(
+                                            _quillController.document
+                                                .toDelta()
+                                                .toJson());
+
+                                        Position? position;
+
+                                        // First attempt to get location
+                                        try {
+                                          position = await LocationHelper
+                                              .getCurrentPosition();
+                                        } on Exception {
+                                          // Initial location retrieval failed
+                                        }
+
+                                        if (position == null) {
+                                          // Check current permission status
+                                          final permission = await Geolocator
+                                              .checkPermission();
+
+                                          if (permission ==
+                                              LocationPermission.denied) {
+                                            // Request permission again
+                                            final newPermission =
+                                                await Geolocator
+                                                    .requestPermission();
+
+                                            if (newPermission ==
+                                                    LocationPermission
+                                                        .whileInUse ||
+                                                newPermission ==
+                                                    LocationPermission.always) {
+                                              // Get position again after permission granted
+                                              try {
+                                                final newPosition =
+                                                    await LocationHelper
+                                                        .getCurrentPosition();
+                                                if (newPosition != null) {
+                                                  data['latitude'] =
+                                                      newPosition.latitude;
+                                                  data['longitude'] =
+                                                      newPosition.longitude;
+                                                }
+                                              } on Exception {
+                                                // Handle exception if user denies again
+                                              }
+                                            } else {
+                                              // User denied permission again
+                                              if (context.mounted) {
+                                                context.errorSnackBar(context
+                                                    .i10n
+                                                    .locationPermissionRequired);
+                                              }
+                                            }
+                                          } else if (permission ==
+                                              LocationPermission
+                                                  .deniedForever) {
+                                            // Handle permanent denial
+                                            if (context.mounted) {
+                                              context.errorSnackBar(context.i10n
+                                                  .locationPermissionRequired);
+                                            }
+                                          }
+                                        } else {
+                                          // Position successfully obtained
+                                          data['latitude'] = position.latitude;
+                                          data['longitude'] =
+                                              position.longitude;
+                                        }
+
+                                        if (data['latitude'] == null ||
+                                            data['longitude'] == null) {
+                                          if (context.mounted) {
+                                            context.errorSnackBar(context.i10n
+                                                .locationPermissionRequired);
+                                          }
+                                          return;
+                                        }
+
+                                        // Enforce user's authorized radius (if any) only when a target with coordinates is selected
+                                        if (data['pharmacieId'] != null &&
+                                            (data['pharmacieId'] as String)
+                                                .isNotEmpty) {
+                                          try {
+                                            // Retrieve selected tour detail / pharmacy info for client coordinates
+                                            final selectedId =
+                                                data['pharmacieId'] as String?;
+                                            double? clientLat;
+                                            double? clientLng;
+                                            num?
+                                                authorizedRadius; // from authenticated user
+
+                                            if (selectedId != null &&
+                                                widget.tour.pharmacies !=
+                                                    null) {
+                                              final split =
+                                                  selectedId.split(':');
+                                              final id = split.first;
+                                              final tourDetail = widget
+                                                  .tour.pharmacies!
+                                                  .where((t) =>
+                                                      t.pharmacy?.id
+                                                          .toString() ==
+                                                      id)
+                                                  .firstOrNull;
+
+                                              clientLat =
+                                                  tourDetail?.latitude ??
+                                                      tourDetail
+                                                          ?.pharmacy?.latitude;
+                                              clientLng =
+                                                  tourDetail?.longitude ??
+                                                      tourDetail
+                                                          ?.pharmacy?.longitude;
+
+                                              // Authorized radius comes from the authenticated user
+                                              authorizedRadius =
+                                                  user.authorizedRadius;
+                                              debugPrint(
+                                                  'Client coords: $clientLat, $clientLng, Authorized radius: $authorizedRadius');
+
+                                              // If we have client coords and an authorized radius > 0, check distance
+                                              if (clientLat != null &&
+                                                  clientLng != null &&
+                                                  authorizedRadius != null &&
+                                                  authorizedRadius > 0) {
+                                                final userLat =
+                                                    data['latitude'] as double;
+                                                final userLng =
+                                                    data['longitude'] as double;
+
+                                                final distanceMeters =
+                                                    Geolocator.distanceBetween(
+                                                        clientLat,
+                                                        clientLng,
+                                                        userLat,
+                                                        userLng);
+
+                                                debugPrint(
+                                                    'Distance to client: $distanceMeters meters');
+                                                if (distanceMeters >
+                                                    authorizedRadius) {
+                                                  if (context.mounted) {
+                                                    context.errorSnackBar(context
+                                                        .i10n
+                                                        .visitCreationOutsideAuthorizedRadius(
+                                                            authorizedRadius
+                                                                .toInt()));
+                                                  }
+                                                  return;
+                                                }
+                                              }
+                                            }
+                                          } catch (e) {
+                                            // If anything goes wrong with radius check, log and continue with creation
+                                            // so as not to block visits unnecessarily
+                                            // ignore: avoid_print
+                                            print('Radius check failed: $e');
+                                          }
+                                        }
+
+                                        data["dateFin"] = DateTime.now();
+                                        // Ensure contactType is sent as a string (ID)
+                                        if (data['contactType'] is! String) {
+                                          data['contactType'] =
+                                              data['contactType']?.toString() ??
+                                                  '';
+                                        }
+
+                                        if (context.mounted) {
+                                          // Keep request like before: pharmacieId as id:typeclient and contactId:1 for contacts flow
+                                          if (user.companyType == 1) {
+                                            data['contactId'] = 1;
+                                          }
+                                          context
+                                              .read<VisitCreationCubit>()
+                                              .validate(data: data);
+                                        }
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ));

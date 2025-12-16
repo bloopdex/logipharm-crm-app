@@ -16,15 +16,23 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color textColor = kCodGray;
-    switch (event.statut) {
-      case "EN_ATTENTE": // EN_ATTENTE (Pending)
+    // Prefer textual `statut` when provided; fallback to numeric `type`.
+    final statusFlag = event.statut ??
+        (event.type == 0
+            ? 'EN_ATTENTE'
+            : event.type == 1
+                ? 'EN_COURS'
+                : 'TERMINE');
+
+    Color textColor;
+    switch (statusFlag) {
+      case 'EN_ATTENTE':
         textColor = kBrightSun.shade600;
         break;
-      case "EN_COURS": // EN_COURS (In Progress)
-        textColor = kPrimaryColor;
+      case 'EN_COURS':
+        textColor = kCeruleanBlue;
         break;
-      case "TERMINE": // TERMINE (Completed)
+      case 'TERMINE':
         textColor = kSuccessColor;
         break;
       default:
@@ -99,7 +107,7 @@ class EventCard extends StatelessWidget {
           Column(
             children: [
               EventStatusWidget(
-                flag: event.statut,
+                flag: statusFlag,
               ),
               Text(
                 DateFormat("dd MMM yyyy").format(

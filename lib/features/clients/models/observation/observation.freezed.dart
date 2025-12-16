@@ -35,8 +35,12 @@ mixin _$Observation {
   @JsonKey(name: 'rapportText')
   String get reportText => throw _privateConstructorUsedError;
 
+  /// Serializes this Observation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Observation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ObservationCopyWith<Observation> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -67,6 +71,8 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Observation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,6 +143,8 @@ class __$$ObservationImplCopyWithImpl<$Res>
       _$ObservationImpl _value, $Res Function(_$ObservationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Observation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -239,12 +247,14 @@ class _$ObservationImpl implements _Observation {
                 other.reportText == reportText));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, pharmacyId, date, type, title, reason, report, reportText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Observation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ObservationImplCopyWith<_$ObservationImpl> get copyWith =>
@@ -293,8 +303,11 @@ abstract class _Observation implements Observation {
   @override
   @JsonKey(name: 'rapportText')
   String get reportText;
+
+  /// Create a copy of Observation
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ObservationImplCopyWith<_$ObservationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

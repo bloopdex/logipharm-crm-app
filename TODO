@@ -1,0 +1,72 @@
+Todo:
+  [x] AUTHENTICATION & GLOBAL RULES
+    [x] Check CMP_TYPE after login to show/hide Laboratoire features
+
+  [x] CONTACTS MODULE (Visible only for CMP_TYPE = 1)
+    [x] Add a "Contacts" button to the home screen
+    [x] Create a "Contacts" menu item in the main navigation
+    [x] Build a contact list view (from STP_TIERS where TER_TYPE = 1)
+    [x] Implement contact search/filter functionality
+
+  [x] CONTACT FORM (Dynamic)
+    [x] Create a dynamic form that changes based on TER_CATEGORIE
+    [x] Hide the "Délégué" field and auto-populate DLG_TER_ID with the logged-in user's ID
+
+    Common Fields for all contact types:
+    [x] TER_NOM (Nom)
+    [x] TER_PRENOM (Prénom)
+    [x] TER_WIL_ID (Wilaya - dropdown)
+    [x] TER_NATIONALITE (Ville)
+    [x] TER_TEL1_FIXE (Téléphone 1)
+    [x] TER_TEL2_FIXE (Téléphone 2)
+    [x] TER_ADRESSE (Adresse)
+    [x] TER_EMAIL (Email)
+
+    Pharmacien-Specific Fields:
+    [x] TER_RC_CODE (RC)
+    [x] TER_FISCAL_CODE (NIF)
+    [x] TER_NIS (NIS)
+    [x] TER_ARTICLE_CODE (AI)
+
+    Médecin-Specific Fields:
+    [] SPECIALITE (dropdown from CRM_SPECIALITES)
+    [x] POTENCIEL (dropdown from CRM_POTENTIELS)
+    [x] CONNAISSANCE DE PRODUIT (Oui/Non toggle)
+    [x] PRESCRIPTEUR (Oui/Non toggle)
+    [x] PROMESSE DE PRESCRIPTION (Oui/Non toggle)
+    [x] OBJECTIONS (text area)
+
+    Patient-Specific Fields:
+    [x] MEDECIN TRAITANT (text)
+    [] SPECIALITEE MEDECIN (dropdown from CRM_SPECIALITES)
+    [x] TYPE DE DIABETE (dropdown from CRM_type_diabete)
+    [x] CONNAISSANCE PRODUIT (Oui/Non toggle)
+    [x] TESTE PRODUIT (conditional fields)
+    [x] OBJECTIONS (text area)
+
+  [x] VISIT FORMS
+    [x] Integrate new contact fields into existing visit UI
+    [x] Ensure visit data is saved to CRM_TOURNEE_DETAIL table
+
+    Visite Pharmacien new fields:
+    [x] NOM INTERLOCUTEUR
+    [x] FONCTION
+    [x] RECEPTION DE PRESCRIPTION (Oui/Non)
+    [x] Prescriber details (conditional)
+    [x] PRODUIT CONCURENT
+    [x] OBJECTIONS
+
+    Visite Médecin new fields:
+    [x] POTENCIEL (dropdown)
+    [x] CONNAISSANCE DE PRODUIT (Oui/Non)
+    [x] PRESCRIPTEUR (Oui/Non)
+    [x] PROMESSE DE PRESCRIPTION (Oui/Non)
+    [x] OBJECTIONS
+
+    Visite Patient new fields:
+    [x] MEDECIN TRAITANT
+    [x] SPECIALITEE MEDECIN (dropdown)
+    [x] TYPE DE DIABETE (dropdown)
+    [x] CONNAISSANCE PRODUIT (Oui/Non)
+    [x] TESTE PRODUIT (conditional logic)
+    [x] OBJECTIONS
