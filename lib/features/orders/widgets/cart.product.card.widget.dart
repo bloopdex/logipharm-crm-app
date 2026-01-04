@@ -139,7 +139,8 @@ class _CartProductCardState extends State<CartProductCard> {
                           child: Text(
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.end,
-                              MoneyHelper.format(context, widget.cart.montant?.toDouble() ?? 0.0),
+                              MoneyHelper.format(context,
+                                  widget.cart.montant?.toDouble() ?? 0.0),
                               style: context.textTheme.headlineLarge,
                               textDirection: TextDirection.ltr),
                         ),

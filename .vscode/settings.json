@@ -1,25 +1,23 @@
 {
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "**/.classpath": true,
-        "**/.factorypath": true,
-        "**/.project": true,
-        "**/.settings": true
-    },
-    // Use FVM-managed Flutter SDK
-    "dart.flutterSdkPath": ".fvm/flutter_sdk",
-    // Keep .fvm out of search and watchers
-    "search.exclude": {
-        "**/.fvm": true
-    },
-    "files.watcherExclude": {
-        "**/.fvm/**": true
-    },
-    "todo-tree.tree.showBadges": true,
-    "todo-tree.tree.showCountsInTree": true
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.project": true,
+    "**/.settings": true
+  },
+  "dart.flutterSdkPath": ".fvm/versions/3.27.4",
+  "search.exclude": {
+    "**/.fvm": true
+  },
+  "files.watcherExclude": {
+    "**/.fvm/**": true
+  },
+  "todo-tree.tree.showBadges": true,
+  "todo-tree.tree.showCountsInTree": true
 }

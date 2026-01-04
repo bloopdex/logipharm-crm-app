@@ -85,7 +85,8 @@ class MedicamentCard extends StatelessWidget {
                       children: [
                         Text(
                           textDirection: TextDirection.ltr,
-                          MoneyHelper.format(context, medicament.prixPpa.toDouble()),
+                          MoneyHelper.format(
+                              context, medicament.prixPh.toDouble()),
                           style: context.textTheme.displaySmall!.copyWith(
                             color: kPrimaryColor,
                           ),

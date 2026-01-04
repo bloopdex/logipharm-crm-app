@@ -80,7 +80,9 @@ class _RefactorDetailsState extends State<RefactorDetails> {
               icon: BlocBuilder<LocalizationsBloc, LocalizationsState>(
                 builder: (context, state) {
                   return Icon(
-                    state.locale.languageCode != 'ar' ? Icons.chevron_left : Icons.chevron_right,
+                    state.locale.languageCode != 'ar'
+                        ? Icons.chevron_left
+                        : Icons.chevron_right,
                     color: kCodGray,
                   );
                 },
@@ -119,13 +121,19 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                     height: context.height - context.appBarSize,
                     width: context.width,
                     constraints: BoxConstraints(
-                      minHeight: context.height - context.appBarSize - context.height * 0.17,
-                      maxHeight: context.height - context.appBarSize - context.height * 0.17,
+                      minHeight: context.height -
+                          context.appBarSize -
+                          context.height * 0.17,
+                      maxHeight: context.height -
+                          context.appBarSize -
+                          context.height * 0.17,
                       minWidth: context.width,
                       maxWidth: context.width,
                     ),
-                    margin:
-                        EdgeInsets.only(right: kSpacingX5, left: kSpacingX5, bottom: kSpacingX4),
+                    margin: EdgeInsets.only(
+                        right: kSpacingX5,
+                        left: kSpacingX5,
+                        bottom: kSpacingX4),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
@@ -151,7 +159,10 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                         // minHeight: context.height * 0.17,
                       ),
                       padding: EdgeInsets.only(
-                          top: kSpacingX1, right: kSpacingX5, left: kSpacingX5, bottom: kSpacingX5),
+                          top: kSpacingX1,
+                          right: kSpacingX5,
+                          left: kSpacingX5,
+                          bottom: kSpacingX5),
                       decoration: BoxDecoration(
                         color: kCodGray.shade100,
                       ),
@@ -174,8 +185,11 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                                   BlocBuilder<QuantityCubit, int>(
                                     builder: (context, state) {
                                       return Text(
-                                        MoneyHelper.format(context,
-                                            (widget.medicament.prixPpa.toDouble()) * state),
+                                        MoneyHelper.format(
+                                            context,
+                                            (widget.medicament.prixPh
+                                                    .toDouble()) *
+                                                state),
                                         style: context.textTheme.headlineLarge!
                                             .copyWith(color: kPrimaryColor),
                                       );
@@ -187,7 +201,8 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                                 padding: EdgeInsets.all(3.h),
                                 decoration: BoxDecoration(
                                   color: kCodGray.shade100,
-                                  borderRadius: BorderRadius.circular(kSpacingX12),
+                                  borderRadius:
+                                      BorderRadius.circular(kSpacingX12),
                                   border: Border.all(color: kBorder3),
                                 ),
                                 child: Row(
@@ -195,13 +210,17 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          int count =
-                                              (int.tryParse(textEditingController.text) ?? 1);
+                                          int count = (int.tryParse(
+                                                  textEditingController.text) ??
+                                              1);
                                           if (count > 1) {
-                                            textEditingController.text = "${count - 1}";
+                                            textEditingController.text =
+                                                "${count - 1}";
                                           }
                                         });
-                                        context.read<QuantityCubit>().decrement();
+                                        context
+                                            .read<QuantityCubit>()
+                                            .decrement();
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -229,24 +248,30 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                                           border: InputBorder.none,
                                           enabledBorder: InputBorder.none,
                                           focusedBorder: InputBorder.none,
-                                          contentPadding: const EdgeInsets.all(0),
+                                          contentPadding:
+                                              const EdgeInsets.all(0),
                                         ),
                                         controller: textEditingController,
                                         focusNode: focus,
                                         onChanged: (value) => context
                                             .read<QuantityCubit>()
-                                            .setQuantity(int.tryParse(value) ?? 1),
+                                            .setQuantity(
+                                                int.tryParse(value) ?? 1),
                                       ),
                                     ),
                                     SizedBox(width: 6.h),
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          int count =
-                                              (int.tryParse(textEditingController.text) ?? 1);
-                                          textEditingController.text = "${count + 1}";
+                                          int count = (int.tryParse(
+                                                  textEditingController.text) ??
+                                              1);
+                                          textEditingController.text =
+                                              "${count + 1}";
                                         });
-                                        context.read<QuantityCubit>().increment();
+                                        context
+                                            .read<QuantityCubit>()
+                                            .increment();
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -277,9 +302,12 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                                 "medId": widget.medicament.medId,
                                 "prdId": widget.medicament.prdId,
                                 "stkCode": widget.medicament.stkCode,
-                                "qte": int.tryParse(textEditingController.text) ?? 1,
-                                "prixPh": widget.medicament.prixPpa.toDouble(),
-                                "txRistourne": widget.medicament.ugVnete?.toDouble() ?? 0,
+                                "qte":
+                                    int.tryParse(textEditingController.text) ??
+                                        1,
+                                "prixPh": widget.medicament.prixPh.toDouble(),
+                                "txRistourne":
+                                    widget.medicament.ugVnete?.toDouble() ?? 0,
                               });
                             },
                           ),
@@ -319,11 +347,15 @@ class ProductDetailsCard extends StatelessWidget {
                 Icon(Icons.science, color: kCodGray.shade700, size: 20.h),
                 SizedBox(width: kSpacingX1),
                 Expanded(
-                  child: Text(context.i10n.laboratoire, style: context.textTheme.titleMedium),
+                  child: Text(context.i10n.laboratoire,
+                      style: context.textTheme.titleMedium),
                 ),
                 Text(
-                  (medicament.laboratoire ?? '').isEmpty ? '-' : medicament.laboratoire!,
-                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  (medicament.laboratoire ?? '').isEmpty
+                      ? '-'
+                      : medicament.laboratoire!,
+                  style: context.textTheme.titleMedium!
+                      .copyWith(color: Colors.black),
                   textAlign: TextAlign.end,
                 ),
               ],
@@ -363,11 +395,13 @@ class ProductDetailsCard extends StatelessWidget {
                 Icon(Icons.inventory, color: kCodGray.shade700, size: 20.h),
                 SizedBox(width: kSpacingX1),
                 Expanded(
-                  child: Text(context.i10n.quantity, style: context.textTheme.titleMedium),
+                  child: Text(context.i10n.quantity,
+                      style: context.textTheme.titleMedium),
                 ),
                 Text(
                   '${medicament.qte}',
-                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  style: context.textTheme.titleMedium!
+                      .copyWith(color: Colors.black),
                   textAlign: TextAlign.end,
                 ),
               ],
@@ -406,46 +440,19 @@ class ProductDetailsCard extends StatelessWidget {
               color: kCodGray.shade200,
             ),
             SizedBox(height: kSpacingX5),
-            Row(
-              children: [
-                Icon(
-                  Icons.money,
-                  color: kCodGray.shade700,
-                  size: 20.h,
-                ),
-                SizedBox(width: kSpacingX1),
-                Expanded(
-                  child: Text(
-                    context.i10n.ppa,
-                    style: context.textTheme.titleMedium,
-                  ),
-                ),
-                Text(
-                  MoneyHelper.format(
-                    context,
-                    medicament.prixPpa,
-                  ),
-                  style: context.textTheme.titleMedium!.copyWith(
-                    color: Colors.black,
-                  ),
-                  textAlign: TextAlign.end,
-                ),
-              ],
-            ),
-            SizedBox(height: kSpacingX5),
-            Container(height: 1, color: kCodGray.shade200),
-            SizedBox(height: kSpacingX5),
             // PH price
             Row(
               children: [
                 Icon(Icons.price_change, color: kCodGray.shade700, size: 20.h),
                 SizedBox(width: kSpacingX1),
                 Expanded(
-                  child: Text('PH price', style: context.textTheme.titleMedium),
+                  child: Text(context.i10n.unitPrice,
+                      style: context.textTheme.titleMedium),
                 ),
                 Text(
                   MoneyHelper.format(context, medicament.prixPh),
-                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  style: context.textTheme.titleMedium!
+                      .copyWith(color: Colors.black),
                   textAlign: TextAlign.end,
                 ),
               ],
@@ -458,11 +465,13 @@ class ProductDetailsCard extends StatelessWidget {
                 Icon(Icons.percent, color: kCodGray.shade700, size: 20.h),
                 SizedBox(width: kSpacingX1),
                 Expanded(
-                  child: Text('Discount (UG Vnete)', style: context.textTheme.titleMedium),
+                  child: Text('Discount (UG Vnete)',
+                      style: context.textTheme.titleMedium),
                 ),
                 Text(
                   medicament.ugVnete == null ? '-' : '${medicament.ugVnete}',
-                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  style: context.textTheme.titleMedium!
+                      .copyWith(color: Colors.black),
                   textAlign: TextAlign.end,
                 ),
               ],
@@ -480,7 +489,8 @@ class ProductDetailsCard extends StatelessWidget {
                 ),
                 Text(
                   medicament.colis == null ? '-' : '${medicament.colis}',
-                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  style: context.textTheme.titleMedium!
+                      .copyWith(color: Colors.black),
                   textAlign: TextAlign.end,
                 ),
               ],
@@ -498,7 +508,8 @@ class ProductDetailsCard extends StatelessWidget {
                 ),
                 Text(
                   medicament.objectif == null ? '-' : '${medicament.objectif}',
-                  style: context.textTheme.titleMedium!.copyWith(color: Colors.black),
+                  style: context.textTheme.titleMedium!
+                      .copyWith(color: Colors.black),
                   textAlign: TextAlign.end,
                 ),
               ],

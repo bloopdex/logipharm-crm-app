@@ -305,6 +305,11 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
 
                     if (!context.mounted || selectedClient == null) return;
 
+                    final confirmed =
+                        await _confirmClientSelection(selectedClient);
+
+                    if (!context.mounted || !confirmed) return;
+
                     // Generate invoice only if enabled
                     if (widget.generateInvoiceOnValidate) {
                       await _generateAndDownloadInvoice(selectedClient);
@@ -358,5 +363,36 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
         ],
       ),
     );
+  }
+
+  Future<bool> _confirmClientSelection(Person client) async {
+    final productCount = context.read<CartCubit>().state.maybeWhen(
+          loaded: (_, __, totalElements, ___) => totalElements,
+          orElse: () => 0,
+        );
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Confirm client'),
+          content: Text(
+            'Are you sure you want to make the order for: ${client.fullName}, with $productCount products?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Confirm'),
+            ),
+          ],
+        );
+      },
+    );
+
+    return confirmed ?? false;
   }
 }
