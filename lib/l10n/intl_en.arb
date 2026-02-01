@@ -8,6 +8,23 @@
   "@confirm": {
     "description": "Confirm"
   },
+  "confirmClientTitle": "Confirm client",
+  "@confirmClientTitle": {
+    "description": "Dialog title to confirm selected client for the order"
+  },
+  "confirmClientMessage": "Are you sure you want to make the order for: {clientName}, with {productCount} products?",
+  "@confirmClientMessage": {
+    "description": "Confirm the selected client and product count before validating the order",
+    "placeholders": {
+      "clientName": {
+        "description": "Selected client's full name"
+      },
+      "productCount": {
+        "description": "Number of products in the cart",
+        "type": "int"
+      }
+    }
+  },
   "back": "Back",
   "@back": {
     "description": "Back"
@@ -567,6 +584,18 @@
   "@visitAlreadyEntered": {
     "description": "The visit is already entered"
   },
+  "lastVisitDate": "Last visit",
+  "@lastVisitDate": {
+    "description": "Last visit date"
+  },
+  "visitCount": "Visits",
+  "@visitCount": {
+    "description": "Number of visits"
+  },
+  "noVisitsYet": "No visits yet",
+  "@noVisitsYet": {
+    "description": "No visits yet"
+  },
   "visitDetailsTitle": "Visit Details",
   "@visitDetailsTitle": {
     "description": "Visit Details"
@@ -1114,6 +1143,10 @@
   "grossiste": "Grossiste",
   "@grossiste": {
     "description": "Grossiste"
+  },
+  "supplier": "Supplier",
+  "@supplier": {
+    "description": "Supplier"
   },
   "noGrossiste": "No grossiste",
   "@noGrossiste": {

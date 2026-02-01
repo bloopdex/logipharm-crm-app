@@ -44,6 +44,8 @@ class Person with _$Person {
     @JsonKey(name: 'ficheClient') ClientStatistics? clientStatistics,
     @JsonKey(name: 'laboratoireCode') String? laboratoireCode,
     @JsonKey(name: 'delegueType') num? delegueType,
+    @JsonKey(name: 'lastVisitDate') String? lastVisitDate,
+    @JsonKey(name: 'visitCount') int? visitCount,
   }) = _Person;
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);

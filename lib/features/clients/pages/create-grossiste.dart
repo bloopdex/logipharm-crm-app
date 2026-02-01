@@ -8,6 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/core.dart';
 import '../blocs/grossiste/grossiste_cubit.dart';
+import '../blocs/fournisseur_lov/fournisseur_lov_cubit.dart';
+import '../../../shared/widgets/loading/loader.widget.dart';
 
 class CreateGrossistePage extends StatefulWidget {
   final int pharmacyId;
@@ -27,8 +29,12 @@ class _CreateGrossistePageState extends State<CreateGrossistePage> {
 
   @override
   void initState() {
-    grossiste['pharmacieId'] = widget.pharmacyId;
     super.initState();
+    grossiste['pharmacieId'] = widget.pharmacyId;
+    // Load fournisseur LOV after the first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<FournisseurLovCubit>().load();
+    });
   }
 
   @override
@@ -91,40 +97,68 @@ class _CreateGrossistePageState extends State<CreateGrossistePage> {
           key: _formKey,
           child: Container(
               constraints: BoxConstraints(
-                maxHeight: context.height - context.appBarSize - context.paddingBottom - 160.h,
-                minHeight: context.height - context.appBarSize - context.paddingBottom - 160.h,
+                maxHeight: context.height -
+                    context.appBarSize -
+                    context.paddingBottom -
+                    160.h,
+                minHeight: context.height -
+                    context.appBarSize -
+                    context.paddingBottom -
+                    160.h,
                 maxWidth: context.width,
                 minWidth: context.width,
               ),
               child: Column(
                 children: [
                   const Divider(),
-                  TextFormField(
-                    initialValue: grossiste['titre'],
-                    style: context.textTheme.displayMedium,
-                    cursorColor: kPrimaryColor,
-                    maxLines: 2,
-                    onSaved: (String? value) {
-                      grossiste['titre'] = value;
-                    },
-                    validator: (String? value) {
-                      if (value!.isEmpty) {
-                        return context.i10n.todoTitleError;
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        hintText: context.i10n.todoTitlePlaceholder,
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        hintStyle: context.textTheme.displayMedium,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: kPaddingLg1,
-                          vertical: kPaddingSm1,
-                        )),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: kPaddingLg1,
+                      vertical: kPaddingSm1,
+                    ),
+                    child:
+                        BlocBuilder<FournisseurLovCubit, FournisseurLovState>(
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                          loading: () => const Center(child: Loader()),
+                          error: (message) => Text(
+                            'Error loading suppliers: $message',
+                            style: TextStyle(color: kCardinal),
+                          ),
+                          loaded: (fournisseurs) {
+                            return DropdownButtonFormField<int>(
+                              decoration: InputDecoration(
+                                labelText: context.i10n.supplier,
+                                labelStyle: context.textTheme.bodyLarge,
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(kPaddingSm3),
+                                ),
+                              ),
+                              value: grossiste['fournisseurId'],
+                              onChanged: (int? value) {
+                                setState(() {
+                                  grossiste['fournisseurId'] = value;
+                                  // Store the fournisseur name to use as title
+                                  final selected = fournisseurs.firstWhere(
+                                    (f) => f.id == value,
+                                  );
+                                  grossiste['titre'] = selected.label;
+                                });
+                              },
+                              items: fournisseurs
+                                  .map<DropdownMenuItem<int>>(
+                                      (fournisseur) => DropdownMenuItem(
+                                            value: fournisseur.id,
+                                            child: Text(fournisseur.label),
+                                          ))
+                                  .toList(),
+                            );
+                          },
+                          orElse: () => const SizedBox.shrink(),
+                        );
+                      },
+                    ),
                   ),
                   const Divider(),
                   Expanded(
@@ -139,7 +173,8 @@ class _CreateGrossistePageState extends State<CreateGrossistePage> {
                         config: QuillEditorConfig(
                           scrollable: true,
                           autoFocus: false,
-                          placeholder: context.i10n.visitCreationRapportPlaceholder,
+                          placeholder:
+                              context.i10n.visitCreationRapportPlaceholder,
                           expands: false,
                           showCursor: true,
                         ),
@@ -156,10 +191,13 @@ class _CreateGrossistePageState extends State<CreateGrossistePage> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            grossiste['rapportText'] = _quillController.document.toPlainText();
-                            grossiste['rapport'] =
-                                json.encode(_quillController.document.toDelta().toJson());
-                            context.read<GrossisteCubit>().create(data: grossiste);
+                            grossiste['rapportText'] =
+                                _quillController.document.toPlainText();
+                            grossiste['rapport'] = json.encode(
+                                _quillController.document.toDelta().toJson());
+                            context
+                                .read<GrossisteCubit>()
+                                .create(data: grossiste);
                             context.pop();
                           }
                         }),

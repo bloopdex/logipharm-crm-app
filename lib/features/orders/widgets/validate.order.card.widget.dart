@@ -375,18 +375,21 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Confirm client'),
+          title: Text(context.i10n.confirmClientTitle),
           content: Text(
-            'Are you sure you want to make the order for: ${client.fullName}, with $productCount products?',
+            context.i10n.confirmClientMessage(
+              client.fullName,
+              productCount,
+            ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('Cancel'),
+              child: Text(context.i10n.cancel),
             ),
             ElevatedButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Confirm'),
+              child: Text(context.i10n.confirm),
             ),
           ],
         );

@@ -65,6 +65,27 @@ class S {
     return Intl.message('Confirm', name: 'confirm', desc: 'Confirm', args: []);
   }
 
+  /// `Confirm client`
+  String get confirmClientTitle {
+    return Intl.message(
+      'Confirm client',
+      name: 'confirmClientTitle',
+      desc: 'Dialog title to confirm selected client for the order',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to make the order for: {clientName}, with {productCount} products?`
+  String confirmClientMessage(Object clientName, int productCount) {
+    return Intl.message(
+      'Are you sure you want to make the order for: $clientName, with $productCount products?',
+      name: 'confirmClientMessage',
+      desc:
+          'Confirm the selected client and product count before validating the order',
+      args: [clientName, productCount],
+    );
+  }
+
   /// `Back`
   String get back {
     return Intl.message('Back', name: 'back', desc: 'Back', args: []);
@@ -1326,6 +1347,36 @@ class S {
     );
   }
 
+  /// `Last visit`
+  String get lastVisitDate {
+    return Intl.message(
+      'Last visit',
+      name: 'lastVisitDate',
+      desc: 'Last visit date',
+      args: [],
+    );
+  }
+
+  /// `Visits`
+  String get visitCount {
+    return Intl.message(
+      'Visits',
+      name: 'visitCount',
+      desc: 'Number of visits',
+      args: [],
+    );
+  }
+
+  /// `No visits yet`
+  String get noVisitsYet {
+    return Intl.message(
+      'No visits yet',
+      name: 'noVisitsYet',
+      desc: 'No visits yet',
+      args: [],
+    );
+  }
+
   /// `Visit Details`
   String get visitDetailsTitle {
     return Intl.message(
@@ -2577,6 +2628,16 @@ class S {
       'Grossiste',
       name: 'grossiste',
       desc: 'Grossiste',
+      args: [],
+    );
+  }
+
+  /// `Supplier`
+  String get supplier {
+    return Intl.message(
+      'Supplier',
+      name: 'supplier',
+      desc: 'Supplier',
       args: [],
     );
   }

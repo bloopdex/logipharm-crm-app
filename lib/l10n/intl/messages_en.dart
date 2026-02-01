@@ -20,20 +20,23 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(percentage) => "${percentage}%";
+  static String m0(clientName, productCount) =>
+      "Are you sure you want to make the order for: ${clientName}, with ${productCount} products?";
 
-  static String m1(ref) => "Offer ${ref}";
+  static String m1(percentage) => "${percentage}%";
 
-  static String m2(count) => "${count} Client";
+  static String m2(ref) => "Offer ${ref}";
 
-  static String m3(percentage) => "${percentage}%";
+  static String m3(count) => "${count} Client";
 
-  static String m4(count) => "Clients (${count})";
+  static String m4(percentage) => "${percentage}%";
 
-  static String m5(radius) =>
+  static String m5(count) => "Clients (${count})";
+
+  static String m6(radius) =>
       "You are outside the authorized radius (${radius} m) for this client";
 
-  static String m6(min) => "Rapport must be at least ${min} characters";
+  static String m7(min) => "Rapport must be at least ${min} characters";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -134,6 +137,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "commune": MessageLookupByLibrary.simpleMessage("Commune"),
     "completed": MessageLookupByLibrary.simpleMessage("Completed"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+    "confirmClientMessage": m0,
+    "confirmClientTitle": MessageLookupByLibrary.simpleMessage(
+      "Confirm client",
+    ),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Confirm your new password",
@@ -275,7 +282,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "eventDetailsTitle": MessageLookupByLibrary.simpleMessage("Event Details"),
     "eventInProgress": MessageLookupByLibrary.simpleMessage("In Progress"),
     "eventPending": MessageLookupByLibrary.simpleMessage("Pending"),
-    "eventProgress": m0,
+    "eventProgress": m1,
     "eventTitle": MessageLookupByLibrary.simpleMessage("Event Title"),
     "eventType": MessageLookupByLibrary.simpleMessage("Event Type"),
     "events": MessageLookupByLibrary.simpleMessage("Events"),
@@ -343,6 +350,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lastNameRequired": MessageLookupByLibrary.simpleMessage(
       "Last name is required",
     ),
+    "lastVisitDate": MessageLookupByLibrary.simpleMessage("Last visit"),
     "later": MessageLookupByLibrary.simpleMessage("Later"),
     "locationPermissionRequired": MessageLookupByLibrary.simpleMessage(
       "Location permission is required",
@@ -426,12 +434,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "noVeilleConcurrentielleDesc": MessageLookupByLibrary.simpleMessage(
       "No competitive watch entries found for this client",
     ),
+    "noVisitsYet": MessageLookupByLibrary.simpleMessage("No visits yet"),
     "note": MessageLookupByLibrary.simpleMessage("Note"),
     "notePlaceholder": MessageLookupByLibrary.simpleMessage("Enter the note"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "obj": MessageLookupByLibrary.simpleMessage("Obj"),
     "observations": MessageLookupByLibrary.simpleMessage("Observations"),
-    "offerDetailsTitle": m1,
+    "offerDetailsTitle": m2,
     "offersTitle": MessageLookupByLibrary.simpleMessage("Offers"),
     "oldPassword": MessageLookupByLibrary.simpleMessage("Old Password"),
     "oldPasswordPlaceholder": MessageLookupByLibrary.simpleMessage(
@@ -505,6 +514,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
     "status": MessageLookupByLibrary.simpleMessage("Status"),
     "supervisorRole": MessageLookupByLibrary.simpleMessage("Supervisor"),
+    "supplier": MessageLookupByLibrary.simpleMessage("Supplier"),
     "system": MessageLookupByLibrary.simpleMessage("System"),
     "today": MessageLookupByLibrary.simpleMessage("Today"),
     "todoCreateNewEvent": MessageLookupByLibrary.simpleMessage(
@@ -533,7 +543,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalRest": MessageLookupByLibrary.simpleMessage("Total Rest For Payment"),
     "totalTtc": MessageLookupByLibrary.simpleMessage("Total TTC"),
     "tourAllPlans": MessageLookupByLibrary.simpleMessage("All Plans"),
-    "tourClient": m2,
+    "tourClient": m3,
     "tourCompletedPlans": MessageLookupByLibrary.simpleMessage(
       "Completed Plans",
     ),
@@ -637,14 +647,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "tourInProgressStatus": MessageLookupByLibrary.simpleMessage("In Progress"),
     "tourPendingPlans": MessageLookupByLibrary.simpleMessage("Pending Plans"),
     "tourPendingStatus": MessageLookupByLibrary.simpleMessage("Pending"),
-    "tourProgress": m3,
+    "tourProgress": m4,
     "tourSearchPerCommune": MessageLookupByLibrary.simpleMessage(
       "Search per commune",
     ),
     "tourSearchPerWilaya": MessageLookupByLibrary.simpleMessage(
       "Search per wilaya",
     ),
-    "tourValidationClientLabelNumber": m4,
+    "tourValidationClientLabelNumber": m5,
     "tourValidationPlanBy": MessageLookupByLibrary.simpleMessage(
       "Tour Plan, By:",
     ),
@@ -670,6 +680,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "visitAlreadyEntered": MessageLookupByLibrary.simpleMessage(
       "The visit is already entered",
     ),
+    "visitCount": MessageLookupByLibrary.simpleMessage("Visits"),
     "visitCreationClientLabel": MessageLookupByLibrary.simpleMessage("Client"),
     "visitCreationClientPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Select a client",
@@ -687,11 +698,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "visitCreationInProgressTitle": MessageLookupByLibrary.simpleMessage(
       "The Creation Of The Visit Is In Progress",
     ),
-    "visitCreationOutsideAuthorizedRadius": m5,
+    "visitCreationOutsideAuthorizedRadius": m6,
     "visitCreationRapportLabel": MessageLookupByLibrary.simpleMessage(
       "Rapport",
     ),
-    "visitCreationRapportMinCharError": m6,
+    "visitCreationRapportMinCharError": m7,
     "visitCreationRapportPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Enter the rapport of the visit",
     ),

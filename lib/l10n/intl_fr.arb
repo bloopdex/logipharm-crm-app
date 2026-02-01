@@ -8,6 +8,23 @@
   "@confirm": {
     "description": "Confirmer"
   },
+  "confirmClientTitle": "Confirmer le client",
+  "@confirmClientTitle": {
+    "description": "Titre de la boîte de dialogue pour confirmer le client sélectionné pour la commande"
+  },
+  "confirmClientMessage": "Êtes-vous sûr de vouloir passer la commande pour : {clientName}, avec {productCount} produits ?",
+  "@confirmClientMessage": {
+    "description": "Confirmer le client sélectionné et le nombre de produits avant de valider la commande",
+    "placeholders": {
+      "clientName": {
+        "description": "Nom complet du client sélectionné"
+      },
+      "productCount": {
+        "description": "Nombre de produits dans le panier",
+        "type": "int"
+      }
+    }
+  },
   "back": "Retour",
   "@back": {
     "description": "Retour"
@@ -670,6 +687,18 @@
   "@visitAlreadyEntered": {
     "description": "La visite est déjà entrée"
   },
+  "lastVisitDate": "Dernière visite",
+  "@lastVisitDate": {
+    "description": "Date de la dernière visite"
+  },
+  "visitCount": "Visites",
+  "@visitCount": {
+    "description": "Nombre de visites"
+  },
+  "noVisitsYet": "Aucune visite",
+  "@noVisitsYet": {
+    "description": "Aucune visite"
+  },
   "visitDetailsTitle": "Détails de la visite",
   "@visitDetailsTitle": {
     "description": "Détails de la visite"
@@ -1209,6 +1238,10 @@
   "grossiste": "Grossiste",
   "@grossiste": {
     "description": "Grossiste"
+  },
+  "supplier": "Fournisseur",
+  "@supplier": {
+    "description": "Fournisseur"
   },
   "noGrossiste": "Pas de grossiste",
   "@noGrossiste": {

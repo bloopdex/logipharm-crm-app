@@ -63,6 +63,7 @@ import 'features/tour-plan/core/controller.dart';
 import 'features/visits/bloc/contact_type_cubit.dart';
 import 'features/visits/bloc/visit-creation/visit_creation_cubit.dart';
 import 'features/contacts/bloc/specialite_lov_cubit.dart';
+import 'features/clients/blocs/fournisseur_lov/fournisseur_lov_cubit.dart';
 import 'l10n/l10n.dart';
 import 'logic/auth/auth_bloc.dart';
 import 'logic/counter_cubit.dart';
@@ -463,6 +464,8 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<ClaimMotifCubit>(create: (context) => ClaimMotifCubit()),
           BlocProvider<SpecialiteLovCubit>(
               create: (context) => SpecialiteLovCubit()),
+          BlocProvider<FournisseurLovCubit>(
+              create: (context) => FournisseurLovCubit()),
           BlocProvider<ClientDetailsCubit>(
               create: (context) => ClientDetailsCubit()),
           BlocProvider<MotifVisitCubit>(create: (context) => MotifVisitCubit()),
