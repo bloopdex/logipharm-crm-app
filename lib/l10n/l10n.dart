@@ -4077,9 +4077,24 @@ class S {
     );
   }
 
+  /// `No products found`
+  String get emptyProducts {
+    return Intl.message(
+      'No products found',
+      name: 'emptyProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Paliers`
   String get paliersTitle {
     return Intl.message('Paliers', name: 'paliersTitle', desc: '', args: []);
+  }
+
+  /// `Products`
+  String get productsTitle {
+    return Intl.message('Products', name: 'productsTitle', desc: '', args: []);
   }
 
   /// `Reference`
@@ -4135,6 +4150,31 @@ class S {
   /// `Value`
   String get labelValue {
     return Intl.message('Value', name: 'labelValue', desc: '', args: []);
+  }
+
+  /// `Product Name`
+  String get labelProductName {
+    return Intl.message(
+      'Product Name',
+      name: 'labelProductName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product ID`
+  String get labelProductId {
+    return Intl.message(
+      'Product ID',
+      name: 'labelProductId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lab Code`
+  String get labelLabCode {
+    return Intl.message('Lab Code', name: 'labelLabCode', desc: '', args: []);
   }
 
   /// `Laboratory`

@@ -32,6 +32,7 @@ mixin _$OfferDto {
   String? get labo => throw _privateConstructorUsedError;
   String? get tiers => throw _privateConstructorUsedError;
   String? get terType => throw _privateConstructorUsedError;
+  List<ProductDto>? get products => throw _privateConstructorUsedError;
 
   /// Create a copy of OfferDto
   /// with the given fields replaced by the non-null parameter values.
@@ -59,7 +60,8 @@ abstract class $OfferDtoCopyWith<$Res> {
       num? montantConsom,
       String? labo,
       String? tiers,
-      String? terType});
+      String? terType,
+      List<ProductDto>? products});
 }
 
 /// @nodoc
@@ -91,6 +93,7 @@ class _$OfferDtoCopyWithImpl<$Res, $Val extends OfferDto>
     Object? labo = freezed,
     Object? tiers = freezed,
     Object? terType = freezed,
+    Object? products = freezed,
   }) {
     return _then(_value.copyWith(
       companyId: freezed == companyId
@@ -149,6 +152,10 @@ class _$OfferDtoCopyWithImpl<$Res, $Val extends OfferDto>
           ? _value.terType
           : terType // ignore: cast_nullable_to_non_nullable
               as String?,
+      products: freezed == products
+          ? _value.products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductDto>?,
     ) as $Val);
   }
 }
@@ -175,7 +182,8 @@ abstract class _$$OfferDtoImplCopyWith<$Res>
       num? montantConsom,
       String? labo,
       String? tiers,
-      String? terType});
+      String? terType,
+      List<ProductDto>? products});
 }
 
 /// @nodoc
@@ -205,6 +213,7 @@ class __$$OfferDtoImplCopyWithImpl<$Res>
     Object? labo = freezed,
     Object? tiers = freezed,
     Object? terType = freezed,
+    Object? products = freezed,
   }) {
     return _then(_$OfferDtoImpl(
       companyId: freezed == companyId
@@ -263,6 +272,10 @@ class __$$OfferDtoImplCopyWithImpl<$Res>
           ? _value.terType
           : terType // ignore: cast_nullable_to_non_nullable
               as String?,
+      products: freezed == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductDto>?,
     ));
   }
 }
@@ -284,7 +297,9 @@ class _$OfferDtoImpl implements _OfferDto {
       this.montantConsom,
       this.labo,
       this.tiers,
-      this.terType});
+      this.terType,
+      final List<ProductDto>? products})
+      : _products = products;
 
   @override
   final int? companyId;
@@ -316,10 +331,19 @@ class _$OfferDtoImpl implements _OfferDto {
   final String? tiers;
   @override
   final String? terType;
+  final List<ProductDto>? _products;
+  @override
+  List<ProductDto>? get products {
+    final value = _products;
+    if (value == null) return null;
+    if (_products is EqualUnmodifiableListView) return _products;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'OfferDto(companyId: $companyId, id: $id, ref: $ref, type: $type, labCode: $labCode, remarque: $remarque, reference: $reference, debut: $debut, fin: $fin, montant: $montant, montantConsom: $montantConsom, labo: $labo, tiers: $tiers, terType: $terType)';
+    return 'OfferDto(companyId: $companyId, id: $id, ref: $ref, type: $type, labCode: $labCode, remarque: $remarque, reference: $reference, debut: $debut, fin: $fin, montant: $montant, montantConsom: $montantConsom, labo: $labo, tiers: $tiers, terType: $terType, products: $products)';
   }
 
   @override
@@ -344,7 +368,8 @@ class _$OfferDtoImpl implements _OfferDto {
                 other.montantConsom == montantConsom) &&
             (identical(other.labo, labo) || other.labo == labo) &&
             (identical(other.tiers, tiers) || other.tiers == tiers) &&
-            (identical(other.terType, terType) || other.terType == terType));
+            (identical(other.terType, terType) || other.terType == terType) &&
+            const DeepCollectionEquality().equals(other._products, _products));
   }
 
   @override
@@ -363,7 +388,8 @@ class _$OfferDtoImpl implements _OfferDto {
       montantConsom,
       labo,
       tiers,
-      terType);
+      terType,
+      const DeepCollectionEquality().hash(_products));
 
   /// Create a copy of OfferDto
   /// with the given fields replaced by the non-null parameter values.
@@ -389,7 +415,8 @@ abstract class _OfferDto implements OfferDto {
       final num? montantConsom,
       final String? labo,
       final String? tiers,
-      final String? terType}) = _$OfferDtoImpl;
+      final String? terType,
+      final List<ProductDto>? products}) = _$OfferDtoImpl;
 
   @override
   int? get companyId;
@@ -419,6 +446,8 @@ abstract class _OfferDto implements OfferDto {
   String? get tiers;
   @override
   String? get terType;
+  @override
+  List<ProductDto>? get products;
 
   /// Create a copy of OfferDto
   /// with the given fields replaced by the non-null parameter values.

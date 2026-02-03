@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'product_dto.dart';
 
 part 'offer_dto.freezed.dart';
 part 'offer_dto.g.dart';
@@ -21,6 +22,7 @@ class OfferDto with _$OfferDto {
     String? labo,
     String? tiers,
     String? terType,
+    List<ProductDto>? products,
   }) = _OfferDto;
 
   factory OfferDto.fromJson(Map<String, dynamic> json) {

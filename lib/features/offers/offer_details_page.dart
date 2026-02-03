@@ -6,8 +6,10 @@ import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit/paliers_cubit.dart';
+import 'cubit/products_cubit.dart';
 import 'models/offer_dto.dart';
 import 'models/palier_dto.dart';
+import 'models/product_dto.dart';
 
 class OfferDetailsPage extends StatelessWidget {
   const OfferDetailsPage({super.key, required this.offer});
@@ -15,8 +17,11 @@ class OfferDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => OfferPaliersCubit()..load(offer.id ?? 0),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => OfferPaliersCubit()..load(offer.id ?? 0)),
+        BlocProvider(create: (_) => OfferProductsCubit()..load(offer.id ?? 0)),
+      ],
       child: _OfferDetailsView(offer: offer),
     );
   }
@@ -36,18 +41,69 @@ class _OfferDetailsView extends StatelessWidget {
         ),
         leading: BackButton(onPressed: () => Navigator.of(context).pop()),
       ),
-      body: BlocBuilder<OfferPaliersCubit, OfferPaliersState>(
-        builder: (context, state) => state.maybeWhen(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (msg) => _ErrorRetry(
-            message: msg,
-            onRetry: () =>
-                context.read<OfferPaliersCubit>().load(offer.id ?? 0),
+      body: ListView(
+        padding: EdgeInsets.all(kPaddingMd2),
+        children: [
+          _OfferHeader(offer: offer),
+          const SizedBox(height: 12),
+          BlocBuilder<OfferPaliersCubit, OfferPaliersState>(
+            builder: (context, state) => state.maybeWhen(
+              loading: () => const Card(
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+              ),
+              error: (msg) => Card(
+                child: Padding(
+                  padding: EdgeInsets.all(kPaddingMd2),
+                  child: _ErrorRetry(
+                    message: msg,
+                    onRetry: () =>
+                        context.read<OfferPaliersCubit>().load(offer.id ?? 0),
+                  ),
+                ),
+              ),
+              empty: () => Card(
+                child: Padding(
+                  padding: EdgeInsets.all(kPaddingMd2),
+                  child: Text(context.i10n.emptyPaliers),
+                ),
+              ),
+              loaded: (paliers) => _PaliersCard(paliers: paliers),
+              orElse: () => const SizedBox.shrink(),
+            ),
           ),
-          empty: () => Center(child: Text(context.i10n.emptyPaliers)),
-          loaded: (paliers) => _DetailsContent(offer: offer, paliers: paliers),
-          orElse: () => const SizedBox.shrink(),
-        ),
+          const SizedBox(height: 12),
+          BlocBuilder<OfferProductsCubit, OfferProductsState>(
+            builder: (context, state) => state.maybeWhen(
+              loading: () => const Card(
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+              ),
+              error: (msg) => Card(
+                child: Padding(
+                  padding: EdgeInsets.all(kPaddingMd2),
+                  child: _ErrorRetry(
+                    message: msg,
+                    onRetry: () =>
+                        context.read<OfferProductsCubit>().load(offer.id ?? 0),
+                  ),
+                ),
+              ),
+              empty: () => Card(
+                child: Padding(
+                  padding: EdgeInsets.all(kPaddingMd2),
+                  child: Text(context.i10n.emptyProducts),
+                ),
+              ),
+              loaded: (products) => _ProductsCard(products: products),
+              orElse: () => const SizedBox.shrink(),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -70,43 +126,66 @@ class _ErrorRetry extends StatelessWidget {
   }
 }
 
-class _DetailsContent extends StatelessWidget {
-  const _DetailsContent({required this.offer, required this.paliers});
-  final OfferDto offer;
+class _PaliersCard extends StatelessWidget {
+  const _PaliersCard({required this.paliers});
   final List<PalierDto> paliers;
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.all(kPaddingMd2),
-      children: [
-        _OfferHeader(offer: offer),
-        const SizedBox(height: 12),
-        Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          child: Padding(
-            padding: EdgeInsets.all(kPaddingMd2),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  context.i10n.paliersTitle,
-                  style: context.textTheme.titleMedium?.copyWith(
-                    color: context.theme.colorScheme.primary,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                ...paliers.map((p) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6.0),
-                      child: _PalierRow(p: p),
-                    )),
-              ],
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: EdgeInsets.all(kPaddingMd2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.i10n.paliersTitle,
+              style: context.textTheme.titleMedium?.copyWith(
+                color: context.theme.colorScheme.primary,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-          ),
-        )
-      ],
+            const SizedBox(height: 8),
+            ...paliers.map((p) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: _PalierRow(p: p),
+                )),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ProductsCard extends StatelessWidget {
+  const _ProductsCard({required this.products});
+  final List<ProductDto> products;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: EdgeInsets.all(kPaddingMd2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.i10n.productsTitle,
+              style: context.textTheme.titleMedium?.copyWith(
+                color: context.theme.colorScheme.primary,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 8),
+            ...products.map((p) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: _ProductRow(p: p),
+                )),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -178,12 +257,6 @@ class _OfferHeader extends StatelessWidget {
     } catch (_) {
       return iso;
     }
-  }
-
-  String _money(num? value) {
-    if (value == null) return '-';
-    final f = NumberFormat.currency(symbol: 'DA', decimalDigits: 0);
-    return f.format(value);
   }
 }
 
@@ -267,6 +340,48 @@ class _LabelValue extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ProductRow extends StatelessWidget {
+  const _ProductRow({required this.p});
+  final ProductDto p;
+  @override
+  Widget build(BuildContext context) {
+    final primary = context.theme.colorScheme.primary;
+    return Container(
+      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      decoration: BoxDecoration(
+        color: context.theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: context.theme.dividerColor.withOpacity(.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _LabelValue(
+            label: context.i10n.labelProductName,
+            value: (p.productName ?? '-'),
+            color: primary,
+          ),
+          const SizedBox(height: 6),
+          _LabelValue(
+            label: context.i10n.labelProductId,
+            value: (p.productId?.toString() ?? '-'),
+            color: primary,
+          ),
+          if (p.labCode != null && p.labCode!.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            _LabelValue(
+              label: context.i10n.labelLabCode,
+              value: p.labCode!,
+              color: primary,
+            ),
+          ],
+        ],
+      ),
     );
   }
 }

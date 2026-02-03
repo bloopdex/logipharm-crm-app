@@ -1,8 +1,8 @@
-import 'package:crm/features/auth/services/auth.repository.dart';
 import 'package:crm/shared/services/helpers/dio.helper.dart';
 
 import 'models/offer_dto.dart';
 import 'models/palier_dto.dart';
+import 'models/product_dto.dart';
 
 class OffersRepository {
   const OffersRepository();
@@ -28,21 +28,33 @@ class OffersRepository {
 
   Future<List<PalierDto>> getPaliers({
     required String authToken,
-    required int companyId,
     required int offerId,
   }) async {
     final res = await DioHelper.getData(
       url: '/offers/$offerId/paliers',
       token: authToken,
-      query: {
-        'companyId': companyId,
-      },
     );
 
     final data = res.data;
     final list = _extractList(data);
     return list
         .map((e) => PalierDto.fromJson(Map<String, dynamic>.from(e)))
+        .toList();
+  }
+
+  Future<List<ProductDto>> getProducts({
+    required String authToken,
+    required int offerId,
+  }) async {
+    final res = await DioHelper.getData(
+      url: '/offers/$offerId/products',
+      token: authToken,
+    );
+
+    final data = res.data;
+    final list = _extractList(data);
+    return list
+        .map((e) => ProductDto.fromJson(Map<String, dynamic>.from(e)))
         .toList();
   }
 
@@ -60,12 +72,5 @@ class OffersRepository {
       if (content is List) return content;
     }
     return [];
-  }
-
-  // Convenience to build with stored creds when used outside DI
-  static Future<(String, int)> get _creds async {
-    final token = await AuthRepository.token;
-    final company = await AuthRepository.companyId;
-    return ((token ?? ''), (company ?? 0));
   }
 }

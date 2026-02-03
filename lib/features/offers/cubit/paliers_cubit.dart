@@ -18,14 +18,12 @@ class OfferPaliersCubit extends Cubit<OfferPaliersState> {
     emit(const OfferPaliersState.loading());
     try {
       final token = await AuthRepository.token;
-      final companyId = await AuthRepository.companyId;
-      if (token == null || companyId == null) {
+      if (token == null) {
         emit(const OfferPaliersState.error('Missing credentials'));
         return;
       }
       final paliers = await _repository.getPaliers(
         authToken: token,
-        companyId: companyId,
         offerId: offerId,
       );
       if (paliers.isEmpty) {

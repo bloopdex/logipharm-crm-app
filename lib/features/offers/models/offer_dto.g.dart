@@ -21,6 +21,9 @@ OfferDto _$OfferDtoFromJson(Map<String, dynamic> json) => OfferDto(
       labo: json['labo'] as String?,
       tiers: json['tiers'] as String?,
       terType: json['terType'] as String?,
+      products: (json['products'] as List<dynamic>?)
+          ?.map((e) => ProductDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$OfferDtoToJson(OfferDto instance) => <String, dynamic>{
@@ -38,4 +41,5 @@ Map<String, dynamic> _$OfferDtoToJson(OfferDto instance) => <String, dynamic>{
       'labo': instance.labo,
       'tiers': instance.tiers,
       'terType': instance.terType,
+      'products': instance.products,
     };
