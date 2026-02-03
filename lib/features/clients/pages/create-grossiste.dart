@@ -1,10 +1,6 @@
-import 'dart:convert';
-
 import 'package:crm/shared/widgets/buttons/button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quill/flutter_quill.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/core.dart';
 import '../blocs/grossiste/grossiste_cubit.dart';
@@ -21,26 +17,19 @@ class CreateGrossistePage extends StatefulWidget {
 }
 
 class _CreateGrossistePageState extends State<CreateGrossistePage> {
-  final QuillController _quillController = QuillController.basic();
-  final FocusNode _quillFocusNode = FocusNode();
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final Map<String, dynamic> grossiste = {};
+  List<int> selectedFournisseurs = [];
+  List<int> initialSelectedFournisseurs = [];
 
   @override
   void initState() {
     super.initState();
-    grossiste['pharmacieId'] = widget.pharmacyId;
-    // Load fournisseur LOV after the first frame
+    // Load fournisseur LOV and existing grossistes
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<FournisseurLovCubit>().load();
+      context.read<GrossisteCubit>().get(pharmacyId: widget.pharmacyId);
     });
-  }
-
-  @override
-  void dispose() {
-    _quillFocusNode.dispose();
-    super.dispose();
   }
 
   @override
@@ -50,7 +39,15 @@ class _CreateGrossistePageState extends State<CreateGrossistePage> {
         state.maybeWhen(
           orElse: () {},
           loaded: (grossistes) {
-            context.pop();
+            // Extract fournisseur IDs from existing grossistes only on initial load
+            if (initialSelectedFournisseurs.isEmpty && grossistes.isNotEmpty) {
+              setState(() {
+                // Try to extract fournisseur ID from title or other fields
+                // Since we store fournisseur name in titre, we need to match it back
+                initialSelectedFournisseurs = [];
+                selectedFournisseurs = [];
+              });
+            }
           },
           error: (error) {
             context.errorSnackBar(error);
@@ -72,138 +69,160 @@ class _CreateGrossistePageState extends State<CreateGrossistePage> {
             context.i10n.addGrossiste,
             style: context.textTheme.headlineMedium,
           ),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(160.h),
-            child: QuillSimpleToolbar(
-                controller: _quillController,
-                config: QuillSimpleToolbarConfig(
-                  showAlignmentButtons: true,
-                  showBackgroundColorButton: false,
-                  showColorButton: false,
-                  showCodeBlock: false,
-                  showQuote: false,
-                  showLink: false,
-                  showClearFormat: false,
-                  showInlineCode: false,
-                  showListCheck: false,
-                  showJustifyAlignment: false,
-                  showHeaderStyle: false,
-                  showSearchButton: false,
-                  showFontFamily: false,
-                )),
-          ),
         ),
         body: Form(
           key: _formKey,
           child: Container(
-              constraints: BoxConstraints(
-                maxHeight: context.height -
-                    context.appBarSize -
-                    context.paddingBottom -
-                    160.h,
-                minHeight: context.height -
-                    context.appBarSize -
-                    context.paddingBottom -
-                    160.h,
-                maxWidth: context.width,
-                minWidth: context.width,
-              ),
-              child: Column(
-                children: [
-                  const Divider(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: kPaddingLg1,
-                      vertical: kPaddingSm1,
-                    ),
-                    child:
-                        BlocBuilder<FournisseurLovCubit, FournisseurLovState>(
-                      builder: (context, state) {
-                        return state.maybeWhen(
-                          loading: () => const Center(child: Loader()),
-                          error: (message) => Text(
+            constraints: BoxConstraints(
+              maxHeight:
+                  context.height - context.appBarSize - context.paddingBottom,
+              minHeight:
+                  context.height - context.appBarSize - context.paddingBottom,
+              maxWidth: context.width,
+              minWidth: context.width,
+            ),
+            child: Column(
+              children: [
+                const Divider(),
+                Expanded(
+                  child: BlocBuilder<FournisseurLovCubit, FournisseurLovState>(
+                    builder: (context, fournisseurState) {
+                      return fournisseurState.maybeWhen(
+                        loading: () => const Center(child: Loader()),
+                        error: (message) => Center(
+                          child: Text(
                             'Error loading suppliers: $message',
                             style: TextStyle(color: kCardinal),
                           ),
-                          loaded: (fournisseurs) {
-                            return DropdownButtonFormField<int>(
-                              decoration: InputDecoration(
-                                labelText: context.i10n.supplier,
-                                labelStyle: context.textTheme.bodyLarge,
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(kPaddingSm3),
-                                ),
-                              ),
-                              value: grossiste['fournisseurId'],
-                              onChanged: (int? value) {
-                                setState(() {
-                                  grossiste['fournisseurId'] = value;
-                                  // Store the fournisseur name to use as title
-                                  final selected = fournisseurs.firstWhere(
-                                    (f) => f.id == value,
-                                  );
-                                  grossiste['titre'] = selected.label;
-                                });
-                              },
-                              items: fournisseurs
-                                  .map<DropdownMenuItem<int>>(
-                                      (fournisseur) => DropdownMenuItem(
-                                            value: fournisseur.id,
-                                            child: Text(fournisseur.label),
-                                          ))
-                                  .toList(),
-                            );
-                          },
-                          orElse: () => const SizedBox.shrink(),
-                        );
-                      },
-                    ),
-                  ),
-                  const Divider(),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: kPaddingLg1,
-                        vertical: kPaddingSm1,
-                      ),
-                      child: QuillEditor(
-                        focusNode: _quillFocusNode,
-                        controller: _quillController,
-                        config: QuillEditorConfig(
-                          scrollable: true,
-                          autoFocus: false,
-                          placeholder:
-                              context.i10n.visitCreationRapportPlaceholder,
-                          expands: false,
-                          showCursor: true,
                         ),
-                        scrollController: ScrollController(),
-                      ),
-                    ),
+                        loaded: (fournisseurs) {
+                          return BlocBuilder<GrossisteCubit, GrossisteState>(
+                            builder: (context, grossisteState) {
+                              // Initialize selected fournisseurs from loaded grossistes
+                              grossisteState.maybeWhen(
+                                orElse: () {},
+                                loaded: (grossistes) {
+                                  if (selectedFournisseurs.isEmpty &&
+                                      grossistes.isNotEmpty) {
+                                    // Extract fournisseur IDs directly from grossistes
+                                    final matchedIds = grossistes
+                                        .where((g) => g.fournisseurId != null)
+                                        .map((g) => g.fournisseurId!)
+                                        .toList();
+                                    WidgetsBinding.instance
+                                        .addPostFrameCallback((_) {
+                                      if (mounted) {
+                                        setState(() {
+                                          selectedFournisseurs = matchedIds;
+                                        });
+                                      }
+                                    });
+                                  }
+                                },
+                              );
+
+                              return ListView(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: kPaddingLg1,
+                                  vertical: kPaddingSm1,
+                                ),
+                                children: [
+                                  Text(
+                                    context.i10n.supplier,
+                                    style: context.textTheme.headlineMedium,
+                                  ),
+                                  SizedBox(height: kSpacingX2),
+                                  Text(
+                                    'Sélectionnez les grossistes (plusieurs choix possibles)',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  SizedBox(height: kSpacingX3),
+                                  ...fournisseurs.map((fournisseur) {
+                                    final isSelected = selectedFournisseurs
+                                        .contains(fournisseur.id);
+                                    return CheckboxListTile(
+                                      title: Text(fournisseur.label),
+                                      value: isSelected,
+                                      onChanged: (bool? value) {
+                                        setState(() {
+                                          if (value == true) {
+                                            selectedFournisseurs
+                                                .add(fournisseur.id);
+                                          } else {
+                                            selectedFournisseurs
+                                                .remove(fournisseur.id);
+                                          }
+                                        });
+                                      },
+                                      activeColor: kPrimaryColor,
+                                    );
+                                  }),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        orElse: () => const SizedBox.shrink(),
+                      );
+                    },
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: kPaddingLg1,
-                    ),
-                    child: CustomButton(
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: kPaddingLg1,
+                    vertical: kPaddingSm1,
+                  ),
+                  child: BlocBuilder<FournisseurLovCubit, FournisseurLovState>(
+                    builder: (context, fournisseurState) {
+                      return CustomButton(
                         text: context.i10n.save,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            grossiste['rapportText'] =
-                                _quillController.document.toPlainText();
-                            grossiste['rapport'] = json.encode(
-                                _quillController.document.toDelta().toJson());
+
+                            // Build fournisseurs list with id and name
+                            final fournisseurs = fournisseurState.maybeWhen(
+                              loaded: (fournisseursList) {
+                                return selectedFournisseurs
+                                    .map((id) {
+                                      try {
+                                        final fournisseur = fournisseursList
+                                            .firstWhere((f) => f.id == id);
+                                        return {
+                                          'id': fournisseur.id,
+                                          'name': fournisseur.label,
+                                        };
+                                      } catch (e) {
+                                        return null;
+                                      }
+                                    })
+                                    .where((item) => item != null)
+                                    .cast<Map<String, dynamic>>()
+                                    .toList();
+                              },
+                              orElse: () => <Map<String, dynamic>>[],
+                            );
+
+                            final data = {
+                              'pharmacieId': widget.pharmacyId,
+                              'fournisseurs': fournisseurs,
+                              'rapport': '',
+                              'rapportText': '',
+                            };
+
                             context
                                 .read<GrossisteCubit>()
-                                .create(data: grossiste);
+                                .bulkUpdate(data: data);
                             context.pop();
                           }
-                        }),
+                        },
+                      );
+                    },
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

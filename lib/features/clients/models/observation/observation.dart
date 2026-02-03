@@ -13,8 +13,9 @@ class Observation with _$Observation {
     @JsonKey(name: 'type') required int type,
     @JsonKey(name: 'titre') required String title,
     @JsonKey(name: 'motif') String? reason,
-    @JsonKey(name: 'rapport') required String report,
-    @JsonKey(name: 'rapportText') required String reportText,
+    @JsonKey(name: 'rapport') String? report,
+    @JsonKey(name: 'rapportText') String? reportText,
+    @JsonKey(name: 'fournisseurId') int? fournisseurId,
   }) = _Observation;
 
   factory Observation.fromJson(Map<String, dynamic> json) =>

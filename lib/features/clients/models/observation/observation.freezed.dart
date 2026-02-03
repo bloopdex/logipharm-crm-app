@@ -31,9 +31,11 @@ mixin _$Observation {
   @JsonKey(name: 'motif')
   String? get reason => throw _privateConstructorUsedError;
   @JsonKey(name: 'rapport')
-  String get report => throw _privateConstructorUsedError;
+  String? get report => throw _privateConstructorUsedError;
   @JsonKey(name: 'rapportText')
-  String get reportText => throw _privateConstructorUsedError;
+  String? get reportText => throw _privateConstructorUsedError;
+  @JsonKey(name: 'fournisseurId')
+  int? get fournisseurId => throw _privateConstructorUsedError;
 
   /// Serializes this Observation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -57,8 +59,9 @@ abstract class $ObservationCopyWith<$Res> {
       @JsonKey(name: 'type') int type,
       @JsonKey(name: 'titre') String title,
       @JsonKey(name: 'motif') String? reason,
-      @JsonKey(name: 'rapport') String report,
-      @JsonKey(name: 'rapportText') String reportText});
+      @JsonKey(name: 'rapport') String? report,
+      @JsonKey(name: 'rapportText') String? reportText,
+      @JsonKey(name: 'fournisseurId') int? fournisseurId});
 }
 
 /// @nodoc
@@ -81,8 +84,9 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
     Object? type = null,
     Object? title = null,
     Object? reason = freezed,
-    Object? report = null,
-    Object? reportText = null,
+    Object? report = freezed,
+    Object? reportText = freezed,
+    Object? fournisseurId = freezed,
   }) {
     return _then(_value.copyWith(
       pharmacyId: null == pharmacyId
@@ -105,14 +109,18 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
           ? _value.reason
           : reason // ignore: cast_nullable_to_non_nullable
               as String?,
-      report: null == report
+      report: freezed == report
           ? _value.report
           : report // ignore: cast_nullable_to_non_nullable
-              as String,
-      reportText: null == reportText
+              as String?,
+      reportText: freezed == reportText
           ? _value.reportText
           : reportText // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      fournisseurId: freezed == fournisseurId
+          ? _value.fournisseurId
+          : fournisseurId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -131,8 +139,9 @@ abstract class _$$ObservationImplCopyWith<$Res>
       @JsonKey(name: 'type') int type,
       @JsonKey(name: 'titre') String title,
       @JsonKey(name: 'motif') String? reason,
-      @JsonKey(name: 'rapport') String report,
-      @JsonKey(name: 'rapportText') String reportText});
+      @JsonKey(name: 'rapport') String? report,
+      @JsonKey(name: 'rapportText') String? reportText,
+      @JsonKey(name: 'fournisseurId') int? fournisseurId});
 }
 
 /// @nodoc
@@ -153,8 +162,9 @@ class __$$ObservationImplCopyWithImpl<$Res>
     Object? type = null,
     Object? title = null,
     Object? reason = freezed,
-    Object? report = null,
-    Object? reportText = null,
+    Object? report = freezed,
+    Object? reportText = freezed,
+    Object? fournisseurId = freezed,
   }) {
     return _then(_$ObservationImpl(
       pharmacyId: null == pharmacyId
@@ -177,14 +187,18 @@ class __$$ObservationImplCopyWithImpl<$Res>
           ? _value.reason
           : reason // ignore: cast_nullable_to_non_nullable
               as String?,
-      report: null == report
+      report: freezed == report
           ? _value.report
           : report // ignore: cast_nullable_to_non_nullable
-              as String,
-      reportText: null == reportText
+              as String?,
+      reportText: freezed == reportText
           ? _value.reportText
           : reportText // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      fournisseurId: freezed == fournisseurId
+          ? _value.fournisseurId
+          : fournisseurId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -198,8 +212,9 @@ class _$ObservationImpl implements _Observation {
       @JsonKey(name: 'type') required this.type,
       @JsonKey(name: 'titre') required this.title,
       @JsonKey(name: 'motif') this.reason,
-      @JsonKey(name: 'rapport') required this.report,
-      @JsonKey(name: 'rapportText') required this.reportText});
+      @JsonKey(name: 'rapport') this.report,
+      @JsonKey(name: 'rapportText') this.reportText,
+      @JsonKey(name: 'fournisseurId') this.fournisseurId});
 
   factory _$ObservationImpl.fromJson(Map<String, dynamic> json) =>
       _$$ObservationImplFromJson(json);
@@ -221,14 +236,17 @@ class _$ObservationImpl implements _Observation {
   final String? reason;
   @override
   @JsonKey(name: 'rapport')
-  final String report;
+  final String? report;
   @override
   @JsonKey(name: 'rapportText')
-  final String reportText;
+  final String? reportText;
+  @override
+  @JsonKey(name: 'fournisseurId')
+  final int? fournisseurId;
 
   @override
   String toString() {
-    return 'Observation(pharmacyId: $pharmacyId, date: $date, type: $type, title: $title, reason: $reason, report: $report, reportText: $reportText)';
+    return 'Observation(pharmacyId: $pharmacyId, date: $date, type: $type, title: $title, reason: $reason, report: $report, reportText: $reportText, fournisseurId: $fournisseurId)';
   }
 
   @override
@@ -244,13 +262,15 @@ class _$ObservationImpl implements _Observation {
             (identical(other.reason, reason) || other.reason == reason) &&
             (identical(other.report, report) || other.report == report) &&
             (identical(other.reportText, reportText) ||
-                other.reportText == reportText));
+                other.reportText == reportText) &&
+            (identical(other.fournisseurId, fournisseurId) ||
+                other.fournisseurId == fournisseurId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, pharmacyId, date, type, title, reason, report, reportText);
+  int get hashCode => Object.hash(runtimeType, pharmacyId, date, type, title,
+      reason, report, reportText, fournisseurId);
 
   /// Create a copy of Observation
   /// with the given fields replaced by the non-null parameter values.
@@ -275,8 +295,9 @@ abstract class _Observation implements Observation {
           @JsonKey(name: 'type') required final int type,
           @JsonKey(name: 'titre') required final String title,
           @JsonKey(name: 'motif') final String? reason,
-          @JsonKey(name: 'rapport') required final String report,
-          @JsonKey(name: 'rapportText') required final String reportText}) =
+          @JsonKey(name: 'rapport') final String? report,
+          @JsonKey(name: 'rapportText') final String? reportText,
+          @JsonKey(name: 'fournisseurId') final int? fournisseurId}) =
       _$ObservationImpl;
 
   factory _Observation.fromJson(Map<String, dynamic> json) =
@@ -299,10 +320,13 @@ abstract class _Observation implements Observation {
   String? get reason;
   @override
   @JsonKey(name: 'rapport')
-  String get report;
+  String? get report;
   @override
   @JsonKey(name: 'rapportText')
-  String get reportText;
+  String? get reportText;
+  @override
+  @JsonKey(name: 'fournisseurId')
+  int? get fournisseurId;
 
   /// Create a copy of Observation
   /// with the given fields replaced by the non-null parameter values.

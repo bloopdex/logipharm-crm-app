@@ -22,4 +22,15 @@ class GrossisteRepository {
       token: token,
     );
   }
+
+  static Future<Response> bulkUpdate(
+      {required Map<String, dynamic> data}) async {
+    final token = await AuthRepository.token;
+
+    return await DioHelper.postData(
+      url: '/grossiste/bulk',
+      data: data,
+      token: token,
+    );
+  }
 }

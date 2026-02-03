@@ -152,9 +152,7 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                                       );
 
                                   // Reload client details after update
-                                  await context
-                                      .read<ClientsCubit>()
-                                      .load();
+                                  await context.read<ClientsCubit>().load();
 
                                   if (mounted) {
                                     setState(() {
@@ -479,12 +477,15 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                                       padding: EdgeInsets.all(kPaddingSm3),
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: !(statistics.commercialBlockage ?? false)
-                                            ? kSuccessColor
-                                            : kCardinal,
+                                        color:
+                                            !(statistics.commercialBlockage ??
+                                                    false)
+                                                ? kSuccessColor
+                                                : kCardinal,
                                       ),
                                       child: Icon(
-                                        !(statistics.commercialBlockage ?? false)
+                                        !(statistics.commercialBlockage ??
+                                                false)
                                             ? Icons.check
                                             : Icons.error,
                                         color: kWhite,
@@ -507,7 +508,8 @@ class _ClientDetailsPageState extends State<ClientDetailsPage> {
                                       padding: EdgeInsets.all(kPaddingSm3),
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: !(statistics.financialBlockage ?? false)
+                                        color: !(statistics.financialBlockage ??
+                                                false)
                                             ? kSuccessColor
                                             : kCardinal,
                                       ),
@@ -856,8 +858,8 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                                 ),
                                 Expanded(
                                   child: Text(
-                                    MoneyHelper.format(
-                                        context, (statistics.ceiling ?? 0).toDouble()),
+                                    MoneyHelper.format(context,
+                                        (statistics.ceiling ?? 0).toDouble()),
                                     textAlign: TextAlign.end,
                                     style: context.textTheme.headlineMedium!
                                         .copyWith(
@@ -879,8 +881,8 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                                 ),
                                 Expanded(
                                   child: Text(
-                                    MoneyHelper.format(
-                                        context, (statistics.totalHt ?? 0).toDouble()),
+                                    MoneyHelper.format(context,
+                                        (statistics.totalHt ?? 0).toDouble()),
                                     textAlign: TextAlign.end,
                                     style: context.textTheme.headlineMedium!
                                         .copyWith(
@@ -925,8 +927,10 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                                 ),
                                 Expanded(
                                   child: Text(
-                                    MoneyHelper.format(context,
-                                        (statistics.totalPayment ?? 0).toDouble()),
+                                    MoneyHelper.format(
+                                        context,
+                                        (statistics.totalPayment ?? 0)
+                                            .toDouble()),
                                     textAlign: TextAlign.end,
                                     style: context.textTheme.headlineMedium!
                                         .copyWith(
@@ -1044,7 +1048,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                               ],
                             ),
                             subtitle: Text(
-                              observations[index].reportText,
+                              observations[index].reportText ?? '',
                               softWrap: true,
                               maxLines: 3,
                               style: context.textTheme.bodyMedium,
@@ -1212,7 +1216,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                               ],
                             ),
                             subtitle: Text(
-                              grossiste[index].reportText,
+                              grossiste[index].reportText ?? '',
                               softWrap: true,
                               maxLines: 3,
                               style: context.textTheme.bodyMedium,
@@ -1296,7 +1300,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                               ],
                             ),
                             subtitle: Text(
-                              etablissement[index].reportText,
+                              etablissement[index].reportText ?? '',
                               softWrap: true,
                               maxLines: 3,
                               style: context.textTheme.bodyMedium,
@@ -1380,7 +1384,7 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                               ],
                             ),
                             subtitle: Text(
-                              veilles[index].reportText,
+                              veilles[index].reportText ?? '',
                               softWrap: true,
                               maxLines: 3,
                               style: context.textTheme.bodyMedium,

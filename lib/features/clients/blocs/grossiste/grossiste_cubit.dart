@@ -35,4 +35,15 @@ class GrossisteCubit extends Cubit<GrossisteState> {
       emit(GrossisteState.error(e.toString()));
     }
   }
+
+  Future<void> bulkUpdate({required Map<String, dynamic> data}) async {
+    emit(const GrossisteState.loading());
+    try {
+      await GrossisteRepository.bulkUpdate(data: data);
+
+      get(pharmacyId: data['pharmacieId']);
+    } catch (e) {
+      emit(GrossisteState.error(e.toString()));
+    }
+  }
 }
