@@ -396,7 +396,9 @@ class ClientCard extends StatelessWidget {
       },
       leading: ProfileCard(
         text: client.fullName,
-        borderColor: client.prospect ?? false ? kCardinal : kCeruleanBlue,
+        borderColor: client.inactifFlag == true
+            ? kInactiveClient
+            : (client.prospect ?? false ? kCardinal : kCeruleanBlue),
       ),
       title: Text(client.fullName, style: context.textTheme.bodyLarge),
       subtitle: Text(client.address ?? context.i10n.noAddress,

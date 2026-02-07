@@ -1460,5 +1460,13 @@
   "nisPlaceholder": "Enter NIS",
   "@nisPlaceholder": {
     "description": "Enter NIS"
+  },
+  "visitActivationLabel": "Activation Visit",
+  "@visitActivationLabel": {
+    "description": "Activation Visit"
+  },
+  "visitActivationHint": "Check this box to activate this client during this visit",
+  "@visitActivationHint": {
+    "description": "Check this box to activate this client during this visit"
   }
 }

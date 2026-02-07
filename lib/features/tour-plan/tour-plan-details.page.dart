@@ -457,9 +457,11 @@ class TourClientsList extends StatelessWidget {
           },
           leading: ProfileCard(
             text: pharmacy.pharmacy?.fullName ?? "",
-            borderColor: pharmacy.pharmacy?.prospect ?? false
-                ? kCardinal
-                : kCeruleanBlue,
+            borderColor: pharmacy.pharmacy?.inactifFlag == true
+                ? kInactiveClient
+                : (pharmacy.pharmacy?.prospect ?? false
+                    ? kCardinal
+                    : kCeruleanBlue),
           ),
           title: Text(
             pharmacy.pharmacy?.fullName ?? "",

@@ -50,6 +50,7 @@ _$PersonImpl _$$PersonImplFromJson(Map<String, dynamic> json) => _$PersonImpl(
       delegueType: json['delegueType'] as num?,
       lastVisitDate: json['lastVisitDate'] as String?,
       visitCount: (json['visitCount'] as num?)?.toInt(),
+      inactifFlag: json['inactifFlag'] as bool?,
     );
 
 Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
@@ -90,6 +91,7 @@ Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
       'delegueType': instance.delegueType,
       'lastVisitDate': instance.lastVisitDate,
       'visitCount': instance.visitCount,
+      'inactifFlag': instance.inactifFlag,
     };
 
 _$SolvabiliteImpl _$$SolvabiliteImplFromJson(Map<String, dynamic> json) =>

@@ -691,6 +691,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Competitive Watch",
     ),
     "viewDetails": MessageLookupByLibrary.simpleMessage("View Details"),
+    "visitActivationHint": MessageLookupByLibrary.simpleMessage(
+      "Check this box to activate this client during this visit",
+    ),
+    "visitActivationLabel": MessageLookupByLibrary.simpleMessage(
+      "Activation Visit",
+    ),
     "visitAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Visit added successfully",
     ),

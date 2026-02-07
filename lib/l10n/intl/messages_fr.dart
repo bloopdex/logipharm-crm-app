@@ -778,6 +778,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Veille Concurrentielle",
     ),
     "viewDetails": MessageLookupByLibrary.simpleMessage("Voir les détails"),
+    "visitActivationHint": MessageLookupByLibrary.simpleMessage(
+      "Cochez cette case pour activer ce client lors de cette visite",
+    ),
+    "visitActivationLabel": MessageLookupByLibrary.simpleMessage(
+      "Visite d\'activation",
+    ),
     "visitAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Visite ajoutée avec succès",
     ),

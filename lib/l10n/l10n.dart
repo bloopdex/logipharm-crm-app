@@ -4271,6 +4271,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Activation Visit`
+  String get visitActivationLabel {
+    return Intl.message(
+      'Activation Visit',
+      name: 'visitActivationLabel',
+      desc: 'Activation Visit',
+      args: [],
+    );
+  }
+
+  /// `Check this box to activate this client during this visit`
+  String get visitActivationHint {
+    return Intl.message(
+      'Check this box to activate this client during this visit',
+      name: 'visitActivationHint',
+      desc: 'Check this box to activate this client during this visit',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -78,6 +78,7 @@ Color kOverlay = Colors.black.withOpacity(.5);
 
 Color kPrimaryColor = kCeruleanBlue.shade600;
 Color kSuccessColor = kHighland.shade500;
+Color kInactiveClient = kBrightSun.shade600;
 
 Color kTextLight = Colors.white;
 Color kText5 = kCodGray.shade400;

@@ -46,6 +46,7 @@ class Person with _$Person {
     @JsonKey(name: 'delegueType') num? delegueType,
     @JsonKey(name: 'lastVisitDate') String? lastVisitDate,
     @JsonKey(name: 'visitCount') int? visitCount,
+    @JsonKey(name: 'inactifFlag') bool? inactifFlag,
   }) = _Person;
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
@@ -58,7 +59,8 @@ class Solvabilite with _$Solvabilite {
     @JsonKey(name: 'label') required String label,
   }) = _Solvabilite;
 
-  factory Solvabilite.fromJson(Map<String, dynamic> json) => _$SolvabiliteFromJson(json);
+  factory Solvabilite.fromJson(Map<String, dynamic> json) =>
+      _$SolvabiliteFromJson(json);
 }
 
 @freezed
@@ -68,5 +70,6 @@ class ModePaie with _$ModePaie {
     @JsonKey(name: 'label') required String label,
   }) = _ModePaie;
 
-  factory ModePaie.fromJson(Map<String, dynamic> json) => _$ModePaieFromJson(json);
+  factory ModePaie.fromJson(Map<String, dynamic> json) =>
+      _$ModePaieFromJson(json);
 }

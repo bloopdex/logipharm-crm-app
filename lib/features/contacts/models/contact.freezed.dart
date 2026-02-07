@@ -75,7 +75,10 @@ mixin _$Contact {
   @JsonKey(name: 'testeProduit')
   String? get testeProduit => throw _privateConstructorUsedError;
   @JsonKey(name: 'resultatTest')
-  String? get resultatTest => throw _privateConstructorUsedError;
+  String? get resultatTest =>
+      throw _privateConstructorUsedError; // Inactive flag
+  @JsonKey(name: 'inactifFlag')
+  bool? get inactifFlag => throw _privateConstructorUsedError;
 
   /// Serializes this Contact to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -118,7 +121,8 @@ abstract class $ContactCopyWith<$Res> {
       @JsonKey(name: 'specialiteMedecin') String? specialiteMedecin,
       @JsonKey(name: 'typeDiabete') String? typeDiabete,
       @JsonKey(name: 'testeProduit') String? testeProduit,
-      @JsonKey(name: 'resultatTest') String? resultatTest});
+      @JsonKey(name: 'resultatTest') String? resultatTest,
+      @JsonKey(name: 'inactifFlag') bool? inactifFlag});
 }
 
 /// @nodoc
@@ -163,6 +167,7 @@ class _$ContactCopyWithImpl<$Res, $Val extends Contact>
     Object? typeDiabete = freezed,
     Object? testeProduit = freezed,
     Object? resultatTest = freezed,
+    Object? inactifFlag = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -273,6 +278,10 @@ class _$ContactCopyWithImpl<$Res, $Val extends Contact>
           ? _value.resultatTest
           : resultatTest // ignore: cast_nullable_to_non_nullable
               as String?,
+      inactifFlag: freezed == inactifFlag
+          ? _value.inactifFlag
+          : inactifFlag // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -311,7 +320,8 @@ abstract class _$$ContactImplCopyWith<$Res> implements $ContactCopyWith<$Res> {
       @JsonKey(name: 'specialiteMedecin') String? specialiteMedecin,
       @JsonKey(name: 'typeDiabete') String? typeDiabete,
       @JsonKey(name: 'testeProduit') String? testeProduit,
-      @JsonKey(name: 'resultatTest') String? resultatTest});
+      @JsonKey(name: 'resultatTest') String? resultatTest,
+      @JsonKey(name: 'inactifFlag') bool? inactifFlag});
 }
 
 /// @nodoc
@@ -354,6 +364,7 @@ class __$$ContactImplCopyWithImpl<$Res>
     Object? typeDiabete = freezed,
     Object? testeProduit = freezed,
     Object? resultatTest = freezed,
+    Object? inactifFlag = freezed,
   }) {
     return _then(_$ContactImpl(
       id: freezed == id
@@ -464,6 +475,10 @@ class __$$ContactImplCopyWithImpl<$Res>
           ? _value.resultatTest
           : resultatTest // ignore: cast_nullable_to_non_nullable
               as String?,
+      inactifFlag: freezed == inactifFlag
+          ? _value.inactifFlag
+          : inactifFlag // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -498,7 +513,8 @@ class _$ContactImpl implements _Contact {
       @JsonKey(name: 'specialiteMedecin') this.specialiteMedecin,
       @JsonKey(name: 'typeDiabete') this.typeDiabete,
       @JsonKey(name: 'testeProduit') this.testeProduit,
-      @JsonKey(name: 'resultatTest') this.resultatTest});
+      @JsonKey(name: 'resultatTest') this.resultatTest,
+      @JsonKey(name: 'inactifFlag') this.inactifFlag});
 
   factory _$ContactImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContactImplFromJson(json);
@@ -587,10 +603,14 @@ class _$ContactImpl implements _Contact {
   @override
   @JsonKey(name: 'resultatTest')
   final String? resultatTest;
+// Inactive flag
+  @override
+  @JsonKey(name: 'inactifFlag')
+  final bool? inactifFlag;
 
   @override
   String toString() {
-    return 'Contact(id: $id, categorie: $categorie, nom: $nom, prenom: $prenom, wilayaId: $wilayaId, regionLib: $regionLib, vilId: $vilId, delegueId: $delegueId, ville: $ville, adresse: $adresse, email: $email, tel1: $tel1, tel2: $tel2, rcCode: $rcCode, fiscalCode: $fiscalCode, nis: $nis, articleCode: $articleCode, specialite: $specialite, potentiel: $potentiel, connaissanceProduit: $connaissanceProduit, prescripteur: $prescripteur, objections: $objections, medecinTraitant: $medecinTraitant, specialiteMedecin: $specialiteMedecin, typeDiabete: $typeDiabete, testeProduit: $testeProduit, resultatTest: $resultatTest)';
+    return 'Contact(id: $id, categorie: $categorie, nom: $nom, prenom: $prenom, wilayaId: $wilayaId, regionLib: $regionLib, vilId: $vilId, delegueId: $delegueId, ville: $ville, adresse: $adresse, email: $email, tel1: $tel1, tel2: $tel2, rcCode: $rcCode, fiscalCode: $fiscalCode, nis: $nis, articleCode: $articleCode, specialite: $specialite, potentiel: $potentiel, connaissanceProduit: $connaissanceProduit, prescripteur: $prescripteur, objections: $objections, medecinTraitant: $medecinTraitant, specialiteMedecin: $specialiteMedecin, typeDiabete: $typeDiabete, testeProduit: $testeProduit, resultatTest: $resultatTest, inactifFlag: $inactifFlag)';
   }
 
   @override
@@ -640,7 +660,9 @@ class _$ContactImpl implements _Contact {
             (identical(other.testeProduit, testeProduit) ||
                 other.testeProduit == testeProduit) &&
             (identical(other.resultatTest, resultatTest) ||
-                other.resultatTest == resultatTest));
+                other.resultatTest == resultatTest) &&
+            (identical(other.inactifFlag, inactifFlag) ||
+                other.inactifFlag == inactifFlag));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -673,7 +695,8 @@ class _$ContactImpl implements _Contact {
         specialiteMedecin,
         typeDiabete,
         testeProduit,
-        resultatTest
+        resultatTest,
+        inactifFlag
       ]);
 
   /// Create a copy of Contact
@@ -720,8 +743,8 @@ abstract class _Contact implements Contact {
       @JsonKey(name: 'specialiteMedecin') final String? specialiteMedecin,
       @JsonKey(name: 'typeDiabete') final String? typeDiabete,
       @JsonKey(name: 'testeProduit') final String? testeProduit,
-      @JsonKey(name: 'resultatTest')
-      final String? resultatTest}) = _$ContactImpl;
+      @JsonKey(name: 'resultatTest') final String? resultatTest,
+      @JsonKey(name: 'inactifFlag') final bool? inactifFlag}) = _$ContactImpl;
 
   factory _Contact.fromJson(Map<String, dynamic> json) = _$ContactImpl.fromJson;
 
@@ -805,7 +828,10 @@ abstract class _Contact implements Contact {
   String? get testeProduit;
   @override
   @JsonKey(name: 'resultatTest')
-  String? get resultatTest;
+  String? get resultatTest; // Inactive flag
+  @override
+  @JsonKey(name: 'inactifFlag')
+  bool? get inactifFlag;
 
   /// Create a copy of Contact
   /// with the given fields replaced by the non-null parameter values.

@@ -35,6 +35,7 @@ _$ContactImpl _$$ContactImplFromJson(Map<String, dynamic> json) =>
       typeDiabete: json['typeDiabete'] as String?,
       testeProduit: json['testeProduit'] as String?,
       resultatTest: json['resultatTest'] as String?,
+      inactifFlag: json['inactifFlag'] as bool?,
     );
 
 Map<String, dynamic> _$$ContactImplToJson(_$ContactImpl instance) =>
@@ -66,6 +67,7 @@ Map<String, dynamic> _$$ContactImplToJson(_$ContactImpl instance) =>
       'typeDiabete': instance.typeDiabete,
       'testeProduit': instance.testeProduit,
       'resultatTest': instance.resultatTest,
+      'inactifFlag': instance.inactifFlag,
     };
 
 _$ContactCreateUpdateImpl _$$ContactCreateUpdateImplFromJson(
