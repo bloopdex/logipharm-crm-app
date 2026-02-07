@@ -2969,7 +2969,7 @@ class S {
 
   /// `Commune`
   String get commune {
-    return Intl.message('Commune', name: 'commune', desc: '', args: []);
+    return Intl.message('Commune', name: 'commune', desc: 'Commune', args: []);
   }
 
   /// `No commune`
@@ -4205,6 +4205,71 @@ class S {
   /// `Obj`
   String get obj {
     return Intl.message('Obj', name: 'obj', desc: '', args: []);
+  }
+
+  /// `Create CNRC`
+  String get createCnrc {
+    return Intl.message(
+      'Create CNRC',
+      name: 'createCnrc',
+      desc: 'Create CNRC',
+      args: [],
+    );
+  }
+
+  /// `CNRC created successfully`
+  String get cnrcCreatedSuccessfully {
+    return Intl.message(
+      'CNRC created successfully',
+      name: 'cnrcCreatedSuccessfully',
+      desc: 'CNRC created successfully',
+      args: [],
+    );
+  }
+
+  /// `Create`
+  String get create {
+    return Intl.message('Create', name: 'create', desc: 'Create', args: []);
+  }
+
+  /// `Select a commune`
+  String get communePlaceholder {
+    return Intl.message(
+      'Select a commune',
+      name: 'communePlaceholder',
+      desc: 'Select a commune',
+      args: [],
+    );
+  }
+
+  /// `NIF`
+  String get nif {
+    return Intl.message('NIF', name: 'nif', desc: 'NIF', args: []);
+  }
+
+  /// `Enter NIF`
+  String get nifPlaceholder {
+    return Intl.message(
+      'Enter NIF',
+      name: 'nifPlaceholder',
+      desc: 'Enter NIF',
+      args: [],
+    );
+  }
+
+  /// `NIS`
+  String get nis {
+    return Intl.message('NIS', name: 'nis', desc: 'NIS', args: []);
+  }
+
+  /// `Enter NIS`
+  String get nisPlaceholder {
+    return Intl.message(
+      'Enter NIS',
+      name: 'nisPlaceholder',
+      desc: 'Enter NIS',
+      args: [],
+    );
   }
 }
 

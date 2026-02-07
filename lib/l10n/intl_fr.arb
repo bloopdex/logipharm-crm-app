@@ -1420,5 +1420,41 @@
   "myOrders": "Mes commandes",
   "sold": "Vendu",
   "avgRealization": "Avg",
-  "obj": "Obj"
+  "obj": "Obj",
+  "createCnrc": "Créer CNRC",
+  "@createCnrc": {
+    "description": "Créer CNRC"
+  },
+  "cnrcCreatedSuccessfully": "CNRC créé avec succès",
+  "@cnrcCreatedSuccessfully": {
+    "description": "CNRC créé avec succès"
+  },
+  "create": "Créer",
+  "@create": {
+    "description": "Créer"
+  },
+  "commune": "Commune",
+  "@commune": {
+    "description": "Commune"
+  },
+  "communePlaceholder": "Sélectionner une commune",
+  "@communePlaceholder": {
+    "description": "Sélectionner une commune"
+  },
+  "nif": "NIF",
+  "@nif": {
+    "description": "NIF"
+  },
+  "nifPlaceholder": "Entrer le NIF",
+  "@nifPlaceholder": {
+    "description": "Entrer le NIF"
+  },
+  "nis": "NIS",
+  "@nis": {
+    "description": "NIS"
+  },
+  "nisPlaceholder": "Entrer le NIS",
+  "@nisPlaceholder": {
+    "description": "Entrer le NIS"
+  }
 }

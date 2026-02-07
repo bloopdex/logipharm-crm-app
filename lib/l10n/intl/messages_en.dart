@@ -132,9 +132,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Close the current tour plan.",
     ),
     "cnrc": MessageLookupByLibrary.simpleMessage("CNRC"),
+    "cnrcCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "CNRC created successfully",
+    ),
     "colis": MessageLookupByLibrary.simpleMessage("Colis"),
     "color": MessageLookupByLibrary.simpleMessage("Color"),
     "commune": MessageLookupByLibrary.simpleMessage("Commune"),
+    "communePlaceholder": MessageLookupByLibrary.simpleMessage(
+      "Select a commune",
+    ),
     "completed": MessageLookupByLibrary.simpleMessage("Completed"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmClientMessage": m0,
@@ -254,6 +260,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Pharmacist details",
     ),
     "contactsTitle": MessageLookupByLibrary.simpleMessage("Contacts"),
+    "create": MessageLookupByLibrary.simpleMessage("Create"),
+    "createCnrc": MessageLookupByLibrary.simpleMessage("Create CNRC"),
     "createNewHirement": MessageLookupByLibrary.simpleMessage(
       "Create New Hirement",
     ),
@@ -383,6 +391,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "New password is required",
     ),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "nif": MessageLookupByLibrary.simpleMessage("NIF"),
+    "nifPlaceholder": MessageLookupByLibrary.simpleMessage("Enter NIF"),
+    "nis": MessageLookupByLibrary.simpleMessage("NIS"),
+    "nisPlaceholder": MessageLookupByLibrary.simpleMessage("Enter NIS"),
     "noAddress": MessageLookupByLibrary.simpleMessage("No address"),
     "noAnalytics": MessageLookupByLibrary.simpleMessage("No analytics found"),
     "noAnalyticsDesc": MessageLookupByLibrary.simpleMessage(
