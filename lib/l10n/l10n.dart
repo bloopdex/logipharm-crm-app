@@ -1637,6 +1637,16 @@ class S {
     );
   }
 
+  /// `Inactive`
+  String get inactiveClients {
+    return Intl.message(
+      'Inactive',
+      name: 'inactiveClients',
+      desc: 'Inactive Clients',
+      args: [],
+    );
+  }
+
   /// `Events`
   String get events {
     return Intl.message('Events', name: 'events', desc: 'Events', args: []);
@@ -2909,7 +2919,12 @@ class S {
 
   /// `Status`
   String get status {
-    return Intl.message('Status', name: 'status', desc: '', args: []);
+    return Intl.message(
+      'Status',
+      name: 'status',
+      desc: 'Status label',
+      args: [],
+    );
   }
 
   /// `Created By`
@@ -4290,6 +4305,41 @@ class S {
       desc: 'Check this box to activate this client during this visit',
       args: [],
     );
+  }
+
+  /// `Visit Result`
+  String get visitResultLabel {
+    return Intl.message(
+      'Visit Result',
+      name: 'visitResultLabel',
+      desc: 'Visit result dropdown label',
+      args: [],
+    );
+  }
+
+  /// `Select visit result`
+  String get selectVisitResult {
+    return Intl.message(
+      'Select visit result',
+      name: 'selectVisitResult',
+      desc: 'Placeholder for visit result dropdown',
+      args: [],
+    );
+  }
+
+  /// `Error loading data`
+  String get errorLoadingData {
+    return Intl.message(
+      'Error loading data',
+      name: 'errorLoadingData',
+      desc: 'Error loading data message',
+      args: [],
+    );
+  }
+
+  /// `Phase`
+  String get phase {
+    return Intl.message('Phase', name: 'phase', desc: 'Phase label', args: []);
   }
 }
 

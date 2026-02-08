@@ -708,6 +708,10 @@
   "@prospect": {
     "description": "Prospect"
   },
+  "inactiveClients": "Inactive",
+  "@inactiveClients": {
+    "description": "Inactive Clients"
+  },
   "events": "Events",
   "@events": {
     "description": "Events"
@@ -1468,5 +1472,25 @@
   "visitActivationHint": "Check this box to activate this client during this visit",
   "@visitActivationHint": {
     "description": "Check this box to activate this client during this visit"
+  },
+  "visitResultLabel": "Visit Result",
+  "@visitResultLabel": {
+    "description": "Visit result dropdown label"
+  },
+  "selectVisitResult": "Select visit result",
+  "@selectVisitResult": {
+    "description": "Placeholder for visit result dropdown"
+  },
+  "errorLoadingData": "Error loading data",
+  "@errorLoadingData": {
+    "description": "Error loading data message"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Status label"
+  },
+  "phase": "Phase",
+  "@phase": {
+    "description": "Phase label"
   }
 }

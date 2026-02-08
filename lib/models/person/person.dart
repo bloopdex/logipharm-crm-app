@@ -47,6 +47,8 @@ class Person with _$Person {
     @JsonKey(name: 'lastVisitDate') String? lastVisitDate,
     @JsonKey(name: 'visitCount') int? visitCount,
     @JsonKey(name: 'inactifFlag') bool? inactifFlag,
+    @JsonKey(name: 'status') String? status,
+    @JsonKey(name: 'phase') String? phase,
   }) = _Person;
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);

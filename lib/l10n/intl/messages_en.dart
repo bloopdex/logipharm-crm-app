@@ -284,6 +284,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "emptyProducts": MessageLookupByLibrary.simpleMessage("No products found"),
     "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
     "error": MessageLookupByLibrary.simpleMessage("Error"),
+    "errorLoadingData": MessageLookupByLibrary.simpleMessage(
+      "Error loading data",
+    ),
     "etablissement": MessageLookupByLibrary.simpleMessage("Etablissement"),
     "eventAll": MessageLookupByLibrary.simpleMessage("All Events"),
     "eventCompleted": MessageLookupByLibrary.simpleMessage("Completed"),
@@ -342,6 +345,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "homePendingPlan": MessageLookupByLibrary.simpleMessage("Pending Plan"),
     "homeQuickAddContact": MessageLookupByLibrary.simpleMessage("Add contact"),
     "inProgress": MessageLookupByLibrary.simpleMessage("In Progress"),
+    "inactiveClients": MessageLookupByLibrary.simpleMessage("Inactive"),
     "labelAmount": MessageLookupByLibrary.simpleMessage("Amount"),
     "labelDates": MessageLookupByLibrary.simpleMessage("Dates"),
     "labelLabCode": MessageLookupByLibrary.simpleMessage("Lab Code"),
@@ -481,6 +485,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "pending": MessageLookupByLibrary.simpleMessage("Pending"),
     "pendingEvent": MessageLookupByLibrary.simpleMessage("Pending Event"),
+    "phase": MessageLookupByLibrary.simpleMessage("Phase"),
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
     "phone1": MessageLookupByLibrary.simpleMessage("Phone 1"),
     "phone1Hint": MessageLookupByLibrary.simpleMessage("+213 5x xx xx xx"),
@@ -525,6 +530,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "selectReason": MessageLookupByLibrary.simpleMessage("Select Reason"),
     "selectTime": MessageLookupByLibrary.simpleMessage("Select Time"),
+    "selectVisitResult": MessageLookupByLibrary.simpleMessage(
+      "Select visit result",
+    ),
     "sold": MessageLookupByLibrary.simpleMessage("Sold"),
     "solvability": MessageLookupByLibrary.simpleMessage("Solvability"),
     "start": MessageLookupByLibrary.simpleMessage("Start"),
@@ -846,6 +854,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "visitPrivilegeMissing": MessageLookupByLibrary.simpleMessage(
       "You don\'t have the privilege to create a visit",
     ),
+    "visitResultLabel": MessageLookupByLibrary.simpleMessage("Visit Result"),
     "visitTourIsntOpen": MessageLookupByLibrary.simpleMessage(
       "The tour isn\'t open",
     ),

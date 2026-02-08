@@ -102,7 +102,8 @@ class ClientsCubit extends Cubit<ClientsState> {
       {String searchQuery = "",
       String regionId = "",
       String commune = "",
-      bool? prospect}) async {
+      bool? prospect,
+      bool? inactif}) async {
     try {
       state.maybeWhen(
         loaded: (allClients, filteredClients) {
@@ -150,6 +151,13 @@ class ClientsCubit extends Cubit<ClientsState> {
           if (prospect != null) {
             filteredList = filteredList
                 .where((client) => client.prospect == prospect)
+                .toList();
+          }
+
+          // Filter by inactive status
+          if (inactif != null) {
+            filteredList = filteredList
+                .where((client) => client.inactifFlag == inactif)
                 .toList();
           }
 

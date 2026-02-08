@@ -21,6 +21,7 @@ import '../../tour-plan/models/tour.dart';
 import '../add_client_selection.dart';
 import '../add_contact_selection.dart';
 import '../bloc/contact_type_cubit.dart';
+import '../bloc/visit_result_cubit.dart';
 import '../models/contact_type.dart';
 import '../widgets/selected_entity_header.dart';
 
@@ -894,6 +895,58 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                     contentPadding: EdgeInsets.zero,
                   ),
                   SizedBox(height: kSpacingX3),
+                ],
+
+                // Visit result dropdown - only show for prospects (typeTier == 14)
+                if (pharmacy?.typeTier == '14' && user.companyType == 0) ...[
+                  Text(
+                    context.i10n.visitResultLabel,
+                    style: context.textTheme.bodyMedium,
+                  ),
+                  SizedBox(height: kSpacingX1),
+                  BlocBuilder<VisitResultLovCubit, VisitResultLovState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        orElse: () {
+                          context.read<VisitResultLovCubit>().load();
+                          return const CircularProgressIndicator();
+                        },
+                        loading: () => const CircularProgressIndicator(),
+                        error: (_) => Text(
+                          context.i10n.errorLoadingData,
+                          style:
+                              TextStyle(color: context.theme.colorScheme.error),
+                        ),
+                        loaded: (results) {
+                          return CustomDropDownInput(
+                            data: widget.data,
+                            mapKey: 'visitResult',
+                            items: [
+                              CustomDropDownItem(
+                                label: context.i10n.selectVisitResult,
+                                value: '',
+                              ),
+                              ...results.map(
+                                (result) => CustomDropDownItem(
+                                  label: result.label,
+                                  value: result.id.toString(),
+                                ),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                widget.data['visitResult'] = value;
+                              });
+                              log('Visit result selected: $value');
+                              log('Data map after setState: ${widget.data["visitResult"]}');
+                              widget.onQuillChange?.call();
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  SizedBox(height: kSpacingX5),
                 ],
 
                 // Dynamic visit attributes by selected contact type

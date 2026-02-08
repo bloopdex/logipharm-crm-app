@@ -29,6 +29,20 @@ class VisitCreationCubit extends Cubit<VisitCreationState> {
       'longitude': data['longitude'],
       'latitude': data['latitude'],
     };
+
+    // Include activation visit flag if present
+    if (data['visiteActivation'] == true) {
+      body['visiteActivation'] = true;
+    }
+
+    // Include visit result for prospects if present
+    if (data['visitResult'] != null &&
+        data['visitResult'].toString().isNotEmpty) {
+      body['visitResult'] = data['visitResult'];
+      log('Visit result included: ${data["visitResult"]}');
+    } else {
+      log('Visit result not included: ${data["visitResult"]}');
+    }
     // Include dynamic category-specific visit attributes when present
     const dynamicKeys = [
       // Pharmacie
@@ -78,6 +92,10 @@ class VisitCreationCubit extends Cubit<VisitCreationState> {
     if (data['contactId'] != null) {
       body['contactId'] = data['contactId'];
     }
+
+    log('Final request body keys: ${body.keys.toList()}');
+    log('Visit result in body: ${body.containsKey("visitResult") ? body["visitResult"] : "NOT PRESENT"}');
+
     try {
       final Response response = await VisitsRepository.validate(data: body);
       if (response.statusCode == 200) {

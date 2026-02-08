@@ -325,6 +325,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "endDate": MessageLookupByLibrary.simpleMessage("Date de fin"),
     "error": MessageLookupByLibrary.simpleMessage("Erreur"),
+    "errorLoadingData": MessageLookupByLibrary.simpleMessage(
+      "Erreur de chargement des données",
+    ),
     "etablissement": MessageLookupByLibrary.simpleMessage("Etablissement"),
     "eventAll": MessageLookupByLibrary.simpleMessage("Tous les événements"),
     "eventCompleted": MessageLookupByLibrary.simpleMessage("Terminé"),
@@ -393,6 +396,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Ajouter un contact",
     ),
     "inProgress": MessageLookupByLibrary.simpleMessage("En cours"),
+    "inactiveClients": MessageLookupByLibrary.simpleMessage("Inactifs"),
     "labelAmount": MessageLookupByLibrary.simpleMessage("Montant"),
     "labelDates": MessageLookupByLibrary.simpleMessage("Dates"),
     "labelLabCode": MessageLookupByLibrary.simpleMessage("Code labo"),
@@ -544,6 +548,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pendingEvent": MessageLookupByLibrary.simpleMessage(
       "Événement en attente",
     ),
+    "phase": MessageLookupByLibrary.simpleMessage("Phase"),
     "phone": MessageLookupByLibrary.simpleMessage("Téléphone"),
     "phone1": MessageLookupByLibrary.simpleMessage("Téléphone 1"),
     "phone1Hint": MessageLookupByLibrary.simpleMessage("+213 5x xx xx xx"),
@@ -602,6 +607,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sélectionner une raison",
     ),
     "selectTime": MessageLookupByLibrary.simpleMessage("Sélectionner l\'heure"),
+    "selectVisitResult": MessageLookupByLibrary.simpleMessage(
+      "Sélectionner le résultat de la visite",
+    ),
     "sold": MessageLookupByLibrary.simpleMessage("Vendu"),
     "solvability": MessageLookupByLibrary.simpleMessage("Solvaibilité"),
     "start": MessageLookupByLibrary.simpleMessage("Démarrer"),
@@ -938,6 +946,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "visitPrivilegeMissing": MessageLookupByLibrary.simpleMessage(
       "Vous n\'avez pas le privilège de créer une visite",
+    ),
+    "visitResultLabel": MessageLookupByLibrary.simpleMessage(
+      "Résultat de la visite",
     ),
     "visitTourIsntOpen": MessageLookupByLibrary.simpleMessage(
       "La visite n\'est pas ouverte",

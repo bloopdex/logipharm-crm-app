@@ -51,6 +51,8 @@ _$PersonImpl _$$PersonImplFromJson(Map<String, dynamic> json) => _$PersonImpl(
       lastVisitDate: json['lastVisitDate'] as String?,
       visitCount: (json['visitCount'] as num?)?.toInt(),
       inactifFlag: json['inactifFlag'] as bool?,
+      status: json['status'] as String?,
+      phase: json['phase'] as String?,
     );
 
 Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
@@ -92,6 +94,8 @@ Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
       'lastVisitDate': instance.lastVisitDate,
       'visitCount': instance.visitCount,
       'inactifFlag': instance.inactifFlag,
+      'status': instance.status,
+      'phase': instance.phase,
     };
 
 _$SolvabiliteImpl _$$SolvabiliteImplFromJson(Map<String, dynamic> json) =>

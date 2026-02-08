@@ -803,6 +803,10 @@
   "@prospect": {
     "description": "Prospect"
   },
+  "inactiveClients": "Inactifs",
+  "@inactiveClients": {
+    "description": "Clients inactifs"
+  },
   "events": "Événements",
   "@events": {
     "description": "Événements"
@@ -1464,5 +1468,25 @@
   "visitActivationHint": "Cochez cette case pour activer ce client lors de cette visite",
   "@visitActivationHint": {
     "description": "Cochez cette case pour activer ce client lors de cette visite"
+  },
+  "visitResultLabel": "Résultat de la visite",
+  "@visitResultLabel": {
+    "description": "Libellé du menu déroulant des résultats de visite"
+  },
+  "selectVisitResult": "Sélectionner le résultat de la visite",
+  "@selectVisitResult": {
+    "description": "Placeholder pour le menu déroulant des résultats de visite"
+  },
+  "errorLoadingData": "Erreur de chargement des données",
+  "@errorLoadingData": {
+    "description": "Message d'erreur de chargement"
+  },
+  "status": "Statut",
+  "@status": {
+    "description": "Libellé du statut"
+  },
+  "phase": "Phase",
+  "@phase": {
+    "description": "Libellé de la phase"
   }
 }
