@@ -549,6 +549,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "productsTitle": MessageLookupByLibrary.simpleMessage("Produits"),
     "prospect": MessageLookupByLibrary.simpleMessage("Prospect"),
     "quantity": MessageLookupByLibrary.simpleMessage("Quantité"),
+    "quantitySansUg": MessageLookupByLibrary.simpleMessage("Quantité sans UG"),
+    "quantityUg": MessageLookupByLibrary.simpleMessage("Quantité (UG)"),
     "refused": MessageLookupByLibrary.simpleMessage("Refusé"),
     "region": MessageLookupByLibrary.simpleMessage("Région"),
     "regionPlaceholder": MessageLookupByLibrary.simpleMessage(
@@ -753,6 +755,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Aperçu et validation",
     ),
     "turnover": MessageLookupByLibrary.simpleMessage("Chiffre d\'affaires"),
+    "tva": MessageLookupByLibrary.simpleMessage("TVA"),
     "type": MessageLookupByLibrary.simpleMessage("Type"),
     "unitPrice": MessageLookupByLibrary.simpleMessage("PU"),
     "update": MessageLookupByLibrary.simpleMessage("Mettre à jour"),

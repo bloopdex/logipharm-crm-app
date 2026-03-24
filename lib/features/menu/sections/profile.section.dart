@@ -22,7 +22,8 @@ class ProfileSection extends StatelessWidget {
             leading: ProfileCard(
               text: user.fullName ?? "no-name",
             ),
-            title: Text(user.fullName ?? "no-name", style: context.textTheme.bodyLarge),
+            title: Text(user.fullName ?? "no-name",
+                style: context.textTheme.bodyLarge),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -45,42 +46,6 @@ class ProfileSection extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: context.textTheme.bodyMedium),
-              ],
-            ),
-          ),
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: '${0} DA/',
-                  style: context.textTheme.bodyMedium,
-                ),
-                TextSpan(
-                  text: '${0} DA',
-                  style: context.textTheme.bodySmall,
-                ),
-                TextSpan(
-                  text: ' ${context.i10n.salesThisMonth}',
-                  style: context.textTheme.bodySmall,
-                ),
-              ],
-            ),
-          ),
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: '${0}/',
-                  style: context.textTheme.bodyMedium,
-                ),
-                TextSpan(
-                  text: '${0}',
-                  style: context.textTheme.bodySmall,
-                ),
-                TextSpan(
-                  text: ' ${context.i10n.recrutementThisMonth}',
-                  style: context.textTheme.bodySmall,
-                ),
               ],
             ),
           ),

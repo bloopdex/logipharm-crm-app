@@ -30,8 +30,25 @@ class ProductsCubit extends Cubit<ProductsState> {
 
       ILogger.info('Products loaded: ${response.data}');
 
-      final List<Product> newProducts = (response.data['content'] as List)
-          .map<Product>((product) => Product.fromJson(product))
+      final contentList = response.data['content'];
+      if (contentList == null || contentList is! List) {
+        emit(ProductsState.failure(
+            message: 'Invalid product data format, response data: ${response.data}'));
+        return;
+      }
+
+      final List<Product> newProducts = contentList
+          .map<Product?>((product) {
+            try {
+              return product != null
+                  ? Product.fromJson(product as Map<String, dynamic>)
+                  : null;
+            } catch (e) {
+              ILogger.error('Failed to parse product: $e');
+              return null;
+            }
+          })
+          .whereType<Product>()
           .toList();
 
       _products.clear();
@@ -40,7 +57,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsState.loaded(products: _products));
     } catch (e) {
       ILogger.error('Failed to load products $e');
-      emit(const ProductsState.failure(message: 'Failed to load products'));
+      emit(ProductsState.failure(message: 'Failed to load products $e'));
     }
   }
 
@@ -57,8 +74,25 @@ class ProductsCubit extends Cubit<ProductsState> {
           query: query,
         );
 
-        final List<Product> newProducts = (response.data['content'] as List)
-            .map<Product>((product) => Product.fromJson(product))
+        final contentList = response.data['content'];
+        if (contentList == null || contentList is! List) {
+          emit(const ProductsState.failure(
+              message: 'Invalid product data format'));
+          return;
+        }
+
+        final List<Product> newProducts = contentList
+            .map<Product?>((product) {
+              try {
+                return product != null
+                    ? Product.fromJson(product as Map<String, dynamic>)
+                    : null;
+              } catch (e) {
+                ILogger.error('Failed to parse product: $e');
+                return null;
+              }
+            })
+            .whereType<Product>()
             .toList();
 
         ILogger.info('More products loaded: ${newProducts.length}');
@@ -66,7 +100,8 @@ class ProductsCubit extends Cubit<ProductsState> {
         ILogger.info('Total products: ${_products.length}');
         emit(ProductsState.loaded(products: _products));
       } catch (e) {
-        emit(const ProductsState.failure(message: 'Failed to load more products'));
+        emit(const ProductsState.failure(
+            message: 'Failed to load more products'));
       }
     }
   }

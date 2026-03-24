@@ -24,11 +24,12 @@ class CartProductCard extends StatefulWidget {
 }
 
 class _CartProductCardState extends State<CartProductCard> {
-  late final controller = TextEditingController(text: "${widget.cart.qte}");
+  late final controller = TextEditingController();
   final FocusNode focus = FocusNode();
 
   @override
   void initState() {
+    controller.text = "${widget.cart.qte ?? 0}";
     focus.addListener(() {
       if (focus.hasFocus) controller.clear();
     });
@@ -44,12 +45,12 @@ class _CartProductCardState extends State<CartProductCard> {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: ValueKey(widget.cart.no),
+      key: ValueKey(widget.cart.no ?? 0),
       direction: DismissDirection.endToStart,
       onDismissed: (DismissDirection direction) {
         if (direction == DismissDirection.endToStart) {
           context.read<CartCubit>().deleteItemFromCart({
-            "cpsNo": widget.cart.no,
+            "cpsNo": widget.cart.no ?? 0,
           });
         }
       },
@@ -96,7 +97,7 @@ class _CartProductCardState extends State<CartProductCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.cart.commercialName,
+                      widget.cart.commercialName ?? '-',
                       maxLines: 2,
                       style: context.textTheme.headlineMedium,
                     ),
@@ -116,19 +117,19 @@ class _CartProductCardState extends State<CartProductCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${context.i10n.quantity} : ${widget.cart.qte.toInt()}',
+                              '${context.i10n.quantity} : ${(widget.cart.qteSansUg ?? 0).toInt()}',
                               style: context.textTheme.titleMedium!.copyWith(
                                 fontSize: 18.h,
                               ),
                             ),
                             Text(
-                              '${context.i10n.unitPrice} : ${MoneyHelper.format(context, widget.cart.prixPh)}',
+                              '${context.i10n.unitPrice} : ${MoneyHelper.format(context, widget.cart.prixPh ?? 0)}',
                               style: context.textTheme.titleMedium!.copyWith(
                                 fontSize: 18.h,
                               ),
                             ),
                             Text(
-                              '${context.i10n.ppa} : ${MoneyHelper.format(context, widget.cart.prixPpa)}',
+                              '${context.i10n.ppa} : ${MoneyHelper.format(context, widget.cart.prixPpa ?? 0)}',
                               style: context.textTheme.titleMedium!.copyWith(
                                 fontSize: 18.h,
                               ),
@@ -137,12 +138,13 @@ class _CartProductCardState extends State<CartProductCard> {
                         ),
                         Expanded(
                           child: Text(
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.end,
-                              MoneyHelper.format(context,
-                                  widget.cart.montant?.toDouble() ?? 0.0),
-                              style: context.textTheme.headlineLarge,
-                              textDirection: TextDirection.ltr),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.end,
+                            MoneyHelper.format(context,
+                                widget.cart.montant?.toDouble() ?? 0.0),
+                            style: context.textTheme.headlineLarge,
+                            textDirection: TextDirection.ltr,
+                          ),
                         ),
                       ],
                     )

@@ -3887,6 +3887,31 @@ class S {
     return Intl.message('Quantity', name: 'quantity', desc: '', args: []);
   }
 
+  /// `Quantity (without UG)`
+  String get quantitySansUg {
+    return Intl.message(
+      'Quantity (without UG)',
+      name: 'quantitySansUg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quantity (UG)`
+  String get quantityUg {
+    return Intl.message(
+      'Quantity (UG)',
+      name: 'quantityUg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TVA`
+  String get tva {
+    return Intl.message('TVA', name: 'tva', desc: '', args: []);
+  }
+
   /// `Orders`
   String get orders {
     return Intl.message('Orders', name: 'orders', desc: '', args: []);

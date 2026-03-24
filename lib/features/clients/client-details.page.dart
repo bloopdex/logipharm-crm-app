@@ -661,6 +661,22 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
               Tab(
                 child: Container(
                   constraints: BoxConstraints(
+                    maxWidth: context.width / 3,
+                    minWidth: context.width / 3,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.assignment_rounded),
+                      SizedBox(width: kSpacingX1),
+                      Text(context.i10n.moreDetails),
+                    ],
+                  ),
+                ),
+              ),
+              Tab(
+                child: Container(
+                  constraints: BoxConstraints(
                     maxWidth: context.width * 2 / 5,
                     minWidth: context.width * 2 / 5,
                   ),
@@ -775,28 +791,90 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                   ),
                 ),
               ),
-              Tab(
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: context.width / 3,
-                    minWidth: context.width / 3,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.assignment_rounded),
-                      SizedBox(width: kSpacingX1),
-                      Text(context.i10n.moreDetails),
-                    ],
-                  ),
-                ),
-              ),
             ],
           ),
         ),
         SizedBox(height: kSpacingX3),
         Expanded(
           child: TabBarView(controller: _tabController, children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: widget.onCategoryTap,
+                    behavior: HitTestBehavior.opaque,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          context.i10n.category,
+                          style: context.textTheme.headlineMedium,
+                        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  widget.categoryLabel ??
+                                      context.i10n.noCategory,
+                                  textAlign: TextAlign.end,
+                                  style: context.textTheme.headlineMedium,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ),
+                              SizedBox(width: kSpacingX1),
+                              Icon(Icons.edit,
+                                  size: kSpacingX5, color: kPrimaryColor),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(),
+                  SizedBox(height: kSpacingX3),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        context.i10n.solvability,
+                        style: context.textTheme.headlineMedium,
+                      ),
+                      Expanded(
+                        child: Text(
+                          widget.client.solvabilite?.label ??
+                              context.i10n.noSolvability,
+                          textAlign: TextAlign.end,
+                          style: context.textTheme.headlineMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(),
+                  SizedBox(height: kSpacingX3),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        context.i10n.modePaie,
+                        style: context.textTheme.headlineMedium,
+                      ),
+                      Expanded(
+                        child: Text(
+                          widget.client.modePaie?.label ??
+                              context.i10n.noModePaie,
+                          textAlign: TextAlign.end,
+                          style: context.textTheme.headlineMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
             BlocBuilder<TurnoverCubit, TurnoverState>(
               builder: (context, state) {
                 return state.maybeWhen(
@@ -1394,84 +1472,6 @@ class _ClientOptionsTabState extends State<ClientOptionsTab>
                       );
                     });
               },
-            ),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: widget.onCategoryTap,
-                    behavior: HitTestBehavior.opaque,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          context.i10n.category,
-                          style: context.textTheme.headlineMedium,
-                        ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  widget.categoryLabel ??
-                                      context.i10n.noCategory,
-                                  textAlign: TextAlign.end,
-                                  style: context.textTheme.headlineMedium,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              ),
-                              SizedBox(width: kSpacingX1),
-                              Icon(Icons.edit,
-                                  size: kSpacingX5, color: kPrimaryColor),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Divider(),
-                  SizedBox(height: kSpacingX3),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        context.i10n.solvability,
-                        style: context.textTheme.headlineMedium,
-                      ),
-                      Expanded(
-                        child: Text(
-                          widget.client.solvabilite?.label ??
-                              context.i10n.noSolvability,
-                          textAlign: TextAlign.end,
-                          style: context.textTheme.headlineMedium,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Divider(),
-                  SizedBox(height: kSpacingX3),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        context.i10n.modePaie,
-                        style: context.textTheme.headlineMedium,
-                      ),
-                      Expanded(
-                        child: Text(
-                          widget.client.modePaie?.label ??
-                              context.i10n.noModePaie,
-                          textAlign: TextAlign.end,
-                          style: context.textTheme.headlineMedium,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ),
           ]),
         ),

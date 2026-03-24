@@ -21,23 +21,27 @@ CartItem _$CartItemFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CartItem {
   @JsonKey(name: 'cpsCmpId')
-  int get cpsCmpId => throw _privateConstructorUsedError;
+  int? get cpsCmpId => throw _privateConstructorUsedError;
   @JsonKey(name: 'cpsTerId')
-  int get cpsTerId => throw _privateConstructorUsedError;
+  int? get cpsTerId => throw _privateConstructorUsedError;
   @JsonKey(name: 'cpsTerType')
-  String get cpsTerType => throw _privateConstructorUsedError;
+  String? get cpsTerType => throw _privateConstructorUsedError;
   @JsonKey(name: 'no')
-  int get no => throw _privateConstructorUsedError;
+  int? get no => throw _privateConstructorUsedError;
   @JsonKey(name: 'commercialName')
-  String get commercialName => throw _privateConstructorUsedError;
+  String? get commercialName => throw _privateConstructorUsedError;
   @JsonKey(name: 'datePeremption')
-  DateTime get datePeremption => throw _privateConstructorUsedError;
+  DateTime? get datePeremption => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixPpa')
-  double get prixPpa => throw _privateConstructorUsedError;
+  double? get prixPpa => throw _privateConstructorUsedError;
   @JsonKey(name: 'qte')
-  double get qte => throw _privateConstructorUsedError;
+  double? get qte => throw _privateConstructorUsedError;
+  @JsonKey(name: 'qteSansUg')
+  double? get qteSansUg => throw _privateConstructorUsedError;
+  @JsonKey(name: 'qteUg')
+  double? get qteUg => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixPh')
-  double get prixPh => throw _privateConstructorUsedError;
+  double? get prixPh => throw _privateConstructorUsedError;
   @JsonKey(name: 'txRistourne')
   double? get txRistourne => throw _privateConstructorUsedError;
   @JsonKey(name: 'montant')
@@ -59,15 +63,17 @@ abstract class $CartItemCopyWith<$Res> {
       _$CartItemCopyWithImpl<$Res, CartItem>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'cpsCmpId') int cpsCmpId,
-      @JsonKey(name: 'cpsTerId') int cpsTerId,
-      @JsonKey(name: 'cpsTerType') String cpsTerType,
-      @JsonKey(name: 'no') int no,
-      @JsonKey(name: 'commercialName') String commercialName,
-      @JsonKey(name: 'datePeremption') DateTime datePeremption,
-      @JsonKey(name: 'prixPpa') double prixPpa,
-      @JsonKey(name: 'qte') double qte,
-      @JsonKey(name: 'prixPh') double prixPh,
+      {@JsonKey(name: 'cpsCmpId') int? cpsCmpId,
+      @JsonKey(name: 'cpsTerId') int? cpsTerId,
+      @JsonKey(name: 'cpsTerType') String? cpsTerType,
+      @JsonKey(name: 'no') int? no,
+      @JsonKey(name: 'commercialName') String? commercialName,
+      @JsonKey(name: 'datePeremption') DateTime? datePeremption,
+      @JsonKey(name: 'prixPpa') double? prixPpa,
+      @JsonKey(name: 'qte') double? qte,
+      @JsonKey(name: 'qteSansUg') double? qteSansUg,
+      @JsonKey(name: 'qteUg') double? qteUg,
+      @JsonKey(name: 'prixPh') double? prixPh,
       @JsonKey(name: 'txRistourne') double? txRistourne,
       @JsonKey(name: 'montant') num? montant});
 }
@@ -87,55 +93,65 @@ class _$CartItemCopyWithImpl<$Res, $Val extends CartItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cpsCmpId = null,
-    Object? cpsTerId = null,
-    Object? cpsTerType = null,
-    Object? no = null,
-    Object? commercialName = null,
-    Object? datePeremption = null,
-    Object? prixPpa = null,
-    Object? qte = null,
-    Object? prixPh = null,
+    Object? cpsCmpId = freezed,
+    Object? cpsTerId = freezed,
+    Object? cpsTerType = freezed,
+    Object? no = freezed,
+    Object? commercialName = freezed,
+    Object? datePeremption = freezed,
+    Object? prixPpa = freezed,
+    Object? qte = freezed,
+    Object? qteSansUg = freezed,
+    Object? qteUg = freezed,
+    Object? prixPh = freezed,
     Object? txRistourne = freezed,
     Object? montant = freezed,
   }) {
     return _then(_value.copyWith(
-      cpsCmpId: null == cpsCmpId
+      cpsCmpId: freezed == cpsCmpId
           ? _value.cpsCmpId
           : cpsCmpId // ignore: cast_nullable_to_non_nullable
-              as int,
-      cpsTerId: null == cpsTerId
+              as int?,
+      cpsTerId: freezed == cpsTerId
           ? _value.cpsTerId
           : cpsTerId // ignore: cast_nullable_to_non_nullable
-              as int,
-      cpsTerType: null == cpsTerType
+              as int?,
+      cpsTerType: freezed == cpsTerType
           ? _value.cpsTerType
           : cpsTerType // ignore: cast_nullable_to_non_nullable
-              as String,
-      no: null == no
+              as String?,
+      no: freezed == no
           ? _value.no
           : no // ignore: cast_nullable_to_non_nullable
-              as int,
-      commercialName: null == commercialName
+              as int?,
+      commercialName: freezed == commercialName
           ? _value.commercialName
           : commercialName // ignore: cast_nullable_to_non_nullable
-              as String,
-      datePeremption: null == datePeremption
+              as String?,
+      datePeremption: freezed == datePeremption
           ? _value.datePeremption
           : datePeremption // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      prixPpa: null == prixPpa
+              as DateTime?,
+      prixPpa: freezed == prixPpa
           ? _value.prixPpa
           : prixPpa // ignore: cast_nullable_to_non_nullable
-              as double,
-      qte: null == qte
+              as double?,
+      qte: freezed == qte
           ? _value.qte
           : qte // ignore: cast_nullable_to_non_nullable
-              as double,
-      prixPh: null == prixPh
+              as double?,
+      qteSansUg: freezed == qteSansUg
+          ? _value.qteSansUg
+          : qteSansUg // ignore: cast_nullable_to_non_nullable
+              as double?,
+      qteUg: freezed == qteUg
+          ? _value.qteUg
+          : qteUg // ignore: cast_nullable_to_non_nullable
+              as double?,
+      prixPh: freezed == prixPh
           ? _value.prixPh
           : prixPh // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       txRistourne: freezed == txRistourne
           ? _value.txRistourne
           : txRistourne // ignore: cast_nullable_to_non_nullable
@@ -157,15 +173,17 @@ abstract class _$$CartItemImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'cpsCmpId') int cpsCmpId,
-      @JsonKey(name: 'cpsTerId') int cpsTerId,
-      @JsonKey(name: 'cpsTerType') String cpsTerType,
-      @JsonKey(name: 'no') int no,
-      @JsonKey(name: 'commercialName') String commercialName,
-      @JsonKey(name: 'datePeremption') DateTime datePeremption,
-      @JsonKey(name: 'prixPpa') double prixPpa,
-      @JsonKey(name: 'qte') double qte,
-      @JsonKey(name: 'prixPh') double prixPh,
+      {@JsonKey(name: 'cpsCmpId') int? cpsCmpId,
+      @JsonKey(name: 'cpsTerId') int? cpsTerId,
+      @JsonKey(name: 'cpsTerType') String? cpsTerType,
+      @JsonKey(name: 'no') int? no,
+      @JsonKey(name: 'commercialName') String? commercialName,
+      @JsonKey(name: 'datePeremption') DateTime? datePeremption,
+      @JsonKey(name: 'prixPpa') double? prixPpa,
+      @JsonKey(name: 'qte') double? qte,
+      @JsonKey(name: 'qteSansUg') double? qteSansUg,
+      @JsonKey(name: 'qteUg') double? qteUg,
+      @JsonKey(name: 'prixPh') double? prixPh,
       @JsonKey(name: 'txRistourne') double? txRistourne,
       @JsonKey(name: 'montant') num? montant});
 }
@@ -183,55 +201,65 @@ class __$$CartItemImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cpsCmpId = null,
-    Object? cpsTerId = null,
-    Object? cpsTerType = null,
-    Object? no = null,
-    Object? commercialName = null,
-    Object? datePeremption = null,
-    Object? prixPpa = null,
-    Object? qte = null,
-    Object? prixPh = null,
+    Object? cpsCmpId = freezed,
+    Object? cpsTerId = freezed,
+    Object? cpsTerType = freezed,
+    Object? no = freezed,
+    Object? commercialName = freezed,
+    Object? datePeremption = freezed,
+    Object? prixPpa = freezed,
+    Object? qte = freezed,
+    Object? qteSansUg = freezed,
+    Object? qteUg = freezed,
+    Object? prixPh = freezed,
     Object? txRistourne = freezed,
     Object? montant = freezed,
   }) {
     return _then(_$CartItemImpl(
-      cpsCmpId: null == cpsCmpId
+      cpsCmpId: freezed == cpsCmpId
           ? _value.cpsCmpId
           : cpsCmpId // ignore: cast_nullable_to_non_nullable
-              as int,
-      cpsTerId: null == cpsTerId
+              as int?,
+      cpsTerId: freezed == cpsTerId
           ? _value.cpsTerId
           : cpsTerId // ignore: cast_nullable_to_non_nullable
-              as int,
-      cpsTerType: null == cpsTerType
+              as int?,
+      cpsTerType: freezed == cpsTerType
           ? _value.cpsTerType
           : cpsTerType // ignore: cast_nullable_to_non_nullable
-              as String,
-      no: null == no
+              as String?,
+      no: freezed == no
           ? _value.no
           : no // ignore: cast_nullable_to_non_nullable
-              as int,
-      commercialName: null == commercialName
+              as int?,
+      commercialName: freezed == commercialName
           ? _value.commercialName
           : commercialName // ignore: cast_nullable_to_non_nullable
-              as String,
-      datePeremption: null == datePeremption
+              as String?,
+      datePeremption: freezed == datePeremption
           ? _value.datePeremption
           : datePeremption // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      prixPpa: null == prixPpa
+              as DateTime?,
+      prixPpa: freezed == prixPpa
           ? _value.prixPpa
           : prixPpa // ignore: cast_nullable_to_non_nullable
-              as double,
-      qte: null == qte
+              as double?,
+      qte: freezed == qte
           ? _value.qte
           : qte // ignore: cast_nullable_to_non_nullable
-              as double,
-      prixPh: null == prixPh
+              as double?,
+      qteSansUg: freezed == qteSansUg
+          ? _value.qteSansUg
+          : qteSansUg // ignore: cast_nullable_to_non_nullable
+              as double?,
+      qteUg: freezed == qteUg
+          ? _value.qteUg
+          : qteUg // ignore: cast_nullable_to_non_nullable
+              as double?,
+      prixPh: freezed == prixPh
           ? _value.prixPh
           : prixPh // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       txRistourne: freezed == txRistourne
           ? _value.txRistourne
           : txRistourne // ignore: cast_nullable_to_non_nullable
@@ -248,15 +276,17 @@ class __$$CartItemImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CartItemImpl implements _CartItem {
   const _$CartItemImpl(
-      {@JsonKey(name: 'cpsCmpId') required this.cpsCmpId,
-      @JsonKey(name: 'cpsTerId') required this.cpsTerId,
-      @JsonKey(name: 'cpsTerType') required this.cpsTerType,
-      @JsonKey(name: 'no') required this.no,
-      @JsonKey(name: 'commercialName') required this.commercialName,
-      @JsonKey(name: 'datePeremption') required this.datePeremption,
-      @JsonKey(name: 'prixPpa') required this.prixPpa,
-      @JsonKey(name: 'qte') required this.qte,
-      @JsonKey(name: 'prixPh') required this.prixPh,
+      {@JsonKey(name: 'cpsCmpId') this.cpsCmpId,
+      @JsonKey(name: 'cpsTerId') this.cpsTerId,
+      @JsonKey(name: 'cpsTerType') this.cpsTerType,
+      @JsonKey(name: 'no') this.no,
+      @JsonKey(name: 'commercialName') this.commercialName,
+      @JsonKey(name: 'datePeremption') this.datePeremption,
+      @JsonKey(name: 'prixPpa') this.prixPpa,
+      @JsonKey(name: 'qte') this.qte,
+      @JsonKey(name: 'qteSansUg') this.qteSansUg,
+      @JsonKey(name: 'qteUg') this.qteUg,
+      @JsonKey(name: 'prixPh') this.prixPh,
       @JsonKey(name: 'txRistourne') this.txRistourne,
       @JsonKey(name: 'montant') this.montant});
 
@@ -265,31 +295,37 @@ class _$CartItemImpl implements _CartItem {
 
   @override
   @JsonKey(name: 'cpsCmpId')
-  final int cpsCmpId;
+  final int? cpsCmpId;
   @override
   @JsonKey(name: 'cpsTerId')
-  final int cpsTerId;
+  final int? cpsTerId;
   @override
   @JsonKey(name: 'cpsTerType')
-  final String cpsTerType;
+  final String? cpsTerType;
   @override
   @JsonKey(name: 'no')
-  final int no;
+  final int? no;
   @override
   @JsonKey(name: 'commercialName')
-  final String commercialName;
+  final String? commercialName;
   @override
   @JsonKey(name: 'datePeremption')
-  final DateTime datePeremption;
+  final DateTime? datePeremption;
   @override
   @JsonKey(name: 'prixPpa')
-  final double prixPpa;
+  final double? prixPpa;
   @override
   @JsonKey(name: 'qte')
-  final double qte;
+  final double? qte;
+  @override
+  @JsonKey(name: 'qteSansUg')
+  final double? qteSansUg;
+  @override
+  @JsonKey(name: 'qteUg')
+  final double? qteUg;
   @override
   @JsonKey(name: 'prixPh')
-  final double prixPh;
+  final double? prixPh;
   @override
   @JsonKey(name: 'txRistourne')
   final double? txRistourne;
@@ -299,7 +335,7 @@ class _$CartItemImpl implements _CartItem {
 
   @override
   String toString() {
-    return 'CartItem(cpsCmpId: $cpsCmpId, cpsTerId: $cpsTerId, cpsTerType: $cpsTerType, no: $no, commercialName: $commercialName, datePeremption: $datePeremption, prixPpa: $prixPpa, qte: $qte, prixPh: $prixPh, txRistourne: $txRistourne, montant: $montant)';
+    return 'CartItem(cpsCmpId: $cpsCmpId, cpsTerId: $cpsTerId, cpsTerType: $cpsTerType, no: $no, commercialName: $commercialName, datePeremption: $datePeremption, prixPpa: $prixPpa, qte: $qte, qteSansUg: $qteSansUg, qteUg: $qteUg, prixPh: $prixPh, txRistourne: $txRistourne, montant: $montant)';
   }
 
   @override
@@ -320,6 +356,9 @@ class _$CartItemImpl implements _CartItem {
                 other.datePeremption == datePeremption) &&
             (identical(other.prixPpa, prixPpa) || other.prixPpa == prixPpa) &&
             (identical(other.qte, qte) || other.qte == qte) &&
+            (identical(other.qteSansUg, qteSansUg) ||
+                other.qteSansUg == qteSansUg) &&
+            (identical(other.qteUg, qteUg) || other.qteUg == qteUg) &&
             (identical(other.prixPh, prixPh) || other.prixPh == prixPh) &&
             (identical(other.txRistourne, txRistourne) ||
                 other.txRistourne == txRistourne) &&
@@ -338,6 +377,8 @@ class _$CartItemImpl implements _CartItem {
       datePeremption,
       prixPpa,
       qte,
+      qteSansUg,
+      qteUg,
       prixPh,
       txRistourne,
       montant);
@@ -360,15 +401,17 @@ class _$CartItemImpl implements _CartItem {
 
 abstract class _CartItem implements CartItem {
   const factory _CartItem(
-      {@JsonKey(name: 'cpsCmpId') required final int cpsCmpId,
-      @JsonKey(name: 'cpsTerId') required final int cpsTerId,
-      @JsonKey(name: 'cpsTerType') required final String cpsTerType,
-      @JsonKey(name: 'no') required final int no,
-      @JsonKey(name: 'commercialName') required final String commercialName,
-      @JsonKey(name: 'datePeremption') required final DateTime datePeremption,
-      @JsonKey(name: 'prixPpa') required final double prixPpa,
-      @JsonKey(name: 'qte') required final double qte,
-      @JsonKey(name: 'prixPh') required final double prixPh,
+      {@JsonKey(name: 'cpsCmpId') final int? cpsCmpId,
+      @JsonKey(name: 'cpsTerId') final int? cpsTerId,
+      @JsonKey(name: 'cpsTerType') final String? cpsTerType,
+      @JsonKey(name: 'no') final int? no,
+      @JsonKey(name: 'commercialName') final String? commercialName,
+      @JsonKey(name: 'datePeremption') final DateTime? datePeremption,
+      @JsonKey(name: 'prixPpa') final double? prixPpa,
+      @JsonKey(name: 'qte') final double? qte,
+      @JsonKey(name: 'qteSansUg') final double? qteSansUg,
+      @JsonKey(name: 'qteUg') final double? qteUg,
+      @JsonKey(name: 'prixPh') final double? prixPh,
       @JsonKey(name: 'txRistourne') final double? txRistourne,
       @JsonKey(name: 'montant') final num? montant}) = _$CartItemImpl;
 
@@ -377,31 +420,37 @@ abstract class _CartItem implements CartItem {
 
   @override
   @JsonKey(name: 'cpsCmpId')
-  int get cpsCmpId;
+  int? get cpsCmpId;
   @override
   @JsonKey(name: 'cpsTerId')
-  int get cpsTerId;
+  int? get cpsTerId;
   @override
   @JsonKey(name: 'cpsTerType')
-  String get cpsTerType;
+  String? get cpsTerType;
   @override
   @JsonKey(name: 'no')
-  int get no;
+  int? get no;
   @override
   @JsonKey(name: 'commercialName')
-  String get commercialName;
+  String? get commercialName;
   @override
   @JsonKey(name: 'datePeremption')
-  DateTime get datePeremption;
+  DateTime? get datePeremption;
   @override
   @JsonKey(name: 'prixPpa')
-  double get prixPpa;
+  double? get prixPpa;
   @override
   @JsonKey(name: 'qte')
-  double get qte;
+  double? get qte;
+  @override
+  @JsonKey(name: 'qteSansUg')
+  double? get qteSansUg;
+  @override
+  @JsonKey(name: 'qteUg')
+  double? get qteUg;
   @override
   @JsonKey(name: 'prixPh')
-  double get prixPh;
+  double? get prixPh;
   @override
   @JsonKey(name: 'txRistourne')
   double? get txRistourne;

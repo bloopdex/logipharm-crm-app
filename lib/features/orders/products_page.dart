@@ -128,57 +128,88 @@ class _ProductsPageState extends State<ProductsPage> {
                         await _productsCubit.loadProducts(
                             query: _searchController.text);
                       },
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: ListView.separated(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: kPaddingMd1),
-                              physics: AlwaysScrollableScrollPhysics(),
-                              controller: _scrollController,
-                              itemCount: products.length,
-                              shrinkWrap: true,
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(height: kPaddingSm3),
-                              itemBuilder: (context, index) {
-                                final product = products[index];
-                                return MedicamentCard(medicament: product);
-                              },
-                            ),
-                          ),
-                        ],
+                      child: ListView.separated(
+                        key: const PageStorageKey('products_list'),
+                        padding: EdgeInsets.symmetric(horizontal: kPaddingMd1),
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        controller: _scrollController,
+                        itemCount: products.length,
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: kPaddingSm3),
+                        itemBuilder: (context, index) {
+                          final product = products[index];
+                          return MedicamentCard(medicament: product);
+                        },
                       ),
                     );
                   },
                   loadingMore: (products) {
-                    return Column(
-                      children: [
-                        Expanded(
-                          child: ListView.separated(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: kPaddingMd1),
-                            controller: _scrollController,
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            itemCount: products.length + 1,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(height: kPaddingSm3),
-                            itemBuilder: (context, index) {
-                              if (index == products.length) {
-                                return const Padding(
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Center(
-                                      child: CircularProgressIndicator()),
-                                );
-                              }
-                              final product = products[index];
-                              return MedicamentCard(medicament: product);
-                            },
-                          ),
-                        ),
-                      ],
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        _productsCubit.reset();
+                        await _productsCubit.loadProducts(
+                            query: _searchController.text);
+                      },
+                      child: ListView.separated(
+                        key: const PageStorageKey('products_list'),
+                        padding: EdgeInsets.symmetric(horizontal: kPaddingMd1),
+                        controller: _scrollController,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        itemCount: products.length + 1,
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: kPaddingSm3),
+                        itemBuilder: (context, index) {
+                          if (index == products.length) {
+                            return const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          }
+                          final product = products[index];
+                          return MedicamentCard(medicament: product);
+                        },
+                      ),
                     );
                   },
-                  failure: (message) => Center(child: Text(message)),
+                  failure: (message) => Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(kPaddingLg1),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            size: 64,
+                            color: Colors.red.shade300,
+                          ),
+                          SizedBox(height: kSpacingX5),
+                          Text(
+                            message,
+                            textAlign: TextAlign.center,
+                            style: context.textTheme.bodyLarge,
+                            maxLines: 5,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: kSpacingX5),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              _productsCubit.loadProducts(
+                                query: _searchController.text,
+                              );
+                            },
+                            icon: const Icon(Icons.refresh),
+                            label: Text(context.i10n.retry),
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: kPaddingLg1,
+                                vertical: kPaddingMd2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 );
               },
             ),

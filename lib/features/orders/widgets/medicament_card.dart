@@ -45,7 +45,7 @@ class MedicamentCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  medicament.commercialName,
+                  medicament.commercialName ?? '-',
                   style: context.textTheme.headlineMedium!.copyWith(
                     color: kPrimaryColor,
                   ),
@@ -60,19 +60,21 @@ class MedicamentCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${context.i10n.expirationDate} : ${medicament.datePeremption.month}/${medicament.datePeremption.year}',
+                            medicament.datePeremption == null
+                                ? '${context.i10n.expirationDate} : -'
+                                : '${context.i10n.expirationDate} : ${medicament.datePeremption!.month}/${medicament.datePeremption!.year}',
                             style: context.textTheme.bodyMedium,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            '${context.i10n.lot} : ${medicament.nlot}',
+                            '${context.i10n.lot} : ${medicament.nlot ?? '-'}',
                             style: context.textTheme.bodyMedium,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            '${context.i10n.laboratoire} : ${medicament.laboratoire}',
+                            '${context.i10n.laboratoire} : ${medicament.laboratoire ?? '-'}',
                             style: context.textTheme.bodyMedium,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -86,15 +88,13 @@ class MedicamentCard extends StatelessWidget {
                         Text(
                           textDirection: TextDirection.ltr,
                           MoneyHelper.format(
-                              context, medicament.prixPh.toDouble()),
+                              context, (medicament.prixPh ?? 0).toDouble()),
                           style: context.textTheme.displaySmall!.copyWith(
                             color: kPrimaryColor,
                           ),
                         ),
                         Text(
-                          medicament.objectif != null
-                              ? 'x ${medicament.objectif!.toInt()}'
-                              : 'x ${medicament.qte.toInt()}',
+                          'x ${(medicament.objectif ?? medicament.qte ?? 0).toInt()}',
                           style: context.textTheme.displaySmall!.copyWith(
                             color: kPrimaryColor,
                           ),

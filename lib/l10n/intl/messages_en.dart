@@ -482,6 +482,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "productsTitle": MessageLookupByLibrary.simpleMessage("Products"),
     "prospect": MessageLookupByLibrary.simpleMessage("Prospect"),
     "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
+    "quantitySansUg": MessageLookupByLibrary.simpleMessage(
+      "Quantity (without UG)",
+    ),
+    "quantityUg": MessageLookupByLibrary.simpleMessage("Quantity (UG)"),
     "recrutementThisMonth": MessageLookupByLibrary.simpleMessage(
       "Recrutement this month",
     ),
@@ -668,6 +672,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Overview and Validation",
     ),
     "turnover": MessageLookupByLibrary.simpleMessage("Turnover"),
+    "tva": MessageLookupByLibrary.simpleMessage("TVA"),
     "type": MessageLookupByLibrary.simpleMessage("Type"),
     "unitPrice": MessageLookupByLibrary.simpleMessage("UP"),
     "update": MessageLookupByLibrary.simpleMessage("Update"),

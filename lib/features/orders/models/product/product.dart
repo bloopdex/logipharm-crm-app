@@ -8,26 +8,28 @@ part 'product.g.dart';
 @freezed
 class Product with _$Product {
   const factory Product({
-    @JsonKey(name: 'cmpId') required int cmpId,
-    @JsonKey(name: 'prdId') required int prdId,
-    @JsonKey(name: 'medId') required int medId,
-    @JsonKey(name: 'stkCode') required String stkCode,
-    @JsonKey(name: 'commercialName') required String commercialName,
+    @JsonKey(name: 'cmpId') int? cmpId,
+    @JsonKey(name: 'prdId') int? prdId,
+    @JsonKey(name: 'medId') int? medId,
+    @JsonKey(name: 'stkCode') String? stkCode,
+    @JsonKey(name: 'commercialName') String? commercialName,
     @JsonKey(name: 'attribut2') String? attribut2,
-    @JsonKey(name: 'nlot') required String nlot,
-    @JsonKey(name: 'datePeremption') required DateTime datePeremption,
-    @JsonKey(name: 'prixPpa') required double prixPpa,
-    @JsonKey(name: 'qte') required double qte,
-    @JsonKey(name: 'prixPh') required double prixPh,
+    @JsonKey(name: 'nlot') String? nlot,
+    @JsonKey(name: 'datePeremption') DateTime? datePeremption,
+    @JsonKey(name: 'prixPpa') double? prixPpa,
+    @JsonKey(name: 'qte') double? qte,
+    @JsonKey(name: 'prixPh') double? prixPh,
     @JsonKey(name: 'prixGr') int? prixGr,
-    @JsonKey(name: 'prixShp') required double prixShp,
+    @JsonKey(name: 'prixShp') double? prixShp,
     @JsonKey(name: 'ugVnete') double? ugVnete,
+    @JsonKey(name: 'tva') double? tva,
     @JsonKey(name: 'etatFlag') bool? etatFlag,
-    @JsonKey(name: 'creerDate') required DateTime creerDate,
+    @JsonKey(name: 'creerDate') DateTime? creerDate,
     @JsonKey(name: 'colis') double? colis,
     @JsonKey(name: 'objectif') double? objectif,
     @JsonKey(name: 'laboratoire') String? laboratoire,
   }) = _Product;
 
-  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
 }

@@ -21,37 +21,39 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Product {
   @JsonKey(name: 'cmpId')
-  int get cmpId => throw _privateConstructorUsedError;
+  int? get cmpId => throw _privateConstructorUsedError;
   @JsonKey(name: 'prdId')
-  int get prdId => throw _privateConstructorUsedError;
+  int? get prdId => throw _privateConstructorUsedError;
   @JsonKey(name: 'medId')
-  int get medId => throw _privateConstructorUsedError;
+  int? get medId => throw _privateConstructorUsedError;
   @JsonKey(name: 'stkCode')
-  String get stkCode => throw _privateConstructorUsedError;
+  String? get stkCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'commercialName')
-  String get commercialName => throw _privateConstructorUsedError;
+  String? get commercialName => throw _privateConstructorUsedError;
   @JsonKey(name: 'attribut2')
   String? get attribut2 => throw _privateConstructorUsedError;
   @JsonKey(name: 'nlot')
-  String get nlot => throw _privateConstructorUsedError;
+  String? get nlot => throw _privateConstructorUsedError;
   @JsonKey(name: 'datePeremption')
-  DateTime get datePeremption => throw _privateConstructorUsedError;
+  DateTime? get datePeremption => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixPpa')
-  double get prixPpa => throw _privateConstructorUsedError;
+  double? get prixPpa => throw _privateConstructorUsedError;
   @JsonKey(name: 'qte')
-  double get qte => throw _privateConstructorUsedError;
+  double? get qte => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixPh')
-  double get prixPh => throw _privateConstructorUsedError;
+  double? get prixPh => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixGr')
   int? get prixGr => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixShp')
-  double get prixShp => throw _privateConstructorUsedError;
+  double? get prixShp => throw _privateConstructorUsedError;
   @JsonKey(name: 'ugVnete')
   double? get ugVnete => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tva')
+  double? get tva => throw _privateConstructorUsedError;
   @JsonKey(name: 'etatFlag')
   bool? get etatFlag => throw _privateConstructorUsedError;
   @JsonKey(name: 'creerDate')
-  DateTime get creerDate => throw _privateConstructorUsedError;
+  DateTime? get creerDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'colis')
   double? get colis => throw _privateConstructorUsedError;
   @JsonKey(name: 'objectif')
@@ -74,22 +76,23 @@ abstract class $ProductCopyWith<$Res> {
       _$ProductCopyWithImpl<$Res, Product>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'cmpId') int cmpId,
-      @JsonKey(name: 'prdId') int prdId,
-      @JsonKey(name: 'medId') int medId,
-      @JsonKey(name: 'stkCode') String stkCode,
-      @JsonKey(name: 'commercialName') String commercialName,
+      {@JsonKey(name: 'cmpId') int? cmpId,
+      @JsonKey(name: 'prdId') int? prdId,
+      @JsonKey(name: 'medId') int? medId,
+      @JsonKey(name: 'stkCode') String? stkCode,
+      @JsonKey(name: 'commercialName') String? commercialName,
       @JsonKey(name: 'attribut2') String? attribut2,
-      @JsonKey(name: 'nlot') String nlot,
-      @JsonKey(name: 'datePeremption') DateTime datePeremption,
-      @JsonKey(name: 'prixPpa') double prixPpa,
-      @JsonKey(name: 'qte') double qte,
-      @JsonKey(name: 'prixPh') double prixPh,
+      @JsonKey(name: 'nlot') String? nlot,
+      @JsonKey(name: 'datePeremption') DateTime? datePeremption,
+      @JsonKey(name: 'prixPpa') double? prixPpa,
+      @JsonKey(name: 'qte') double? qte,
+      @JsonKey(name: 'prixPh') double? prixPh,
       @JsonKey(name: 'prixGr') int? prixGr,
-      @JsonKey(name: 'prixShp') double prixShp,
+      @JsonKey(name: 'prixShp') double? prixShp,
       @JsonKey(name: 'ugVnete') double? ugVnete,
+      @JsonKey(name: 'tva') double? tva,
       @JsonKey(name: 'etatFlag') bool? etatFlag,
-      @JsonKey(name: 'creerDate') DateTime creerDate,
+      @JsonKey(name: 'creerDate') DateTime? creerDate,
       @JsonKey(name: 'colis') double? colis,
       @JsonKey(name: 'objectif') double? objectif,
       @JsonKey(name: 'laboratoire') String? laboratoire});
@@ -110,91 +113,96 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cmpId = null,
-    Object? prdId = null,
-    Object? medId = null,
-    Object? stkCode = null,
-    Object? commercialName = null,
+    Object? cmpId = freezed,
+    Object? prdId = freezed,
+    Object? medId = freezed,
+    Object? stkCode = freezed,
+    Object? commercialName = freezed,
     Object? attribut2 = freezed,
-    Object? nlot = null,
-    Object? datePeremption = null,
-    Object? prixPpa = null,
-    Object? qte = null,
-    Object? prixPh = null,
+    Object? nlot = freezed,
+    Object? datePeremption = freezed,
+    Object? prixPpa = freezed,
+    Object? qte = freezed,
+    Object? prixPh = freezed,
     Object? prixGr = freezed,
-    Object? prixShp = null,
+    Object? prixShp = freezed,
     Object? ugVnete = freezed,
+    Object? tva = freezed,
     Object? etatFlag = freezed,
-    Object? creerDate = null,
+    Object? creerDate = freezed,
     Object? colis = freezed,
     Object? objectif = freezed,
     Object? laboratoire = freezed,
   }) {
     return _then(_value.copyWith(
-      cmpId: null == cmpId
+      cmpId: freezed == cmpId
           ? _value.cmpId
           : cmpId // ignore: cast_nullable_to_non_nullable
-              as int,
-      prdId: null == prdId
+              as int?,
+      prdId: freezed == prdId
           ? _value.prdId
           : prdId // ignore: cast_nullable_to_non_nullable
-              as int,
-      medId: null == medId
+              as int?,
+      medId: freezed == medId
           ? _value.medId
           : medId // ignore: cast_nullable_to_non_nullable
-              as int,
-      stkCode: null == stkCode
+              as int?,
+      stkCode: freezed == stkCode
           ? _value.stkCode
           : stkCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      commercialName: null == commercialName
+              as String?,
+      commercialName: freezed == commercialName
           ? _value.commercialName
           : commercialName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       attribut2: freezed == attribut2
           ? _value.attribut2
           : attribut2 // ignore: cast_nullable_to_non_nullable
               as String?,
-      nlot: null == nlot
+      nlot: freezed == nlot
           ? _value.nlot
           : nlot // ignore: cast_nullable_to_non_nullable
-              as String,
-      datePeremption: null == datePeremption
+              as String?,
+      datePeremption: freezed == datePeremption
           ? _value.datePeremption
           : datePeremption // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      prixPpa: null == prixPpa
+              as DateTime?,
+      prixPpa: freezed == prixPpa
           ? _value.prixPpa
           : prixPpa // ignore: cast_nullable_to_non_nullable
-              as double,
-      qte: null == qte
+              as double?,
+      qte: freezed == qte
           ? _value.qte
           : qte // ignore: cast_nullable_to_non_nullable
-              as double,
-      prixPh: null == prixPh
+              as double?,
+      prixPh: freezed == prixPh
           ? _value.prixPh
           : prixPh // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       prixGr: freezed == prixGr
           ? _value.prixGr
           : prixGr // ignore: cast_nullable_to_non_nullable
               as int?,
-      prixShp: null == prixShp
+      prixShp: freezed == prixShp
           ? _value.prixShp
           : prixShp // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       ugVnete: freezed == ugVnete
           ? _value.ugVnete
           : ugVnete // ignore: cast_nullable_to_non_nullable
+              as double?,
+      tva: freezed == tva
+          ? _value.tva
+          : tva // ignore: cast_nullable_to_non_nullable
               as double?,
       etatFlag: freezed == etatFlag
           ? _value.etatFlag
           : etatFlag // ignore: cast_nullable_to_non_nullable
               as bool?,
-      creerDate: null == creerDate
+      creerDate: freezed == creerDate
           ? _value.creerDate
           : creerDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       colis: freezed == colis
           ? _value.colis
           : colis // ignore: cast_nullable_to_non_nullable
@@ -219,22 +227,23 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'cmpId') int cmpId,
-      @JsonKey(name: 'prdId') int prdId,
-      @JsonKey(name: 'medId') int medId,
-      @JsonKey(name: 'stkCode') String stkCode,
-      @JsonKey(name: 'commercialName') String commercialName,
+      {@JsonKey(name: 'cmpId') int? cmpId,
+      @JsonKey(name: 'prdId') int? prdId,
+      @JsonKey(name: 'medId') int? medId,
+      @JsonKey(name: 'stkCode') String? stkCode,
+      @JsonKey(name: 'commercialName') String? commercialName,
       @JsonKey(name: 'attribut2') String? attribut2,
-      @JsonKey(name: 'nlot') String nlot,
-      @JsonKey(name: 'datePeremption') DateTime datePeremption,
-      @JsonKey(name: 'prixPpa') double prixPpa,
-      @JsonKey(name: 'qte') double qte,
-      @JsonKey(name: 'prixPh') double prixPh,
+      @JsonKey(name: 'nlot') String? nlot,
+      @JsonKey(name: 'datePeremption') DateTime? datePeremption,
+      @JsonKey(name: 'prixPpa') double? prixPpa,
+      @JsonKey(name: 'qte') double? qte,
+      @JsonKey(name: 'prixPh') double? prixPh,
       @JsonKey(name: 'prixGr') int? prixGr,
-      @JsonKey(name: 'prixShp') double prixShp,
+      @JsonKey(name: 'prixShp') double? prixShp,
       @JsonKey(name: 'ugVnete') double? ugVnete,
+      @JsonKey(name: 'tva') double? tva,
       @JsonKey(name: 'etatFlag') bool? etatFlag,
-      @JsonKey(name: 'creerDate') DateTime creerDate,
+      @JsonKey(name: 'creerDate') DateTime? creerDate,
       @JsonKey(name: 'colis') double? colis,
       @JsonKey(name: 'objectif') double? objectif,
       @JsonKey(name: 'laboratoire') String? laboratoire});
@@ -253,91 +262,96 @@ class __$$ProductImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cmpId = null,
-    Object? prdId = null,
-    Object? medId = null,
-    Object? stkCode = null,
-    Object? commercialName = null,
+    Object? cmpId = freezed,
+    Object? prdId = freezed,
+    Object? medId = freezed,
+    Object? stkCode = freezed,
+    Object? commercialName = freezed,
     Object? attribut2 = freezed,
-    Object? nlot = null,
-    Object? datePeremption = null,
-    Object? prixPpa = null,
-    Object? qte = null,
-    Object? prixPh = null,
+    Object? nlot = freezed,
+    Object? datePeremption = freezed,
+    Object? prixPpa = freezed,
+    Object? qte = freezed,
+    Object? prixPh = freezed,
     Object? prixGr = freezed,
-    Object? prixShp = null,
+    Object? prixShp = freezed,
     Object? ugVnete = freezed,
+    Object? tva = freezed,
     Object? etatFlag = freezed,
-    Object? creerDate = null,
+    Object? creerDate = freezed,
     Object? colis = freezed,
     Object? objectif = freezed,
     Object? laboratoire = freezed,
   }) {
     return _then(_$ProductImpl(
-      cmpId: null == cmpId
+      cmpId: freezed == cmpId
           ? _value.cmpId
           : cmpId // ignore: cast_nullable_to_non_nullable
-              as int,
-      prdId: null == prdId
+              as int?,
+      prdId: freezed == prdId
           ? _value.prdId
           : prdId // ignore: cast_nullable_to_non_nullable
-              as int,
-      medId: null == medId
+              as int?,
+      medId: freezed == medId
           ? _value.medId
           : medId // ignore: cast_nullable_to_non_nullable
-              as int,
-      stkCode: null == stkCode
+              as int?,
+      stkCode: freezed == stkCode
           ? _value.stkCode
           : stkCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      commercialName: null == commercialName
+              as String?,
+      commercialName: freezed == commercialName
           ? _value.commercialName
           : commercialName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       attribut2: freezed == attribut2
           ? _value.attribut2
           : attribut2 // ignore: cast_nullable_to_non_nullable
               as String?,
-      nlot: null == nlot
+      nlot: freezed == nlot
           ? _value.nlot
           : nlot // ignore: cast_nullable_to_non_nullable
-              as String,
-      datePeremption: null == datePeremption
+              as String?,
+      datePeremption: freezed == datePeremption
           ? _value.datePeremption
           : datePeremption // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      prixPpa: null == prixPpa
+              as DateTime?,
+      prixPpa: freezed == prixPpa
           ? _value.prixPpa
           : prixPpa // ignore: cast_nullable_to_non_nullable
-              as double,
-      qte: null == qte
+              as double?,
+      qte: freezed == qte
           ? _value.qte
           : qte // ignore: cast_nullable_to_non_nullable
-              as double,
-      prixPh: null == prixPh
+              as double?,
+      prixPh: freezed == prixPh
           ? _value.prixPh
           : prixPh // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       prixGr: freezed == prixGr
           ? _value.prixGr
           : prixGr // ignore: cast_nullable_to_non_nullable
               as int?,
-      prixShp: null == prixShp
+      prixShp: freezed == prixShp
           ? _value.prixShp
           : prixShp // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       ugVnete: freezed == ugVnete
           ? _value.ugVnete
           : ugVnete // ignore: cast_nullable_to_non_nullable
+              as double?,
+      tva: freezed == tva
+          ? _value.tva
+          : tva // ignore: cast_nullable_to_non_nullable
               as double?,
       etatFlag: freezed == etatFlag
           ? _value.etatFlag
           : etatFlag // ignore: cast_nullable_to_non_nullable
               as bool?,
-      creerDate: null == creerDate
+      creerDate: freezed == creerDate
           ? _value.creerDate
           : creerDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       colis: freezed == colis
           ? _value.colis
           : colis // ignore: cast_nullable_to_non_nullable
@@ -358,22 +372,23 @@ class __$$ProductImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductImpl implements _Product {
   const _$ProductImpl(
-      {@JsonKey(name: 'cmpId') required this.cmpId,
-      @JsonKey(name: 'prdId') required this.prdId,
-      @JsonKey(name: 'medId') required this.medId,
-      @JsonKey(name: 'stkCode') required this.stkCode,
-      @JsonKey(name: 'commercialName') required this.commercialName,
+      {@JsonKey(name: 'cmpId') this.cmpId,
+      @JsonKey(name: 'prdId') this.prdId,
+      @JsonKey(name: 'medId') this.medId,
+      @JsonKey(name: 'stkCode') this.stkCode,
+      @JsonKey(name: 'commercialName') this.commercialName,
       @JsonKey(name: 'attribut2') this.attribut2,
-      @JsonKey(name: 'nlot') required this.nlot,
-      @JsonKey(name: 'datePeremption') required this.datePeremption,
-      @JsonKey(name: 'prixPpa') required this.prixPpa,
-      @JsonKey(name: 'qte') required this.qte,
-      @JsonKey(name: 'prixPh') required this.prixPh,
+      @JsonKey(name: 'nlot') this.nlot,
+      @JsonKey(name: 'datePeremption') this.datePeremption,
+      @JsonKey(name: 'prixPpa') this.prixPpa,
+      @JsonKey(name: 'qte') this.qte,
+      @JsonKey(name: 'prixPh') this.prixPh,
       @JsonKey(name: 'prixGr') this.prixGr,
-      @JsonKey(name: 'prixShp') required this.prixShp,
+      @JsonKey(name: 'prixShp') this.prixShp,
       @JsonKey(name: 'ugVnete') this.ugVnete,
+      @JsonKey(name: 'tva') this.tva,
       @JsonKey(name: 'etatFlag') this.etatFlag,
-      @JsonKey(name: 'creerDate') required this.creerDate,
+      @JsonKey(name: 'creerDate') this.creerDate,
       @JsonKey(name: 'colis') this.colis,
       @JsonKey(name: 'objectif') this.objectif,
       @JsonKey(name: 'laboratoire') this.laboratoire});
@@ -383,52 +398,55 @@ class _$ProductImpl implements _Product {
 
   @override
   @JsonKey(name: 'cmpId')
-  final int cmpId;
+  final int? cmpId;
   @override
   @JsonKey(name: 'prdId')
-  final int prdId;
+  final int? prdId;
   @override
   @JsonKey(name: 'medId')
-  final int medId;
+  final int? medId;
   @override
   @JsonKey(name: 'stkCode')
-  final String stkCode;
+  final String? stkCode;
   @override
   @JsonKey(name: 'commercialName')
-  final String commercialName;
+  final String? commercialName;
   @override
   @JsonKey(name: 'attribut2')
   final String? attribut2;
   @override
   @JsonKey(name: 'nlot')
-  final String nlot;
+  final String? nlot;
   @override
   @JsonKey(name: 'datePeremption')
-  final DateTime datePeremption;
+  final DateTime? datePeremption;
   @override
   @JsonKey(name: 'prixPpa')
-  final double prixPpa;
+  final double? prixPpa;
   @override
   @JsonKey(name: 'qte')
-  final double qte;
+  final double? qte;
   @override
   @JsonKey(name: 'prixPh')
-  final double prixPh;
+  final double? prixPh;
   @override
   @JsonKey(name: 'prixGr')
   final int? prixGr;
   @override
   @JsonKey(name: 'prixShp')
-  final double prixShp;
+  final double? prixShp;
   @override
   @JsonKey(name: 'ugVnete')
   final double? ugVnete;
+  @override
+  @JsonKey(name: 'tva')
+  final double? tva;
   @override
   @JsonKey(name: 'etatFlag')
   final bool? etatFlag;
   @override
   @JsonKey(name: 'creerDate')
-  final DateTime creerDate;
+  final DateTime? creerDate;
   @override
   @JsonKey(name: 'colis')
   final double? colis;
@@ -441,7 +459,7 @@ class _$ProductImpl implements _Product {
 
   @override
   String toString() {
-    return 'Product(cmpId: $cmpId, prdId: $prdId, medId: $medId, stkCode: $stkCode, commercialName: $commercialName, attribut2: $attribut2, nlot: $nlot, datePeremption: $datePeremption, prixPpa: $prixPpa, qte: $qte, prixPh: $prixPh, prixGr: $prixGr, prixShp: $prixShp, ugVnete: $ugVnete, etatFlag: $etatFlag, creerDate: $creerDate, colis: $colis, objectif: $objectif, laboratoire: $laboratoire)';
+    return 'Product(cmpId: $cmpId, prdId: $prdId, medId: $medId, stkCode: $stkCode, commercialName: $commercialName, attribut2: $attribut2, nlot: $nlot, datePeremption: $datePeremption, prixPpa: $prixPpa, qte: $qte, prixPh: $prixPh, prixGr: $prixGr, prixShp: $prixShp, ugVnete: $ugVnete, tva: $tva, etatFlag: $etatFlag, creerDate: $creerDate, colis: $colis, objectif: $objectif, laboratoire: $laboratoire)';
   }
 
   @override
@@ -466,6 +484,7 @@ class _$ProductImpl implements _Product {
             (identical(other.prixGr, prixGr) || other.prixGr == prixGr) &&
             (identical(other.prixShp, prixShp) || other.prixShp == prixShp) &&
             (identical(other.ugVnete, ugVnete) || other.ugVnete == ugVnete) &&
+            (identical(other.tva, tva) || other.tva == tva) &&
             (identical(other.etatFlag, etatFlag) ||
                 other.etatFlag == etatFlag) &&
             (identical(other.creerDate, creerDate) ||
@@ -495,6 +514,7 @@ class _$ProductImpl implements _Product {
         prixGr,
         prixShp,
         ugVnete,
+        tva,
         etatFlag,
         creerDate,
         colis,
@@ -520,22 +540,23 @@ class _$ProductImpl implements _Product {
 
 abstract class _Product implements Product {
   const factory _Product(
-      {@JsonKey(name: 'cmpId') required final int cmpId,
-      @JsonKey(name: 'prdId') required final int prdId,
-      @JsonKey(name: 'medId') required final int medId,
-      @JsonKey(name: 'stkCode') required final String stkCode,
-      @JsonKey(name: 'commercialName') required final String commercialName,
+      {@JsonKey(name: 'cmpId') final int? cmpId,
+      @JsonKey(name: 'prdId') final int? prdId,
+      @JsonKey(name: 'medId') final int? medId,
+      @JsonKey(name: 'stkCode') final String? stkCode,
+      @JsonKey(name: 'commercialName') final String? commercialName,
       @JsonKey(name: 'attribut2') final String? attribut2,
-      @JsonKey(name: 'nlot') required final String nlot,
-      @JsonKey(name: 'datePeremption') required final DateTime datePeremption,
-      @JsonKey(name: 'prixPpa') required final double prixPpa,
-      @JsonKey(name: 'qte') required final double qte,
-      @JsonKey(name: 'prixPh') required final double prixPh,
+      @JsonKey(name: 'nlot') final String? nlot,
+      @JsonKey(name: 'datePeremption') final DateTime? datePeremption,
+      @JsonKey(name: 'prixPpa') final double? prixPpa,
+      @JsonKey(name: 'qte') final double? qte,
+      @JsonKey(name: 'prixPh') final double? prixPh,
       @JsonKey(name: 'prixGr') final int? prixGr,
-      @JsonKey(name: 'prixShp') required final double prixShp,
+      @JsonKey(name: 'prixShp') final double? prixShp,
       @JsonKey(name: 'ugVnete') final double? ugVnete,
+      @JsonKey(name: 'tva') final double? tva,
       @JsonKey(name: 'etatFlag') final bool? etatFlag,
-      @JsonKey(name: 'creerDate') required final DateTime creerDate,
+      @JsonKey(name: 'creerDate') final DateTime? creerDate,
       @JsonKey(name: 'colis') final double? colis,
       @JsonKey(name: 'objectif') final double? objectif,
       @JsonKey(name: 'laboratoire') final String? laboratoire}) = _$ProductImpl;
@@ -544,52 +565,55 @@ abstract class _Product implements Product {
 
   @override
   @JsonKey(name: 'cmpId')
-  int get cmpId;
+  int? get cmpId;
   @override
   @JsonKey(name: 'prdId')
-  int get prdId;
+  int? get prdId;
   @override
   @JsonKey(name: 'medId')
-  int get medId;
+  int? get medId;
   @override
   @JsonKey(name: 'stkCode')
-  String get stkCode;
+  String? get stkCode;
   @override
   @JsonKey(name: 'commercialName')
-  String get commercialName;
+  String? get commercialName;
   @override
   @JsonKey(name: 'attribut2')
   String? get attribut2;
   @override
   @JsonKey(name: 'nlot')
-  String get nlot;
+  String? get nlot;
   @override
   @JsonKey(name: 'datePeremption')
-  DateTime get datePeremption;
+  DateTime? get datePeremption;
   @override
   @JsonKey(name: 'prixPpa')
-  double get prixPpa;
+  double? get prixPpa;
   @override
   @JsonKey(name: 'qte')
-  double get qte;
+  double? get qte;
   @override
   @JsonKey(name: 'prixPh')
-  double get prixPh;
+  double? get prixPh;
   @override
   @JsonKey(name: 'prixGr')
   int? get prixGr;
   @override
   @JsonKey(name: 'prixShp')
-  double get prixShp;
+  double? get prixShp;
   @override
   @JsonKey(name: 'ugVnete')
   double? get ugVnete;
+  @override
+  @JsonKey(name: 'tva')
+  double? get tva;
   @override
   @JsonKey(name: 'etatFlag')
   bool? get etatFlag;
   @override
   @JsonKey(name: 'creerDate')
-  DateTime get creerDate;
+  DateTime? get creerDate;
   @override
   @JsonKey(name: 'colis')
   double? get colis;

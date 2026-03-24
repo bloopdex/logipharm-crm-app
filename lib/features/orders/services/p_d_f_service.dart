@@ -116,10 +116,12 @@ class PDFService {
         // Items
         ...cartItems.map((item) => pw.TableRow(
               children: [
-                _buildTableCell(item.commercialName),
-                _buildTableCell(DateHelper.MMYY(item.datePeremption)),
-                _buildTableCell('${item.qte.toInt()}'),
-                _buildTableCell('${item.prixPh}'),
+                _buildTableCell(item.commercialName ?? '-'),
+                _buildTableCell(item.datePeremption != null
+                    ? DateHelper.MMYY(item.datePeremption!)
+                    : '-'),
+                _buildTableCell('${(item.qte ?? 0).toInt()}'),
+                _buildTableCell('${item.prixPh ?? 0}'),
                 _buildTableCell('${item.montant ?? 0.0}'),
               ],
             )),

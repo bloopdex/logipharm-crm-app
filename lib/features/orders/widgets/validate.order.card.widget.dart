@@ -387,7 +387,7 @@ class _ValidateOrderCardState extends State<ValidateOrderCard> {
               onPressed: () => Navigator.of(context).pop(false),
               child: Text(context.i10n.cancel),
             ),
-            ElevatedButton(
+            TextButton(
               onPressed: () => Navigator.of(context).pop(true),
               child: Text(context.i10n.confirm),
             ),

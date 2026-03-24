@@ -138,7 +138,7 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                       child: Column(
                         children: [
                           Text(
-                            widget.medicament.commercialName,
+                            widget.medicament.commercialName ?? '-',
                             maxLines: 5,
                             style: context.textTheme.headlineLarge,
                           ),
@@ -187,8 +187,7 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                                       return Text(
                                         MoneyHelper.format(
                                             context,
-                                            (widget.medicament.prixPh
-                                                    .toDouble()) *
+                                            (widget.medicament.prixPh ?? 0) *
                                                 state),
                                         style: context.textTheme.headlineLarge!
                                             .copyWith(color: kPrimaryColor),
@@ -305,7 +304,7 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                                 "qte":
                                     int.tryParse(textEditingController.text) ??
                                         1,
-                                "prixPh": widget.medicament.prixPh.toDouble(),
+                                "prixPh": widget.medicament.prixPh ?? 0,
                                 "txRistourne":
                                     widget.medicament.ugVnete?.toDouble() ?? 0,
                               });
@@ -378,7 +377,7 @@ class ProductDetailsCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  medicament.nlot,
+                  medicament.nlot ?? '-',
                   style: context.textTheme.titleMedium!.copyWith(
                     color: Colors.black,
                   ),
@@ -399,7 +398,7 @@ class ProductDetailsCard extends StatelessWidget {
                       style: context.textTheme.titleMedium),
                 ),
                 Text(
-                  '${medicament.qte}',
+                  medicament.qte == null ? '-' : '${medicament.qte}',
                   style: context.textTheme.titleMedium!
                       .copyWith(color: Colors.black),
                   textAlign: TextAlign.end,
@@ -423,9 +422,10 @@ class ProductDetailsCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    DateFormat('MM/yy').format(
-                      medicament.datePeremption,
-                    ),
+                    medicament.datePeremption == null
+                        ? '-'
+                        : DateFormat('MM/yy')
+                            .format(medicament.datePeremption!),
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Colors.black,
                         ),
@@ -450,7 +450,7 @@ class ProductDetailsCard extends StatelessWidget {
                       style: context.textTheme.titleMedium),
                 ),
                 Text(
-                  MoneyHelper.format(context, medicament.prixPh),
+                  MoneyHelper.format(context, medicament.prixPh ?? 0),
                   style: context.textTheme.titleMedium!
                       .copyWith(color: Colors.black),
                   textAlign: TextAlign.end,
@@ -465,7 +465,7 @@ class ProductDetailsCard extends StatelessWidget {
                 Icon(Icons.percent, color: kCodGray.shade700, size: 20.h),
                 SizedBox(width: kSpacingX1),
                 Expanded(
-                  child: Text('Discount (UG Vnete)',
+                  child: Text('Discount (UG Vente)',
                       style: context.textTheme.titleMedium),
                 ),
                 Text(
@@ -489,6 +489,25 @@ class ProductDetailsCard extends StatelessWidget {
                 ),
                 Text(
                   medicament.colis == null ? '-' : '${medicament.colis}',
+                  style: context.textTheme.titleMedium!
+                      .copyWith(color: Colors.black),
+                  textAlign: TextAlign.end,
+                ),
+              ],
+            ),
+            SizedBox(height: kSpacingX5),
+            Container(height: 1, color: kCodGray.shade200),
+            SizedBox(height: kSpacingX5),
+            // TVA
+            Row(
+              children: [
+                Icon(Icons.all_inbox, color: kCodGray.shade700, size: 20.h),
+                SizedBox(width: kSpacingX1),
+                Expanded(
+                  child: Text(context.i10n.tva, style: context.textTheme.titleMedium),
+                ),
+                Text(
+                  medicament.tva == null ? '-' : '${medicament.tva}',
                   style: context.textTheme.titleMedium!
                       .copyWith(color: Colors.black),
                   textAlign: TextAlign.end,
