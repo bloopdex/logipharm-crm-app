@@ -42,6 +42,9 @@ class Contact with _$Contact {
     @JsonKey(name: 'typeDiabete') String? typeDiabete,
     @JsonKey(name: 'testeProduit') String? testeProduit,
     @JsonKey(name: 'resultatTest') String? resultatTest,
+
+    // Inactive flag
+    @JsonKey(name: 'inactifFlag') bool? inactifFlag,
   }) = _Contact;
 
   factory Contact.fromJson(Map<String, dynamic> json) =>

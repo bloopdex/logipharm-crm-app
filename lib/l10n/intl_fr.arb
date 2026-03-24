@@ -803,6 +803,10 @@
   "@prospect": {
     "description": "Prospect"
   },
+  "inactiveClients": "Inactifs",
+  "@inactiveClients": {
+    "description": "Clients inactifs"
+  },
   "events": "Événements",
   "@events": {
     "description": "Événements"
@@ -1423,5 +1427,69 @@
   "myOrders": "Mes commandes",
   "sold": "Vendu",
   "avgRealization": "Avg",
-  "obj": "Obj"
+  "obj": "Obj",
+  "createCnrc": "Créer CNRC",
+  "@createCnrc": {
+    "description": "Créer CNRC"
+  },
+  "cnrcCreatedSuccessfully": "CNRC créé avec succès",
+  "@cnrcCreatedSuccessfully": {
+    "description": "CNRC créé avec succès"
+  },
+  "create": "Créer",
+  "@create": {
+    "description": "Créer"
+  },
+  "commune": "Commune",
+  "@commune": {
+    "description": "Commune"
+  },
+  "communePlaceholder": "Sélectionner une commune",
+  "@communePlaceholder": {
+    "description": "Sélectionner une commune"
+  },
+  "nif": "NIF",
+  "@nif": {
+    "description": "NIF"
+  },
+  "nifPlaceholder": "Entrer le NIF",
+  "@nifPlaceholder": {
+    "description": "Entrer le NIF"
+  },
+  "nis": "NIS",
+  "@nis": {
+    "description": "NIS"
+  },
+  "nisPlaceholder": "Entrer le NIS",
+  "@nisPlaceholder": {
+    "description": "Entrer le NIS"
+  },
+  "visitActivationLabel": "Visite d'activation",
+  "@visitActivationLabel": {
+    "description": "Visite d'activation"
+  },
+  "visitActivationHint": "Cochez cette case pour activer ce client lors de cette visite",
+  "@visitActivationHint": {
+    "description": "Cochez cette case pour activer ce client lors de cette visite"
+  },
+  "visitResultLabel": "Résultat de la visite",
+  "@visitResultLabel": {
+    "description": "Libellé du menu déroulant des résultats de visite"
+  },
+  "selectVisitResult": "Sélectionner le résultat de la visite",
+  "@selectVisitResult": {
+    "description": "Placeholder pour le menu déroulant des résultats de visite"
+  },
+  "errorLoadingData": "Erreur de chargement des données",
+  "@errorLoadingData": {
+    "description": "Message d'erreur de chargement"
+  },
+  "status": "Statut",
+  "@status": {
+    "description": "Libellé du statut"
+  },
+  "phase": "Phase",
+  "@phase": {
+    "description": "Libellé de la phase"
+  }
 }

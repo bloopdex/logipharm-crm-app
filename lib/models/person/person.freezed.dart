@@ -94,6 +94,12 @@ mixin _$Person {
   String? get lastVisitDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'visitCount')
   int? get visitCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'inactifFlag')
+  bool? get inactifFlag => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status')
+  String? get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'phase')
+  String? get phase => throw _privateConstructorUsedError;
 
   /// Serializes this Person to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -145,7 +151,10 @@ abstract class $PersonCopyWith<$Res> {
       @JsonKey(name: 'laboratoireCode') String? laboratoireCode,
       @JsonKey(name: 'delegueType') num? delegueType,
       @JsonKey(name: 'lastVisitDate') String? lastVisitDate,
-      @JsonKey(name: 'visitCount') int? visitCount});
+      @JsonKey(name: 'visitCount') int? visitCount,
+      @JsonKey(name: 'inactifFlag') bool? inactifFlag,
+      @JsonKey(name: 'status') String? status,
+      @JsonKey(name: 'phase') String? phase});
 
   $SolvabiliteCopyWith<$Res>? get solvabilite;
   $ModePaieCopyWith<$Res>? get modePaie;
@@ -203,6 +212,9 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? delegueType = freezed,
     Object? lastVisitDate = freezed,
     Object? visitCount = freezed,
+    Object? inactifFlag = freezed,
+    Object? status = freezed,
+    Object? phase = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -349,6 +361,18 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.visitCount
           : visitCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      inactifFlag: freezed == inactifFlag
+          ? _value.inactifFlag
+          : inactifFlag // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phase: freezed == phase
+          ? _value.phase
+          : phase // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -438,7 +462,10 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       @JsonKey(name: 'laboratoireCode') String? laboratoireCode,
       @JsonKey(name: 'delegueType') num? delegueType,
       @JsonKey(name: 'lastVisitDate') String? lastVisitDate,
-      @JsonKey(name: 'visitCount') int? visitCount});
+      @JsonKey(name: 'visitCount') int? visitCount,
+      @JsonKey(name: 'inactifFlag') bool? inactifFlag,
+      @JsonKey(name: 'status') String? status,
+      @JsonKey(name: 'phase') String? phase});
 
   @override
   $SolvabiliteCopyWith<$Res>? get solvabilite;
@@ -497,6 +524,9 @@ class __$$PersonImplCopyWithImpl<$Res>
     Object? delegueType = freezed,
     Object? lastVisitDate = freezed,
     Object? visitCount = freezed,
+    Object? inactifFlag = freezed,
+    Object? status = freezed,
+    Object? phase = freezed,
   }) {
     return _then(_$PersonImpl(
       id: null == id
@@ -643,6 +673,18 @@ class __$$PersonImplCopyWithImpl<$Res>
           ? _value.visitCount
           : visitCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      inactifFlag: freezed == inactifFlag
+          ? _value.inactifFlag
+          : inactifFlag // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phase: freezed == phase
+          ? _value.phase
+          : phase // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -686,7 +728,10 @@ class _$PersonImpl implements _Person {
       @JsonKey(name: 'laboratoireCode') this.laboratoireCode,
       @JsonKey(name: 'delegueType') this.delegueType,
       @JsonKey(name: 'lastVisitDate') this.lastVisitDate,
-      @JsonKey(name: 'visitCount') this.visitCount});
+      @JsonKey(name: 'visitCount') this.visitCount,
+      @JsonKey(name: 'inactifFlag') this.inactifFlag,
+      @JsonKey(name: 'status') this.status,
+      @JsonKey(name: 'phase') this.phase});
 
   factory _$PersonImpl.fromJson(Map<String, dynamic> json) =>
       _$$PersonImplFromJson(json);
@@ -802,10 +847,19 @@ class _$PersonImpl implements _Person {
   @override
   @JsonKey(name: 'visitCount')
   final int? visitCount;
+  @override
+  @JsonKey(name: 'inactifFlag')
+  final bool? inactifFlag;
+  @override
+  @JsonKey(name: 'status')
+  final String? status;
+  @override
+  @JsonKey(name: 'phase')
+  final String? phase;
 
   @override
   String toString() {
-    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, activeFlag: $activeFlag, regionId: $regionId, ville: $ville, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName, prospect: $prospect, solvabilite: $solvabilite, modePaie: $modePaie, categoryId: $categoryId, categoryLabel: $categoryLabel, categorieId2: $categorieId2, categoryLabel2: $categoryLabel2, clientStatistics: $clientStatistics, laboratoireCode: $laboratoireCode, delegueType: $delegueType, lastVisitDate: $lastVisitDate, visitCount: $visitCount)';
+    return 'Person(id: $id, companyId: $companyId, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, activeFlag: $activeFlag, regionId: $regionId, ville: $ville, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, postalCode: $postalCode, postBox: $postBox, email: $email, website: $website, nisCode: $nisCode, nssCode: $nssCode, tel1Fixe: $tel1Fixe, tel2Fixe: $tel2Fixe, telMobile: $telMobile, fax: $fax, fullName: $fullName, prospect: $prospect, solvabilite: $solvabilite, modePaie: $modePaie, categoryId: $categoryId, categoryLabel: $categoryLabel, categorieId2: $categorieId2, categoryLabel2: $categoryLabel2, clientStatistics: $clientStatistics, laboratoireCode: $laboratoireCode, delegueType: $delegueType, lastVisitDate: $lastVisitDate, visitCount: $visitCount, inactifFlag: $inactifFlag, status: $status, phase: $phase)';
   }
 
   @override
@@ -875,7 +929,11 @@ class _$PersonImpl implements _Person {
             (identical(other.lastVisitDate, lastVisitDate) ||
                 other.lastVisitDate == lastVisitDate) &&
             (identical(other.visitCount, visitCount) ||
-                other.visitCount == visitCount));
+                other.visitCount == visitCount) &&
+            (identical(other.inactifFlag, inactifFlag) ||
+                other.inactifFlag == inactifFlag) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.phase, phase) || other.phase == phase));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -917,7 +975,10 @@ class _$PersonImpl implements _Person {
         laboratoireCode,
         delegueType,
         lastVisitDate,
-        visitCount
+        visitCount,
+        inactifFlag,
+        status,
+        phase
       ]);
 
   /// Create a copy of Person
@@ -973,7 +1034,10 @@ abstract class _Person implements Person {
       @JsonKey(name: 'laboratoireCode') final String? laboratoireCode,
       @JsonKey(name: 'delegueType') final num? delegueType,
       @JsonKey(name: 'lastVisitDate') final String? lastVisitDate,
-      @JsonKey(name: 'visitCount') final int? visitCount}) = _$PersonImpl;
+      @JsonKey(name: 'visitCount') final int? visitCount,
+      @JsonKey(name: 'inactifFlag') final bool? inactifFlag,
+      @JsonKey(name: 'status') final String? status,
+      @JsonKey(name: 'phase') final String? phase}) = _$PersonImpl;
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$PersonImpl.fromJson;
 
@@ -1085,6 +1149,15 @@ abstract class _Person implements Person {
   @override
   @JsonKey(name: 'visitCount')
   int? get visitCount;
+  @override
+  @JsonKey(name: 'inactifFlag')
+  bool? get inactifFlag;
+  @override
+  @JsonKey(name: 'status')
+  String? get status;
+  @override
+  @JsonKey(name: 'phase')
+  String? get phase;
 
   /// Create a copy of Person
   /// with the given fields replaced by the non-null parameter values.

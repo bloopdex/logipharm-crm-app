@@ -62,6 +62,7 @@ import 'features/tour-plan/bloc/wilaya_cubit.dart';
 import 'features/tour-plan/core/controller.dart';
 import 'features/visits/bloc/contact_type_cubit.dart';
 import 'features/visits/bloc/visit-creation/visit_creation_cubit.dart';
+import 'features/visits/bloc/visit_result_cubit.dart';
 import 'features/contacts/bloc/specialite_lov_cubit.dart';
 import 'features/clients/blocs/fournisseur_lov/fournisseur_lov_cubit.dart';
 import 'l10n/l10n.dart';
@@ -472,6 +473,8 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           // Contact type for visits
           BlocProvider<ContactTypeCubit>(
               create: (context) => ContactTypeCubit()),
+          BlocProvider<VisitResultLovCubit>(
+              create: (context) => VisitResultLovCubit()),
           BlocProvider<GrossisteCubit>(create: (context) => GrossisteCubit()),
           BlocProvider<EtablissementCubit>(
               create: (context) => EtablissementCubit()),

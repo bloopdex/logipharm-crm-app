@@ -155,9 +155,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Ferme le plan de tournée actuel.",
     ),
     "cnrc": MessageLookupByLibrary.simpleMessage("Prospect"),
+    "cnrcCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "CNRC créé avec succès",
+    ),
     "colis": MessageLookupByLibrary.simpleMessage("Colis"),
     "color": MessageLookupByLibrary.simpleMessage("Couleur"),
     "commune": MessageLookupByLibrary.simpleMessage("Commune"),
+    "communePlaceholder": MessageLookupByLibrary.simpleMessage(
+      "Sélectionner une commune",
+    ),
     "completed": MessageLookupByLibrary.simpleMessage("Terminé"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirmer"),
     "confirmClientMessage": m0,
@@ -287,6 +293,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Détails Pharmacien",
     ),
     "contactsTitle": MessageLookupByLibrary.simpleMessage("Contacts"),
+    "create": MessageLookupByLibrary.simpleMessage("Créer"),
+    "createCnrc": MessageLookupByLibrary.simpleMessage("Créer CNRC"),
     "createNewHirement": MessageLookupByLibrary.simpleMessage(
       "Créer un nouveau recrutement",
     ),
@@ -317,6 +325,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "endDate": MessageLookupByLibrary.simpleMessage("Date de fin"),
     "error": MessageLookupByLibrary.simpleMessage("Erreur"),
+    "errorLoadingData": MessageLookupByLibrary.simpleMessage(
+      "Erreur de chargement des données",
+    ),
     "etablissement": MessageLookupByLibrary.simpleMessage("Etablissement"),
     "eventAll": MessageLookupByLibrary.simpleMessage("Tous les événements"),
     "eventCompleted": MessageLookupByLibrary.simpleMessage("Terminé"),
@@ -385,6 +396,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Ajouter un contact",
     ),
     "inProgress": MessageLookupByLibrary.simpleMessage("En cours"),
+    "inactiveClients": MessageLookupByLibrary.simpleMessage("Inactifs"),
     "labelAmount": MessageLookupByLibrary.simpleMessage("Montant"),
     "labelDates": MessageLookupByLibrary.simpleMessage("Dates"),
     "labelLabCode": MessageLookupByLibrary.simpleMessage("Code labo"),
@@ -434,6 +446,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Le nouveau mot de passe est requis",
     ),
     "next": MessageLookupByLibrary.simpleMessage("Suivant"),
+    "nif": MessageLookupByLibrary.simpleMessage("NIF"),
+    "nifPlaceholder": MessageLookupByLibrary.simpleMessage("Entrer le NIF"),
+    "nis": MessageLookupByLibrary.simpleMessage("NIS"),
+    "nisPlaceholder": MessageLookupByLibrary.simpleMessage("Entrer le NIS"),
     "noAddress": MessageLookupByLibrary.simpleMessage("Pas d\'adresse"),
     "noAnalytics": MessageLookupByLibrary.simpleMessage(
       "Aucune analyse trouvée",
@@ -532,6 +548,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pendingEvent": MessageLookupByLibrary.simpleMessage(
       "Événement en attente",
     ),
+    "phase": MessageLookupByLibrary.simpleMessage("Phase"),
     "phone": MessageLookupByLibrary.simpleMessage("Téléphone"),
     "phone1": MessageLookupByLibrary.simpleMessage("Téléphone 1"),
     "phone1Hint": MessageLookupByLibrary.simpleMessage("+213 5x xx xx xx"),
@@ -592,6 +609,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sélectionner une raison",
     ),
     "selectTime": MessageLookupByLibrary.simpleMessage("Sélectionner l\'heure"),
+    "selectVisitResult": MessageLookupByLibrary.simpleMessage(
+      "Sélectionner le résultat de la visite",
+    ),
     "sold": MessageLookupByLibrary.simpleMessage("Vendu"),
     "solvability": MessageLookupByLibrary.simpleMessage("Solvaibilité"),
     "start": MessageLookupByLibrary.simpleMessage("Démarrer"),
@@ -769,6 +789,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Veille Concurrentielle",
     ),
     "viewDetails": MessageLookupByLibrary.simpleMessage("Voir les détails"),
+    "visitActivationHint": MessageLookupByLibrary.simpleMessage(
+      "Cochez cette case pour activer ce client lors de cette visite",
+    ),
+    "visitActivationLabel": MessageLookupByLibrary.simpleMessage(
+      "Visite d\'activation",
+    ),
     "visitAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Visite ajoutée avec succès",
     ),
@@ -923,6 +949,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "visitPrivilegeMissing": MessageLookupByLibrary.simpleMessage(
       "Vous n\'avez pas le privilège de créer une visite",
+    ),
+    "visitResultLabel": MessageLookupByLibrary.simpleMessage(
+      "Résultat de la visite",
     ),
     "visitTourIsntOpen": MessageLookupByLibrary.simpleMessage(
       "La visite n\'est pas ouverte",

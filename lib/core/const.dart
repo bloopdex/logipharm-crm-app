@@ -78,6 +78,7 @@ Color kOverlay = Colors.black.withOpacity(.5);
 
 Color kPrimaryColor = kCeruleanBlue.shade600;
 Color kSuccessColor = kHighland.shade500;
+Color kInactiveClient = kBrightSun.shade600;
 
 Color kTextLight = Colors.white;
 Color kText5 = kCodGray.shade400;
@@ -161,7 +162,7 @@ const String port = "8085";
 // const String baseUrl = 'http://saouli.damnserver.com:8089';
 // const String baseUrl = 'http://192.168.9.105:8086';
 // const String baseUrl = 'http://192.168.0.14:$port';
-// const String baseUrl = 'http://10.0.2.2:$port';
+const String baseUrl = 'http://10.0.2.2:$port';
 // const String baseUrl = 'http://192.168.0.109:$port';
 // const String baseUrl = 'http://optipharm.damnserver.com:$port';
 // const String baseUrl = 'http://hq.icoperdis.com:$port';

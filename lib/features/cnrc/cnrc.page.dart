@@ -1,4 +1,5 @@
 import 'package:crm/core/core.dart';
+import 'package:crm/features/cnrc/create-cnrc.page.dart';
 import 'package:crm/features/cnrc/cubit/commercial_register_cubit.dart';
 import 'package:crm/features/cnrc/update-cnrc.page.dart';
 import 'package:crm/features/hiring/create-hire.page.dart';
@@ -51,6 +52,23 @@ class _CommercialRegisterContentState extends State<CommercialRegisterContent> {
             context.i10n.cnrc,
             style: context.textTheme.headlineMedium,
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(
+                  MaterialPageRoute(
+                    builder: (context) => const CreateCNRCPage(),
+                  ),
+                )
+                    .then((_) {
+                  // Refresh the list after creating a new CNRC
+                  context.read<CommercialRegisterCubit>().started();
+                });
+              },
+            ),
+          ],
         ),
         body: BlocListener<SearchCubit, String>(
           listener: (BuildContext context, String state) {

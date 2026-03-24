@@ -44,12 +44,18 @@ class _ClientsPageState extends State<ClientsPage> {
     return null;
   }
 
+  bool? get _inactifFilter {
+    if (selectedClientType == 'inactive') return true;
+    return null;
+  }
+
   void _applyFilter() {
     context.read<ClientsCubit>().filter(
           searchQuery: _searchQuery,
           commune: selectedCommune,
           regionId: selectedWilaya,
           prospect: _prospectFilter,
+          inactif: _inactifFilter,
         );
   }
 
@@ -289,6 +295,47 @@ class _ClientsPageState extends State<ClientsPage> {
                             ),
                           ),
                         ),
+                        SizedBox(width: kSpacingX2),
+                        // Inactive Client Radio Button
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedClientType = "inactive";
+                              _applyFilter();
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.h, vertical: 8.h),
+                            decoration: BoxDecoration(
+                              color: selectedClientType == "inactive"
+                                  ? kInactiveClient.withOpacity(0.1)
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: selectedClientType == "inactive"
+                                    ? kInactiveClient
+                                    : Colors.grey,
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Radio<String?>(
+                                  value: "inactive",
+                                  groupValue: selectedClientType,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedClientType = value ?? "";
+                                      _applyFilter();
+                                    });
+                                  },
+                                ),
+                                Text(context.i10n.inactiveClients,
+                                    style: context.textTheme.bodyMedium),
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -396,11 +443,53 @@ class ClientCard extends StatelessWidget {
       },
       leading: ProfileCard(
         text: client.fullName,
-        borderColor: client.prospect ?? false ? kCardinal : kCeruleanBlue,
+        borderColor: client.inactifFlag == true
+            ? kInactiveClient
+            : (client.prospect ?? false ? kCardinal : kCeruleanBlue),
       ),
       title: Text(client.fullName, style: context.textTheme.bodyLarge),
-      subtitle: Text(client.address ?? context.i10n.noAddress,
-          style: context.textTheme.bodyMedium),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(client.address ?? context.i10n.noAddress,
+              style: context.textTheme.bodyMedium),
+          if (client.prospect == true &&
+              (client.status != null || client.phase != null)) ...[
+            SizedBox(height: 4),
+            Row(
+              children: [
+                if (client.status != null && client.status!.isNotEmpty) ...[
+                  Icon(Icons.info_outline, size: 14, color: kCardinal),
+                  SizedBox(width: 4),
+                  Text(
+                    '${context.i10n.status}: ${client.status}',
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: kCardinal,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+                if (client.status != null &&
+                    client.status!.isNotEmpty &&
+                    client.phase != null &&
+                    client.phase!.isNotEmpty)
+                  Text(' • ', style: context.textTheme.bodySmall),
+                if (client.phase != null && client.phase!.isNotEmpty) ...[
+                  Icon(Icons.timeline, size: 14, color: kCardinal),
+                  SizedBox(width: 4),
+                  Text(
+                    '${context.i10n.phase}: ${client.phase}',
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: kCardinal,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ],
+        ],
+      ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

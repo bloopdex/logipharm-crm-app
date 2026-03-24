@@ -21,6 +21,7 @@ import '../../tour-plan/models/tour.dart';
 import '../add_client_selection.dart';
 import '../add_contact_selection.dart';
 import '../bloc/contact_type_cubit.dart';
+import '../bloc/visit_result_cubit.dart';
 import '../models/contact_type.dart';
 import '../widgets/selected_entity_header.dart';
 
@@ -66,7 +67,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
 
     // Initial validity for report
     isReportValid =
-        widget.quillController.document.toPlainText().trim().length >= (user.minReportChar ?? 1);
+        widget.quillController.document.toPlainText().trim().length >=
+            (user.minReportChar ?? 1);
 
     if (widget.data['pharmacieId'] != null) {
       pharmacy = widget.clients
@@ -83,7 +85,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
     // Update selected contact by searching widget.data['pharmacieId'] in the contacts cubit if companyType==0
     if (user.companyType == 1 && widget.data['pharmacieId'] != null) {
       final currentValue = (widget.data['pharmacieId'] ?? '').toString();
-      final selectedId = int.tryParse(currentValue.split(':').firstOrNull ?? '');
+      final selectedId =
+          int.tryParse(currentValue.split(':').firstOrNull ?? '');
       if (selectedId != null) {
         final contactsState = context.read<ContactsCubit>().state;
         contactsState.maybeWhen(
@@ -101,7 +104,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
 
     _quillFocusNode.addListener(_handleQuillFocusChange);
     widget.quillController.addListener(() {
-      final textLength = widget.quillController.document.toPlainText().trim().length;
+      final textLength =
+          widget.quillController.document.toPlainText().trim().length;
       setState(() {
         isReportValid = textLength >= (user.minReportChar ?? 1);
       });
@@ -128,7 +132,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
 
   Future<void> _onAddContactPressed() async {
     final contactsCubit = context.read<ContactsCubit>();
-    final hasData = contactsCubit.state.maybeWhen(loaded: (_) => true, orElse: () => false);
+    final hasData =
+        contactsCubit.state.maybeWhen(loaded: (_) => true, orElse: () => false);
     if (!hasData) {
       await contactsCubit.load(categories: const ['1', '2', '3']);
     }
@@ -181,7 +186,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
     }
   }
 
-  Widget _visitTextField(String key, String label, String hint, {TextInputType? keyboardType}) {
+  Widget _visitTextField(String key, String label, String hint,
+      {TextInputType? keyboardType}) {
     final value = (widget.data[key] ?? '').toString();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,7 +209,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
   }
 
   Widget _visitCheckboxField(String key, String label, String hint) {
-    final checked = (widget.data[key] ?? 'NON').toString().toUpperCase() == 'OUI';
+    final checked =
+        (widget.data[key] ?? 'NON').toString().toUpperCase() == 'OUI';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -214,7 +221,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
           subtitle: hint.isNotEmpty
               ? Text(
                   hint,
-                  style: context.textTheme.bodySmall?.copyWith(color: kCodGray.shade500),
+                  style: context.textTheme.bodySmall
+                      ?.copyWith(color: kCodGray.shade500),
                 )
               : null,
           value: checked,
@@ -284,12 +292,14 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                   items: items
                       .map((e) => DropdownMenuItem<String>(
                             value: e.label,
-                            child: Text(e.label, overflow: TextOverflow.ellipsis),
+                            child:
+                                Text(e.label, overflow: TextOverflow.ellipsis),
                           ))
                       .toList(),
                   onChanged: (selected) {
                     setState(() {
-                      widget.data['specialiteMedecin'] = selected?.toString() ?? '';
+                      widget.data['specialiteMedecin'] =
+                          selected?.toString() ?? '';
                     });
                     widget.onQuillChange?.call();
                   },
@@ -431,7 +441,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(context.i10n.contactLabel, style: context.textTheme.bodyMedium),
+                            Text(context.i10n.contactLabel,
+                                style: context.textTheme.bodyMedium),
                             SizedBox(height: kSpacingX1),
                             Text(
                               ('${selectedContact?.nom ?? ''} ${selectedContact?.prenom ?? ''}')
@@ -491,7 +502,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                                 .map(
                                   (e) => CustomDropDownItem(
                                     label: e.pharmacy?.fullName ?? "",
-                                    value: '${e.pharmacy?.id}:${e.pharmacy?.typeTier}',
+                                    value:
+                                        '${e.pharmacy?.id}:${e.pharmacy?.typeTier}',
                                   ),
                                 ),
                           ],
@@ -517,10 +529,12 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                                 Person? pharmacy = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const AddClientSelection()),
+                                      builder: (context) =>
+                                          const AddClientSelection()),
                                 );
 
-                                if (!context.mounted || pharmacy == null) return;
+                                if (!context.mounted || pharmacy == null)
+                                  return;
 
                                 setState(() {
                                   widget.data['pharmacieId'] =
@@ -538,7 +552,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                   ),
                 ] else ...[
                   // companyType == 0 -> use ContactsCubit to list contacts included in the tour
-                  Text(context.i10n.contactLabel, style: context.textTheme.bodyMedium),
+                  Text(context.i10n.contactLabel,
+                      style: context.textTheme.bodyMedium),
                   SizedBox(height: kSpacingX1),
                   BlocBuilder<ContactsCubit, ContactsState>(
                     builder: (context, state) {
@@ -553,13 +568,16 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                               .toSet();
 
                           var filteredContacts = contacts
-                              .where((c) => c.id != null && allowedContactIds.contains(c.id))
+                              .where((c) =>
+                                  c.id != null &&
+                                  allowedContactIds.contains(c.id))
                               .toList();
 
                           // Find current value from data['pharmacieId'] (format id:1)
-                          final currentValue = (widget.data['pharmacieId'] ?? '').toString();
-                          final selectedId =
-                              int.tryParse(currentValue.split(':').firstOrNull ?? '');
+                          final currentValue =
+                              (widget.data['pharmacieId'] ?? '').toString();
+                          final selectedId = int.tryParse(
+                              currentValue.split(':').firstOrNull ?? '');
                           if (selectedId != null && selectedContact == null) {
                             final sc = contacts.firstWhere(
                               (c) => c.id == selectedId,
@@ -567,9 +585,13 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                             );
                             selectedContact = sc.id == null ? null : sc;
                             if (selectedContact != null) {
-                              if ((widget.data['contactType'] ?? '').toString().isEmpty &&
-                                  (selectedContact!.categorie ?? '').isNotEmpty) {
-                                widget.data['contactType'] = selectedContact!.categorie!;
+                              if ((widget.data['contactType'] ?? '')
+                                      .toString()
+                                      .isEmpty &&
+                                  (selectedContact!.categorie ?? '')
+                                      .isNotEmpty) {
+                                widget.data['contactType'] =
+                                    selectedContact!.categorie!;
                               }
                               widget.data['contact'] = {
                                 'nom': selectedContact!.nom,
@@ -580,7 +602,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                               _applyContactDefaults(selectedContact!);
                               if (!_initializedContactFromPharmacieId) {
                                 _initializedContactFromPharmacieId = true;
-                                WidgetsBinding.instance.addPostFrameCallback((_) {
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
                                   if (!mounted) return;
                                   setState(() {});
                                   widget.onQuillChange?.call();
@@ -590,16 +613,21 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                           }
 
                           if (filteredContacts.isNotEmpty &&
-                              (widget.data['pharmacieId'] ?? '').toString().isEmpty) {
+                              (widget.data['pharmacieId'] ?? '')
+                                  .toString()
+                                  .isEmpty) {
                             final firstContact = filteredContacts.first;
                             WidgetsBinding.instance.addPostFrameCallback((_) {
                               if (!mounted) return;
                               setState(() {
                                 widget.data['pharmacieId'] =
-                                    firstContact.id == null ? '' : '${firstContact.id}:1';
+                                    firstContact.id == null
+                                        ? ''
+                                        : '${firstContact.id}:1';
                                 selectedContact = firstContact;
                                 if ((firstContact.categorie ?? '').isNotEmpty) {
-                                  widget.data['contactType'] = firstContact.categorie!;
+                                  widget.data['contactType'] =
+                                      firstContact.categorie!;
                                 }
                                 widget.data['contact'] = {
                                   'nom': firstContact.nom,
@@ -616,7 +644,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                           // Ensure selected contact remains visible even if outside tour list
                           if (selectedContact != null &&
                               selectedContact!.id != null &&
-                              filteredContacts.every((c) => c.id != selectedContact!.id)) {
+                              filteredContacts
+                                  .every((c) => c.id != selectedContact!.id)) {
                             filteredContacts = [
                               selectedContact!,
                               ...filteredContacts,
@@ -624,8 +653,10 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                           }
 
                           filteredContacts.sort((a, b) {
-                            final nameA = ('${a.nom ?? ''} ${a.prenom ?? ''}').trim();
-                            final nameB = ('${b.nom ?? ''} ${b.prenom ?? ''}').trim();
+                            final nameA =
+                                ('${a.nom ?? ''} ${a.prenom ?? ''}').trim();
+                            final nameB =
+                                ('${b.nom ?? ''} ${b.prenom ?? ''}').trim();
                             return nameA.compareTo(nameB);
                           });
 
@@ -638,7 +669,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                                     style: context.textTheme.bodyMedium,
                                   ),
                                 ),
-                                if (context.user.addVisitOutPlanPrivilege == true) ...[
+                                if (context.user.addVisitOutPlanPrivilege ==
+                                    true) ...[
                                   SizedBox(width: kPaddingSm2),
                                   IconButton(
                                     onPressed: _onAddContactPressed,
@@ -651,7 +683,9 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
 
                           final items = <CustomDropDownItem>[
                             ...filteredContacts.map((c) {
-                              final label = ('${c.nom ?? ''} ${c.prenom ?? ''}').trim().isEmpty
+                              final label = ('${c.nom ?? ''} ${c.prenom ?? ''}')
+                                      .trim()
+                                      .isEmpty
                                   ? (c.nom ?? context.i10n.contactLabel)
                                   : ('${c.nom ?? ''} ${c.prenom ?? ''}').trim();
                               return CustomDropDownItem(
@@ -663,7 +697,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
 
                           String initialValue = currentValue;
                           if (!items.any((i) => i.value == currentValue)) {
-                            initialValue = items.isNotEmpty ? items.first.value : '';
+                            initialValue =
+                                items.isNotEmpty ? items.first.value : '';
                           }
 
                           final dropdown = CustomDropDownInput(
@@ -674,7 +709,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                             onChanged: (value) {
                               setState(() {
                                 widget.data['pharmacieId'] = value ?? '';
-                                final id = int.tryParse((value ?? '').split(':').firstOrNull ?? '');
+                                final id = int.tryParse(
+                                    (value ?? '').split(':').firstOrNull ?? '');
                                 final sc = (id == null)
                                     ? const Contact()
                                     : contacts.firstWhere(
@@ -684,7 +720,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                                 selectedContact = sc.id == null ? null : sc;
 
                                 if (selectedContact?.categorie != null) {
-                                  widget.data['contactType'] = selectedContact!.categorie!;
+                                  widget.data['contactType'] =
+                                      selectedContact!.categorie!;
                                 }
 
                                 if (selectedContact != null) {
@@ -707,7 +744,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                           return Row(
                             children: [
                               Expanded(child: dropdown),
-                              if (context.user.addVisitOutPlanPrivilege == true) ...[
+                              if (context.user.addVisitOutPlanPrivilege ==
+                                  true) ...[
                                 SizedBox(width: kPaddingSm2),
                                 IconButton(
                                   onPressed: _onAddContactPressed,
@@ -731,7 +769,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                 SizedBox(height: kSpacingX1),
                 CustomDateTimePicker(
                   data: widget.data,
-                  firstDate: DateTime.parse(widget.tour?.startDate ?? DateTime.now().toString()),
+                  firstDate: DateTime.parse(
+                      widget.tour?.startDate ?? DateTime.now().toString()),
                   initialDate: DateTime.now(),
                   onChanged: (value) {
                     widget.onQuillChange?.call();
@@ -749,13 +788,16 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                       return const CircularProgressIndicator();
                     }
                     final items = [
-                      CustomDropDownItem(label: context.i10n.selectReason, value: ''),
+                      CustomDropDownItem(
+                          label: context.i10n.selectReason, value: ''),
                       ...state.map(
-                        (e) => CustomDropDownItem(label: e.label, value: e.id.toString()),
+                        (e) => CustomDropDownItem(
+                            label: e.label, value: e.id.toString()),
                       ),
                     ];
 
-                    final currentValue = (widget.data['contactType'] ?? '') as String;
+                    final currentValue =
+                        (widget.data['contactType'] ?? '') as String;
 
                     return CustomDropDownInput(
                       data: widget.data,
@@ -786,19 +828,21 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                     } else {
                       // Deduplicate motifs by id
                       final uniqueMotifs = <MotifVisit>{};
-                      final deduplicatedMotifs =
-                          state.where((motif) => uniqueMotifs.add(motif)).toList();
+                      final deduplicatedMotifs = state
+                          .where((motif) => uniqueMotifs.add(motif))
+                          .toList();
 
                       // Extract values from dropdown items
                       final itemValues = <String>[
-                        ...deduplicatedMotifs.map((motif) => motif.id.toString()),
+                        ...deduplicatedMotifs
+                            .map((motif) => motif.id.toString()),
                       ];
 
                       // Ensure the current value exists in items; default to empty if not
-                      final currentValue =
-                          widget.data['motif'] == null || !itemValues.contains(widget.data['motif'])
-                              ? ""
-                              : widget.data['motif'];
+                      final currentValue = widget.data['motif'] == null ||
+                              !itemValues.contains(widget.data['motif'])
+                          ? ""
+                          : widget.data['motif'];
 
                       return CustomDropDownInput(
                         data: widget.data,
@@ -827,6 +871,84 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                   },
                 ),
                 SizedBox(height: kSpacingX5),
+
+                // Activation visit checkbox - only show if client is inactive
+                if (pharmacy?.inactifFlag == true ||
+                    selectedContact?.inactifFlag == true) ...[
+                  CheckboxListTile(
+                    value: widget.data['visiteActivation'] == true,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        widget.data['visiteActivation'] = value ?? false;
+                      });
+                      widget.onQuillChange?.call();
+                    },
+                    title: Text(
+                      context.i10n.visitActivationLabel,
+                      style: context.textTheme.bodyMedium,
+                    ),
+                    subtitle: Text(
+                      context.i10n.visitActivationHint,
+                      style: context.textTheme.bodySmall,
+                    ),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                  SizedBox(height: kSpacingX3),
+                ],
+
+                // Visit result dropdown - only show for prospects (typeTier == 14)
+                if (pharmacy?.typeTier == '14' && user.companyType == 0) ...[
+                  Text(
+                    context.i10n.visitResultLabel,
+                    style: context.textTheme.bodyMedium,
+                  ),
+                  SizedBox(height: kSpacingX1),
+                  BlocBuilder<VisitResultLovCubit, VisitResultLovState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        orElse: () {
+                          context.read<VisitResultLovCubit>().load();
+                          return const CircularProgressIndicator();
+                        },
+                        loading: () => const CircularProgressIndicator(),
+                        error: (_) => Text(
+                          context.i10n.errorLoadingData,
+                          style:
+                              TextStyle(color: context.theme.colorScheme.error),
+                        ),
+                        loaded: (results) {
+                          return CustomDropDownInput(
+                            data: widget.data,
+                            mapKey: 'visitResult',
+                            items: [
+                              CustomDropDownItem(
+                                label: context.i10n.selectVisitResult,
+                                value: '',
+                              ),
+                              ...results.map(
+                                (result) => CustomDropDownItem(
+                                  label: result.label,
+                                  value: result.id.toString(),
+                                ),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                widget.data['visitResult'] = value;
+                              });
+                              log('Visit result selected: $value');
+                              log('Data map after setState: ${widget.data["visitResult"]}');
+                              widget.onQuillChange?.call();
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  SizedBox(height: kSpacingX5),
+                ],
+
                 // Dynamic visit attributes by selected contact type
                 Builder(builder: (context) {
                   final ct = selectedContact?.categorie ?? '';
@@ -916,8 +1038,10 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                         context.i10n.visitFieldTypeDiabete,
                         context.i10n.visitHintTypeDiabete,
                         [
-                          DropdownMenuItem(value: 'Type 1', child: Text('Type 1')),
-                          DropdownMenuItem(value: 'Type 2', child: Text('Type 2')),
+                          DropdownMenuItem(
+                              value: 'Type 1', child: Text('Type 1')),
+                          DropdownMenuItem(
+                              value: 'Type 2', child: Text('Type 2')),
                         ],
                       ),
                       _visitCheckboxField(
@@ -956,7 +1080,8 @@ class _ClientSelectionFormState extends State<ClientSelectionForm> {
                   Padding(
                     padding: EdgeInsets.only(top: kSpacingX1),
                     child: Text(
-                      context.i10n.visitCreationRapportMinCharError(user.minReportChar ?? 1),
+                      context.i10n.visitCreationRapportMinCharError(
+                          user.minReportChar ?? 1),
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.error,
                         fontSize: 12,
