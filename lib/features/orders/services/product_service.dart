@@ -21,4 +21,17 @@ class ProductService {
       token: token,
     );
   }
+
+  static Future<Response> exportProductsPdf() async {
+    final token = await AuthRepository.token;
+
+    return await DioHelper.getData(
+      url: '/stocks/export',
+      token: token,
+      headers: {
+        'Accept': 'application/pdf',
+      },
+      responseType: ResponseType.bytes,
+    );
+  }
 }

@@ -42,7 +42,9 @@ class _CartScreenState extends State<CartScreen> {
         isDelegateRestricted = context.user.delegueType == 1;
       } catch (_) {}
 
-      context.read<ClientsCubit>().load(usePagination: isDelegateRestricted);
+      if (!isDelegateRestricted) {
+        context.read<ClientsCubit>().load();
+      }
     }
   }
 

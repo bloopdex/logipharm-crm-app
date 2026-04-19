@@ -74,6 +74,7 @@ class DioHelper {
     Map<String, dynamic>? query,
     Map<String, dynamic>? headers,
     String? token,
+    ResponseType? responseType,
   }) async {
     Map<String, dynamic> header = {
       'Authorization': token,
@@ -85,11 +86,32 @@ class DioHelper {
     // Manually encode query parameters to use %20 instead of +
     String? queryString;
     if (query != null && query.isNotEmpty) {
-      queryString = query.entries
-          .where((e) => e.value != null)
-          .map((e) =>
-              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
-          .join('&');
+      final encodedPairs = <String>[];
+
+      for (final entry in query.entries) {
+        final value = entry.value;
+        if (value == null) continue;
+
+        final encodedKey = Uri.encodeComponent(entry.key);
+
+        // Repeat the same key for list values: key=1&key=2
+        if (value is Iterable && value is! String) {
+          for (final item in value) {
+            if (item == null) continue;
+            encodedPairs.add(
+              '$encodedKey=${Uri.encodeComponent(item.toString())}',
+            );
+          }
+          continue;
+        }
+
+        encodedPairs
+            .add('$encodedKey=${Uri.encodeComponent(value.toString())}');
+      }
+
+      if (encodedPairs.isNotEmpty) {
+        queryString = encodedPairs.join('&');
+      }
     }
 
     final fullUrl = queryString != null ? '$url?$queryString' : url;
@@ -98,6 +120,7 @@ class DioHelper {
         cancelToken: cancelToken,
         options: Options(
           headers: header,
+          responseType: responseType,
         ));
   }
 

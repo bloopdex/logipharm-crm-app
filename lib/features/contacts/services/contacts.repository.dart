@@ -10,8 +10,8 @@ class ContactsRepository {
     final token = await AuthRepository.token;
     final Map<String, dynamic> query = {};
     if (categories != null && categories.isNotEmpty) {
-      // Dio supports list params as repeated keys when listFormat is multiDefault
-      query['categorie'] = categories; // -> categorie=1&categorie=2
+      // Serialized as repeated keys by DioHelper.getData: categorie=1&categorie=2
+      query['categorie'] = categories;
     }
     return await DioHelper.getData(
       url: _basePath,

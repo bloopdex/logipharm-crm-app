@@ -1,9 +1,14 @@
+import 'dart:typed_data';
+
 import 'package:crm/core/core.dart';
 import 'package:crm/features/orders/blocs/product/products_cubit.dart';
 import 'package:crm/features/orders/blocs/orders/orders_cubit.dart';
 import 'package:crm/features/orders/blocs/order_details/order_details_cubit.dart';
 import 'package:crm/features/orders/blocs/realization/realization_cubit.dart';
+import 'package:crm/features/orders/services/p_d_f_service.dart';
+import 'package:crm/features/orders/services/product_service.dart';
 import 'package:crm/features/orders/widgets/medicament_card.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +26,7 @@ class ProductsPage extends StatefulWidget {
 class _ProductsPageState extends State<ProductsPage> {
   final ScrollController _scrollController = ScrollController();
   late ProductsCubit _productsCubit;
+  bool _isExportingProducts = false;
 
   final TextEditingController _searchController = TextEditingController();
 
@@ -52,6 +58,140 @@ class _ProductsPageState extends State<ProductsPage> {
     super.dispose();
   }
 
+  Future<void> _exportProducts() async {
+    if (_isExportingProducts) return;
+
+    setState(() {
+      _isExportingProducts = true;
+    });
+
+    try {
+      final hasPermission = await PDFService.requestStoragePermission();
+      if (!hasPermission) {
+        if (mounted) {
+          context.errorSnackBar(context.i10n.exportStoragePermissionRequired);
+        }
+        return;
+      }
+
+      final response = await ProductService.exportProductsPdf();
+      if (response.statusCode != 200) {
+        throw Exception('HTTP ${response.statusCode}');
+      }
+
+      final pdfBytes = _extractPdfBytes(response.data);
+      if (pdfBytes.isEmpty) {
+        if (mounted) {
+          context.errorSnackBar(context.i10n.productsExportEmptyFile);
+        }
+        return;
+      }
+
+      final fileName = _resolveExportFileName(response.headers);
+      final filePath = await PDFService.saveAndDownloadPDF(
+        pdfBytes: pdfBytes,
+        fileName: fileName,
+      );
+
+      if (!mounted) return;
+
+      if (filePath == null) {
+        context.errorSnackBar(context.i10n.productsExportFailed);
+        return;
+      }
+
+      context.successSnackBar(context.i10n.productsExportSuccess);
+      _showExportOptionsDialog(pdfBytes, fileName);
+    } catch (e) {
+      if (mounted) {
+        context.errorSnackBar('${context.i10n.productsExportFailed}: $e');
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isExportingProducts = false;
+        });
+      }
+    }
+  }
+
+  Uint8List _extractPdfBytes(dynamic data) {
+    if (data is Uint8List) {
+      return data;
+    }
+
+    if (data is List<int>) {
+      return Uint8List.fromList(data);
+    }
+
+    if (data is List) {
+      return Uint8List.fromList(data.cast<int>());
+    }
+
+    throw const FormatException('Unexpected PDF payload type');
+  }
+
+  String _resolveExportFileName(Headers headers) {
+    final disposition = headers.value('content-disposition');
+
+    if (disposition != null && disposition.isNotEmpty) {
+      final encodedMatch = RegExp(
+        r"filename\*=UTF-8''([^;]+)",
+        caseSensitive: false,
+      ).firstMatch(disposition);
+      if (encodedMatch != null && encodedMatch.group(1) != null) {
+        return Uri.decodeComponent(encodedMatch.group(1)!);
+      }
+
+      final plainMatch = RegExp(
+        r'filename="?([^";]+)"?',
+        caseSensitive: false,
+      ).firstMatch(disposition);
+      if (plainMatch != null && plainMatch.group(1) != null) {
+        return plainMatch.group(1)!;
+      }
+    }
+
+    return 'products_export_${DateTime.now().millisecondsSinceEpoch}.pdf';
+  }
+
+  void _showExportOptionsDialog(Uint8List pdfBytes, String fileName) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text(context.i10n.exportProducts),
+          content: Text(context.i10n.productsExportReady),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+              child: Text(context.i10n.closeAction),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(dialogContext).pop();
+                await PDFService.printPDF(pdfBytes);
+              },
+              child: Text(context.i10n.printAction),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(dialogContext).pop();
+                await PDFService.sharePDF(
+                  pdfBytes: pdfBytes,
+                  fileName: fileName,
+                );
+              },
+              child: Text(context.i10n.shareAction),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,8 +199,23 @@ class _ProductsPageState extends State<ProductsPage> {
         title: Text(context.i10n.products),
         actions: [
           IconButton(
+            icon: _isExportingProducts
+                ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                    ),
+                  )
+                : const Icon(Icons.picture_as_pdf_outlined),
+            tooltip: _isExportingProducts
+                ? context.i10n.exportingProducts
+                : context.i10n.exportProducts,
+            onPressed: _isExportingProducts ? null : _exportProducts,
+          ),
+          IconButton(
             icon: const Icon(Icons.list_alt),
-            tooltip: 'My Orders',
+            tooltip: context.i10n.myOrders,
             onPressed: () {
               context.push(
                 MultiBlocProvider(
