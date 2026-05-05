@@ -20,6 +20,17 @@ class MedicamentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int? venteFlag = context.user.terVentePrixAchat;
+    double displayPrice;
+    if (venteFlag == 1) {
+      displayPrice = (medicament.prixRv ?? medicament.prixPh ?? 0).toDouble();
+    } else if (venteFlag == 2) {
+      displayPrice = (medicament.prixGr != null)
+          ? medicament.prixGr!.toDouble()
+          : (medicament.prixPh ?? 0).toDouble();
+    } else {
+      displayPrice = (medicament.prixPh ?? 0).toDouble();
+    }
     return InkWell(
       onTap: () {
         context.push(RefactorDetails(medicament: medicament));
@@ -87,8 +98,7 @@ class MedicamentCard extends StatelessWidget {
                       children: [
                         Text(
                           textDirection: TextDirection.ltr,
-                          MoneyHelper.format(
-                              context, (medicament.prixPh ?? 0).toDouble()),
+                          MoneyHelper.format(context, displayPrice),
                           style: context.textTheme.displaySmall!.copyWith(
                             color: kPrimaryColor,
                           ),

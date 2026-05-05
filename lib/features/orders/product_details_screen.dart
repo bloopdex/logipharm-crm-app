@@ -61,6 +61,18 @@ class _RefactorDetailsState extends State<RefactorDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final int? venteFlag = context.user.terVentePrixAchat;
+    double unitPrice;
+    if (venteFlag == 1) {
+      unitPrice = (widget.medicament.prixRv ?? widget.medicament.prixPh ?? 0)
+          .toDouble();
+    } else if (venteFlag == 2) {
+      unitPrice = (widget.medicament.prixGr != null)
+          ? widget.medicament.prixGr!.toDouble()
+          : (widget.medicament.prixPh ?? 0).toDouble();
+    } else {
+      unitPrice = (widget.medicament.prixPh ?? 0).toDouble();
+    }
     return GestureDetector(
       onTap: () {
         if (textEditingController.text == "") {
@@ -186,9 +198,7 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                                     builder: (context, state) {
                                       return Text(
                                         MoneyHelper.format(
-                                            context,
-                                            (widget.medicament.prixPh ?? 0) *
-                                                state),
+                                            context, unitPrice * state),
                                         style: context.textTheme.headlineLarge!
                                             .copyWith(color: kPrimaryColor),
                                       );
@@ -297,14 +307,14 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                             text: context.i10n.addToCart,
                             icon: Icons.shopping_cart,
                             onPressed: () {
+                              final int qty =
+                                  int.tryParse(textEditingController.text) ?? 1;
                               context.read<CartCubit>().addItemToCart({
                                 "medId": widget.medicament.medId,
                                 "prdId": widget.medicament.prdId,
                                 "stkCode": widget.medicament.stkCode,
-                                "qte":
-                                    int.tryParse(textEditingController.text) ??
-                                        1,
-                                "prixPh": widget.medicament.prixPh ?? 0,
+                                "qte": qty,
+                                "prixPh": unitPrice,
                                 "txRistourne":
                                     widget.medicament.ugVnete?.toDouble() ?? 0,
                               });
@@ -504,7 +514,8 @@ class ProductDetailsCard extends StatelessWidget {
                 Icon(Icons.all_inbox, color: kCodGray.shade700, size: 20.h),
                 SizedBox(width: kSpacingX1),
                 Expanded(
-                  child: Text(context.i10n.tva, style: context.textTheme.titleMedium),
+                  child: Text(context.i10n.tva,
+                      style: context.textTheme.titleMedium),
                 ),
                 Text(
                   medicament.tva == null ? '-' : '${medicament.tva}',

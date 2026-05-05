@@ -27,6 +27,7 @@ class User with _$User {
     @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
     @JsonKey(name: 'delegueType') num? delegueType,
     @JsonKey(name: 'crmNbrLettres') int? minReportChar,
+    @JsonKey(name: 'terVentePrixAchat') int? terVentePrixAchat,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

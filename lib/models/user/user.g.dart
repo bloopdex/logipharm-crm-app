@@ -26,6 +26,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       roleChangeLocationClient: json['roleChangeLocationClient'] as bool?,
       delegueType: json['delegueType'] as num?,
       minReportChar: (json['crmNbrLettres'] as num?)?.toInt(),
+      terVentePrixAchat: (json['terVentePrixAchat'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -49,4 +50,5 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'roleChangeLocationClient': instance.roleChangeLocationClient,
       'delegueType': instance.delegueType,
       'crmNbrLettres': instance.minReportChar,
+      'terVentePrixAchat': instance.terVentePrixAchat,
     };

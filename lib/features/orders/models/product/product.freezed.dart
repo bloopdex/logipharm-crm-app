@@ -42,6 +42,8 @@ mixin _$Product {
   double? get qte => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixPh')
   double? get prixPh => throw _privateConstructorUsedError;
+  @JsonKey(name: 'prixRv')
+  double? get prixRv => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixGr')
   int? get prixGr => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixShp')
@@ -87,6 +89,7 @@ abstract class $ProductCopyWith<$Res> {
       @JsonKey(name: 'prixPpa') double? prixPpa,
       @JsonKey(name: 'qte') double? qte,
       @JsonKey(name: 'prixPh') double? prixPh,
+      @JsonKey(name: 'prixRv') double? prixRv,
       @JsonKey(name: 'prixGr') int? prixGr,
       @JsonKey(name: 'prixShp') double? prixShp,
       @JsonKey(name: 'ugVnete') double? ugVnete,
@@ -124,6 +127,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? prixPpa = freezed,
     Object? qte = freezed,
     Object? prixPh = freezed,
+    Object? prixRv = freezed,
     Object? prixGr = freezed,
     Object? prixShp = freezed,
     Object? ugVnete = freezed,
@@ -178,6 +182,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       prixPh: freezed == prixPh
           ? _value.prixPh
           : prixPh // ignore: cast_nullable_to_non_nullable
+              as double?,
+      prixRv: freezed == prixRv
+          ? _value.prixRv
+          : prixRv // ignore: cast_nullable_to_non_nullable
               as double?,
       prixGr: freezed == prixGr
           ? _value.prixGr
@@ -238,6 +246,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       @JsonKey(name: 'prixPpa') double? prixPpa,
       @JsonKey(name: 'qte') double? qte,
       @JsonKey(name: 'prixPh') double? prixPh,
+      @JsonKey(name: 'prixRv') double? prixRv,
       @JsonKey(name: 'prixGr') int? prixGr,
       @JsonKey(name: 'prixShp') double? prixShp,
       @JsonKey(name: 'ugVnete') double? ugVnete,
@@ -273,6 +282,7 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? prixPpa = freezed,
     Object? qte = freezed,
     Object? prixPh = freezed,
+    Object? prixRv = freezed,
     Object? prixGr = freezed,
     Object? prixShp = freezed,
     Object? ugVnete = freezed,
@@ -327,6 +337,10 @@ class __$$ProductImplCopyWithImpl<$Res>
       prixPh: freezed == prixPh
           ? _value.prixPh
           : prixPh // ignore: cast_nullable_to_non_nullable
+              as double?,
+      prixRv: freezed == prixRv
+          ? _value.prixRv
+          : prixRv // ignore: cast_nullable_to_non_nullable
               as double?,
       prixGr: freezed == prixGr
           ? _value.prixGr
@@ -383,6 +397,7 @@ class _$ProductImpl implements _Product {
       @JsonKey(name: 'prixPpa') this.prixPpa,
       @JsonKey(name: 'qte') this.qte,
       @JsonKey(name: 'prixPh') this.prixPh,
+      @JsonKey(name: 'prixRv') this.prixRv,
       @JsonKey(name: 'prixGr') this.prixGr,
       @JsonKey(name: 'prixShp') this.prixShp,
       @JsonKey(name: 'ugVnete') this.ugVnete,
@@ -430,6 +445,9 @@ class _$ProductImpl implements _Product {
   @JsonKey(name: 'prixPh')
   final double? prixPh;
   @override
+  @JsonKey(name: 'prixRv')
+  final double? prixRv;
+  @override
   @JsonKey(name: 'prixGr')
   final int? prixGr;
   @override
@@ -459,7 +477,7 @@ class _$ProductImpl implements _Product {
 
   @override
   String toString() {
-    return 'Product(cmpId: $cmpId, prdId: $prdId, medId: $medId, stkCode: $stkCode, commercialName: $commercialName, attribut2: $attribut2, nlot: $nlot, datePeremption: $datePeremption, prixPpa: $prixPpa, qte: $qte, prixPh: $prixPh, prixGr: $prixGr, prixShp: $prixShp, ugVnete: $ugVnete, tva: $tva, etatFlag: $etatFlag, creerDate: $creerDate, colis: $colis, objectif: $objectif, laboratoire: $laboratoire)';
+    return 'Product(cmpId: $cmpId, prdId: $prdId, medId: $medId, stkCode: $stkCode, commercialName: $commercialName, attribut2: $attribut2, nlot: $nlot, datePeremption: $datePeremption, prixPpa: $prixPpa, qte: $qte, prixPh: $prixPh, prixRv: $prixRv, prixGr: $prixGr, prixShp: $prixShp, ugVnete: $ugVnete, tva: $tva, etatFlag: $etatFlag, creerDate: $creerDate, colis: $colis, objectif: $objectif, laboratoire: $laboratoire)';
   }
 
   @override
@@ -481,6 +499,7 @@ class _$ProductImpl implements _Product {
             (identical(other.prixPpa, prixPpa) || other.prixPpa == prixPpa) &&
             (identical(other.qte, qte) || other.qte == qte) &&
             (identical(other.prixPh, prixPh) || other.prixPh == prixPh) &&
+            (identical(other.prixRv, prixRv) || other.prixRv == prixRv) &&
             (identical(other.prixGr, prixGr) || other.prixGr == prixGr) &&
             (identical(other.prixShp, prixShp) || other.prixShp == prixShp) &&
             (identical(other.ugVnete, ugVnete) || other.ugVnete == ugVnete) &&
@@ -511,6 +530,7 @@ class _$ProductImpl implements _Product {
         prixPpa,
         qte,
         prixPh,
+        prixRv,
         prixGr,
         prixShp,
         ugVnete,
@@ -551,6 +571,7 @@ abstract class _Product implements Product {
       @JsonKey(name: 'prixPpa') final double? prixPpa,
       @JsonKey(name: 'qte') final double? qte,
       @JsonKey(name: 'prixPh') final double? prixPh,
+      @JsonKey(name: 'prixRv') final double? prixRv,
       @JsonKey(name: 'prixGr') final int? prixGr,
       @JsonKey(name: 'prixShp') final double? prixShp,
       @JsonKey(name: 'ugVnete') final double? ugVnete,
@@ -596,6 +617,9 @@ abstract class _Product implements Product {
   @override
   @JsonKey(name: 'prixPh')
   double? get prixPh;
+  @override
+  @JsonKey(name: 'prixRv')
+  double? get prixRv;
   @override
   @JsonKey(name: 'prixGr')
   int? get prixGr;

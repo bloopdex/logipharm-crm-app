@@ -58,6 +58,8 @@ mixin _$User {
   num? get delegueType => throw _privateConstructorUsedError;
   @JsonKey(name: 'crmNbrLettres')
   int? get minReportChar => throw _privateConstructorUsedError;
+  @JsonKey(name: 'terVentePrixAchat')
+  int? get terVentePrixAchat => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -92,7 +94,8 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: 'authorizedRadius') num? authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
       @JsonKey(name: 'delegueType') num? delegueType,
-      @JsonKey(name: 'crmNbrLettres') int? minReportChar});
+      @JsonKey(name: 'crmNbrLettres') int? minReportChar,
+      @JsonKey(name: 'terVentePrixAchat') int? terVentePrixAchat});
 }
 
 /// @nodoc
@@ -129,6 +132,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? roleChangeLocationClient = freezed,
     Object? delegueType = freezed,
     Object? minReportChar = freezed,
+    Object? terVentePrixAchat = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -207,6 +211,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.minReportChar
           : minReportChar // ignore: cast_nullable_to_non_nullable
               as int?,
+      terVentePrixAchat: freezed == terVentePrixAchat
+          ? _value.terVentePrixAchat
+          : terVentePrixAchat // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -237,7 +245,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: 'authorizedRadius') num? authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient') bool? roleChangeLocationClient,
       @JsonKey(name: 'delegueType') num? delegueType,
-      @JsonKey(name: 'crmNbrLettres') int? minReportChar});
+      @JsonKey(name: 'crmNbrLettres') int? minReportChar,
+      @JsonKey(name: 'terVentePrixAchat') int? terVentePrixAchat});
 }
 
 /// @nodoc
@@ -271,6 +280,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? roleChangeLocationClient = freezed,
     Object? delegueType = freezed,
     Object? minReportChar = freezed,
+    Object? terVentePrixAchat = freezed,
   }) {
     return _then(_$UserImpl(
       id: freezed == id
@@ -349,6 +359,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.minReportChar
           : minReportChar // ignore: cast_nullable_to_non_nullable
               as int?,
+      terVentePrixAchat: freezed == terVentePrixAchat
+          ? _value.terVentePrixAchat
+          : terVentePrixAchat // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -375,7 +389,8 @@ class _$UserImpl implements _User {
       @JsonKey(name: 'authorizedRadius') this.authorizedRadius,
       @JsonKey(name: 'roleChangeLocationClient') this.roleChangeLocationClient,
       @JsonKey(name: 'delegueType') this.delegueType,
-      @JsonKey(name: 'crmNbrLettres') this.minReportChar});
+      @JsonKey(name: 'crmNbrLettres') this.minReportChar,
+      @JsonKey(name: 'terVentePrixAchat') this.terVentePrixAchat});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -437,10 +452,13 @@ class _$UserImpl implements _User {
   @override
   @JsonKey(name: 'crmNbrLettres')
   final int? minReportChar;
+  @override
+  @JsonKey(name: 'terVentePrixAchat')
+  final int? terVentePrixAchat;
 
   @override
   String toString() {
-    return 'User(id: $id, companyId: $companyId, companyType: $companyType, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, addVisitOutPlanPrivilege: $addVisitOutPlanPrivilege, fullName: $fullName, authorizedRadius: $authorizedRadius, roleChangeLocationClient: $roleChangeLocationClient, delegueType: $delegueType, minReportChar: $minReportChar)';
+    return 'User(id: $id, companyId: $companyId, companyType: $companyType, typeTier: $typeTier, lastName: $lastName, firstName: $firstName, loginCode: $loginCode, actionFlag: $actionFlag, regionId: $regionId, address: $address, latitude: $latitude, longitude: $longitude, supervisor: $supervisor, addVisitOutPlanPrivilege: $addVisitOutPlanPrivilege, fullName: $fullName, authorizedRadius: $authorizedRadius, roleChangeLocationClient: $roleChangeLocationClient, delegueType: $delegueType, minReportChar: $minReportChar, terVentePrixAchat: $terVentePrixAchat)';
   }
 
   @override
@@ -485,7 +503,9 @@ class _$UserImpl implements _User {
             (identical(other.delegueType, delegueType) ||
                 other.delegueType == delegueType) &&
             (identical(other.minReportChar, minReportChar) ||
-                other.minReportChar == minReportChar));
+                other.minReportChar == minReportChar) &&
+            (identical(other.terVentePrixAchat, terVentePrixAchat) ||
+                other.terVentePrixAchat == terVentePrixAchat));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -510,7 +530,8 @@ class _$UserImpl implements _User {
         authorizedRadius,
         roleChangeLocationClient,
         delegueType,
-        minReportChar
+        minReportChar,
+        terVentePrixAchat
       ]);
 
   /// Create a copy of User
@@ -550,7 +571,9 @@ abstract class _User implements User {
       @JsonKey(name: 'roleChangeLocationClient')
       final bool? roleChangeLocationClient,
       @JsonKey(name: 'delegueType') final num? delegueType,
-      @JsonKey(name: 'crmNbrLettres') final int? minReportChar}) = _$UserImpl;
+      @JsonKey(name: 'crmNbrLettres') final int? minReportChar,
+      @JsonKey(name: 'terVentePrixAchat')
+      final int? terVentePrixAchat}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -611,6 +634,9 @@ abstract class _User implements User {
   @override
   @JsonKey(name: 'crmNbrLettres')
   int? get minReportChar;
+  @override
+  @JsonKey(name: 'terVentePrixAchat')
+  int? get terVentePrixAchat;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
