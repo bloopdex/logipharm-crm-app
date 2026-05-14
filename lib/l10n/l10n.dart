@@ -4366,6 +4366,106 @@ class S {
   String get phase {
     return Intl.message('Phase', name: 'phase', desc: 'Phase label', args: []);
   }
+
+  /// `Product Rotation`
+  String get productRotation {
+    return Intl.message(
+      'Product Rotation',
+      name: 'productRotation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Date`
+  String get productRotationStartDate {
+    return Intl.message(
+      'Start Date',
+      name: 'productRotationStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date`
+  String get productRotationEndDate {
+    return Intl.message(
+      'End Date',
+      name: 'productRotationEndDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Products:`
+  String get productRotationTotalProducts {
+    return Intl.message(
+      'Total Products:',
+      name: 'productRotationTotalProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data found`
+  String get productRotationNoData {
+    return Intl.message(
+      'No data found',
+      name: 'productRotationNoData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No product sales in this period`
+  String get productRotationNoDataDescription {
+    return Intl.message(
+      'No product sales in this period',
+      name: 'productRotationNoDataDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading data`
+  String get productRotationError {
+    return Intl.message(
+      'Error loading data',
+      name: 'productRotationError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `units`
+  String get productRotationUnits {
+    return Intl.message(
+      'units',
+      name: 'productRotationUnits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get productRotationRetry {
+    return Intl.message(
+      'Retry',
+      name: 'productRotationRetry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rotation des Produits`
+  String get menuProductRotation {
+    return Intl.message(
+      'Rotation des Produits',
+      name: 'menuProductRotation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

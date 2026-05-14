@@ -377,6 +377,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "lot": MessageLookupByLibrary.simpleMessage("Lot"),
     "manageProfile": MessageLookupByLibrary.simpleMessage("Manage Profile"),
+    "menuProductRotation": MessageLookupByLibrary.simpleMessage(
+      "Rotation des Produits",
+    ),
     "modePaie": MessageLookupByLibrary.simpleMessage("Mode de paiement"),
     "moreDetails": MessageLookupByLibrary.simpleMessage("More Details"),
     "motif": MessageLookupByLibrary.simpleMessage("Motif"),
@@ -495,6 +498,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneRequired": MessageLookupByLibrary.simpleMessage("Phone is required"),
     "ppa": MessageLookupByLibrary.simpleMessage("PPA"),
     "price": MessageLookupByLibrary.simpleMessage("Price"),
+    "productRotation": MessageLookupByLibrary.simpleMessage("Product Rotation"),
+    "productRotationEndDate": MessageLookupByLibrary.simpleMessage("End Date"),
+    "productRotationError": MessageLookupByLibrary.simpleMessage(
+      "Error loading data",
+    ),
+    "productRotationNoData": MessageLookupByLibrary.simpleMessage(
+      "No data found",
+    ),
+    "productRotationNoDataDescription": MessageLookupByLibrary.simpleMessage(
+      "No product sales in this period",
+    ),
+    "productRotationRetry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "productRotationStartDate": MessageLookupByLibrary.simpleMessage(
+      "Start Date",
+    ),
+    "productRotationTotalProducts": MessageLookupByLibrary.simpleMessage(
+      "Total Products:",
+    ),
+    "productRotationUnits": MessageLookupByLibrary.simpleMessage("units"),
     "products": MessageLookupByLibrary.simpleMessage("Products"),
     "productsTitle": MessageLookupByLibrary.simpleMessage("Products"),
     "prospect": MessageLookupByLibrary.simpleMessage("Prospect"),
