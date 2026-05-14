@@ -1,6 +1,7 @@
 import 'package:crm/core/core.dart';
 import 'package:crm/features/orders/models/order/order.dart';
 import 'package:crm/features/orders/order_details_screen.dart';
+import 'package:crm/shared/utils/money.formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -166,7 +167,7 @@ class _OrderTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${order.totalTtc.toStringAsFixed(2)} DA',
+                    MoneyHelper.format(context, order.totalTtc),
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),

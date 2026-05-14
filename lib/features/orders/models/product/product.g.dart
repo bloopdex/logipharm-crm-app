@@ -22,7 +22,7 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       qte: (json['qte'] as num?)?.toDouble(),
       prixPh: (json['prixPh'] as num?)?.toDouble(),
       prixRv: (json['prixRv'] as num?)?.toDouble(),
-      prixGr: (json['prixGr'] as num?)?.toInt(),
+      prixGr: (json['prixGr'] as num?)?.toDouble(),
       prixShp: (json['prixShp'] as num?)?.toDouble(),
       ugVnete: (json['ugVnete'] as num?)?.toDouble(),
       tva: (json['tva'] as num?)?.toDouble(),

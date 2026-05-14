@@ -20,7 +20,7 @@ class Product with _$Product {
     @JsonKey(name: 'qte') double? qte,
     @JsonKey(name: 'prixPh') double? prixPh,
     @JsonKey(name: 'prixRv') double? prixRv,
-    @JsonKey(name: 'prixGr') int? prixGr,
+    @JsonKey(name: 'prixGr') double? prixGr,
     @JsonKey(name: 'prixShp') double? prixShp,
     @JsonKey(name: 'ugVnete') double? ugVnete,
     @JsonKey(name: 'tva') double? tva,

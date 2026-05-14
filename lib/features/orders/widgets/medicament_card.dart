@@ -23,11 +23,9 @@ class MedicamentCard extends StatelessWidget {
     final int? venteFlag = context.user.terVentePrixAchat;
     double displayPrice;
     if (venteFlag == 1) {
-      displayPrice = (medicament.prixRv ?? medicament.prixPh ?? 0).toDouble();
+      displayPrice = medicament.prixRv ?? 0;
     } else if (venteFlag == 2) {
-      displayPrice = (medicament.prixGr != null)
-          ? medicament.prixGr!.toDouble()
-          : (medicament.prixPh ?? 0).toDouble();
+      displayPrice = medicament.prixGr?.toDouble() ?? 0;
     } else {
       displayPrice = (medicament.prixPh ?? 0).toDouble();
     }

@@ -64,12 +64,9 @@ class _RefactorDetailsState extends State<RefactorDetails> {
     final int? venteFlag = context.user.terVentePrixAchat;
     double unitPrice;
     if (venteFlag == 1) {
-      unitPrice = (widget.medicament.prixRv ?? widget.medicament.prixPh ?? 0)
-          .toDouble();
+      unitPrice = widget.medicament.prixRv ?? 0;
     } else if (venteFlag == 2) {
-      unitPrice = (widget.medicament.prixGr != null)
-          ? widget.medicament.prixGr!.toDouble()
-          : (widget.medicament.prixPh ?? 0).toDouble();
+      unitPrice = widget.medicament.prixGr?.toDouble() ?? 0;
     } else {
       unitPrice = (widget.medicament.prixPh ?? 0).toDouble();
     }
@@ -155,7 +152,10 @@ class _RefactorDetailsState extends State<RefactorDetails> {
                             style: context.textTheme.headlineLarge,
                           ),
                           SizedBox(height: kSpacingX5),
-                          ProductDetailsCard(medicament: widget.medicament),
+                          ProductDetailsCard(
+                            medicament: widget.medicament,
+                            unitPrice: unitPrice,
+                          ),
                           SizedBox(height: kSpacingX1),
                         ],
                       ),
@@ -336,9 +336,11 @@ class ProductDetailsCard extends StatelessWidget {
   const ProductDetailsCard({
     super.key,
     required this.medicament,
+    required this.unitPrice,
   });
 
   final Product medicament;
+  final double unitPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -450,7 +452,7 @@ class ProductDetailsCard extends StatelessWidget {
               color: kCodGray.shade200,
             ),
             SizedBox(height: kSpacingX5),
-            // PH price
+            // Selected unit price
             Row(
               children: [
                 Icon(Icons.price_change, color: kCodGray.shade700, size: 20.h),
@@ -460,7 +462,7 @@ class ProductDetailsCard extends StatelessWidget {
                       style: context.textTheme.titleMedium),
                 ),
                 Text(
-                  MoneyHelper.format(context, medicament.prixPh ?? 0),
+                  MoneyHelper.format(context, unitPrice),
                   style: context.textTheme.titleMedium!
                       .copyWith(color: Colors.black),
                   textAlign: TextAlign.end,

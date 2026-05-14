@@ -45,7 +45,7 @@ mixin _$Product {
   @JsonKey(name: 'prixRv')
   double? get prixRv => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixGr')
-  int? get prixGr => throw _privateConstructorUsedError;
+  double? get prixGr => throw _privateConstructorUsedError;
   @JsonKey(name: 'prixShp')
   double? get prixShp => throw _privateConstructorUsedError;
   @JsonKey(name: 'ugVnete')
@@ -90,7 +90,7 @@ abstract class $ProductCopyWith<$Res> {
       @JsonKey(name: 'qte') double? qte,
       @JsonKey(name: 'prixPh') double? prixPh,
       @JsonKey(name: 'prixRv') double? prixRv,
-      @JsonKey(name: 'prixGr') int? prixGr,
+      @JsonKey(name: 'prixGr') double? prixGr,
       @JsonKey(name: 'prixShp') double? prixShp,
       @JsonKey(name: 'ugVnete') double? ugVnete,
       @JsonKey(name: 'tva') double? tva,
@@ -190,7 +190,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       prixGr: freezed == prixGr
           ? _value.prixGr
           : prixGr // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       prixShp: freezed == prixShp
           ? _value.prixShp
           : prixShp // ignore: cast_nullable_to_non_nullable
@@ -247,7 +247,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       @JsonKey(name: 'qte') double? qte,
       @JsonKey(name: 'prixPh') double? prixPh,
       @JsonKey(name: 'prixRv') double? prixRv,
-      @JsonKey(name: 'prixGr') int? prixGr,
+      @JsonKey(name: 'prixGr') double? prixGr,
       @JsonKey(name: 'prixShp') double? prixShp,
       @JsonKey(name: 'ugVnete') double? ugVnete,
       @JsonKey(name: 'tva') double? tva,
@@ -345,7 +345,7 @@ class __$$ProductImplCopyWithImpl<$Res>
       prixGr: freezed == prixGr
           ? _value.prixGr
           : prixGr // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       prixShp: freezed == prixShp
           ? _value.prixShp
           : prixShp // ignore: cast_nullable_to_non_nullable
@@ -449,7 +449,7 @@ class _$ProductImpl implements _Product {
   final double? prixRv;
   @override
   @JsonKey(name: 'prixGr')
-  final int? prixGr;
+  final double? prixGr;
   @override
   @JsonKey(name: 'prixShp')
   final double? prixShp;
@@ -572,7 +572,7 @@ abstract class _Product implements Product {
       @JsonKey(name: 'qte') final double? qte,
       @JsonKey(name: 'prixPh') final double? prixPh,
       @JsonKey(name: 'prixRv') final double? prixRv,
-      @JsonKey(name: 'prixGr') final int? prixGr,
+      @JsonKey(name: 'prixGr') final double? prixGr,
       @JsonKey(name: 'prixShp') final double? prixShp,
       @JsonKey(name: 'ugVnete') final double? ugVnete,
       @JsonKey(name: 'tva') final double? tva,
@@ -622,7 +622,7 @@ abstract class _Product implements Product {
   double? get prixRv;
   @override
   @JsonKey(name: 'prixGr')
-  int? get prixGr;
+  double? get prixGr;
   @override
   @JsonKey(name: 'prixShp')
   double? get prixShp;

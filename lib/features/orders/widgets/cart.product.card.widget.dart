@@ -117,7 +117,7 @@ class _CartProductCardState extends State<CartProductCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${context.i10n.quantity} : ${(widget.cart.qteSansUg ?? 0).toInt()}',
+                              '${context.i10n.quantity} : ${(widget.cart.qteSansUg ?? widget.cart.qte ?? 0).toInt()}',
                               style: context.textTheme.titleMedium!.copyWith(
                                 fontSize: 18.h,
                               ),
@@ -140,8 +140,7 @@ class _CartProductCardState extends State<CartProductCard> {
                           child: Text(
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.end,
-                            MoneyHelper.format(context,
-                                widget.cart.montant?.toDouble() ?? 0.0),
+                            MoneyHelper.format(context, widget.cart.montant?.toDouble() ?? 0.0),
                             style: context.textTheme.headlineLarge,
                             textDirection: TextDirection.ltr,
                           ),
