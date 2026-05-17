@@ -506,6 +506,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneRequired": MessageLookupByLibrary.simpleMessage("Phone is required"),
     "ppa": MessageLookupByLibrary.simpleMessage("PPA"),
     "price": MessageLookupByLibrary.simpleMessage("Price"),
+    "printAction": MessageLookupByLibrary.simpleMessage("Print"),
     "productRotation": MessageLookupByLibrary.simpleMessage("Product Rotation"),
     "productRotationEndDate": MessageLookupByLibrary.simpleMessage("End Date"),
     "productRotationError": MessageLookupByLibrary.simpleMessage(
@@ -525,7 +526,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Total Products:",
     ),
     "productRotationUnits": MessageLookupByLibrary.simpleMessage("units"),
-    "printAction": MessageLookupByLibrary.simpleMessage("Print"),
     "products": MessageLookupByLibrary.simpleMessage("Products"),
     "productsExportEmptyFile": MessageLookupByLibrary.simpleMessage(
       "Exported products file is empty",

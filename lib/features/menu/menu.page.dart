@@ -35,125 +35,128 @@ class MenuPage extends StatelessWidget {
     final isDelegateRestricted = (user.delegueType == 1);
     if (isDelegateRestricted) {
       return Container(
-          constraints: BoxConstraints(
-            maxWidth: context.width,
-            minWidth: context.width,
-            maxHeight: context.height -
-                context.appBarSize -
-                context.bottomNavigationBarSize,
-            minHeight: context.height -
-                context.appBarSize -
-                context.bottomNavigationBarSize,
-          ),
-          child: ListView(
-            children: [
-              Padding(
+        constraints: BoxConstraints(
+          maxWidth: context.width,
+          minWidth: context.width,
+          maxHeight: context.height -
+              context.appBarSize -
+              context.bottomNavigationBarSize,
+          minHeight: context.height -
+              context.appBarSize -
+              context.bottomNavigationBarSize,
+        ),
+        child: ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+              child: const ProfileSection(),
+            ),
+            SizedBox(height: kSpacingX5),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+              child: Text(context.i10n.consultation,
+                  style: context.textTheme.bodyLarge),
+            ),
+            SizedBox(height: kSpacingX3),
+            DividerContainer(
+              isBottom: true,
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-                child: const ProfileSection(),
-              ),
-              SizedBox(height: kSpacingX5),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-                child: Text(context.i10n.consultation,
-                    style: context.textTheme.bodyLarge),
-              ),
-              SizedBox(height: kSpacingX3),
-              DividerContainer(
-                isBottom: true,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-                  child: InkWell(
-                    onTap: () {
-                      context.push(const ProductsPage());
-                    },
-                    child: Row(
-                      children: [
-                        Container(
-                          width: kSpacingX9,
-                          height: kSpacingX9,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: kCeruleanBlue.shade100,
-                          ),
-                          padding: EdgeInsets.all(kPaddingSm3),
-                          alignment: Alignment.center,
-                          child: const Icon(
-                            Icons.shopping_bag_rounded,
-                            color: kCeruleanBlue,
-                          ),
+                child: InkWell(
+                  onTap: () {
+                    context.push(const ProductsPage());
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        width: kSpacingX9,
+                        height: kSpacingX9,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: kCeruleanBlue.shade100,
                         ),
-                        SizedBox(width: kSpacingX3),
-                        Expanded(
-                          child: Text(
-                            context.i10n.orders,
-                            style: context.textTheme.bodyLarge,
-                          ),
+                        padding: EdgeInsets.all(kPaddingSm3),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.shopping_bag_rounded,
+                          color: kCeruleanBlue,
                         ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: kSpacingX5,
+                      ),
+                      SizedBox(width: kSpacingX3),
+                      Expanded(
+                        child: Text(
+                          context.i10n.orders,
+                          style: context.textTheme.bodyLarge,
                         ),
-                      ],
-                    ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: kSpacingX5,
+                      ),
+                    ],
                   ),
                 ),
               ),
-              SizedBox(height: kSpacingX5),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-                child: Text(
-                  context.i10n.system,
-                  style: context.textTheme.bodyLarge,
-                ),
+            ),
+            SizedBox(height: kSpacingX5),
+            _productRotationRow(context),
+            SizedBox(height: kSpacingX5),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+              child: Text(
+                context.i10n.system,
+                style: context.textTheme.bodyLarge,
               ),
-              SizedBox(height: kSpacingX3),
-              DividerContainer(
-                isBottom: true,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
-                  child: InkWell(
-                    onTap: () {
-                      context.read<AuthBloc>().add(const AuthEvent.loggedOut());
-                      context
-                          .read<TourPlanBloc>()
-                          .add(const TourPlanEvent.reset());
-                      context.read<VisitBloc>().add(const VisitEvent.reset());
-                      context.read<ClientsCubit>().reset();
-                      context.read<DelegateCubit>().reset();
-                    },
-                    child: Row(
-                      children: [
-                        Container(
-                          width: kSpacingX9,
-                          height: kSpacingX9,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: kCardinal.shade100,
-                          ),
-                          padding: EdgeInsets.all(kPaddingSm3),
-                          alignment: Alignment.center,
-                          child: const Icon(
-                            Icons.logout_rounded,
-                            color: kCardinal,
-                          ),
+            ),
+            SizedBox(height: kSpacingX3),
+            DividerContainer(
+              isBottom: true,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+                child: InkWell(
+                  onTap: () {
+                    context.read<AuthBloc>().add(const AuthEvent.loggedOut());
+                    context
+                        .read<TourPlanBloc>()
+                        .add(const TourPlanEvent.reset());
+                    context.read<VisitBloc>().add(const VisitEvent.reset());
+                    context.read<ClientsCubit>().reset();
+                    context.read<DelegateCubit>().reset();
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        width: kSpacingX9,
+                        height: kSpacingX9,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: kCardinal.shade100,
                         ),
-                        SizedBox(width: kSpacingX3),
-                        Expanded(
-                          child: Text(
-                            context.i10n.logout,
-                            style: context.textTheme.bodyLarge,
-                          ),
+                        padding: EdgeInsets.all(kPaddingSm3),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.logout_rounded,
+                          color: kCardinal,
                         ),
-                        const Icon(
-                          Icons.arrow_forward_ios_rounded,
+                      ),
+                      SizedBox(width: kSpacingX3),
+                      Expanded(
+                        child: Text(
+                          context.i10n.logout,
+                          style: context.textTheme.bodyLarge,
                         ),
-                      ],
-                    ),
+                      ),
+                      const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ));
+            ),
+          ],
+        ),
+      );
     }
     return Container(
         constraints: BoxConstraints(
@@ -726,5 +729,47 @@ class MenuPage extends StatelessWidget {
             ),
           ],
         ));
+  }
+
+  Widget _productRotationRow(BuildContext context) {
+    return DividerContainer(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+        child: InkWell(
+          onTap: () {
+            context.push(const ProductRotationPage());
+          },
+          child: Row(
+            children: [
+              Container(
+                width: kSpacingX9,
+                height: kSpacingX9,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: kCeruleanBlue.shade100,
+                ),
+                padding: EdgeInsets.all(kPaddingSm3),
+                alignment: Alignment.center,
+                child: const Icon(
+                  Icons.rotate_right_rounded,
+                  color: kCeruleanBlue,
+                ),
+              ),
+              SizedBox(width: kSpacingX3),
+              Expanded(
+                child: Text(
+                  context.i10n.menuProductRotation,
+                  style: context.textTheme.bodyLarge,
+                ),
+              ),
+              const Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -46,6 +46,8 @@ class RotationCubit extends Cubit<RotationState> {
         endDate: endFormatted,
         limit: limit,
       );
+      log('ProductRotation HTTP status: ${response.statusCode}');
+      log('ProductRotation response body: ${response.data}');
 
       if (response.statusCode == 200 && response.data['body'] != null) {
         final rotationData =

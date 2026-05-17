@@ -575,6 +575,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ppa": MessageLookupByLibrary.simpleMessage("PPA"),
     "price": MessageLookupByLibrary.simpleMessage("Prix"),
+    "printAction": MessageLookupByLibrary.simpleMessage("Imprimer"),
     "productRotation": MessageLookupByLibrary.simpleMessage(
       "Rotation des Produits",
     ),
@@ -598,7 +599,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Total des produits :",
     ),
     "productRotationUnits": MessageLookupByLibrary.simpleMessage("unités"),
-    "printAction": MessageLookupByLibrary.simpleMessage("Imprimer"),
     "products": MessageLookupByLibrary.simpleMessage("Produits"),
     "productsExportEmptyFile": MessageLookupByLibrary.simpleMessage(
       "Le fichier exporté des produits est vide",
