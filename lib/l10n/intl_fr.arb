@@ -1501,5 +1501,15 @@
   "phase": "Phase",
   "@phase": {
     "description": "Libellé de la phase"
-  }
+  },
+  "productRotation": "Rotation des Produits",
+  "productRotationStartDate": "Date de début",
+  "productRotationEndDate": "Date de fin",
+  "productRotationTotalProducts": "Total des produits :",
+  "productRotationNoData": "Aucune donnée trouvée",
+  "productRotationNoDataDescription": "Aucune vente de produits sur cette période",
+  "productRotationError": "Erreur de chargement",
+  "productRotationUnits": "unités",
+  "productRotationRetry": "Réessayer",
+  "menuProductRotation": "Rotation des Produits"
 }

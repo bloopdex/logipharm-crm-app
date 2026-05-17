@@ -45,15 +45,18 @@ import 'features/auth/services/auth.repository.dart';
 import 'features/clients/blocs/categories/category_cubit.dart';
 import 'features/clients/blocs/claims/claim_cubit.dart';
 import 'features/clients/blocs/etablissement/etablissement_cubit.dart';
+import 'features/clients/blocs/fournisseur_lov/fournisseur_lov_cubit.dart';
 import 'features/clients/blocs/grossiste/grossiste_cubit.dart';
 import 'features/clients/blocs/observation/observation_cubit.dart';
 import 'features/clients/blocs/turnover/turnover_cubit.dart';
-import 'features/statistics/cubit/monthly_statistics_cubit.dart';
 import 'features/contacts/bloc/contacts_cubit.dart';
+import 'features/contacts/bloc/specialite_lov_cubit.dart';
 import 'features/navigation/cubit/navigation_cubit.dart';
 import 'features/navigation/navigation.screen.dart';
 import 'features/orders/blocs/cart/cart_cubit.dart';
 import 'features/orders/product_details_screen.dart';
+import 'features/rotation/cubit/rotation_cubit.dart';
+import 'features/statistics/cubit/monthly_statistics_cubit.dart';
 import 'features/tour-plan/bloc/clients/clients_cubit.dart';
 import 'features/tour-plan/bloc/delegate_cubit.dart';
 import 'features/tour-plan/bloc/tour-creation/tour_creation_cubit.dart';
@@ -63,8 +66,6 @@ import 'features/tour-plan/core/controller.dart';
 import 'features/visits/bloc/contact_type_cubit.dart';
 import 'features/visits/bloc/visit-creation/visit_creation_cubit.dart';
 import 'features/visits/bloc/visit_result_cubit.dart';
-import 'features/contacts/bloc/specialite_lov_cubit.dart';
-import 'features/clients/blocs/fournisseur_lov/fournisseur_lov_cubit.dart';
 import 'l10n/l10n.dart';
 import 'logic/auth/auth_bloc.dart';
 import 'logic/counter_cubit.dart';
@@ -449,6 +450,9 @@ class MyAppState extends State<MyApp> with TickerProviderStateMixin {
           BlocProvider<ClientsCubit>(
             lazy: false,
             create: (context) => ClientsCubit()..load(),
+          ),
+          BlocProvider<RotationCubit>(
+            create: (context) => RotationCubit(),
           ),
           BlocProvider<TourCreationCubit>(
               create: (context) => TourCreationCubit()),
