@@ -581,6 +581,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Aucune vente de produits sur cette période",
     ),
     "productRotationRetry": MessageLookupByLibrary.simpleMessage("Réessayer"),
+    "productRotationSearchHint": MessageLookupByLibrary.simpleMessage(
+      "Rechercher un produit...",
+    ),
     "productRotationStartDate": MessageLookupByLibrary.simpleMessage(
       "Date de début",
     ),

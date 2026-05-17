@@ -4457,11 +4457,21 @@ class S {
     );
   }
 
-  /// `Rotation des Produits`
+  /// `Product Rotation`
   String get menuProductRotation {
     return Intl.message(
-      'Rotation des Produits',
+      'Product Rotation',
       name: 'menuProductRotation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search product...`
+  String get productRotationSearchHint {
+    return Intl.message(
+      'Search product...',
+      name: 'productRotationSearchHint',
       desc: '',
       args: [],
     );
