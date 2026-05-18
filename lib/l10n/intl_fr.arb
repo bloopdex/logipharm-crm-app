@@ -1511,5 +1511,6 @@
   "productRotationError": "Erreur de chargement",
   "productRotationUnits": "unités",
   "productRotationRetry": "Réessayer",
-  "menuProductRotation": "Rotation des Produits"
+  "menuProductRotation": "Rotation des Produits",
+  "productRotationSearchHint": "Rechercher un produit..."
 }

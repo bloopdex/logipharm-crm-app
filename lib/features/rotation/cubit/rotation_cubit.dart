@@ -15,11 +15,8 @@ part 'rotation_cubit.freezed.dart';
 @freezed
 class RotationState with _$RotationState {
   const factory RotationState.initial() = _Initial;
-
   const factory RotationState.loading() = _Loading;
-
   const factory RotationState.loaded(ProductRotationResponse data) = _Loaded;
-
   const factory RotationState.error({required String message}) = _Error;
 }
 
@@ -33,7 +30,8 @@ class RotationCubit extends Cubit<RotationState> {
   Future<void> loadProductRotation({
     required DateTime startDate,
     required DateTime endDate,
-    int limit = 20,
+    int limit = 1000,
+    String? productName,
   }) async {
     emit(const RotationState.loading());
 
@@ -45,18 +43,17 @@ class RotationCubit extends Cubit<RotationState> {
         startDate: startFormatted,
         endDate: endFormatted,
         limit: limit,
+        productName: productName,
       );
       log('ProductRotation HTTP status: ${response.statusCode}');
       log('ProductRotation response body: ${response.data}');
 
       if (response.statusCode == 200 && response.data['body'] != null) {
-        final rotationData =
-            ProductRotationResponse.fromJson(response.data['body']);
+        final rotationData = ProductRotationResponse.fromJson(response.data['body']);
         emit(RotationState.loaded(rotationData));
       } else {
         emit(RotationState.error(
-          message:
-              response.data['message'] ?? 'Failed to load product rotation',
+          message: response.data['message'] ?? 'Failed to load product rotation',
         ));
       }
     } catch (e) {

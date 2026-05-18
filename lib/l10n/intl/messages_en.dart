@@ -386,7 +386,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lot": MessageLookupByLibrary.simpleMessage("Lot"),
     "manageProfile": MessageLookupByLibrary.simpleMessage("Manage Profile"),
     "menuProductRotation": MessageLookupByLibrary.simpleMessage(
-      "Rotation des Produits",
+      "Product Rotation",
     ),
     "modePaie": MessageLookupByLibrary.simpleMessage("Mode de paiement"),
     "moreDetails": MessageLookupByLibrary.simpleMessage("More Details"),
@@ -519,6 +519,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "No product sales in this period",
     ),
     "productRotationRetry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "productRotationSearchHint": MessageLookupByLibrary.simpleMessage(
+      "Search product...",
+    ),
     "productRotationStartDate": MessageLookupByLibrary.simpleMessage(
       "Start Date",
     ),

@@ -1515,5 +1515,6 @@
    "productRotationError": "Error loading data",
    "productRotationUnits": "units",
    "productRotationRetry": "Retry",
-   "menuProductRotation": "Rotation des Produits"
+   "menuProductRotation": "Product Rotation",
+   "productRotationSearchHint": "Search product..."
 }

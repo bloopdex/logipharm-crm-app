@@ -1,11 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/core.dart';
-import '../../shared/widgets/image/svg.dart';
 import '../../shared/widgets/loading/loader.widget.dart';
+import '../../shared/widgets/image/svg.dart';
 import 'cubit/rotation_cubit.dart';
 
 class ProductRotationPage extends StatefulWidget {
@@ -21,6 +23,10 @@ class _ProductRotationPageState extends State<ProductRotationPage> {
   DateTime? _startDate;
   DateTime? _endDate;
   final int _limit = 1000;
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+  
+  Timer? _debounce;
 
   @override
   void initState() {
@@ -32,14 +38,32 @@ class _ProductRotationPageState extends State<ProductRotationPage> {
     _loadData();
   }
 
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _debounce?.cancel();
+    super.dispose();
+  }
+
   void _loadData() {
     if (_startDate != null && _endDate != null) {
       context.read<RotationCubit>().loadProductRotation(
             startDate: _startDate!,
             endDate: _endDate!,
             limit: _limit,
+            productName: _searchQuery.isEmpty ? null : _searchQuery,
           );
     }
+  }
+
+  void _onSearchChanged(String value) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      setState(() {
+        _searchQuery = value;
+      });
+      _loadData();
+    });
   }
 
   Future<void> _selectStartDate() async {
@@ -97,7 +121,6 @@ class _ProductRotationPageState extends State<ProductRotationPage> {
             padding: EdgeInsets.all(kPaddingMd2),
             child: Row(
               children: [
-                // Start Date Picker
                 Expanded(
                   child: InkWell(
                     onTap: _selectStartDate,
@@ -112,8 +135,7 @@ class _ProductRotationPageState extends State<ProductRotationPage> {
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.calendar_today,
-                              size: 18, color: kPrimaryColor),
+                          Icon(Icons.calendar_today, size: 18, color: kPrimaryColor),
                           SizedBox(width: kSpacingX2),
                           Expanded(
                             child: Text(
@@ -130,7 +152,6 @@ class _ProductRotationPageState extends State<ProductRotationPage> {
                   ),
                 ),
                 SizedBox(width: kSpacingX2),
-                // End Date Picker
                 Expanded(
                   child: InkWell(
                     onTap: _selectEndDate,
@@ -145,8 +166,7 @@ class _ProductRotationPageState extends State<ProductRotationPage> {
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.calendar_today,
-                              size: 18, color: kPrimaryColor),
+                          Icon(Icons.calendar_today, size: 18, color: kPrimaryColor),
                           SizedBox(width: kSpacingX2),
                           Expanded(
                             child: Text(
@@ -165,6 +185,31 @@ class _ProductRotationPageState extends State<ProductRotationPage> {
               ],
             ),
           ),
+          // Search Bar
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: kPaddingMd2),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: context.i10n.productRotationSearchHint,
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(kSpacingX3),
+                ),
+                suffixIcon: _searchQuery.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          _searchController.clear();
+                          _onSearchChanged('');
+                        },
+                      )
+                    : null,
+              ),
+              onChanged: _onSearchChanged,
+            ),
+          ),
+          SizedBox(height: kSpacingX2),
           // Results
           Expanded(
             child: BlocBuilder<RotationCubit, RotationState>(
@@ -184,7 +229,9 @@ class _ProductRotationPageState extends State<ProductRotationPage> {
                             ),
                             SizedBox(height: kSpacingX3),
                             Text(
-                              context.i10n.productRotationNoData,
+                              _searchQuery.isNotEmpty
+                                  ? 'No products found for "${_searchQuery}"'
+                                  : context.i10n.productRotationNoData,
                               style: context.textTheme.headlineMedium,
                             ),
                             SizedBox(height: kSpacingX2),
@@ -283,7 +330,7 @@ class _ProductRotationPageState extends State<ProductRotationPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          context.i10n.productRotationTotalProducts,
+                          '${context.i10n.productRotationTotalProducts} ${_searchQuery.isNotEmpty ? '(filtered)' : ''}',
                           style: context.textTheme.titleMedium,
                         ),
                         Text(
