@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:crm/core/core.dart';
@@ -76,7 +77,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
       final response = await ProductService.exportProductsPdf();
       if (response.statusCode != 200) {
-        throw Exception('HTTP ${response.statusCode}');
+        throw Exception(_resolveExportErrorMessage(response));
       }
 
       final pdfBytes = _extractPdfBytes(response.data);
@@ -129,6 +130,55 @@ class _ProductsPageState extends State<ProductsPage> {
     }
 
     throw const FormatException('Unexpected PDF payload type');
+  }
+
+  String _resolveExportErrorMessage(Response response) {
+    final statusCode = response.statusCode ?? 0;
+    final data = response.data;
+
+    Map<String, dynamic>? payload;
+
+    if (data is Map<String, dynamic>) {
+      payload = data;
+    } else if (data is Uint8List) {
+      final decoded = utf8.decode(data, allowMalformed: true).trim();
+      if (decoded.isNotEmpty) {
+        payload = _tryParseJsonMap(decoded);
+      }
+    } else if (data is List<int>) {
+      final decoded = utf8.decode(data, allowMalformed: true).trim();
+      if (decoded.isNotEmpty) {
+        payload = _tryParseJsonMap(decoded);
+      }
+    } else if (data is String && data.trim().isNotEmpty) {
+      payload = _tryParseJsonMap(data);
+    }
+
+    if (payload != null) {
+      final message = payload['message']?.toString();
+      final codeError = payload['codeError']?.toString();
+
+      if (message != null && message.isNotEmpty) {
+        if (codeError != null && codeError.isNotEmpty) {
+          return '$message ($codeError)';
+        }
+        return message;
+      }
+    }
+
+    return 'HTTP $statusCode';
+  }
+
+  Map<String, dynamic>? _tryParseJsonMap(String raw) {
+    try {
+      final jsonBody = jsonDecode(raw);
+      if (jsonBody is Map<String, dynamic>) {
+        return jsonBody;
+      }
+    } catch (_) {
+      // Ignore invalid JSON payloads and fallback to HTTP status.
+    }
+    return null;
   }
 
   String _resolveExportFileName(Headers headers) {

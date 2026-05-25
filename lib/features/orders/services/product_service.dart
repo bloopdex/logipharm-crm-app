@@ -29,7 +29,7 @@ class ProductService {
       url: '/stocks/export',
       token: token,
       headers: {
-        'Accept': 'application/pdf',
+        'Accept': 'application/pdf, application/json',
       },
       responseType: ResponseType.bytes,
     );
