@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../core/core.dart';
 import '../../../../models/person/person.dart';
 import '../../services/client.repository.dart';
 
@@ -119,14 +120,14 @@ class ClientsCubit extends Cubit<ClientsState> {
 
           // Apply commune filter if provided
           if (commune.isNotEmpty) {
+            final normalizedFilter = normalizeForComparison(commune);
             filteredList = filteredList.where((client) {
-              final ville = client.ville?.toLowerCase() ?? '';
-              final searchCommune = commune.toLowerCase();
+              final ville = normalizeForComparison(client.ville ?? '');
 
               debugPrint('Filtering by Commune: $commune');
-              debugPrint('Client Ville: $ville');
+              debugPrint('Client Ville: ${client.ville}');
 
-              return ville.contains(searchCommune);
+              return ville.contains(normalizedFilter);
             }).toList();
           }
 

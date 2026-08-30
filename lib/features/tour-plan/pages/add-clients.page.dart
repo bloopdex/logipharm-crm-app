@@ -1,5 +1,4 @@
 import 'package:crm/core/core.dart';
-import 'package:crm/features/tour-plan/bloc/commune_cubit.dart';
 import 'package:crm/logic/search/search_cubit.dart';
 import 'package:crm/shared/widgets/container/profile-container.widget.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ import '../../../shared/widgets/inputs/search.text.field.widget.dart';
 import '../../contacts/bloc/contacts_cubit.dart';
 import '../bloc/clients/clients_cubit.dart';
 import '../bloc/wilaya_cubit.dart';
-import '../models/commune/commune.dart';
 import '../models/wilaya/wilaya.dart';
 
 class AddClientsForm extends StatefulWidget {
@@ -85,38 +83,87 @@ class _AddClientsFormState extends State<AddClientsForm> {
                 ),
                 SizedBox(height: kSpacingX2),
                 if (!useContacts)
-                  BlocBuilder<WilayaCubit, List<Wilaya>>(
-                    builder: (context, state) {
-                      return CustomDropDownInput(
-                          data: widget.data,
-                          mapKey: 'regionId',
-                          onChanged: (value) {
-                            context
-                                .read<ClientsCubit>()
-                                .filter(regionId: value ?? "");
-
-                            setState(() {
-                              regionId = value;
-                            });
-                          },
-                          items: [
-                            CustomDropDownItem(
-                              label: context.i10n.allRegions,
-                              value: "",
-                            ),
-                            ...state.map(
-                              (e) => CustomDropDownItem(
-                                label: e.name,
-                                value: e.code.toString(),
-                              ),
-                            )
-                          ]);
+                  BlocBuilder<ClientsCubit, ClientsState>(
+                    builder: (context, clientState) {
+                      final allClients = clientState.maybeWhen(
+                        loaded: (all, _) => all,
+                        orElse: () => <Person>[],
+                      );
+                      final delegateId =
+                          int.tryParse(widget.data['delegueId'] ?? '');
+                      final delegateClients = delegateId != null
+                          ? allClients
+                              .where((c) => c.supervisor == delegateId)
+                              .toList()
+                          : allClients;
+                      final clientRegionIds = delegateClients
+                          .where((c) =>
+                              c.regionId != null && c.regionId!.isNotEmpty)
+                          .map((c) => c.regionId!)
+                          .toSet();
+                      return BlocBuilder<WilayaCubit, List<Wilaya>>(
+                        builder: (context, wilayas) {
+                          final filteredWilayas = wilayas
+                              .where((w) => clientRegionIds.contains(w.code))
+                              .toList();
+                          return CustomDropDownInput(
+                              data: widget.data,
+                              mapKey: 'regionId',
+                              onChanged: (value) {
+                                context
+                                    .read<ClientsCubit>()
+                                    .filter(regionId: value ?? "");
+                                setState(() {
+                                  regionId = value;
+                                });
+                              },
+                              items: [
+                                CustomDropDownItem(
+                                  label: context.i10n.allRegions,
+                                  value: "",
+                                ),
+                                ...filteredWilayas.map(
+                                  (e) => CustomDropDownItem(
+                                    label: e.name,
+                                    value: e.code.toString(),
+                                  ),
+                                ),
+                              ]);
+                        },
+                      );
                     },
                   ),
                 SizedBox(height: kSpacingX2),
                 if (!useContacts)
-                  BlocBuilder<CommuneCubit, List<Commune>>(
-                    builder: (context, state) {
+                  BlocBuilder<ClientsCubit, ClientsState>(
+                    builder: (context, clientState) {
+                      final allClients = clientState.maybeWhen(
+                        loaded: (all, _) => all,
+                        orElse: () => <Person>[],
+                      );
+                      final delegateId =
+                          int.tryParse(widget.data['delegueId'] ?? '');
+                      final delegateClients = delegateId != null
+                          ? allClients
+                              .where((c) => c.supervisor == delegateId)
+                              .toList()
+                          : allClients;
+                      // Build a map of normalized key → original display name
+                      // to handle Unicode variants of the same commune name
+                      final villeMap = <String, String>{};
+                      for (final c in delegateClients) {
+                        if (regionId != null &&
+                            regionId!.isNotEmpty &&
+                            c.regionId != regionId) {
+                          continue;
+                        }
+                        if (c.ville != null && c.ville!.isNotEmpty) {
+                          final key = normalizeForComparison(c.ville!);
+                          villeMap.putIfAbsent(key, () => c.ville!);
+                        }
+                      }
+                      final sortedVilles = villeMap.entries.toList()
+                        ..sort((a, b) => a.key.compareTo(b.key));
                       return CustomDropDownInput(
                           data: widget.data,
                           mapKey: 'communeId',
@@ -130,17 +177,12 @@ class _AddClientsFormState extends State<AddClientsForm> {
                               label: context.i10n.allCommunes,
                               value: "",
                             ),
-                            ...state.where((e) {
-                              if (regionId == null) {
-                                return true;
-                              }
-                              return e.wlyCode == regionId;
-                            }).map(
+                            ...sortedVilles.map(
                               (e) => CustomDropDownItem(
-                                label: e.name,
-                                value: e.name,
+                                label: e.value,
+                                value: e.key,
                               ),
-                            )
+                            ),
                           ]);
                     },
                   ),

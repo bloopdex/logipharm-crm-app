@@ -16,7 +16,7 @@ _$DelegateRealizationImpl _$$DelegateRealizationImplFromJson(
       delegateType: json['delegateType'] as String,
       delegue: json['delegue'] as String,
       medId: (json['medId'] as num).toInt(),
-      medAmm: json['medAmm'] as String,
+      medAmm: json['medAmm'] as String?,
       medCommercialName: json['medCommercialName'] as String,
       qteObj: (json['qteObj'] as num?)?.toInt(),
       qteVendue: (json['qteVendue'] as num).toInt(),

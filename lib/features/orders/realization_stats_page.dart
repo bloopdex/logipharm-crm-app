@@ -177,7 +177,7 @@ class _RealizationStatsPageState extends State<RealizationStatsPage> {
                               return ListTile(
                                 dense: true,
                                 title: Text(
-                                  r.medCommercialName.isEmpty ? r.medAmm : r.medCommercialName,
+                                  r.medCommercialName.isEmpty ? (r.medAmm ?? '') : r.medCommercialName,
                                   maxLines: 2,
                                   style: context.textTheme.bodyLarge!.copyWith(
                                     fontWeight: FontWeight.w600,

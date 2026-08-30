@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gem list *)",
+      "Bash(gem search *)",
+      "Bash(sed -n '78,95p' /opt/homebrew/lib/ruby/gems/3.4.0/gems/xcodeproj-1.27.0/lib/xcodeproj/project.rb)",
+      "Read(//opt/homebrew/lib/ruby/gems/3.4.0/gems/xcodeproj-1.27.0/lib/xcodeproj/**)",
+      "Bash(pod install *)",
+      "Bash(dart analyze *)"
+    ]
+  }
+}

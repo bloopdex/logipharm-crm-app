@@ -14,7 +14,7 @@ class DelegateRealization with _$DelegateRealization {
     @JsonKey(name: 'delegateType') required String delegateType,
     @JsonKey(name: 'delegue') required String delegue,
     @JsonKey(name: 'medId') required int medId,
-    @JsonKey(name: 'medAmm') required String medAmm,
+    @JsonKey(name: 'medAmm') String? medAmm,
     @JsonKey(name: 'medCommercialName') required String medCommercialName,
     @JsonKey(name: 'qteObj') int? qteObj,
     @JsonKey(name: 'qteVendue') required int qteVendue,

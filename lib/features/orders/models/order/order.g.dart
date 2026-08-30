@@ -16,7 +16,7 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       statut: json['statut'] as String,
       terId: (json['terId'] as num).toInt(),
       fournisseurId: (json['fournisseurId'] as num).toInt(),
-      fournisseurType: json['fournisseurType'] as String,
+      fournisseurType: (json['fournisseurType'] ?? '').toString(),
       client: json['client'] as String,
       delegue: json['delegue'] as String?,
       netHt: (json['netHt'] as num).toInt(),

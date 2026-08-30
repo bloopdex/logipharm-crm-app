@@ -14,13 +14,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../logic/search/search_cubit.dart';
 import '../../models/person/person.dart';
 import '../../shared/widgets/inputs/search.text.field.widget.dart';
-import '../../logic/search/search_cubit.dart';
 import '../tour-plan/bloc/clients/clients_cubit.dart';
-import '../tour-plan/bloc/commune_cubit.dart';
 import '../tour-plan/bloc/wilaya_cubit.dart';
-import '../tour-plan/models/commune/commune.dart';
 import '../tour-plan/models/wilaya/wilaya.dart';
 import 'blocs/etablissement/etablissement_cubit.dart';
 import 'client-details.page.dart';
@@ -110,36 +108,71 @@ class _ClientsPageState extends State<ClientsPage> {
                     },
                   ),
                   SizedBox(height: kSpacingX2),
-                  BlocBuilder<WilayaCubit, List<Wilaya>>(
-                    builder: (context, wilayas) {
-                      return CustomDropDownInput(
-                        mapKey: 'regionId',
-                        onChanged: (value) {
-                          setState(() {
-                            selectedWilaya = value ?? "";
-                            selectedCommune = ""; // Reset commune
-                            _applyFilter();
-                          });
+                  BlocBuilder<ClientsCubit, ClientsState>(
+                    builder: (context, clientState) {
+                      final allClients = clientState.maybeWhen(
+                        loaded: (all, _) => all,
+                        orElse: () => <Person>[],
+                      );
+                      debugPrint(
+                          'All Clients: ${allClients.where((client) => client.fullName.contains("ABROUS")).toList()}');
+                      final clientRegionIds = allClients
+                          .where((c) => c.regionId != null && c.regionId!.isNotEmpty)
+                          .map((c) => c.regionId!)
+                          .toSet();
+                      return BlocBuilder<WilayaCubit, List<Wilaya>>(
+                        builder: (context, wilayas) {
+                          final filteredWilayas =
+                              wilayas.where((w) => clientRegionIds.contains(w.code)).toList();
+                          return CustomDropDownInput(
+                            mapKey: 'regionId',
+                            onChanged: (value) {
+                              setState(() {
+                                selectedWilaya = value ?? "";
+                                selectedCommune = "";
+                                _applyFilter();
+                              });
+                            },
+                            items: [
+                              CustomDropDownItem(
+                                label: context.i10n.allRegions,
+                                value: "",
+                              ),
+                              ...filteredWilayas.map(
+                                (wilaya) => CustomDropDownItem(
+                                  label: wilaya.name,
+                                  value: wilaya.code.toString(),
+                                ),
+                              ),
+                            ],
+                            data: {},
+                          );
                         },
-                        items: [
-                          CustomDropDownItem(
-                            label: context.i10n.allRegions,
-                            value: "",
-                          ),
-                          ...wilayas.map(
-                            (wilaya) => CustomDropDownItem(
-                              label: wilaya.name,
-                              value: wilaya.code.toString(),
-                            ),
-                          ),
-                        ],
-                        data: {},
                       );
                     },
                   ),
                   SizedBox(height: kSpacingX2),
-                  BlocBuilder<CommuneCubit, List<Commune>>(
-                    builder: (context, communes) {
+                  BlocBuilder<ClientsCubit, ClientsState>(
+                    builder: (context, clientState) {
+                      final allClients = clientState.maybeWhen(
+                        loaded: (all, _) => all,
+                        orElse: () => <Person>[],
+                      );
+                      // Build a map of normalized key → original display name
+                      // to handle Unicode variants of the same commune name
+                      final villeMap = <String, String>{};
+                      for (final c in allClients) {
+                        if (selectedWilaya.isNotEmpty &&
+                            c.regionId != selectedWilaya) {
+                          continue;
+                        }
+                        if (c.ville != null && c.ville!.isNotEmpty) {
+                          final key = normalizeForComparison(c.ville!);
+                          villeMap.putIfAbsent(key, () => c.ville!);
+                        }
+                      }
+                      final sortedVilles = villeMap.entries.toList()
+                        ..sort((a, b) => a.key.compareTo(b.key));
                       return CustomDropDownInput(
                         mapKey: 'communeId',
                         onChanged: (value) {
@@ -153,13 +186,10 @@ class _ClientsPageState extends State<ClientsPage> {
                             label: context.i10n.allCommunes,
                             value: "",
                           ),
-                          ...communes.where((commune) {
-                            if (selectedWilaya.isEmpty) return true;
-                            return commune.wlyCode == selectedWilaya;
-                          }).map(
-                            (commune) => CustomDropDownItem(
-                              label: commune.name,
-                              value: commune.name,
+                          ...sortedVilles.map(
+                            (e) => CustomDropDownItem(
+                              label: e.value,
+                              value: e.key,
                             ),
                           ),
                         ],
@@ -182,17 +212,14 @@ class _ClientsPageState extends State<ClientsPage> {
                             });
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.h, vertical: 8.h),
+                            padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 8.h),
                             decoration: BoxDecoration(
                               color: selectedClientType.isEmpty
                                   ? kPrimaryColor.withOpacity(0.1)
                                   : Colors.transparent,
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                color: selectedClientType.isEmpty
-                                    ? kPrimaryColor
-                                    : Colors.grey,
+                                color: selectedClientType.isEmpty ? kPrimaryColor : Colors.grey,
                               ),
                             ),
                             child: Row(
@@ -207,8 +234,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                     });
                                   },
                                 ),
-                                Text(context.i10n.allClients,
-                                    style: context.textTheme.bodyMedium),
+                                Text(context.i10n.allClients, style: context.textTheme.bodyMedium),
                               ],
                             ),
                           ),
@@ -223,17 +249,15 @@ class _ClientsPageState extends State<ClientsPage> {
                             });
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.h, vertical: 8.h),
+                            padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 8.h),
                             decoration: BoxDecoration(
                               color: selectedClientType == "prospect"
                                   ? kPrimaryColor.withOpacity(0.1)
                                   : Colors.transparent,
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                color: selectedClientType == "prospect"
-                                    ? kPrimaryColor
-                                    : Colors.grey,
+                                color:
+                                    selectedClientType == "prospect" ? kPrimaryColor : Colors.grey,
                               ),
                             ),
                             child: Row(
@@ -248,8 +272,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                     });
                                   },
                                 ),
-                                Text(context.i10n.prospect,
-                                    style: context.textTheme.bodyMedium),
+                                Text(context.i10n.prospect, style: context.textTheme.bodyMedium),
                               ],
                             ),
                           ),
@@ -264,17 +287,14 @@ class _ClientsPageState extends State<ClientsPage> {
                             });
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.h, vertical: 8.h),
+                            padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 8.h),
                             decoration: BoxDecoration(
                               color: selectedClientType == "client"
                                   ? kPrimaryColor.withOpacity(0.1)
                                   : Colors.transparent,
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                color: selectedClientType == "client"
-                                    ? kPrimaryColor
-                                    : Colors.grey,
+                                color: selectedClientType == "client" ? kPrimaryColor : Colors.grey,
                               ),
                             ),
                             child: Row(
@@ -289,8 +309,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                     });
                                   },
                                 ),
-                                Text(context.i10n.client,
-                                    style: context.textTheme.bodyMedium),
+                                Text(context.i10n.client, style: context.textTheme.bodyMedium),
                               ],
                             ),
                           ),
@@ -305,8 +324,7 @@ class _ClientsPageState extends State<ClientsPage> {
                             });
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.h, vertical: 8.h),
+                            padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 8.h),
                             decoration: BoxDecoration(
                               color: selectedClientType == "inactive"
                                   ? kInactiveClient.withOpacity(0.1)
@@ -357,8 +375,7 @@ class _ClientsPageState extends State<ClientsPage> {
                             context.read<ClientsCubit>().load();
                           },
                           child: Text(context.i10n.retry,
-                              style: context.textTheme.bodyMedium!
-                                  .copyWith(color: Colors.white)),
+                              style: context.textTheme.bodyMedium!.copyWith(color: Colors.white)),
                         ),
                       ],
                     )),
@@ -451,10 +468,8 @@ class ClientCard extends StatelessWidget {
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(client.address ?? context.i10n.noAddress,
-              style: context.textTheme.bodyMedium),
-          if (client.prospect == true &&
-              (client.status != null || client.phase != null)) ...[
+          Text(client.address ?? context.i10n.noAddress, style: context.textTheme.bodyMedium),
+          if (client.prospect == true && (client.status != null || client.phase != null)) ...[
             SizedBox(height: 4),
             Row(
               children: [
@@ -498,9 +513,7 @@ class ClientCard extends StatelessWidget {
               final Uri phoneLaunchUri = Uri.parse(
                   'tel://${client.telMobile ?? client.tel1Fixe ?? client.tel2Fixe ?? ""}');
 
-              if (client.tel1Fixe != null ||
-                  client.tel2Fixe != null ||
-                  client.telMobile != null) {
+              if (client.tel1Fixe != null || client.tel2Fixe != null || client.telMobile != null) {
                 await launchUrl(phoneLaunchUri);
               }
             },

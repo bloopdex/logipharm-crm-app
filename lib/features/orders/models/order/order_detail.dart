@@ -22,7 +22,7 @@ class OrderDetail with _$OrderDetail {
     @JsonKey(name: 'client') required String client,
     @JsonKey(name: 'delegue') required String delegue,
     @JsonKey(name: 'medId') required int medId,
-    @JsonKey(name: 'medAmm') required String medAmm,
+    @JsonKey(name: 'medAmm') String? medAmm,
     @JsonKey(name: 'medCommercialName') required String medCommercialName,
     @JsonKey(name: 'lot') required String lot,
     @JsonKey(name: 'datePeremption') required DateTime datePeremption,

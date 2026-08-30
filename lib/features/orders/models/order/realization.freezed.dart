@@ -35,7 +35,7 @@ mixin _$DelegateRealization {
   @JsonKey(name: 'medId')
   int get medId => throw _privateConstructorUsedError;
   @JsonKey(name: 'medAmm')
-  String get medAmm => throw _privateConstructorUsedError;
+  String? get medAmm => throw _privateConstructorUsedError;
   @JsonKey(name: 'medCommercialName')
   String get medCommercialName => throw _privateConstructorUsedError;
   @JsonKey(name: 'qteObj')
@@ -71,7 +71,7 @@ abstract class $DelegateRealizationCopyWith<$Res> {
       @JsonKey(name: 'delegateType') String delegateType,
       @JsonKey(name: 'delegue') String delegue,
       @JsonKey(name: 'medId') int medId,
-      @JsonKey(name: 'medAmm') String medAmm,
+      @JsonKey(name: 'medAmm') String? medAmm,
       @JsonKey(name: 'medCommercialName') String medCommercialName,
       @JsonKey(name: 'qteObj') int? qteObj,
       @JsonKey(name: 'qteVendue') int qteVendue,
@@ -140,7 +140,7 @@ class _$DelegateRealizationCopyWithImpl<$Res, $Val extends DelegateRealization>
       medAmm: null == medAmm
           ? _value.medAmm
           : medAmm // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       medCommercialName: null == medCommercialName
           ? _value.medCommercialName
           : medCommercialName // ignore: cast_nullable_to_non_nullable
@@ -181,7 +181,7 @@ abstract class _$$DelegateRealizationImplCopyWith<$Res>
       @JsonKey(name: 'delegateType') String delegateType,
       @JsonKey(name: 'delegue') String delegue,
       @JsonKey(name: 'medId') int medId,
-      @JsonKey(name: 'medAmm') String medAmm,
+      @JsonKey(name: 'medAmm') String? medAmm,
       @JsonKey(name: 'medCommercialName') String medCommercialName,
       @JsonKey(name: 'qteObj') int? qteObj,
       @JsonKey(name: 'qteVendue') int qteVendue,
@@ -248,7 +248,7 @@ class __$$DelegateRealizationImplCopyWithImpl<$Res>
       medAmm: null == medAmm
           ? _value.medAmm
           : medAmm // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       medCommercialName: null == medCommercialName
           ? _value.medCommercialName
           : medCommercialName // ignore: cast_nullable_to_non_nullable
@@ -284,7 +284,7 @@ class _$DelegateRealizationImpl implements _DelegateRealization {
       @JsonKey(name: 'delegateType') required this.delegateType,
       @JsonKey(name: 'delegue') required this.delegue,
       @JsonKey(name: 'medId') required this.medId,
-      @JsonKey(name: 'medAmm') required this.medAmm,
+      @JsonKey(name: 'medAmm') this.medAmm,
       @JsonKey(name: 'medCommercialName') required this.medCommercialName,
       @JsonKey(name: 'qteObj') this.qteObj,
       @JsonKey(name: 'qteVendue') required this.qteVendue,
@@ -317,7 +317,7 @@ class _$DelegateRealizationImpl implements _DelegateRealization {
   final int medId;
   @override
   @JsonKey(name: 'medAmm')
-  final String medAmm;
+  final String? medAmm;
   @override
   @JsonKey(name: 'medCommercialName')
   final String medCommercialName;
@@ -408,7 +408,7 @@ abstract class _DelegateRealization implements DelegateRealization {
           @JsonKey(name: 'delegateType') required final String delegateType,
           @JsonKey(name: 'delegue') required final String delegue,
           @JsonKey(name: 'medId') required final int medId,
-          @JsonKey(name: 'medAmm') required final String medAmm,
+          @JsonKey(name: 'medAmm') final String? medAmm,
           @JsonKey(name: 'medCommercialName')
           required final String medCommercialName,
           @JsonKey(name: 'qteObj') final int? qteObj,
@@ -443,7 +443,7 @@ abstract class _DelegateRealization implements DelegateRealization {
   int get medId;
   @override
   @JsonKey(name: 'medAmm')
-  String get medAmm;
+  String? get medAmm;
   @override
   @JsonKey(name: 'medCommercialName')
   String get medCommercialName;

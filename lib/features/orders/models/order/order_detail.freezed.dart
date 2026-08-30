@@ -49,7 +49,7 @@ mixin _$OrderDetail {
   @JsonKey(name: 'medId')
   int get medId => throw _privateConstructorUsedError;
   @JsonKey(name: 'medAmm')
-  String get medAmm => throw _privateConstructorUsedError;
+  String? get medAmm => throw _privateConstructorUsedError;
   @JsonKey(name: 'medCommercialName')
   String get medCommercialName => throw _privateConstructorUsedError;
   @JsonKey(name: 'lot')
@@ -100,7 +100,7 @@ abstract class $OrderDetailCopyWith<$Res> {
       @JsonKey(name: 'client') String client,
       @JsonKey(name: 'delegue') String delegue,
       @JsonKey(name: 'medId') int medId,
-      @JsonKey(name: 'medAmm') String medAmm,
+      @JsonKey(name: 'medAmm') String? medAmm,
       @JsonKey(name: 'medCommercialName') String medCommercialName,
       @JsonKey(name: 'lot') String lot,
       @JsonKey(name: 'datePeremption') DateTime datePeremption,
@@ -212,7 +212,7 @@ class _$OrderDetailCopyWithImpl<$Res, $Val extends OrderDetail>
       medAmm: null == medAmm
           ? _value.medAmm
           : medAmm // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       medCommercialName: null == medCommercialName
           ? _value.medCommercialName
           : medCommercialName // ignore: cast_nullable_to_non_nullable
@@ -276,7 +276,7 @@ abstract class _$$OrderDetailImplCopyWith<$Res>
       @JsonKey(name: 'client') String client,
       @JsonKey(name: 'delegue') String delegue,
       @JsonKey(name: 'medId') int medId,
-      @JsonKey(name: 'medAmm') String medAmm,
+      @JsonKey(name: 'medAmm') String? medAmm,
       @JsonKey(name: 'medCommercialName') String medCommercialName,
       @JsonKey(name: 'lot') String lot,
       @JsonKey(name: 'datePeremption') DateTime datePeremption,
@@ -386,7 +386,7 @@ class __$$OrderDetailImplCopyWithImpl<$Res>
       medAmm: null == medAmm
           ? _value.medAmm
           : medAmm // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       medCommercialName: null == medCommercialName
           ? _value.medCommercialName
           : medCommercialName // ignore: cast_nullable_to_non_nullable
@@ -445,7 +445,7 @@ class _$OrderDetailImpl implements _OrderDetail {
       @JsonKey(name: 'client') required this.client,
       @JsonKey(name: 'delegue') required this.delegue,
       @JsonKey(name: 'medId') required this.medId,
-      @JsonKey(name: 'medAmm') required this.medAmm,
+      @JsonKey(name: 'medAmm') this.medAmm,
       @JsonKey(name: 'medCommercialName') required this.medCommercialName,
       @JsonKey(name: 'lot') required this.lot,
       @JsonKey(name: 'datePeremption') required this.datePeremption,
@@ -503,7 +503,7 @@ class _$OrderDetailImpl implements _OrderDetail {
   final int medId;
   @override
   @JsonKey(name: 'medAmm')
-  final String medAmm;
+  final String? medAmm;
   @override
   @JsonKey(name: 'medCommercialName')
   final String medCommercialName;
@@ -639,7 +639,7 @@ abstract class _OrderDetail implements OrderDetail {
       @JsonKey(name: 'client') required final String client,
       @JsonKey(name: 'delegue') required final String delegue,
       @JsonKey(name: 'medId') required final int medId,
-      @JsonKey(name: 'medAmm') required final String medAmm,
+      @JsonKey(name: 'medAmm') final String? medAmm,
       @JsonKey(name: 'medCommercialName')
       required final String medCommercialName,
       @JsonKey(name: 'lot') required final String lot,
@@ -699,7 +699,7 @@ abstract class _OrderDetail implements OrderDetail {
   int get medId;
   @override
   @JsonKey(name: 'medAmm')
-  String get medAmm;
+  String? get medAmm;
   @override
   @JsonKey(name: 'medCommercialName')
   String get medCommercialName;
